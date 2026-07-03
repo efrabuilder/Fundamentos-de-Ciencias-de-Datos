@@ -1,0 +1,40 @@
+Actúa como un experto en nutrición deportiva, antropometría y economía doméstica aplicada a la salud. Quiero que generes una guía nutricional y una rutina alimenticia 100% personalizada para un usuario con las siguientes características individuales:
+
+### Perfil del Usuario:
+- Edad: Mayor de 20 años (adulto, con un desarrollo óseo y metabólico maduro).
+- Biotipo: Ectomorfo estricto (metabolismo muy rápido, dificultad para ganar masa muscular y peso graso).
+- Tipo de Cuerpo (Estructura ósea/Silueta): [Elegir uno: Rectangular / Trapezoide / Triangular].
+- Temperamento Predominante: [Elegir uno: Melancólico / Flemático] (Esto influye en sus niveles de cortisol, adherencia a la dieta, niveles de energía y digestión).
+
+### Objetivos Principales:
+1. Optimizar el metabolismo ectomorfo para una ganancia de masa muscular limpia (hipertrofia) o mantenimiento óptimo en la etapa adulta, sin saturar su sistema digestivo.
+2. Adaptar la densidad calórica al temperamento seleccionado y ofrecer una estimación de presupuesto realista y accesible.
+
+---
+
+### Por favor, estructura la respuesta en las siguientes secciones claras:
+
+## 1. Análisis del Perfil y Estrategia Nutricional
+- Explica brevemente cómo interactúan el biotipo ectomorfo con la silueta física elegida y el temperamento en una etapa adulta (mayores de 20 años).
+- Define el enfoque de macronutrientes ideal (Proteínas, Carbohidratos Complejos, Grasas Saludables) expresado en porcentajes aproximados o pautas clave.
+
+## 2. Distribución de Comidas (Rutina Diaria)
+Diseña un ejemplo de menú diario detallado que incluya **5 comidas al día** (esencial para ectomorfos), especificando opciones de alimentos reales, densos en nutrientes y fáciles de preparar.
+- **Desayuno:** (Alto en energía y carbohidratos complejos)
+- **Media Mañana:** (Snack denso, fácil de transportar)
+- **Almuerzo/Comida Principal:** (Balance completo de macronutrientes)
+- **Merienda/Post-entrenamiento:** (Fácil digestión y asimilación rápida)
+- **Cena:** (Proteínas de absorción lenta y grasas saludables para el descanso)
+
+## 3. Análisis de Presupuesto y Optimización de Costos
+- Proporciona una estimación del nivel de presupuesto necesario para mantener esta dieta (bato, moderado o alto).
+- Incluye una lista de "intercambios inteligentes" para abaratar costos (por ejemplo, fuentes de proteína o carbohidratos más económicas pero igual de eficientes para un ectomorfo).
+
+## 4. Pautas de Hidratación y Suplementación Recomendada
+- Recomendaciones específicas de agua y/o infusiones según su temperamento.
+- Suplementos clave recomendados para este perfil (ej. Creatina, proteína en polvo), evaluando si son estrictamente necesarios o prescindibles según el presupuesto.
+
+## 5. Consejos de Adherencia y Psicología Alimentaria
+- 3 consejos prácticos basados en su temperamento para evitar que abandone la dieta (ej. manejo de la apatía si es flemático, o control de la rigidez/ansiedad si es melancólico).
+
+Nota: Evita tecnicismos excesivos y asegúrate de que los alimentos propuestos sean accesibles, realistas y económicos para el día a día.
