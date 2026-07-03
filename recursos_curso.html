@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fundamentos de Ciencia de Datos — Recursos del Curso</title>
+<style>
+  :root{
+    --bg:#f8fafc;
+    --panel:#ffffff;
+    --ink:#1e293b;
+    --ink-soft:#64748b;
+    --border:#e2e8f0;
+    --mapa:#7c3aed;
+    --mapa-soft:#f5f3ff;
+    --prompt:#16a34a;
+    --prompt-soft:#f0fdf4;
+    --reporte:#ea580c;
+    --reporte-soft:#fff7ed;
+    --referencias:#0284c7;
+    --referencias-soft:#f0f9ff;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    font-family:var(--sans);
+    color:var(--ink);
+    min-height:100vh;
+  }
+  header{
+    padding:38px 24px 22px;
+    text-align:center;
+    border-bottom:1px solid var(--border);
+    background:var(--panel);
+  }
+  header h1{
+    margin:0 0 6px;
+    font-size:clamp(20px,3vw,28px);
+    letter-spacing:-0.01em;
+  }
+  header p{
+    margin:0;
+    color:var(--ink-soft);
+    font-size:14px;
+  }
+  nav{
+    display:flex;
+    justify-content:center;
+    gap:6px;
+    padding:16px;
+    flex-wrap:wrap;
+    background:var(--panel);
+    border-bottom:1px solid var(--border);
+    position:sticky;
+    top:0;
+    z-index:10;
+  }
+  .tab{
+    appearance:none;
+    border:1.5px solid var(--border);
+    background:var(--bg);
+    color:var(--ink-soft);
+    font-family:var(--sans);
+    font-size:13.5px;
+    font-weight:600;
+    padding:10px 18px;
+    border-radius:999px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    transition:all .15s ease;
+  }
+  .tab .dot{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.5;}
+  .tab:hover{border-color:var(--accent);color:var(--ink);}
+  .tab.active{
+    background:var(--accent);
+    border-color:var(--accent);
+    color:#ffffff;
+  }
+  .tab.active .dot{background:#ffffff;opacity:1;}
+  #tab-mapa{--accent:var(--mapa);}
+  #tab-prompt{--accent:var(--prompt);}
+  #tab-reporte{--accent:var(--reporte);}
+  #tab-referencias{--accent:var(--referencias);}
+
+  main{
+    max-width:1100px;
+    margin:0 auto;
+    padding:28px 20px 80px;
+  }
+  .panel{display:none;}
+  .panel.active{display:block;animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+
+  .panel-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-bottom:16px;
+  }
+  .panel-head h2{
+    margin:0;
+    font-size:19px;
+  }
+  .panel-head .sub{
+    color:var(--ink-soft);
+    font-size:13px;
+    margin-top:4px;
+  }
+
+  .card{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:14px;
+    overflow:hidden;
+  }
+  .card-toolbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    flex-wrap:wrap;
+    padding:12px 16px;
+    border-bottom:1px solid var(--border);
+    background:var(--accent-soft);
+  }
+  #panel-mapa .card-toolbar{--accent-soft:var(--mapa-soft);}
+  #panel-prompt .card-toolbar{--accent-soft:var(--prompt-soft);}
+  #panel-reporte .card-toolbar{--accent-soft:var(--reporte-soft);}
+  #panel-referencias .card-toolbar{--accent-soft:var(--referencias-soft);}
+
+  .status{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .status .led{width:7px;height:7px;border-radius:50%;background:#cbd5e1;}
+  .status.ok .led{background:#16a34a;}
+  .status.err .led{background:#dc2626;}
+
+  .toolbar-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+  .btn{
+    font-family:var(--sans);
+    font-size:12.5px;
+    font-weight:600;
+    padding:7px 12px;
+    border-radius:8px;
+    border:1px solid var(--border);
+    background:#ffffff;
+    color:var(--ink);
+    cursor:pointer;
+  }
+  .btn:hover{border-color:var(--ink-soft);}
+  input[type=file]{display:none;}
+
+  .viewer{
+    min-height:420px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:0;
+    background:#ffffff;
+  }
+  .viewer.empty{
+    flex-direction:column;
+    gap:10px;
+    padding:60px 20px;
+    color:var(--ink-soft);
+    font-size:13.5px;
+    text-align:center;
+  }
+  .viewer.empty strong{color:var(--ink);font-size:14.5px;}
+  .viewer object, .viewer iframe{
+    width:100%;
+    height:78vh;
+    border:0;
+    display:block;
+  }
+  pre.text-view{
+    width:100%;
+    margin:0;
+    padding:22px 26px;
+    font-family:var(--mono);
+    font-size:12.8px;
+    line-height:1.6;
+    white-space:pre-wrap;
+    word-break:break-word;
+    max-height:78vh;
+    overflow:auto;
+  }
+  .hint{
+    margin-top:12px;
+    font-size:12px;
+    color:var(--ink-soft);
+    line-height:1.6;
+  }
+  .hint code{
+    background:#f1f5f9;
+    padding:1px 6px;
+    border-radius:5px;
+    font-family:var(--mono);
+  }
+  footer{
+    text-align:center;
+    padding:24px;
+    color:var(--ink-soft);
+    font-size:12px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Fundamentos de Ciencia de Datos</h1>
+  <p>Mapa conceptual del curso · prompt y reporte del caso práctico de nutrición</p>
+</header>
+
+<nav>
+  <button class="tab active" id="tab-mapa" data-target="panel-mapa">
+    <span class="dot"></span> 1. Mapa Conceptual
+  </button>
+  <button class="tab" id="tab-prompt" data-target="panel-prompt">
+    <span class="dot"></span> 2. Prompt Guía Nutricional
+  </button>
+  <button class="tab" id="tab-reporte" data-target="panel-reporte">
+    <span class="dot"></span> 3. Reporte Nutricional
+  </button>
+  <button class="tab" id="tab-referencias" data-target="panel-referencias">
+    <span class="dot"></span> 4. Referencias
+  </button>
+</nav>
+
+<main>
+
+  <!-- ===================== PANEL 1: MAPA ===================== -->
+  <section class="panel active" id="panel-mapa">
+    <div class="panel-head">
+      <div>
+        <h2>Mapa Conceptual — Ciencia de Datos</h2>
+        <div class="sub">Fundamentos, recolección, Big Data/BI/IA/ML, carrera y habilidades avanzadas</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-mapa"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-mapa').click()">Cargar archivo…</button>
+          <input type="file" id="file-mapa" accept=".svg,image/svg+xml">
+          <a class="btn" id="download-mapa" download="mapa_conceptual_ciencia_datos.svg" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-mapa">
+        <strong>Sin mapa cargado todavía</strong>
+        Coloca el archivo <code>mapa_conceptual_ciencia_datos.svg</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>mapa_conceptual_ciencia_datos.svg</code>
+    </div>
+  </section>
+
+  <!-- ===================== PANEL 2: PROMPT ===================== -->
+  <section class="panel" id="panel-prompt">
+    <div class="panel-head">
+      <div>
+        <h2>Prompt — Guía Nutricional</h2>
+        <div class="sub">Instrucción utilizada para generar la guía nutricional del caso práctico</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-prompt"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-prompt').click()">Cargar archivo…</button>
+          <input type="file" id="file-prompt" accept=".md,.txt,text/plain,text/markdown">
+          <a class="btn" id="download-prompt" download="Prompt de guia nutricional.txt" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-prompt">
+        <strong>Sin prompt cargado todavía</strong>
+        Coloca el archivo <code>Prompt de guia nutricional.txt</code> en la misma carpeta
+        que este HTML, o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>Prompt de guia nutricional.txt</code>
+    </div>
+  </section>
+
+  <!-- ===================== PANEL 3: REPORTE ===================== -->
+  <section class="panel" id="panel-reporte">
+    <div class="panel-head">
+      <div>
+        <h2>Reporte — Caso Práctico Nutricional</h2>
+        <div class="sub">Resultado del análisis aplicando el proceso analítico de 6 pasos</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-reporte"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-reporte').click()">Cargar archivo…</button>
+          <input type="file" id="file-reporte" accept=".pdf,.md,.txt,application/pdf,text/plain,text/markdown">
+          <a class="btn" id="download-reporte" download="Reporte nutricional para caso de practica del curso Fundamentos de ciencia de datos.pdf" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-reporte">
+        <strong>Sin reporte cargado todavía</strong>
+        Coloca el archivo <code>Reporte nutricional para caso de practica del curso Fundamentos de ciencia de datos.pdf</code> en la misma
+        carpeta que este HTML, o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>Reporte nutricional para caso de practica del curso Fundamentos de ciencia de datos.pdf</code>
+    </div>
+  </section>
+
+  <!-- ===================== PANEL 4: REFERENCIAS ===================== -->
+  <section class="panel" id="panel-referencias">
+    <div class="panel-head">
+      <div>
+        <h2>Referencias — Mapa Conceptual</h2>
+        <div class="sub">Fuentes consultadas para la construcción del mapa conceptual</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-referencias"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-referencias').click()">Cargar archivo…</button>
+          <input type="file" id="file-referencias" accept=".pdf,.md,.txt,application/pdf,text/plain,text/markdown">
+          <a class="btn" id="download-referencias" download="Referencias_Mapa_Conceptual.pdf" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-referencias">
+        <strong>Sin referencias cargadas todavía</strong>
+        Coloca el archivo <code>Referencias_Mapa_Conceptual.pdf</code> en la misma
+        carpeta que este HTML, o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>Referencias_Mapa_Conceptual.pdf</code>
+    </div>
+  </section>
+
+</main>
+
+<footer>Recursos del curso Fundamentos de Ciencia de Datos</footer>
+
+<script>
+  // ---------- Tab switching ----------
+  document.querySelectorAll('.tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.target).classList.add('active');
+    });
+  });
+
+  function setStatus(id, mode, text){
+    const el = document.getElementById(id);
+    el.className = 'status ' + mode;
+    el.innerHTML = '<span class="led"></span> ' + text;
+  }
+
+  // ---------- Panel: Mapa (SVG) ----------
+  function renderSvg(url){
+    const v = document.getElementById('viewer-mapa');
+    v.className = 'viewer';
+    v.innerHTML = '<object type="image/svg+xml" data="' + url + '"></object>';
+    const dl = document.getElementById('download-mapa');
+    dl.href = url; dl.style.display = 'inline-block';
+    setStatus('status-mapa','ok','Mapa cargado');
+  }
+  fetch('mapa_conceptual_ciencia_datos.svg').then(r=>{
+    if(!r.ok) throw new Error();
+    return r.blob();
+  }).then(blob=>{
+    renderSvg(URL.createObjectURL(blob));
+  }).catch(()=>{
+    setStatus('status-mapa','err','No se encontró automáticamente — cárgalo manualmente');
+  });
+  document.getElementById('file-mapa').addEventListener('change', e=>{
+    const f = e.target.files[0];
+    if(!f) return;
+    renderSvg(URL.createObjectURL(f));
+  });
+
+  // ---------- Panel: Prompt (texto / markdown) ----------
+  function renderText(viewerId, statusId, downloadId, text, url, filename){
+    const v = document.getElementById(viewerId);
+    v.className = 'viewer';
+    const pre = document.createElement('pre');
+    pre.className = 'text-view';
+    pre.textContent = text;
+    v.innerHTML = '';
+    v.appendChild(pre);
+    if(url){
+      const dl = document.getElementById(downloadId);
+      dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
+    }
+    setStatus(statusId,'ok','Archivo cargado');
+  }
+  fetch('Prompt de guia nutricional.txt').then(r=>{
+    if(!r.ok) throw new Error();
+    return r.text();
+  }).then(text=>{
+    renderText('viewer-prompt','status-prompt','download-prompt', text, 'Prompt de guia nutricional.txt', 'Prompt de guia nutricional.txt');
+  }).catch(()=>{
+    setStatus('status-prompt','err','No se encontró automáticamente — cárgalo manualmente');
+  });
+  document.getElementById('file-prompt').addEventListener('change', e=>{
+    const f = e.target.files[0];
+    if(!f) return;
+    const reader = new FileReader();
+    reader.onload = evt => renderText('viewer-prompt','status-prompt','download-prompt', evt.target.result, URL.createObjectURL(f), f.name);
+    reader.readAsText(f);
+  });
+
+  // ---------- Panel: Reporte (PDF o texto) ----------
+  function renderDoc(viewerId, statusId, downloadId, url, filename, isPdf, text){
+    const v = document.getElementById(viewerId);
+    if(isPdf){
+      v.className = 'viewer';
+      v.innerHTML = '<iframe src="' + url + '"></iframe>';
+      const dl = document.getElementById(downloadId);
+      dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
+      setStatus(statusId,'ok','Archivo cargado');
+    } else {
+      renderText(viewerId, statusId, downloadId, text, url, filename);
+    }
+  }
+  fetch('Reporte nutricional para caso de practica del curso Fundamentos de ciencia de datos.pdf').then(r=>{
+    if(!r.ok) throw new Error();
+    return r.blob();
+  }).then(blob=>{
+    renderDoc('viewer-reporte','status-reporte','download-reporte', URL.createObjectURL(blob), 'Reporte nutricional para caso de practica del curso Fundamentos de ciencia de datos.pdf', true);
+  }).catch(()=>{
+    setStatus('status-reporte','err','No se encontró automáticamente — cárgalo manualmente');
+  });
+  document.getElementById('file-reporte').addEventListener('change', e=>{
+    const f = e.target.files[0];
+    if(!f) return;
+    if(f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf')){
+      renderDoc('viewer-reporte','status-reporte','download-reporte', URL.createObjectURL(f), f.name, true);
+    } else {
+      const reader = new FileReader();
+      reader.onload = evt => renderDoc('viewer-reporte','status-reporte','download-reporte', URL.createObjectURL(f), f.name, false, evt.target.result);
+      reader.readAsText(f);
+    }
+  });
+
+  // ---------- Panel: Referencias (PDF o texto) ----------
+  fetch('Referencias_Mapa_Conceptual.pdf').then(r=>{
+    if(!r.ok) throw new Error();
+    return r.blob();
+  }).then(blob=>{
+    renderDoc('viewer-referencias','status-referencias','download-referencias', URL.createObjectURL(blob), 'Referencias_Mapa_Conceptual.pdf', true);
+  }).catch(()=>{
+    setStatus('status-referencias','err','No se encontró automáticamente — cárgalo manualmente');
+  });
+  document.getElementById('file-referencias').addEventListener('change', e=>{
+    const f = e.target.files[0];
+    if(!f) return;
+    if(f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf')){
+      renderDoc('viewer-referencias','status-referencias','download-referencias', URL.createObjectURL(f), f.name, true);
+    } else {
+      const reader = new FileReader();
+      reader.onload = evt => renderDoc('viewer-referencias','status-referencias','download-referencias', URL.createObjectURL(f), f.name, false, evt.target.result);
+      reader.readAsText(f);
+    }
+  });
+</script>
+
+</body>
+</html>
