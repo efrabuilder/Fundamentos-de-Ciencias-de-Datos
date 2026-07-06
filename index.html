@@ -19,6 +19,12 @@
     --reporte-soft:#fff7ed;
     --referencias:#0284c7;
     --referencias-soft:#f0f9ff;
+    --huevo:#d97706;
+    --huevo-soft:#fffbeb;
+    --algoritmo:#0d9488;
+    --algoritmo-soft:#f0fdfa;
+    --aceite:#dc2626;
+    --aceite-soft:#fef2f2;
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
@@ -86,6 +92,9 @@
   #tab-prompt{--accent:var(--prompt);}
   #tab-reporte{--accent:var(--reporte);}
   #tab-referencias{--accent:var(--referencias);}
+  #tab-huevo{--accent:var(--huevo);}
+  #tab-algoritmo{--accent:var(--algoritmo);}
+  #tab-aceite{--accent:var(--aceite);}
 
   main{
     max-width:1100px;
@@ -134,6 +143,9 @@
   #panel-prompt .card-toolbar{--accent-soft:var(--prompt-soft);}
   #panel-reporte .card-toolbar{--accent-soft:var(--reporte-soft);}
   #panel-referencias .card-toolbar{--accent-soft:var(--referencias-soft);}
+  #panel-huevo .card-toolbar{--accent-soft:var(--huevo-soft);}
+  #panel-algoritmo .card-toolbar{--accent-soft:var(--algoritmo-soft);}
+  #panel-aceite .card-toolbar{--accent-soft:var(--aceite-soft);}
 
   .status{
     font-size:12.5px;
@@ -184,6 +196,12 @@
     border:0;
     display:block;
   }
+  .viewer img{
+    max-width:100%;
+    max-height:78vh;
+    display:block;
+    margin:0 auto;
+  }
   pre.text-view{
     width:100%;
     margin:0;
@@ -220,7 +238,7 @@
 
 <header>
   <h1>Fundamentos de Ciencia de Datos</h1>
-  <p>Mapa conceptual del curso · prompt y reporte del caso práctico de nutrición</p>
+  <p>Mapa conceptual del curso · prompt y reporte del caso práctico de nutrición · recursos adicionales</p>
   <p>Efrain Sebastian Rojas Artavia</p>
 </header>
 
@@ -236,6 +254,15 @@
   </button>
   <button class="tab" id="tab-referencias" data-target="panel-referencias">
     <span class="dot"></span> 4. Referencias
+  </button>
+  <button class="tab" id="tab-huevo" data-target="panel-huevo">
+    <span class="dot"></span> 5. Huevo Frito
+  </button>
+  <button class="tab" id="tab-algoritmo" data-target="panel-algoritmo">
+    <span class="dot"></span> 6. Algoritmo Calculadora RPN
+  </button>
+  <button class="tab" id="tab-aceite" data-target="panel-aceite">
+    <span class="dot"></span> 7. Cambio de Aceite
   </button>
 </nav>
 
@@ -350,6 +377,90 @@
     </div>
     <div class="hint">
       Nombre esperado en el repositorio: <code>Referencias_Mapa_Conceptual.pdf</code>
+    </div>
+  </section>
+
+  <!-- ===================== PANEL 5: HUEVO FRITO ===================== -->
+  <section class="panel" id="panel-huevo">
+    <div class="panel-head">
+      <div>
+        <h2>Huevo Frito</h2>
+        <div class="sub">Documento de texto</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-huevo"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-huevo').click()">Cargar archivo…</button>
+          <input type="file" id="file-huevo" accept=".md,.txt,text/plain,text/markdown">
+          <a class="btn" id="download-huevo" download="Huevo Frito.txt" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-huevo">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Huevo Frito.txt</code> en la misma carpeta
+        que este HTML, o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>Huevo Frito.txt</code>
+    </div>
+  </section>
+
+  <!-- ===================== PANEL 6: ALGORITMO CALCULADORA RPN ===================== -->
+  <section class="panel" id="panel-algoritmo">
+    <div class="panel-head">
+      <div>
+        <h2>Algoritmo Calculadora RPN</h2>
+        <div class="sub">Diagrama del algoritmo de la calculadora en notación polaca inversa</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-algoritmo"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-algoritmo').click()">Cargar archivo…</button>
+          <input type="file" id="file-algoritmo" accept=".png,image/png">
+          <a class="btn" id="download-algoritmo" download="algoritmo_calculadora_rpn.png" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-algoritmo">
+        <strong>Sin imagen cargada todavía</strong>
+        Coloca el archivo <code>algoritmo_calculadora_rpn.png</code> en la misma carpeta
+        que este HTML, o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>algoritmo_calculadora_rpn.png</code>
+    </div>
+  </section>
+
+  <!-- ===================== PANEL 7: CAMBIO DE ACEITE ===================== -->
+  <section class="panel" id="panel-aceite">
+    <div class="panel-head">
+      <div>
+        <h2>Pasos para el Cambio de Aceite</h2>
+        <div class="sub">Diagrama de pasos para el cambio de aceite del carro</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-aceite"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-aceite').click()">Cargar archivo…</button>
+          <input type="file" id="file-aceite" accept=".png,image/png">
+          <a class="btn" id="download-aceite" download="pasos_cambio_aceite_carro.png" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-aceite">
+        <strong>Sin imagen cargada todavía</strong>
+        Coloca el archivo <code>pasos_cambio_aceite_carro.png</code> en la misma carpeta
+        que este HTML, o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>pasos_cambio_aceite_carro.png</code>
     </div>
   </section>
 
@@ -481,6 +592,64 @@
       reader.onload = evt => renderDoc('viewer-referencias','status-referencias','download-referencias', URL.createObjectURL(f), f.name, false, evt.target.result);
       reader.readAsText(f);
     }
+  });
+
+  // ---------- Panel: Huevo Frito (texto) ----------
+  fetch('Huevo Frito.txt').then(r=>{
+    if(!r.ok) throw new Error();
+    return r.text();
+  }).then(text=>{
+    renderText('viewer-huevo','status-huevo','download-huevo', text, 'Huevo Frito.txt', 'Huevo Frito.txt');
+  }).catch(()=>{
+    setStatus('status-huevo','err','No se encontró automáticamente — cárgalo manualmente');
+  });
+  document.getElementById('file-huevo').addEventListener('change', e=>{
+    const f = e.target.files[0];
+    if(!f) return;
+    const reader = new FileReader();
+    reader.onload = evt => renderText('viewer-huevo','status-huevo','download-huevo', evt.target.result, URL.createObjectURL(f), f.name);
+    reader.readAsText(f);
+  });
+
+  // ---------- Panel: Algoritmo Calculadora RPN (imagen) ----------
+  function renderImage(viewerId, statusId, downloadId, url, filename){
+    const v = document.getElementById(viewerId);
+    v.className = 'viewer';
+    v.innerHTML = '';
+    const img = document.createElement('img');
+    img.src = url;
+    v.appendChild(img);
+    const dl = document.getElementById(downloadId);
+    dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
+    setStatus(statusId,'ok','Imagen cargada');
+  }
+  fetch('algoritmo_calculadora_rpn.png').then(r=>{
+    if(!r.ok) throw new Error();
+    return r.blob();
+  }).then(blob=>{
+    renderImage('viewer-algoritmo','status-algoritmo','download-algoritmo', URL.createObjectURL(blob), 'algoritmo_calculadora_rpn.png');
+  }).catch(()=>{
+    setStatus('status-algoritmo','err','No se encontró automáticamente — cárgalo manualmente');
+  });
+  document.getElementById('file-algoritmo').addEventListener('change', e=>{
+    const f = e.target.files[0];
+    if(!f) return;
+    renderImage('viewer-algoritmo','status-algoritmo','download-algoritmo', URL.createObjectURL(f), f.name);
+  });
+
+  // ---------- Panel: Cambio de Aceite (imagen) ----------
+  fetch('pasos_cambio_aceite_carro.png').then(r=>{
+    if(!r.ok) throw new Error();
+    return r.blob();
+  }).then(blob=>{
+    renderImage('viewer-aceite','status-aceite','download-aceite', URL.createObjectURL(blob), 'pasos_cambio_aceite_carro.png');
+  }).catch(()=>{
+    setStatus('status-aceite','err','No se encontró automáticamente — cárgalo manualmente');
+  });
+  document.getElementById('file-aceite').addEventListener('change', e=>{
+    const f = e.target.files[0];
+    if(!f) return;
+    renderImage('viewer-aceite','status-aceite','download-aceite', URL.createObjectURL(f), f.name);
   });
 </script>
 
