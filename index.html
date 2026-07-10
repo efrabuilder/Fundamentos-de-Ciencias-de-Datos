@@ -25,6 +25,12 @@
     --algoritmo-soft:#f0fdfa;
     --aceite:#dc2626;
     --aceite-soft:#fef2f2;
+    --dashboard:#4f46e5;
+    --dashboard-soft:#eef2ff;
+    --segmentacion:#db2777;
+    --segmentacion-soft:#fdf2f8;
+    --dataset:#0891b2;
+    --dataset-soft:#ecfeff;
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
@@ -95,6 +101,9 @@
   #tab-huevo{--accent:var(--huevo);}
   #tab-algoritmo{--accent:var(--algoritmo);}
   #tab-aceite{--accent:var(--aceite);}
+  #tab-dashboard{--accent:var(--dashboard);}
+  #tab-segmentacion{--accent:var(--segmentacion);}
+  #tab-dataset{--accent:var(--dataset);}
 
   main{
     max-width:1100px;
@@ -146,6 +155,9 @@
   #panel-huevo .card-toolbar{--accent-soft:var(--huevo-soft);}
   #panel-algoritmo .card-toolbar{--accent-soft:var(--algoritmo-soft);}
   #panel-aceite .card-toolbar{--accent-soft:var(--aceite-soft);}
+  #panel-dashboard .card-toolbar{--accent-soft:var(--dashboard-soft);}
+  #panel-segmentacion .card-toolbar{--accent-soft:var(--segmentacion-soft);}
+  #panel-dataset .card-toolbar{--accent-soft:var(--dataset-soft);}
 
   .status{
     font-size:12.5px;
@@ -214,6 +226,44 @@
     max-height:78vh;
     overflow:auto;
   }
+  .filecard{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+    padding:70px 20px;
+    text-align:center;
+  }
+  .filecard .icon{
+    width:64px;
+    height:64px;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:26px;
+    font-weight:700;
+    color:#ffffff;
+    background:var(--accent);
+  }
+  .filecard .fname{
+    font-size:14.5px;
+    font-weight:600;
+    color:var(--ink);
+    word-break:break-word;
+    max-width:520px;
+  }
+  .filecard .fmeta{
+    font-size:12.5px;
+    color:var(--ink-soft);
+  }
+  .filecard .btn.primary{
+    background:var(--accent);
+    border-color:var(--accent);
+    color:#ffffff;
+    padding:9px 18px;
+    font-size:13px;
+  }
   .hint{
     margin-top:12px;
     font-size:12px;
@@ -263,6 +313,15 @@
   </button>
   <button class="tab" id="tab-aceite" data-target="panel-aceite">
     <span class="dot"></span> 7. Cambio de Aceite
+  </button>
+  <button class="tab" id="tab-dashboard" data-target="panel-dashboard">
+    <span class="dot"></span> 8. Dashboard
+  </button>
+  <button class="tab" id="tab-segmentacion" data-target="panel-segmentacion">
+    <span class="dot"></span> 9. Presentación de Segmentación
+  </button>
+  <button class="tab" id="tab-dataset" data-target="panel-dataset">
+    <span class="dot"></span> 10. Presentación de Dataset
   </button>
 </nav>
 
@@ -464,6 +523,90 @@
     </div>
   </section>
 
+  <!-- ===================== PANEL 8: DASHBOARD ===================== -->
+  <section class="panel" id="panel-dashboard">
+    <div class="panel-head">
+      <div>
+        <h2>Dashboard — Cumpleaños CR</h2>
+        <div class="sub">Libro de Excel con el dashboard de cumpleaños</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-dashboard"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-dashboard').click()">Cargar archivo…</button>
+          <input type="file" id="file-dashboard" accept=".xlsx,.xlsm,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+          <a class="btn" id="download-dashboard" download="dashboard_cumpleanos_cr.xlsx" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-dashboard">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>dashboard_cumpleanos_cr.xlsx</code> en la misma carpeta
+        que este HTML, o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>dashboard_cumpleanos_cr.xlsx</code> · Los archivos de Excel no se previsualizan en el navegador; usa el botón Descargar para abrirlo.
+    </div>
+  </section>
+
+  <!-- ===================== PANEL 9: PRESENTACIÓN SEGMENTACIÓN ===================== -->
+  <section class="panel" id="panel-segmentacion">
+    <div class="panel-head">
+      <div>
+        <h2>Presentación — Segmentación de Cumpleaños CR</h2>
+        <div class="sub">Presentación de PowerPoint sobre segmentación de cumpleaños en Costa Rica</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-segmentacion"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-segmentacion').click()">Cargar archivo…</button>
+          <input type="file" id="file-segmentacion" accept=".pptx,application/vnd.openxmlformats-officedocument.presentationml.presentation">
+          <a class="btn" id="download-segmentacion" download="Segmentacion_Cumpleanos_CRI.pptx" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-segmentacion">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Segmentacion_Cumpleanos_CRI.pptx</code> en la misma carpeta
+        que este HTML, o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>Segmentacion_Cumpleanos_CRI.pptx</code> · Las presentaciones de PowerPoint no se previsualizan en el navegador; usa el botón Descargar para abrirla.
+    </div>
+  </section>
+
+  <!-- ===================== PANEL 10: PRESENTACIÓN DATASET ===================== -->
+  <section class="panel" id="panel-dataset">
+    <div class="panel-head">
+      <div>
+        <h2>Presentación — Análisis del Dataset</h2>
+        <div class="sub">Presentación de PowerPoint con el análisis del dataset</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-dataset"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-dataset').click()">Cargar archivo…</button>
+          <input type="file" id="file-dataset" accept=".pptx,application/vnd.openxmlformats-officedocument.presentationml.presentation">
+          <a class="btn" id="download-dataset" download="Analisis_Dataset.pptx" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-dataset">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Analisis_Dataset.pptx</code> en la misma carpeta
+        que este HTML, o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>Analisis_Dataset.pptx</code> · Las presentaciones de PowerPoint no se previsualizan en el navegador; usa el botón Descargar para abrirla.
+    </div>
+  </section>
+
 </main>
 
 <footer>Recursos del curso Fundamentos de Ciencia de Datos</footer>
@@ -484,6 +627,13 @@
     const el = document.getElementById(id);
     el.className = 'status ' + mode;
     el.innerHTML = '<span class="led"></span> ' + text;
+  }
+
+  function formatBytes(bytes){
+    if(!bytes && bytes !== 0) return '';
+    if(bytes < 1024) return bytes + ' B';
+    if(bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
+    return (bytes/(1024*1024)).toFixed(1) + ' MB';
   }
 
   // ---------- Panel: Mapa (SVG) ----------
@@ -650,6 +800,67 @@
     const f = e.target.files[0];
     if(!f) return;
     renderImage('viewer-aceite','status-aceite','download-aceite', URL.createObjectURL(f), f.name);
+  });
+
+  // ---------- Genérico: archivos de Office (xlsx / pptx) sin previsualización nativa ----------
+  function renderOfficeFile(viewerId, statusId, downloadId, url, filename, size, label){
+    const v = document.getElementById(viewerId);
+    v.className = 'viewer';
+    v.innerHTML =
+      '<div class="filecard">' +
+        '<div class="icon">' + label + '</div>' +
+        '<div class="fname">' + filename + '</div>' +
+        '<div class="fmeta">' + (size ? formatBytes(size) + ' · ' : '') + 'Vista previa no disponible en el navegador' + '</div>' +
+        '<a class="btn primary" href="' + url + '" download="' + filename + '">Descargar / Abrir archivo</a>' +
+      '</div>';
+    const dl = document.getElementById(downloadId);
+    dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
+    setStatus(statusId,'ok','Archivo cargado');
+  }
+
+  // ---------- Panel: Dashboard (xlsx) ----------
+  fetch('dashboard_cumpleanos_cr.xlsx').then(r=>{
+    if(!r.ok) throw new Error();
+    return r.blob();
+  }).then(blob=>{
+    renderOfficeFile('viewer-dashboard','status-dashboard','download-dashboard', URL.createObjectURL(blob), 'dashboard_cumpleanos_cr.xlsx', blob.size, 'XLS');
+  }).catch(()=>{
+    setStatus('status-dashboard','err','No se encontró automáticamente — cárgalo manualmente');
+  });
+  document.getElementById('file-dashboard').addEventListener('change', e=>{
+    const f = e.target.files[0];
+    if(!f) return;
+    renderOfficeFile('viewer-dashboard','status-dashboard','download-dashboard', URL.createObjectURL(f), f.name, f.size, 'XLS');
+  });
+
+  // ---------- Panel: Presentación Segmentación (pptx) ----------
+  fetch('Segmentacion_Cumpleanos_CRI.pptx').then(r=>{
+    if(!r.ok) throw new Error();
+    return r.blob();
+  }).then(blob=>{
+    renderOfficeFile('viewer-segmentacion','status-segmentacion','download-segmentacion', URL.createObjectURL(blob), 'Segmentacion_Cumpleanos_CRI.pptx', blob.size, 'PPT');
+  }).catch(()=>{
+    setStatus('status-segmentacion','err','No se encontró automáticamente — cárgalo manualmente');
+  });
+  document.getElementById('file-segmentacion').addEventListener('change', e=>{
+    const f = e.target.files[0];
+    if(!f) return;
+    renderOfficeFile('viewer-segmentacion','status-segmentacion','download-segmentacion', URL.createObjectURL(f), f.name, f.size, 'PPT');
+  });
+
+  // ---------- Panel: Presentación Dataset (pptx) ----------
+  fetch('Analisis_Dataset.pptx').then(r=>{
+    if(!r.ok) throw new Error();
+    return r.blob();
+  }).then(blob=>{
+    renderOfficeFile('viewer-dataset','status-dataset','download-dataset', URL.createObjectURL(blob), 'Analisis_Dataset.pptx', blob.size, 'PPT');
+  }).catch(()=>{
+    setStatus('status-dataset','err','No se encontró automáticamente — cárgalo manualmente');
+  });
+  document.getElementById('file-dataset').addEventListener('change', e=>{
+    const f = e.target.files[0];
+    if(!f) return;
+    renderOfficeFile('viewer-dataset','status-dataset','download-dataset', URL.createObjectURL(f), f.name, f.size, 'PPT');
   });
 </script>
 
