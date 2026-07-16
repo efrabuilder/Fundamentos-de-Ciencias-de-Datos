@@ -12,6 +12,8 @@
     --ink-soft:#64748b;
     --border:#e2e8f0;
     --r1:#0284c7; --r1-soft:#f0f9ff;
+    --r2:#7c3aed; --r2-soft:#f5f3ff;
+    --r3:#db2777; --r3-soft:#fdf2f8;
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
@@ -32,6 +34,8 @@
   .tab.active{background:var(--accent);border-color:var(--accent);color:#ffffff;}
   .tab.active .dot{background:#ffffff;opacity:1;}
   #tab-r1{--accent:var(--r1);}
+  #tab-r2{--accent:var(--r2);}
+  #tab-r3{--accent:var(--r3);}
   main{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
   .panel{display:none;}
   .panel.active{display:block;animation:fade .25s ease;}
@@ -42,6 +46,8 @@
   .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
   .card-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--accent-soft);}
   #panel-r1 .card-toolbar{--accent-soft:var(--r1-soft);}
+  #panel-r2 .card-toolbar{--accent-soft:var(--r2-soft);}
+  #panel-r3 .card-toolbar{--accent-soft:var(--r3-soft);}
   .status{font-size:12.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
   .status .led{width:7px;height:7px;border-radius:50%;background:#cbd5e1;}
   .status.ok .led{background:#16a34a;}
@@ -83,17 +89,25 @@
   <button class="tab active" id="tab-r1" data-target="panel-r1">
     <span class="dot"></span> 1. Base de Datos (SQL)
   </button>
+
+  <button class="tab" id="tab-r2" data-target="panel-r2">
+    <span class="dot"></span> 2. Diagrama identidad relación (ejemplo)
+  </button>
+
+  <button class="tab" id="tab-r3" data-target="panel-r3">
+    <span class="dot"></span> 3. Caso Práctico (Indicaciones + Diagrama)
+  </button>
   <!--
     Para agregar un nuevo recurso: copia un botón como el de arriba,
-    dale un id y data-target únicos, y crea abajo su <section class="panel">
-    correspondiente. También agrega su color de acento en :root arriba
-    (ej. --r2, --r2-soft) siguiendo el mismo patrón.
+    dale un id y data-target únicos (ej. tab-r4 / panel-r4), y crea abajo su
+    <section class="panel"> correspondiente. También agrega su color de
+    acento en :root arriba (ej. --r4, --r4-soft) siguiendo el mismo patrón.
   -->
 </nav>
 
 <main>
 
-  <!-- ===================== PANEL 1: BASE DE DATOS (SQL) — duplica este bloque por cada recurso nuevo ===================== -->
+  <!-- ===================== PANEL 1: BASE DE DATOS (SQL) ===================== -->
   <section class="panel active" id="panel-r1">
     <div class="panel-head">
       <div>
@@ -118,6 +132,84 @@
     </div>
     <div class="hint">
       Nombre esperado en el repositorio: <code>DB Modulo 2 (Module 2).sql</code>
+    </div>
+  </section>
+
+
+  <!-- ===================== PANEL 2: DIAGRAMA (EJEMPLO) ===================== -->
+  <section class="panel" id="panel-r2">
+    <div class="panel-head">
+      <div>
+        <h2>Diagrama identidad relación (ejemplo) — Módulo 2</h2>
+        <div class="sub">Diagrama de identidad relación para la base de datos del panel anterior</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-r2"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r2').click()">Cargar archivo…</button>
+          <input type="file" id="file-r2" accept=".png,image/png">
+          <a class="btn" id="download-r2" download="Diagrama indentidad relacion modulo 2, ejemplo.drawio.png" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r2">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Diagrama indentidad relacion modulo 2, ejemplo.drawio.png</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>Diagrama indentidad relacion modulo 2, ejemplo.drawio.png</code>
+    </div>
+  </section>
+
+
+  <!-- ===================== PANEL 3: DIAGRAMA (CASO PRÁCTICO) ===================== -->
+  <section class="panel" id="panel-r3">
+    <div class="panel-head">
+      <div>
+        <h2>Caso Práctico — Módulo 2</h2>
+        <div class="sub">Indicaciones del caso práctico y su diagrama de identidad relación</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar">
+        <span class="status" id="status-r3a"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r3a').click()">Cargar archivo…</button>
+          <input type="file" id="file-r3a" accept=".png,image/png">
+          <a class="btn" id="download-r3a" download="Caso practico.png" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r3a">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Caso practico.png</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">
+      Nombre esperado en el repositorio: <code>Caso practico.png</code> (indicaciones)
+    </div>
+
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-r3b"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r3b').click()">Cargar archivo…</button>
+          <input type="file" id="file-r3b" accept=".png,image/png">
+          <a class="btn" id="download-r3b" download="Diagrama identidad relación caso práctico módulo 2.drawio.png" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r3b">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Diagrama identidad relación caso práctico módulo 2.drawio.png</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>Diagrama identidad relación caso práctico módulo 2.drawio.png</code> (diagrama)
     </div>
   </section>
 
@@ -148,7 +240,7 @@
     return (bytes/(1024*1024)).toFixed(1) + ' MB';
   }
 
-  // ---------- Texto (md/txt) ----------
+  // ---------- Texto (sql/md/txt) ----------
   function renderText(viewerId, statusId, downloadId, text, url, filename){
     const v = document.getElementById(viewerId);
     v.className = 'viewer';
@@ -235,20 +327,34 @@
     }
   }
 
-  // ---------- Recurso 1: Base de Datos SQL — intenta cargar automáticamente, si no, permite carga manual ----------
-  fetch('DB Modulo 2 (Module 2).sql').then(r=>{
-    if(!r.ok) throw new Error();
-    return r.blob();
-  }).then(blob=>{
-    renderByExtension('viewer-r1','status-r1','download-r1', URL.createObjectURL(blob), 'DB Modulo 2 (Module 2).sql', blob);
-  }).catch(()=>{
-    setStatus('status-r1','err','No se encontró automáticamente — cárgalo manualmente');
-  });
-  document.getElementById('file-r1').addEventListener('change', e=>{
-    const f = e.target.files[0];
-    if(!f) return;
-    renderByExtension('viewer-r1','status-r1','download-r1', URL.createObjectURL(f), f.name, f);
-  });
+  // Carga un recurso: intenta traerlo automáticamente del repo y, si falla, habilita carga manual
+  function setupResource(id, expectedFilename){
+    const viewerId = 'viewer-' + id;
+    const statusId = 'status-' + id;
+    const downloadId = 'download-' + id;
+    const fileId = 'file-' + id;
+
+    fetch(expectedFilename).then(r=>{
+      if(!r.ok) throw new Error();
+      return r.blob();
+    }).then(blob=>{
+      renderByExtension(viewerId, statusId, downloadId, URL.createObjectURL(blob), expectedFilename, blob);
+    }).catch(()=>{
+      setStatus(statusId,'err','No se encontró automáticamente — cárgalo manualmente');
+    });
+
+    document.getElementById(fileId).addEventListener('change', e=>{
+      const f = e.target.files[0];
+      if(!f) return;
+      renderByExtension(viewerId, statusId, downloadId, URL.createObjectURL(f), f.name, f);
+    });
+  }
+
+  // ---------- Recursos del Módulo 2 ----------
+  setupResource('r1', 'DB Modulo 2 (Module 2).sql');
+  setupResource('r2', 'Diagrama indentidad relacion modulo 2, ejemplo.drawio.png');
+  setupResource('r3a', 'Caso practico.png');
+  setupResource('r3b', 'Diagrama identidad relación caso práctico módulo 2.drawio.png');
 </script>
 
 </body>
