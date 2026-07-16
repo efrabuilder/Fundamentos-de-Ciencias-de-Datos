@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Módulo 2 — Manejo y Preparación de Datos — Recursos</title>
+<style>
+  :root{
+    --bg:#f8fafc;
+    --panel:#ffffff;
+    --ink:#1e293b;
+    --ink-soft:#64748b;
+    --border:#e2e8f0;
+    --r1:#0284c7; --r1-soft:#f0f9ff;
+    --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{background:var(--bg);font-family:var(--sans);color:var(--ink);min-height:100vh;}
+  .top-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding:14px 24px 0;}
+  .top-link{display:inline-flex;align-items:center;gap:6px;color:var(--ink-soft);text-decoration:none;font-size:13px;}
+  .top-link:hover{color:var(--ink);}
+  header{padding:20px 24px 22px;text-align:center;border-bottom:1px solid var(--border);background:var(--panel);}
+  header .eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--r1);margin-bottom:6px;}
+  header h1{margin:0 0 6px;font-size:clamp(20px,3vw,28px);letter-spacing:-0.01em;}
+  header p{margin:0;color:var(--ink-soft);font-size:14px;}
+  nav{display:flex;justify-content:center;gap:6px;padding:16px;flex-wrap:wrap;background:var(--panel);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;}
+  .tab{appearance:none;border:1.5px solid var(--border);background:var(--bg);color:var(--ink-soft);font-family:var(--sans);font-size:13.5px;font-weight:600;padding:10px 18px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .15s ease;}
+  .tab .dot{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.5;}
+  .tab:hover{border-color:var(--accent);color:var(--ink);}
+  .tab.active{background:var(--accent);border-color:var(--accent);color:#ffffff;}
+  .tab.active .dot{background:#ffffff;opacity:1;}
+  #tab-r1{--accent:var(--r1);}
+  main{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
+  .panel{display:none;}
+  .panel.active{display:block;animation:fade .25s ease;}
+  @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
+  .panel-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:16px;}
+  .panel-head h2{margin:0;font-size:19px;}
+  .panel-head .sub{color:var(--ink-soft);font-size:13px;margin-top:4px;}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+  .card-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--accent-soft);}
+  #panel-r1 .card-toolbar{--accent-soft:var(--r1-soft);}
+  .status{font-size:12.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
+  .status .led{width:7px;height:7px;border-radius:50%;background:#cbd5e1;}
+  .status.ok .led{background:#16a34a;}
+  .status.err .led{background:#dc2626;}
+  .toolbar-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+  .btn{font-family:var(--sans);font-size:12.5px;font-weight:600;padding:7px 12px;border-radius:8px;border:1px solid var(--border);background:#ffffff;color:var(--ink);cursor:pointer;}
+  .btn:hover{border-color:var(--ink-soft);}
+  input[type=file]{display:none;}
+  .viewer{min-height:420px;display:flex;align-items:center;justify-content:center;padding:0;background:#ffffff;}
+  .viewer.empty{flex-direction:column;gap:10px;padding:60px 20px;color:var(--ink-soft);font-size:13.5px;text-align:center;}
+  .viewer.empty strong{color:var(--ink);font-size:14.5px;}
+  .viewer object, .viewer iframe{width:100%;height:78vh;border:0;display:block;}
+  .viewer img{max-width:100%;max-height:78vh;display:block;margin:0 auto;}
+  pre.text-view{width:100%;margin:0;padding:22px 26px;font-family:var(--mono);font-size:12.8px;line-height:1.6;white-space:pre-wrap;word-break:break-word;max-height:78vh;overflow:auto;}
+  .filecard{display:flex;flex-direction:column;align-items:center;gap:14px;padding:70px 20px;text-align:center;}
+  .filecard .icon{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;color:#ffffff;background:var(--accent);}
+  .filecard .fname{font-size:14.5px;font-weight:600;color:var(--ink);word-break:break-word;max-width:520px;}
+  .filecard .fmeta{font-size:12.5px;color:var(--ink-soft);}
+  .filecard .btn.primary{background:var(--accent);border-color:var(--accent);color:#ffffff;padding:9px 18px;font-size:13px;}
+  .hint{margin-top:12px;font-size:12px;color:var(--ink-soft);line-height:1.6;}
+  .hint code{background:#f1f5f9;padding:1px 6px;border-radius:5px;font-family:var(--mono);}
+  footer{text-align:center;padding:24px;color:var(--ink-soft);font-size:12px;}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a class="top-link" href="../index.html">← Volver a Módulos</a>
+  <a class="top-link" href="https://github.com/efrabuilder/Fundamentos-de-Ciencias-de-Datos/tree/main/Modulo%202" target="_blank">github.com/efrabuilder/Fundamentos-de-Ciencias-de-Datos →</a>
+</div>
+
+<header>
+  <div class="eyebrow">Módulo 2</div>
+  <h1>Manejo y Preparación de Datos</h1>
+  <p>Recursos, ejercicios y entregables del módulo. Esta página se irá completando a medida que agregues archivos a la carpeta <code>Modulo 2</code>.</p>
+</header>
+
+<nav>
+  <button class="tab active" id="tab-r1" data-target="panel-r1">
+    <span class="dot"></span> 1. Base de Datos (SQL)
+  </button>
+  <!--
+    Para agregar un nuevo recurso: copia un botón como el de arriba,
+    dale un id y data-target únicos, y crea abajo su <section class="panel">
+    correspondiente. También agrega su color de acento en :root arriba
+    (ej. --r2, --r2-soft) siguiendo el mismo patrón.
+  -->
+</nav>
+
+<main>
+
+  <!-- ===================== PANEL 1: BASE DE DATOS (SQL) — duplica este bloque por cada recurso nuevo ===================== -->
+  <section class="panel active" id="panel-r1">
+    <div class="panel-head">
+      <div>
+        <h2>Base de Datos — Módulo 2</h2>
+        <div class="sub">Script SQL con la estructura y/o datos de la base de datos del módulo</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-r1"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r1').click()">Cargar archivo…</button>
+          <input type="file" id="file-r1" accept=".sql,text/plain">
+          <a class="btn" id="download-r1" download="DB Modulo 2 (Module 2).sql" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r1">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>DB Modulo 2 (Module 2).sql</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>DB Modulo 2 (Module 2).sql</code>
+    </div>
+  </section>
+
+</main>
+
+<footer>Recursos del Módulo 2 — Manejo y Preparación de Datos</footer>
+<footer>© 2026 Todos los derechos reservados · Diseñado y desarrollado por Efraín Sebastián Rojas Artavia</footer>
+
+<script>
+  document.querySelectorAll('.tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById(btn.dataset.target).classList.add('active');
+    });
+  });
+
+  function setStatus(id, mode, text){
+    const el = document.getElementById(id);
+    el.className = 'status ' + mode;
+    el.innerHTML = '<span class="led"></span> ' + text;
+  }
+  function formatBytes(bytes){
+    if(!bytes && bytes !== 0) return '';
+    if(bytes < 1024) return bytes + ' B';
+    if(bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
+    return (bytes/(1024*1024)).toFixed(1) + ' MB';
+  }
+
+  // ---------- Texto (md/txt) ----------
+  function renderText(viewerId, statusId, downloadId, text, url, filename){
+    const v = document.getElementById(viewerId);
+    v.className = 'viewer';
+    const pre = document.createElement('pre');
+    pre.className = 'text-view';
+    pre.textContent = text;
+    v.innerHTML = '';
+    v.appendChild(pre);
+    if(url){
+      const dl = document.getElementById(downloadId);
+      dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
+    }
+    setStatus(statusId,'ok','Archivo cargado');
+  }
+
+  // ---------- PDF ----------
+  function renderPdf(viewerId, statusId, downloadId, url, filename){
+    const v = document.getElementById(viewerId);
+    v.className = 'viewer';
+    v.innerHTML = '<iframe src="' + url + '"></iframe>';
+    const dl = document.getElementById(downloadId);
+    dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
+    setStatus(statusId,'ok','Archivo cargado');
+  }
+
+  // ---------- Imagen (png/svg) ----------
+  function renderImage(viewerId, statusId, downloadId, url, filename){
+    const v = document.getElementById(viewerId);
+    v.className = 'viewer';
+    v.innerHTML = '';
+    const img = document.createElement('img');
+    img.src = url;
+    v.appendChild(img);
+    const dl = document.getElementById(downloadId);
+    dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
+    setStatus(statusId,'ok','Imagen cargada');
+  }
+
+  // ---------- Office (xlsx/pptx) sin previsualización nativa ----------
+  function renderOfficeFile(viewerId, statusId, downloadId, url, filename, size, label){
+    const v = document.getElementById(viewerId);
+    v.className = 'viewer';
+    v.innerHTML =
+      '<div class="filecard">' +
+        '<div class="icon">' + label + '</div>' +
+        '<div class="fname">' + filename + '</div>' +
+        '<div class="fmeta">' + (size ? formatBytes(size) + ' · ' : '') + 'Vista previa no disponible en el navegador' + '</div>' +
+        '<a class="btn primary" href="' + url + '" download="' + filename + '">Descargar / Abrir archivo</a>' +
+      '</div>';
+    const dl = document.getElementById(downloadId);
+    dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
+    setStatus(statusId,'ok','Archivo cargado');
+  }
+
+  // Detecta el tipo de archivo por extensión y lo renderiza con la función correcta
+  function renderByExtension(viewerId, statusId, downloadId, url, filename, blob){
+    const ext = filename.toLowerCase().split('.').pop();
+    switch(ext){
+      case 'sql':
+      case 'txt':
+      case 'md':
+        if(blob){
+          blob.text().then(text => renderText(viewerId, statusId, downloadId, text, url, filename));
+        }
+        break;
+      case 'svg':
+      case 'png':
+        renderImage(viewerId, statusId, downloadId, url, filename);
+        break;
+      case 'pdf':
+        renderPdf(viewerId, statusId, downloadId, url, filename);
+        break;
+      case 'xlsx':
+      case 'xlsm':
+        renderOfficeFile(viewerId, statusId, downloadId, url, filename, blob ? blob.size : null, 'XLS');
+        break;
+      case 'pptx':
+        renderOfficeFile(viewerId, statusId, downloadId, url, filename, blob ? blob.size : null, 'PPT');
+        break;
+      default:
+        if(blob){
+          blob.text().then(text => renderText(viewerId, statusId, downloadId, text, url, filename));
+        }
+    }
+  }
+
+  // ---------- Recurso 1: Base de Datos SQL — intenta cargar automáticamente, si no, permite carga manual ----------
+  fetch('DB Modulo 2 (Module 2).sql').then(r=>{
+    if(!r.ok) throw new Error();
+    return r.blob();
+  }).then(blob=>{
+    renderByExtension('viewer-r1','status-r1','download-r1', URL.createObjectURL(blob), 'DB Modulo 2 (Module 2).sql', blob);
+  }).catch(()=>{
+    setStatus('status-r1','err','No se encontró automáticamente — cárgalo manualmente');
+  });
+  document.getElementById('file-r1').addEventListener('change', e=>{
+    const f = e.target.files[0];
+    if(!f) return;
+    renderByExtension('viewer-r1','status-r1','download-r1', URL.createObjectURL(f), f.name, f);
+  });
+</script>
+
+</body>
+</html>
