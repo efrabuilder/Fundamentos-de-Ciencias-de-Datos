@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fundamentos de Ciencia de Datos — Recursos del Curso - Modulo 1</title>
+<title>Fundamentos de Ciencia de Datos — Módulos del Curso</title>
 <style>
   :root{
     --bg:#f8fafc;
@@ -11,28 +11,15 @@
     --ink:#1e293b;
     --ink-soft:#64748b;
     --border:#e2e8f0;
-    --mapa:#7c3aed;
-    --mapa-soft:#f5f3ff;
-    --referencias:#0284c7;
-    --referencias-soft:#f0f9ff;
-    --prompt:#16a34a;
-    --prompt-soft:#f0fdf4;
-    --reporte:#ea580c;
-    --reporte-soft:#fff7ed;
-    --huevo:#d97706;
-    --huevo-soft:#fffbeb;
-    --algoritmo:#0d9488;
-    --algoritmo-soft:#f0fdfa;
-    --aceite:#dc2626;
-    --aceite-soft:#fef2f2;
-    --dashboard:#4f46e5;
-    --dashboard-soft:#eef2ff;
-    --segmentacion:#db2777;
-    --segmentacion-soft:#fdf2f8;
-    --dataset:#0891b2;
-    --dataset-soft:#ecfeff;
-    --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    --m1:#7c3aed; --m1-soft:#f5f3ff;
+    --m2:#0284c7; --m2-soft:#f0f9ff;
+    --m3:#16a34a; --m3-soft:#f0fdf4;
+    --m4:#ea580c; --m4-soft:#fff7ed;
+    --m5:#0d9488; --m5-soft:#f0fdfa;
+    --m6:#4f46e5; --m6-soft:#eef2ff;
+    --m7:#db2777; --m7-soft:#fdf2f8;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -53,239 +40,104 @@
   }
   .top-link:hover{color:var(--ink);}
   header{
-    padding:20px 24px 22px;
+    padding:36px 24px 30px;
     text-align:center;
     border-bottom:1px solid var(--border);
     background:var(--panel);
   }
   header h1{
-    margin:0 0 6px;
-    font-size:clamp(20px,3vw,28px);
+    margin:0 0 8px;
+    font-size:clamp(24px,3.4vw,32px);
     letter-spacing:-0.01em;
   }
   header p{
     margin:0;
     color:var(--ink-soft);
-    font-size:14px;
+    font-size:14.5px;
+    max-width:640px;
+    margin-inline:auto;
   }
-  nav{
-    display:flex;
-    justify-content:center;
-    gap:6px;
-    padding:16px;
-    flex-wrap:wrap;
-    background:var(--panel);
-    border-bottom:1px solid var(--border);
-    position:sticky;
-    top:0;
-    z-index:10;
-  }
-  .tab{
-    appearance:none;
-    border:1.5px solid var(--border);
-    background:var(--bg);
-    color:var(--ink-soft);
-    font-family:var(--sans);
-    font-size:13.5px;
-    font-weight:600;
-    padding:10px 18px;
-    border-radius:999px;
-    cursor:pointer;
-    display:flex;
-    align-items:center;
-    gap:8px;
-    transition:all .15s ease;
-  }
-  .tab .dot{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.5;}
-  .tab:hover{border-color:var(--accent);color:var(--ink);}
-  .tab.active{
-    background:var(--accent);
-    border-color:var(--accent);
-    color:#ffffff;
-  }
-  .tab.active .dot{background:#ffffff;opacity:1;}
-  #tab-mapa{--accent:var(--mapa);}
-  #tab-referencias{--accent:var(--referencias);}
-  #tab-prompt{--accent:var(--prompt);}
-  #tab-reporte{--accent:var(--reporte);}
-  #tab-huevo{--accent:var(--huevo);}
-  #tab-algoritmo{--accent:var(--algoritmo);}
-  #tab-aceite{--accent:var(--aceite);}
-  #tab-dashboard{--accent:var(--dashboard);}
-  #tab-segmentacion{--accent:var(--segmentacion);}
-  #tab-dataset{--accent:var(--dataset);}
-
   main{
     max-width:1100px;
     margin:0 auto;
-    padding:28px 20px 80px;
+    padding:40px 20px 80px;
   }
-  .panel{display:none;}
-  .panel.active{display:block;animation:fade .25s ease;}
-  @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
-
-  .panel-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-    flex-wrap:wrap;
-    gap:12px;
-    margin-bottom:16px;
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+    gap:18px;
   }
-  .panel-head h2{
-    margin:0;
-    font-size:19px;
-  }
-  .panel-head .sub{
-    color:var(--ink-soft);
-    font-size:13px;
-    margin-top:4px;
-  }
-
   .card{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
     background:var(--panel);
     border:1px solid var(--border);
     border-radius:14px;
-    overflow:hidden;
+    padding:22px;
+    text-decoration:none;
+    color:var(--ink);
+    transition:transform .15s ease, border-color .15s ease, box-shadow .15s ease;
   }
-  .card-toolbar{
+  .card.active{cursor:pointer;}
+  .card.active:hover{
+    transform:translateY(-2px);
+    border-color:var(--accent);
+    box-shadow:0 8px 20px -12px rgba(15,23,42,.25);
+  }
+  .card.locked{
+    cursor:default;
+    color:var(--ink-soft);
+  }
+  .card-top{
     display:flex;
-    align-items:center;
+    align-items:flex-start;
     justify-content:space-between;
     gap:10px;
-    flex-wrap:wrap;
-    padding:12px 16px;
-    border-bottom:1px solid var(--border);
-    background:var(--accent-soft);
   }
-  #panel-mapa .card-toolbar{--accent-soft:var(--mapa-soft);}
-  #panel-referencias .card-toolbar{--accent-soft:var(--referencias-soft);}
-  #panel-prompt .card-toolbar{--accent-soft:var(--prompt-soft);}
-  #panel-reporte .card-toolbar{--accent-soft:var(--reporte-soft);}
-  #panel-huevo .card-toolbar{--accent-soft:var(--huevo-soft);}
-  #panel-algoritmo .card-toolbar{--accent-soft:var(--algoritmo-soft);}
-  #panel-aceite .card-toolbar{--accent-soft:var(--aceite-soft);}
-  #panel-dashboard .card-toolbar{--accent-soft:var(--dashboard-soft);}
-  #panel-segmentacion .card-toolbar{--accent-soft:var(--segmentacion-soft);}
-  #panel-dataset .card-toolbar{--accent-soft:var(--dataset-soft);}
-
-  .status{
+  .num{
+    width:38px;height:38px;
+    border-radius:10px;
+    display:flex;align-items:center;justify-content:center;
+    font-weight:700;
+    font-size:14px;
+    background:var(--accent-soft);
+    color:var(--accent);
+    flex-shrink:0;
+  }
+  .card.locked .num{background:#f1f5f9;color:var(--ink-soft);}
+  .badge{
+    font-size:11px;
+    font-weight:600;
+    padding:4px 9px;
+    border-radius:999px;
+    white-space:nowrap;
+    height:fit-content;
+  }
+  .badge.disponible{background:#f0fdf4;color:#16a34a;}
+  .badge.progreso{background:#fffbeb;color:#d97706;}
+  .badge.proximo{background:#f1f5f9;color:#64748b;}
+  .card h2{
+    margin:0;
+    font-size:16.5px;
+    line-height:1.35;
+  }
+  .card .hours{
     font-size:12.5px;
     color:var(--ink-soft);
+    margin-top:-6px;
+  }
+  .card .go{
+    margin-top:auto;
+    font-size:13px;
+    font-weight:600;
+    color:var(--accent);
     display:flex;
     align-items:center;
     gap:6px;
   }
-  .status .led{width:7px;height:7px;border-radius:50%;background:#cbd5e1;}
-  .status.ok .led{background:#16a34a;}
-  .status.err .led{background:#dc2626;}
-
-  .toolbar-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
-  .btn{
-    font-family:var(--sans);
-    font-size:12.5px;
-    font-weight:600;
-    padding:7px 12px;
-    border-radius:8px;
-    border:1px solid var(--border);
-    background:#ffffff;
-    color:var(--ink);
-    cursor:pointer;
-  }
-  .btn:hover{border-color:var(--ink-soft);}
-  input[type=file]{display:none;}
-
-  .viewer{
-    min-height:420px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:0;
-    background:#ffffff;
-  }
-  .viewer.empty{
-    flex-direction:column;
-    gap:10px;
-    padding:60px 20px;
-    color:var(--ink-soft);
-    font-size:13.5px;
-    text-align:center;
-  }
-  .viewer.empty strong{color:var(--ink);font-size:14.5px;}
-  .viewer object, .viewer iframe{
-    width:100%;
-    height:78vh;
-    border:0;
-    display:block;
-  }
-  .viewer img{
-    max-width:100%;
-    max-height:78vh;
-    display:block;
-    margin:0 auto;
-  }
-  pre.text-view{
-    width:100%;
-    margin:0;
-    padding:22px 26px;
-    font-family:var(--mono);
-    font-size:12.8px;
-    line-height:1.6;
-    white-space:pre-wrap;
-    word-break:break-word;
-    max-height:78vh;
-    overflow:auto;
-  }
-  .filecard{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:14px;
-    padding:70px 20px;
-    text-align:center;
-  }
-  .filecard .icon{
-    width:64px;
-    height:64px;
-    border-radius:16px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:26px;
-    font-weight:700;
-    color:#ffffff;
-    background:var(--accent);
-  }
-  .filecard .fname{
-    font-size:14.5px;
-    font-weight:600;
-    color:var(--ink);
-    word-break:break-word;
-    max-width:520px;
-  }
-  .filecard .fmeta{
-    font-size:12.5px;
-    color:var(--ink-soft);
-  }
-  .filecard .btn.primary{
-    background:var(--accent);
-    border-color:var(--accent);
-    color:#ffffff;
-    padding:9px 18px;
-    font-size:13px;
-  }
-  .hint{
-    margin-top:12px;
-    font-size:12px;
-    color:var(--ink-soft);
-    line-height:1.6;
-  }
-  .hint code{
-    background:#f1f5f9;
-    padding:1px 6px;
-    border-radius:5px;
-    font-family:var(--mono);
-  }
+  .card.locked .go{color:var(--ink-soft);}
   footer{
     text-align:center;
     padding:24px;
@@ -296,589 +148,90 @@
 </head>
 <body>
 
-<a class="top-link" href="https://github.com/efrabuilder/Fundamentos-de-Ciencias-de-Datos-Modulo-1" target="_blank">← github.com/efrabuilder/Fundamentos-de-Ciencias-de-Datos-Modulo-1</a>
+<a class="top-link" href="https://github.com/efrabuilder/Fundamentos-de-Ciencias-de-Datos" target="_blank">← github.com/efrabuilder/Fundamentos-de-Ciencias-de-Datos</a>
 
 <header>
   <h1>Fundamentos de Ciencia de Datos</h1>
-  <p>Mapa conceptual del curso y sus referencias · Prompt y reporte del caso práctico de nutrición · Ejemplos de Algoritmos (Preparacion de Huevo Frito, Calculadora RPN, Cambiar el aceite a un carro) </p>
-  <p> Dashboard y presentacion de un caso de analisis de datos (Comportamiendo de una persona en su mes de cumple) · Presentacion de Tipos de Datos</p> 
+  <p>Recursos del curso organizados por módulo. Selecciona un módulo para ver sus materiales, ejercicios y entregables.</p>
 </header>
 
-<nav>
-  <button class="tab active" id="tab-mapa" data-target="panel-mapa">
-    <span class="dot"></span> 1. Mapa Conceptual
-  </button>
-  <button class="tab" id="tab-referencias" data-target="panel-referencias">
-    <span class="dot"></span> 4. Referencias
-  </button>
-  <button class="tab" id="tab-prompt" data-target="panel-prompt">
-    <span class="dot"></span> 2. Prompt Guía Nutricional
-  </button>
-  <button class="tab" id="tab-reporte" data-target="panel-reporte">
-    <span class="dot"></span> 3. Reporte Nutricional
-  </button>
-  <button class="tab" id="tab-huevo" data-target="panel-huevo">
-    <span class="dot"></span> 5. Huevo Frito
-  </button>
-  <button class="tab" id="tab-algoritmo" data-target="panel-algoritmo">
-    <span class="dot"></span> 6. Algoritmo Calculadora RPN
-  </button>
-  <button class="tab" id="tab-aceite" data-target="panel-aceite">
-    <span class="dot"></span> 7. Cambio de Aceite
-  </button>
-  <button class="tab" id="tab-dashboard" data-target="panel-dashboard">
-    <span class="dot"></span> 8. Dashboard
-  </button>
-  <button class="tab" id="tab-segmentacion" data-target="panel-segmentacion">
-    <span class="dot"></span> 9. Presentación de Segmentación
-  </button>
-  <button class="tab" id="tab-dataset" data-target="panel-dataset">
-    <span class="dot"></span> 10. Presentación de Dataset
-  </button>
-</nav>
-
 <main>
+  <div class="grid">
 
-  <!-- ===================== PANEL 1: MAPA ===================== -->
-  <section class="panel active" id="panel-mapa">
-    <div class="panel-head">
-      <div>
-        <h2>Mapa Conceptual — Ciencia de Datos</h2>
-        <div class="sub">Fundamentos, recolección, Big Data/BI/IA/ML, carrera y habilidades avanzadas</div>
+    <a class="card active" id="m1" href="Modulo 1/index.html">
+      <div class="card-top">
+        <span class="num" style="--accent:var(--m1);--accent-soft:var(--m1-soft);">01</span>
+        <span class="badge disponible">Disponible</span>
       </div>
-    </div>
-    <div class="card">
-      <div class="card-toolbar">
-        <span class="status" id="status-mapa"><span class="led"></span> Buscando archivo…</span>
-        <div class="toolbar-actions">
-          <button class="btn" onclick="document.getElementById('file-mapa').click()">Cargar archivo…</button>
-          <input type="file" id="file-mapa" accept=".svg,image/svg+xml">
-          <a class="btn" id="download-mapa" download="mapa_conceptual_ciencia_datos.svg" style="display:none;">Descargar</a>
-        </div>
-      </div>
-      <div class="viewer empty" id="viewer-mapa">
-        <strong>Sin mapa cargado todavía</strong>
-        Coloca el archivo <code>mapa_conceptual_ciencia_datos.svg</code> en la misma carpeta que este HTML,
-        o cárgalo manualmente con el botón de arriba.
-      </div>
-    </div>
-    <div class="hint">
-      Nombre esperado en el repositorio: <code>mapa_conceptual_ciencia_datos.svg</code>
-    </div>
-  </section>
+      <h2>Fundamentos de Ciencias de Datos</h2>
+      <div class="hours">40 horas</div>
+      <span class="go" style="--accent:var(--m1);">Ver recursos →</span>
+    </a>
 
+    <a class="card active" id="m2" href="Modulo 2/index.html">
+      <div class="card-top">
+        <span class="num" style="--accent:var(--m2);--accent-soft:var(--m2-soft);">02</span>
+        <span class="badge progreso">En progreso</span>
+      </div>
+      <h2>Manejo y Preparación de Datos</h2>
+      <div class="hours">60 horas</div>
+      <span class="go" style="--accent:var(--m2);">Ver recursos →</span>
+    </a>
 
-  <!-- ===================== PANEL 2: REFERENCIAS ===================== -->
-  <section class="panel" id="panel-referencias">
-    <div class="panel-head">
-      <div>
-        <h2>Referencias — Mapa Conceptual</h2>
-        <div class="sub">Fuentes consultadas para la construcción del mapa conceptual</div>
+    <div class="card locked" id="m3">
+      <div class="card-top">
+        <span class="num" style="--accent:var(--m3);--accent-soft:var(--m3-soft);">03</span>
+        <span class="badge proximo">Próximamente</span>
       </div>
+      <h2>Análisis Exploratorio de Datos (EDA)</h2>
+      <div class="hours">60 horas</div>
+      <span class="go">Sin recursos aún</span>
     </div>
-    <div class="card">
-      <div class="card-toolbar">
-        <span class="status" id="status-referencias"><span class="led"></span> Buscando archivo…</span>
-        <div class="toolbar-actions">
-          <button class="btn" onclick="document.getElementById('file-referencias').click()">Cargar archivo…</button>
-          <input type="file" id="file-referencias" accept=".pdf,.md,.txt,application/pdf,text/plain,text/markdown">
-          <a class="btn" id="download-referencias" download="Referencias_Mapa_Conceptual.pdf" style="display:none;">Descargar</a>
-        </div>
-      </div>
-      <div class="viewer empty" id="viewer-referencias">
-        <strong>Sin referencias cargadas todavía</strong>
-        Coloca el archivo <code>Referencias_Mapa_Conceptual.pdf</code> en la misma
-        carpeta que este HTML, o cárgalo manualmente con el botón de arriba.
-      </div>
-    </div>
-    <div class="hint">
-      Nombre esperado en el repositorio: <code>Referencias_Mapa_Conceptual.pdf</code>
-    </div>
-  </section>
 
-  
-  <!-- ===================== PANEL 3: PROMPT ===================== -->
-  <section class="panel" id="panel-prompt">
-    <div class="panel-head">
-      <div>
-        <h2>Prompt — Guía Nutricional</h2>
-        <div class="sub">Instrucción utilizada para generar la guía nutricional del caso práctico</div>
+    <div class="card locked" id="m4">
+      <div class="card-top">
+        <span class="num" style="--accent:var(--m4);--accent-soft:var(--m4-soft);">04</span>
+        <span class="badge proximo">Próximamente</span>
       </div>
+      <h2>Visualización y Business Intelligence</h2>
+      <div class="hours">60 horas</div>
+      <span class="go">Sin recursos aún</span>
     </div>
-    <div class="card">
-      <div class="card-toolbar">
-        <span class="status" id="status-prompt"><span class="led"></span> Buscando archivo…</span>
-        <div class="toolbar-actions">
-          <button class="btn" onclick="document.getElementById('file-prompt').click()">Cargar archivo…</button>
-          <input type="file" id="file-prompt" accept=".md,.txt,text/plain,text/markdown">
-          <a class="btn" id="download-prompt" download="Prompt de guia nutricional.txt" style="display:none;">Descargar</a>
-        </div>
-      </div>
-      <div class="viewer empty" id="viewer-prompt">
-        <strong>Sin prompt cargado todavía</strong>
-        Coloca el archivo <code>Prompt de guia nutricional.txt</code> en la misma carpeta
-        que este HTML, o cárgalo manualmente con el botón de arriba.
-      </div>
-    </div>
-    <div class="hint">
-      Nombre esperado en el repositorio: <code>Prompt de guia nutricional.txt</code>
-    </div>
-  </section>
 
-  <!-- ===================== PANEL 4: REPORTE ===================== -->
-  <section class="panel" id="panel-reporte">
-    <div class="panel-head">
-      <div>
-        <h2>Reporte — Caso Práctico Nutricional</h2>
-        <div class="sub">Resultado del análisis aplicando el proceso analítico de 6 pasos</div>
+    <div class="card locked" id="m5">
+      <div class="card-top">
+        <span class="num" style="--accent:var(--m5);--accent-soft:var(--m5-soft);">05</span>
+        <span class="badge proximo">Próximamente</span>
       </div>
+      <h2>Introducción al Machine Learning Aplicado</h2>
+      <div class="hours">50 horas</div>
+      <span class="go">Sin recursos aún</span>
     </div>
-    <div class="card">
-      <div class="card-toolbar">
-        <span class="status" id="status-reporte"><span class="led"></span> Buscando archivo…</span>
-        <div class="toolbar-actions">
-          <button class="btn" onclick="document.getElementById('file-reporte').click()">Cargar archivo…</button>
-          <input type="file" id="file-reporte" accept=".pdf,.md,.txt,application/pdf,text/plain,text/markdown">
-          <a class="btn" id="download-reporte" download="Reporte nutricional para caso de practica del curso Fundamentos de ciencia de datos.pdf" style="display:none;">Descargar</a>
-        </div>
-      </div>
-      <div class="viewer empty" id="viewer-reporte">
-        <strong>Sin reporte cargado todavía</strong>
-        Coloca el archivo <code>Reporte nutricional para caso de practica del curso Fundamentos de ciencia de datos.pdf</code> en la misma
-        carpeta que este HTML, o cárgalo manualmente con el botón de arriba.
-      </div>
-    </div>
-    <div class="hint">
-      Nombre esperado en el repositorio: <code>Reporte nutricional para caso de practica del curso Fundamentos de ciencia de datos.pdf</code>
-    </div>
-  </section>
 
+    <div class="card locked" id="m6">
+      <div class="card-top">
+        <span class="num" style="--accent:var(--m6);--accent-soft:var(--m6-soft);">06</span>
+        <span class="badge proximo">Próximamente</span>
+      </div>
+      <h2>Proyecto Integrador de Análisis de Datos</h2>
+      <div class="hours">50 horas</div>
+      <span class="go">Sin recursos aún</span>
+    </div>
 
-  <!-- ===================== PANEL 5: HUEVO FRITO ===================== -->
-  <section class="panel" id="panel-huevo">
-    <div class="panel-head">
-      <div>
-        <h2>Huevo Frito</h2>
-        <div class="sub">Documento de texto</div>
+    <div class="card locked" id="m7">
+      <div class="card-top">
+        <span class="num" style="--accent:var(--m7);--accent-soft:var(--m7-soft);">07</span>
+        <span class="badge proximo">Próximamente</span>
       </div>
+      <h2>Habilidades Socioemocionales para el Análisis de Datos</h2>
+      <div class="hours">40 horas</div>
+      <span class="go">Sin recursos aún</span>
     </div>
-    <div class="card">
-      <div class="card-toolbar">
-        <span class="status" id="status-huevo"><span class="led"></span> Buscando archivo…</span>
-        <div class="toolbar-actions">
-          <button class="btn" onclick="document.getElementById('file-huevo').click()">Cargar archivo…</button>
-          <input type="file" id="file-huevo" accept=".md,.txt,text/plain,text/markdown">
-          <a class="btn" id="download-huevo" download="Huevo Frito.txt" style="display:none;">Descargar</a>
-        </div>
-      </div>
-      <div class="viewer empty" id="viewer-huevo">
-        <strong>Sin archivo cargado todavía</strong>
-        Coloca el archivo <code>Huevo Frito.txt</code> en la misma carpeta
-        que este HTML, o cárgalo manualmente con el botón de arriba.
-      </div>
-    </div>
-    <div class="hint">
-      Nombre esperado en el repositorio: <code>Huevo Frito.txt</code>
-    </div>
-  </section>
 
-  <!-- ===================== PANEL 6: ALGORITMO CALCULADORA RPN ===================== -->
-  <section class="panel" id="panel-algoritmo">
-    <div class="panel-head">
-      <div>
-        <h2>Algoritmo Calculadora RPN</h2>
-        <div class="sub">Diagrama del algoritmo de la calculadora en notación polaca inversa</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-toolbar">
-        <span class="status" id="status-algoritmo"><span class="led"></span> Buscando archivo…</span>
-        <div class="toolbar-actions">
-          <button class="btn" onclick="document.getElementById('file-algoritmo').click()">Cargar archivo…</button>
-          <input type="file" id="file-algoritmo" accept=".png,image/png">
-          <a class="btn" id="download-algoritmo" download="algoritmo_calculadora_rpn.png" style="display:none;">Descargar</a>
-        </div>
-      </div>
-      <div class="viewer empty" id="viewer-algoritmo">
-        <strong>Sin imagen cargada todavía</strong>
-        Coloca el archivo <code>algoritmo_calculadora_rpn.png</code> en la misma carpeta
-        que este HTML, o cárgalo manualmente con el botón de arriba.
-      </div>
-    </div>
-    <div class="hint">
-      Nombre esperado en el repositorio: <code>algoritmo_calculadora_rpn.png</code>
-    </div>
-  </section>
-
-  <!-- ===================== PANEL 7: CAMBIO DE ACEITE ===================== -->
-  <section class="panel" id="panel-aceite">
-    <div class="panel-head">
-      <div>
-        <h2>Pasos para el Cambio de Aceite</h2>
-        <div class="sub">Diagrama de pasos para el cambio de aceite del carro</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-toolbar">
-        <span class="status" id="status-aceite"><span class="led"></span> Buscando archivo…</span>
-        <div class="toolbar-actions">
-          <button class="btn" onclick="document.getElementById('file-aceite').click()">Cargar archivo…</button>
-          <input type="file" id="file-aceite" accept=".png,image/png">
-          <a class="btn" id="download-aceite" download="pasos_cambio_aceite_carro.png" style="display:none;">Descargar</a>
-        </div>
-      </div>
-      <div class="viewer empty" id="viewer-aceite">
-        <strong>Sin imagen cargada todavía</strong>
-        Coloca el archivo <code>pasos_cambio_aceite_carro.png</code> en la misma carpeta
-        que este HTML, o cárgalo manualmente con el botón de arriba.
-      </div>
-    </div>
-    <div class="hint">
-      Nombre esperado en el repositorio: <code>pasos_cambio_aceite_carro.png</code>
-    </div>
-  </section>
-
-  <!-- ===================== PANEL 8: DASHBOARD ===================== -->
-  <section class="panel" id="panel-dashboard">
-    <div class="panel-head">
-      <div>
-        <h2>Dashboard — Cumpleaños CR</h2>
-        <div class="sub">Libro de Excel con el dashboard de cumpleaños</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-toolbar">
-        <span class="status" id="status-dashboard"><span class="led"></span> Buscando archivo…</span>
-        <div class="toolbar-actions">
-          <button class="btn" onclick="document.getElementById('file-dashboard').click()">Cargar archivo…</button>
-          <input type="file" id="file-dashboard" accept=".xlsx,.xlsm,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
-          <a class="btn" id="download-dashboard" download="dashboard_cumpleanos_cr.xlsx" style="display:none;">Descargar</a>
-        </div>
-      </div>
-      <div class="viewer empty" id="viewer-dashboard">
-        <strong>Sin archivo cargado todavía</strong>
-        Coloca el archivo <code>dashboard_cumpleanos_cr.xlsx</code> en la misma carpeta
-        que este HTML, o cárgalo manualmente con el botón de arriba.
-      </div>
-    </div>
-    <div class="hint">
-      Nombre esperado en el repositorio: <code>dashboard_cumpleanos_cr.xlsx</code> · Los archivos de Excel no se previsualizan en el navegador; usa el botón Descargar para abrirlo.
-    </div>
-  </section>
-
-  <!-- ===================== PANEL 9: PRESENTACIÓN SEGMENTACIÓN ===================== -->
-  <section class="panel" id="panel-segmentacion">
-    <div class="panel-head">
-      <div>
-        <h2>Presentación — Segmentación de Cumpleaños CR</h2>
-        <div class="sub">Presentación de PowerPoint sobre segmentación de cumpleaños en Costa Rica</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-toolbar">
-        <span class="status" id="status-segmentacion"><span class="led"></span> Buscando archivo…</span>
-        <div class="toolbar-actions">
-          <button class="btn" onclick="document.getElementById('file-segmentacion').click()">Cargar archivo…</button>
-          <input type="file" id="file-segmentacion" accept=".pptx,application/vnd.openxmlformats-officedocument.presentationml.presentation">
-          <a class="btn" id="download-segmentacion" download="Segmentacion_Cumpleanos_CRI.pptx" style="display:none;">Descargar</a>
-        </div>
-      </div>
-      <div class="viewer empty" id="viewer-segmentacion">
-        <strong>Sin archivo cargado todavía</strong>
-        Coloca el archivo <code>Segmentacion_Cumpleanos_CRI.pptx</code> en la misma carpeta
-        que este HTML, o cárgalo manualmente con el botón de arriba.
-      </div>
-    </div>
-    <div class="hint">
-      Nombre esperado en el repositorio: <code>Segmentacion_Cumpleanos_CRI.pptx</code> · Las presentaciones de PowerPoint no se previsualizan en el navegador; usa el botón Descargar para abrirla.
-    </div>
-  </section>
-
-  <!-- ===================== PANEL 10: PRESENTACIÓN DATASET ===================== -->
-  <section class="panel" id="panel-dataset">
-    <div class="panel-head">
-      <div>
-        <h2>Presentación — Análisis del Dataset</h2>
-        <div class="sub">Presentación de PowerPoint con el análisis del dataset</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-toolbar">
-        <span class="status" id="status-dataset"><span class="led"></span> Buscando archivo…</span>
-        <div class="toolbar-actions">
-          <button class="btn" onclick="document.getElementById('file-dataset').click()">Cargar archivo…</button>
-          <input type="file" id="file-dataset" accept=".pptx,application/vnd.openxmlformats-officedocument.presentationml.presentation">
-          <a class="btn" id="download-dataset" download="Analisis_Dataset.pptx" style="display:none;">Descargar</a>
-        </div>
-      </div>
-      <div class="viewer empty" id="viewer-dataset">
-        <strong>Sin archivo cargado todavía</strong>
-        Coloca el archivo <code>Analisis_Dataset.pptx</code> en la misma carpeta
-        que este HTML, o cárgalo manualmente con el botón de arriba.
-      </div>
-    </div>
-    <div class="hint">
-      Nombre esperado en el repositorio: <code>Analisis_Dataset.pptx</code> · Las presentaciones de PowerPoint no se previsualizan en el navegador; usa el botón Descargar para abrirla.
-    </div>
-  </section>
-
+  </div>
 </main>
 
-<footer>Recursos del curso Fundamentos de Ciencia de Datos</footer>
 <footer>© 2026 Todos los derechos reservados · Diseñado y desarrollado por Efraín Sebastián Rojas Artavia</footer>
-
-<script>
-  // ---------- Tab switching ----------
-  document.querySelectorAll('.tab').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.target).classList.add('active');
-    });
-  });
-
-  function setStatus(id, mode, text){
-    const el = document.getElementById(id);
-    el.className = 'status ' + mode;
-    el.innerHTML = '<span class="led"></span> ' + text;
-  }
-
-  function formatBytes(bytes){
-    if(!bytes && bytes !== 0) return '';
-    if(bytes < 1024) return bytes + ' B';
-    if(bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
-    return (bytes/(1024*1024)).toFixed(1) + ' MB';
-  }
-
-  // ---------- Panel: Mapa (SVG) ----------
-  function renderSvg(url){
-    const v = document.getElementById('viewer-mapa');
-    v.className = 'viewer';
-    v.innerHTML = '<object type="image/svg+xml" data="' + url + '"></object>';
-    const dl = document.getElementById('download-mapa');
-    dl.href = url; dl.style.display = 'inline-block';
-    setStatus('status-mapa','ok','Mapa cargado');
-  }
-  fetch('mapa_conceptual_ciencia_datos.svg').then(r=>{
-    if(!r.ok) throw new Error();
-    return r.blob();
-  }).then(blob=>{
-    renderSvg(URL.createObjectURL(blob));
-  }).catch(()=>{
-    setStatus('status-mapa','err','No se encontró automáticamente — cárgalo manualmente');
-  });
-  document.getElementById('file-mapa').addEventListener('change', e=>{
-    const f = e.target.files[0];
-    if(!f) return;
-    renderSvg(URL.createObjectURL(f));
-  });
-
-    // ---------- Panel: Referencias (PDF o texto) ----------
-  fetch('Referencias_Mapa_Conceptual.pdf').then(r=>{
-    if(!r.ok) throw new Error();
-    return r.blob();
-  }).then(blob=>{
-    renderDoc('viewer-referencias','status-referencias','download-referencias', URL.createObjectURL(blob), 'Referencias_Mapa_Conceptual.pdf', true);
-  }).catch(()=>{
-    setStatus('status-referencias','err','No se encontró automáticamente — cárgalo manualmente');
-  });
-  document.getElementById('file-referencias').addEventListener('change', e=>{
-    const f = e.target.files[0];
-    if(!f) return;
-    if(f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf')){
-      renderDoc('viewer-referencias','status-referencias','download-referencias', URL.createObjectURL(f), f.name, true);
-    } else {
-      const reader = new FileReader();
-      reader.onload = evt => renderDoc('viewer-referencias','status-referencias','download-referencias', URL.createObjectURL(f), f.name, false, evt.target.result);
-      reader.readAsText(f);
-    }
-  });
-
-  // ---------- Panel: Prompt (texto / markdown) ----------
-  function renderText(viewerId, statusId, downloadId, text, url, filename){
-    const v = document.getElementById(viewerId);
-    v.className = 'viewer';
-    const pre = document.createElement('pre');
-    pre.className = 'text-view';
-    pre.textContent = text;
-    v.innerHTML = '';
-    v.appendChild(pre);
-    if(url){
-      const dl = document.getElementById(downloadId);
-      dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
-    }
-    setStatus(statusId,'ok','Archivo cargado');
-  }
-  fetch('Prompt de guia nutricional.txt').then(r=>{
-    if(!r.ok) throw new Error();
-    return r.text();
-  }).then(text=>{
-    renderText('viewer-prompt','status-prompt','download-prompt', text, 'Prompt de guia nutricional.txt', 'Prompt de guia nutricional.txt');
-  }).catch(()=>{
-    setStatus('status-prompt','err','No se encontró automáticamente — cárgalo manualmente');
-  });
-  document.getElementById('file-prompt').addEventListener('change', e=>{
-    const f = e.target.files[0];
-    if(!f) return;
-    const reader = new FileReader();
-    reader.onload = evt => renderText('viewer-prompt','status-prompt','download-prompt', evt.target.result, URL.createObjectURL(f), f.name);
-    reader.readAsText(f);
-  });
-
-  // ---------- Panel: Reporte (PDF o texto) ----------
-  function renderDoc(viewerId, statusId, downloadId, url, filename, isPdf, text){
-    const v = document.getElementById(viewerId);
-    if(isPdf){
-      v.className = 'viewer';
-      v.innerHTML = '<iframe src="' + url + '"></iframe>';
-      const dl = document.getElementById(downloadId);
-      dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
-      setStatus(statusId,'ok','Archivo cargado');
-    } else {
-      renderText(viewerId, statusId, downloadId, text, url, filename);
-    }
-  }
-  fetch('Reporte nutricional para caso de practica del curso Fundamentos de ciencia de datos.pdf').then(r=>{
-    if(!r.ok) throw new Error();
-    return r.blob();
-  }).then(blob=>{
-    renderDoc('viewer-reporte','status-reporte','download-reporte', URL.createObjectURL(blob), 'Reporte nutricional para caso de practica del curso Fundamentos de ciencia de datos.pdf', true);
-  }).catch(()=>{
-    setStatus('status-reporte','err','No se encontró automáticamente — cárgalo manualmente');
-  });
-  document.getElementById('file-reporte').addEventListener('change', e=>{
-    const f = e.target.files[0];
-    if(!f) return;
-    if(f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf')){
-      renderDoc('viewer-reporte','status-reporte','download-reporte', URL.createObjectURL(f), f.name, true);
-    } else {
-      const reader = new FileReader();
-      reader.onload = evt => renderDoc('viewer-reporte','status-reporte','download-reporte', URL.createObjectURL(f), f.name, false, evt.target.result);
-      reader.readAsText(f);
-    }
-  });
-
-
-  // ---------- Panel: Huevo Frito (texto) ----------
-  fetch('Huevo Frito.txt').then(r=>{
-    if(!r.ok) throw new Error();
-    return r.text();
-  }).then(text=>{
-    renderText('viewer-huevo','status-huevo','download-huevo', text, 'Huevo Frito.txt', 'Huevo Frito.txt');
-  }).catch(()=>{
-    setStatus('status-huevo','err','No se encontró automáticamente — cárgalo manualmente');
-  });
-  document.getElementById('file-huevo').addEventListener('change', e=>{
-    const f = e.target.files[0];
-    if(!f) return;
-    const reader = new FileReader();
-    reader.onload = evt => renderText('viewer-huevo','status-huevo','download-huevo', evt.target.result, URL.createObjectURL(f), f.name);
-    reader.readAsText(f);
-  });
-
-  // ---------- Panel: Algoritmo Calculadora RPN (imagen) ----------
-  function renderImage(viewerId, statusId, downloadId, url, filename){
-    const v = document.getElementById(viewerId);
-    v.className = 'viewer';
-    v.innerHTML = '';
-    const img = document.createElement('img');
-    img.src = url;
-    v.appendChild(img);
-    const dl = document.getElementById(downloadId);
-    dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
-    setStatus(statusId,'ok','Imagen cargada');
-  }
-  fetch('algoritmo_calculadora_rpn.png').then(r=>{
-    if(!r.ok) throw new Error();
-    return r.blob();
-  }).then(blob=>{
-    renderImage('viewer-algoritmo','status-algoritmo','download-algoritmo', URL.createObjectURL(blob), 'algoritmo_calculadora_rpn.png');
-  }).catch(()=>{
-    setStatus('status-algoritmo','err','No se encontró automáticamente — cárgalo manualmente');
-  });
-  document.getElementById('file-algoritmo').addEventListener('change', e=>{
-    const f = e.target.files[0];
-    if(!f) return;
-    renderImage('viewer-algoritmo','status-algoritmo','download-algoritmo', URL.createObjectURL(f), f.name);
-  });
-
-  // ---------- Panel: Cambio de Aceite (imagen) ----------
-  fetch('pasos_cambio_aceite_carro.png').then(r=>{
-    if(!r.ok) throw new Error();
-    return r.blob();
-  }).then(blob=>{
-    renderImage('viewer-aceite','status-aceite','download-aceite', URL.createObjectURL(blob), 'pasos_cambio_aceite_carro.png');
-  }).catch(()=>{
-    setStatus('status-aceite','err','No se encontró automáticamente — cárgalo manualmente');
-  });
-  document.getElementById('file-aceite').addEventListener('change', e=>{
-    const f = e.target.files[0];
-    if(!f) return;
-    renderImage('viewer-aceite','status-aceite','download-aceite', URL.createObjectURL(f), f.name);
-  });
-
-  // ---------- Genérico: archivos de Office (xlsx / pptx) sin previsualización nativa ----------
-  function renderOfficeFile(viewerId, statusId, downloadId, url, filename, size, label){
-    const v = document.getElementById(viewerId);
-    v.className = 'viewer';
-    v.innerHTML =
-      '<div class="filecard">' +
-        '<div class="icon">' + label + '</div>' +
-        '<div class="fname">' + filename + '</div>' +
-        '<div class="fmeta">' + (size ? formatBytes(size) + ' · ' : '') + 'Vista previa no disponible en el navegador' + '</div>' +
-        '<a class="btn primary" href="' + url + '" download="' + filename + '">Descargar / Abrir archivo</a>' +
-      '</div>';
-    const dl = document.getElementById(downloadId);
-    dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
-    setStatus(statusId,'ok','Archivo cargado');
-  }
-
-  // ---------- Panel: Dashboard (xlsx) ----------
-  fetch('dashboard_cumpleanos_cr.xlsx').then(r=>{
-    if(!r.ok) throw new Error();
-    return r.blob();
-  }).then(blob=>{
-    renderOfficeFile('viewer-dashboard','status-dashboard','download-dashboard', URL.createObjectURL(blob), 'dashboard_cumpleanos_cr.xlsx', blob.size, 'XLS');
-  }).catch(()=>{
-    setStatus('status-dashboard','err','No se encontró automáticamente — cárgalo manualmente');
-  });
-  document.getElementById('file-dashboard').addEventListener('change', e=>{
-    const f = e.target.files[0];
-    if(!f) return;
-    renderOfficeFile('viewer-dashboard','status-dashboard','download-dashboard', URL.createObjectURL(f), f.name, f.size, 'XLS');
-  });
-
-  // ---------- Panel: Presentación Segmentación (pptx) ----------
-  fetch('Segmentacion_Cumpleanos_CRI.pptx').then(r=>{
-    if(!r.ok) throw new Error();
-    return r.blob();
-  }).then(blob=>{
-    renderOfficeFile('viewer-segmentacion','status-segmentacion','download-segmentacion', URL.createObjectURL(blob), 'Segmentacion_Cumpleanos_CRI.pptx', blob.size, 'PPT');
-  }).catch(()=>{
-    setStatus('status-segmentacion','err','No se encontró automáticamente — cárgalo manualmente');
-  });
-  document.getElementById('file-segmentacion').addEventListener('change', e=>{
-    const f = e.target.files[0];
-    if(!f) return;
-    renderOfficeFile('viewer-segmentacion','status-segmentacion','download-segmentacion', URL.createObjectURL(f), f.name, f.size, 'PPT');
-  });
-
-  // ---------- Panel: Presentación Dataset (pptx) ----------
-  fetch('Analisis_Dataset.pptx').then(r=>{
-    if(!r.ok) throw new Error();
-    return r.blob();
-  }).then(blob=>{
-    renderOfficeFile('viewer-dataset','status-dataset','download-dataset', URL.createObjectURL(blob), 'Analisis_Dataset.pptx', blob.size, 'PPT');
-  }).catch(()=>{
-    setStatus('status-dataset','err','No se encontró automáticamente — cárgalo manualmente');
-  });
-  document.getElementById('file-dataset').addEventListener('change', e=>{
-    const f = e.target.files[0];
-    if(!f) return;
-    renderOfficeFile('viewer-dataset','status-dataset','download-dataset', URL.createObjectURL(f), f.name, f.size, 'PPT');
-  });
-</script>
 
 </body>
 </html>
