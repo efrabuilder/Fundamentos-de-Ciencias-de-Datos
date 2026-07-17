@@ -14,6 +14,7 @@
     --r1:#0284c7; --r1-soft:#f0f9ff;
     --r2:#7c3aed; --r2-soft:#f5f3ff;
     --r3:#db2777; --r3-soft:#fdf2f8;
+    --r4:#0d9488; --r4-soft:#f0fdfa;
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
@@ -36,6 +37,7 @@
   #tab-r1{--accent:var(--r1);}
   #tab-r2{--accent:var(--r2);}
   #tab-r3{--accent:var(--r3);}
+  #tab-r4{--accent:var(--r4);}
   main{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
   .panel{display:none;}
   .panel.active{display:block;animation:fade .25s ease;}
@@ -48,6 +50,7 @@
   #panel-r1 .card-toolbar{--accent-soft:var(--r1-soft);}
   #panel-r2 .card-toolbar{--accent-soft:var(--r2-soft);}
   #panel-r3 .card-toolbar{--accent-soft:var(--r3-soft);}
+  #panel-r4 .card-toolbar{--accent-soft:var(--r4-soft);}
   .status{font-size:12.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
   .status .led{width:7px;height:7px;border-radius:50%;background:#cbd5e1;}
   .status.ok .led{background:#16a34a;}
@@ -96,6 +99,10 @@
 
   <button class="tab" id="tab-r3" data-target="panel-r3">
     <span class="dot"></span> 3. Caso Práctico (Indicaciones + Diagrama)
+  </button>
+
+  <button class="tab" id="tab-r4" data-target="panel-r4">
+    <span class="dot"></span> 4. Quiz (Indicaciones + Diagrama)
   </button>
   <!--
     Para agregar un nuevo recurso: copia un botón como el de arriba,
@@ -210,6 +217,55 @@
     </div>
     <div class="hint">
       Nombre esperado en el repositorio: <code>Diagrama identidad relación caso práctico módulo 2.drawio.png</code> (diagrama)
+    </div>
+  </section>
+
+
+  <!-- ===================== PANEL 4: QUIZ (INDICACIONES + DIAGRAMA) ===================== -->
+  <section class="panel" id="panel-r4">
+    <div class="panel-head">
+      <div>
+        <h2>Quiz — Módulo 2</h2>
+        <div class="sub">Indicaciones del quiz y su diagrama de identidad relación</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar">
+        <span class="status" id="status-r4a"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r4a').click()">Cargar archivo…</button>
+          <input type="file" id="file-r4a" accept=".png,image/png">
+          <a class="btn" id="download-r4a" download="quiz modulo 2.png" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r4a">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>quiz modulo 2.png</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">
+      Nombre esperado en el repositorio: <code>quiz modulo 2.png</code> (indicaciones)
+    </div>
+
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-r4b"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r4b').click()">Cargar archivo…</button>
+          <input type="file" id="file-r4b" accept=".png,image/png">
+          <a class="btn" id="download-r4b" download="Diagrama identidad relacion - quiz - modulo 2.drawio.png" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r4b">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Diagrama identidad relacion - quiz - modulo 2.drawio.png</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>Diagrama identidad relacion - quiz - modulo 2.drawio.png</code> (diagrama)
     </div>
   </section>
 
@@ -355,6 +411,8 @@
   setupResource('r2', 'Diagrama indentidad relacion modulo 2, ejemplo.drawio.png');
   setupResource('r3a', 'Caso practico.png');
   setupResource('r3b', 'Diagrama identidad relación caso práctico módulo 2.drawio.png');
+  setupResource('r4a', 'quiz modulo 2.png');
+  setupResource('r4b', 'Diagrama identidad relacion - quiz - modulo 2.drawio.png');
 </script>
 
 </body>
