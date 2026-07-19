@@ -102,7 +102,7 @@
   </button>
 
   <button class="tab" id="tab-r4" data-target="panel-r4">
-    <span class="dot"></span> 4. Quiz (Indicaciones + Diagrama + Script (SQL))
+    <span class="dot"></span> 4. Quiz (Indicaciones + Diagrama)
   </button>
   <!--
     Para agregar un nuevo recurso: copia un botón como el de arriba,
@@ -286,6 +286,25 @@
     <div class="hint">
       Nombre esperado en el repositorio: <code>Script para la creacion de la DB del quiz modulo 2 Efrain Sebastian Rojas Artavia.sql</code> (script de creación de tablas)
     </div>
+
+    <div class="card" style="margin-top:22px;">
+      <div class="card-toolbar">
+        <span class="status" id="status-r4d"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r4d').click()">Cargar archivo…</button>
+          <input type="file" id="file-r4d" accept=".jpg,.jpeg,image/jpeg">
+          <a class="btn" id="download-r4d" download="Base de datos + Diagrama.jpeg" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r4d">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Base de datos + Diagrama.jpeg</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>Base de datos + Diagrama.jpeg</code> (captura de la base de datos junto con su diagrama)
+    </div>
   </section>
 
 </main>
@@ -383,6 +402,8 @@
         break;
       case 'svg':
       case 'png':
+      case 'jpg':
+      case 'jpeg':
         renderImage(viewerId, statusId, downloadId, url, filename);
         break;
       case 'pdf':
@@ -433,6 +454,7 @@
   setupResource('r4a', 'quiz modulo 2.png');
   setupResource('r4b', 'Diagrama identidad relacion - quiz - modulo 2.drawio.png');
   setupResource('r4c', 'Script para la creacion de la DB del quiz modulo 2 Efrain Sebastian Rojas Artavia.sql');
+  setupResource('r4d', 'Base de datos + Diagrama.jpeg');
 </script>
 
 </body>
