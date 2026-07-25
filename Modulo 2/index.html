@@ -15,6 +15,7 @@
     --r2:#7c3aed; --r2-soft:#f5f3ff;
     --r3:#db2777; --r3-soft:#fdf2f8;
     --r4:#0d9488; --r4-soft:#f0fdfa;
+    --r5:#ea580c; --r5-soft:#fff7ed;
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
@@ -38,6 +39,7 @@
   #tab-r2{--accent:var(--r2);}
   #tab-r3{--accent:var(--r3);}
   #tab-r4{--accent:var(--r4);}
+  #tab-r5{--accent:var(--r5);}
   main{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
   .panel{display:none;}
   .panel.active{display:block;animation:fade .25s ease;}
@@ -51,6 +53,7 @@
   #panel-r2 .card-toolbar{--accent-soft:var(--r2-soft);}
   #panel-r3 .card-toolbar{--accent-soft:var(--r3-soft);}
   #panel-r4 .card-toolbar{--accent-soft:var(--r4-soft);}
+  #panel-r5 .card-toolbar{--accent-soft:var(--r5-soft);}
   .status{font-size:12.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
   .status .led{width:7px;height:7px;border-radius:50%;background:#cbd5e1;}
   .status.ok .led{background:#16a34a;}
@@ -104,11 +107,15 @@
   <button class="tab" id="tab-r4" data-target="panel-r4">
     <span class="dot"></span> 4. Quiz (Indicaciones + Diagrama)
   </button>
+
+  <button class="tab" id="tab-r5" data-target="panel-r5">
+    <span class="dot"></span> 5. Consultas a las tablas
+  </button>
   <!--
     Para agregar un nuevo recurso: copia un botón como el de arriba,
-    dale un id y data-target únicos (ej. tab-r4 / panel-r4), y crea abajo su
+    dale un id y data-target únicos (ej. tab-r6 / panel-r6), y crea abajo su
     <section class="panel"> correspondiente. También agrega su color de
-    acento en :root arriba (ej. --r4, --r4-soft) siguiendo el mismo patrón.
+    acento en :root arriba (ej. --r6, --r6-soft) siguiendo el mismo patrón.
   -->
 </nav>
 
@@ -307,6 +314,74 @@
     </div>
   </section>
 
+
+  <!-- ===================== PANEL 5: CONSULTAS A LAS TABLAS ===================== -->
+  <section class="panel" id="panel-r5">
+    <div class="panel-head">
+      <div>
+        <h2>Consultas a las tablas — Módulo 2</h2>
+        <div class="sub">Scripts SQL con las consultas realizadas sobre las tablas de la base de datos</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar">
+        <span class="status" id="status-r5a"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r5a').click()">Cargar archivo…</button>
+          <input type="file" id="file-r5a" accept=".sql,text/plain">
+          <a class="btn" id="download-r5a" download="Consultas a las tablas..sql" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r5a">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Consultas a las tablas..sql</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">
+      Nombre esperado en el repositorio: <code>Consultas a las tablas..sql</code>
+    </div>
+
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar">
+        <span class="status" id="status-r5b"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r5b').click()">Cargar archivo…</button>
+          <input type="file" id="file-r5b" accept=".sql,text/plain">
+          <a class="btn" id="download-r5b" download="Consultas a las tablas parte 2.sql" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r5b">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Consultas a las tablas parte 2.sql</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">
+      Nombre esperado en el repositorio: <code>Consultas a las tablas parte 2.sql</code>
+    </div>
+
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-r5c"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r5c').click()">Cargar archivo…</button>
+          <input type="file" id="file-r5c" accept=".sql,text/plain">
+          <a class="btn" id="download-r5c" download="Consultas a las tablas parte 3.sql" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r5c">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Consultas a las tablas parte 3.sql</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>Consultas a las tablas parte 3.sql</code>
+    </div>
+  </section>
+
 </main>
 
 <footer>Recursos del Módulo 2 — Manejo y Preparación de Datos</footer>
@@ -455,6 +530,9 @@
   setupResource('r4b', 'Diagrama identidad relacion - quiz - modulo 2.drawio.png');
   setupResource('r4c', 'Script para la creacion de la DB del quiz modulo 2 Efrain Sebastian Rojas Artavia.sql');
   setupResource('r4d', 'Base de datos + Diagrama.jpeg');
+  setupResource('r5a', 'Consultas a las tablas..sql');
+  setupResource('r5b', 'Consultas a las tablas parte 2.sql');
+  setupResource('r5c', 'Consultas a las tablas parte 3.sql');
 </script>
 
 </body>
