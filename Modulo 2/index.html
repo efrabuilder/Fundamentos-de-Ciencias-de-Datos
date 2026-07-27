@@ -16,6 +16,7 @@
     --r3:#db2777; --r3-soft:#fdf2f8;
     --r4:#0d9488; --r4-soft:#f0fdfa;
     --r5:#ea580c; --r5-soft:#fff7ed;
+    --r6:#4338ca; --r6-soft:#eef2ff;
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
@@ -40,6 +41,7 @@
   #tab-r3{--accent:var(--r3);}
   #tab-r4{--accent:var(--r4);}
   #tab-r5{--accent:var(--r5);}
+  #tab-r6{--accent:var(--r6);}
   main{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
   .panel{display:none;}
   .panel.active{display:block;animation:fade .25s ease;}
@@ -54,6 +56,7 @@
   #panel-r3 .card-toolbar{--accent-soft:var(--r3-soft);}
   #panel-r4 .card-toolbar{--accent-soft:var(--r4-soft);}
   #panel-r5 .card-toolbar{--accent-soft:var(--r5-soft);}
+  #panel-r6 .card-toolbar{--accent-soft:var(--r6-soft);}
   .status{font-size:12.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
   .status .led{width:7px;height:7px;border-radius:50%;background:#cbd5e1;}
   .status.ok .led{background:#16a34a;}
@@ -76,6 +79,20 @@
   .hint{margin-top:12px;font-size:12px;color:var(--ink-soft);line-height:1.6;}
   .hint code{background:#f1f5f9;padding:1px 6px;border-radius:5px;font-family:var(--mono);}
   footer{text-align:center;padding:24px;color:var(--ink-soft);font-size:12px;}
+
+  /* ---------- Notebook viewer ---------- */
+  .nb{width:100%;max-height:78vh;overflow:auto;padding:20px 22px;}
+  .nb-cell{border:1px solid var(--border);border-radius:10px;margin-bottom:14px;overflow:hidden;}
+  .nb-cell.md{border-color:var(--border);}
+  .nb-cell.code{border-color:var(--border);}
+  .nb-cell-label{font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#ffffff;padding:6px 12px;background:var(--accent);}
+  .nb-cell.md .nb-cell-label{background:#64748b;}
+  .nb-src{margin:0;padding:14px 16px;font-family:var(--mono);font-size:12.5px;line-height:1.65;white-space:pre-wrap;word-break:break-word;background:#0f172a;color:#e2e8f0;overflow-x:auto;}
+  .nb-md-body{padding:14px 16px;font-size:13.5px;line-height:1.6;}
+  .nb-out{padding:12px 16px;border-top:1px dashed var(--border);background:#f8fafc;}
+  .nb-out-label{font-size:10.5px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px;}
+  .nb-out pre{margin:0;font-family:var(--mono);font-size:12px;white-space:pre-wrap;word-break:break-word;}
+  .nb-out img{max-width:100%;display:block;}
 </style>
 </head>
 <body>
@@ -111,11 +128,15 @@
   <button class="tab" id="tab-r5" data-target="panel-r5">
     <span class="dot"></span> 5. Consultas a las tablas
   </button>
+
+  <button class="tab" id="tab-r6" data-target="panel-r6">
+    <span class="dot"></span> 6. Pruebas con Python
+  </button>
   <!--
     Para agregar un nuevo recurso: copia un botón como el de arriba,
-    dale un id y data-target únicos (ej. tab-r6 / panel-r6), y crea abajo su
+    dale un id y data-target únicos (ej. tab-r7 / panel-r7), y crea abajo su
     <section class="panel"> correspondiente. También agrega su color de
-    acento en :root arriba (ej. --r6, --r6-soft) siguiendo el mismo patrón.
+    acento en :root arriba (ej. --r7, --r7-soft) siguiendo el mismo patrón.
   -->
 </nav>
 
@@ -362,7 +383,7 @@
       Nombre esperado en el repositorio: <code>Consultas a las tablas parte 2.sql</code>
     </div>
 
-    <div class="card">
+    <div class="card" style="margin-bottom:18px;">
       <div class="card-toolbar">
         <span class="status" id="status-r5c"><span class="led"></span> Buscando archivo…</span>
         <div class="toolbar-actions">
@@ -377,8 +398,56 @@
         o cárgalo manualmente con el botón de arriba.
       </div>
     </div>
-    <div class="hint">
+    <div class="hint" style="margin-bottom:22px;">
       Nombre esperado en el repositorio: <code>Consultas a las tablas parte 3.sql</code>
+    </div>
+
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-r5d"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r5d').click()">Cargar archivo…</button>
+          <input type="file" id="file-r5d" accept=".sql,text/plain">
+          <a class="btn" id="download-r5d" download="Consultas a las tablas parte 4.sql" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r5d">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Consultas a las tablas parte 4.sql</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>Consultas a las tablas parte 4.sql</code>
+    </div>
+  </section>
+
+
+  <!-- ===================== PANEL 6: PRUEBAS CON PYTHON (NOTEBOOK) ===================== -->
+  <section class="panel" id="panel-r6">
+    <div class="panel-head">
+      <div>
+        <h2>Pruebas con Python — Módulo 2</h2>
+        <div class="sub">Notebook con pruebas y ejercicios realizados en Python</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-r6"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r6').click()">Cargar archivo…</button>
+          <input type="file" id="file-r6" accept=".ipynb,application/x-ipynb+json">
+          <a class="btn" id="download-r6" download="pruebas_python.ipynb" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r6">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>pruebas_python.ipynb</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>pruebas_python.ipynb</code>
     </div>
   </section>
 
@@ -407,6 +476,12 @@
     if(bytes < 1024) return bytes + ' B';
     if(bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
     return (bytes/(1024*1024)).toFixed(1) + ' MB';
+  }
+  function escapeHtml(str){
+    return str
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;');
   }
 
   // ---------- Texto (sql/md/txt) ----------
@@ -464,6 +539,80 @@
     setStatus(statusId,'ok','Archivo cargado');
   }
 
+  // ---------- Notebook Jupyter (.ipynb) ----------
+  function renderNotebook(viewerId, statusId, downloadId, text, url, filename){
+    const v = document.getElementById(viewerId);
+    v.className = 'viewer';
+    let nb;
+    try{
+      nb = JSON.parse(text);
+    }catch(e){
+      renderText(viewerId, statusId, downloadId, text, url, filename);
+      return;
+    }
+    const wrap = document.createElement('div');
+    wrap.className = 'nb';
+    const cells = nb.cells || [];
+    cells.forEach(cell => {
+      const src = Array.isArray(cell.source) ? cell.source.join('') : (cell.source || '');
+      const cellEl = document.createElement('div');
+      cellEl.className = 'nb-cell ' + (cell.cell_type === 'markdown' ? 'md' : 'code');
+
+      const label = document.createElement('div');
+      label.className = 'nb-cell-label';
+      label.textContent = cell.cell_type === 'markdown' ? 'Markdown' : 'Código';
+      cellEl.appendChild(label);
+
+      if(cell.cell_type === 'markdown'){
+        const body = document.createElement('div');
+        body.className = 'nb-md-body';
+        body.innerHTML = escapeHtml(src).replace(/\n/g,'<br>');
+        cellEl.appendChild(body);
+      } else {
+        const pre = document.createElement('pre');
+        pre.className = 'nb-src';
+        pre.textContent = src;
+        cellEl.appendChild(pre);
+
+        (cell.outputs || []).forEach(out => {
+          const outWrap = document.createElement('div');
+          outWrap.className = 'nb-out';
+          const outLabel = document.createElement('div');
+          outLabel.className = 'nb-out-label';
+          outLabel.textContent = 'Salida';
+          outWrap.appendChild(outLabel);
+
+          if(out.data && out.data['image/png']){
+            const img = document.createElement('img');
+            img.src = 'data:image/png;base64,' + out.data['image/png'];
+            outWrap.appendChild(img);
+          } else if(out.data && out.data['text/plain']){
+            const pre2 = document.createElement('pre');
+            const t = Array.isArray(out.data['text/plain']) ? out.data['text/plain'].join('') : out.data['text/plain'];
+            pre2.textContent = t;
+            outWrap.appendChild(pre2);
+          } else if(out.text){
+            const pre2 = document.createElement('pre');
+            const t = Array.isArray(out.text) ? out.text.join('') : out.text;
+            pre2.textContent = t;
+            outWrap.appendChild(pre2);
+          } else if(out.ename){
+            const pre2 = document.createElement('pre');
+            pre2.textContent = out.ename + ': ' + out.evalue;
+            outWrap.appendChild(pre2);
+          }
+          cellEl.appendChild(outWrap);
+        });
+      }
+      wrap.appendChild(cellEl);
+    });
+    v.innerHTML = '';
+    v.appendChild(wrap);
+    const dl = document.getElementById(downloadId);
+    dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
+    setStatus(statusId,'ok','Notebook cargado');
+  }
+
   // Detecta el tipo de archivo por extensión y lo renderiza con la función correcta
   function renderByExtension(viewerId, statusId, downloadId, url, filename, blob){
     const ext = filename.toLowerCase().split('.').pop();
@@ -490,6 +639,11 @@
         break;
       case 'pptx':
         renderOfficeFile(viewerId, statusId, downloadId, url, filename, blob ? blob.size : null, 'PPT');
+        break;
+      case 'ipynb':
+        if(blob){
+          blob.text().then(text => renderNotebook(viewerId, statusId, downloadId, text, url, filename));
+        }
         break;
       default:
         if(blob){
@@ -533,6 +687,8 @@
   setupResource('r5a', 'Consultas a las tablas..sql');
   setupResource('r5b', 'Consultas a las tablas parte 2.sql');
   setupResource('r5c', 'Consultas a las tablas parte 3.sql');
+  setupResource('r5d', 'Consultas a las tablas parte 4.sql');
+  setupResource('r6', 'pruebas_python.ipynb');
 </script>
 
 </body>
