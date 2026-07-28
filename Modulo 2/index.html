@@ -11,6 +11,7 @@
     --ink:#1e293b;
     --ink-soft:#64748b;
     --border:#e2e8f0;
+    --r0:#65a30d; --r0-soft:#f7fee7;
     --r1:#0284c7; --r1-soft:#f0f9ff;
     --r2:#7c3aed; --r2-soft:#f5f3ff;
     --r3:#db2777; --r3-soft:#fdf2f8;
@@ -36,6 +37,7 @@
   .tab:hover{border-color:var(--accent);color:var(--ink);}
   .tab.active{background:var(--accent);border-color:var(--accent);color:#ffffff;}
   .tab.active .dot{background:#ffffff;opacity:1;}
+  #tab-r0{--accent:var(--r0);}
   #tab-r1{--accent:var(--r1);}
   #tab-r2{--accent:var(--r2);}
   #tab-r3{--accent:var(--r3);}
@@ -51,6 +53,7 @@
   .panel-head .sub{color:var(--ink-soft);font-size:13px;margin-top:4px;}
   .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
   .card-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--accent-soft);}
+  #panel-r0 .card-toolbar{--accent-soft:var(--r0-soft);}
   #panel-r1 .card-toolbar{--accent-soft:var(--r1-soft);}
   #panel-r2 .card-toolbar{--accent-soft:var(--r2-soft);}
   #panel-r3 .card-toolbar{--accent-soft:var(--r3-soft);}
@@ -105,7 +108,10 @@
   <p>Recursos, ejercicios y entregables del módulo. Esta página se irá completando a medida que agregues archivos a la carpeta <code>Modulo 2</code>.</p>
 </header>
 <nav>
-  <button class="tab active" id="tab-r1" data-target="panel-r1">
+  <button class="tab active" id="tab-r0" data-target="panel-r0">
+    <span class="dot"></span> Mapas Conceptuales
+  </button>
+  <button class="tab" id="tab-r1" data-target="panel-r1">
     <span class="dot"></span> 1. Base de Datos (SQL)
   </button>
   <button class="tab" id="tab-r2" data-target="panel-r2">
@@ -131,8 +137,107 @@
   -->
 </nav>
 <main>
+  <!-- ===================== PANEL 0: MAPAS CONCEPTUALES ===================== -->
+  <section class="panel active" id="panel-r0">
+    <div class="panel-head">
+      <div>
+        <h2>Mapas Conceptuales — Módulo 2</h2>
+        <div class="sub">Mapas conceptuales elaborados durante el módulo</div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar">
+        <span class="status" id="status-r0a"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r0a').click()">Cargar archivo…</button>
+          <input type="file" id="file-r0a" accept=".jpg,.jpeg,image/jpeg">
+          <a class="btn" id="download-r0a" download="mapa_conceptual.jpg" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r0a">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>mapa_conceptual.jpg</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">
+      Nombre esperado en el repositorio: <code>mapa_conceptual.jpg</code>
+    </div>
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar">
+        <span class="status" id="status-r0b"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r0b').click()">Cargar archivo…</button>
+          <input type="file" id="file-r0b" accept=".jpg,.jpeg,image/jpeg">
+          <a class="btn" id="download-r0b" download="mapa_conceptual_curso.jpg" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r0b">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>mapa_conceptual_curso.jpg</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">
+      Nombre esperado en el repositorio: <code>mapa_conceptual_curso.jpg</code>
+    </div>
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar">
+        <span class="status" id="status-r0c"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r0c').click()">Cargar archivo…</button>
+          <input type="file" id="file-r0c" accept=".jpg,.jpeg,image/jpeg">
+          <a class="btn" id="download-r0c" download="mapa_conceptual_seguridad.jpg" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r0c">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>mapa_conceptual_seguridad.jpg</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">
+      Nombre esperado en el repositorio: <code>mapa_conceptual_seguridad.jpg</code>
+    </div>
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar">
+        <span class="status" id="status-r0d"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r0d').click()">Cargar archivo…</button>
+          <input type="file" id="file-r0d" accept=".jpg,.jpeg,image/jpeg">
+          <a class="btn" id="download-r0d" download="mapa_conceptual_clase4.jpg" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r0d">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>mapa_conceptual_clase4.jpg</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">
+      Nombre esperado en el repositorio: <code>mapa_conceptual_clase4.jpg</code>
+    </div>
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-r0e"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r0e').click()">Cargar archivo…</button>
+          <input type="file" id="file-r0e" accept=".jpg,.jpeg,image/jpeg">
+          <a class="btn" id="download-r0e" download="mapa_conceptual_clase6.jpg" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r0e">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>mapa_conceptual_clase6.jpg</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>mapa_conceptual_clase6.jpg</code>
+    </div>
+  </section>
   <!-- ===================== PANEL 1: BASE DE DATOS (SQL) ===================== -->
-  <section class="panel active" id="panel-r1">
+  <section class="panel" id="panel-r1">
     <div class="panel-head">
       <div>
         <h2>Base de Datos — Módulo 2</h2>
@@ -663,6 +768,11 @@
     });
   }
   // ---------- Recursos del Módulo 2 ----------
+  setupResource('r0a', 'mapa_conceptual.jpg');
+  setupResource('r0b', 'mapa_conceptual_curso.jpg');
+  setupResource('r0c', 'mapa_conceptual_seguridad.jpg');
+  setupResource('r0d', 'mapa_conceptual_clase4.jpg');
+  setupResource('r0e', 'mapa_conceptual_clase6.jpg');
   setupResource('r1', 'DB Modulo 2 (Module 2).sql');
   setupResource('r2', 'Diagrama indentidad relacion modulo 2, ejemplo.drawio.png');
   setupResource('r3a', 'Caso practico.png');
