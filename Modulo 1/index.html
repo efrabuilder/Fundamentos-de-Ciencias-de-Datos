@@ -76,6 +76,9 @@
   .filecard .fname{font-size:14.5px;font-weight:600;color:var(--ink);word-break:break-word;max-width:520px;}
   .filecard .fmeta{font-size:12.5px;color:var(--ink-soft);}
   .filecard .btn.primary{background:var(--accent);border-color:var(--accent);color:#ffffff;padding:9px 18px;font-size:13px;}
+  .office-embed-wrap{width:100%;}
+  .office-embed-note{text-align:center;padding:8px 12px;font-size:11.5px;color:var(--ink-soft);border-top:1px solid var(--border);}
+  .office-embed-note a{color:var(--ink);}
   .hint{margin-top:12px;font-size:12px;color:var(--ink-soft);line-height:1.6;}
   .hint code{background:#f1f5f9;padding:1px 6px;border-radius:5px;font-family:var(--mono);}
   footer{text-align:center;padding:24px;color:var(--ink-soft);font-size:12px;}
@@ -298,7 +301,7 @@
       </div>
     </div>
     <div class="hint">
-      Nombre esperado en el repositorio: <code>dashboard/dashboard_cumpleanos_cr.xlsx</code> · Los archivos de Excel no se previsualizan en el navegador; usa el botón Descargar para abrirlo.
+      Nombre esperado en el repositorio: <code>dashboard/dashboard_cumpleanos_cr.xlsx</code>
     </div>
   </section>
 
@@ -326,7 +329,7 @@
       </div>
     </div>
     <div class="hint">
-      Nombre esperado en el repositorio: <code>Presentacion segmentacion/Segmentacion_Cumpleanos_CRI.pptx</code> · Las presentaciones de PowerPoint no se previsualizan en el navegador; usa el botón Descargar para abrirla.
+      Nombre esperado en el repositorio: <code>Presentacion segmentacion/Segmentacion_Cumpleanos_CRI.pptx</code>
     </div>
   </section>
 
@@ -354,7 +357,7 @@
       </div>
     </div>
     <div class="hint">
-      Nombre esperado en el repositorio: <code>DataSet/Analisis_Dataset.pptx</code> · Las presentaciones de PowerPoint no se previsualizan en el navegador; usa el botón Descargar para abrirla.
+      Nombre esperado en el repositorio: <code>DataSet/Analisis_Dataset.pptx</code>
     </div>
   </section>
 
@@ -422,23 +425,39 @@
     dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
     setStatus(statusId,'ok','Imagen cargada');
   }
-  // ---------- Office (xlsx/pptx) sin previsualización nativa ----------
-  function renderOfficeFile(viewerId, statusId, downloadId, url, filename, size, label){
+  // ---------- Office (xlsx/pptx): vista previa embebida cuando hay URL pública, si no, tarjeta de descarga ----------
+  function renderOfficeFile(viewerId, statusId, downloadId, url, filename, size, label, absoluteUrl){
     const v = document.getElementById(viewerId);
     v.className = 'viewer';
-    v.innerHTML =
-      '<div class="filecard">' +
-        '<div class="icon">' + label + '</div>' +
-        '<div class="fname">' + filename + '</div>' +
-        '<div class="fmeta">' + (size ? formatBytes(size) + ' · ' : '') + 'Vista previa no disponible en el navegador' + '</div>' +
-        '<a class="btn primary" href="' + url + '" download="' + filename + '">Descargar / Abrir archivo</a>' +
-      '</div>';
     const dl = document.getElementById(downloadId);
     dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
+
+    if(absoluteUrl){
+      // Vista previa embebida vía Microsoft Office Online Viewer.
+      // Solo funciona con archivos accesibles públicamente por internet (p.ej. publicados en GitHub Pages),
+      // por eso solo se usa cuando el archivo se cargó automáticamente desde el repo.
+      const viewerUrl = 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(absoluteUrl);
+      v.innerHTML =
+        '<div class="office-embed-wrap">' +
+          '<iframe src="' + viewerUrl + '" style="width:100%;height:78vh;border:0;display:block;"></iframe>' +
+          '<div class="office-embed-note">Si la vista previa no carga (puede tardar unos segundos la primera vez), ' +
+            '<a href="' + url + '" download="' + filename + '">descarga el archivo directamente</a>.</div>' +
+        '</div>';
+    } else {
+      // Archivo cargado manualmente desde el equipo: no tiene URL pública, así que Office Online no puede
+      // previsualizarlo. Se muestra la tarjeta de descarga como respaldo.
+      v.innerHTML =
+        '<div class="filecard">' +
+          '<div class="icon">' + label + '</div>' +
+          '<div class="fname">' + filename + '</div>' +
+          '<div class="fmeta">' + (size ? formatBytes(size) + ' · ' : '') + 'Vista previa no disponible para archivos cargados manualmente' + '</div>' +
+          '<a class="btn primary" href="' + url + '" download="' + filename + '">Descargar / Abrir archivo</a>' +
+        '</div>';
+    }
     setStatus(statusId,'ok','Archivo cargado');
   }
   // Detecta el tipo de archivo por extensión y lo renderiza con la función correcta
-  function renderByExtension(viewerId, statusId, downloadId, url, filename, blob){
+  function renderByExtension(viewerId, statusId, downloadId, url, filename, blob, absoluteUrl){
     const ext = filename.toLowerCase().split('.').pop();
     switch(ext){
       case 'txt':
@@ -458,10 +477,10 @@
         break;
       case 'xlsx':
       case 'xlsm':
-        renderOfficeFile(viewerId, statusId, downloadId, url, filename, blob ? blob.size : null, 'XLS');
+        renderOfficeFile(viewerId, statusId, downloadId, url, filename, blob ? blob.size : null, 'XLS', absoluteUrl);
         break;
       case 'pptx':
-        renderOfficeFile(viewerId, statusId, downloadId, url, filename, blob ? blob.size : null, 'PPT');
+        renderOfficeFile(viewerId, statusId, downloadId, url, filename, blob ? blob.size : null, 'PPT', absoluteUrl);
         break;
       default:
         if(blob){
@@ -479,13 +498,16 @@
       if(!r.ok) throw new Error();
       return r.blob();
     }).then(blob=>{
-      renderByExtension(viewerId, statusId, downloadId, URL.createObjectURL(blob), expectedFilename, blob);
+      // URL absoluta y pública del archivo (necesaria para incrustar Office Online Viewer en xlsx/pptx)
+      const absoluteUrl = new URL(expectedFilename, window.location.href).href;
+      renderByExtension(viewerId, statusId, downloadId, URL.createObjectURL(blob), expectedFilename, blob, absoluteUrl);
     }).catch(()=>{
       setStatus(statusId,'err','No se encontró automáticamente — cárgalo manualmente');
     });
     document.getElementById(fileId).addEventListener('change', e=>{
       const f = e.target.files[0];
       if(!f) return;
+      // Los archivos cargados manualmente no tienen URL pública, no se pasa absoluteUrl
       renderByExtension(viewerId, statusId, downloadId, URL.createObjectURL(f), f.name, f);
     });
   }
