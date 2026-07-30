@@ -19,6 +19,7 @@
     --r5:#ea580c; --r5-soft:#fff7ed;
     --r6:#4338ca; --r6-soft:#eef2ff;
     --r7:#b91c1c; --r7-soft:#fef2f2;
+    --r8:#0f766e; --r8-soft:#f0fdfa;
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
@@ -46,6 +47,7 @@
   #tab-r5{--accent:var(--r5);}
   #tab-r6{--accent:var(--r6);}
   #tab-r7{--accent:var(--r7);}
+  #tab-r8{--accent:var(--r8);}
   main{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
   .panel{display:none;}
   .panel.active{display:block;animation:fade .25s ease;}
@@ -63,6 +65,7 @@
   #panel-r5 .card-toolbar{--accent-soft:var(--r5-soft);}
   #panel-r6 .card-toolbar{--accent-soft:var(--r6-soft);}
   #panel-r7 .card-toolbar{--accent-soft:var(--r7-soft);}
+  #panel-r8 .card-toolbar{--accent-soft:var(--r8-soft);}
   .status{font-size:12.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
   .status .led{width:7px;height:7px;border-radius:50%;background:#cbd5e1;}
   .status.ok .led{background:#16a34a;}
@@ -120,20 +123,23 @@
   <button class="tab" id="tab-r2" data-target="panel-r2">
     <span class="dot"></span> 2. Diagrama identidad relación (ejemplo)
   </button>
+  <button class="tab" id="tab-r8" data-target="panel-r8">
+    <span class="dot"></span> 3. Control con Excel + Visual Basic
+  </button>
   <button class="tab" id="tab-r3" data-target="panel-r3">
-    <span class="dot"></span> 3. Caso Práctico (Indicaciones + Diagrama)
+    <span class="dot"></span> 4. Caso Práctico (Indicaciones + Diagrama)
   </button>
   <button class="tab" id="tab-r4" data-target="panel-r4">
-    <span class="dot"></span> 4. Quiz (Indicaciones + Diagrama)
+    <span class="dot"></span> 5. Quiz (Indicaciones + Diagrama)
   </button>
   <button class="tab" id="tab-r5" data-target="panel-r5">
-    <span class="dot"></span> 5. Consultas a las tablas
+    <span class="dot"></span> 6. Consultas a las tablas
   </button>
   <button class="tab" id="tab-r6" data-target="panel-r6">
-    <span class="dot"></span> 6. Pruebas con Python
+    <span class="dot"></span> 7. Pruebas con Python
   </button>
   <button class="tab" id="tab-r7" data-target="panel-r7">
-    <span class="dot"></span> 7. Proyecto Final
+    <span class="dot"></span> 8. Proyecto Final
   </button>
   <!--
     Para agregar un nuevo recurso: copia un botón como el de arriba,
@@ -296,6 +302,105 @@
       Nombre esperado en el repositorio: <code>Diagrama indentidad relacion modulo 2, ejemplo.drawio.png</code>
     </div>
   </section>
+  <!-- ===================== PANEL 8: CONTROL CON EXCEL + VISUAL BASIC ===================== -->
+  <section class="panel" id="panel-r8">
+    <div class="panel-head">
+      <div>
+        <h2>Control con Excel + Visual Basic — Módulo 2</h2>
+        <div class="sub">Hoja de Excel controlada mediante un programa desarrollado en Visual Basic, junto con sus archivos de proyecto y una captura de la interfaz</div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar">
+        <span class="status" id="status-r8a"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r8a').click()">Cargar archivo…</button>
+          <input type="file" id="file-r8a" accept=".xlsx,.xlsm">
+          <a class="btn" id="download-r8a" download="CONTROL_PLACAS_2026_moto_LIMPIO.xlsx" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r8a">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>CONTROL_PLACAS_2026_moto_LIMPIO.xlsx</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">
+      Nombre esperado en el repositorio: <code>CONTROL_PLACAS_2026_moto_LIMPIO.xlsx</code> (hoja de Excel controlada por el programa)
+    </div>
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar">
+        <span class="status" id="status-r8b"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r8b').click()">Cargar archivo…</button>
+          <input type="file" id="file-r8b" accept=".frm,text/plain">
+          <a class="btn" id="download-r8b" download="DATACONTROLLER.frm" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r8b">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>DATACONTROLLER.frm</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">
+      Nombre esperado en el repositorio: <code>DATACONTROLLER.frm</code> (formulario del programa en Visual Basic)
+    </div>
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar">
+        <span class="status" id="status-r8c"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r8c').click()">Cargar archivo…</button>
+          <input type="file" id="file-r8c" accept=".frx">
+          <a class="btn" id="download-r8c" download="DATACONTROLLER.frx" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r8c">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>DATACONTROLLER.frx</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">
+      Nombre esperado en el repositorio: <code>DATACONTROLLER.frx</code> (recursos binarios del formulario)
+    </div>
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar">
+        <span class="status" id="status-r8d"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r8d').click()">Cargar archivo…</button>
+          <input type="file" id="file-r8d" accept=".log,text/plain">
+          <a class="btn" id="download-r8d" download="DATACONTROLLER.log" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r8d">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>DATACONTROLLER.log</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">
+      Nombre esperado en el repositorio: <code>DATACONTROLLER.log</code> (registro del proyecto en Visual Basic)
+    </div>
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-r8e"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r8e').click()">Cargar archivo…</button>
+          <input type="file" id="file-r8e" accept=".png,image/png">
+          <a class="btn" id="download-r8e" download="datacontroller imagen.png" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r8e">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>datacontroller imagen.png</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>datacontroller imagen.png</code> (captura de la interfaz del programa) — si el nombre del archivo en el repositorio es distinto, ajusta el nombre en el código o renómbralo para que coincida.
+    </div>
+  </section>
   <!-- ===================== PANEL 3: DIAGRAMA (CASO PRÁCTICO) ===================== -->
   <section class="panel" id="panel-r3">
     <div class="panel-head">
@@ -429,6 +534,24 @@
         <h2>Consultas a las tablas — Módulo 2</h2>
         <div class="sub">Scripts SQL con las consultas realizadas sobre las tablas de la base de datos</div>
       </div>
+    </div>
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar">
+        <span class="status" id="status-r5db"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r5db').click()">Cargar archivo…</button>
+          <input type="file" id="file-r5db" accept=".sql,text/plain">
+          <a class="btn" id="download-r5db" download="db_jardineria.sql" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r5db">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>db_jardineria.sql</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">
+      Nombre esperado en el repositorio: <code>db_jardineria.sql</code> (base de datos sobre la que se hicieron las consultas)
     </div>
     <div class="card" style="margin-bottom:18px;">
       <div class="card-toolbar">
@@ -868,6 +991,7 @@
   setupResource('r4b', 'Diagrama identidad relacion - quiz - modulo 2.drawio.png');
   setupResource('r4c', 'Script para la creacion de la DB del quiz modulo 2 Efrain Sebastian Rojas Artavia.sql');
   setupResource('r4d', 'Base de datos + Diagrama.jpeg');
+  setupResource('r5db', 'db_jardineria.sql');
   setupResource('r5a', 'Consultas a las tablas..sql');
   setupResource('r5b', 'Consultas a las tablas parte 2.sql');
   setupResource('r5c', 'Consultas a las tablas parte 3.sql');
@@ -879,6 +1003,11 @@
   setupResource('r7d', 'Script DB registromatriculapf - Efrain Sebastian Rojas Artavia - Proyecto final M2.sql');
   setupResource('r7c', 'Proyecto Final - Efrain Sebastian Rojas Artavia.pdf');
   setupResource('r7a', 'DB Proyecto Final Efrain S Rojas Artavia.png');
+  setupResource('r8a', 'CONTROL_PLACAS_2026_moto_LIMPIO.xlsx');
+  setupResource('r8b', 'DATACONTROLLER.frm');
+  setupResource('r8c', 'DATACONTROLLER.frx');
+  setupResource('r8d', 'DATACONTROLLER.log');
+  setupResource('r8e', 'datacontroller imagen.png');
 </script>
 </body>
 </html>
