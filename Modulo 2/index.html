@@ -18,6 +18,7 @@
     --r4:#0d9488; --r4-soft:#f0fdfa;
     --r5:#ea580c; --r5-soft:#fff7ed;
     --r6:#4338ca; --r6-soft:#eef2ff;
+    --r7:#b91c1c; --r7-soft:#fef2f2;
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
@@ -44,6 +45,7 @@
   #tab-r4{--accent:var(--r4);}
   #tab-r5{--accent:var(--r5);}
   #tab-r6{--accent:var(--r6);}
+  #tab-r7{--accent:var(--r7);}
   main{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
   .panel{display:none;}
   .panel.active{display:block;animation:fade .25s ease;}
@@ -60,6 +62,7 @@
   #panel-r4 .card-toolbar{--accent-soft:var(--r4-soft);}
   #panel-r5 .card-toolbar{--accent-soft:var(--r5-soft);}
   #panel-r6 .card-toolbar{--accent-soft:var(--r6-soft);}
+  #panel-r7 .card-toolbar{--accent-soft:var(--r7-soft);}
   .status{font-size:12.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
   .status .led{width:7px;height:7px;border-radius:50%;background:#cbd5e1;}
   .status.ok .led{background:#16a34a;}
@@ -129,11 +132,14 @@
   <button class="tab" id="tab-r6" data-target="panel-r6">
     <span class="dot"></span> 6. Pruebas con Python
   </button>
+  <button class="tab" id="tab-r7" data-target="panel-r7">
+    <span class="dot"></span> 7. Proyecto Final
+  </button>
   <!--
     Para agregar un nuevo recurso: copia un botón como el de arriba,
-    dale un id y data-target únicos (ej. tab-r7 / panel-r7), y crea abajo su
+    dale un id y data-target únicos (ej. tab-r8 / panel-r8), y crea abajo su
     <section class="panel"> correspondiente. También agrega su color de
-    acento en :root arriba (ej. --r7, --r7-soft) siguiendo el mismo patrón.
+    acento en :root arriba (ej. --r8, --r8-soft) siguiendo el mismo patrón.
   -->
 </nav>
 <main>
@@ -560,6 +566,87 @@
       Nombre esperado en el repositorio: <code>Probando_python_2.ipynb</code>
     </div>
   </section>
+  <!-- ===================== PANEL 7: PROYECTO FINAL ===================== -->
+  <section class="panel" id="panel-r7">
+    <div class="panel-head">
+      <div>
+        <h2>Proyecto Final — Módulo 2</h2>
+        <div class="sub">Entregable final: captura de la base de datos, diagrama entidad-relación, documento del proyecto y script de creación</div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar">
+        <span class="status" id="status-r7a"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r7a').click()">Cargar archivo…</button>
+          <input type="file" id="file-r7a" accept=".png,image/png">
+          <a class="btn" id="download-r7a" download="DB Proyecto Final Efrain S Rojas Artavia.png" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r7a">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>DB Proyecto Final Efrain S Rojas Artavia.png</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">
+      Nombre esperado en el repositorio: <code>DB Proyecto Final Efrain S Rojas Artavia.png</code> (captura de la base de datos)
+    </div>
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar">
+        <span class="status" id="status-r7b"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r7b').click()">Cargar archivo…</button>
+          <input type="file" id="file-r7b" accept=".png,image/png">
+          <a class="btn" id="download-r7b" download="Diagrama Entidad-Relacion Proyecto Final-Efrain Sebastian Rojas Artavia.drawio version 2.png" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r7b">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Diagrama Entidad-Relacion Proyecto Final-Efrain Sebastian Rojas Artavia.drawio version 2.png</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">
+      Nombre esperado en el repositorio: <code>Diagrama Entidad-Relacion Proyecto Final-Efrain Sebastian Rojas Artavia.drawio version 2.png</code> (diagrama entidad-relación)
+    </div>
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar">
+        <span class="status" id="status-r7c"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r7c').click()">Cargar archivo…</button>
+          <input type="file" id="file-r7c" accept=".pdf,application/pdf">
+          <a class="btn" id="download-r7c" download="Proyecto Final - Efrain Sebastian Rojas Artavia.pdf" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r7c">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Proyecto Final - Efrain Sebastian Rojas Artavia.pdf</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">
+      Nombre esperado en el repositorio: <code>Proyecto Final - Efrain Sebastian Rojas Artavia.pdf</code> (documento del proyecto)
+    </div>
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-r7d"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r7d').click()">Cargar archivo…</button>
+          <input type="file" id="file-r7d" accept=".sql,text/plain">
+          <a class="btn" id="download-r7d" download="Script DB registromatriculapf - Efrain Sebastian Artavia - Proyecto final M2.sql" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r7d">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Script DB registromatriculapf - Efrain Sebastian Artavia - Proyecto final M2.sql</code> en la misma carpeta que este HTML,
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>Script DB registromatriculapf - Efrain Sebastian Artavia - Proyecto final M2.sql</code> (script de creación de la base de datos)
+    </div>
+  </section>
 </main>
 <footer>Recursos del Módulo 2 — Manejo y Preparación de Datos</footer>
 <footer>© 2026 Todos los derechos reservados · Diseñado y desarrollado por Efraín Sebastián Rojas Artavia</footer>
@@ -788,6 +875,10 @@
   setupResource('r5e', 'Consultas views.sql');
   setupResource('r6', 'pruebas_python.ipynb');
   setupResource('r6b', 'Probando_python_2.ipynb');
+  setupResource('r7a', 'DB Proyecto Final Efrain S Rojas Artavia.png');
+  setupResource('r7b', 'Diagrama Entidad-Relacion Proyecto Final-Efrain Sebastian Rojas Artavia.drawio version 2.png');
+  setupResource('r7c', 'Proyecto Final - Efrain Sebastian Rojas Artavia.pdf');
+  setupResource('r7d', 'Script DB registromatriculapf - Efrain Sebastian Artavia - Proyecto final M2.sql');
 </script>
 </body>
 </html>
