@@ -619,7 +619,7 @@
     <div class="hint" style="margin-bottom:22px;">
       Nombre esperado en el repositorio: <code>Pruebas con Python/pruebas_python.ipynb</code>
     </div>
-    <div class="card">
+    <div class="card" style="margin-bottom:18px;">
       <div class="card-toolbar">
         <span class="status" id="status-r6b"><span class="led"></span> Buscando archivo…</span>
         <div class="toolbar-actions">
@@ -634,8 +634,26 @@
         o cárgalo manualmente con el botón de arriba.
       </div>
     </div>
-    <div class="hint">
+    <div class="hint" style="margin-bottom:22px;">
       Nombre esperado en el repositorio: <code>Pruebas con Python/Probando_python_2.ipynb</code>
+    </div>
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-r6c"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r6c').click()">Cargar archivo…</button>
+          <input type="file" id="file-r6c" accept=".ipynb,application/x-ipynb+json">
+          <a class="btn" id="download-r6c" download="probando_python_3.ipynb" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r6c">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Pruebas con Python/probando_python_3.ipynb</code> en la ruta indicada (relativa a este HTML),
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>Pruebas con Python/probando_python_3.ipynb</code>
     </div>
   </section>
   <!-- ===================== PANEL 7: PROYECTO FINAL ===================== -->
@@ -967,6 +985,7 @@
   setupResource('r5e', 'Consultas a las tablas/Consultas views.sql');
   setupResource('r6', 'Pruebas con Python/pruebas_python.ipynb');
   setupResource('r6b', 'Pruebas con Python/Probando_python_2.ipynb');
+  setupResource('r6c', 'Pruebas con Python/probando_python_3.ipynb');
   setupResource('r7b', 'Proyecto Final/Diagrama Entidad-Relacion Proyecto Final-Efrain Sebastian Rojas Artavia.drawio.png');
   setupResource('r7d', 'Proyecto Final/Script DB registromatriculapf - Efrain Sebastian Rojas Artavia - Proyecto final M2.sql');
   setupResource('r7c', 'Proyecto Final/Proyecto Final - Efrain Sebastian Rojas Artavia.pdf');
