@@ -12,7 +12,6 @@
     --ink-soft:#64748b;
     --border:#e2e8f0;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-
     --m3:#16a34a; --m3-soft:#f0fdf4;
   }
   *{box-sizing:border-box;}
@@ -71,16 +70,24 @@
     background:var(--panel);
     border-bottom:1px solid var(--border);
   }
-  .tab-empty{
+  .tab{
     display:inline-flex;
     align-items:center;
     gap:8px;
     padding:9px 16px;
     border-radius:999px;
-    border:1px dashed var(--border);
+    border:1px solid var(--border);
     color:var(--ink-soft);
     font-size:13.5px;
     background:var(--bg);
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .tab.active{
+    border-color:var(--m3);
+    color:var(--m3);
+    background:var(--m3-soft);
+    font-weight:600;
   }
   main{
     max-width:1100px;
@@ -97,33 +104,56 @@
     color:var(--ink-soft);
     margin:0 0 24px;
   }
-  .placeholder{
-    border:1px dashed var(--border);
+  .resource-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+    gap:16px;
+  }
+  .resource-card{
+    border:1px solid var(--border);
     border-radius:14px;
-    padding:48px 24px;
-    text-align:center;
+    padding:20px;
     background:var(--panel);
+    display:flex;
+    flex-direction:column;
+    gap:10px;
   }
-  .placeholder .dot{
-    width:10px;height:10px;
-    border-radius:50%;
-    background:#cbd5e1;
-    display:inline-block;
-    margin-bottom:14px;
+  .resource-icon{
+    width:38px;height:38px;
+    border-radius:10px;
+    background:var(--m3-soft);
+    color:var(--m3);
+    display:flex;align-items:center;justify-content:center;
+    font-size:18px;
   }
-  .placeholder h3{
-    margin:0 0 8px;
-    font-size:15.5px;
-    color:var(--ink);
-  }
-  .placeholder p{
+  .resource-card h3{
     margin:0;
-    font-size:13.5px;
-    color:var(--ink-soft);
-    max-width:420px;
-    margin-inline:auto;
-    line-height:1.55;
+    font-size:15px;
   }
+  .resource-card p{
+    margin:0;
+    font-size:13px;
+    color:var(--ink-soft);
+    line-height:1.5;
+  }
+  .resource-thumb{
+    width:100%;
+    border-radius:8px;
+    border:1px solid var(--border);
+    display:block;
+    margin-top:4px;
+  }
+  .resource-link{
+    margin-top:auto;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:13px;
+    font-weight:600;
+    color:var(--m3);
+    text-decoration:none;
+  }
+  .resource-link:hover{text-decoration:underline;}
   footer{
     text-align:center;
     padding:24px;
@@ -133,34 +163,37 @@
 </style>
 </head>
 <body>
-
 <div class="topbar">
   <a href="../index.html">← Volver a Módulos</a>
   <a href="https://github.com/efrabuilder/Fundamentos-de-Ciencias-de-Datos" target="_blank">github.com/efrabuilder/Fundamentos-de-Ciencias-de-Datos →</a>
 </div>
-
 <header>
   <span class="eyebrow">MÓDULO 3</span>
   <h1>Análisis Exploratorio de Datos (EDA)</h1>
-  <p>Recursos, ejercicios y entregables del módulo. Esta página se irá completando a medida que agregues archivos a la carpeta Modulo 3.</p>
+  <p>Recursos, ejercicios y entregables del módulo.</p>
 </header>
-
 <div class="tabs">
-  <span class="tab-empty">● Esperando recursos</span>
+  <span class="tab active">Estadística</span>
 </div>
-
 <main>
-  <div class="content-title">Recursos — Módulo 3</div>
-  <p class="content-sub">Aún no se han agregado recursos a este módulo.</p>
-
-  <div class="placeholder">
-    <span class="dot"></span>
-    <h3>Sin recursos todavía</h3>
-    <p>Cuando agregues archivos a la carpeta <strong>Modulo 3</strong> del repositorio, aparecerán aquí organizados por pestañas, igual que en los demás módulos.</p>
+  <div class="content-title">Estadística</div>
+  <p class="content-sub">Presentación y mapa conceptual del bloque de Estadística.</p>
+  <div class="resource-grid">
+    <div class="resource-card">
+      <div class="resource-icon">📊</div>
+      <h3>Estadística.pptx</h3>
+      <p>Presentación con los conceptos principales de estadística del módulo.</p>
+      <a class="resource-link" href="Estadística/Estadística.pptx" target="_blank">Descargar presentación →</a>
+    </div>
+    <div class="resource-card">
+      <div class="resource-icon">🗺️</div>
+      <h3>Mapa conceptual — Estadística</h3>
+      <p>Mapa conceptual vertical que resume el bloque de Estadística.</p>
+      <img class="resource-thumb" src="Estadística/mapa_conceptual_estadistica_vertical.png" alt="Mapa conceptual de Estadística">
+      <a class="resource-link" href="Estadística/mapa_conceptual_estadistica_vertical.png" target="_blank">Ver imagen completa →</a>
+    </div>
   </div>
 </main>
-
 <footer>© 2026 Todos los derechos reservados · Diseñado y desarrollado por Efraín Sebastián Rojas Artavia</footer>
-
 </body>
 </html>
