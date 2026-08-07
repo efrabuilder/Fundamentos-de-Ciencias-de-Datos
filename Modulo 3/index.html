@@ -108,7 +108,7 @@
     <div class="panel-head">
       <div>
         <h2>Estadística — Módulo 3</h2>
-        <div class="sub">Presentación y mapa conceptual del bloque de Estadística</div>
+        <div class="sub">Presentación y mapas conceptuales del bloque de Estadística</div>
       </div>
     </div>
     <div class="card" style="margin-bottom:18px;">
@@ -129,7 +129,7 @@
     <div class="hint" style="margin-bottom:22px;">
       Nombre esperado en el repositorio: <code>Estadística/Estadística.pptx</code> (presentación)
     </div>
-    <div class="card">
+    <div class="card" style="margin-bottom:18px;">
       <div class="card-toolbar">
         <span class="status" id="status-r0b"><span class="led"></span> Buscando archivo…</span>
         <div class="toolbar-actions">
@@ -144,8 +144,26 @@
         o cárgalo manualmente con el botón de arriba.
       </div>
     </div>
-    <div class="hint">
+    <div class="hint" style="margin-bottom:22px;">
       Nombre esperado en el repositorio: <code>Estadística/mapa_conceptual_estadistica_vertical.png</code> (mapa conceptual)
+    </div>
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-r0c"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r0c').click()">Cargar archivo…</button>
+          <input type="file" id="file-r0c" accept=".jpg,.jpeg,image/jpeg">
+          <a class="btn" id="download-r0c" download="mapa_simbologia_modulo3.jpg" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r0c">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Estadística/mapa_simbologia_modulo3.jpg</code> en la ruta indicada (relativa a este HTML),
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>Estadística/mapa_simbologia_modulo3.jpg</code> (mapa conceptual de simbología de estadística inferencial)
     </div>
   </section>
 
@@ -427,6 +445,7 @@
   // ---------- Recursos del Módulo 3 ----------
   setupResource('r0a', 'Estadística/Estadística.pptx');
   setupResource('r0b', 'Estadística/mapa_conceptual_estadistica_vertical.png');
+  setupResource('r0c', 'Estadística/mapa_simbologia_modulo3.jpg');
 </script>
 </body>
 </html>
