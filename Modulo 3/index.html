@@ -15,6 +15,7 @@
     --r1:#0ea5e9; --r1-soft:#f0f9ff;
     --r2:#a855f7; --r2-soft:#faf5ff;
     --r3:#f97316; --r3-soft:#fff7ed;
+    --r4:#e11d48; --r4-soft:#fff1f2;
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
@@ -38,6 +39,7 @@
   #tab-r1{--accent:var(--r1);}
   #tab-r2{--accent:var(--r2);}
   #tab-r3{--accent:var(--r3);}
+  #tab-r4{--accent:var(--r4);}
   main{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
   .panel{display:none;}
   .panel.active{display:block;animation:fade .25s ease;}
@@ -51,6 +53,7 @@
   #panel-r1 .card-toolbar{--accent-soft:var(--r1-soft);}
   #panel-r2 .card-toolbar{--accent-soft:var(--r2-soft);}
   #panel-r3 .card-toolbar{--accent-soft:var(--r3-soft);}
+  #panel-r4 .card-toolbar{--accent-soft:var(--r4-soft);}
   .status{font-size:12.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
   .status .led{width:7px;height:7px;border-radius:50%;background:#cbd5e1;}
   .status.ok .led{background:#16a34a;}
@@ -100,11 +103,14 @@
   <button class="tab" id="tab-r3" data-target="panel-r3">
     <span class="dot"></span> Consultas con Python
   </button>
+  <button class="tab" id="tab-r4" data-target="panel-r4">
+    <span class="dot"></span> Patrones de Datos
+  </button>
   <!--
     Para agregar un nuevo recurso: copia un botón como el de arriba,
-    dale un id y data-target únicos (ej. tab-r4 / panel-r4), y crea abajo su
+    dale un id y data-target únicos (ej. tab-r5 / panel-r5), y crea abajo su
     <section class="panel"> correspondiente. También agrega su color de
-    acento en :root arriba (ej. --r4, --r4-soft) siguiendo el mismo patrón.
+    acento en :root arriba (ej. --r5, --r5-soft) siguiendo el mismo patrón.
   -->
 </nav>
 <main>
@@ -283,6 +289,52 @@
     </div>
     <div class="hint">
       Nombre esperado en el repositorio: <code>Consultas con Python/Prueba_de_grafico.ipynb</code>
+    </div>
+  </section>
+
+  <!-- ===================== PANEL 4: Patrones de Datos ===================== -->
+  <section class="panel" id="panel-r4">
+    <div class="panel-head">
+      <div>
+        <h2>Patrones de Datos</h2>
+        <div class="sub">Notebook de práctica y mapa conceptual del bloque de Patrones de Datos</div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar">
+        <span class="status" id="status-r4a"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r4a').click()">Cargar archivo…</button>
+          <input type="file" id="file-r4a" accept=".ipynb">
+          <a class="btn" id="download-r4a" download="Prueba_de_grafico.ipynb" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r4a">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Patrones de Datos/00/Prueba_de_grafico.ipynb</code> en la ruta indicada (relativa a este HTML),
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">
+      Nombre esperado en el repositorio: <code>Patrones de Datos/00/Prueba_de_grafico.ipynb</code>
+    </div>
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-r4b"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r4b').click()">Cargar archivo…</button>
+          <input type="file" id="file-r4b" accept=".jpg,.jpeg,image/jpeg">
+          <a class="btn" id="download-r4b" download="mapa_conceptual_patron_de_datos.jpg" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r4b">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Patrones de Datos/00/mapa_conceptual_patron_de_datos.jpg</code> en la ruta indicada (relativa a este HTML),
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>Patrones de Datos/00/mapa_conceptual_patron_de_datos.jpg</code> (mapa conceptual de patrones de datos)
     </div>
   </section>
 </main>
@@ -518,6 +570,8 @@
   setupResource('r3a', 'Consultas con Python/Consultas con Python.ipynb');
   setupResource('r3b', 'Consultas con Python/consultas_python_2.ipynb');
   setupResource('r3c', 'Consultas con Python/Prueba_de_grafico.ipynb');
+  setupResource('r4a', 'Patrones de Datos/00/Prueba_de_grafico.ipynb');
+  setupResource('r4b', 'Patrones de Datos/00/mapa_conceptual_patron_de_datos.jpg');
 </script>
 </body>
 </html>
