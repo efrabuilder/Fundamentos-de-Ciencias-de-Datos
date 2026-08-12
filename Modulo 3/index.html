@@ -16,6 +16,7 @@
     --r2:#a855f7; --r2-soft:#faf5ff;
     --r3:#f97316; --r3-soft:#fff7ed;
     --r4:#e11d48; --r4-soft:#fff1f2;
+    --r5:#0891b2; --r5-soft:#ecfeff;
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
@@ -40,6 +41,7 @@
   #tab-r2{--accent:var(--r2);}
   #tab-r3{--accent:var(--r3);}
   #tab-r4{--accent:var(--r4);}
+  #tab-r5{--accent:var(--r5);}
   main{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
   .panel{display:none;}
   .panel.active{display:block;animation:fade .25s ease;}
@@ -54,6 +56,7 @@
   #panel-r2 .card-toolbar{--accent-soft:var(--r2-soft);}
   #panel-r3 .card-toolbar{--accent-soft:var(--r3-soft);}
   #panel-r4 .card-toolbar{--accent-soft:var(--r4-soft);}
+  #panel-r5 .card-toolbar{--accent-soft:var(--r5-soft);}
   .status{font-size:12.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
   .status .led{width:7px;height:7px;border-radius:50%;background:#cbd5e1;}
   .status.ok .led{background:#16a34a;}
@@ -119,6 +122,9 @@
   </button>
   <button class="tab" id="tab-r4" data-target="panel-r4">
     <span class="dot"></span> Patrones de Datos
+  </button>
+  <button class="tab" id="tab-r5" data-target="panel-r5">
+    <span class="dot"></span> Estadistica Descriptiva
   </button>
   <!--
     Para agregar un nuevo recurso: copia un botón como el de arriba,
@@ -349,6 +355,52 @@
     </div>
     <div class="hint">
       Nombre esperado en el repositorio: <code>Patrones de Datos/Prueba_de_grafico.ipynb</code>
+    </div>
+  </section>
+
+  <!-- ===================== PANEL 5: Estadistica Descriptiva ===================== -->
+  <section class="panel" id="panel-r5">
+    <div class="panel-head">
+      <div>
+        <h2>Estadistica Descriptiva</h2>
+        <div class="sub">Notebooks de práctica del bloque de Estadística Descriptiva: correlación y detección de outliers</div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar">
+        <span class="status" id="status-r5a"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r5a').click()">Cargar archivo…</button>
+          <input type="file" id="file-r5a" accept=".ipynb">
+          <a class="btn" id="download-r5a" download="correlacion_pearson.ipynb" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r5a">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Estadistica Descriptiva/correlacion_pearson.ipynb</code> en la ruta indicada (relativa a este HTML),
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">
+      Nombre esperado en el repositorio: <code>Estadistica Descriptiva/correlacion_pearson.ipynb</code>
+    </div>
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-r5b"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r5b').click()">Cargar archivo…</button>
+          <input type="file" id="file-r5b" accept=".ipynb">
+          <a class="btn" id="download-r5b" download="gastos_vendedores_ric.ipynb" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r5b">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Estadistica Descriptiva/gastos_vendedores_ric.ipynb</code> en la ruta indicada (relativa a este HTML),
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>Estadistica Descriptiva/gastos_vendedores_ric.ipynb</code>
     </div>
   </section>
 </main>
@@ -586,6 +638,8 @@
   setupResource('r3c', 'Consultas con Python/Prueba_de_grafico.ipynb');
   setupResource('r4b', 'Patrones de Datos/mapa_conceptual_patron_de_datos.jpg');
   setupResource('r4a', 'Patrones de Datos/Prueba_de_grafico.ipynb');
+  setupResource('r5a', 'Estadistica Descriptiva/correlacion_pearson.ipynb');
+  setupResource('r5b', 'Estadistica Descriptiva/gastos_vendedores_ric.ipynb');
 </script>
 </body>
 </html>
