@@ -79,6 +79,20 @@
   .hint{margin-top:12px;font-size:12px;color:var(--ink-soft);line-height:1.6;}
   .hint code{background:#f1f5f9;padding:1px 6px;border-radius:5px;font-family:var(--mono);}
   footer{text-align:center;padding:24px;color:var(--ink-soft);font-size:12px;}
+
+  /* ---------- Fix: visor de notebooks (.ipynb) ---------- */
+  /* .viewer por defecto es flex+centrado, pensado para UN elemento (imagen/iframe).
+     El notebook necesita comportarse como bloque normal con scroll vertical,
+     si no las celdas quedan recortadas por el overflow:hidden de .card. */
+  .viewer.notebook{display:block;text-align:left;padding:20px 24px;overflow-x:auto;max-height:78vh;overflow-y:auto;}
+  .nb-cell{margin-bottom:16px;}
+  .nb-cell-label{font-size:11px;font-weight:700;text-transform:uppercase;color:var(--ink-soft);margin-bottom:4px;}
+  .nb-src{background:#0f172a;color:#e2e8f0;padding:12px 14px;border-radius:8px;font-family:var(--mono);font-size:12.5px;line-height:1.6;white-space:pre-wrap;overflow-x:auto;margin:0;}
+  .nb-md-body{font-size:13.5px;line-height:1.6;}
+  .nb-out{margin-top:8px;}
+  .nb-out-label{font-size:10.5px;color:var(--ink-soft);margin-bottom:4px;}
+  .nb-out pre{background:#f1f5f9;padding:10px 12px;border-radius:8px;font-family:var(--mono);font-size:12px;overflow-x:auto;}
+  .nb-out img{max-width:100%;border-radius:8px;}
 </style>
 </head>
 <body>
@@ -436,7 +450,7 @@
   // ---------- Notebook Jupyter (.ipynb) ----------
   function renderNotebook(viewerId, statusId, downloadId, text, url, filename){
     const v = document.getElementById(viewerId);
-    v.className = 'viewer';
+    v.className = 'viewer notebook';
     let nb;
     try{
       nb = JSON.parse(text);
