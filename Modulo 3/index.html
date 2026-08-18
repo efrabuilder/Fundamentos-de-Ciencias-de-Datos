@@ -17,6 +17,7 @@
     --r3:#f97316; --r3-soft:#fff7ed;
     --r4:#e11d48; --r4-soft:#fff1f2;
     --r5:#0891b2; --r5-soft:#ecfeff;
+    --r6:#7c3aed; --r6-soft:#f5f3ff;
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
@@ -42,6 +43,7 @@
   #tab-r3{--accent:var(--r3);}
   #tab-r4{--accent:var(--r4);}
   #tab-r5{--accent:var(--r5);}
+  #tab-r6{--accent:var(--r6);}
   main{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
   .panel{display:none;}
   .panel.active{display:block;animation:fade .25s ease;}
@@ -57,6 +59,7 @@
   #panel-r3 .card-toolbar{--accent-soft:var(--r3-soft);}
   #panel-r4 .card-toolbar{--accent-soft:var(--r4-soft);}
   #panel-r5 .card-toolbar{--accent-soft:var(--r5-soft);}
+  #panel-r6 .card-toolbar{--accent-soft:var(--r6-soft);}
   .status{font-size:12.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
   .status .led{width:7px;height:7px;border-radius:50%;background:#cbd5e1;}
   .status.ok .led{background:#16a34a;}
@@ -125,6 +128,9 @@
   </button>
   <button class="tab" id="tab-r5" data-target="panel-r5">
     <span class="dot"></span> Estadistica Descriptiva
+  </button>
+  <button class="tab" id="tab-r6" data-target="panel-r6">
+    <span class="dot"></span> Estadística Aplicada al Negocio
   </button>
   <!--
     Para agregar un nuevo recurso: copia un botón como el de arriba,
@@ -457,6 +463,70 @@
       Nombre esperado en el repositorio: <code>Estadistica Descriptiva/series_temporales_ventas_dumis.ipynb</code>
     </div>
   </section>
+
+  <!-- ===================== PANEL 6: Estadística Aplicada al Negocio ===================== -->
+  <section class="panel" id="panel-r6">
+    <div class="panel-head">
+      <div>
+        <h2>Estadística Aplicada al Negocio</h2>
+        <div class="sub">Mapa conceptual, quiz y caso práctico del bloque de Estadística Aplicada al Negocio (Caso LMB)</div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar">
+        <span class="status" id="status-r6a"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r6a').click()">Cargar archivo…</button>
+          <input type="file" id="file-r6a" accept=".png,image/png">
+          <a class="btn" id="download-r6a" download="mapa_conceptual_unidad3_vertical.png" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r6a">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>ESTADÍSTICA APLICADA AL NEGOCIO/mapa_conceptual_unidad3_vertical.png</code> en la ruta indicada (relativa a este HTML),
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">
+      Nombre esperado en el repositorio: <code>ESTADÍSTICA APLICADA AL NEGOCIO/mapa_conceptual_unidad3_vertical.png</code> (mapa conceptual)
+    </div>
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar">
+        <span class="status" id="status-r6b"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r6b').click()">Cargar archivo…</button>
+          <input type="file" id="file-r6b" accept=".pdf,application/pdf">
+          <a class="btn" id="download-r6b" download="QUIZ MODULO 3 EFRAIN ROJAS ARTAVIA.pdf" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r6b">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>ESTADÍSTICA APLICADA AL NEGOCIO/QUIZ MODULO 3 EFRAIN ROJAS ARTAVIA.pdf</code> en la ruta indicada (relativa a este HTML),
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">
+      Nombre esperado en el repositorio: <code>ESTADÍSTICA APLICADA AL NEGOCIO/QUIZ MODULO 3 EFRAIN ROJAS ARTAVIA.pdf</code> (quiz)
+    </div>
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-r6c"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r6c').click()">Cargar archivo…</button>
+          <input type="file" id="file-r6c" accept=".ipynb">
+          <a class="btn" id="download-r6c" download="Caso Practico -Quiz modulo 3, Efrain Sebastian Rojas Artavia.ipynb" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r6c">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>ESTADÍSTICA APLICADA AL NEGOCIO/Caso Practico -Quiz modulo 3, Efrain Sebastian Rojas Artavia.ipynb</code> en la ruta indicada (relativa a este HTML),
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>ESTADÍSTICA APLICADA AL NEGOCIO/Caso Practico -Quiz modulo 3, Efrain Sebastian Rojas Artavia.ipynb</code> (caso práctico, notebook)
+    </div>
+  </section>
 </main>
 <footer>Recursos del Módulo 3 — Análisis Exploratorio de Datos (EDA)</footer>
 <footer>© 2026 Todos los derechos reservados · Diseñado y desarrollado por Efraín Sebastián Rojas Artavia</footer>
@@ -697,6 +767,9 @@
   setupResource('r5b', 'Estadistica Descriptiva/gastos_vendedores_ric.ipynb');
   setupResource('r5c', 'Estadistica Descriptiva/series_temporales_rotacion_inventario_LMB.ipynb');
   setupResource('r5d', 'Estadistica Descriptiva/series_temporales_ventas_dumis.ipynb');
+  setupResource('r6a', 'ESTADÍSTICA APLICADA AL NEGOCIO/mapa_conceptual_unidad3_vertical.png');
+  setupResource('r6b', 'ESTADÍSTICA APLICADA AL NEGOCIO/QUIZ MODULO 3 EFRAIN ROJAS ARTAVIA.pdf');
+  setupResource('r6c', 'ESTADÍSTICA APLICADA AL NEGOCIO/Caso Practico -Quiz modulo 3, Efrain Sebastian Rojas Artavia.ipynb');
 </script>
 </body>
 </html>
