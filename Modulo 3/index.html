@@ -18,6 +18,8 @@
     --r4:#e11d48; --r4-soft:#fff1f2;
     --r5:#0891b2; --r5-soft:#ecfeff;
     --r6:#7c3aed; --r6-soft:#f5f3ff;
+    --r7:#d97706; --r7-soft:#fffbeb;
+    --r8:#0d9488; --r8-soft:#f0fdfa;
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
@@ -44,6 +46,8 @@
   #tab-r4{--accent:var(--r4);}
   #tab-r5{--accent:var(--r5);}
   #tab-r6{--accent:var(--r6);}
+  #tab-r7{--accent:var(--r7);}
+  #tab-r8{--accent:var(--r8);}
   main{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
   .panel{display:none;}
   .panel.active{display:block;animation:fade .25s ease;}
@@ -60,6 +64,8 @@
   #panel-r4 .card-toolbar{--accent-soft:var(--r4-soft);}
   #panel-r5 .card-toolbar{--accent-soft:var(--r5-soft);}
   #panel-r6 .card-toolbar{--accent-soft:var(--r6-soft);}
+  #panel-r7 .card-toolbar{--accent-soft:var(--r7-soft);}
+  #panel-r8 .card-toolbar{--accent-soft:var(--r8-soft);}
   .status{font-size:12.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
   .status .led{width:7px;height:7px;border-radius:50%;background:#cbd5e1;}
   .status.ok .led{background:#16a34a;}
@@ -131,6 +137,12 @@
   </button>
   <button class="tab" id="tab-r6" data-target="panel-r6">
     <span class="dot"></span> Estadística Aplicada al Negocio
+  </button>
+  <button class="tab" id="tab-r7" data-target="panel-r7">
+    <span class="dot"></span> Storytelling
+  </button>
+  <button class="tab" id="tab-r8" data-target="panel-r8">
+    <span class="dot"></span> Proyecto Final
   </button>
   <!--
     Para agregar un nuevo recurso: copia un botón como el de arriba,
@@ -527,6 +539,113 @@
       Nombre esperado en el repositorio: <code>ESTADÍSTICA APLICADA AL NEGOCIO/Caso Practico -Quiz modulo 3, Efrain Sebastian Rojas Artavia.ipynb</code> (caso práctico, notebook)
     </div>
   </section>
+
+  <!-- ===================== PANEL 7: Storytelling ===================== -->
+  <section class="panel" id="panel-r7">
+    <div class="panel-head">
+      <div>
+        <h2>Storytelling</h2>
+        <div class="sub">Mapas conceptuales y presentación del bloque de Storytelling</div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar">
+        <span class="status" id="status-r7a"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r7a').click()">Cargar archivo…</button>
+          <input type="file" id="file-r7a" accept=".png,image/png">
+          <a class="btn" id="download-r7a" download="mapa_conceptual_pilares_y_fallas.png" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r7a">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Storytelling/mapa_conceptual_pilares_y_fallas.png</code> en la ruta indicada (relativa a este HTML),
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">
+      Nombre esperado en el repositorio: <code>Storytelling/mapa_conceptual_pilares_y_fallas.png</code> (mapa conceptual: pilares y fallas)
+    </div>
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar">
+        <span class="status" id="status-r7b"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r7b').click()">Cargar archivo…</button>
+          <input type="file" id="file-r7b" accept=".png,image/png">
+          <a class="btn" id="download-r7b" download="mapa_conceptual_evitar_hacer_completo.png" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r7b">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Storytelling/mapa_conceptual_evitar_hacer_completo.png</code> en la ruta indicada (relativa a este HTML),
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">
+      Nombre esperado en el repositorio: <code>Storytelling/mapa_conceptual_evitar_hacer_completo.png</code> (mapa conceptual: qué evitar y qué hacer)
+    </div>
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-r7c"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r7c').click()">Cargar archivo…</button>
+          <input type="file" id="file-r7c" accept=".pptx,application/vnd.openxmlformats-officedocument.presentationml.presentation">
+          <a class="btn" id="download-r7c" download="Presentación ejemplo 1 Unidad 5.pptx" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r7c">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Storytelling/Presentación ejemplo 1 Unidad 5.pptx</code> en la ruta indicada (relativa a este HTML),
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>Storytelling/Presentación ejemplo 1 Unidad 5.pptx</code> (presentación)
+    </div>
+  </section>
+
+  <!-- ===================== PANEL 8: Proyecto Final ===================== -->
+  <section class="panel" id="panel-r8">
+    <div class="panel-head">
+      <div>
+        <h2>Proyecto Final</h2>
+        <div class="sub">Interfaz interactiva (Streamlit) y reporte final en PDF</div>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar">
+        <span class="status ok"><span class="led"></span> Cargado desde Streamlit Community Cloud</span>
+        <div class="toolbar-actions">
+          <a class="btn" href="https://proyectofinalmodulo3-proyectofinal.streamlit.app/" target="_blank">Abrir en pestaña nueva ↗</a>
+          <a class="btn" href="https://github.com/efrabuilder/Fundamentos-de-Ciencias-de-Datos/tree/main/Proyecto_Final" target="_blank">Ver código en GitHub</a>
+        </div>
+      </div>
+      <div class="viewer" style="padding:0;">
+        <iframe src="https://proyectofinalmodulo3-proyectofinal.streamlit.app/" style="width:100%;height:78vh;border:0;display:block;" title="Proyecto Final - Manejo de Datos (EDA) en vivo" loading="lazy"></iframe>
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">
+      Demo interactiva embebida de la app <code>app_streamlit.py</code> (Manejo de Datos / EDA), desplegada en Streamlit Community Cloud.
+    </div>
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-r8b"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r8b').click()">Cargar archivo…</button>
+          <input type="file" id="file-r8b" accept=".pdf,application/pdf">
+          <a class="btn" id="download-r8b" download="Proyecto Final - Efrain Sebastian Rojas Artavia.pdf" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r8b">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>../Proyecto_Final/Proyecto Final - Efrain Sebastian Rojas Artavia.pdf</code> en la ruta indicada (relativa a este HTML),
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>Proyecto_Final/Proyecto Final - Efrain Sebastian Rojas Artavia.pdf</code> (reporte final, en la raíz del repo)
+    </div>
+  </section>
 </main>
 <footer>Recursos del Módulo 3 — Análisis Exploratorio de Datos (EDA)</footer>
 <footer>© 2026 Todos los derechos reservados · Diseñado y desarrollado por Efraín Sebastián Rojas Artavia</footer>
@@ -770,6 +889,10 @@
   setupResource('r6a', 'ESTADÍSTICA APLICADA AL NEGOCIO/mapa_conceptual_unidad3_vertical.png');
   setupResource('r6b', 'ESTADÍSTICA APLICADA AL NEGOCIO/QUIZ MODULO 3 EFRAIN ROJAS ARTAVIA.pdf');
   setupResource('r6c', 'ESTADÍSTICA APLICADA AL NEGOCIO/Caso Practico -Quiz modulo 3, Efrain Sebastian Rojas Artavia.ipynb');
+  setupResource('r7a', 'Storytelling/mapa_conceptual_pilares_y_fallas.png');
+  setupResource('r7b', 'Storytelling/mapa_conceptual_evitar_hacer_completo.png');
+  setupResource('r7c', 'Storytelling/Presentación ejemplo 1 Unidad 5.pptx');
+  setupResource('r8b', '../Proyecto_Final/Proyecto Final - Efrain Sebastian Rojas Artavia.pdf');
 </script>
 </body>
 </html>
