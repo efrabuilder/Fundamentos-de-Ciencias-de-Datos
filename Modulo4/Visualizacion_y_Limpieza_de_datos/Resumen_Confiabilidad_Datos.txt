@@ -1,0 +1,44 @@
+RESUMEN DE CONFIABILIDAD DEL ARCHIVO ORIGINAL
+Vivero El Jardín Oriental - Registro de Ventas
+Efrain Sebastián Rojas Artavia - Modulo 4
+-------------------------------------------------------------------------
+
+El archivo original (Jardineria_Datos_X.xlsx) contenía 3,000 registros de
+venta correspondientes a los últimos dos años. Tras la auditoría realizada
+con Power Query, se identificaron 288 hallazgos de calidad de datos,
+que afectan a 280 filas distintas (9.3% del total de registros).
+
+Los problemas se distribuyen así:
+
+  - Datos faltantes (120 casos): principalmente en Ciudad, Categoría de
+    Producto, Vendedor, Método de Pago, Nombre de Cliente y Producto,
+    con 15 casos cada uno.
+  - Valores atípicos (76 casos): cantidades y precios fuera de rango
+    razonable, y totales de venta que no correspondían al cálculo de
+    Cantidad x Precio Unitario.
+  - Tipo de dato inválido (66 casos): cantidades escritas como texto
+    ("7 unidades"), precios con el símbolo de colones (₡) incluido, y
+    fechas registradas en al menos cinco formatos distintos y mutuamente
+    inconsistentes (ISO con puntos, "dd de mes de aaaa" en inglés,
+    dd/mm/aaaa, y dos variantes de formato con guion según el largo del
+    año), incluyendo un par de fechas inexistentes (31 de febrero).
+  - Filas duplicadas (26 casos): registros idénticos repetidos por
+    completo.
+  - La columna más afectada fue Teléfono, con 74 hallazgos (números con
+    letras mezcladas, guiones, o largos incorrectos), señal clara de que
+    los datos venían de digitación manual en distintas cajas.
+
+CONCLUSIÓN
+
+El archivo original tenía una confiabilidad media-baja: cerca del 91% de
+los registros estaban completos y coherentes, pero el 9.3% restante
+habría introducido errores directos en cualquier análisis o tablero
+construido sin depurarlo primero (totales de venta incorrectos, fechas
+mal interpretadas, clientes sin forma de contacto válida). El patrón de
+errores —múltiples formatos de fecha, símbolos de moneda inconsistentes,
+nombres de categoría y vendedor escritos de formas distintas— confirma
+que los datos fueron recolectados de fuentes heterogéneas (varias cajas
+registradoras y hojas de cálculo de distinto personal) sin un estándar
+de captura común. Después del proceso de limpieza y marcado aplicado en
+Power Query, la base queda en condición confiable para construir el
+tablero en Power BI.
