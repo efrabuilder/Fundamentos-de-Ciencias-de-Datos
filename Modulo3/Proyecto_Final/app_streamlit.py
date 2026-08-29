@@ -1,6 +1,6 @@
 # app_streamlit.py
 #
-# Interfaz web (Streamlit) para el Proyecto Final - Manejo de Datos (EDA).
+# Interfaz web (Streamlit) para el Inventory Automator - Manejo de Datos (EDA).
 # Ejecutar con: streamlit run app_streamlit.py
 
 import streamlit as st
@@ -10,7 +10,7 @@ import os
 
 import core.analisis as analisis
 
-st.set_page_config(page_title="Proyecto Final - Manejo de Datos (EDA)", layout="wide")
+st.set_page_config(page_title="Inventory Automator - Manejo de Datos (EDA)", layout="wide")
 
 
 
@@ -29,14 +29,14 @@ estado = st.session_state.estado
 
 st.sidebar.title("Menu principal")
 
-archivo = st.sidebar.file_uploader("Cargar archivo CSV", type=["csv"])
+archivo = st.sidebar.file_uploader("Cargar archivo CSV o Excel", type=["csv", "xlsx", "xls"])
 if archivo is not None:
     ruta_temporal = os.path.join(tempfile.gettempdir(), archivo.name)
     with open(ruta_temporal, "wb") as f:
         f.write(archivo.getbuffer())
     if estado["ruta_actual"] != ruta_temporal:
         try:
-            mensaje = analisis.cargar_csv(estado, ruta_temporal)
+            mensaje = analisis.cargar_archivo(estado, ruta_temporal)
             st.sidebar.success(mensaje)
         except Exception as e:
             st.sidebar.error(str(e))
@@ -80,7 +80,7 @@ opcion = st.sidebar.radio("Ir a:", [
     "Ingresar nuevos datos",
 ])
 
-st.title("Proyecto Final - Manejo de Datos (EDA)")
+st.title("Inventory Automator - Manejo de Datos (EDA)")
 
 
 
@@ -88,7 +88,7 @@ st.title("Proyecto Final - Manejo de Datos (EDA)")
 
 def requiere_datos():
     if estado["df"] is None:
-        st.warning("Debe cargar un archivo CSV antes de realizar esta operacion.")
+        st.warning("Debe cargar un archivo CSV o Excel antes de realizar esta operacion.")
         return False
     return True
 
