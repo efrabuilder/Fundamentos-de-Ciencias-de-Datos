@@ -1,5 +1,5 @@
 # main_consola.py
-# Interfaz de menu por consola para el Proyecto Final - Manejo de Datos (EDA).
+# Interfaz de menu por consola para el Inventory Automator - Manejo de Datos (EDA).
 # Ejecutar con: python main_consola.py
 
 import os
@@ -44,13 +44,13 @@ def pedir_entero(mensaje, minimo=None, maximo=None):
 def menu_principal():
     while True:
         print("\n" + "=" * 55)
-        print(" PROYECTO FINAL - MANEJO DE DATOS (EDA)")
+        print(" INVENTORY AUTOMATOR - MANEJO DE DATOS (EDA)")
         print(" Estado: " + (
             f"'{os.path.basename(estado['ruta_actual'])}' cargado ({estado['df'].shape[0]} filas)"
             if estado["df"] is not None else "sin archivo cargado"
         ))
         print("=" * 55)
-        print(" 1. Cargar archivo CSV")
+        print(" 1. Cargar archivo CSV o Excel")
         print(" 2. Mostrar informacion del conjunto de datos")
         print(" 3. Mostrar primeras y ultimas filas")
         print(" 4. Analizar tipos de datos")
@@ -126,8 +126,12 @@ def opcion_cargar_csv():
         raiz.withdraw()
         raiz.attributes("-topmost", True)
         ruta = filedialog.askopenfilename(
-            title="Seleccionar archivo CSV",
-            filetypes=[("Archivos CSV", "*.csv")],
+            title="Seleccionar archivo CSV o Excel",
+            filetypes=[
+                ("Archivos CSV y Excel", "*.csv *.xlsx *.xls"),
+                ("Archivos CSV", "*.csv"),
+                ("Archivos Excel", "*.xlsx *.xls"),
+            ],
         )
         raiz.destroy()
     except Exception:
@@ -135,9 +139,9 @@ def opcion_cargar_csv():
               "se pedira la ruta manualmente)")
 
     if not ruta:
-        ruta = input("Ingrese la ruta del archivo CSV: ").strip()
+        ruta = input("Ingrese la ruta del archivo CSV o Excel: ").strip()
 
-    print(analisis.cargar_csv(estado, ruta))
+    print(analisis.cargar_archivo(estado, ruta))
 
 
 def opcion_info_general():
@@ -329,7 +333,7 @@ def ingresar_registro_interactivo():
 def mostrar_readme():
     print("""
 --- README del proyecto ---
-Proyecto Final del modulo Manejo de Datos - EDA.
+Inventory Automator del modulo Manejo de Datos - EDA.
 Estructura de archivos:
   core/analisis.py     -> logica compartida (carga, validacion, analisis, graficos)
   main_consola.py       -> esta interfaz de menu por consola
