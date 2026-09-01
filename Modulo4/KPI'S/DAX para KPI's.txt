@@ -1,0 +1,53 @@
+ventas totales = 
+SUM(Datos_KPI[Ventas_Real])
+
+-----------------------------
+
+Meta de ventas = 
+SUM(Datos_KPI[Meta_Ventas])
+
+-----------------------------
+
+Pedidos Totales = 
+SUM(Datos_KPI[Pedidos_Real])
+
+------------------------------
+
+Cumplimiento de Ventas = 
+DIVIDE(
+    SUM(Datos_KPI[Ventas_Real]),
+    SUM(Datos_KPI[Meta_Ventas])
+)
+
+-------------------------------
+
+Clientes Totales = 
+SUM(Datos_KPI[Clientes_Real])
+
+-------------------------------
+
+Cumplimientos de Clientes = 
+DIVIDE(
+    SUM(Datos_KPI[Clientes_Real]),
+    SUM(Datos_KPI[Meta_Clientes])
+)
+
+-------------------------------
+
+Unidades Totales = 
+SUM(Datos_KPI[Unidades_Real])
+
+--------------------------------
+
+Variación de Ventas = 
+SUM(Datos_KPI[Ventas_Real]) - SUM(Datos_KPI[Meta_Ventas])
+
+----------------------------------------------------------
+
+Variación porcentual de ventas = 
+DIVIDE(
+    SUM(Datos_KPI[Ventas_Real]) - SUM(Datos_KPI[Meta_Ventas]),
+    SUM(Datos_KPI[Meta_Ventas])
+)
+
+---------------------------------------------------------------
