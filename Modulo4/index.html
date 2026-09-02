@@ -89,6 +89,8 @@
   .nb-out-label{font-size:10.5px;color:var(--ink-soft);margin-bottom:4px;}
   .nb-out pre{background:#f1f5f9;padding:10px 12px;border-radius:8px;font-family:var(--mono);font-size:12px;overflow-x:auto;}
   .nb-out img{max-width:100%;border-radius:8px;}
+
+  .subgroup-title{margin:22px 0 10px;font-size:13.5px;font-weight:700;color:var(--r4);padding-bottom:6px;border-bottom:1px dashed var(--border);}
 </style>
 </head>
 <body>
@@ -446,6 +448,66 @@
       </div>
       <div class="viewer" id="viewer-r4c"></div>
     </div>
+
+    <!-- ---------- Sub-bloque nuevo: Financieros, Operativos y Comerciales ---------- -->
+    <div class="subgroup-title">KPI'S Financieros, Operativos y Comerciales</div>
+
+    <div class="card">
+      <div class="card-label">Mapa conceptual — Tres categorías de KPI's</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-r4g"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <a class="btn" id="download-r4g" style="display:none;">Descargar</a>
+          <label class="btn" for="file-r4g">Cargar manualmente</label>
+          <input type="file" id="file-r4g">
+        </div>
+      </div>
+      <div class="viewer" id="viewer-r4g"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Resumen de ejercicios e indicadores (Word)</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-r4h"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <a class="btn" id="download-r4h" style="display:none;">Descargar</a>
+          <label class="btn" for="file-r4h">Cargar manualmente</label>
+          <input type="file" id="file-r4h">
+        </div>
+      </div>
+      <div class="viewer" id="viewer-r4h"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Presentación — KPI Finan</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-r4i"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <a class="btn" id="download-r4i" style="display:none;">Descargar</a>
+          <label class="btn" for="file-r4i">Cargar manualmente</label>
+          <input type="file" id="file-r4i">
+        </div>
+      </div>
+      <div class="viewer" id="viewer-r4i"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Aplicación interactiva (Streamlit)</div>
+      <div class="card-toolbar">
+        <div class="status ok"><span class="led"></span> Enlace externo</div>
+        <div class="toolbar-actions">
+          <a class="btn" href="https://fundamentos-de-ciencias-de-datos-creando-kpis.streamlit.app/" target="_blank" rel="noopener">Abrir en pestaña nueva</a>
+        </div>
+      </div>
+      <div class="viewer">
+        <div class="filecard">
+          <div class="icon" style="background:var(--r4);">APP</div>
+          <div class="fname">App de KPI's Financieros, Operativos y Comerciales</div>
+          <div class="fmeta">Aplicación desplegada en Streamlit Community Cloud</div>
+          <a class="btn primary" style="background:var(--r4);border-color:var(--r4);" href="https://fundamentos-de-ciencias-de-datos-creando-kpis.streamlit.app/" target="_blank" rel="noopener">Abrir aplicación en Streamlit →</a>
+        </div>
+      </div>
+    </div>
   </section>
 </main>
 <footer>Recursos del Módulo 4 — Visualización y Business Intelligence</footer>
@@ -628,6 +690,9 @@
       case 'pptx':
         renderOfficeFile(viewerId, statusId, downloadId, url, filename, blob ? blob.size : null, 'PPT', absoluteUrl);
         break;
+      case 'docx':
+        renderOfficeFile(viewerId, statusId, downloadId, url, filename, blob ? blob.size : null, 'DOC', absoluteUrl);
+        break;
       case 'pbix':
         renderOfficeFile(viewerId, statusId, downloadId, url, filename, blob ? blob.size : null, 'PBI', false);
         break;
@@ -686,12 +751,17 @@
   setupResource('r3b', 'Diseño_Dashboards_Efectivos/PRIMER DASHBOARD.pbix');
 
   // Panel 4: KPI'S
-  setupResource('r4a', "KPI'S/metricas_kpis.png");
-  setupResource('r4b', "KPI'S/datos_practica_KPI_PowerBI_100_registros.xlsx");
-  setupResource('r4d', "KPI'S/mapa_conceptual_funciones_dax.png");
-  setupResource('r4e', "KPI'S/mapa_kpis_dax_descriptivo.png");
-  setupResource('r4f', "KPI'S/DAX para KPI's.txt");
-  setupResource('r4c', "KPI'S/Aplicando KPI'S.pbix");
+  setupResource('r4a', "KPIS/metricas_kpis.png");
+  setupResource('r4b', "KPIS/datos_practica_KPI_PowerBI_100_registros.xlsx");
+  setupResource('r4d', "KPIS/mapa_conceptual_funciones_dax.png");
+  setupResource('r4e', "KPIS/mapa_kpis_dax_descriptivo.png");
+  setupResource('r4f', "KPIS/DAX para KPI's.txt");
+  setupResource('r4c', "KPIS/Aplicando KPI'S.pbix");
+
+  // Panel 4 (sub-bloque): Financieros, Operativos y Comerciales
+  setupResource('r4g', "KPIS/Financieros_Operativos_Comerciales/kpis_tres_categorias.png");
+  setupResource('r4h', "KPIS/Financieros_Operativos_Comerciales/Resumen_Ejercicios_Indicadores.docx");
+  setupResource('r4i', "KPIS/Financieros_Operativos_Comerciales/KPI Finan.pptx");
 </script>
 </body>
 </html>
