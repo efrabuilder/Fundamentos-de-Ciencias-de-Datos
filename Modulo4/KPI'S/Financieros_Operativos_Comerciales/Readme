@@ -1,0 +1,41 @@
+# Calculadora de KPIs
+
+App en Streamlit para calcular KPIs financieros, operativos y comerciales
+a partir de sus fórmulas.
+
+## Estructura
+
+- `kpi_engine.py` — funciones puras de cálculo (una por KPI) y el registro
+  `REGISTRO_KPIS`, que agrupa cada KPI por categoría junto con su
+  descripción, fórmula, campos de entrada y unidad de resultado.
+- `app.py` — interfaz Streamlit: una pestaña por categoría, un desplegable
+  por KPI con sus campos de entrada y el resultado calculado.
+
+## Ejecutar
+
+```bash
+pip install -r requirements.txt
+streamlit run app.py
+```
+
+## KPIs incluidos
+
+**Financieros:** ROI, margen neto, liquidez corriente, punto de equilibrio,
+EBITDA, ROE, ratio de endeudamiento, flujo de caja libre.
+
+**Operativos:** productividad, rotación de inventario, tiempo de ciclo,
+tasa de defectos, OEE, OTIF, costo por unidad, tiempo de inactividad.
+
+**Comerciales:** tasa de conversión, CAC, LTV, ticket promedio, tasa de
+retención, ROAS, duración del ciclo de venta, NPS.
+
+## Agregar un nuevo KPI
+
+1. Escribe la función de cálculo en `kpi_engine.py`. Que devuelva `None`
+   si algún dato de entrada la vuelve inválida (por ejemplo, una división
+   entre cero), en vez de lanzar una excepción.
+2. Agrega una `DefinicionKpi` a la lista de la categoría correspondiente
+   dentro de `REGISTRO_KPIS`, indicando sus campos de entrada.
+
+La interfaz en `app.py` no necesita cambios: recorre `REGISTRO_KPIS`
+automáticamente.
