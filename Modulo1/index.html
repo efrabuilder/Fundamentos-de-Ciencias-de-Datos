@@ -14,7 +14,6 @@
     --mapa:#7c3aed; --mapa-soft:#f5f3ff;
     --nutricion:#16a34a; --nutricion-soft:#f0fdf4;
     --algoritmos:#d97706; --algoritmos-soft:#fffbeb;
-    --dashboard:#4f46e5; --dashboard-soft:#eef2ff;
     --segmentacion:#db2777; --segmentacion-soft:#fdf2f8;
     --dataset:#0891b2; --dataset-soft:#ecfeff;
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
@@ -39,7 +38,6 @@
   #tab-mapa{--accent:var(--mapa);}
   #tab-nutricion{--accent:var(--nutricion);}
   #tab-algoritmos{--accent:var(--algoritmos);}
-  #tab-dashboard{--accent:var(--dashboard);}
   #tab-segmentacion{--accent:var(--segmentacion);}
   #tab-dataset{--accent:var(--dataset);}
   main{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
@@ -54,7 +52,6 @@
   #panel-mapa .card-toolbar{--accent-soft:var(--mapa-soft);}
   #panel-nutricion .card-toolbar{--accent-soft:var(--nutricion-soft);}
   #panel-algoritmos .card-toolbar{--accent-soft:var(--algoritmos-soft);}
-  #panel-dashboard .card-toolbar{--accent-soft:var(--dashboard-soft);}
   #panel-segmentacion .card-toolbar{--accent-soft:var(--segmentacion-soft);}
   #panel-dataset .card-toolbar{--accent-soft:var(--dataset-soft);}
   .status{font-size:12.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
@@ -105,9 +102,6 @@
   </button>
   <button class="tab" id="tab-algoritmos" data-target="panel-algoritmos">
     <span class="dot"></span> Algoritmos
-  </button>
-  <button class="tab" id="tab-dashboard" data-target="panel-dashboard">
-    <span class="dot"></span> Dashboard
   </button>
   <button class="tab" id="tab-segmentacion" data-target="panel-segmentacion">
     <span class="dot"></span> Presentación de Segmentación
@@ -275,52 +269,42 @@
     </div>
   </section>
 
-  <!-- ===================== PANEL 4: DASHBOARD ===================== -->
-  <section class="panel" id="panel-dashboard">
-    <div class="panel-head">
-      <div>
-        <h2>Dashboard — Cumpleaños CR</h2>
-        <div class="sub">Libro de Excel con el dashboard de cumpleaños</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-toolbar">
-        <span class="status" id="status-dashboard"><span class="led"></span> Buscando archivo…</span>
-        <div class="toolbar-actions">
-          <button class="btn" onclick="document.getElementById('file-dashboard').click()">Cargar archivo…</button>
-          <input type="file" id="file-dashboard" accept=".xlsx,.xlsm,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
-          <a class="btn" id="download-dashboard" download="dashboard_cumpleanos_cr.xlsx" style="display:none;">Descargar</a>
-        </div>
-      </div>
-      <div class="viewer empty" id="viewer-dashboard">
-        <strong>Sin archivo cargado todavía</strong>
-        Coloca el archivo <code>dashboard/dashboard_cumpleanos_cr.xlsx</code> en la ruta indicada (relativa a este HTML),
-        o cárgalo manualmente con el botón de arriba.
-      </div>
-    </div>
-    <div class="hint">
-      Nombre esperado en el repositorio: <code>dashboard/dashboard_cumpleanos_cr.xlsx</code>
-    </div>
-  </section>
-
-  <!-- ===================== PANEL 5: PRESENTACIÓN SEGMENTACIÓN ===================== -->
+  <!-- ===================== PANEL 4: PRESENTACIÓN SEGMENTACIÓN ===================== -->
   <section class="panel" id="panel-segmentacion">
     <div class="panel-head">
       <div>
-        <h2>Presentación — Segmentación de Cumpleaños CR</h2>
-        <div class="sub">Presentación de PowerPoint sobre segmentación de cumpleaños en Costa Rica</div>
+        <h2>Segmentación de Cumpleaños CR</h2>
+        <div class="sub">Dashboard de Excel y presentación de PowerPoint sobre segmentación de cumpleaños en Costa Rica</div>
       </div>
+    </div>
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar">
+        <span class="status" id="status-segmentacion-xlsx"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-segmentacion-xlsx').click()">Cargar archivo…</button>
+          <input type="file" id="file-segmentacion-xlsx" accept=".xlsx,.xlsm,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+          <a class="btn" id="download-segmentacion-xlsx" download="dashboard_cumpleanos_cr.xlsx" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-segmentacion-xlsx">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Presentacion segmentacion/dashboard_cumpleanos_cr.xlsx</code> en la ruta indicada (relativa a este HTML),
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">
+      Nombre esperado en el repositorio: <code>Presentacion segmentacion/dashboard_cumpleanos_cr.xlsx</code>
     </div>
     <div class="card">
       <div class="card-toolbar">
-        <span class="status" id="status-segmentacion"><span class="led"></span> Buscando archivo…</span>
+        <span class="status" id="status-segmentacion-pptx"><span class="led"></span> Buscando archivo…</span>
         <div class="toolbar-actions">
-          <button class="btn" onclick="document.getElementById('file-segmentacion').click()">Cargar archivo…</button>
-          <input type="file" id="file-segmentacion" accept=".pptx,application/vnd.openxmlformats-officedocument.presentationml.presentation">
-          <a class="btn" id="download-segmentacion" download="Segmentacion_Cumpleanos_CRI.pptx" style="display:none;">Descargar</a>
+          <button class="btn" onclick="document.getElementById('file-segmentacion-pptx').click()">Cargar archivo…</button>
+          <input type="file" id="file-segmentacion-pptx" accept=".pptx,application/vnd.openxmlformats-officedocument.presentationml.presentation">
+          <a class="btn" id="download-segmentacion-pptx" download="Segmentacion_Cumpleanos_CRI.pptx" style="display:none;">Descargar</a>
         </div>
       </div>
-      <div class="viewer empty" id="viewer-segmentacion">
+      <div class="viewer empty" id="viewer-segmentacion-pptx">
         <strong>Sin archivo cargado todavía</strong>
         Coloca el archivo <code>Presentacion segmentacion/Segmentacion_Cumpleanos_CRI.pptx</code> en la ruta indicada (relativa a este HTML),
         o cárgalo manualmente con el botón de arriba.
@@ -331,7 +315,7 @@
     </div>
   </section>
 
-  <!-- ===================== PANEL 6: PRESENTACIÓN DATASET ===================== -->
+  <!-- ===================== PANEL 5: PRESENTACIÓN DATASET ===================== -->
   <section class="panel" id="panel-dataset">
     <div class="panel-head">
       <div>
@@ -518,8 +502,8 @@
   setupResource('algoritmos-huevo', 'Algoritmos/Huevo Frito.txt');
   setupResource('algoritmos-rpn', 'Algoritmos/algoritmo_calculadora_rpn.png');
   setupResource('algoritmos-aceite', 'Algoritmos/pasos_cambio_aceite_carro.png');
-  setupResource('dashboard', 'dashboard/dashboard_cumpleanos_cr.xlsx');
-  setupResource('segmentacion', 'Presentacion segmentacion/Segmentacion_Cumpleanos_CRI.pptx');
+  setupResource('segmentacion-xlsx', 'Presentacion segmentacion/dashboard_cumpleanos_cr.xlsx');
+  setupResource('segmentacion-pptx', 'Presentacion segmentacion/Segmentacion_Cumpleanos_CRI.pptx');
   setupResource('dataset', 'DataSet/Analisis_Dataset.pptx');
 </script>
 
