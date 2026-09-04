@@ -17,6 +17,7 @@
     --r3:#7c3aed; --r3-soft:#f5f3ff;
     --r4:#db2777; --r4-soft:#fdf2f8;
     --r5:#0891b2; --r5-soft:#ecfeff;
+    --r6:#4338ca; --r6-soft:#eef2ff;
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
@@ -39,6 +40,7 @@
   #tab-r1{--accent:var(--r1);}
   #tab-r2{--accent:var(--r2);}
   #tab-r3{--accent:var(--r3);}
+  #tab-r6{--accent:var(--r6);}
   #tab-r4{--accent:var(--r4);}
   #tab-r5{--accent:var(--r5);}
   main{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
@@ -55,6 +57,7 @@
   #panel-r1 .card-toolbar{--accent-soft:var(--r1-soft);}
   #panel-r2 .card-toolbar{--accent-soft:var(--r2-soft);}
   #panel-r3 .card-toolbar{--accent-soft:var(--r3-soft);}
+  #panel-r6 .card-toolbar{--accent-soft:var(--r6-soft);}
   #panel-r4 .card-toolbar{--accent-soft:var(--r4-soft);}
   #panel-r5 .card-toolbar{--accent-soft:var(--r5-soft);}
   .status{font-size:12.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
@@ -94,6 +97,7 @@
   .nb-out img{max-width:100%;border-radius:8px;}
 
   .subgroup-title{margin:22px 0 10px;font-size:13.5px;font-weight:700;color:var(--r4);padding-bottom:6px;border-bottom:1px dashed var(--border);}
+  #panel-r2 .subgroup-title{color:var(--r2);}
 </style>
 </head>
 <body>
@@ -114,6 +118,9 @@
   </button>
   <button class="tab" id="tab-r3" data-target="panel-r3">
     <span class="dot"></span> Diseño de Dashboards Efectivos
+  </button>
+  <button class="tab" id="tab-r6" data-target="panel-r6">
+    <span class="dot"></span> Funciones y Consultas Personalizadas
   </button>
   <button class="tab" id="tab-r4" data-target="panel-r4">
     <span class="dot"></span> KPI'S
@@ -253,6 +260,8 @@
       </div>
     </div>
 
+    <div class="subgroup-title">Base de Datos y Calidad</div>
+
     <div class="card">
       <div class="card-label">Base de datos original</div>
       <div class="card-toolbar">
@@ -293,19 +302,6 @@
     </div>
 
     <div class="card">
-      <div class="card-label">Tablero Power BI — Datos limpios</div>
-      <div class="card-toolbar">
-        <div class="status" id="status-r2d"><span class="led"></span> Cargando…</div>
-        <div class="toolbar-actions">
-          <a class="btn" id="download-r2d" style="display:none;">Descargar</a>
-          <label class="btn" for="file-r2d">Cargar manualmente</label>
-          <input type="file" id="file-r2d">
-        </div>
-      </div>
-      <div class="viewer" id="viewer-r2d"></div>
-    </div>
-
-    <div class="card">
       <div class="card-label">Resumen de confiabilidad de datos</div>
       <div class="card-toolbar">
         <div class="status" id="status-r2e"><span class="led"></span> Cargando…</div>
@@ -329,6 +325,49 @@
         </div>
       </div>
       <div class="viewer" id="viewer-r2f"></div>
+    </div>
+
+    <div class="subgroup-title">Tablero Power BI — Datos Limpios</div>
+
+    <div class="card">
+      <div class="card-label">Tablero Power BI — Datos limpios</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-r2d"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <a class="btn" id="download-r2d" style="display:none;">Descargar</a>
+          <label class="btn" for="file-r2d">Cargar manualmente</label>
+          <input type="file" id="file-r2d">
+        </div>
+      </div>
+      <div class="viewer" id="viewer-r2d"></div>
+    </div>
+
+    <div class="subgroup-title">Nuevo Dashboard — Clientes de Jardinería</div>
+
+    <div class="card">
+      <div class="card-label">Tablero Power BI — Dashboard Clientes</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-r2g"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <a class="btn" id="download-r2g" style="display:none;">Descargar</a>
+          <label class="btn" for="file-r2g">Cargar manualmente</label>
+          <input type="file" id="file-r2g">
+        </div>
+      </div>
+      <div class="viewer" id="viewer-r2g"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Tablero Power BI — Dashboard Clientes (PDF)</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-r2h"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <a class="btn" id="download-r2h" style="display:none;">Descargar</a>
+          <label class="btn" for="file-r2h">Cargar manualmente</label>
+          <input type="file" id="file-r2h">
+        </div>
+      </div>
+      <div class="viewer" id="viewer-r2h"></div>
     </div>
   </section>
 
@@ -368,14 +407,53 @@
     </div>
   </section>
 
+  <!-- ===================== PANEL 6: Funciones y Consultas Personalizadas ===================== -->
+  <section class="panel" id="panel-r6">
+    <div class="panel-head">
+      <div>
+        <h2>Funciones y Consultas Personalizadas</h2>
+        <div class="sub">Mapas conceptuales sobre funciones personalizadas y consultas en Power Query / Power BI</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Mapa conceptual — Ruta para invocar una función en Power BI</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-r6a"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <a class="btn" id="download-r6a" style="display:none;">Descargar</a>
+          <label class="btn" for="file-r6a">Cargar manualmente</label>
+          <input type="file" id="file-r6a">
+        </div>
+      </div>
+      <div class="viewer" id="viewer-r6a"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Mapa conceptual — Funciones en Power Query, cuándo usarlas</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-r6b"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <a class="btn" id="download-r6b" style="display:none;">Descargar</a>
+          <label class="btn" for="file-r6b">Cargar manualmente</label>
+          <input type="file" id="file-r6b">
+        </div>
+      </div>
+      <div class="viewer" id="viewer-r6b"></div>
+    </div>
+  </section>
+
   <!-- ===================== PANEL 4: KPI'S ===================== -->
   <section class="panel" id="panel-r4">
     <div class="panel-head">
       <div>
         <h2>KPI'S</h2>
-        <div class="sub">Mapa conceptual, datos de práctica y tablero de KPIs en Power BI</div>
+        <div class="sub">Mapa conceptual, funciones DAX, datos de práctica y tablero de KPIs en Power BI</div>
       </div>
     </div>
+
+    <!-- ---------- Sub-bloque: Conceptos y Fundamentos de KPI's ---------- -->
+    <div class="subgroup-title">Conceptos y Fundamentos de KPI'S</div>
 
     <div class="card">
       <div class="card-label">Mapa conceptual — Métricas vs KPIs</div>
@@ -388,71 +466,6 @@
         </div>
       </div>
       <div class="viewer" id="viewer-r4a"></div>
-    </div>
-
-    <div class="card">
-      <div class="card-label">Datos de práctica — 100 registros</div>
-      <div class="card-toolbar">
-        <div class="status" id="status-r4b"><span class="led"></span> Cargando…</div>
-        <div class="toolbar-actions">
-          <a class="btn" id="download-r4b" style="display:none;">Descargar</a>
-          <label class="btn" for="file-r4b">Cargar manualmente</label>
-          <input type="file" id="file-r4b">
-        </div>
-      </div>
-      <div class="viewer" id="viewer-r4b"></div>
-    </div>
-
-    <div class="card">
-      <div class="card-label">Mapa conceptual — Funciones DAX</div>
-      <div class="card-toolbar">
-        <div class="status" id="status-r4d"><span class="led"></span> Cargando…</div>
-        <div class="toolbar-actions">
-          <a class="btn" id="download-r4d" style="display:none;">Descargar</a>
-          <label class="btn" for="file-r4d">Cargar manualmente</label>
-          <input type="file" id="file-r4d">
-        </div>
-      </div>
-      <div class="viewer" id="viewer-r4d"></div>
-    </div>
-
-    <div class="card">
-      <div class="card-label">Mapa conceptual — KPIs DAX (descriptivo)</div>
-      <div class="card-toolbar">
-        <div class="status" id="status-r4e"><span class="led"></span> Cargando…</div>
-        <div class="toolbar-actions">
-          <a class="btn" id="download-r4e" style="display:none;">Descargar</a>
-          <label class="btn" for="file-r4e">Cargar manualmente</label>
-          <input type="file" id="file-r4e">
-        </div>
-      </div>
-      <div class="viewer" id="viewer-r4e"></div>
-    </div>
-
-    <div class="card">
-      <div class="card-label">DAX para KPI'S</div>
-      <div class="card-toolbar">
-        <div class="status" id="status-r4f"><span class="led"></span> Cargando…</div>
-        <div class="toolbar-actions">
-          <a class="btn" id="download-r4f" style="display:none;">Descargar</a>
-          <label class="btn" for="file-r4f">Cargar manualmente</label>
-          <input type="file" id="file-r4f">
-        </div>
-      </div>
-      <div class="viewer" id="viewer-r4f"></div>
-    </div>
-
-    <div class="card">
-      <div class="card-label">Tablero Power BI — Aplicando KPI'S</div>
-      <div class="card-toolbar">
-        <div class="status" id="status-r4c"><span class="led"></span> Cargando…</div>
-        <div class="toolbar-actions">
-          <a class="btn" id="download-r4c" style="display:none;">Descargar</a>
-          <label class="btn" for="file-r4c">Cargar manualmente</label>
-          <input type="file" id="file-r4c">
-        </div>
-      </div>
-      <div class="viewer" id="viewer-r4c"></div>
     </div>
 
     <div class="card">
@@ -481,7 +494,75 @@
       <div class="viewer" id="viewer-r4k"></div>
     </div>
 
-    <!-- ---------- Sub-bloque nuevo: Financieros, Operativos y Comerciales ---------- -->
+    <!-- ---------- Sub-bloque: Funciones DAX aplicadas a KPI's ---------- -->
+    <div class="subgroup-title">Funciones DAX aplicadas a KPI'S</div>
+
+    <div class="card">
+      <div class="card-label">Mapa conceptual — Funciones DAX</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-r4d"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <a class="btn" id="download-r4d" style="display:none;">Descargar</a>
+          <label class="btn" for="file-r4d">Cargar manualmente</label>
+          <input type="file" id="file-r4d">
+        </div>
+      </div>
+      <div class="viewer" id="viewer-r4d"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Mapa conceptual — KPIs DAX (descriptivo)</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-r4e"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <a class="btn" id="download-r4e" style="display:none;">Descargar</a>
+          <label class="btn" for="file-r4e">Cargar manualmente</label>
+          <input type="file" id="file-r4e">
+        </div>
+      </div>
+      <div class="viewer" id="viewer-r4e"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Datos de práctica — 100 registros</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-r4b"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <a class="btn" id="download-r4b" style="display:none;">Descargar</a>
+          <label class="btn" for="file-r4b">Cargar manualmente</label>
+          <input type="file" id="file-r4b">
+        </div>
+      </div>
+      <div class="viewer" id="viewer-r4b"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">DAX para KPI'S</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-r4f"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <a class="btn" id="download-r4f" style="display:none;">Descargar</a>
+          <label class="btn" for="file-r4f">Cargar manualmente</label>
+          <input type="file" id="file-r4f">
+        </div>
+      </div>
+      <div class="viewer" id="viewer-r4f"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Tablero Power BI — Aplicando KPI'S</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-r4c"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <a class="btn" id="download-r4c" style="display:none;">Descargar</a>
+          <label class="btn" for="file-r4c">Cargar manualmente</label>
+          <input type="file" id="file-r4c">
+        </div>
+      </div>
+      <div class="viewer" id="viewer-r4c"></div>
+    </div>
+
+    <!-- ---------- Sub-bloque: Financieros, Operativos y Comerciales ---------- -->
     <div class="subgroup-title">KPI'S Financieros, Operativos y Comerciales</div>
 
     <div class="card">
@@ -810,23 +891,29 @@
   setupResource('r2a', 'Visualizacion_y_Limpieza_de_datos/Jardineria_Datos_X.xlsx');
   setupResource('r2b', 'Visualizacion_y_Limpieza_de_datos/Jardineria_Datos_limpiosX.xlsx');
   setupResource('r2c', 'Visualizacion_y_Limpieza_de_datos/reporte_calidad_datos_Jardineria.xlsx');
-  setupResource('r2d', 'Visualizacion_y_Limpieza_de_datos/Jardineria_Datos_Limpia_PowerBI.pbix');
   setupResource('r2e', 'Visualizacion_y_Limpieza_de_datos/Resumen_Confiabilidad_Datos.txt');
   setupResource('r2f', 'Visualizacion_y_Limpieza_de_datos/Jardineria_SOLUCION.xlsx');
+  setupResource('r2d', 'Visualizacion_y_Limpieza_de_datos/Jardineria_Datos_Limpia_PowerBI.pbix');
+  setupResource('r2g', "Visualizacion_y_Limpieza_de_datos/CREANDO DASHBOARD DB_JARDINERIA_CLIENTES.pbix");
+  setupResource('r2h', "Visualizacion_y_Limpieza_de_datos/CREANDO DASHBOARD DB_JARDINERIA_CLIENTES.pdf");
 
   // Panel 3: Diseño de Dashboards Efectivos
   setupResource('r3a', 'Diseño_Dashboards_Efectivos/mapa_conceptual_diseno_dashboards.png');
   setupResource('r3b', 'Diseño_Dashboards_Efectivos/PRIMER DASHBOARD.pbix');
 
+  // Panel 6: Funciones y Consultas Personalizadas
+  setupResource('r6a', 'Funciones_y_Consultas_Personalizadas/ruta_invocar_funcion_power_bi.png');
+  setupResource('r6b', 'Funciones_y_Consultas_Personalizadas/funciones_power_query_cuando_usar.png');
+
   // Panel 4: KPI'S
   setupResource('r4a', "KPIS/metricas_kpis.png");
-  setupResource('r4b', "KPIS/datos_practica_KPI_PowerBI_100_registros.xlsx");
-  setupResource('r4d', "KPIS/mapa_conceptual_funciones_dax.png");
-  setupResource('r4e', "KPIS/mapa_kpis_dax_descriptivo.png");
-  setupResource('r4f', "KPIS/DAX para KPI's.txt");
-  setupResource('r4c', "KPIS/Aplicando KPI'S.pbix");
   setupResource('r4j', "KPIS/Mapa_Conceptual_Empresas_Exportadoras.jpg");
   setupResource('r4k', "KPIS/Mapa_Conceptual_Diseno_Tableros_Control.jpg");
+  setupResource('r4d', "KPIS/mapa_conceptual_funciones_dax.png");
+  setupResource('r4e', "KPIS/mapa_kpis_dax_descriptivo.png");
+  setupResource('r4b', "KPIS/datos_practica_KPI_PowerBI_100_registros.xlsx");
+  setupResource('r4f', "KPIS/DAX para KPI's.txt");
+  setupResource('r4c', "KPIS/Aplicando KPI'S.pbix");
 
   // Panel 4 (sub-bloque): Financieros, Operativos y Comerciales
   setupResource('r4g', "KPIS/Financieros_Operativos_Comerciales/kpis_tres_categorias.png");
