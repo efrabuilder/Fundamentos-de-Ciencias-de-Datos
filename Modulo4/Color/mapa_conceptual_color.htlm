@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>El color en la creación de dashboards — Mapa conceptual</title>
+<style>
+  :root{
+    --bg: #f7f4ec;
+    --ink: #1f2430;
+    --sub: #5b6270;
+    --hub: #3d3673;
+
+    --col-intro-head: #efece4;
+    --col-intro-border: #c9c4b6;
+
+    --col-fis-head: #dbe9f6;
+    --col-fis-border: #6fa8d8;
+
+    --col-psi-head: #f6ddd8;
+    --col-psi-border: #c96a53;
+
+    --col-teo-head: #e2ecdb;
+    --col-teo-border: #7fa66a;
+
+    --col-pal-head: #f6dcea;
+    --col-pal-border: #c85c9a;
+
+    --col-con-head: #f8e6cf;
+    --col-con-border: #d99a3d;
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin: 0;
+    padding: 48px 32px 72px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .page{
+    max-width: 1900px;
+    margin: 0 auto;
+  }
+
+  header{
+    text-align: center;
+    margin-bottom: 34px;
+  }
+
+  h1{
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 8px;
+    letter-spacing: 0.2px;
+  }
+
+  .subtitle{
+    font-size: 16px;
+    color: var(--sub);
+    margin: 0 0 6px;
+  }
+
+  .byline{
+    font-size: 13px;
+    color: #8a8f99;
+    margin: 0;
+  }
+
+  .hub-wrap{
+    display: flex;
+    justify-content: center;
+    margin: 28px 0 0;
+  }
+
+  .hub{
+    background: var(--hub);
+    color: #fff;
+    font-size: 19px;
+    font-weight: 700;
+    padding: 16px 40px;
+    border-radius: 10px;
+    box-shadow: 0 6px 14px rgba(61, 54, 115, 0.25);
+  }
+
+  .stem{
+    width: 2px;
+    height: 26px;
+    background: #cfc9bd;
+    margin: 0 auto;
+  }
+
+  .columns{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    column-gap: 18px;
+    border-top: 2px solid #d9d4c6;
+    padding-top: 0;
+  }
+
+  .col-head{
+    text-align: center;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 12px 8px;
+    margin-top: -2px;
+    border-bottom: 3px solid transparent;
+  }
+
+  .col-intro .col-head{ background: var(--col-intro-head); border-color: var(--col-intro-border); }
+  .col-fis   .col-head{ background: var(--col-fis-head);   border-color: var(--col-fis-border); }
+  .col-psi   .col-head{ background: var(--col-psi-head);   border-color: var(--col-psi-border); }
+  .col-teo   .col-head{ background: var(--col-teo-head);   border-color: var(--col-teo-border); }
+  .col-pal   .col-head{ background: var(--col-pal-head);   border-color: var(--col-pal-border); }
+  .col-con   .col-head{ background: var(--col-con-head);   border-color: var(--col-con-border); }
+
+  .cards{
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-top: 16px;
+  }
+
+  .card{
+    background: #fff;
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-size: 12.5px;
+    line-height: 1.42;
+    border: 1px solid #e2ddd0;
+    border-left-width: 3px;
+  }
+
+  .card h3{
+    margin: 0 0 4px;
+    font-size: 13.5px;
+    font-weight: 700;
+  }
+
+  .card p{
+    margin: 0;
+    color: #3a3f49;
+  }
+
+  .card .fuente{
+    color: #3a3f49;
+  }
+  .card .fuente strong{
+    font-weight: 700;
+  }
+
+  .card .uso{
+    display: block;
+    margin-top: 4px;
+    color: #6b7080;
+  }
+
+  .col-intro .card{ border-left-color: var(--col-intro-border); }
+  .col-fis   .card{ border-left-color: var(--col-fis-border); }
+  .col-psi   .card{ border-left-color: var(--col-psi-border); }
+  .col-teo   .card{ border-left-color: var(--col-teo-border); }
+  .col-pal   .card{ border-left-color: var(--col-pal-border); }
+  .col-con   .card{ border-left-color: var(--col-con-border); }
+
+  @media (max-width: 1100px){
+    .columns{
+      grid-template-columns: repeat(2, 1fr);
+      row-gap: 28px;
+    }
+  }
+
+  @media (max-width: 640px){
+    .columns{
+      grid-template-columns: 1fr;
+    }
+    body{ padding: 32px 16px 56px; }
+    h1{ font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1>El color en la creación de dashboards</h1>
+    <p class="subtitle">Mapa conceptual — Parte 1: Investigación</p>
+    <p class="byline">Efraín Sebastián Rojas Artavia · Ciencias de Datos</p>
+  </header>
+
+  <div class="hub-wrap"><div class="hub">El color en dashboards</div></div>
+  <div class="stem"></div>
+
+  <div class="columns">
+
+    <div class="col-intro">
+      <div class="col-head">Introducción</div>
+      <div class="cards">
+        <div class="card">
+          <h3>Función del color</h3>
+          <p>No es solo estético: codifica información</p>
+        </div>
+        <div class="card">
+          <h3>Rol en el dashboard</h3>
+          <p>Guía la atención y facilita la toma de decisiones</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-fis">
+      <div class="col-head">Fundamento físico</div>
+      <div class="cards">
+        <div class="card">
+          <h3>Longitud de onda</h3>
+          <p>Espectro visible: violeta (380nm) a rojo (770nm)<br><span class="fuente"><strong>Fuente:</strong> García Fernández, s.f.</span></p>
+        </div>
+        <div class="card">
+          <h3>Reflexión y absorción</h3>
+          <p>El objeto refleja el color que vemos y absorbe el resto de la luz</p>
+        </div>
+        <div class="card">
+          <h3>Sensibilidad del ojo</h3>
+          <p>Máxima en 555nm (amarillo-verdoso); por eso las señales de peligro son amarillas</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-psi">
+      <div class="col-head">Psicología del color</div>
+      <div class="cards">
+        <div class="card">
+          <h3>Percepción subjetiva</h3>
+          <p>Varía según cultura y experiencia individual<br><span class="fuente"><strong>Fuente:</strong> Unobravo, 2025</span></p>
+        </div>
+        <div class="card">
+          <h3>Origen teórico</h3>
+          <p>Teoría del color de Goethe (1810)</p>
+        </div>
+        <div class="card">
+          <h3>Efecto emocional</h3>
+          <p>Rojo aumenta ritmo cardíaco (urgencia); verde/azul transmiten calma<br><span class="fuente"><strong>Fuente:</strong> psicologiaymente.com, 2016</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-teo">
+      <div class="col-head">Teoría del color</div>
+      <div class="cards">
+        <div class="card">
+          <h3>1. Primarios/secundarios/terciarios</h3>
+          <p>Base de la rueda cromática<span class="uso">Uso: paleta didáctica o de marca</span></p>
+        </div>
+        <div class="card">
+          <h3>2. Cálidos y fríos</h3>
+          <p>Cálidos = urgencia; fríos = calma<span class="uso">Uso: alertas vs. paneles financieros/salud</span></p>
+        </div>
+        <div class="card">
+          <h3>3. Complementarios</h3>
+          <p>Colores opuestos, máximo contraste<span class="uso">Uso: resaltar un KPI crítico</span></p>
+        </div>
+        <div class="card">
+          <h3>4. Análogos</h3>
+          <p>Colores vecinos, armonía visual<span class="uso">Uso: reportes ejecutivos elegantes</span></p>
+        </div>
+        <div class="card">
+          <h3>5. Monocromáticos</h3>
+          <p>Un solo color, variación de tono<span class="uso">Uso: mapas de calor de una métrica</span></p>
+        </div>
+        <div class="card">
+          <h3>6. Triádicos</h3>
+          <p>Tres colores equidistantes<span class="uso">Uso: tres categorías igual de importantes</span></p>
+        </div>
+        <div class="card">
+          <h3>7. Neutros</h3>
+          <p>Grises y blancos de soporte<span class="uso">Uso: fondo, reduce fatiga visual</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-pal">
+      <div class="col-head">Paletas para datos</div>
+      <div class="cards">
+        <div class="card">
+          <h3>8. Semáforo</h3>
+          <p>Verde-amarillo-rojo: estado o riesgo<span class="uso">Uso: KPIs, control de calidad</span></p>
+        </div>
+        <div class="card">
+          <h3>9. Categóricas</h3>
+          <p>Colores distintos, sin jerarquía entre sí<span class="uso">Uso: regiones, productos, canales</span></p>
+        </div>
+        <div class="card">
+          <h3>10. Secuenciales</h3>
+          <p>Escala clara-oscura para cantidad<span class="uso">Uso: mapas de calor, tendencias</span></p>
+        </div>
+        <div class="card">
+          <h3>11. Divergentes</h3>
+          <p>Punto medio neutro, dos direcciones opuestas<span class="uso">Uso: márgenes de utilidad, desviaciones</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-con">
+      <div class="col-head">Conclusión</div>
+      <div class="cards">
+        <div class="card">
+          <h3>No hay paleta única</h3>
+          <p>Depende del tipo de dato, contexto y efecto psicológico</p>
+        </div>
+        <div class="card">
+          <h3>Combinación de enfoques</h3>
+          <p>Teoría del color + esquemas funcionales = comunicación clara</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
