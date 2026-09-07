@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diseño de dashboards efectivos</title>
+<style>
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:#faf8f2;
+    font-family:"Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color:#2b2f36;
+    padding:40px 20px 60px;
+  }
+  .wrapper{
+    max-width:1260px;
+    margin:0 auto;
+  }
+
+  .header{
+    background:#1f2733;
+    color:#fff;
+    border-radius:8px;
+    padding:18px 30px;
+    text-align:center;
+    max-width:460px;
+    margin:0 auto 0;
+  }
+  .header h1{
+    margin:0 0 4px;
+    font-size:1.25rem;
+  }
+  .header p{
+    margin:0;
+    font-size:0.82rem;
+    color:#c7cdd7;
+  }
+
+  .connector{
+    position:relative;
+    height:36px;
+    max-width:1180px;
+    margin:0 auto;
+  }
+  .connector::before{
+    content:"";
+    position:absolute;
+    top:0; left:0; right:0;
+    height:1px;
+    background:#c9c6bd;
+  }
+  .connector .drop{
+    position:absolute;
+    top:0;
+    width:1px;
+    height:36px;
+    background:#c9c6bd;
+  }
+  .connector .d1{ left:12.5%; }
+  .connector .d2{ left:37.5%; }
+  .connector .d3{ left:62.5%; }
+  .connector .d4{ left:87.5%; }
+
+  .columns{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:20px;
+    max-width:1180px;
+    margin:0 auto;
+  }
+
+  .col-header{
+    border-radius:8px 8px 0 0;
+    padding:14px 14px;
+    color:#fff;
+    text-align:center;
+  }
+  .col-header h2{
+    margin:0 0 3px;
+    font-size:0.95rem;
+  }
+  .col-header p{
+    margin:0;
+    font-size:0.72rem;
+    opacity:0.9;
+  }
+  .col-header.blue{ background:#2f5f8f; }
+  .col-header.green{ background:#1c7a58; }
+  .col-header.brown{ background:#8a4a2b; }
+  .col-header.maroon{ background:#7a2f47; }
+
+  .card{
+    background:#fff;
+    border:1px solid #e6e3da;
+    border-radius:6px;
+    padding:13px 14px;
+    margin-top:12px;
+    font-size:0.78rem;
+    line-height:1.45;
+  }
+  .card h3{
+    margin:0 0 6px;
+    font-size:0.83rem;
+  }
+  .card h3.blue-text{ color:#2f5f8f; }
+  .card h3.green-text{ color:#1c7a58; }
+  .card h3.brown-text{ color:#8a4a2b; }
+  .card h3.maroon-text{ color:#7a2f47; }
+
+  .card p{
+    margin:0 0 4px;
+    color:#3a3f47;
+  }
+  .card ul{
+    margin:0 0 4px;
+    padding-left:16px;
+    color:#3a3f47;
+  }
+  .card ul li{ margin-bottom:2px; }
+  .card .italic{
+    color:#8a8f99;
+    font-style:italic;
+    font-size:0.75rem;
+  }
+
+  .badge{
+    display:inline-block;
+    font-size:0.68rem;
+    font-weight:700;
+    padding:2px 9px;
+    border-radius:10px;
+    margin-bottom:6px;
+  }
+  .badge.blue{ background:#dbe8f5; color:#2f5f8f; }
+  .badge.green{ background:#d7f0e6; color:#1c7a58; }
+  .badge.peach{ background:#fbe3da; color:#8a4a2b; }
+  .badge.pink{ background:#fbdce6; color:#7a2f47; }
+
+  /* table */
+  .quick-map{
+    max-width:1180px;
+    margin:34px auto 0;
+    background:#fff;
+    border:1px solid #e6e3da;
+    border-radius:8px;
+    padding:20px 24px;
+  }
+  .quick-map h3{
+    margin:0 0 14px;
+    font-size:1rem;
+    color:#1f2733;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:0.82rem;
+  }
+  thead th{
+    text-align:left;
+    padding:6px 8px;
+    color:#1f2733;
+    font-weight:700;
+    border-bottom:1px solid #e0ddd3;
+  }
+  tbody td{
+    padding:8px 8px;
+    border-bottom:1px solid #efece4;
+    color:#3a3f47;
+  }
+
+  .footer-note{
+    text-align:center;
+    font-style:italic;
+    color:#6b7078;
+    font-size:0.85rem;
+    max-width:900px;
+    margin:26px auto 0;
+  }
+
+  @media (max-width:1000px){
+    .columns{ grid-template-columns:1fr 1fr; }
+    .connector{ display:none; }
+  }
+  @media (max-width:600px){
+    .columns{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="header">
+    <h1>Diseño de dashboards efectivos</h1>
+    <p>Unidad 1 · Análisis de datos (14 horas)</p>
+  </div>
+
+  <div class="connector">
+    <div class="drop d1"></div>
+    <div class="drop d2"></div>
+    <div class="drop d3"></div>
+    <div class="drop d4"></div>
+  </div>
+
+  <div class="columns">
+
+    <!-- COLUMNA 1 -->
+    <div class="col">
+      <div class="col-header blue">
+        <h2>1 · Principios de diseño visual</h2>
+        <p>UX/UI aplicado a Business Intelligence</p>
+      </div>
+
+      <div class="card">
+        <h3 class="blue-text">UX vs UI</h3>
+        <p>UX: ¿encuentra lo que necesita? ¿decide rápido? ¿navegación lógica? — UI: tipografía, color, alineación, identidad de marca.</p>
+      </div>
+
+      <div class="card">
+        <h3 class="blue-text">Principio 1 — Simplicidad</h3>
+        <p>Menos es más. Todo elemento que no ayude a interpretar es ruido (bordes, sombras, íconos sin función).</p>
+        <p class="italic">Ej: 1 tipografía, 2-3 colores.</p>
+      </div>
+
+      <div class="card">
+        <h3 class="blue-text">Principio 2 — Consistencia visual</h3>
+        <p>Un mismo dato siempre igual color/ícono/formato en todo el dashboard.</p>
+        <p class="italic">Ej: verde no puede significar cosas distintas en dos pantallas.</p>
+      </div>
+
+      <div class="card">
+        <h3 class="blue-text">Principio 3 — Contraste y legibilidad</h3>
+        <p>Es accesibilidad, no estética. Regla WCAG: contraste mínimo 4.5:1 texto/fondo.</p>
+      </div>
+
+      <div class="card">
+        <h3 class="blue-text">Principio 4 — Semántica del color</h3>
+        <ul>
+          <li>Verde = positivo / meta cumplida</li>
+          <li>Rojo = negativo / alerta</li>
+          <li>Ámbar = advertencia / riesgo</li>
+          <li>Gris-azul = información neutra</li>
+        </ul>
+        <p class="italic">Máx. 1 color de énfasis por gráfico.</p>
+      </div>
+
+      <div class="card">
+        <h3 class="blue-text">Principio 5 — Espacio en blanco</h3>
+        <p>No es espacio desperdiciado: agrupa y da descanso visual.</p>
+        <p class="italic">Margen 16-24 px; espaciado uniforme entre tarjetas.</p>
+      </div>
+
+      <div class="card">
+        <span class="badge blue">Actividad</span>
+        <p>Diagnóstico de un dashboard real: 3 aciertos + 3 problemas + corrección (30 min).</p>
+      </div>
+    </div>
+
+    <!-- COLUMNA 2 -->
+    <div class="col">
+      <div class="col-header green">
+        <h2>2 · Tipos de visualizaciones</h2>
+        <p>Elegir el gráfico según el objetivo</p>
+      </div>
+
+      <div class="card">
+        <h3 class="green-text">Comparación</h3>
+        <p>"¿Cómo se compara A vs B / meta?"</p>
+        <ul>
+          <li>Barras, columnas, bullet chart</li>
+          <li>Evitar: 8-10+ categorías → tabla</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="green-text">Tendencia</h3>
+        <p>"¿Cómo evolucionó en el tiempo?"</p>
+        <ul>
+          <li>Líneas, área, sparklines</li>
+          <li>Evitar: &lt;4-5 puntos → tarjetas de variación</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="green-text">Composición</h3>
+        <p>"¿Cómo se divide el total?"</p>
+        <ul>
+          <li>Barras 100% apiladas, treemap, pastel (2-4 cat.)</li>
+          <li>Evitar: 5+ categorías → apiladas/treemap</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="green-text">Relación</h3>
+        <p>"¿Hay relación entre variables?"</p>
+        <ul>
+          <li>Dispersión, burbujas, mapa de calor</li>
+          <li>Evitar: var. categórica → boxplot</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="green-text">Distribución</h3>
+        <p>"¿Cómo se reparten los valores?"</p>
+        <ul>
+          <li>Histograma, boxplot, densidad</li>
+          <li>Evitar: valor exacto → complementar con tabla</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="green-text">Errores comunes</h3>
+        <ul>
+          <li>Pastel con 10+ categorías</li>
+          <li>Gráficos 3D (distorsionan tamaño)</li>
+          <li>Doble eje Y sin aclarar escalas</li>
+          <li>Eje de barras que no inicia en 0</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <span class="badge green">Actividad</span>
+        <p>"El gráfico correcto" (35 min).</p>
+      </div>
+    </div>
+
+    <!-- COLUMNA 3 -->
+    <div class="col">
+      <div class="col-header brown">
+        <h2>3 · Jerarquía de información</h2>
+        <p>Guiar la mirada del usuario</p>
+      </div>
+
+      <div class="card">
+        <h3 class="brown-text">3 herramientas</h3>
+        <ul>
+          <li>Tamaño → lo grande se percibe primero</li>
+          <li>Posición → arriba-izquierda se lee primero</li>
+          <li>Contraste → lo que resalta atrae la mirada</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="brown-text">Patrones de lectura</h3>
+        <p><strong>Z:</strong> pocos elementos clave (resumen ejecutivo).</p>
+        <p><strong>F:</strong> más texto/detalle (reportes, tablas).</p>
+      </div>
+
+      <div class="card">
+        <h3 class="brown-text">Pirámide invertida</h3>
+        <ul>
+          <li>Nivel 1: KPIs principales (3-5, grandes, con comparación)</li>
+          <li>Nivel 2: tendencias y comparaciones</li>
+          <li>Nivel 3: detalle y tablas</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="brown-text">Gestalt: proximidad y similitud</h3>
+        <p>Elementos cercanos o con mismo color/forma se perciben relacionados.</p>
+        <p class="italic">Ej: agrupar KPI + mini-gráfico en una tarjeta.</p>
+      </div>
+
+      <div class="card">
+        <span class="badge peach">Actividad</span>
+        <p>Rediseño de jerarquía (30 min).</p>
+      </div>
+    </div>
+
+    <!-- COLUMNA 4 -->
+    <div class="col">
+      <div class="col-header maroon">
+        <h2>4 · Buenas prácticas</h2>
+        <p>Checklist, errores y casos reales</p>
+      </div>
+
+      <div class="card">
+        <h3 class="maroon-text">Regla de los 5 segundos</h3>
+        <p>Si el usuario no entiende el dashboard en 5 s, el diseño falló — aunque los datos sean correctos.</p>
+      </div>
+
+      <div class="card">
+        <h3 class="maroon-text">Evitar sobrecarga</h3>
+        <ul>
+          <li>5-9 elementos visuales por pantalla</li>
+          <li>Máx. 3-5 KPIs destacados arriba</li>
+          <li>Más métricas → pestañas / drill-down</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="maroon-text">Filtros e interactividad</h3>
+        <ul>
+          <li>Ubicación consistente (arriba o lateral)</li>
+          <li>Valor por defecto útil (nunca vacío)</li>
+          <li>Feedback visual del filtro activo</li>
+          <li>Máx. 4-5 filtros simultáneos</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="maroon-text">Chartjunk (evitar)</h3>
+        <ul>
+          <li>Fondos/imágenes decorativas</li>
+          <li>Gráficos 3D</li>
+          <li>Líneas de cuadrícula gruesas</li>
+          <li>Etiquetas de datos duplicadas</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3 class="maroon-text">Checklist antes de publicar</h3>
+        <ul>
+          <li>¿KPI principal visible sin scroll?</li>
+          <li>¿Color con significado consistente?</li>
+          <li>¿Contraste suficiente texto/fondo?</li>
+          <li>¿Gráfico correcto según objetivo?</li>
+          <li>¿Mensaje claro en 5 segundos?</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <span class="badge pink">Actividad final</span>
+        <p>Actividad integradora (30 min).</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="quick-map">
+    <h3>Mapa rápido — pregunta de negocio → gráfico</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Pregunta</th>
+          <th>Objetivo</th>
+          <th>Gráfico sugerido</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>¿Qué región vendió más este mes?</td>
+          <td>Comparación</td>
+          <td>Barras horizontales</td>
+        </tr>
+        <tr>
+          <td>¿Las ventas crecen o caen?</td>
+          <td>Tendencia</td>
+          <td>Línea de tiempo</td>
+        </tr>
+        <tr>
+          <td>¿Qué % representa cada producto?</td>
+          <td>Composición</td>
+          <td>Barras 100% apiladas</td>
+        </tr>
+        <tr>
+          <td>¿El gasto en marketing se relaciona con ventas?</td>
+          <td>Relación</td>
+          <td>Dispersión (scatter)</td>
+        </tr>
+        <tr>
+          <td>¿Cómo se distribuyen los tiempos de entrega?</td>
+          <td>Distribución</td>
+          <td>Histograma</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="footer-note">Idea central: el diseño no es estética, es funcionalidad — reduce el tiempo de decisión, evita malas interpretaciones y genera confianza en el dato.</p>
+
+</div>
+</body>
+</html>
