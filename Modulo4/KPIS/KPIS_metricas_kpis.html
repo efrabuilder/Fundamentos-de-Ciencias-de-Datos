@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Métricas vs KPIs</title>
+<style>
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:#faf8f2;
+    font-family:"Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color:#232323;
+    padding:40px 20px 60px;
+  }
+  .wrapper{
+    max-width:1200px;
+    margin:0 auto;
+  }
+
+  .title{
+    text-align:center;
+    font-size:2.2rem;
+    font-weight:800;
+    margin:0 0 6px;
+    color:#1c1c1c;
+  }
+  .subtitle{
+    text-align:center;
+    font-size:1.05rem;
+    color:#6b6f76;
+    margin:0 0 34px;
+  }
+
+  .intro-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+    margin-bottom:24px;
+  }
+  .intro-box{
+    border-radius:10px;
+    padding:26px 28px;
+  }
+  .intro-box.blue{
+    background:#dbeafc;
+    border:1px solid #bcd7ef;
+  }
+  .intro-box.green{
+    background:#d8f3e9;
+    border:1px solid #b9e2d1;
+  }
+  .intro-box h2{
+    margin:0 0 12px;
+    font-size:1.4rem;
+  }
+  .intro-box.blue h2{ color:#1a5fa8; }
+  .intro-box.green h2{ color:#12805a; }
+  .intro-box p{
+    margin:0 0 16px;
+    font-size:0.98rem;
+    line-height:1.5;
+    color:#333;
+  }
+  .tag-row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .tag{
+    font-size:0.85rem;
+    font-weight:600;
+    padding:5px 14px;
+    border-radius:14px;
+  }
+  .intro-box.blue .tag{ background:#b7d9f5; color:#154c84; }
+  .intro-box.green .tag{ background:#aee4cd; color:#0e6b4c; }
+
+  .relation-box{
+    background:#eeece5;
+    border:1px solid #ddd9cd;
+    border-radius:6px;
+    padding:16px 22px;
+    text-align:center;
+    font-size:0.95rem;
+    color:#3a3a3a;
+    margin-bottom:36px;
+  }
+  .relation-box strong{ font-weight:700; }
+  .relation-box em{ color:#5a5a5a; }
+
+  h3.section-title{
+    font-size:1.35rem;
+    margin:0 0 10px;
+    color:#1c1c1c;
+  }
+  .rule{
+    border:none;
+    border-top:2px solid #2b2b2b;
+    margin:0 0 20px;
+  }
+
+  /* table */
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin-bottom:40px;
+    font-size:0.92rem;
+  }
+  thead th{
+    background:#1c1c1c;
+    color:#fff;
+    text-align:left;
+    padding:12px 16px;
+    font-weight:700;
+  }
+  tbody td{
+    padding:14px 16px;
+    border-bottom:1px solid #e6e3da;
+    color:#333;
+  }
+  tbody tr:nth-child(odd){ background:#f6f4ee; }
+  tbody td:first-child{ font-weight:700; }
+
+  /* ejemplos por area */
+  .ejemplos-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:18px;
+    margin-bottom:40px;
+  }
+  .ej-card{
+    background:#fff;
+    border:1px solid #e6e3da;
+    border-radius:8px;
+    padding:18px 20px;
+  }
+  .ej-card h4{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin:0 0 12px;
+    font-size:1.05rem;
+    color:#1c1c1c;
+  }
+  .dot{
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    display:inline-block;
+  }
+  .ej-card .label{
+    font-size:0.72rem;
+    letter-spacing:0.03em;
+    color:#9a9a9a;
+    margin:10px 0 3px;
+  }
+  .ej-card .metric-text{
+    font-size:0.9rem;
+    color:#3a3a3a;
+    margin:0 0 8px;
+  }
+  .ej-card .kpi-text{
+    font-size:0.9rem;
+    font-weight:700;
+    color:#1a5fa8;
+    margin:0;
+  }
+
+  /* smart */
+  .smart-grid{
+    display:grid;
+    grid-template-columns:repeat(5, 1fr);
+    gap:16px;
+  }
+  .smart-box{
+    background:#fbe4bd;
+    border:1px solid #dba556;
+    border-radius:8px;
+    padding:20px 12px;
+    text-align:center;
+  }
+  .smart-box .letter{
+    font-size:1.8rem;
+    font-weight:800;
+    color:#8a5a15;
+    margin-bottom:6px;
+  }
+  .smart-box .word{
+    font-weight:700;
+    font-size:0.95rem;
+    color:#5a3d0f;
+    margin-bottom:6px;
+  }
+  .smart-box .desc{
+    font-size:0.78rem;
+    color:#6b5230;
+  }
+
+  .footer{
+    text-align:center;
+    color:#9a9a9a;
+    font-size:0.85rem;
+    margin-top:40px;
+  }
+
+  @media (max-width:900px){
+    .intro-row{ grid-template-columns:1fr; }
+    .ejemplos-grid{ grid-template-columns:1fr; }
+    .smart-grid{ grid-template-columns:1fr 1fr; }
+    table{ font-size:0.8rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="title">Métricas vs KPIs</div>
+  <div class="subtitle">Diferencias, funciones, usos y ejemplos aplicados por área</div>
+
+  <div class="intro-row">
+    <div class="intro-box blue">
+      <h2>Métricas</h2>
+      <p>Cualquier dato cuantificable que se puede medir y rastrear a lo largo del tiempo. Describen "qué está pasando" en un proceso o sistema, sin necesariamente indicar si el resultado es bueno o malo.</p>
+      <div class="tag-row">
+        <span class="tag">Descriptivas</span>
+        <span class="tag">Numerosas</span>
+        <span class="tag">Nivel operativo</span>
+      </div>
+    </div>
+
+    <div class="intro-box green">
+      <h2>KPIs (Key Performance Indicators)</h2>
+      <p>Un subconjunto de métricas seleccionadas porque están directamente ligadas a un objetivo estratégico del negocio. Indican si se está avanzando hacia una meta definida.</p>
+      <div class="tag-row">
+        <span class="tag">Estratégicos</span>
+        <span class="tag">Pocos y priorizados</span>
+        <span class="tag">Nivel directivo</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="relation-box">
+    <strong>Relación:</strong> <em>todo KPI es una métrica, pero no toda métrica es un KPI — un KPI es una métrica a la que se le asignó una meta y un propósito estratégico.</em>
+  </div>
+
+  <h3 class="section-title">Diferencias clave</h3>
+  <hr class="rule">
+  <table>
+    <thead>
+      <tr>
+        <th>Aspecto</th>
+        <th>Métrica</th>
+        <th>KPI</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Función</td>
+        <td>Monitorear el desempeño general de un proceso o actividad</td>
+        <td>Evaluar el progreso hacia un objetivo estratégico específico</td>
+      </tr>
+      <tr>
+        <td>Cantidad</td>
+        <td>Pueden ser decenas o cientos, se recopilan de forma continua</td>
+        <td>Pocos y seleccionados (idealmente entre 3 y 7 por área)</td>
+      </tr>
+      <tr>
+        <td>Público</td>
+        <td>Equipos operativos y analistas</td>
+        <td>Gerencia, dirección y stakeholders</td>
+      </tr>
+      <tr>
+        <td>Meta asociada</td>
+        <td>No necesariamente tiene una meta u objetivo definido</td>
+        <td>Siempre tiene una meta, umbral o benchmark de referencia</td>
+      </tr>
+      <tr>
+        <td>Frecuencia de revisión</td>
+        <td>Diaria u operativa, según necesidad</td>
+        <td>Periódica (semanal, mensual, trimestral) en reportes ejecutivos</td>
+      </tr>
+      <tr>
+        <td>Ejemplo</td>
+        <td>Número de visitas al sitio web</td>
+        <td>Tasa de conversión de visitas a ventas (con meta: 3%)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 class="section-title">Ejemplos por área</h3>
+  <hr class="rule">
+  <div class="ejemplos-grid">
+
+    <div class="ej-card">
+      <h4><span class="dot" style="background:#3f7fd6;"></span>Marketing</h4>
+      <div class="label">MÉTRICAS</div>
+      <p class="metric-text">Impresiones, clics, alcance, tiempo en página</p>
+      <div class="label">KPI</div>
+      <p class="kpi-text">Costo por adquisición (CPA), tasa de conversión</p>
+    </div>
+
+    <div class="ej-card">
+      <h4><span class="dot" style="background:#e0562f;"></span>Ventas</h4>
+      <div class="label">MÉTRICAS</div>
+      <p class="metric-text">Llamadas realizadas, correos enviados, reuniones agendadas</p>
+      <div class="label">KPI</div>
+      <p class="kpi-text">Tasa de cierre, ingresos por vendedor</p>
+    </div>
+
+    <div class="ej-card">
+      <h4><span class="dot" style="background:#4f9e3f;"></span>Finanzas</h4>
+      <div class="label">MÉTRICAS</div>
+      <p class="metric-text">Gasto mensual por categoría, número de facturas</p>
+      <div class="label">KPI</div>
+      <p class="kpi-text">Margen de utilidad, ROI, flujo de caja</p>
+    </div>
+
+    <div class="ej-card">
+      <h4><span class="dot" style="background:#d63f7a;"></span>Atención al cliente</h4>
+      <div class="label">MÉTRICAS</div>
+      <p class="metric-text">Tickets recibidos, tiempo de primera respuesta</p>
+      <div class="label">KPI</div>
+      <p class="kpi-text">CSAT (satisfacción), NPS, tiempo de resolución</p>
+    </div>
+
+    <div class="ej-card">
+      <h4><span class="dot" style="background:#8a5fd6;"></span>Recursos humanos</h4>
+      <div class="label">MÉTRICAS</div>
+      <p class="metric-text">Vacantes abiertas, días para contratar</p>
+      <div class="label">KPI</div>
+      <p class="kpi-text">Tasa de rotación, retención de talento</p>
+    </div>
+
+    <div class="ej-card">
+      <h4><span class="dot" style="background:#3fbf9e;"></span>Operaciones / TI</h4>
+      <div class="label">MÉTRICAS</div>
+      <p class="metric-text">Solicitudes procesadas, tiempo de actividad del servidor</p>
+      <div class="label">KPI</div>
+      <p class="kpi-text">Uptime del servicio (SLA), tiempo medio de resolución (MTTR)</p>
+    </div>
+
+  </div>
+
+  <h3 class="section-title">Características de un buen KPI (modelo SMART)</h3>
+  <hr class="rule">
+  <div class="smart-grid">
+    <div class="smart-box">
+      <div class="letter">S</div>
+      <div class="word">Específico</div>
+      <div class="desc">Enfocado en un resultado claro y concreto</div>
+    </div>
+    <div class="smart-box">
+      <div class="letter">M</div>
+      <div class="word">Medible</div>
+      <div class="desc">Cuantificable con datos verificables</div>
+    </div>
+    <div class="smart-box">
+      <div class="letter">A</div>
+      <div class="word">Alcanzable</div>
+      <div class="desc">Realista dado los recursos disponibles</div>
+    </div>
+    <div class="smart-box">
+      <div class="letter">R</div>
+      <div class="word">Relevante</div>
+      <div class="desc">Alineado a un objetivo estratégico real</div>
+    </div>
+    <div class="smart-box">
+      <div class="letter">T</div>
+      <div class="word">Temporal</div>
+      <div class="desc">Con un plazo definido de cumplimiento</div>
+    </div>
+  </div>
+
+  <div class="footer">Mapa conceptual · Métricas vs KPIs</div>
+
+</div>
+</body>
+</html>
