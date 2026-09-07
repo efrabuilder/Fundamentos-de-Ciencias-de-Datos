@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diseño de dashboards</title>
+<style>
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:#ffffff;
+    font-family:"Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding:50px 20px;
+  }
+  .wrapper{
+    max-width:1000px;
+    margin:0 auto;
+    position:relative;
+  }
+
+  .root{
+    background:#efece4;
+    border:2px solid #8f8b7f;
+    border-radius:10px;
+    max-width:420px;
+    margin:0 auto;
+    padding:22px 30px;
+    text-align:center;
+    font-size:1.3rem;
+    font-weight:700;
+    color:#3a3a3a;
+    position:relative;
+    z-index:2;
+  }
+
+  .connectors{
+    position:relative;
+    height:70px;
+    max-width:1000px;
+    margin:0 auto;
+  }
+  .connectors svg{
+    width:100%;
+    height:100%;
+    display:block;
+  }
+
+  .columns{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+  }
+
+  .node{
+    border-radius:10px;
+    padding:22px 20px;
+    text-align:center;
+    font-size:1.15rem;
+    margin-bottom:22px;
+  }
+
+  .col-line{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .connector-v{
+    height:22px;
+    display:flex;
+    justify-content:center;
+  }
+  .connector-v svg{
+    height:100%;
+  }
+
+  /* left column - red/terracotta */
+  .node.bad{
+    background:#fbe8e0;
+    border:1.5px solid #b5451f;
+    color:#8a3416;
+  }
+  .node.bad.head{
+    font-weight:700;
+    color:#8a3416;
+  }
+
+  /* right column - green/teal */
+  .node.good{
+    background:#dcf2ea;
+    border:1.5px solid #1e7d5c;
+    color:#155f45;
+  }
+  .node.good.head{
+    font-weight:700;
+    color:#0f5a3f;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+
+  <div class="root">Diseño de dashboards</div>
+
+  <div class="connectors">
+    <svg viewBox="0 0 1000 70" preserveAspectRatio="none">
+      <line x1="500" y1="0" x2="250" y2="70" stroke="#9a9a9a" stroke-width="1.5"/>
+      <line x1="500" y1="0" x2="750" y2="70" stroke="#9a9a9a" stroke-width="1.5"/>
+    </svg>
+  </div>
+
+  <div class="columns">
+
+    <!-- LEFT: Dashboard con errores -->
+    <div class="col-line">
+      <div class="node bad head">Dashboard con errores</div>
+      <div class="connector-v"><svg viewBox="0 0 10 22" width="10"><line x1="5" y1="0" x2="5" y2="22" stroke="#9a9a9a" stroke-width="1.5" marker-end="url(#arrowL1)"/><defs><marker id="arrowL1" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#9a9a9a"/></marker></defs></svg></div>
+
+      <div class="node bad">Paleta sin criterio</div>
+      <div class="connector-v"><svg viewBox="0 0 10 22" width="10"><line x1="5" y1="0" x2="5" y2="22" stroke="#9a9a9a" stroke-width="1.5" marker-end="url(#arrowL2)"/><defs><marker id="arrowL2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#9a9a9a"/></marker></defs></svg></div>
+
+      <div class="node bad">Contraste bajo</div>
+      <div class="connector-v"><svg viewBox="0 0 10 22" width="10"><line x1="5" y1="0" x2="5" y2="22" stroke="#9a9a9a" stroke-width="1.5" marker-end="url(#arrowL3)"/><defs><marker id="arrowL3" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#9a9a9a"/></marker></defs></svg></div>
+
+      <div class="node bad">Jerarquía visual débil</div>
+      <div class="connector-v"><svg viewBox="0 0 10 22" width="10"><line x1="5" y1="0" x2="5" y2="22" stroke="#9a9a9a" stroke-width="1.5" marker-end="url(#arrowL4)"/><defs><marker id="arrowL4" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#9a9a9a"/></marker></defs></svg></div>
+
+      <div class="node bad">Semáforo invertido</div>
+    </div>
+
+    <!-- RIGHT: Dashboard correcto -->
+    <div class="col-line">
+      <div class="node good head">Dashboard correcto</div>
+      <div class="connector-v"><svg viewBox="0 0 10 22" width="10"><line x1="5" y1="0" x2="5" y2="22" stroke="#9a9a9a" stroke-width="1.5" marker-end="url(#arrowR1)"/><defs><marker id="arrowR1" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#9a9a9a"/></marker></defs></svg></div>
+
+      <div class="node good">Paleta coherente</div>
+      <div class="connector-v"><svg viewBox="0 0 10 22" width="10"><line x1="5" y1="0" x2="5" y2="22" stroke="#9a9a9a" stroke-width="1.5" marker-end="url(#arrowR2)"/><defs><marker id="arrowR2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#9a9a9a"/></marker></defs></svg></div>
+
+      <div class="node good">Buen contraste</div>
+      <div class="connector-v"><svg viewBox="0 0 10 22" width="10"><line x1="5" y1="0" x2="5" y2="22" stroke="#9a9a9a" stroke-width="1.5" marker-end="url(#arrowR3)"/><defs><marker id="arrowR3" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#9a9a9a"/></marker></defs></svg></div>
+
+      <div class="node good">Jerarquía clara</div>
+      <div class="connector-v"><svg viewBox="0 0 10 22" width="10"><line x1="5" y1="0" x2="5" y2="22" stroke="#9a9a9a" stroke-width="1.5" marker-end="url(#arrowR4)"/><defs><marker id="arrowR4" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#9a9a9a"/></marker></defs></svg></div>
+
+      <div class="node good">Semáforo convencional</div>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
