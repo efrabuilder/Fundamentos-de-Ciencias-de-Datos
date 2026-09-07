@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Indicadores en empresas exportadoras</title>
+<style>
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:#f2efe8;
+    font-family:"Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color:#2b2f36;
+    padding:40px 20px 50px;
+  }
+  .wrapper{
+    max-width:1180px;
+    margin:0 auto;
+  }
+
+  .title{
+    text-align:center;
+    font-family:Georgia, "Times New Roman", serif;
+    font-weight:700;
+    font-size:2.3rem;
+    color:#1b2a45;
+    margin:0 0 8px;
+  }
+  .subtitle{
+    text-align:center;
+    color:#6b7078;
+    font-size:1.05rem;
+    margin:0 0 30px;
+  }
+
+  .intro-card{
+    background:#fff;
+    border-radius:10px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.06);
+    padding:26px 34px;
+    max-width:820px;
+    margin:0 auto 34px;
+  }
+  .intro-card .eyebrow{
+    font-size:0.78rem;
+    color:#9a9a9a;
+    margin-bottom:6px;
+  }
+  .intro-card h2{
+    font-size:1.2rem;
+    margin:0 0 12px;
+    color:#1b2a45;
+  }
+  .intro-card p{
+    font-size:0.95rem;
+    line-height:1.6;
+    color:#333;
+    margin:0 0 16px;
+  }
+  .example-box{
+    background:#f2efe8;
+    border-radius:6px;
+    padding:14px 18px;
+    font-size:0.88rem;
+    line-height:1.55;
+    color:#3a3a3a;
+  }
+
+  .columns{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:24px;
+  }
+
+  .col{
+    border-radius:10px;
+    padding:26px 26px 32px;
+  }
+  .col.blue{ background:#dce8f7; }
+  .col.green{ background:#dcefe4; }
+  .col.pink{ background:#fbe3ea; }
+
+  .col h2{
+    margin:0 0 16px;
+    font-size:1.35rem;
+  }
+  .col.blue h2{ color:#1e4a86; }
+  .col.green h2{ color:#1a6e4a; }
+  .col.pink h2{ color:#9e2f5a; }
+
+  .col p{
+    font-size:0.9rem;
+    line-height:1.55;
+    color:#333;
+    margin:0 0 18px;
+  }
+
+  .label-small{
+    font-size:0.72rem;
+    font-weight:700;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    margin:0 0 12px;
+  }
+  .col.blue .label-small{ color:#4a6ea3; }
+  .col.green .label-small{ color:#2f8a63; }
+  .col.pink .label-small{ color:#b5497a; }
+
+  .item{
+    margin-bottom:16px;
+  }
+  .item h3{
+    margin:0 0 4px;
+    font-size:0.95rem;
+    color:#1b2a45;
+  }
+  .col.green .item h3{ color:#154a34; }
+  .col.pink .item h3{ color:#7a2347; }
+  .item p{
+    margin:0;
+    font-size:0.86rem;
+    color:#3a3a3a;
+    line-height:1.5;
+  }
+
+  .formula-box{
+    background:#eef7f1;
+    border-radius:6px;
+    padding:12px 14px;
+    font-family:"Consolas", "Courier New", monospace;
+    font-size:0.8rem;
+    color:#2f4a3e;
+    line-height:1.5;
+    margin-top:6px;
+  }
+
+  .footer{
+    text-align:center;
+    color:#9a9a9a;
+    font-style:italic;
+    font-size:0.85rem;
+    margin-top:34px;
+  }
+
+  @media (max-width:900px){
+    .columns{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="title">Indicadores en empresas exportadoras</div>
+  <div class="subtitle">Por qué cambian, indicadores clave y un caso aplicado</div>
+
+  <div class="intro-card">
+    <div class="eyebrow">Antes de empezar</div>
+    <h2>¿Qué es un indicador?</h2>
+    <p>Un indicador (o KPI) es una medida numérica que muestra si algo funciona bien o mal, comparada contra una meta o un valor de referencia. No es un dato suelto: es un dato con propósito, que ayuda a tomar una decisión.</p>
+    <div class="example-box">Ejemplo: "vendimos 100 unidades" es un dato. "Vendimos el 80% de lo proyectado este mes" es un indicador, porque dice si se va bien o mal respecto a una meta.</div>
+  </div>
+
+  <div class="columns">
+
+    <!-- COLUMNA AZUL -->
+    <div class="col blue">
+      <h2>¿Por qué otros indicadores?</h2>
+      <p>Toda empresa ya mide indicadores básicos: ventas, costos, satisfacción del cliente. Exportar no los reemplaza, pero agrega riesgos que no existen en el mercado local — aduanas, transporte de larga distancia, tipo de cambio, normas internacionales — y cada uno de esos riesgos necesita su propio indicador para poder vigilarlo a tiempo.</p>
+
+      <div class="label-small">Factores</div>
+
+      <div class="item">
+        <h3>Logística internacional</h3>
+        <p>Tránsito marítimo/aéreo y costos de transporte más altos y variables.</p>
+      </div>
+
+      <div class="item">
+        <h3>Riesgo cambiario</h3>
+        <p>Las ventas se cobran en otra moneda; el tipo de cambio afecta el margen.</p>
+      </div>
+
+      <div class="item">
+        <h3>Cumplimiento normativo</h3>
+        <p>Requisitos aduaneros y certificaciones sanitarias del país destino.</p>
+      </div>
+
+      <div class="item">
+        <h3>Relación con el cliente</h3>
+        <p>Mayor distancia física exige más control de cumplimiento y satisfacción.</p>
+      </div>
+    </div>
+
+    <!-- COLUMNA VERDE -->
+    <div class="col green">
+      <h2>Indicadores clave</h2>
+      <div class="label-small">Fórmulas de cálculo</div>
+
+      <div class="item">
+        <h3>Lead time de exportación</h3>
+        <div class="formula-box">Fecha de llegada al cliente – Fecha de orden de producción</div>
+      </div>
+
+      <div class="item">
+        <h3>% de cumplimiento de entrega (OTIF)</h3>
+        <div class="formula-box">Pedidos entregados a tiempo y completos / Pedidos totales × 100</div>
+      </div>
+
+      <div class="item">
+        <h3>Costo logístico por unidad exportada</h3>
+        <div class="formula-box">Costo total de logística internacional / Unidades exportadas</div>
+      </div>
+
+      <div class="item">
+        <h3>Tipo de cambio efectivo de la operación</h3>
+        <div class="formula-box">Ingreso en moneda local recibido / Monto facturado en moneda extranjera</div>
+      </div>
+
+      <div class="item">
+        <h3>% de rechazo aduanero o de calidad</h3>
+        <div class="formula-box">Envíos rechazados o con incidencias / Envíos totales × 100</div>
+      </div>
+    </div>
+
+    <!-- COLUMNA ROSA -->
+    <div class="col pink">
+      <h2>Caso aplicado</h2>
+
+      <div class="item">
+        <h3>Exportadora de café — cumplimiento OTIF</h3>
+        <p>El indicador se sigue mes a mes para detectar cuellos de botella logísticos o aduaneros antes de que afecten al cliente.</p>
+      </div>
+
+      <div class="label-small">Interpretación</div>
+
+      <div class="item">
+        <h3>Meta alcanzada</h3>
+        <p>El 90% de OTIF se alcanza a partir de mayo.</p>
+      </div>
+
+      <div class="item">
+        <h3>Punto más bajo</h3>
+        <p>Marzo (79%): posible cuello de botella logístico o retraso aduanero.</p>
+      </div>
+
+      <div class="item">
+        <h3>Tendencia</h3>
+        <p>General positiva: respalda mantener al proveedor logístico actual.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">Mapa conceptual · Indicadores en empresas exportadoras</div>
+
+</div>
+</body>
+</html>
