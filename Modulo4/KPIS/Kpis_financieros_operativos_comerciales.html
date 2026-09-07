@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KPIs financieros, operativos y comerciales</title>
+<style>
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:#faf8f2;
+    font-family:"Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color:#232323;
+    padding:40px 20px 50px;
+  }
+  .wrapper{
+    max-width:1260px;
+    margin:0 auto;
+  }
+
+  .title{
+    text-align:center;
+    font-size:2.1rem;
+    font-weight:800;
+    margin:0 0 6px;
+    color:#1c1c1c;
+  }
+  .subtitle{
+    text-align:center;
+    font-size:1.05rem;
+    color:#6b6f76;
+    margin:0 0 34px;
+  }
+
+  .columns{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:22px;
+  }
+
+  .col{
+    border-radius:14px;
+    padding:26px 26px 30px;
+  }
+  .col.blue{ background:#dfeafb; border:1.5px solid #3f7fd0; }
+  .col.green{ background:#e0f3ea; border:1.5px solid #2fa06f; }
+  .col.pink{ background:#fbe4ef; border:1.5px solid #d1467e; }
+
+  .col h2{
+    margin:0 0 16px;
+    font-size:1.4rem;
+  }
+  .col.blue h2{ color:#1a4c8f; }
+  .col.green h2{ color:#146b47; }
+  .col.pink h2{ color:#9e2159; }
+
+  .label-small{
+    font-size:0.72rem;
+    font-weight:700;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    margin:14px 0 6px;
+  }
+  .col.blue .label-small{ color:#3f7fd0; }
+  .col.green .label-small{ color:#2fa06f; }
+  .col.pink .label-small{ color:#d1467e; }
+
+  .col > p{
+    font-size:0.92rem;
+    line-height:1.55;
+    color:#333;
+    margin:0;
+  }
+
+  .ex-card{
+    background:rgba(255,255,255,0.65);
+    border-radius:8px;
+    padding:12px 14px;
+    margin-bottom:10px;
+  }
+  .ex-card h3{
+    margin:0 0 3px;
+    font-size:0.98rem;
+    color:#1c1c1c;
+  }
+  .ex-card .desc{
+    margin:0 0 6px;
+    font-size:0.82rem;
+    color:#7a7a7a;
+  }
+  .ex-card .formula{
+    margin:0;
+    font-family:"Consolas","Courier New",monospace;
+    font-size:0.85rem;
+    font-weight:700;
+  }
+  .col.blue .formula{ color:#1a4c8f; }
+  .col.green .formula{ color:#146b47; }
+  .col.pink .formula{ color:#9e2159; }
+
+  .footer{
+    text-align:center;
+    color:#9a9a9a;
+    font-size:0.88rem;
+    margin-top:30px;
+  }
+
+  @media (max-width:960px){
+    .columns{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="title">KPIs financieros, operativos y comerciales</div>
+  <div class="subtitle">Definición, función y ejemplos con fórmula de cálculo</div>
+
+  <div class="columns">
+
+    <!-- FINANCIEROS -->
+    <div class="col blue">
+      <h2>KPIs financieros</h2>
+
+      <div class="label-small">Definición</div>
+      <p>Miden la rentabilidad, liquidez y salud económica general de la empresa. Reflejan si el dinero invertido está generando valor.</p>
+
+      <div class="label-small">Función</div>
+      <p>Evaluar el desempeño económico del negocio y respaldar decisiones de inversión, financiamiento y control de gastos.</p>
+
+      <div class="label-small">Ejemplos</div>
+
+      <div class="ex-card">
+        <h3>ROI — Retorno sobre la inversión</h3>
+        <p class="desc">Ganancia generada por cada colón/dólar invertido</p>
+        <p class="formula">(Beneficio – Inversión) / Inversión × 100</p>
+      </div>
+
+      <div class="ex-card">
+        <h3>Margen neto</h3>
+        <p class="desc">Rentabilidad final sobre ventas</p>
+        <p class="formula">Utilidad neta / Ventas totales × 100</p>
+      </div>
+
+      <div class="ex-card">
+        <h3>Liquidez corriente</h3>
+        <p class="desc">Capacidad de pago a corto plazo</p>
+        <p class="formula">Activo corriente / Pasivo corriente</p>
+      </div>
+
+      <div class="ex-card">
+        <h3>Punto de equilibrio</h3>
+        <p class="desc">Nivel de ventas sin pérdidas ni ganancias</p>
+        <p class="formula">Costos fijos / (Precio – Costo variable unitario)</p>
+      </div>
+    </div>
+
+    <!-- OPERATIVOS -->
+    <div class="col green">
+      <h2>KPIs operativos</h2>
+
+      <div class="label-small">Definición</div>
+      <p>Miden la eficiencia, calidad y velocidad de los procesos internos del día a día, sin enfocarse aún en el resultado financiero final.</p>
+
+      <div class="label-small">Función</div>
+      <p>Monitorear el desempeño de los procesos para detectar cuellos de botella, reducir desperdicios y mejorar la productividad.</p>
+
+      <div class="label-small">Ejemplos</div>
+
+      <div class="ex-card">
+        <h3>Productividad</h3>
+        <p class="desc">Producción obtenida por recurso empleado</p>
+        <p class="formula">Unidades producidas / Horas trabajadas</p>
+      </div>
+
+      <div class="ex-card">
+        <h3>Rotación de inventario</h3>
+        <p class="desc">Veces que se renueva el inventario en un período</p>
+        <p class="formula">Costo de ventas / Inventario promedio</p>
+      </div>
+
+      <div class="ex-card">
+        <h3>Tiempo de ciclo</h3>
+        <p class="desc">Duración total de un proceso operativo</p>
+        <p class="formula">Fecha de entrega – Fecha de inicio del proceso</p>
+      </div>
+
+      <div class="ex-card">
+        <h3>Tasa de defectos</h3>
+        <p class="desc">% de unidades no conformes</p>
+        <p class="formula">Unidades defectuosas / Unidades totales × 100</p>
+      </div>
+    </div>
+
+    <!-- COMERCIALES -->
+    <div class="col pink">
+      <h2>KPIs comerciales</h2>
+
+      <div class="label-small">Definición</div>
+      <p>Miden la capacidad de atraer prospectos, convertirlos en clientes y generar valor a lo largo de la relación comercial.</p>
+
+      <div class="label-small">Función</div>
+      <p>Evaluar la eficacia de las estrategias de ventas y marketing, y el retorno que genera cada cliente adquirido.</p>
+
+      <div class="label-small">Ejemplos</div>
+
+      <div class="ex-card">
+        <h3>Tasa de conversión</h3>
+        <p class="desc">% de prospectos que se convierten en clientes</p>
+        <p class="formula">Clientes nuevos / Prospectos totales × 100</p>
+      </div>
+
+      <div class="ex-card">
+        <h3>CAC — Costo de adquisición</h3>
+        <p class="desc">Costo de conseguir un cliente nuevo</p>
+        <p class="formula">Gasto en marketing y ventas / Clientes nuevos</p>
+      </div>
+
+      <div class="ex-card">
+        <h3>LTV — Valor de vida del cliente</h3>
+        <p class="desc">Ingreso total esperado de un cliente</p>
+        <p class="formula">Ticket promedio × Frecuencia de compra × Duración</p>
+      </div>
+
+      <div class="ex-card">
+        <h3>Ticket promedio</h3>
+        <p class="desc">Monto medio por venta</p>
+        <p class="formula">Ingresos totales / Número de transacciones</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">Mapa conceptual · KPIs financieros, operativos y comerciales</div>
+
+</div>
+</body>
+</html>
