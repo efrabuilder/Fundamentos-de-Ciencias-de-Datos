@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algoritmo — Calculadora RPN</title>
+<style>
+  body{
+    margin:0; padding:20px; background:#ffffff;
+    font-family:Arial, Helvetica, sans-serif;
+    display:flex; justify-content:center;
+  }
+  svg{ max-width:900px; width:100%; height:auto; }
+</style>
+</head>
+<body>
+
+<svg viewBox="0 0 1560 1650" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif">
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- ===================== CONECTORES ===================== -->
+  <!-- Inicio -> Leer siguiente token -->
+  <line x1="780" y1="112" x2="780" y2="183" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <!-- Leer siguiente token -> ¿Es número? -->
+  <line x1="780" y1="277" x2="780" y2="308" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ¿Es número? -> sí -> Apilar número -->
+  <polyline points="550,420 350,420 350,593" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="440" y="405" font-size="18" fill="#374151">sí</text>
+
+  <!-- ¿Es número? -> no -> Extraer 2 operandos -->
+  <polyline points="1010,420 1250,420 1250,593" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="1120" y="405" font-size="18" fill="#374151">no</text>
+
+  <!-- Extraer -> Aplicar operador -->
+  <line x1="1250" y1="707" x2="1250" y2="773" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <!-- Aplicar operador -> Apilar resultado -->
+  <line x1="1250" y1="887" x2="1250" y2="953" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Apilar número -> merge -> ¿Quedan tokens? -->
+  <polyline points="350,707 350,1230 548,1230" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <!-- Apilar resultado -> merge -> ¿Quedan tokens? -->
+  <polyline points="1250,1067 1250,1230 1012,1230" fill="none" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- ¿Quedan tokens? -> no, terminó -> Resultado final -->
+  <line x1="780" y1="1342" x2="780" y2="1393" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="800" y="1375" font-size="18" fill="#374151">no, terminó</text>
+
+  <!-- Loop back: ¿Quedan tokens? -> sí, hay más tokens -> Leer siguiente token -->
+  <polyline points="550,1230 100,1230 100,230 548,230" fill="none" stroke="#94a3b8" stroke-width="2" stroke-dasharray="8,6" marker-end="url(#arrow)"/>
+  <text x="120" y="212" font-size="18" fill="#374151">sí, hay más tokens</text>
+
+  <!-- ===================== NODOS ===================== -->
+
+  <!-- Inicio -->
+  <rect x="600" y="12" width="360" height="100" rx="14" fill="#f2efe9" stroke="#d8d3c8" stroke-width="1.5"/>
+  <text x="780" y="52" text-anchor="middle" font-size="21" font-weight="bold" fill="#374151">Inicio</text>
+  <text x="780" y="80" text-anchor="middle" font-size="15" fill="#57606f">Pila vacía</text>
+
+  <!-- Leer siguiente token -->
+  <rect x="550" y="185" width="460" height="92" rx="14" fill="#f2efe9" stroke="#d8d3c8" stroke-width="1.5"/>
+  <text x="780" y="238" text-anchor="middle" font-size="21" font-weight="bold" fill="#374151">Leer siguiente token</text>
+
+  <!-- Diamante ¿Es número? -->
+  <polygon points="780,308 1010,420 780,532 550,420" fill="#f2efe9" stroke="#d8d3c8" stroke-width="1.5"/>
+  <text x="780" y="427" text-anchor="middle" font-size="20" fill="#374151">¿Es número?</text>
+
+  <!-- Apilar número -->
+  <rect x="170" y="593" width="360" height="114" rx="14" fill="#dcf6ec" stroke="#8fdcc0" stroke-width="1.5"/>
+  <text x="350" y="638" text-anchor="middle" font-size="20" font-weight="bold" fill="#065f46">Apilar número</text>
+  <text x="350" y="666" text-anchor="middle" font-size="15" fill="#0f766e">Push a la pila</text>
+
+  <!-- Extraer 2 operandos -->
+  <rect x="1070" y="593" width="360" height="114" rx="14" fill="#fdece3" stroke="#f3b494" stroke-width="1.5"/>
+  <text x="1250" y="638" text-anchor="middle" font-size="20" font-weight="bold" fill="#9a3412">Extraer 2 operandos</text>
+  <text x="1250" y="666" text-anchor="middle" font-size="15" fill="#c2410c">b y a (orden LIFO)</text>
+
+  <!-- Aplicar operador -->
+  <rect x="1070" y="773" width="360" height="114" rx="14" fill="#fdece3" stroke="#f3b494" stroke-width="1.5"/>
+  <text x="1250" y="818" text-anchor="middle" font-size="20" font-weight="bold" fill="#9a3412">Aplicar operador</text>
+  <text x="1250" y="846" text-anchor="middle" font-size="15" fill="#c2410c">resultado = a op b</text>
+
+  <!-- Apilar resultado -->
+  <rect x="1070" y="953" width="360" height="114" rx="14" fill="#fdece3" stroke="#f3b494" stroke-width="1.5"/>
+  <text x="1250" y="998" text-anchor="middle" font-size="20" font-weight="bold" fill="#9a3412">Apilar resultado</text>
+  <text x="1250" y="1026" text-anchor="middle" font-size="15" fill="#c2410c">Push a la pila</text>
+
+  <!-- Diamante ¿Quedan tokens? -->
+  <polygon points="780,1120 1010,1230 780,1340 550,1230" fill="#f2efe9" stroke="#d8d3c8" stroke-width="1.5"/>
+  <text x="780" y="1237" text-anchor="middle" font-size="20" fill="#374151">¿Quedan tokens?</text>
+
+  <!-- Resultado final -->
+  <rect x="600" y="1393" width="360" height="114" rx="14" fill="#f2efe9" stroke="#d8d3c8" stroke-width="1.5"/>
+  <text x="780" y="1438" text-anchor="middle" font-size="20" font-weight="bold" fill="#374151">Resultado final</text>
+  <text x="780" y="1466" text-anchor="middle" font-size="15" fill="#57606f">Único valor en la pila</text>
+
+</svg>
+
+</body>
+</html>
