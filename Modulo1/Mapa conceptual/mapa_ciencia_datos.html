@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa Conceptual — Ciencia de Datos</title>
+<style>
+  :root{
+    --fundamentos:#2563eb; --fundamentos-bg:#eff6ff; --fundamentos-bd:#93c5fd; --fundamentos-tx:#1e3a8a;
+    --recoleccion:#16a34a; --recoleccion-bg:#f0fdf4; --recoleccion-bd:#86efac; --recoleccion-tx:#14532d;
+    --bigdata:#7c3aed; --bigdata-bg:#f5f3ff; --bigdata-bd:#c4b5fd; --bigdata-tx:#4c1d95;
+    --carrera:#ea580c; --carrera-bg:#fff7ed; --carrera-bd:#fdba74; --carrera-tx:#7c2d12;
+    --avanzadas:#0891b2; --avanzadas-bg:#ecfeff; --avanzadas-bd:#67e8f9; --avanzadas-tx:#164e63;
+    --root:#1e293b;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; padding:24px; background:#f8fafc;
+    font-family:Arial, Helvetica, sans-serif; color:#1e293b;
+  }
+  .note{
+    text-align:center; font-size:12.5px; font-style:italic; color:#64748b; margin-bottom:18px;
+  }
+  .root{
+    max-width:520px; margin:0 auto 28px auto; background:var(--root); color:#fff;
+    border-radius:12px; padding:16px 20px; text-align:center;
+  }
+  .root h1{margin:0; font-size:20px;}
+  .root p{margin:6px 0 0; font-size:12.5px; color:#cbd5e1;}
+  .legend{
+    display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-bottom:28px;
+    font-size:12.5px; color:#475569;
+  }
+  .legend span{display:inline-flex; align-items:center; gap:6px;}
+  .swatch{width:14px; height:14px; border-radius:3px; display:inline-block;}
+  .columns{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:20px;
+  }
+  .column{border-radius:10px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,.08);}
+  .column-header{
+    color:#fff; padding:14px 16px; cursor:pointer; user-select:none;
+  }
+  .column-header h2{margin:0; font-size:16px;}
+  .column-header p{margin:4px 0 0; font-size:11.5px; opacity:.9;}
+  .column-body{padding:10px; background:#fff;}
+  details.node{
+    border-radius:8px; border-width:1.5px; border-style:solid; margin-bottom:8px; overflow:hidden;
+  }
+  details.node summary{
+    padding:10px 12px; font-weight:bold; font-size:14px; cursor:pointer; list-style:none;
+  }
+  details.node summary::-webkit-details-marker{display:none;}
+  details.node summary::before{content:"▸ "; font-weight:normal;}
+  details.node[open] summary::before{content:"▾ "; font-weight:normal;}
+  details.node .content{padding:0 14px 12px 14px; font-size:12.8px; line-height:1.55;}
+  details.node .content p{margin:6px 0;}
+  details.node .content .sub{font-weight:bold;}
+  details.node .content .note-line{font-style:italic; font-size:11.3px;}
+  ul.plain{margin:6px 0; padding-left:18px;}
+  ul.plain li{margin:2px 0;}
+
+  /* Fundamentos */
+  .col-fundamentos .column-header{background:var(--fundamentos);}
+  .col-fundamentos details.node{background:var(--fundamentos-bg); border-color:var(--fundamentos-bd);}
+  .col-fundamentos details.node summary, .col-fundamentos .content{color:var(--fundamentos-tx);}
+  .col-fundamentos .note-line{color:#3b82f6;}
+
+  /* Recolección */
+  .col-recoleccion .column-header{background:var(--recoleccion);}
+  .col-recoleccion details.node{background:var(--recoleccion-bg); border-color:var(--recoleccion-bd);}
+  .col-recoleccion details.node summary, .col-recoleccion .content{color:var(--recoleccion-tx);}
+
+  /* Big Data / BI / IA / ML */
+  .col-bigdata .column-header{background:var(--bigdata);}
+  .col-bigdata details.node{background:var(--bigdata-bg); border-color:var(--bigdata-bd);}
+  .col-bigdata details.node summary, .col-bigdata .content{color:var(--bigdata-tx);}
+  .col-bigdata .sub{color:#6d28d9;}
+  .col-bigdata .note-line{color:#7c3aed;}
+  .col-bigdata .realidad{color:#15803d; font-style:italic; font-size:11.3px;}
+
+  /* Carrera */
+  .col-carrera .column-header{background:var(--carrera);}
+  .col-carrera details.node{background:var(--carrera-bg); border-color:var(--carrera-bd);}
+  .col-carrera details.node summary, .col-carrera .content{color:var(--carrera-tx);}
+  .col-carrera .note-line{color:#ea580c;}
+
+  /* Avanzadas */
+  .col-avanzadas .column-header{background:var(--avanzadas);}
+  .col-avanzadas details.node{background:var(--avanzadas-bg); border-color:var(--avanzadas-bd);}
+  .col-avanzadas details.node summary, .col-avanzadas .content{color:var(--avanzadas-tx);}
+  .col-avanzadas .note-line{color:#0891b2;}
+
+  .toolbar{max-width:1400px; margin:0 auto 16px auto; display:flex; justify-content:center; gap:10px;}
+  .toolbar button{
+    font-family:inherit; font-size:12.5px; padding:6px 14px; border-radius:6px; border:1px solid #cbd5e1;
+    background:#fff; cursor:pointer;
+  }
+  .toolbar button:hover{background:#f1f5f9;}
+  .wrap{max-width:1400px; margin:0 auto;}
+</style>
+</head>
+<body>
+
+<p class="note">Fuentes: apuntes de clase [1] · NetAcad Cisco [2][3] · verificación histórica y conceptual [4-8] — ver documento de Referencias APA</p>
+
+<div class="root">
+  <h1>CIENCIA DE DATOS</h1>
+  <p>Fundamentos del Análisis de Datos</p>
+</div>
+
+<div class="legend">
+  <span><span class="swatch" style="background:#2563eb"></span>Fundamentos</span>
+  <span><span class="swatch" style="background:#16a34a"></span>Recolección</span>
+  <span><span class="swatch" style="background:#7c3aed"></span>Big Data / BI / IA / ML</span>
+  <span><span class="swatch" style="background:#ea580c"></span>Carrera y Aplicación</span>
+  <span><span class="swatch" style="background:#0891b2"></span>Habilidades Avanzadas</span>
+</div>
+
+<div class="toolbar">
+  <button onclick="toggleAll(true)">Expandir todo</button>
+  <button onclick="toggleAll(false)">Colapsar todo</button>
+</div>
+
+<div class="wrap">
+<div class="columns">
+
+  <!-- ================= 1. FUNDAMENTOS ================= -->
+  <div class="column col-fundamentos">
+    <div class="column-header">
+      <h2>1. FUNDAMENTOS</h2>
+      <p>Módulo 1: Experience Analytics [2]</p>
+    </div>
+    <div class="column-body">
+
+      <details class="node">
+        <summary>3 Pilares</summary>
+        <div class="content"><p>Datos · Algoritmos · Herramientas</p></div>
+      </details>
+
+      <details class="node">
+        <summary>¿Qué es un Dato?</summary>
+        <div class="content"><p>Valor individual = Algoritmo + Información</p></div>
+      </details>
+
+      <details class="node">
+        <summary>Tipos de Datos — por naturaleza</summary>
+        <div class="content">
+          <p>Variable: característica observada o medida</p>
+          <p class="sub">Cualitativos (categóricos):</p>
+          <ul class="plain">
+            <li>Nominal — sin orden (ej. color, sexo)</li>
+            <li>Ordinal — con orden (ej. satisfacción)</li>
+          </ul>
+          <p class="sub">Cuantitativos (numéricos):</p>
+          <ul class="plain">
+            <li>Discreto — contable (ej. nº de hijos)</li>
+            <li>Continuo — medible (ej. peso, tiempo)</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Tipos de Datos — por privacidad</summary>
+        <div class="content">
+          <p><strong>Públicos</strong> — accesibles legalmente por cualquiera. Ej. nombre en registro civil, precio de acciones</p>
+          <p><strong>Privados / Sensibles</strong> — protegidos, de la intimidad. Ej. historial médico, contraseñas, ingresos</p>
+          <p><strong>PII</strong> (Personally Identifiable Information): dato que te identifica directamente (cédula, pasaporte)</p>
+          <p class="note-line">Un dato puede ser discreto y público, o discreto y privado — la naturaleza indica cómo procesarlo, la privacidad indica cómo protegerlo</p>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Tipos de Datos — en programación</summary>
+        <div class="content">
+          <ul class="plain">
+            <li>Cadena / String — texto (ej. "Hola")</li>
+            <li>Booleano / Bool — Verdadero / Falso</li>
+            <li>Entero / Integer — número sin decimales</li>
+            <li>Flotante / Float — número con decimales</li>
+            <li>Lista / Array — colección ordenada de datos</li>
+            <li>Nulo / Null (None) — ausencia de valor</li>
+          </ul>
+          <p class="note-line">(equivalentes en Python, SQL y la mayoría de lenguajes)</p>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Tipos de Datos — por estructura</summary>
+        <div class="content">
+          <p><strong>Estructurados</strong> — tablas, filas y columnas fijas. Ej. SQL, Excel, bases de datos relacionales</p>
+          <p><strong>Semiestructurados</strong> — etiquetas, sin esquema rígido. Ej. JSON, XML, NoSQL, logs, respuestas de API</p>
+          <p><strong>No estructurados</strong> — sin formato ni esquema. Ej. texto libre, imagen, audio, video, posts</p>
+          <p class="note-line">(esta es la base de la "Variedad" del Big Data)<br>Empresas como Netflix, Facebook y Amazon combinan los tres tipos para generar valor (ver columna 3)</p>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Científico de Datos</summary>
+        <div class="content"><p>Rol: manipula datos ("de pobre a millonario")</p></div>
+      </details>
+
+      <details class="node">
+        <summary>Herramientas</summary>
+        <div class="content"><p>Python · SQL · Power BI</p></div>
+      </details>
+
+      <details class="node">
+        <summary>Proceso Analítico (6 pasos)</summary>
+        <div class="content">
+          <ul class="plain">
+            <li>1. Obtener datos</li>
+            <li>2. Limpiar datos</li>
+            <li>3. Analizar datos</li>
+            <li>4. Encontrar patrones</li>
+            <li>5. Crear modelos predictivos</li>
+            <li>6. Comunicar resultados</li>
+          </ul>
+          <p class="note-line">"Acción, no solo predicción"<br>"Análisis sin invadir la privacidad"</p>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Estructura y Formatos de Datos</summary>
+        <div class="content">
+          <p><strong>Bases de datos (estructurados)</strong>: SQL, Excel, Oracle, Cloud — se analizan y consultan con SQL</p>
+          <p><strong>Datos semiestructurados</strong>: JSON, CSV, XML — organizados por fila y columna, sin tabla rígida</p>
+          <p>Se consultan mediante APIs · Bucket de datos: acceso por medio de vistas</p>
+          <p><strong>IoT / Widgets</strong> — intercambio y movimiento de datos, no requieren tabla fija (No SQL)</p>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Línea de Comandos SQL</summary>
+        <div class="content">
+          <p>Llamar tabla: <code>USE "BASE_DATOS" GO</code></p>
+          <p>Palabra en azul = palabra reservada</p>
+          <p><strong>Dato cuantitativo</strong> — números (edad, salario, ventas): promedio, máximo, mínimo, moda, suma</p>
+          <p><strong>Dato cualitativo</strong> — cualidades (color, estado civil, opinión, marca, características)</p>
+          <p><strong>CSV</strong> — valores separados por coma, compatible con todo y pesa menos</p>
+          <p><strong>JSON</strong> — ideal para transportar datos entre apps y bases de datos · <strong>XML</strong> — "diccionario de datos"</p>
+          <p>Tablas → filas, columnas, datos, llaves primarias/foráneas y relaciones</p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+  <!-- ================= 2. RECOLECCIÓN DE DATOS ================= -->
+  <div class="column col-recoleccion">
+    <div class="column-header">
+      <h2>2. RECOLECCIÓN DE DATOS</h2>
+      <p>Módulo 2: Data Collection and Gathering</p>
+    </div>
+    <div class="column-body">
+
+      <details class="node">
+        <summary>Seguridad</summary>
+        <div class="content">
+          <p>VPN · Cifrado</p>
+          <p>Rutas de navegación (Tor, Chrome, Edge)</p>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Amenazas en Navegadores</summary>
+        <div class="content">
+          <ul class="plain">
+            <li>Phishing — URLs falsas para engañar y atacar</li>
+            <li>Extensiones maliciosas — permisos para leerlo todo</li>
+            <li>Inyección XSS — roba cookies de sesión</li>
+            <li>Infostealers — malware que extrae contraseñas guardadas en el navegador</li>
+            <li>Secuestro de sesión — clona cookies de acceso</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Mitigación y Buenas Prácticas</summary>
+        <div class="content">
+          <ul class="plain">
+            <li>Gestor de contraseñas externo (no el nativo)</li>
+            <li>Autenticación de Dos Factores (2FA)</li>
+            <li>HTTPS — cifrado en tránsito</li>
+            <li>Cookies con atributos HttpOnly + Secure</li>
+            <li>Minimización de datos: no guardar lo innecesario</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Ética</summary>
+        <div class="content"><p>"Enseñar, no regalar la información"</p></div>
+      </details>
+
+      <details class="node">
+        <summary>Privacidad</summary>
+        <div class="content"><p>Analizar sin invadir la privacidad del cliente</p></div>
+      </details>
+
+      <details class="node">
+        <summary>Tipos de Valores</summary>
+        <div class="content"><p>Valor nulo ≠ Valor 0</p></div>
+      </details>
+
+      <details class="node">
+        <summary>Equipos y Asistencia</summary>
+        <div class="content">
+          <p>Adquirir datos · Solucionar · Investigar</p>
+          <p>Recomendar · Resolver</p>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Fuentes de Datos</summary>
+        <div class="content">
+          <p>Primarias — recolectadas directamente</p>
+          <p>Secundarias — ya existentes (bases, encuestas)</p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+  <!-- ================= 3. BIG DATA, BI, IA Y ML ================= -->
+  <div class="column col-bigdata">
+    <div class="column-header">
+      <h2>3. BIG DATA, BI, IA Y ML</h2>
+      <p>Módulo 3</p>
+    </div>
+    <div class="column-body">
+
+      <details class="node">
+        <summary>Inteligencia de Negocios (BI)</summary>
+        <div class="content">
+          <p class="sub">Definición</p>
+          <p>Se enfoca en recopilar, organizar, visualizar y analizar datos históricos para apoyar decisiones empresariales mediante reportes e indicadores</p>
+          <p class="sub">Herramientas comunes</p>
+          <ul class="plain">
+            <li>Power BI — integra Excel, Azure y modelos DAX</li>
+            <li>Tableau — visualizaciones muy interactivas</li>
+            <li>Qlik Sense — motor asociativo, explora libremente</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Big Data</summary>
+        <div class="content">
+          <p class="sub">Definición</p>
+          <p>Se refiere al almacenamiento, procesamiento y gestión de volúmenes masivos de datos que superan la capacidad de las herramientas tradicionales</p>
+          <p class="sub">Herramientas comunes</p>
+          <ul class="plain">
+            <li>Hadoop — almacenamiento distribuido (HDFS)</li>
+            <li>Spark — procesamiento en memoria, muy rápido</li>
+            <li>AWS / GCP / Azure — data lakes en la nube</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Inteligencia Artificial (IA)</summary>
+        <div class="content">
+          <p class="sub">Definición</p>
+          <p>Campo de la informática que busca crear sistemas capaces de simular el razonamiento y comportamiento humano para resolver problemas complejos</p>
+          <p class="sub">Herramientas comunes</p>
+          <ul class="plain">
+            <li>TensorFlow/PyTorch — frameworks de redes</li>
+            <li>ChatGPT / OpenAI — modelos generativos</li>
+            <li>Modelos de visión y NLP — leen imagen/texto</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Machine Learning (ML)</summary>
+        <div class="content">
+          <p class="sub">Definición</p>
+          <p>Subcampo de la IA en el que los sistemas aprenden patrones a partir de datos, sin ser programados explícitamente para cada tarea</p>
+          <p class="sub">Herramientas comunes</p>
+          <ul class="plain">
+            <li>Scikit-learn — algoritmos clásicos en Python</li>
+            <li>TensorFlow/PyTorch — también usados en ML</li>
+            <li>XGBoost — árboles, muy usado en competencias</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Línea de Tiempo Evolutiva</summary>
+        <div class="content">
+          <ul class="plain">
+            <li>1662 — J. Graunt: 1er análisis estadístico de datos [7]</li>
+            <li>1865 — Primer uso del término "Business Intelligence" [5]</li>
+            <li>1890 — Hollerith: máquina tabuladora (censo EE.UU.)</li>
+            <li>1959 — Nace el término "Machine Learning" (A. Samuel)</li>
+            <li>1989 — Dresner (Gartner) formaliza el BI moderno</li>
+            <li>2001 — D. Laney define las 3 V's del Big Data [4]</li>
+            <li>2010 — Boom del Machine Learning (cómputo + datos)</li>
+            <li>2020 — Arranca la ola de IA Generativa (GPT-3)</li>
+          </ul>
+          <p class="note-line">Nota: el BI se popularizó como término en 1989, no en 1980 — sus raíces (DSS) sí vienen de esa década.</p>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Las 5 V's del Big Data [4][6]</summary>
+        <div class="content">
+          <ul class="plain">
+            <li>Volumen — cantidad masiva de datos</li>
+            <li>Velocidad — rapidez de generación/análisis</li>
+            <li>Variedad — texto, imagen, audio, video</li>
+            <li>Veracidad — confiabilidad, sin errores</li>
+            <li>Valor — utilidad para decisiones</li>
+          </ul>
+          <p class="note-line">3 V's originales (Laney, 2001): Volumen, Velocidad, Variedad — Veracidad y Valor se agregaron después</p>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Conceptos Relacionados</summary>
+        <div class="content">
+          <p class="sub">IA Generativa</p>
+          <p>Modelos que crean contenido nuevo (texto, imagen, audio, código) a partir de patrones aprendidos. Ej. ChatGPT genera texto; DALL-E genera imágenes</p>
+          <p class="sub">Deep Learning</p>
+          <p>Subcampo del ML basado en redes neuronales de múltiples capas, inspiradas en el cerebro humano. Permite procesar datos complejos: imagen y voz</p>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Contexto Histórico (Costa Rica) [8]</summary>
+        <div class="content">
+          <p>1968 — Llega "Matilde" (IBM-1620) a la UCR</p>
+          <p>Financiada con préstamo del BID + 60% desc. IBM</p>
+          <p>Código Enigma → Lenguaje ensamblador → ASCII</p>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Diferencias Clave: Ciencia de Datos vs. BI vs. Big Data vs. IA vs. Machine Learning</summary>
+        <div class="content">
+          <p>Tienen propósitos similares, pero NO son lo mismo</p>
+          <p>Confusión 1: pensar que todo es lo mismo</p>
+          <p class="realidad">Realidad: cada uno responde una pregunta distinta</p>
+          <p>Confusión 2: creer que IA = Ciencia de Datos</p>
+          <p class="realidad">Realidad: la Ciencia de Datos usa la IA como una herramienta más, no son lo mismo</p>
+          <p>Confusión 3: creer que Big Data es solo "una base de datos gigante" (es más que eso)</p>
+          <p class="realidad">Realidad: también implica velocidad, variedad y valor, no solo volumen</p>
+          <p>Confusión 4: creer que Machine Learning = IA (ML es en realidad un subcampo de la IA)</p>
+          <p class="realidad">Realidad: existe IA basada en reglas que no usa ningún tipo de Machine Learning</p>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Ejemplos Reales de Big Data / BI</summary>
+        <div class="content">
+          <p>Netflix — recomienda contenido con ML sobre historial de reproducción (dato no estructurado)</p>
+          <p>Facebook / Meta — segmenta anuncios con datos de interacción social (texto, imagen, video)</p>
+          <p>Amazon — optimiza inventario y logística con datos estructurados de ventas en tiempo real</p>
+          <p>Google — indexa y prioriza resultados de búsqueda combinando Big Data + BI</p>
+          <p>Spotify — arma playlists personalizadas (Discover Weekly) con Machine Learning</p>
+          <p class="note-line">Todos combinan datos estructurados, semi y no estructurados: la mezcla es lo que define "Big Data"</p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+  <!-- ================= 4. CARRERA Y APLICACIÓN ================= -->
+  <div class="column col-carrera">
+    <div class="column-header">
+      <h2>4. CARRERA Y APLICACIÓN</h2>
+      <p>Módulo 4: Embarking on Your Career [2]</p>
+    </div>
+    <div class="column-body">
+
+      <details class="node">
+        <summary>Certificaciones</summary>
+        <div class="content"><p>CCNA Cisco · Introduction to Data Science</p></div>
+      </details>
+
+      <details class="node">
+        <summary>Caso Aplicado: Deserción Estudiantil</summary>
+        <div class="content">
+          <ul class="plain">
+            <li>1. Finanzas del estudiante</li>
+            <li>2. Costos de la educación</li>
+            <li>3. Becas y ayuda financiera</li>
+            <li>4. Transporte</li>
+            <li>5. Ansiedad y bienestar</li>
+            <li>6. Asistencia como señal temprana</li>
+          </ul>
+          <p class="note-line">Objetivo: reducir el abandono de clases</p>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Herramientas Complementarias</summary>
+        <div class="content"><p>Excel · SQL · Tableau (Analytics Essentials) [3]</p></div>
+      </details>
+
+      <details class="node">
+        <summary>Perfiles Profesionales</summary>
+        <div class="content">
+          <p>Analista de Datos · Científico de Datos</p>
+          <p>Ingeniero de Datos · Analista de BI</p>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Enfoque Analítico Principal: Ámbito Económico</summary>
+        <div class="content">
+          <p>La demanda analítica más común se concentra en el ámbito económico y financiero de las empresas</p>
+          <p>Ej. rentabilidad, ventas, riesgo crediticio, inversión</p>
+          <p>Se prioriza lo que impacta ingresos y costos</p>
+          <p class="note-line">Por eso el perfil de analista suele iniciar en finanzas</p>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Herramientas Similares, Tareas Distintas</summary>
+        <div class="content">
+          <p>Aunque cumplen funciones parecidas, cada una resuelve tareas específicas y complementarias</p>
+          <ul class="plain">
+            <li>Excel — cálculos y análisis rápido</li>
+            <li>SQL — consulta y extracción de datos</li>
+            <li>Power BI / Tableau — visualización interactiva</li>
+            <li>Python — automatización y modelos predictivos</li>
+          </ul>
+          <p class="note-line">La elección depende de la tarea, no solo del hábito</p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+  <!-- ================= 5. HABILIDADES AVANZADAS ================= -->
+  <div class="column col-avanzadas">
+    <div class="column-header">
+      <h2>5. HABILIDADES AVANZADAS</h2>
+      <p>Más allá del curso introductorio</p>
+    </div>
+    <div class="column-body">
+
+      <details class="node">
+        <summary>Base Matemática y Programación</summary>
+        <div class="content">
+          <p>Estadística · Álgebra Lineal · Cálculo (optimización)</p>
+          <p>Python / R · SQL · Git (control de versiones)</p>
+          <p class="note-line">Sin base teórica, es "construir sobre arena"<br>Sin código, la teoría no se aplica</p>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Machine Learning — Tipos y Evaluación</summary>
+        <div class="content">
+          <p>Supervisado: Regresión · Clasificación</p>
+          <p>No supervisado: Clustering (ej. K-Means)</p>
+          <p>Evaluación: Matriz de Confusión, Accuracy, Precision, Recall, F1-Score</p>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Ética y Privacidad de Datos</summary>
+        <div class="content">
+          <p>Sesgo algorítmico (Bias) — datos con prejuicios</p>
+          <p>Regulaciones (ej. GDPR)</p>
+          <p>Anonimización y consentimiento</p>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>MLOps y Producción</summary>
+        <div class="content">
+          <p>Despliegue: APIs (Flask / FastAPI)</p>
+          <p>Monitoreo y "Data Drift" (degradación del modelo)</p>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Enfoque Científico y Arquitectura</summary>
+        <div class="content">
+          <p>Hipótesis + Pruebas A/B (grupo control/tratamiento)</p>
+          <p>Data Warehouse (procesado) vs. Data Lake (crudo)</p>
+          <p>Big Data: PySpark · AWS / GCP / Azure</p>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Modelo T-Shaped</summary>
+        <div class="content">
+          <p>Generalista — base amplia (stats, SQL, Python, ética)</p>
+          <p>Especialista — profundiza (ML, NLP, MLOps...)</p>
+          <p class="note-line">"Resolver el problema correcto, de forma simple"</p>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Ética de los Datos (ampliación)</summary>
+        <div class="content">
+          <p>Uso responsable, transparente y justo de datos</p>
+          <ul class="plain">
+            <li>Privacidad — la información es personal</li>
+            <li>Transparencia — el usuario sabe cómo se usan sus datos</li>
+            <li>Justicia — los algoritmos no deben discriminar</li>
+            <li>Responsabilidad — automatización necesita un humano responsable</li>
+            <li>Honestidad — no modificar datos para mejorar resultados</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Riesgos del Uso de Datos</summary>
+        <div class="content">
+          <p>Robo de identidad · Pérdida de confianza</p>
+          <p>Discriminación · Daño a la reputación</p>
+          <p>Daños legales · Fraude financiero</p>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Gobernanza de Datos</summary>
+        <div class="content">
+          <p>Políticas, procesos y normas para que los datos sean correctos y estén bien administrados</p>
+          <p>Cumplir normas · Asignar responsables</p>
+          <p>Evitar duplicados · Mantener calidad</p>
+          <p>Garantizar uso adecuado de los datos</p>
+          <p class="sub">Componentes</p>
+          <p>Usuarios: DBA/Administrador, Científico, Analista, Gerente</p>
+          <p>Procesos: seguir procedimientos, copias de seguridad, controles de acceso, auditorías, cifrado, sistemas de respaldo</p>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Seguridad de Datos — Modelo CIA</summary>
+        <div class="content">
+          <p>Confidencialidad — acceso solo a autorizados</p>
+          <p>Integridad — los datos no se alteran indebidamente</p>
+          <p>Disponibilidad — acceso cuando se necesita</p>
+          <p>Protege contra robos y mal manejo de datos</p>
+        </div>
+      </details>
+
+      <details class="node">
+        <summary>Ciclo de Vida del Dato (CAPUAE)</summary>
+        <div class="content">
+          <p>Captura → Almacenamiento → Procesamiento → Uso/Compartición/Análisis → Archivo → Eliminación</p>
+          <p><strong>Archivo</strong>: se guardan datos que ya no se usan pero se reservan para crear historial</p>
+          <p><strong>Eliminación</strong>: al pasar el tiempo, si el dato ya no es útil política y éticamente, se elimina</p>
+          <p>Los logs registran todo el ciclo hasta destruirse</p>
+          <p>Casos: AWS · Bancos · Memoria celular · Compras</p>
+        </div>
+      </details>
+
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+  function toggleAll(open){
+    document.querySelectorAll('details.node').forEach(function(d){ d.open = open; });
+  }
+</script>
+
+</body>
+</html>
