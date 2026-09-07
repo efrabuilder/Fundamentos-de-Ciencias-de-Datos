@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Funciones DAX</title>
+<style>
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:#ffffff;
+    font-family:"Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding:40px 20px 60px;
+  }
+  .wrapper{
+    max-width:1100px;
+    margin:0 auto;
+  }
+
+  .root{
+    background:#efece2;
+    border:1.5px solid #8f8b7f;
+    border-radius:10px;
+    max-width:380px;
+    margin:0 auto;
+    padding:20px 30px;
+    text-align:center;
+    font-size:1.3rem;
+    font-weight:700;
+    color:#3a3a3a;
+  }
+
+  .branch{
+    position:relative;
+    height:60px;
+    max-width:900px;
+    margin:0 auto;
+  }
+  .branch svg{
+    width:100%;
+    height:100%;
+    display:block;
+    overflow:visible;
+  }
+
+  .columns{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:30px;
+    max-width:1100px;
+    margin:0 auto;
+  }
+
+  .col{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .node{
+    border-radius:8px;
+    padding:20px 16px;
+    text-align:center;
+    margin-bottom:0;
+  }
+  .node h3{
+    margin:0 0 4px;
+    font-size:1.15rem;
+  }
+  .node p{
+    margin:0;
+    font-size:0.9rem;
+  }
+  .node.func{
+    font-weight:700;
+    font-size:1.1rem;
+  }
+
+  .arrow{
+    height:26px;
+    display:flex;
+    justify-content:center;
+  }
+
+  /* teal */
+  .teal .head{ background:#d3f0e3; border:1.5px solid #1c8a63; }
+  .teal .head h3{ color:#0f6b47; }
+  .teal .head p{ color:#1c8a63; }
+  .teal .func{ background:#d3f0e3; border:1.5px solid #1c8a63; color:#0f6b47; }
+
+  /* purple */
+  .purple .head{ background:#e6e5fb; border:1.5px solid #4a3fae; }
+  .purple .head h3{ color:#332a8a; }
+  .purple .head p{ color:#4a3fae; }
+  .purple .func{ background:#e6e5fb; border:1.5px solid #4a3fae; color:#332a8a; }
+
+  /* orange */
+  .orange .head{ background:#faecd0; border:1.5px solid #b5791f; }
+  .orange .head h3{ color:#7a5115; }
+  .orange .head p{ color:#b5791f; }
+  .orange .func{ background:#faecd0; border:1.5px solid #b5791f; color:#7a5115; }
+
+  /* beige final */
+  .final{
+    background:#efece2;
+    border:1.5px solid #8f8b7f;
+    color:#3a3a3a;
+  }
+  .final h3{ color:#3a3a3a; }
+  .final p{ color:#7a7a7a; }
+
+  @media (max-width:820px){
+    .columns{ grid-template-columns:1fr; }
+    .branch{ display:none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="root">Funciones DAX</div>
+
+  <div class="branch">
+    <svg viewBox="0 0 900 60" preserveAspectRatio="none">
+      <line x1="450" y1="0" x2="450" y2="18" stroke="#9a9a9a" stroke-width="1.5"/>
+      <line x1="150" y1="18" x2="750" y2="18" stroke="#9a9a9a" stroke-width="1.5"/>
+      <line x1="150" y1="18" x2="150" y2="55" stroke="#9a9a9a" stroke-width="1.5" marker-end="url(#a1)"/>
+      <line x1="450" y1="18" x2="450" y2="55" stroke="#9a9a9a" stroke-width="1.5" marker-end="url(#a2)"/>
+      <line x1="750" y1="18" x2="750" y2="55" stroke="#9a9a9a" stroke-width="1.5" marker-end="url(#a3)"/>
+      <defs>
+        <marker id="a1" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#9a9a9a"/></marker>
+        <marker id="a2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#9a9a9a"/></marker>
+        <marker id="a3" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#9a9a9a"/></marker>
+      </defs>
+    </svg>
+  </div>
+
+  <div class="columns">
+
+    <!-- COLUMNA TEAL -->
+    <div class="col teal">
+      <div class="node head">
+        <h3>Agregación</h3>
+        <p>Suma y cuenta valores</p>
+      </div>
+      <div class="arrow"><svg width="10" height="26"><line x1="5" y1="0" x2="5" y2="18" stroke="#9a9a9a" stroke-width="1.5"/><polygon points="0,17 10,17 5,26" fill="#9a9a9a"/></svg></div>
+
+      <div class="node func">SUM</div>
+      <div class="arrow"><svg width="10" height="26"><line x1="5" y1="0" x2="5" y2="18" stroke="#9a9a9a" stroke-width="1.5"/><polygon points="0,17 10,17 5,26" fill="#9a9a9a"/></svg></div>
+
+      <div class="node func">COUNT</div>
+      <div class="arrow"><svg width="10" height="26"><line x1="5" y1="0" x2="5" y2="18" stroke="#9a9a9a" stroke-width="1.5"/><polygon points="0,17 10,17 5,26" fill="#9a9a9a"/></svg></div>
+
+      <div class="node func">AVERAGE</div>
+      <div class="arrow"><svg width="10" height="26"><line x1="5" y1="0" x2="5" y2="18" stroke="#9a9a9a" stroke-width="1.5"/><polygon points="0,17 10,17 5,26" fill="#9a9a9a"/></svg></div>
+
+      <div class="node final">
+        <h3>Uso en KPI</h3>
+        <p>Ventas totales</p>
+      </div>
+    </div>
+
+    <!-- COLUMNA PURPLE -->
+    <div class="col purple">
+      <div class="node head">
+        <h3>Cálculo dinámico</h3>
+        <p>Cambia el contexto</p>
+      </div>
+      <div class="arrow"><svg width="10" height="26"><line x1="5" y1="0" x2="5" y2="18" stroke="#9a9a9a" stroke-width="1.5"/><polygon points="0,17 10,17 5,26" fill="#9a9a9a"/></svg></div>
+
+      <div class="node func">CALCULATE</div>
+      <div class="arrow"><svg width="10" height="26"><line x1="5" y1="0" x2="5" y2="18" stroke="#9a9a9a" stroke-width="1.5"/><polygon points="0,17 10,17 5,26" fill="#9a9a9a"/></svg></div>
+
+      <div class="node func">DIVIDE</div>
+      <div class="arrow"><svg width="10" height="26"><line x1="5" y1="0" x2="5" y2="18" stroke="#9a9a9a" stroke-width="1.5"/><polygon points="0,17 10,17 5,26" fill="#9a9a9a"/></svg></div>
+
+      <div class="node func">FILTER</div>
+      <div class="arrow"><svg width="10" height="26"><line x1="5" y1="0" x2="5" y2="18" stroke="#9a9a9a" stroke-width="1.5"/><polygon points="0,17 10,17 5,26" fill="#9a9a9a"/></svg></div>
+
+      <div class="node final">
+        <h3>Uso en KPI</h3>
+        <p>Margen filtrado</p>
+      </div>
+    </div>
+
+    <!-- COLUMNA ORANGE -->
+    <div class="col orange">
+      <div class="node head">
+        <h3>Tiempo</h3>
+        <p>Compara periodos</p>
+      </div>
+      <div class="arrow"><svg width="10" height="26"><line x1="5" y1="0" x2="5" y2="18" stroke="#9a9a9a" stroke-width="1.5"/><polygon points="0,17 10,17 5,26" fill="#9a9a9a"/></svg></div>
+
+      <div class="node func">DATEADD</div>
+      <div class="arrow"><svg width="10" height="26"><line x1="5" y1="0" x2="5" y2="18" stroke="#9a9a9a" stroke-width="1.5"/><polygon points="0,17 10,17 5,26" fill="#9a9a9a"/></svg></div>
+
+      <div class="node func">TOTALYTD</div>
+      <div class="arrow"><svg width="10" height="26"><line x1="5" y1="0" x2="5" y2="18" stroke="#9a9a9a" stroke-width="1.5"/><polygon points="0,17 10,17 5,26" fill="#9a9a9a"/></svg></div>
+
+      <div class="node func">SAMEPERIODLASTYEAR</div>
+      <div class="arrow"><svg width="10" height="26"><line x1="5" y1="0" x2="5" y2="18" stroke="#9a9a9a" stroke-width="1.5"/><polygon points="0,17 10,17 5,26" fill="#9a9a9a"/></svg></div>
+
+      <div class="node final">
+        <h3>Uso en KPI</h3>
+        <p>Crecimiento anual</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</body>
+</html>
