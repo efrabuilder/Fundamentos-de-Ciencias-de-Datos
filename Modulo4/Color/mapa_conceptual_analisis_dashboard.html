@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Análisis de un dashboard</title>
+<style>
+  :root{
+    --bg:#f7f5f0;
+    --card-bg:#ffffff;
+    --border:#e2e0d9;
+    --dark:#1f2733;
+    --green:#0f6d5c;
+    --green-dark:#0b5a4c;
+    --red:#a8431e;
+    --red-dark:#8c3719;
+    --blue:#1c5f96;
+    --blue-dark:#164c78;
+    --text:#2b2f36;
+    --muted:#5b6270;
+  }
+
+  *{box-sizing:border-box;}
+
+  body{
+    margin:0;
+    background:var(--bg);
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color:var(--text);
+    padding:40px 20px 60px;
+  }
+
+  .wrapper{
+    max-width:1100px;
+    margin:0 auto;
+  }
+
+  .header{
+    background:var(--dark);
+    color:#fff;
+    border-radius:10px;
+    padding:22px 30px;
+    text-align:center;
+    max-width:420px;
+    margin:0 auto 30px;
+  }
+  .header h1{
+    margin:0 0 6px;
+    font-size:1.4rem;
+  }
+  .header p{
+    margin:0;
+    font-size:0.9rem;
+    color:#c9d0da;
+    line-height:1.4;
+  }
+
+  .connector{
+    position:relative;
+    height:40px;
+    max-width:960px;
+    margin:0 auto;
+  }
+  .connector::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:1px;
+    background:#c7c4bb;
+  }
+  .connector::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:50%;
+    width:1px;
+    height:40px;
+    background:#c7c4bb;
+  }
+  .connector .drop-left, .connector .drop-right{
+    position:absolute;
+    top:0;
+    width:1px;
+    height:40px;
+    background:#c7c4bb;
+  }
+  .connector .drop-left{ left:16.6%; }
+  .connector .drop-right{ left:83.3%; }
+
+  .columns{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:24px;
+    max-width:960px;
+    margin:0 auto;
+  }
+
+  .col-header{
+    border-radius:8px 8px 0 0;
+    padding:16px 18px;
+    color:#fff;
+    text-align:center;
+  }
+  .col-header h2{
+    margin:0 0 4px;
+    font-size:1.05rem;
+  }
+  .col-header p{
+    margin:0;
+    font-size:0.8rem;
+    opacity:0.9;
+  }
+
+  .col-header.green{ background:var(--green); }
+  .col-header.red{ background:var(--red); }
+  .col-header.blue{ background:var(--blue); }
+
+  .card{
+    background:var(--card-bg);
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:16px 18px;
+    margin-top:14px;
+  }
+
+  .card h3{
+    margin:0 0 8px;
+    font-size:0.98rem;
+  }
+  .card h3.green-text{ color:var(--green-dark); }
+  .card h3.red-text{ color:var(--red-dark); }
+  .card h3.blue-text{ color:var(--blue-dark); }
+
+  .card p{
+    margin:0;
+    font-size:0.85rem;
+    line-height:1.5;
+    color:var(--muted);
+  }
+
+  .card .correccion{
+    margin-top:10px;
+    padding-top:10px;
+    border-top:1px dashed var(--border);
+    font-size:0.85rem;
+    color:var(--muted);
+    line-height:1.5;
+  }
+  .card .correccion strong{
+    color:var(--red-dark);
+  }
+
+  .tag{
+    display:inline-block;
+    font-size:0.72rem;
+    font-weight:600;
+    padding:3px 10px;
+    border-radius:12px;
+    margin-bottom:8px;
+    background:#f6ded3;
+    color:var(--red-dark);
+  }
+
+  .quote{
+    text-align:center;
+    font-style:italic;
+    color:var(--muted);
+    max-width:800px;
+    margin:40px auto 0;
+    font-size:0.95rem;
+  }
+
+  @media (max-width:800px){
+    .columns{ grid-template-columns:1fr; }
+    .connector{ display:none; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="header">
+    <h1>Análisis de un dashboard</h1>
+    <p>Dashboard funcional, bien estructurado,<br>visualmente mejorable</p>
+  </div>
+
+  <div class="connector">
+    <div class="drop-left"></div>
+    <div class="drop-right"></div>
+  </div>
+
+  <div class="columns">
+
+    <!-- ACIERTOS -->
+    <div class="col">
+      <div class="col-header green">
+        <h2>Aciertos</h2>
+        <p>3 puntos fuertes del diseño</p>
+      </div>
+
+      <div class="card">
+        <h3 class="green-text">1. Buena jerarquía visual</h3>
+        <p>Primero se ven los indicadores clave (718 llamadas, 82% de respuesta, 142,03 min de espera). El usuario entiende la situación general antes de ver el detalle.</p>
+      </div>
+
+      <div class="card">
+        <h3 class="green-text">2. Buena agrupación de la información</h3>
+        <p>Filtros a la izquierda, KPI arriba, gráficos al centro, detalle por persona abajo. El recorrido visual tiene lógica.</p>
+      </div>
+
+      <div class="card">
+        <h3 class="green-text">3. Gráficos adecuados para los datos</h3>
+        <p>Línea para evolución de llamadas en el tiempo; barras para comparar cantidades entre horas. Facilita la interpretación.</p>
+      </div>
+    </div>
+
+    <!-- PROBLEMAS -->
+    <div class="col">
+      <div class="col-header red">
+        <h2>Problemas</h2>
+        <p>3 puntos a corregir</p>
+      </div>
+
+      <div class="card">
+        <span class="tag">Simplicidad y jerarquía</span>
+        <h3 class="red-text">1. Sobrecarga visual</h3>
+        <p>Principal defecto: demasiados elementos comunicando al mismo tiempo.</p>
+        <div class="correccion"><strong>Corrección:</strong> más espacio en blanco, menos bordes, eliminar etiquetas, dejar solo los indicadores necesarios.</div>
+      </div>
+
+      <div class="card">
+        <span class="tag">Legibilidad</span>
+        <h3 class="red-text">2. Tipografía demasiado pequeña</h3>
+        <p>Especialmente en las tablas inferiores; cuesta leer nombres y valores.</p>
+        <div class="correccion"><strong>Corrección:</strong> aumentar tamaño de fuente; mostrar menos columnas o mover información secundaria a otra página.</div>
+      </div>
+
+      <div class="card">
+        <span class="tag">Semántica del color</span>
+        <h3 class="red-text">3. Fondo y colores innecesarios</h3>
+        <p>El degradado azul-rosado es decorativo, no representa ninguna variable.</p>
+        <div class="correccion"><strong>Corrección:</strong> fondo blanco o gris muy claro; reservar azul/naranja para resaltar información importante.</div>
+      </div>
+    </div>
+
+    <!-- CONCLUSION -->
+    <div class="col">
+      <div class="col-header blue">
+        <h2>Conclusión</h2>
+        <p>Balance general</p>
+      </div>
+
+      <div class="card">
+        <h3 class="blue-text">Fortalezas</h3>
+        <p>Jerarquía visual clara, buena agrupación de información y gráficos apropiados para tendencias y comparaciones.</p>
+      </div>
+
+      <div class="card">
+        <h3 class="blue-text">Oportunidades de mejora</h3>
+        <p>Sobrecarga visual, texto reducido en algunas zonas y uso excesivo de elementos decorativos.</p>
+      </div>
+
+      <div class="card">
+        <h3 class="blue-text">Camino a seguir</h3>
+        <p>Una versión más sencilla, con más espacio en blanco, mejor contraste y menos información simultánea, permitiría interpretar los resultados con mayor rapidez.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="quote">"Un dashboard no necesariamente es mejor por mostrar más información; es mejor cuando permite encontrar la información importante más rápido."</p>
+
+</div>
+</body>
+</html>
