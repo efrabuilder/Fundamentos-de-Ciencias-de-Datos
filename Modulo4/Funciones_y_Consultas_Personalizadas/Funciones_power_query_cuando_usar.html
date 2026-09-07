@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Funciones para ubicar, medir actualidad y validar</title>
+<style>
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:#ffffff;
+    font-family:"Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding:40px 20px;
+  }
+  .outer{
+    max-width:1000px;
+    margin:0 auto;
+    background:#efece2;
+    border:1.5px solid #6b6b6b;
+    border-radius:18px;
+    padding:36px 40px 44px;
+  }
+  .outer-title{
+    font-size:1.4rem;
+    font-weight:700;
+    color:#3a3a3a;
+    margin:0 0 30px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+  }
+
+  .quad{
+    border-radius:14px;
+    padding:26px 24px 32px;
+    text-align:center;
+  }
+  .quad h2{
+    margin:0 0 14px;
+    font-size:1.3rem;
+    font-weight:700;
+  }
+  .quad .sub{
+    margin:0 0 18px;
+    font-size:1.05rem;
+  }
+  .quad .line{
+    margin:0 0 12px;
+    font-size:1.05rem;
+  }
+
+  .quad.blue{
+    background:#dcedfa;
+    border:1.5px solid #1f5f9e;
+  }
+  .quad.blue h2{ color:#154a80; }
+  .quad.blue .sub, .quad.blue .line{ color:#2f6fb5; }
+
+  .quad.orange{
+    background:#faecd2;
+    border:1.5px solid #b5791f;
+  }
+  .quad.orange h2{ color:#7a5115; }
+  .quad.orange .sub, .quad.orange .line{ color:#b5791f; }
+
+  .quad.red{
+    background:#fbe4dd;
+    border:1.5px solid #a8431e;
+  }
+  .quad.red h2{ color:#7a2f14; }
+  .quad.red .sub, .quad.red .line{ color:#a8431e; }
+
+  .quad.purple{
+    background:#e6e4f7;
+    border:1.5px solid #4a3f9e;
+  }
+  .quad.purple h2{ color:#332a6e; }
+  .quad.purple .sub, .quad.purple .line{ color:#4a3f9e; }
+
+  @media (max-width:700px){
+    .grid{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="outer">
+  <div class="outer-title">Funciones para ubicar, medir actualidad y validar</div>
+
+  <div class="grid">
+
+    <div class="quad blue">
+      <h2>Ubicar el momento</h2>
+      <p class="sub">Para sellar la hora de ejecución</p>
+      <p class="line">DateTime.LocalNow()</p>
+      <p class="line">DateTime.FixedLocalNow()</p>
+      <p class="line">DateTimeZone.UtcNow()</p>
+      <p class="line">Date.From / DateTime.Time</p>
+    </div>
+
+    <div class="quad orange">
+      <h2>Actualidad del dato</h2>
+      <p class="sub">Para alertar si un dato ya venció</p>
+      <p class="line">Duration.From(ahora - fecha)</p>
+      <p class="line">Duration.Days(...)</p>
+      <p class="line">Duration.TotalHours(...)</p>
+      <p class="line">if duracion &gt; X then ...</p>
+    </div>
+
+    <div class="quad red">
+      <h2>Validar tipos</h2>
+      <p class="sub">Antes de operar con un valor</p>
+      <p class="line">Value.Is(x, type date)</p>
+      <p class="line">Value.Type(x)</p>
+      <p class="line">Table.HasColumns(...)</p>
+      <p class="line">try ... otherwise</p>
+    </div>
+
+    <div class="quad purple">
+      <h2>Localizar errores</h2>
+      <p class="sub">Al depurar filas que fallan</p>
+      <p class="line">Table.RemoveRowsWithErrors(tabla)</p>
+      <p class="line">Col. auxiliar: try...otherwise</p>
+      <p class="line">Table.Schema(tabla)</p>
+      <p class="line">Value.Metadata(x)</p>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
