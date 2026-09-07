@@ -18,6 +18,7 @@
     --r4:#db2777; --r4-soft:#fdf2f8;
     --r5:#0891b2; --r5-soft:#ecfeff;
     --r6:#4338ca; --r6-soft:#eef2ff;
+    --r7:#0d9488; --r7-soft:#f0fdfa;
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
@@ -43,6 +44,7 @@
   #tab-r6{--accent:var(--r6);}
   #tab-r4{--accent:var(--r4);}
   #tab-r5{--accent:var(--r5);}
+  #tab-r7{--accent:var(--r7);}
   main{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
   .panel{display:none;}
   .panel.active{display:block;animation:fade .25s ease;}
@@ -60,6 +62,7 @@
   #panel-r6 .card-toolbar{--accent-soft:var(--r6-soft);}
   #panel-r4 .card-toolbar{--accent-soft:var(--r4-soft);}
   #panel-r5 .card-toolbar{--accent-soft:var(--r5-soft);}
+  #panel-r7 .card-toolbar{--accent-soft:var(--r7-soft);}
   .status{font-size:12.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
   .status .led{width:7px;height:7px;border-radius:50%;background:#cbd5e1;}
   .status.ok .led{background:#16a34a;}
@@ -121,6 +124,9 @@
   </button>
   <button class="tab" id="tab-r6" data-target="panel-r6">
     <span class="dot"></span> Funciones y Consultas Personalizadas
+  </button>
+  <button class="tab" id="tab-r7" data-target="panel-r7">
+    <span class="dot"></span> Modelo Dimensional
   </button>
   <button class="tab" id="tab-r4" data-target="panel-r4">
     <span class="dot"></span> KPI'S
@@ -456,6 +462,29 @@
     </div>
   </section>
 
+  <!-- ===================== PANEL 7: Modelo Dimensional ===================== -->
+  <section class="panel" id="panel-r7">
+    <div class="panel-head">
+      <div>
+        <h2>Modelo Dimensional</h2>
+        <div class="sub">Modelado dimensional para BI: modelo estrella, copo de nieve y caso aplicado</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Página — Modelado dimensional para BI</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-r7a"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <a class="btn" id="download-r7a" style="display:none;">Descargar</a>
+          <label class="btn" for="file-r7a">Cargar manualmente</label>
+          <input type="file" id="file-r7a">
+        </div>
+      </div>
+      <div class="viewer" id="viewer-r7a"></div>
+    </div>
+  </section>
+
   <!-- ===================== PANEL 4: KPI'S ===================== -->
   <section class="panel" id="panel-r4">
     <div class="panel-head">
@@ -735,6 +764,14 @@
     dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
     setStatus(statusId,'ok','Archivo cargado');
   }
+  function renderHtmlPage(viewerId, statusId, downloadId, url, filename){
+    const v = document.getElementById(viewerId);
+    v.className = 'viewer';
+    v.innerHTML = '<iframe src="' + url + '"></iframe>';
+    const dl = document.getElementById(downloadId);
+    dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
+    setStatus(statusId,'ok','Página cargada');
+  }
   function renderImage(viewerId, statusId, downloadId, url, filename){
     const v = document.getElementById(viewerId);
     v.className = 'viewer';
@@ -858,6 +895,10 @@
       case 'pdf':
         renderPdf(viewerId, statusId, downloadId, url, filename);
         break;
+      case 'html':
+      case 'htm':
+        renderHtmlPage(viewerId, statusId, downloadId, url, filename);
+        break;
       case 'xlsx':
       case 'xlsm':
         renderOfficeFile(viewerId, statusId, downloadId, url, filename, blob ? blob.size : null, 'XLS', absoluteUrl);
@@ -931,6 +972,9 @@
   // Panel 6: Funciones y Consultas Personalizadas
   setupResource('r6a', 'Funciones_y_Consultas_Personalizadas/ruta_invocar_funcion_power_bi.png');
   setupResource('r6b', 'Funciones_y_Consultas_Personalizadas/funciones_power_query_cuando_usar.png');
+
+  // Panel 7: Modelo Dimensional
+  setupResource('r7a', 'Modelo_Dimensional/modelo_dimensional.html');
 
   // Panel 4: KPI'S
   setupResource('r4a', "KPIS/metricas_kpis.png");
