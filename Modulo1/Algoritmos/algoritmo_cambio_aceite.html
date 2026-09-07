@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algoritmo — Pasos para Cambio de Aceite</title>
+<style>
+  body{
+    margin:0; padding:40px 20px; background:#ffffff;
+    font-family:Arial, Helvetica, sans-serif;
+    display:flex; justify-content:center;
+  }
+  .flow{
+    display:flex; flex-direction:column; align-items:center;
+    max-width:480px; width:100%;
+  }
+  .step{
+    width:100%; border-radius:14px; border:1.5px solid; padding:18px 24px;
+    text-align:center; box-sizing:border-box;
+  }
+  .step h3{margin:0 0 6px 0; font-size:19px;}
+  .step p{margin:0; font-size:14px;}
+  .arrow{
+    width:2px; height:48px; background:#94a3b8; position:relative; margin:4px 0;
+  }
+  .arrow::after{
+    content:""; position:absolute; bottom:-1px; left:50%; transform:translateX(-50%);
+    border-left:6px solid transparent; border-right:6px solid transparent;
+    border-top:8px solid #94a3b8;
+  }
+
+  .neutral{background:#f2efe9; border-color:#d8d3c8;}
+  .neutral h3{color:#374151;}
+  .neutral p{color:#57606f;}
+
+  .critical{background:#fdece3; border-color:#f3b494;}
+  .critical h3{color:#9a3412;}
+  .critical p{color:#c2410c;}
+
+  .final{background:#dcf6ec; border-color:#8fdcc0;}
+  .final h3{color:#065f46;}
+  .final p{color:#0f766e;}
+</style>
+</head>
+<body>
+
+<div class="flow">
+
+  <div class="step neutral">
+    <h3>Preparar herramientas</h3>
+    <p>Aceite, filtro, llave, bandeja</p>
+  </div>
+  <div class="arrow"></div>
+
+  <div class="step neutral">
+    <h3>Elevar el vehículo</h3>
+    <p>Usar rampas o gato con soportes</p>
+  </div>
+  <div class="arrow"></div>
+
+  <div class="step critical">
+    <h3>Drenar aceite usado</h3>
+    <p>Quitar el tapón de drenaje</p>
+  </div>
+  <div class="arrow"></div>
+
+  <div class="step critical">
+    <h3>Cambiar el filtro</h3>
+    <p>Retirar el viejo, instalar nuevo</p>
+  </div>
+  <div class="arrow"></div>
+
+  <div class="step neutral">
+    <h3>Cerrar el tapón</h3>
+    <p>Con junta nueva, ajustar bien</p>
+  </div>
+  <div class="arrow"></div>
+
+  <div class="step final">
+    <h3>Verter aceite nuevo</h3>
+    <p>Cantidad y tipo según manual</p>
+  </div>
+  <div class="arrow"></div>
+
+  <div class="step final">
+    <h3>Verificar y probar</h3>
+    <p>Revisar nivel, encender motor</p>
+  </div>
+
+</div>
+
+</body>
+</html>
