@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Mapa Conceptual — Análisis UX/UI del Dashboard de RRHH</title>
+<style>
+  :root{
+    --bg: #eef0f3;
+    --ink: #1f2430;
+    --sub: #6b7280;
+
+    --hub: #1c2333;
+
+    --green: #1f9254;
+    --green-bg: #e2f7ea;
+    --green-border: #1f9254;
+
+    --red: #d92b2b;
+    --red-bg: #fbe4e2;
+    --red-border: #d92b2b;
+
+    --blue: #1f5fd9;
+    --blue-bg: #dce9fb;
+    --blue-border: #1f5fd9;
+  }
+
+  *{ box-sizing: border-box; }
+
+  body{
+    margin: 0;
+    padding: 44px 32px 64px;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .page{
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+
+  h1{
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0 0 40px;
+  }
+
+  /* --- Hub --- */
+  .hub-wrap{
+    display: flex;
+    justify-content: center;
+  }
+
+  .hub{
+    background: var(--hub);
+    color: #fff;
+    text-align: center;
+    padding: 18px 40px;
+    border-radius: 8px;
+    min-width: 300px;
+  }
+
+  .hub h2{
+    margin: 0 0 4px;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .hub p{
+    margin: 0;
+    font-size: 14px;
+    color: #d7dae0;
+  }
+
+  /* --- Connector tree --- */
+  .tree{
+    position: relative;
+    height: 70px;
+  }
+
+  .tree svg{
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+  }
+
+  /* --- Columns --- */
+  .columns{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 40px;
+  }
+
+  .col-head{
+    color: #fff;
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 14px 10px;
+    border-radius: 8px;
+    margin: 0 auto 0;
+  }
+
+  .col-green .col-head{ background: var(--green); }
+  .col-red   .col-head{ background: var(--red); }
+  .col-blue  .col-head{ background: var(--blue); }
+
+  .stem{
+    width: 3px;
+    height: 20px;
+    margin: 0 auto;
+  }
+  .col-green .stem{ background: var(--green); }
+  .col-red   .stem{ background: var(--red); }
+  .col-blue  .stem{ background: var(--blue); }
+
+  .cards{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .connector{
+    width: 3px;
+    height: 18px;
+    margin: 0 auto;
+  }
+  .col-green .connector{ background: var(--green); }
+  .col-red   .connector{ background: var(--red); }
+  .col-blue  .connector{ background: var(--blue); }
+
+  .card{
+    border-radius: 8px;
+    padding: 16px 18px;
+    font-size: 14px;
+    line-height: 1.5;
+    border: 1px solid transparent;
+  }
+
+  .card h3{
+    margin: 0 0 4px;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  .card p{
+    margin: 0;
+  }
+
+  .card .principio{
+    font-style: italic;
+  }
+
+  .col-green .card{ background: var(--green-bg); border-color: #b9e6cb; color: #123c26; }
+  .col-green .card h3{ color: #123c26; }
+
+  .col-red .card{ background: var(--red-bg); border-color: #f3bcb7; color: #5c1210; }
+  .col-red .card h3{ color: #5c1210; }
+
+  .col-blue .card{ background: var(--blue-bg); border-color: #b9cff2; color: #12275c; }
+  .col-blue .card h3{ color: #12275c; }
+
+  /* --- Legend --- */
+  .legend{
+    margin-top: 48px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 26px 32px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+
+  .legend h3{
+    margin: 0 0 16px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .legend-grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 40px;
+    row-gap: 14px;
+  }
+
+  .legend-item{
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14.5px;
+  }
+
+  .dot{
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+  .dot-green{ background: var(--green); }
+  .dot-red{ background: var(--red); }
+
+  .legend-footer{
+    margin-top: 22px;
+    font-size: 13.5px;
+    color: var(--sub);
+  }
+  .legend-footer p{ margin: 4px 0; }
+
+  @media (max-width: 900px){
+    .columns{ grid-template-columns: 1fr; row-gap: 32px; }
+    .legend-grid{ grid-template-columns: 1fr; }
+    .tree{ display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <h1>Mapa Conceptual — Análisis UX/UI del Dashboard de RRHH</h1>
+
+  <div class="hub-wrap">
+    <div class="hub">
+      <h2>Evaluación UX/UI</h2>
+      <p>Dashboard "Planta / Grupo"</p>
+    </div>
+  </div>
+
+  <div class="tree">
+    <svg viewBox="0 0 1500 70" preserveAspectRatio="none">
+      <polyline points="750,0 750,25 250,25 250,70" fill="none" stroke="#1f9254" stroke-width="3"/>
+      <line x1="750" y1="0" x2="750" y2="70" stroke="#d92b2b" stroke-width="3"/>
+      <polyline points="750,0 750,25 1250,25 1250,70" fill="none" stroke="#1f5fd9" stroke-width="3"/>
+    </svg>
+  </div>
+
+  <div class="columns">
+
+    <div class="col-green">
+      <div class="col-head">Aciertos de Diseño</div>
+      <div class="stem"></div>
+      <div class="cards">
+        <div class="card">
+          <h3>Codificación cromática (semáforo)</h3>
+          <p>Rojo/Verde/Ámbar en IFAR y Seguridad</p>
+          <p class="principio">Principio: Atributos preatentivos</p>
+        </div>
+        <div class="connector"></div>
+        <div class="card">
+          <h3>Agrupación en tarjetas (chunking)</h3>
+          <p>Cada KPI en panel propio con título</p>
+          <p class="principio">Principio: Proximidad y cierre (Gestalt)</p>
+        </div>
+        <div class="connector"></div>
+        <div class="card">
+          <h3>Jerarquía visual por tamaño</h3>
+          <p>Números grandes/bold vs. etiquetas pequeñas</p>
+          <p class="principio">Principio: Jerarquía visual / énfasis</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-red">
+      <div class="col-head">Problemas de Diseño</div>
+      <div class="stem"></div>
+      <div class="cards">
+        <div class="card">
+          <h3>Paleta de color sin sistema</h3>
+          <p>Cada tarjeta usa un color de acento distinto</p>
+          <p class="principio">Principio violado: Consistencia visual</p>
+        </div>
+        <div class="connector"></div>
+        <div class="card">
+          <h3>Gráfico de dona (4 segmentos)</h3>
+          <p>Difícil comparar ángulos/áreas con precisión</p>
+          <p class="principio">Principio violado: Precisión perceptual (Cleveland-McGill)</p>
+        </div>
+        <div class="connector"></div>
+        <div class="card">
+          <h3>Tabla "Ausentismo" sobrecargada</h3>
+          <p>7 columnas, fuente pequeña, sin jerarquía</p>
+          <p class="principio">Principio violado: Ruido visual (Tufte)</p>
+        </div>
+        <div class="connector"></div>
+        <div class="card">
+          <h3>Grid sin alinear</h3>
+          <p>Paneles con alturas distintas, bordes sueltos</p>
+          <p class="principio">Principio violado: Alineación (Gestalt)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-blue">
+      <div class="col-head">Correcciones Propuestas</div>
+      <div class="stem"></div>
+      <div class="cards">
+        <div class="card">
+          <h3>Paleta neutra + color con significado</h3>
+          <p>Grises/azul corporativo en encabezados; rojo/ámbar/verde solo para desempeño</p>
+        </div>
+        <div class="connector"></div>
+        <div class="card">
+          <h3>Barras horizontales en vez de dona</h3>
+          <p>Ordenadas de mayor a menor, con % al final de cada barra</p>
+        </div>
+        <div class="connector"></div>
+        <div class="card">
+          <h3>Más espaciado + fila "Total" distinta</h3>
+          <p>+4-6px entre filas, zebra striping marcado, columnas secundarias en detalle expandible</p>
+        </div>
+        <div class="connector"></div>
+        <div class="card">
+          <h3>Grid de 12 columnas alineada</h3>
+          <p>Cada tarjeta ocupa múltiplos exactos de columna/fila para alinear bordes</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="legend">
+    <h3>Leyenda de principios de diseño (UX/UI) aplicados en este análisis</h3>
+    <div class="legend-grid">
+      <div class="legend-item"><span class="dot dot-green"></span><span>Atributos preatentivos — el ojo detecta color/tamaño antes de leer texto</span></div>
+      <div class="legend-item"><span class="dot dot-red"></span><span>Consistencia visual — el color debe usarse con un sistema, no decorativo</span></div>
+      <div class="legend-item"><span class="dot dot-green"></span><span>Proximidad y cierre (Gestalt) — agrupar lo relacionado, separar lo distinto</span></div>
+      <div class="legend-item"><span class="dot dot-red"></span><span>Precisión perceptual (Cleveland-McGill) — longitud &gt; ángulo/área para comparar</span></div>
+      <div class="legend-item"><span class="dot dot-green"></span><span>Jerarquía visual — tamaño/peso indican importancia del dato</span></div>
+      <div class="legend-item"><span class="dot dot-red"></span><span>Ruido visual / tinta-dato (Tufte) — minimizar elementos que no aportan info</span></div>
+      <div class="legend-item"></div>
+      <div class="legend-item"><span class="dot dot-red"></span><span>Alineación (Gestalt) — los bordes alineados crean orden y estructura</span></div>
+    </div>
+    <div class="legend-footer">
+      <p>Verde = Aciertos &nbsp;&nbsp; Rojo = Problemas &nbsp;&nbsp; Azul = Correcciones propuestas</p>
+      <p>Fuente del análisis: evaluación UX/UI del Dashboard de RRHH (División/Planta) — mayo 2020</p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
