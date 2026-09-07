@@ -943,16 +943,45 @@
       renderByExtension(viewerId, statusId, downloadId, URL.createObjectURL(f), f.name, f);
     });
   }
+  // Igual que setupResource, pero la vista previa se carga desde una página
+  // HTML "espejo" del recurso, mientras que el botón Descargar sigue
+  // apuntando al archivo de imagen original (no al HTML).
+  function setupResourceHtml(id, previewHtmlFilename, downloadImageFilename){
+    const viewerId = 'viewer-' + id;
+    const statusId = 'status-' + id;
+    const downloadId = 'download-' + id;
+    const fileId = 'file-' + id;
+    fetch(previewHtmlFilename).then(r=>{
+      if(!r.ok) throw new Error();
+      return r.blob();
+    }).then(blob=>{
+      const previewUrl = URL.createObjectURL(blob);
+      renderHtmlPage(viewerId, statusId, downloadId, previewUrl, previewHtmlFilename);
+      // Sobrescribimos el enlace de descarga para que apunte a la imagen,
+      // no a la página HTML de vista previa.
+      const dl = document.getElementById(downloadId);
+      dl.href = downloadImageFilename;
+      dl.download = downloadImageFilename.split('/').pop();
+      dl.style.display = 'inline-block';
+    }).catch(()=>{
+      setStatus(statusId,'err','No se encontró automáticamente — cárgalo manualmente');
+    });
+    document.getElementById(fileId).addEventListener('change', e=>{
+      const f = e.target.files[0];
+      if(!f) return;
+      renderByExtension(viewerId, statusId, downloadId, URL.createObjectURL(f), f.name, f);
+    });
+  }
   // ---------- Recursos del Módulo 4 ----------
   // Panel 1: El Color en la Creación de Dashboards
-  setupResource('r1a', 'Color/mapa_conceptual.jpg');
+  setupResourceHtml('r1a', 'Color/mapa_conceptual_color.htlm', 'Color/mapa_conceptual.jpg');
   setupResource('r1b', 'Color/COLORES PARA TUS dASHBOARDS.pptx');
   setupResource('r1c', 'Color/DASHBOARD.jpeg');
-  setupResource('r1d', 'Color/mapa_conceptual_UXUI.png');
+  setupResourceHtml('r1d', 'Color/mapa_conceptual_uxui.html', 'Color/mapa_conceptual_UXUI.png');
   setupResource('r1g', 'Color/dashboard_efectivo.jpeg');
-  setupResource('r1h', 'Color/mapa_conceptual_analisis_dashboard.png');
-  setupResource('r1e', 'Color/dashboard_comparativo.jpg');
-  setupResource('r1f', 'Color/mapa_conceptual_dashboards.png');
+  setupResourceHtml('r1h', 'Color/mapa_conceptual_analisis_dashboard.html', 'Color/mapa_conceptual_analisis_dashboard.png');
+  setupResourceHtml('r1e', 'Color/dashboard_comparativo.html', 'Color/dashboard_comparativo.jpg');
+  setupResourceHtml('r1f', 'Color/mapa_conceptual_dashboards.html', 'Color/mapa_conceptual_dashboards.png');
 
   // Panel 2: Visualización y Limpieza de Datos
   setupResource('r2a', 'Visualizacion_y_Limpieza_de_datos/Jardineria_Datos_X.xlsx');
@@ -965,30 +994,30 @@
   setupResource('r2h', "Visualizacion_y_Limpieza_de_datos/CREANDO DASHBOARD DB_JARDINERIA_CLIENTES.pdf");
 
   // Panel 3: Diseño de Dashboards Efectivos
-  setupResource('r3a', 'Diseño_Dashboards_Efectivos/mapa_conceptual_diseno_dashboards.png');
+  setupResourceHtml('r3a', 'Diseño_Dashboards_Efectivos/mapa_diseno_dashboards_efectivos.html', 'Diseño_Dashboards_Efectivos/mapa_conceptual_diseno_dashboards.png');
   setupResource('r3b', 'Diseño_Dashboards_Efectivos/PRIMER DASHBOARD.pbix');
   setupResource('r3c', 'Diseño_Dashboards_Efectivos/PRIMER DASHBOARD.pdf');
 
   // Panel 6: Funciones y Consultas Personalizadas
-  setupResource('r6a', 'Funciones_y_Consultas_Personalizadas/ruta_invocar_funcion_power_bi.png');
-  setupResource('r6b', 'Funciones_y_Consultas_Personalizadas/funciones_power_query_cuando_usar.png');
+  setupResourceHtml('r6a', 'Funciones_y_Consultas_Personalizadas/ruta_invocar_funcion_power_bi.html', 'Funciones_y_Consultas_Personalizadas/ruta_invocar_funcion_power_bi.png');
+  setupResourceHtml('r6b', 'Funciones_y_Consultas_Personalizadas/Funciones_power_query_cuando_usar.html', 'Funciones_y_Consultas_Personalizadas/funciones_power_query_cuando_usar.png');
 
   // Panel 7: Modelo Dimensional
   setupResource('r7a', 'Modelo_Dimensional/modelo_dimensional.html');
 
   // Panel 4: KPI'S
-  setupResource('r4a', "KPIS/metricas_kpis.png");
-  setupResource('r4j', "KPIS/Mapa_Conceptual_Empresas_Exportadoras.jpg");
-  setupResource('r4k', "KPIS/Mapa_Conceptual_Diseno_Tableros_Control.jpg");
-  setupResource('r4d', "KPIS/mapa_conceptual_funciones_dax.png");
-  setupResource('r4e', "KPIS/mapa_kpis_dax_descriptivo.png");
+  setupResourceHtml('r4a', "KPIS/KPIS_metricas_kpis.html", "KPIS/metricas_kpis.png");
+  setupResourceHtml('r4j', "KPIS/indicadores_empresas_exportadoras.html", "KPIS/Mapa_Conceptual_Empresas_Exportadoras.jpg");
+  setupResourceHtml('r4k', "KPIS/Diseno_tableros_control.html", "KPIS/Mapa_Conceptual_Diseno_Tableros_Control.jpg");
+  setupResourceHtml('r4d', "KPIS/mapa_funciones_dax.html", "KPIS/mapa_conceptual_funciones_dax.png");
+  setupResourceHtml('r4e', "KPIS/mapa_kpis_dax_descriptivo.html", "KPIS/mapa_kpis_dax_descriptivo.png");
   setupResource('r4b', "KPIS/datos_practica_KPI_PowerBI_100_registros.xlsx");
   setupResource('r4f', "KPIS/DAX para KPI's.txt");
   setupResource('r4c', "KPIS/Aplicando KPI'S.pbix");
   setupResource('r4l', "KPIS/Aplicando KPI'S.pdf");
 
   // Panel 4 (sub-bloque): Financieros, Operativos y Comerciales
-  setupResource('r4g', "KPIS/Financieros_Operativos_Comerciales/kpis_tres_categorias.png");
+  setupResourceHtml('r4g', "KPIS/Kpis_financieros_operativos_comerciales.html", "KPIS/Financieros_Operativos_Comerciales/kpis_tres_categorias.png");
   setupResource('r4h', "KPIS/Financieros_Operativos_Comerciales/Resumen_Ejercicios_Indicadores.docx");
   setupResource('r4i', "KPIS/Financieros_Operativos_Comerciales/KPI Finan.pptx");
 
