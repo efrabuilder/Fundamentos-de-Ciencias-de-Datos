@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ruta para invocar función en Power BI</title>
+<style>
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:#ffffff;
+    font-family:"Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    padding:50px 20px;
+  }
+  .flow{
+    max-width:640px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .node{
+    border-radius:10px;
+    padding:26px 30px;
+    text-align:center;
+  }
+  .node h2{
+    margin:0 0 6px;
+    font-size:1.5rem;
+  }
+  .node p{
+    margin:0;
+    font-size:1.15rem;
+  }
+
+  .node.beige{
+    background:#efece4;
+    border:1.5px solid #8f8b7f;
+  }
+  .node.beige h2{ color:#3a3a3a; }
+  .node.beige p{ color:#6b6b6b; }
+
+  .node.blue-light{
+    background:#e4eefb;
+    border:1.5px solid #2f6fb0;
+  }
+  .node.blue-light h2{ color:#154c84; }
+  .node.blue-light p{ color:#2f6fb0; }
+
+  .node.green-light{
+    background:#e0f3ec;
+    border:1.5px solid #1e8a63;
+  }
+  .node.green-light h2{ color:#0f5a3f; }
+  .node.green-light p{ color:#1e8a63; }
+
+  .arrow{
+    height:80px;
+    display:flex;
+    justify-content:center;
+  }
+</style>
+</head>
+<body>
+
+<div class="flow">
+
+  <div class="node beige">
+    <h2>Power BI Desktop</h2>
+    <p>Vista Inicio o Datos</p>
+  </div>
+
+  <div class="arrow">
+    <svg width="20" height="80">
+      <line x1="10" y1="0" x2="10" y2="70" stroke="#8a8a8a" stroke-width="2"/>
+      <polygon points="2,68 18,68 10,80" fill="#8a8a8a"/>
+    </svg>
+  </div>
+
+  <div class="node blue-light">
+    <h2>Transformar datos</h2>
+    <p>Abre el editor Power Query</p>
+  </div>
+
+  <div class="arrow">
+    <svg width="20" height="80">
+      <line x1="10" y1="0" x2="10" y2="70" stroke="#8a8a8a" stroke-width="2"/>
+      <polygon points="2,68 18,68 10,80" fill="#8a8a8a"/>
+    </svg>
+  </div>
+
+  <div class="node blue-light">
+    <h2>Nuevo origen</h2>
+    <p>Otros orígenes: consulta en blanco</p>
+  </div>
+
+  <div class="arrow">
+    <svg width="20" height="80">
+      <line x1="10" y1="0" x2="10" y2="70" stroke="#8a8a8a" stroke-width="2"/>
+      <polygon points="2,68 18,68 10,80" fill="#8a8a8a"/>
+    </svg>
+  </div>
+
+  <div class="node green-light">
+    <h2>Invocar función</h2>
+    <p>Escribe DateTime.LocalNow()</p>
+  </div>
+
+</div>
+
+</body>
+</html>
