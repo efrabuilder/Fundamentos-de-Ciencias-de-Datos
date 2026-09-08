@@ -170,12 +170,12 @@
       </div>
       <div class="viewer empty" id="viewer-r0a">
         <strong>Sin archivo cargado todavía</strong>
-        Coloca el archivo <code>Mapas Conceptuales/mapa_conceptual.jpg</code> en la ruta indicada (relativa a este HTML),
+        Coloca el archivo <code>Mapas Conceptuales/mapa_conceptual_bases_de_datos.html</code> en la ruta indicada (relativa a este HTML),
         o cárgalo manualmente con el botón de arriba.
       </div>
     </div>
     <div class="hint" style="margin-bottom:22px;">
-      Nombre esperado en el repositorio: <code>Mapas Conceptuales/mapa_conceptual.jpg</code>
+      Nombre esperado en el repositorio: <code>Mapas Conceptuales/mapa_conceptual_bases_de_datos.html</code> (vista) · <code>Mapas Conceptuales/mapa_conceptual.jpg</code> (descarga)
     </div>
     <div class="card" style="margin-bottom:18px;">
       <div class="card-toolbar">
@@ -188,12 +188,12 @@
       </div>
       <div class="viewer empty" id="viewer-r0b">
         <strong>Sin archivo cargado todavía</strong>
-        Coloca el archivo <code>Mapas Conceptuales/mapa_conceptual_curso.jpg</code> en la ruta indicada (relativa a este HTML),
+        Coloca el archivo <code>Mapas Conceptuales/mapa_conceptual_curso.html</code> en la ruta indicada (relativa a este HTML),
         o cárgalo manualmente con el botón de arriba.
       </div>
     </div>
     <div class="hint" style="margin-bottom:22px;">
-      Nombre esperado en el repositorio: <code>Mapas Conceptuales/mapa_conceptual_curso.jpg</code>
+      Nombre esperado en el repositorio: <code>Mapas Conceptuales/mapa_conceptual_curso.html</code> (vista) · <code>Mapas Conceptuales/mapa_conceptual_curso.jpg</code> (descarga)
     </div>
     <div class="card" style="margin-bottom:18px;">
       <div class="card-toolbar">
@@ -206,12 +206,12 @@
       </div>
       <div class="viewer empty" id="viewer-r0c">
         <strong>Sin archivo cargado todavía</strong>
-        Coloca el archivo <code>Mapas Conceptuales/mapa_conceptual_seguridad.jpg</code> en la ruta indicada (relativa a este HTML),
+        Coloca el archivo <code>Mapas Conceptuales/mapa_conceptual_seguridad.html</code> en la ruta indicada (relativa a este HTML),
         o cárgalo manualmente con el botón de arriba.
       </div>
     </div>
     <div class="hint" style="margin-bottom:22px;">
-      Nombre esperado en el repositorio: <code>Mapas Conceptuales/mapa_conceptual_seguridad.jpg</code>
+      Nombre esperado en el repositorio: <code>Mapas Conceptuales/mapa_conceptual_seguridad.html</code> (vista) · <code>Mapas Conceptuales/mapa_conceptual_seguridad.jpg</code> (descarga)
     </div>
     <div class="card" style="margin-bottom:18px;">
       <div class="card-toolbar">
@@ -224,12 +224,12 @@
       </div>
       <div class="viewer empty" id="viewer-r0d">
         <strong>Sin archivo cargado todavía</strong>
-        Coloca el archivo <code>Mapas Conceptuales/mapa_conceptual_clase4.jpg</code> en la ruta indicada (relativa a este HTML),
+        Coloca el archivo <code>Mapas Conceptuales/mapa_conceptual_clase4.html</code> en la ruta indicada (relativa a este HTML),
         o cárgalo manualmente con el botón de arriba.
       </div>
     </div>
     <div class="hint" style="margin-bottom:22px;">
-      Nombre esperado en el repositorio: <code>Mapas Conceptuales/mapa_conceptual_clase4.jpg</code>
+      Nombre esperado en el repositorio: <code>Mapas Conceptuales/mapa_conceptual_clase4.html</code> (vista) · <code>Mapas Conceptuales/mapa_conceptual_clase4.jpg</code> (descarga)
     </div>
     <div class="card">
       <div class="card-toolbar">
@@ -242,12 +242,12 @@
       </div>
       <div class="viewer empty" id="viewer-r0e">
         <strong>Sin archivo cargado todavía</strong>
-        Coloca el archivo <code>Mapas Conceptuales/mapa_conceptual_clase6.jpg</code> en la ruta indicada (relativa a este HTML),
+        Coloca el archivo <code>Mapas Conceptuales/mapa_conceptual_clase6.html</code> en la ruta indicada (relativa a este HTML),
         o cárgalo manualmente con el botón de arriba.
       </div>
     </div>
     <div class="hint">
-      Nombre esperado en el repositorio: <code>Mapas Conceptuales/mapa_conceptual_clase6.jpg</code>
+      Nombre esperado en el repositorio: <code>Mapas Conceptuales/mapa_conceptual_clase6.html</code> (vista) · <code>Mapas Conceptuales/mapa_conceptual_clase6.jpg</code> (descarga)
     </div>
   </section>
   <!-- ===================== PANEL 1: BASE DE DATOS (SQL) ===================== -->
@@ -801,6 +801,15 @@
     dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
     setStatus(statusId,'ok','Imagen cargada');
   }
+  // ---------- HTML embebido (vista) con descarga de imagen ----------
+  function renderEmbeddedHtml(viewerId, statusId, downloadId, htmlUrl, jpgUrl, jpgFilename){
+    const v = document.getElementById(viewerId);
+    v.className = 'viewer';
+    v.innerHTML = '<iframe src="' + htmlUrl + '"></iframe>';
+    const dl = document.getElementById(downloadId);
+    dl.href = jpgUrl; dl.download = jpgFilename; dl.style.display = 'inline-block';
+    setStatus(statusId,'ok','Archivo cargado');
+  }
   // ---------- Office (xlsx/pptx): vista previa embebida cuando hay URL pública, si no, tarjeta de descarga ----------
   function renderOfficeFile(viewerId, statusId, downloadId, url, filename, size, label, absoluteUrl){
     const v = document.getElementById(viewerId);
@@ -962,12 +971,41 @@
       renderByExtension(viewerId, statusId, downloadId, URL.createObjectURL(f), f.name, f);
     });
   }
+  // Carga un mapa conceptual: muestra el .html embebido en el visor,
+  // pero el botón de descarga siempre entrega la imagen .jpg correspondiente.
+  // Si no se encuentra el .html, cae de vuelta a intentar mostrar el .jpg directamente.
+  function setupMapResource(id, htmlFilename, jpgFilename){
+    const viewerId = 'viewer-' + id;
+    const statusId = 'status-' + id;
+    const downloadId = 'download-' + id;
+    const fileId = 'file-' + id;
+    fetch(htmlFilename, { method: 'HEAD' }).then(r=>{
+      if(!r.ok) throw new Error();
+      renderEmbeddedHtml(viewerId, statusId, downloadId, htmlFilename, jpgFilename, jpgFilename.split('/').pop());
+    }).catch(()=>{
+      // Respaldo: si el .html no existe todavía, intenta mostrar directamente el .jpg
+      fetch(jpgFilename).then(r=>{
+        if(!r.ok) throw new Error();
+        return r.blob();
+      }).then(blob=>{
+        renderImage(viewerId, statusId, downloadId, URL.createObjectURL(blob), jpgFilename.split('/').pop());
+      }).catch(()=>{
+        setStatus(statusId,'err','No se encontró automáticamente — cárgalo manualmente');
+      });
+    });
+    document.getElementById(fileId).addEventListener('change', e=>{
+      const f = e.target.files[0];
+      if(!f) return;
+      // Carga manual: se conserva el comportamiento de imagen (el usuario elige el .jpg)
+      renderImage(viewerId, statusId, downloadId, URL.createObjectURL(f), f.name);
+    });
+  }
   // ---------- Recursos del Módulo 2 ----------
-  setupResource('r0a', 'Mapas Conceptuales/mapa_conceptual.jpg');
-  setupResource('r0b', 'Mapas Conceptuales/mapa_conceptual_curso.jpg');
-  setupResource('r0c', 'Mapas Conceptuales/mapa_conceptual_seguridad.jpg');
-  setupResource('r0d', 'Mapas Conceptuales/mapa_conceptual_clase4.jpg');
-  setupResource('r0e', 'Mapas Conceptuales/mapa_conceptual_clase6.jpg');
+  setupMapResource('r0a', 'Mapas Conceptuales/mapa_conceptual_bases_de_datos.html', 'Mapas Conceptuales/mapa_conceptual.jpg');
+  setupMapResource('r0b', 'Mapas Conceptuales/mapa_conceptual_curso.html', 'Mapas Conceptuales/mapa_conceptual_curso.jpg');
+  setupMapResource('r0c', 'Mapas Conceptuales/mapa_conceptual_seguridad.html', 'Mapas Conceptuales/mapa_conceptual_seguridad.jpg');
+  setupMapResource('r0d', 'Mapas Conceptuales/mapa_conceptual_clase4.html', 'Mapas Conceptuales/mapa_conceptual_clase4.jpg');
+  setupMapResource('r0e', 'Mapas Conceptuales/mapa_conceptual_clase6.html', 'Mapas Conceptuales/mapa_conceptual_clase6.jpg');
   setupResource('r1', 'Base de Datos (SQL)/DB Modulo 2 (Module 2).sql');
   setupResource('r2', 'Diagrama indentidad relacion (ejemplo)/Diagrama indentidad relacion modulo 2, ejemplo.drawio.png');
   setupResource('r3a', 'Caso Practico/Caso practico.png');
