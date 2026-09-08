@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa Conceptual — Simbología de Estadística Inferencial</title>
+<style>
+  :root{
+    --purple:#3730a5;
+    --purple-bg:#eef0fb;
+    --purple-card:#e9e8fb;
+    --green:#0f7a68;
+    --green-card:#e3f8f1;
+    --orange:#b5451b;
+    --orange-card:#fbeae1;
+    --ink:#0f172a;
+    --muted:#475569;
+  }
+  body{
+    margin:0; padding:0; background:#ffffff;
+    font-family:Arial, Helvetica, sans-serif;
+    color:var(--ink);
+  }
+  .toolbar{
+    position:sticky; top:0; z-index:10; background:#ffffff; border-bottom:1px solid #e2e8f0;
+    display:flex; justify-content:center; gap:10px; padding:10px;
+  }
+  .toolbar button{
+    font-family:inherit; font-size:14px; padding:6px 16px; border-radius:6px; border:1px solid #cbd5e1;
+    background:#fff; cursor:pointer;
+  }
+  .toolbar button:hover{ background:#f1f5f9; }
+  .scroll-area{
+    overflow:auto; width:100%; padding:20px 10px 60px; box-sizing:border-box;
+  }
+  #diagram{
+    transform-origin:top center; transition:width .15s ease;
+    max-width:1700px; margin:0 auto;
+  }
+  .header{
+    text-align:center; margin-bottom:18px;
+  }
+  .header h1{
+    font-size:34px; margin:0 0 4px;
+    font-weight:800;
+  }
+  .header .subtitle{
+    font-size:16px; font-style:italic; color:var(--muted); margin-bottom:16px;
+  }
+  .root-node{
+    display:inline-block; background:#f4f1e9; border:1.5px solid #9a9270;
+    border-radius:10px; padding:12px 32px; font-weight:bold; font-size:16px;
+    margin:0 auto 0;
+  }
+  .connectors{
+    display:block; width:100%; height:38px;
+  }
+  .columns{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:22px; align-items:start;
+  }
+  .col-header{
+    color:#fff; text-align:center; font-weight:bold; font-size:18px;
+    padding:12px 10px; border-radius:6px; margin-bottom:16px;
+  }
+  .col-purple .col-header{ background:var(--purple); }
+  .col-green  .col-header{ background:var(--green); }
+  .col-orange .col-header{ background:var(--orange); }
+
+  .card{
+    border-radius:12px; padding:16px 18px 18px; margin-bottom:18px;
+    border-width:2px; border-style:solid;
+  }
+  .col-purple .card{ background:var(--purple-bg); border-color:#c7c4f0; }
+  .col-green  .card{ background:var(--green-card); border-color:#8fd9c4; }
+  .col-orange .card{ background:var(--orange-card); border-color:#f0b79a; }
+
+  .card h3{
+    margin:0 0 10px; font-size:16px;
+  }
+  .col-purple .card h3{ color:var(--purple); }
+  .col-green  .card h3{ color:var(--green); }
+  .col-orange .card h3{ color:var(--orange); }
+
+  .row{
+    display:grid; grid-template-columns:100px 1fr; gap:8px; padding:3px 0; font-size:14px;
+  }
+  .row .sym{ font-weight:bold; }
+  .note{
+    font-style:italic; font-size:12.5px; color:var(--muted); margin-top:8px; line-height:1.5;
+  }
+  .footer{
+    text-align:center; font-style:italic; color:var(--muted); font-size:13px;
+    margin-top:30px; padding-top:16px; border-top:1px solid #e2e8f0;
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button onclick="zoom(0.8)">− Alejar</button>
+  <button onclick="zoom(1.25)">+ Acercar</button>
+  <button onclick="resetZoom()">Restablecer</button>
+</div>
+
+<div class="scroll-area">
+<div id="diagram">
+
+  <div class="header">
+    <h1>Simbología de estadística inferencial</h1>
+    <div class="subtitle">Fundamentos de Ciencias de Datos — Módulo 3</div>
+    <div class="root-node">Simbología estadística</div>
+  </div>
+
+  <svg class="connectors" viewBox="0 0 1700 40" preserveAspectRatio="none">
+    <line x1="850" y1="0" x2="270" y2="38" stroke="#3730a5" stroke-width="2"/>
+    <line x1="850" y1="0" x2="850" y2="38" stroke="#0f7a68" stroke-width="2"/>
+    <line x1="850" y1="0" x2="1430" y2="38" stroke="#b5451b" stroke-width="2"/>
+  </svg>
+
+  <div class="columns">
+
+    <!-- ===================== COLUMNA 1: DATOS Y MUESTREO ===================== -->
+    <div class="col-purple">
+      <div class="col-header">Datos y muestreo</div>
+
+      <div class="card">
+        <h3>Población y muestra</h3>
+        <div class="row"><div class="sym">N</div><div>Tamaño de población</div></div>
+        <div class="row"><div class="sym">n</div><div>Tamaño de muestra</div></div>
+        <div class="row"><div class="sym">X</div><div>Variable</div></div>
+        <div class="row"><div class="sym">xᵢ</div><div>Observación</div></div>
+        <div class="row"><div class="sym">μ</div><div>Media poblacional</div></div>
+        <div class="row"><div class="sym">x̄</div><div>Media muestral</div></div>
+        <div class="row"><div class="sym">σ</div><div>Desv. estándar poblacional</div></div>
+        <div class="row"><div class="sym">s</div><div>Desv. estándar muestral</div></div>
+        <div class="row"><div class="sym">σ²</div><div>Varianza poblacional</div></div>
+        <div class="row"><div class="sym">s²</div><div>Varianza muestral</div></div>
+        <div class="row"><div class="sym">p</div><div>Proporción poblacional</div></div>
+        <div class="row"><div class="sym">p̂</div><div>Proporción muestral</div></div>
+      </div>
+
+      <div class="card">
+        <h3>Sumatorias y operaciones</h3>
+        <div class="row"><div class="sym">Σ</div><div>Sumatoria</div></div>
+        <div class="row"><div class="sym">Σxᵢ</div><div>Suma de datos</div></div>
+        <div class="row"><div class="sym">xᵢ</div><div>Dato individual</div></div>
+        <div class="row"><div class="sym">n</div><div>Número de datos</div></div>
+        <div class="row"><div class="sym">√</div><div>Raíz cuadrada</div></div>
+        <div class="row"><div class="sym">≈</div><div>Aproximadamente</div></div>
+        <div class="row"><div class="sym">=</div><div>Igual</div></div>
+        <div class="row"><div class="sym">&lt;</div><div>Menor que</div></div>
+        <div class="row"><div class="sym">&gt;</div><div>Mayor que</div></div>
+        <div class="row"><div class="sym">≤</div><div>Menor o igual</div></div>
+        <div class="row"><div class="sym">≥</div><div>Mayor o igual</div></div>
+      </div>
+
+      <div class="card">
+        <h3>Muestreo</h3>
+        <div class="row"><div class="sym">N</div><div>Población</div></div>
+        <div class="row"><div class="sym">n</div><div>Muestra</div></div>
+        <div class="row"><div class="sym">f</div><div>Fracción de muestreo</div></div>
+        <div class="row"><div class="sym">N/n</div><div>Relación población/muestra</div></div>
+        <div class="row"><div class="sym">n/N</div><div>Fracción de muestreo</div></div>
+        <div class="note">Ejemplo: N=10 000, n=500 → n/N=5%</div>
+      </div>
+    </div>
+
+    <!-- ===================== COLUMNA 2: DISTRIBUCIONES ===================== -->
+    <div class="col-green">
+      <div class="col-header">Distribuciones</div>
+
+      <div class="card">
+        <h3>Distribución normal</h3>
+        <div class="row"><div class="sym">Z</div><div>Estadístico Z</div></div>
+        <div class="row"><div class="sym">z</div><div>Valor Z</div></div>
+        <div class="row"><div class="sym">μ</div><div>Media poblacional</div></div>
+        <div class="row"><div class="sym">σ</div><div>Desviación estándar</div></div>
+        <div class="row"><div class="sym">N(μ,σ²)</div><div>Distribución normal</div></div>
+        <div class="row"><div class="sym">P</div><div>Probabilidad</div></div>
+        <div class="note">Z = (X − μ) / σ</div>
+      </div>
+
+      <div class="card">
+        <h3>Distribución t de Student</h3>
+        <div class="row"><div class="sym">t</div><div>Estadístico t</div></div>
+        <div class="row"><div class="sym">tα/2</div><div>Valor crítico t</div></div>
+        <div class="row"><div class="sym">gl / df</div><div>Grados de libertad</div></div>
+        <div class="row"><div class="sym">n − 1</div><div>Grados de libertad</div></div>
+        <div class="note">Ejemplo: n=30 → df=29</div>
+      </div>
+    </div>
+
+    <!-- ===================== COLUMNA 3: INFERENCIA Y PRUEBAS ===================== -->
+    <div class="col-orange">
+      <div class="col-header">Inferencia y pruebas</div>
+
+      <div class="card">
+        <h3>Intervalos de confianza</h3>
+        <div class="row"><div class="sym">IC</div><div>Intervalo de confianza</div></div>
+        <div class="row"><div class="sym">CL</div><div>Nivel de confianza</div></div>
+        <div class="row"><div class="sym">α</div><div>Nivel de significancia</div></div>
+        <div class="row"><div class="sym">1 − α</div><div>Nivel de confianza</div></div>
+        <div class="row"><div class="sym">zα/2</div><div>Valor crítico Z</div></div>
+        <div class="row"><div class="sym">E / ME</div><div>Margen de error</div></div>
+        <div class="row"><div class="sym">SE</div><div>Error estándar</div></div>
+        <div class="note">z crítico: 90%→1.645&nbsp;&nbsp;95%→1.960&nbsp;&nbsp;99%→2.576</div>
+      </div>
+
+      <div class="card">
+        <h3>Error estándar</h3>
+        <div class="row"><div class="sym">SE</div><div>Error estándar</div></div>
+        <div class="row"><div class="sym">σx̄</div><div>Error estándar de la media</div></div>
+        <div class="row"><div class="sym">sx̄</div><div>Error estándar estimado</div></div>
+        <div class="note">
+          SE = σ/√n&nbsp;&nbsp;(σ conocida)<br>
+          SE = s/√n&nbsp;&nbsp;(con s)
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Pruebas de hipótesis</h3>
+        <div class="row"><div class="sym">H₀</div><div>Hipótesis nula</div></div>
+        <div class="row"><div class="sym">H₁ / Ha</div><div>Hipótesis alternativa</div></div>
+        <div class="row"><div class="sym">α</div><div>Nivel de significancia</div></div>
+        <div class="row"><div class="sym">p-value</div><div>Valor p</div></div>
+        <div class="row"><div class="sym">Z</div><div>Estadístico Z</div></div>
+        <div class="row"><div class="sym">t</div><div>Estadístico t</div></div>
+        <div class="row"><div class="sym">F</div><div>Estadístico F</div></div>
+        <div class="row"><div class="sym">χ²</div><div>Chi-cuadrado</div></div>
+        <div class="note">p-value &lt; α → se rechaza H₀</div>
+      </div>
+
+      <div class="card">
+        <h3>Proporciones</h3>
+        <div class="row"><div class="sym">p</div><div>Proporción poblacional</div></div>
+        <div class="row"><div class="sym">p̂</div><div>Proporción muestral</div></div>
+        <div class="row"><div class="sym">q</div><div>Complemento de p</div></div>
+        <div class="row"><div class="sym">x</div><div>Número de éxitos</div></div>
+        <div class="note">p̂ = x/n&nbsp;&nbsp;·&nbsp;&nbsp;Ej: x=350, n=500 → p̂=70%</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    μ ↔ x̄ : población vs. muestra&nbsp;&nbsp;&nbsp;·&nbsp;&nbsp;&nbsp;σ ↔ s : desviación poblacional vs. muestral
+  </div>
+
+</div>
+</div>
+
+<script>
+  var scale = 1;
+  var diagram = document.getElementById('diagram');
+  function applyZoom(){
+    diagram.style.transform = 'scale(' + scale + ')';
+  }
+  function zoom(factor){
+    scale = Math.min(2, Math.max(0.5, scale * factor));
+    applyZoom();
+  }
+  function resetZoom(){
+    scale = 1;
+    applyZoom();
+  }
+</script>
+
+</body>
+</html>
