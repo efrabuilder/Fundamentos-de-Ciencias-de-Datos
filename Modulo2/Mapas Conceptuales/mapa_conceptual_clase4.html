@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa Conceptual — Clase 4: Variables SQL y Relaciones entre Tablas</title>
+<style>
+  body{
+    margin:0; padding:0; background:#ffffff;
+    font-family:Arial, Helvetica, sans-serif;
+  }
+  .toolbar{
+    position:sticky; top:0; z-index:10; background:#ffffff; border-bottom:1px solid #e2e8f0;
+    display:flex; justify-content:center; gap:10px; padding:10px;
+  }
+  .toolbar button{
+    font-family:inherit; font-size:14px; padding:6px 16px; border-radius:6px; border:1px solid #cbd5e1;
+    background:#fff; cursor:pointer;
+  }
+  .toolbar button:hover{ background:#f1f5f9; }
+  .scroll-area{
+    overflow:auto; width:100%; padding:20px; box-sizing:border-box;
+  }
+  #diagram{
+    display:block; transform-origin:top left; transition:width .15s ease;
+  }
+  .code{ font-family: 'Courier New', Courier, monospace; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button onclick="zoom(0.8)">− Alejar</button>
+  <button onclick="zoom(1.25)">+ Acercar</button>
+  <button onclick="resetZoom()">Restablecer</button>
+</div>
+
+<div class="scroll-area">
+<svg id="diagram" viewBox="-20 0 5150 780" width="5150" height="780" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif">
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- ===================== CONECTORES: ROOT -> NIVEL 1 ===================== -->
+  <line x1="2100" y1="85" x2="232" y2="140" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1050" y="105" font-size="13" fill="#475569">incluye</text>
+
+  <line x1="2160" y1="85" x2="1255" y2="140" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1660" y="100" font-size="13" fill="#475569">incluye</text>
+
+  <line x1="2280" y1="85" x2="2922" y2="140" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="2560" y="100" font-size="13" fill="#475569">incluye</text>
+
+  <line x1="2340" y1="85" x2="4445" y2="140" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="3300" y="90" font-size="13" fill="#475569">ejemplifica con</text>
+
+  <!-- ===================== CONECTORES: NIVEL 1 -> NIVEL 2 ===================== -->
+  <line x1="200" y1="200" x2="115" y2="245" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="95" y="225" font-size="12" fill="#475569">se definen como</text>
+
+  <line x1="260" y1="200" x2="350" y2="245" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="290" y="225" font-size="12" fill="#475569">se explican con</text>
+
+  <line x1="1200" y1="200" x2="590" y2="245" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="850" y="222" font-size="12" fill="#475569">se clasifica en</text>
+
+  <line x1="1220" y1="200" x2="975" y2="245" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1080" y="222" font-size="12" fill="#475569">se clasifica en</text>
+
+  <line x1="1255" y1="200" x2="1350" y2="245" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1265" y="222" font-size="12" fill="#475569">se clasifica en</text>
+
+  <line x1="1290" y1="200" x2="1560" y2="245" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1400" y="222" font-size="12" fill="#475569">se clasifica en</text>
+
+  <line x1="1330" y1="200" x2="1800" y2="245" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1600" y="218" font-size="12" fill="#475569">se clasifica en</text>
+
+  <line x1="2860" y1="200" x2="2460" y2="245" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="2600" y="222" font-size="12" fill="#475569">se basa en</text>
+
+  <line x1="2960" y1="200" x2="3383" y2="245" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="3050" y="222" font-size="12" fill="#475569">se clasifica en</text>
+
+  <line x1="4380" y1="200" x2="3980" y2="245" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="4030" y="222" font-size="11.5" fill="#475569">define tabla con PK</text>
+
+  <line x1="4420" y1="200" x2="4300" y2="245" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="4300" y="218" font-size="11.5" fill="#475569">define tabla con FK</text>
+
+  <line x1="4470" y1="200" x2="4600" y2="245" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="4550" y="218" font-size="11.5" fill="#475569">define tabla con PK</text>
+
+  <line x1="4510" y1="200" x2="4900" y2="245" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="4720" y="212" font-size="11.5" fill="#475569">define relación 1:1</text>
+  <text x="4720" y="226" font-size="11.5" fill="#475569">(FK + UNIQUE)</text>
+
+  <!-- ===================== CONECTORES: NIVEL 2 -> NIVEL 3 ===================== -->
+  <line x1="590" y1="300" x2="590" y2="365" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="600" y="335" font-size="12" fill="#475569">incluye</text>
+
+  <line x1="940" y1="300" x2="850" y2="365" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="855" y="335" font-size="12" fill="#475569">incluye</text>
+
+  <line x1="1000" y1="300" x2="1100" y2="365" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1040" y="335" font-size="12" fill="#475569">incluye</text>
+
+  <line x1="1350" y1="300" x2="1350" y2="365" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1360" y="335" font-size="12" fill="#475569">incluye</text>
+
+  <line x1="1560" y1="300" x2="1560" y2="365" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1540" y="335" font-size="12" fill="#475569">valores:</text>
+
+  <line x1="1800" y1="300" x2="1800" y2="365" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1810" y="335" font-size="12" fill="#475569">incluye</text>
+
+  <line x1="2420" y1="321" x2="2205" y2="365" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="2260" y="345" font-size="12" fill="#475569">define</text>
+
+  <line x1="2500" y1="321" x2="2715" y2="365" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="2600" y="345" font-size="12" fill="#475569">define</text>
+
+  <line x1="3383" y1="300" x2="3383" y2="365" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="3390" y="335" font-size="12" fill="#475569">ejemplo:</text>
+
+  <!-- ===================== CONECTORES: NIVEL 3 -> NIVEL 4 ===================== -->
+  <line x1="2160" y1="420" x2="2080" y2="480" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="2010" y="452" font-size="12" fill="#475569">se explica con</text>
+
+  <line x1="2250" y1="420" x2="2330" y2="480" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="2280" y="452" font-size="12" fill="#475569">ejemplo:</text>
+
+  <line x1="2670" y1="420" x2="2580" y2="480" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="2520" y="452" font-size="12" fill="#475569">se explica con</text>
+
+  <line x1="2760" y1="420" x2="2850" y2="480" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="2790" y="452" font-size="12" fill="#475569">ejemplo:</text>
+
+  <line x1="3300" y1="420" x2="3110" y2="480" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="3050" y="452" font-size="12" fill="#475569">se explica con</text>
+
+  <line x1="3383" y1="420" x2="3380" y2="480" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="3320" y="452" font-size="12" fill="#475569">caso real:</text>
+
+  <line x1="3450" y1="420" x2="3660" y2="480" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="3560" y="452" font-size="12" fill="#475569">implementación:</text>
+
+  <!-- ===================== NODOS ===================== -->
+
+  <!-- ROOT -->
+  <rect x="2038" y="5" width="360" height="80" rx="10" fill="#1e293b"/>
+  <text x="2218" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">Clase 4</text>
+  <text x="2218" y="50" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">Variables SQL y Relaciones</text>
+  <text x="2218" y="70" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">entre Tablas</text>
+
+  <!-- NIVEL 1 -->
+  <rect x="132" y="140" width="200" height="60" rx="10" fill="#1f9d8a"/>
+  <text x="232" y="175" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">Variables SQL</text>
+
+  <rect x="1160" y="140" width="190" height="60" rx="10" fill="#1f9d8a"/>
+  <text x="1255" y="175" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">Tipos de Datos</text>
+
+  <rect x="2807" y="140" width="230" height="60" rx="10" fill="#1f9d8a"/>
+  <text x="2922" y="175" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">Relaciones entre Tablas</text>
+
+  <rect x="4350" y="140" width="190" height="60" rx="10" fill="#1f9d8a"/>
+  <text x="4445" y="175" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">Comandos SQL</text>
+
+  <!-- NIVEL 2 -->
+  <rect x="10" y="245" width="210" height="55" rx="8" fill="#e8fbf5" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="115" y="266" text-anchor="middle" font-size="11.5" fill="#0f172a">Espacios en memoria donde</text>
+  <text x="115" y="283" text-anchor="middle" font-size="11.5" fill="#0f172a">se guarda un valor temporal</text>
+
+  <rect x="240" y="245" width="220" height="76" rx="8" fill="#e8fbf5" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="350" y="266" text-anchor="middle" font-size="11.5" fill="#0f172a">Analogía: una cajita</text>
+  <text x="350" y="283" text-anchor="middle" font-size="11.5" fill="#0f172a">donde se guarda un dato</text>
+  <text x="350" y="300" text-anchor="middle" font-size="11.5" fill="#0f172a">momentáneamente</text>
+
+  <rect x="510" y="245" width="160" height="55" rx="8" fill="#1f9d8a"/>
+  <text x="590" y="278" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">A. Texto (Strings)</text>
+
+  <rect x="905" y="245" width="140" height="55" rx="8" fill="#1f9d8a"/>
+  <text x="975" y="278" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">B. Números</text>
+
+  <rect x="1280" y="245" width="140" height="55" rx="8" fill="#1f9d8a"/>
+  <text x="1350" y="278" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">C. Fechas</text>
+
+  <rect x="1490" y="245" width="140" height="55" rx="8" fill="#1f9d8a"/>
+  <text x="1560" y="278" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">D. Booleano</text>
+
+  <rect x="1715" y="245" width="170" height="55" rx="8" fill="#1f9d8a"/>
+  <text x="1800" y="278" text-anchor="middle" font-size="13" font-weight="bold" fill="#ffffff">E. Otros importantes</text>
+
+  <rect x="2360" y="245" width="200" height="76" rx="8" fill="#e8fbf5" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="2460" y="270" text-anchor="middle" font-size="12.5" fill="#0f172a">Claves primarias</text>
+  <text x="2460" y="288" text-anchor="middle" font-size="12.5" fill="#0f172a">y foráneas</text>
+
+  <rect x="3273" y="245" width="220" height="55" rx="8" fill="#e8fbf5" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="3383" y="278" text-anchor="middle" font-size="12.5" fill="#0f172a">Relaciones 1:1, 1:N y N:M</text>
+
+  <!-- Comandos SQL: cajas de código -->
+  <rect x="3850" y="245" width="260" height="90" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="3980" y="266" text-anchor="middle" class="code" font-size="11.5" fill="#78350f">CREATE TABLE Cursos (</text>
+  <text x="3980" y="282" text-anchor="middle" class="code" font-size="11.5" fill="#78350f">ID_Curso INT PRIMARY KEY,</text>
+  <text x="3980" y="298" text-anchor="middle" class="code" font-size="11.5" fill="#78350f">NombreCurso VARCHAR(50)</text>
+  <text x="3980" y="314" text-anchor="middle" class="code" font-size="11.5" fill="#78350f">);</text>
+
+  <rect x="4155" y="245" width="290" height="110" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="4300" y="264" text-anchor="middle" class="code" font-size="11" fill="#78350f">CREATE TABLE Estudiantes (</text>
+  <text x="4300" y="279" text-anchor="middle" class="code" font-size="11" fill="#78350f">ID_Estudiante INT PRIMARY KEY,</text>
+  <text x="4300" y="294" text-anchor="middle" class="code" font-size="11" fill="#78350f">Nombre VARCHAR(50), ID_Curso INT,</text>
+  <text x="4300" y="309" text-anchor="middle" class="code" font-size="11" fill="#78350f">FOREIGN KEY (ID_Curso)</text>
+  <text x="4300" y="324" text-anchor="middle" class="code" font-size="11" fill="#78350f">REFERENCES Cursos(ID_Curso)</text>
+  <text x="4300" y="339" text-anchor="middle" class="code" font-size="11" fill="#78350f">);</text>
+
+  <rect x="4470" y="245" width="260" height="90" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="4600" y="270" text-anchor="middle" class="code" font-size="11.5" fill="#78350f">CREATE TABLE Clientes (</text>
+  <text x="4600" y="286" text-anchor="middle" class="code" font-size="11.5" fill="#78350f">ID_Cliente INT PRIMARY KEY,</text>
+  <text x="4600" y="302" text-anchor="middle" class="code" font-size="11.5" fill="#78350f">Nombre VARCHAR(50)</text>
+  <text x="4600" y="318" text-anchor="middle" class="code" font-size="11.5" fill="#78350f">);</text>
+
+  <rect x="4755" y="245" width="290" height="110" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="4900" y="264" text-anchor="middle" class="code" font-size="11" fill="#78350f">CREATE TABLE Credito (</text>
+  <text x="4900" y="279" text-anchor="middle" class="code" font-size="11" fill="#78350f">ID_Credito INT PRIMARY KEY,</text>
+  <text x="4900" y="294" text-anchor="middle" class="code" font-size="11" fill="#78350f">ID_Cliente INT UNIQUE,</text>
+  <text x="4900" y="309" text-anchor="middle" class="code" font-size="11" fill="#78350f">Limite DECIMAL(10,2),</text>
+  <text x="4900" y="324" text-anchor="middle" class="code" font-size="11" fill="#78350f">FOREIGN KEY (ID_Cliente)</text>
+  <text x="4900" y="339" text-anchor="middle" class="code" font-size="11" fill="#78350f">REFERENCES Clientes(ID_Cliente));</text>
+
+  <!-- NIVEL 3 -->
+  <rect x="475" y="365" width="230" height="70" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="590" y="386" text-anchor="middle" font-size="11.8" fill="#0f172a">VARCHAR(n): texto variable</text>
+  <text x="590" y="402" text-anchor="middle" font-size="11.8" fill="#0f172a">CHAR(n): texto fijo</text>
+  <text x="590" y="418" text-anchor="middle" font-size="11.8" fill="#0f172a">TEXT: texto largo (obsoleto)</text>
+
+  <rect x="735" y="365" width="230" height="85" rx="8" fill="#e8fbf5" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="850" y="384" text-anchor="middle" font-size="12" font-weight="bold" fill="#0f172a">Enteros:</text>
+  <text x="850" y="400" text-anchor="middle" font-size="11.5" fill="#0f172a">INT: números normales</text>
+  <text x="850" y="415" text-anchor="middle" font-size="11.5" fill="#0f172a">BIGINT: números grandes</text>
+  <text x="850" y="430" text-anchor="middle" font-size="11.5" fill="#0f172a">SMALLINT: pequeños / TINYINT: 0 a 255</text>
+
+  <rect x="985" y="365" width="230" height="85" rx="8" fill="#e8fbf5" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="1100" y="384" text-anchor="middle" font-size="12" font-weight="bold" fill="#0f172a">Decimales:</text>
+  <text x="1100" y="400" text-anchor="middle" font-size="11.5" fill="#0f172a">DECIMAL(p,s): precisión exacta</text>
+  <text x="1100" y="415" text-anchor="middle" font-size="11.5" fill="#0f172a">NUMERIC: igual que decimal</text>
+  <text x="1100" y="430" text-anchor="middle" font-size="11.5" fill="#0f172a">FLOAT: aproximado</text>
+
+  <rect x="1235" y="365" width="230" height="85" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="1350" y="384" text-anchor="middle" font-size="11.8" fill="#0f172a">DATE: solo fecha</text>
+  <text x="1350" y="400" text-anchor="middle" font-size="11.8" fill="#0f172a">DATETIME: fecha y hora</text>
+  <text x="1350" y="415" text-anchor="middle" font-size="11.8" fill="#0f172a">TIME: solo hora</text>
+  <text x="1350" y="430" text-anchor="middle" font-size="11.8" fill="#0f172a">DATETIME2: más preciso</text>
+
+  <rect x="1470" y="365" width="180" height="55" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="1560" y="386" text-anchor="middle" font-size="12" fill="#0f172a">0 = Falso</text>
+  <text x="1560" y="402" text-anchor="middle" font-size="12" fill="#0f172a">1 = Verdadero</text>
+
+  <rect x="1675" y="365" width="250" height="85" rx="8" fill="#e8fbf5" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="1800" y="384" text-anchor="middle" font-size="11.8" fill="#0f172a">IDENTITY: auto incremento</text>
+  <text x="1800" y="400" text-anchor="middle" font-size="11.8" fill="#0f172a">UNIQUEIDENTIFIER: GUID</text>
+  <text x="1800" y="415" text-anchor="middle" font-size="11.8" fill="#0f172a">(ID único global)</text>
+  <text x="1800" y="430" text-anchor="middle" font-size="11.8" fill="#0f172a">XML: datos en formato XML</text>
+
+  <rect x="2105" y="365" width="200" height="55" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="2205" y="387" text-anchor="middle" font-size="12.5" fill="#0f172a">PRIMARY KEY</text>
+  <text x="2205" y="403" text-anchor="middle" font-size="12.5" fill="#0f172a">(clave primaria)</text>
+
+  <rect x="2615" y="365" width="200" height="55" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="2715" y="387" text-anchor="middle" font-size="12.5" fill="#0f172a">FOREIGN KEY</text>
+  <text x="2715" y="403" text-anchor="middle" font-size="12.5" fill="#0f172a">(clave foránea)</text>
+
+  <rect x="3273" y="365" width="220" height="55" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="3383" y="387" text-anchor="middle" font-size="12.5" fill="#0f172a">Relación 1:1</text>
+  <text x="3383" y="403" text-anchor="middle" font-size="12.5" fill="#0f172a">(Uno a Uno)</text>
+
+  <!-- NIVEL 4 -->
+  <rect x="1970" y="480" width="220" height="70" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="2080" y="501" text-anchor="middle" font-size="11.5" fill="#0f172a">Analogía: cédula de identidad</text>
+  <text x="2080" y="516" text-anchor="middle" font-size="11.5" fill="#0f172a">(única, no se repite,</text>
+  <text x="2080" y="531" text-anchor="middle" font-size="11.5" fill="#0f172a">identifica cada registro)</text>
+
+  <rect x="2215" y="480" width="230" height="55" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="2330" y="502" text-anchor="middle" font-size="11.5" fill="#0f172a">Ej: CREATE TABLE Cursos</text>
+  <text x="2330" y="518" text-anchor="middle" font-size="11.5" fill="#0f172a">(ID_Curso INT PRIMARY KEY)</text>
+
+  <rect x="2470" y="480" width="220" height="55" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="2580" y="502" text-anchor="middle" font-size="11.5" fill="#0f172a">Analogía: una referencia</text>
+  <text x="2580" y="518" text-anchor="middle" font-size="11.5" fill="#0f172a">o enlace a otra tabla</text>
+
+  <rect x="2720" y="480" width="260" height="70" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="2850" y="501" text-anchor="middle" font-size="11.5" fill="#0f172a">Ej: Estudiantes guarda</text>
+  <text x="2850" y="516" text-anchor="middle" font-size="11.5" fill="#0f172a">ID_Curso que referencia</text>
+  <text x="2850" y="531" text-anchor="middle" font-size="11.5" fill="#0f172a">a Cursos(ID_Curso)</text>
+
+  <rect x="3000" y="480" width="220" height="70" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="3110" y="501" text-anchor="middle" font-size="11.5" fill="#0f172a">Analogía: una persona</text>
+  <text x="3110" y="516" text-anchor="middle" font-size="11.5" fill="#0f172a">tiene una sola cédula</text>
+  <text x="3110" y="531" text-anchor="middle" font-size="11.5" fill="#0f172a">y viceversa</text>
+
+  <rect x="3255" y="480" width="250" height="85" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="3380" y="501" text-anchor="middle" font-size="11.5" fill="#0f172a">Ejemplo de negocio:</text>
+  <text x="3380" y="516" text-anchor="middle" font-size="11.5" fill="#0f172a">Cliente ↔ Información financiera</text>
+  <text x="3380" y="531" text-anchor="middle" font-size="11.5" fill="#0f172a">(un cliente = un perfil</text>
+  <text x="3380" y="546" text-anchor="middle" font-size="11.5" fill="#0f172a">de crédito)</text>
+
+  <rect x="3545" y="480" width="230" height="70" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="3660" y="501" text-anchor="middle" font-size="11.5" fill="#0f172a">Ej: Clientes (PK)</text>
+  <text x="3660" y="516" text-anchor="middle" font-size="11.5" fill="#0f172a">y Credito (FK + UNIQUE)</text>
+  <text x="3660" y="531" text-anchor="middle" font-size="11.5" fill="#0f172a">sobre ID_Cliente</text>
+
+  <!-- FUENTE -->
+  <text x="2570" y="735" text-anchor="middle" font-size="14" fill="#475569">Fuente: "Clase 4 - Variables SQL y Relaciones entre Tablas" (Clase_4.docx)</text>
+
+</svg>
+</div>
+
+<script>
+  var scale = 1.0;
+  var svg = document.getElementById('diagram');
+  function applyZoom(){
+    svg.setAttribute('width', 5150 * scale);
+    svg.setAttribute('height', 780 * scale);
+  }
+  function zoom(factor){
+    scale = Math.min(4, Math.max(0.3, scale * factor));
+    applyZoom();
+  }
+  function resetZoom(){
+    scale = 1.0;
+    applyZoom();
+  }
+  applyZoom();
+</script>
+
+</body>
+</html>
