@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa Conceptual — Marco y preparación de Datos</title>
+<style>
+  body{
+    margin:0; padding:0; background:#ffffff;
+    font-family:Arial, Helvetica, sans-serif;
+  }
+  .toolbar{
+    position:sticky; top:0; z-index:10; background:#ffffff; border-bottom:1px solid #e2e8f0;
+    display:flex; justify-content:center; gap:10px; padding:10px;
+  }
+  .toolbar button{
+    font-family:inherit; font-size:14px; padding:6px 16px; border-radius:6px; border:1px solid #cbd5e1;
+    background:#fff; cursor:pointer;
+  }
+  .toolbar button:hover{ background:#f1f5f9; }
+  .scroll-area{
+    overflow:auto; width:100%; padding:20px; box-sizing:border-box;
+  }
+  #diagram{
+    display:block; transform-origin:top left; transition:width .15s ease;
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button onclick="zoom(0.8)">− Alejar</button>
+  <button onclick="zoom(1.25)">+ Acercar</button>
+  <button onclick="resetZoom()">Restablecer</button>
+</div>
+
+<div class="scroll-area">
+<svg id="diagram" viewBox="-20 0 3820 850" width="3820" height="850" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif">
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- ===================== CONECTORES: ROOT -> NIVEL 1 ===================== -->
+  <line x1="1550" y1="60" x2="295" y2="115" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="850" y="80" font-size="13" fill="#475569">requiere</text>
+
+  <line x1="1580" y1="55" x2="740" y2="115" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1120" y="72" font-size="13" fill="#475569">persigue</text>
+
+  <line x1="1600" y1="50" x2="1025" y2="115" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1290" y="65" font-size="13" fill="#475569">utiliza</text>
+
+  <line x1="1650" y1="60" x2="1770" y2="115" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1660" y="82" font-size="13" fill="#475569">detalla en</text>
+
+  <line x1="1720" y1="55" x2="2660" y2="115" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="2100" y="68" font-size="13" fill="#475569">comienza con</text>
+
+  <line x1="1760" y1="60" x2="3218" y2="115" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="2450" y="60" font-size="13" fill="#475569">conecta con</text>
+
+  <!-- ===================== CONECTORES: NIVEL 1 -> NIVEL 2 (Instalación inicial) ===================== -->
+  <line x1="240" y1="173" x2="105" y2="228" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="150" y="200" font-size="12" fill="#475569">paso</text>
+
+  <line x1="295" y1="173" x2="295" y2="228" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="300" y="200" font-size="12" fill="#475569">paso</text>
+
+  <line x1="350" y1="173" x2="485" y2="228" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="410" y="200" font-size="12" fill="#475569">paso</text>
+
+  <!-- Objetivo general -> descripción -->
+  <line x1="740" y1="173" x2="740" y2="220" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="655" y="198" font-size="12" fill="#475569">consiste en</text>
+
+  <!-- Herramientas -> lista -->
+  <line x1="1025" y1="173" x2="1025" y2="220" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="950" y="198" font-size="12" fill="#475569">incluye</text>
+
+  <!-- Objetivos específicos -> 6 hijos -->
+  <line x1="1710" y1="173" x2="1270" y2="228" stroke="#94a3b8" stroke-width="1.3"/>
+  <line x1="1740" y1="173" x2="1470" y2="228" stroke="#94a3b8" stroke-width="1.3"/>
+  <line x1="1760" y1="173" x2="1670" y2="228" stroke="#94a3b8" stroke-width="1.3"/>
+  <line x1="1780" y1="173" x2="1870" y2="228" stroke="#94a3b8" stroke-width="1.3"/>
+  <line x1="1800" y1="173" x2="2070" y2="228" stroke="#94a3b8" stroke-width="1.3"/>
+  <line x1="1830" y1="173" x2="2270" y2="228" stroke="#94a3b8" stroke-width="1.3"/>
+
+  <!-- Introducción a SQL -> Dato / Información -->
+  <line x1="2610" y1="173" x2="2525" y2="220" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="2470" y="198" font-size="12" fill="#475569">parte de</text>
+
+  <line x1="2710" y1="173" x2="2795" y2="220" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="2730" y="198" font-size="12" fill="#475569">avanza a</text>
+
+  <!-- Cloud/Log -> Log / (Relación) Base de Datos -->
+  <line x1="3175" y1="173" x2="3075" y2="228" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="3020" y="200" font-size="12" fill="#475569">registra en</text>
+
+  <line x1="3255" y1="173" x2="3360" y2="228" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="3280" y="200" font-size="12" fill="#475569">se relaciona con</text>
+
+  <!-- ===================== CONECTORES: NIVEL 2 -> NIVEL 3 ===================== -->
+  <!-- Dato -> se investiga con -->
+  <line x1="2525" y1="300" x2="2525" y2="355" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="2440" y="332" font-size="12" fill="#475569">se apoya en</text>
+
+  <!-- Información -> conocimiento -->
+  <line x1="2795" y1="300" x2="2795" y2="355" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="2805" y="332" font-size="12" fill="#475569">genera</text>
+
+  <!-- (Relación) Base de Datos -> 5 hijos -->
+  <line x1="3300" y1="308" x2="3030" y2="360" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#arrow)"/>
+  <text x="3140" y="332" font-size="12" fill="#475569">son</text>
+
+  <line x1="3330" y1="308" x2="3195" y2="360" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#arrow)"/>
+  <text x="3260" y="332" font-size="12" fill="#475569">garantiza</text>
+
+  <line x1="3360" y1="308" x2="3360" y2="360" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#arrow)"/>
+  <text x="3368" y="332" font-size="12" fill="#475569">requiere</text>
+
+  <line x1="3390" y1="308" x2="3525" y2="360" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#arrow)"/>
+  <text x="3460" y="332" font-size="12" fill="#475569">necesita</text>
+
+  <line x1="3420" y1="308" x2="3690" y2="360" stroke="#94a3b8" stroke-width="1.3" marker-end="url(#arrow)"/>
+  <text x="3560" y="326" font-size="12" fill="#475569">abarca</text>
+
+  <!-- ===================== NODOS ===================== -->
+
+  <!-- ROOT -->
+  <rect x="1448" y="5" width="340" height="70" rx="10" fill="#1e293b"/>
+  <text x="1618" y="35" text-anchor="middle" font-size="17" font-weight="bold" fill="#ffffff">Módulo: Marco y</text>
+  <text x="1618" y="58" text-anchor="middle" font-size="17" font-weight="bold" fill="#ffffff">preparación de Datos</text>
+
+  <!-- NIVEL 1 -->
+  <rect x="185" y="115" width="220" height="58" rx="10" fill="#1f9d8a"/>
+  <text x="295" y="150" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">Instalación inicial</text>
+
+  <rect x="640" y="115" width="200" height="58" rx="10" fill="#1f9d8a"/>
+  <text x="740" y="150" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">Objetivo general</text>
+
+  <rect x="945" y="115" width="160" height="58" rx="10" fill="#1f9d8a"/>
+  <text x="1025" y="150" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">Herramientas</text>
+
+  <rect x="1660" y="115" width="220" height="58" rx="10" fill="#1f9d8a"/>
+  <text x="1770" y="138" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">Objetivos</text>
+  <text x="1770" y="157" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">específicos</text>
+
+  <rect x="2560" y="115" width="200" height="58" rx="10" fill="#1f9d8a"/>
+  <text x="2660" y="138" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">Introducción</text>
+  <text x="2660" y="157" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">a SQL</text>
+
+  <rect x="3128" y="115" width="180" height="58" rx="10" fill="#1f9d8a"/>
+  <text x="3218" y="150" text-anchor="middle" font-size="14" font-weight="bold" fill="#ffffff">Cloud / Log</text>
+
+  <!-- NIVEL 2 -->
+  <!-- Instalación inicial: 3 pasos -->
+  <rect x="20" y="228" width="170" height="55" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="105" y="260" text-anchor="middle" font-size="12" fill="#0f172a">1. Instalar SQL Server 2025</text>
+
+  <rect x="210" y="228" width="170" height="55" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="295" y="252" text-anchor="middle" font-size="11.5" fill="#0f172a">2. Instalar SQL Server</text>
+  <text x="295" y="268" text-anchor="middle" font-size="11.5" fill="#0f172a">Management Studio</text>
+
+  <rect x="400" y="228" width="170" height="55" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="485" y="260" text-anchor="middle" font-size="12" fill="#0f172a">3. Reiniciar el ordenador</text>
+
+  <!-- Objetivo general: descripción -->
+  <rect x="610" y="220" width="260" height="76" rx="8" fill="#e8fbf5" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="740" y="240" text-anchor="middle" font-size="12" fill="#0f172a">Desarrollar habilidades para</text>
+  <text x="740" y="257" text-anchor="middle" font-size="12" fill="#0f172a">gestionar, desarrollar (preparar),</text>
+  <text x="740" y="274" text-anchor="middle" font-size="12" fill="#0f172a">mejorar y transformar</text>
+  <text x="740" y="288" text-anchor="middle" font-size="12" fill="#0f172a">bases de datos</text>
+
+  <!-- Herramientas: lista -->
+  <rect x="910" y="220" width="230" height="76" rx="8" fill="#e8fbf5" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="1025" y="245" text-anchor="middle" font-size="12" fill="#0f172a">SQL, MySQL, SQLite, Python,</text>
+  <text x="1025" y="262" text-anchor="middle" font-size="12" fill="#0f172a">Power BI, Pandas, Google Colab</text>
+
+  <!-- Objetivos específicos: 6 hijos -->
+  <rect x="1180" y="228" width="180" height="55" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="1270" y="260" text-anchor="middle" font-size="12" fill="#0f172a">Comprender bases de datos</text>
+
+  <rect x="1380" y="228" width="180" height="55" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="1470" y="260" text-anchor="middle" font-size="12" fill="#0f172a">Aplicar consultas en SQL</text>
+
+  <rect x="1580" y="228" width="180" height="55" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="1670" y="260" text-anchor="middle" font-size="12" fill="#0f172a">Evaluar calidad de datos</text>
+
+  <rect x="1780" y="228" width="180" height="55" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="1870" y="260" text-anchor="middle" font-size="12" fill="#0f172a">Integrar múltiples fuentes</text>
+
+  <rect x="1980" y="228" width="180" height="55" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="2070" y="260" text-anchor="middle" font-size="12" fill="#0f172a">Limpiar y transformar datos</text>
+
+  <rect x="2180" y="228" width="180" height="55" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="2270" y="260" text-anchor="middle" font-size="12" fill="#0f172a">Utilizar Python y Power BI</text>
+
+  <!-- Introducción a SQL: Dato / Información -->
+  <rect x="2410" y="220" width="230" height="80" rx="8" fill="#e8fbf5" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="2525" y="240" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#0f172a">Dato:</text>
+  <text x="2525" y="257" text-anchor="middle" font-size="12" fill="#0f172a">representa una variable;</text>
+  <text x="2525" y="273" text-anchor="middle" font-size="12" fill="#0f172a">cada usuario le da</text>
+  <text x="2525" y="289" text-anchor="middle" font-size="12" fill="#0f172a">su significado</text>
+
+  <rect x="2680" y="220" width="230" height="80" rx="8" fill="#e8fbf5" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="2795" y="240" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#0f172a">Información:</text>
+  <text x="2795" y="257" text-anchor="middle" font-size="12" fill="#0f172a">conjunto de datos que</text>
+  <text x="2795" y="273" text-anchor="middle" font-size="12" fill="#0f172a">explican o dan sentido</text>
+  <text x="2795" y="289" text-anchor="middle" font-size="12" fill="#0f172a">a algo</text>
+
+  <!-- Cloud/Log: Log / (Relación) Base de Datos -->
+  <rect x="2960" y="228" width="230" height="80" rx="8" fill="#e8fbf5" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="3075" y="248" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#0f172a">Log:</text>
+  <text x="3075" y="265" text-anchor="middle" font-size="12" fill="#0f172a">SQL, Excel, Oracle,</text>
+  <text x="3075" y="282" text-anchor="middle" font-size="12" fill="#0f172a">Cloud, Azure, GitHub, AWS, IBM</text>
+
+  <rect x="3230" y="228" width="260" height="80" rx="8" fill="#e8fbf5" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="3360" y="248" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#0f172a">(Relación) Base de Datos:</text>
+  <text x="3360" y="265" text-anchor="middle" font-size="12" fill="#0f172a">conjunto de datos</text>
+  <text x="3360" y="282" text-anchor="middle" font-size="12" fill="#0f172a">informativos almacenados</text>
+
+  <!-- NIVEL 3 -->
+  <rect x="2410" y="355" width="230" height="60" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="2525" y="378" text-anchor="middle" font-size="12" fill="#0f172a">Se investiga con:</text>
+  <text x="2525" y="395" text-anchor="middle" font-size="12" fill="#0f172a">IoT, Minería, BI, BD</text>
+
+  <rect x="2680" y="355" width="230" height="60" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="2795" y="378" text-anchor="middle" font-size="12" fill="#0f172a">Conocimiento →</text>
+  <text x="2795" y="395" text-anchor="middle" font-size="12" fill="#0f172a">motores de estrategia</text>
+
+  <rect x="2955" y="360" width="150" height="55" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="3030" y="392" text-anchor="middle" font-size="12" fill="#0f172a">Repositorios</text>
+
+  <rect x="3120" y="360" width="150" height="55" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="3195" y="392" text-anchor="middle" font-size="12" fill="#0f172a">Integridad y validez</text>
+
+  <rect x="3285" y="360" width="150" height="55" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="3360" y="392" text-anchor="middle" font-size="12" fill="#0f172a">Ética y Gobernanza</text>
+
+  <rect x="3450" y="360" width="150" height="55" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="3525" y="384" text-anchor="middle" font-size="11.5" fill="#0f172a">Capas de</text>
+  <text x="3525" y="400" text-anchor="middle" font-size="11.5" fill="#0f172a">recuperación</text>
+
+  <rect x="3615" y="360" width="150" height="55" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="3690" y="384" text-anchor="middle" font-size="11.5" fill="#0f172a">Procesos, métodos,</text>
+  <text x="3690" y="400" text-anchor="middle" font-size="11.5" fill="#0f172a">productos, servicios</text>
+
+  <!-- FUENTE -->
+  <text x="1900" y="800" text-anchor="middle" font-size="14" fill="#475569">Fuente: apuntes de cuaderno - Módulo: Marco y preparación de Datos (13-14/07/2026)</text>
+
+</svg>
+</div>
+
+<script>
+  var scale = 1.0;
+  var svg = document.getElementById('diagram');
+  function applyZoom(){
+    svg.setAttribute('width', 3820 * scale);
+    svg.setAttribute('height', 850 * scale);
+  }
+  function zoom(factor){
+    scale = Math.min(4, Math.max(0.4, scale * factor));
+    applyZoom();
+  }
+  function resetZoom(){
+    scale = 1.0;
+    applyZoom();
+  }
+  applyZoom();
+</script>
+
+</body>
+</html>
