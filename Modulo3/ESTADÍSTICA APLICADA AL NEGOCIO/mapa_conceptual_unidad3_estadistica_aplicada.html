@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa Conceptual — Unidad 3: Análisis descriptivo e inferencial</title>
+<style>
+  body{
+    margin:0; padding:0; background:#ffffff;
+    font-family:Arial, Helvetica, sans-serif;
+    color:#1e293b;
+  }
+  .toolbar{
+    position:sticky; top:0; z-index:10; background:#ffffff; border-bottom:1px solid #e2e8f0;
+    display:flex; justify-content:center; gap:10px; padding:10px;
+  }
+  .toolbar button{
+    font-family:inherit; font-size:14px; padding:6px 16px; border-radius:6px; border:1px solid #cbd5e1;
+    background:#fff; cursor:pointer;
+  }
+  .toolbar button:hover{ background:#f1f5f9; }
+  .scroll-area{
+    overflow:auto; width:100%; padding:20px; box-sizing:border-box;
+  }
+  #diagram{
+    display:block; transform-origin:top left; transition:width .15s ease;
+    max-width:1500px; margin:0 auto;
+  }
+
+  .header-bar{
+    background:#3d3d38; color:#fff; text-align:center;
+    border-radius:8px; padding:16px 20px; margin-bottom:0;
+    font-weight:bold;
+  }
+  .header-bar .l1{ font-size:20px; }
+  .header-bar .l2{ font-size:20px; }
+
+  .trunk-wrap{
+    position:relative; padding-left:26px; margin-top:0;
+  }
+  .trunk-wrap::before{
+    content:""; position:absolute; left:10px; top:0; bottom:20px; width:2px; background:#94a3b8;
+  }
+
+  .columns{
+    display:grid; grid-template-columns:1fr 1fr; gap:70px; margin-top:0;
+  }
+
+  .node{
+    position:relative; margin:14px 0 14px 0; padding-left:26px;
+  }
+  .node::before{
+    /* dot */
+    content:""; position:absolute; left:6px; top:50%; transform:translateY(-50%);
+    width:8px; height:8px; border-radius:50%; background:#3d3d38; z-index:2;
+  }
+  .node::after{
+    /* horizontal connector to box */
+    content:""; position:absolute; left:10px; top:50%; width:16px; height:2px; background:#94a3b8;
+  }
+
+  .box{
+    border-radius:8px; padding:14px 18px; text-align:center; font-size:14.5px; line-height:1.4;
+    border:1px solid;
+  }
+  .box.topic{
+    background:#41c491; border-color:#2fa87a; color:#0f3d2b; font-weight:bold; font-size:16.5px;
+    padding:16px 18px;
+  }
+  .box.item{
+    background:#d6d3fb; border-color:#a29ff0; color:#332f6b;
+  }
+
+  .col-trunk{
+    position:relative; padding-left:0;
+  }
+  .col-trunk::before{
+    content:""; position:absolute; left:10px; top:0; bottom:20px; width:2px; background:#94a3b8;
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button onclick="zoom(0.8)">− Alejar</button>
+  <button onclick="zoom(1.25)">+ Acercar</button>
+  <button onclick="resetZoom()">Restablecer</button>
+</div>
+
+<div class="scroll-area">
+<div id="diagram">
+
+  <div class="header-bar">
+    <div class="l1">Unidad 3</div>
+    <div class="l2">Análisis descriptivo e inferencial</div>
+  </div>
+
+  <div class="columns">
+
+    <!-- ===================== COLUMNA IZQUIERDA ===================== -->
+    <div class="col-trunk">
+      <div class="node"><div class="box topic">Tema 1 - Análisis descriptivo avanzado</div></div>
+      <div class="node"><div class="box item">Cuartiles y percentiles<br>(Q1=25%, Q2=mediana, Q3=75%)</div></div>
+      <div class="node"><div class="box item">Boxplot: mín, Q1, mediana, Q3,<br>máx, atípicos</div></div>
+      <div class="node"><div class="box item">Regla del RIC: límites<br>Q1-1.5·RIC / Q3+1.5·RIC</div></div>
+      <div class="node"><div class="box item">Asimetría: negativa,<br>simétrica, positiva</div></div>
+      <div class="node"><div class="box item">Curtosis: forma de las colas<br>de la distribución</div></div>
+      <div class="node"><div class="box item">Coeficiente de variación: CV =<br>(DE/media)×100</div></div>
+
+      <div class="node"><div class="box topic">Tema 3 - Comparación de grupos</div></div>
+      <div class="node"><div class="box item">Prueba t independiente: dos<br>grupos distintos</div></div>
+      <div class="node"><div class="box item">Prueba t pareada: mismos<br>elementos, antes/después</div></div>
+      <div class="node"><div class="box item">ANOVA: 3+ grupos; requiere<br>pruebas post-hoc</div></div>
+      <div class="node"><div class="box item">¿Qué prueba elegir?: según nº<br>de grupos y su relación</div></div>
+    </div>
+
+    <!-- ===================== COLUMNA DERECHA ===================== -->
+    <div class="col-trunk">
+      <div class="node"><div class="box topic">Tema 2 - Pruebas estadísticas básicas</div></div>
+      <div class="node"><div class="box item">Prueba de hipótesis: evaluar<br>una afirmación con datos</div></div>
+      <div class="node"><div class="box item">H0 (afirmación de partida) vs<br>H1 (alternativa)</div></div>
+      <div class="node"><div class="box item">Nivel de significancia (α,<br>usual 0.05) y valor p</div></div>
+      <div class="node"><div class="box item">Regla de decisión: si p ≤ α se<br>rechaza H0</div></div>
+      <div class="node"><div class="box item">Errores tipo I (rechazar bien)<br>y tipo II (no detectar)</div></div>
+      <div class="node"><div class="box item">Pasos: H0/H1 → α → estadístico<br>→ valor p → decisión</div></div>
+      <div class="node"><div class="box item">Prueba t de una muestra: media<br>muestral vs referencia</div></div>
+
+      <div class="node"><div class="box topic">Tema 4 - Interpretación de resultados</div></div>
+      <div class="node"><div class="box item">Significancia estadística vs.<br>práctica</div></div>
+      <div class="node"><div class="box item">Errores comunes: correlación ≠<br>causalidad, tamaño de muestra</div></div>
+      <div class="node"><div class="box item">Cómo comunicar resultados:<br>claro, sin jerga, con<br>recomendación</div></div>
+      <div class="node"><div class="box item">Checklist de un reporte<br>confiable</div></div>
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+<script>
+  var scale = 1;
+  var diagram = document.getElementById('diagram');
+  function applyZoom(){
+    diagram.style.transform = 'scale(' + scale + ')';
+  }
+  function zoom(factor){
+    scale = Math.min(2, Math.max(0.5, scale * factor));
+    applyZoom();
+  }
+  function resetZoom(){
+    scale = 1;
+    applyZoom();
+  }
+</script>
+
+</body>
+</html>
