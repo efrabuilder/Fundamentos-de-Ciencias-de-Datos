@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa Conceptual — Storytelling con datos</title>
+<style>
+  body{
+    margin:0; padding:0; background:#ffffff;
+    font-family:Arial, Helvetica, sans-serif;
+  }
+  .toolbar{
+    position:sticky; top:0; z-index:10; background:#ffffff; border-bottom:1px solid #e2e8f0;
+    display:flex; justify-content:center; gap:10px; padding:10px;
+  }
+  .toolbar button{
+    font-family:inherit; font-size:14px; padding:6px 16px; border-radius:6px; border:1px solid #cbd5e1;
+    background:#fff; cursor:pointer;
+  }
+  .toolbar button:hover{ background:#f1f5f9; }
+  .scroll-area{
+    overflow:auto; width:100%; padding:20px; box-sizing:border-box;
+  }
+  #diagram{
+    display:block; transform-origin:top left; transition:width .15s ease;
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button onclick="zoom(0.8)">− Alejar</button>
+  <button onclick="zoom(1.25)">+ Acercar</button>
+  <button onclick="resetZoom()">Restablecer</button>
+</div>
+
+<div class="scroll-area">
+<svg id="diagram" viewBox="0 0 2560 1300" width="2560" height="1300" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif">
+
+  <defs>
+    <marker id="arrowGray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7c7c7c"/>
+    </marker>
+  </defs>
+
+  <!-- ===================== CONECTORES ===================== -->
+  <line x1="1280" y1="270" x2="570" y2="465" stroke="#7c7c7c" stroke-width="2.2" marker-end="url(#arrowGray)"/>
+  <line x1="1280" y1="270" x2="1280" y2="465" stroke="#7c7c7c" stroke-width="2.2" marker-end="url(#arrowGray)"/>
+  <line x1="1280" y1="270" x2="1990" y2="465" stroke="#7c7c7c" stroke-width="2.2" marker-end="url(#arrowGray)"/>
+
+  <!-- ===================== NODO RAÍZ ===================== -->
+  <rect x="945" y="60" width="670" height="205" rx="16" fill="#efece0" stroke="#3f3f3f" stroke-width="1.6"/>
+  <text x="1280" y="150" text-anchor="middle" font-size="34" font-weight="bold" fill="#1f2937">Storytelling con datos</text>
+  <text x="1280" y="200" text-anchor="middle" font-size="26" fill="#4b5563">Datos + narrativa + visual</text>
+
+  <!-- ===================== 3 PILARES ===================== -->
+  <!-- Datos -->
+  <rect x="260" y="465" width="620" height="200" rx="14" fill="#e2f6ec" stroke="#1f7a55" stroke-width="1.8"/>
+  <text x="570" y="560" text-anchor="middle" font-size="30" font-weight="bold" fill="#0f4d31">Datos</text>
+  <text x="570" y="605" text-anchor="middle" font-size="24" fill="#1f7a55">Evidencia relevante</text>
+
+  <!-- Narrativa -->
+  <rect x="970" y="465" width="620" height="200" rx="14" fill="#eceafd" stroke="#4a3fae" stroke-width="1.8"/>
+  <text x="1280" y="560" text-anchor="middle" font-size="30" font-weight="bold" fill="#332a8a">Narrativa</text>
+  <text x="1280" y="605" text-anchor="middle" font-size="24" fill="#4a3fae">Contexto, tension, cierre</text>
+
+  <!-- Visual -->
+  <rect x="1680" y="465" width="640" height="200" rx="14" fill="#fbe9df" stroke="#a4491f" stroke-width="1.8"/>
+  <text x="2000" y="560" text-anchor="middle" font-size="30" font-weight="bold" fill="#7a3316">Visual</text>
+  <text x="2000" y="605" text-anchor="middle" font-size="24" fill="#a4491f">Forma que muestra el mensaje</text>
+
+  <!-- ===================== FRASE CENTRAL ===================== -->
+  <text x="1280" y="810" text-anchor="middle" font-size="34" font-weight="bold" fill="#0f172a">Si falta un pilar, la historia falla</text>
+
+  <!-- ===================== FALLAS (COMBINACIONES INCOMPLETAS) ===================== -->
+  <!-- Datos + visual -->
+  <rect x="220" y="925" width="700" height="200" rx="14" fill="#fbe3e1" stroke="#9c2b2b" stroke-width="1.8"/>
+  <text x="570" y="1015" text-anchor="middle" font-size="28" font-weight="bold" fill="#7a1f1f">Datos + visual</text>
+  <text x="570" y="1060" text-anchor="middle" font-size="23" fill="#9c2b2b">Sin narrativa</text>
+
+  <!-- Narrativa + visual -->
+  <rect x="960" y="925" width="640" height="200" rx="14" fill="#fbe3e1" stroke="#9c2b2b" stroke-width="1.8"/>
+  <text x="1280" y="1015" text-anchor="middle" font-size="28" font-weight="bold" fill="#7a1f1f">Narrativa + visual</text>
+  <text x="1280" y="1060" text-anchor="middle" font-size="23" fill="#9c2b2b">Sin datos solidos</text>
+
+  <!-- Datos + narrativa -->
+  <rect x="1660" y="925" width="660" height="200" rx="14" fill="#fbe3e1" stroke="#9c2b2b" stroke-width="1.8"/>
+  <text x="1990" y="1015" text-anchor="middle" font-size="28" font-weight="bold" fill="#7a1f1f">Datos + narrativa</text>
+  <text x="1990" y="1060" text-anchor="middle" font-size="23" fill="#9c2b2b">Sin visual claro</text>
+
+</svg>
+</div>
+
+<script>
+  var scale = 0.75;
+  var svg = document.getElementById('diagram');
+  function applyZoom(){
+    svg.setAttribute('width', 2560 * scale);
+    svg.setAttribute('height', 1300 * scale);
+  }
+  function zoom(factor){
+    scale = Math.min(4, Math.max(0.4, scale * factor));
+    applyZoom();
+  }
+  function resetZoom(){
+    scale = 0.75;
+    applyZoom();
+  }
+  applyZoom();
+</script>
+
+</body>
+</html>
