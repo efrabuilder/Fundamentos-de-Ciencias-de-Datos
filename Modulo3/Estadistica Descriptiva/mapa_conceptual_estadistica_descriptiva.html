@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa Conceptual — Estadística Descriptiva</title>
+<style>
+  body{
+    margin:0; padding:0; background:#ffffff;
+    font-family:Arial, Helvetica, sans-serif;
+    color:#1e293b;
+  }
+  .toolbar{
+    position:sticky; top:0; z-index:10; background:#ffffff; border-bottom:1px solid #e2e8f0;
+    display:flex; justify-content:center; gap:10px; padding:10px;
+  }
+  .toolbar button{
+    font-family:inherit; font-size:14px; padding:6px 16px; border-radius:6px; border:1px solid #cbd5e1;
+    background:#fff; cursor:pointer;
+  }
+  .toolbar button:hover{ background:#f1f5f9; }
+  .scroll-area{
+    overflow:auto; width:100%; padding:20px; box-sizing:border-box;
+  }
+  #diagram{
+    display:block; transform-origin:top left; transition:width .15s ease;
+    max-width:1200px; margin:0 auto;
+  }
+  .section{
+    border:2px dashed #94a3b8; border-radius:20px;
+    padding:26px 30px 34px; margin-bottom:34px;
+  }
+  .section h2{
+    font-size:24px; margin:0 0 24px; font-weight:bold; color:#0f172a;
+  }
+  .grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:22px;
+  }
+  .card{
+    border-radius:12px; padding:18px 16px; text-align:center; border:1.5px solid;
+  }
+  .card .title{
+    font-size:19px; font-weight:bold; margin-bottom:6px;
+  }
+  .card .desc{
+    font-size:15px;
+  }
+
+  /* Verde: Patrones y series temporales */
+  .green .card{ background:#d5f2e3; border-color:#1f9d6e; }
+  .green .card .title, .green .card .desc{ color:#0f6b45; }
+
+  /* Morado: Correlación y causalidad */
+  .purple .card{ background:#eae9fb; border-color:#8b86dd; }
+  .purple .card .title, .purple .card .desc{ color:#4a3fae; }
+
+  /* Naranja: Detección de outliers */
+  .orange .card{ background:#fbe4d9; border-color:#c0703f; }
+  .orange .card .title, .orange .card .desc{ color:#a4491f; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button onclick="zoom(0.8)">− Alejar</button>
+  <button onclick="zoom(1.25)">+ Acercar</button>
+  <button onclick="resetZoom()">Restablecer</button>
+</div>
+
+<div class="scroll-area">
+<div id="diagram">
+
+  <!-- ===================== SECCIÓN 1: PATRONES Y SERIES TEMPORALES ===================== -->
+  <div class="section green">
+    <h2>Patrones y series temporales</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="title">Patrón</div>
+        <div class="desc">Se repite en los datos</div>
+      </div>
+      <div class="card">
+        <div class="title">Tendencia</div>
+        <div class="desc">Dirección a largo plazo</div>
+      </div>
+      <div class="card">
+        <div class="title">Estacionalidad</div>
+        <div class="desc">Patrón en tiempos fijos</div>
+      </div>
+      <div class="card">
+        <div class="title">Ciclo</div>
+        <div class="desc">Fluctúa sin periodo fijo</div>
+      </div>
+      <div class="card">
+        <div class="title">Media móvil</div>
+        <div class="desc">Suaviza con promedios</div>
+      </div>
+      <div class="card">
+        <div class="title">Ruido</div>
+        <div class="desc">Variación aleatoria</div>
+      </div>
+      <div class="card">
+        <div class="title">Serie temporal</div>
+        <div class="desc">Datos en orden temporal</div>
+      </div>
+      <div class="card">
+        <div class="title">Variación %</div>
+        <div class="desc">Cambio entre periodos</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== SECCIÓN 2: CORRELACIÓN Y CAUSALIDAD ===================== -->
+  <div class="section purple">
+    <h2>Correlación y causalidad</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="title">Correlación</div>
+        <div class="desc">Cuánto se mueven juntas</div>
+      </div>
+      <div class="card">
+        <div class="title">Pearson (r)</div>
+        <div class="desc">Mide correlación lineal</div>
+      </div>
+      <div class="card">
+        <div class="title">Causalidad</div>
+        <div class="desc">Provoca cambio directo</div>
+      </div>
+      <div class="card">
+        <div class="title">Var. oculta</div>
+        <div class="desc">Influye sin ser medida</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== SECCIÓN 3: DETECCIÓN DE OUTLIERS ===================== -->
+  <div class="section orange">
+    <h2>Detección de outliers</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="title">Outlier</div>
+        <div class="desc">Se aleja del resto</div>
+      </div>
+      <div class="card">
+        <div class="title">Cuartiles</div>
+        <div class="desc">En 4 partes iguales</div>
+      </div>
+      <div class="card">
+        <div class="title">RIC</div>
+        <div class="desc">Diferencia Q3 menos Q1</div>
+      </div>
+      <div class="card">
+        <div class="title">Boxplot</div>
+        <div class="desc">Muestra los cuartiles</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<script>
+  var scale = 1;
+  var diagram = document.getElementById('diagram');
+  function applyZoom(){
+    diagram.style.transform = 'scale(' + scale + ')';
+  }
+  function zoom(factor){
+    scale = Math.min(2, Math.max(0.5, scale * factor));
+    applyZoom();
+  }
+  function resetZoom(){
+    scale = 1;
+    applyZoom();
+  }
+</script>
+
+</body>
+</html>
