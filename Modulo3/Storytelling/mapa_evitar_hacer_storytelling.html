@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evitar / Hacer — Storytelling con datos</title>
+<style>
+  body{
+    margin:0; padding:0; background:#ffffff;
+    font-family:Arial, Helvetica, sans-serif;
+  }
+  .toolbar{
+    position:sticky; top:0; z-index:10; background:#ffffff; border-bottom:1px solid #e2e8f0;
+    display:flex; justify-content:center; gap:10px; padding:10px;
+  }
+  .toolbar button{
+    font-family:inherit; font-size:14px; padding:6px 16px; border-radius:6px; border:1px solid #cbd5e1;
+    background:#fff; cursor:pointer;
+  }
+  .toolbar button:hover{ background:#f1f5f9; }
+  .scroll-area{
+    overflow:auto; width:100%; padding:20px; box-sizing:border-box;
+  }
+  #diagram{
+    display:block; transform-origin:top left; transition:width .15s ease;
+    max-width:1300px; margin:0 auto;
+  }
+  .columns{
+    display:grid; grid-template-columns:1fr 1fr; gap:40px;
+  }
+  .panel{
+    border-radius:20px; padding:36px 40px; border:1.8px solid;
+  }
+  .panel.evitar{ background:#fdedec; border-color:#8a1f1f; }
+  .panel.hacer{ background:#e7f2e0; border-color:#3d6b1f; }
+
+  .panel h2{
+    margin:0 0 34px; font-size:30px; font-weight:bold;
+  }
+  .panel.evitar h2{ color:#7a1414; }
+  .panel.hacer h2{ color:#2f5a13; }
+
+  .item{
+    font-size:22px; margin-bottom:34px;
+  }
+  .panel.evitar .item{ color:#9c2b2b; }
+  .panel.hacer .item{ color:#3d6b1f; }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button onclick="zoom(0.8)">− Alejar</button>
+  <button onclick="zoom(1.25)">+ Acercar</button>
+  <button onclick="resetZoom()">Restablecer</button>
+</div>
+
+<div class="scroll-area">
+<div id="diagram">
+
+  <div class="columns">
+
+    <!-- ===================== EVITAR ===================== -->
+    <div class="panel evitar">
+      <h2>Evitar</h2>
+      <div class="item">Mostrar todo «por si acaso»</div>
+      <div class="item">Colores sin jerarquia</div>
+      <div class="item">Empezar por la metodologia</div>
+      <div class="item">Asumir que el numero habla solo</div>
+      <div class="item">Dashboard sin conclusion</div>
+    </div>
+
+    <!-- ===================== HACER ===================== -->
+    <div class="panel hacer">
+      <h2>Hacer</h2>
+      <div class="item">Elegir solo lo esencial</div>
+      <div class="item">Un color dominante</div>
+      <div class="item">Abrir con la conclusion</div>
+      <div class="item">Explicar que significa el numero</div>
+      <div class="item">Cerrar con una recomendacion</div>
+    </div>
+
+  </div>
+
+</div>
+</div>
+
+<script>
+  var scale = 1;
+  var diagram = document.getElementById('diagram');
+  function applyZoom(){
+    diagram.style.transform = 'scale(' + scale + ')';
+  }
+  function zoom(factor){
+    scale = Math.min(2, Math.max(0.5, scale * factor));
+    applyZoom();
+  }
+  function resetZoom(){
+    scale = 1;
+    applyZoom();
+  }
+</script>
+
+</body>
+</html>
