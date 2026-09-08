@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa Conceptual — Patrón de Datos</title>
+<style>
+  body{
+    margin:0; padding:0; background:#ffffff;
+    font-family:Arial, Helvetica, sans-serif;
+  }
+  .toolbar{
+    position:sticky; top:0; z-index:10; background:#ffffff; border-bottom:1px solid #e2e8f0;
+    display:flex; justify-content:center; gap:10px; padding:10px;
+  }
+  .toolbar button{
+    font-family:inherit; font-size:14px; padding:6px 16px; border-radius:6px; border:1px solid #cbd5e1;
+    background:#fff; cursor:pointer;
+  }
+  .toolbar button:hover{ background:#f1f5f9; }
+  .scroll-area{
+    overflow:auto; width:100%; padding:20px; box-sizing:border-box;
+  }
+  #diagram{
+    display:block; transform-origin:top left; transition:width .15s ease;
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button onclick="zoom(0.8)">− Alejar</button>
+  <button onclick="zoom(1.25)">+ Acercar</button>
+  <button onclick="resetZoom()">Restablecer</button>
+</div>
+
+<div class="scroll-area">
+<svg id="diagram" viewBox="0 0 2600 1600" width="2600" height="1600" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif">
+
+  <defs>
+    <marker id="arrowGray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7b2d8e"/>
+    </marker>
+    <marker id="arrowTeal" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#0f7a68"/>
+    </marker>
+  </defs>
+
+  <!-- ===================== TITULO ===================== -->
+  <text x="1310" y="45" text-anchor="middle" font-size="26" font-weight="bold" fill="#0f172a">Mapa Conceptual: Patrón de Datos</text>
+
+  <!-- ===================== CONECTORES ===================== -->
+  <!-- Root -> Definición -->
+  <line x1="1310" y1="260" x2="1310" y2="340" stroke="#475569" stroke-width="1.7" marker-end="url(#arrowGray)"/>
+  <!-- Root -> Tasa de cambio (morado) -->
+  <line x1="1200" y1="260" x2="1020" y2="1195" stroke="#7b2d8e" stroke-width="1.7" marker-end="url(#arrowPurple)"/>
+  <!-- Root -> Ejemplos aplicados (verde azulado) -->
+  <line x1="1420" y1="260" x2="1930" y2="1195" stroke="#0f7a68" stroke-width="1.7" marker-end="url(#arrowTeal)"/>
+
+  <!-- Definición -> Tipos de patrón -->
+  <line x1="1000" y1="480" x2="560" y2="518" stroke="#475569" stroke-width="1.7" marker-end="url(#arrowGray)"/>
+  <!-- Definición -> Herramientas -->
+  <line x1="1620" y1="480" x2="2065" y2="518" stroke="#475569" stroke-width="1.7" marker-end="url(#arrowGray)"/>
+
+  <!-- Tipos de patrón -> hijos -->
+  <line x1="430" y1="610" x2="340" y2="658" stroke="#475569" stroke-width="1.7" marker-end="url(#arrowGray)"/>
+  <line x1="670" y1="610" x2="760" y2="658" stroke="#475569" stroke-width="1.7" marker-end="url(#arrowGray)"/>
+  <line x1="300" y1="832" x2="300" y2="878" stroke="#475569" stroke-width="1.7" marker-end="url(#arrowGray)"/>
+  <line x1="800" y1="832" x2="800" y2="878" stroke="#475569" stroke-width="1.7" marker-end="url(#arrowGray)"/>
+  <line x1="750" y1="1052" x2="620" y2="1098" stroke="#475569" stroke-width="1.7" marker-end="url(#arrowGray)"/>
+
+  <!-- Herramientas -> hijos -->
+  <line x1="1950" y1="610" x2="1870" y2="658" stroke="#475569" stroke-width="1.7" marker-end="url(#arrowGray)"/>
+  <line x1="2160" y1="610" x2="2260" y2="658" stroke="#475569" stroke-width="1.7" marker-end="url(#arrowGray)"/>
+  <line x1="1820" y1="832" x2="1820" y2="878" stroke="#475569" stroke-width="1.7" marker-end="url(#arrowGray)"/>
+  <line x1="2320" y1="832" x2="2320" y2="878" stroke="#475569" stroke-width="1.7" marker-end="url(#arrowGray)"/>
+
+  <!-- Tasa de cambio -> hijos -->
+  <line x1="950" y1="1302" x2="820" y2="1348" stroke="#7b2d8e" stroke-width="1.7" marker-end="url(#arrowPurple)"/>
+  <line x1="1090" y1="1302" x2="1230" y2="1348" stroke="#7b2d8e" stroke-width="1.7" marker-end="url(#arrowPurple)"/>
+
+  <!-- Ejemplos aplicados -> hijo -->
+  <line x1="1930" y1="1302" x2="1930" y2="1348" stroke="#0f7a68" stroke-width="1.7" marker-end="url(#arrowTeal)"/>
+
+  <!-- ===================== NODOS ===================== -->
+
+  <!-- ROOT -->
+  <rect x="1070" y="150" width="480" height="110" rx="8" fill="#29394f" stroke="#0f172a" stroke-width="1.3"/>
+  <text x="1310" y="212" text-anchor="middle" font-size="19" font-weight="bold" fill="#ffffff">PATRÓN DE DATOS</text>
+
+  <!-- DEFINICIÓN -->
+  <rect x="810" y="340" width="1000" height="140" rx="6" fill="#eaf1fb" stroke="#8fb3d9" stroke-width="1.3"/>
+  <text x="1310" y="395" text-anchor="middle" font-size="14" fill="#0f172a">Regularidad en el comportamiento de un producto</text>
+  <text x="1310" y="415" text-anchor="middle" font-size="14" fill="#0f172a">que permite anticipar su comportamiento futuro.</text>
+  <text x="1310" y="435" text-anchor="middle" font-size="14" fill="#0f172a">Proceso analizado por lectura y visualización.</text>
+
+  <!-- TIPOS DE PATRÓN (header) -->
+  <rect x="315" y="518" width="470" height="90" rx="6" fill="#2b6693" stroke="#0f172a" stroke-width="1.3"/>
+  <text x="550" y="571" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">TIPOS DE PATRÓN</text>
+
+  <!-- HERRAMIENTAS (header) -->
+  <rect x="1805" y="518" width="530" height="90" rx="6" fill="#a53125" stroke="#0f172a" stroke-width="1.3"/>
+  <text x="2070" y="556" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">HERRAMIENTAS PARA</text>
+  <text x="2070" y="578" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">DETECTAR PATRONES</text>
+
+  <!-- TIPOS: hijo 1. TENDENCIA -->
+  <rect x="80" y="660" width="440" height="170" rx="6" fill="#d6e9f8" stroke="#4a86b3" stroke-width="1.3"/>
+  <text x="300" y="695" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#0f172a">1. TENDENCIA</text>
+  <text x="300" y="720" text-anchor="middle" font-size="12.5" fill="#0f172a">Comportamiento humano</text>
+  <text x="300" y="738" text-anchor="middle" font-size="12.5" fill="#0f172a">que se sostiene en un</text>
+  <text x="300" y="756" text-anchor="middle" font-size="12.5" fill="#0f172a">periodo específico;</text>
+  <text x="300" y="774" text-anchor="middle" font-size="12.5" fill="#0f172a">se visualiza como patrón.</text>
+
+  <!-- TIPOS: hijo 2. ESTACIONALIDAD -->
+  <rect x="580" y="660" width="440" height="170" rx="6" fill="#d6e9f8" stroke="#4a86b3" stroke-width="1.3"/>
+  <text x="800" y="690" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#0f172a">2. ESTACIONALIDAD</text>
+  <text x="800" y="713" text-anchor="middle" font-size="12.5" fill="#0f172a">Patrón repetido en</text>
+  <text x="800" y="731" text-anchor="middle" font-size="12.5" fill="#0f172a">intervalos de tiempo</text>
+  <text x="800" y="749" text-anchor="middle" font-size="12.5" fill="#0f172a">determinados.</text>
+  <text x="800" y="767" text-anchor="middle" font-size="12.5" fill="#0f172a">Comportamiento por temporadas</text>
+  <text x="800" y="785" text-anchor="middle" font-size="12.5" fill="#0f172a">(¿qué se hace tradicionalmente?)</text>
+
+  <!-- TIPOS: hijo 3. CICLOS -->
+  <rect x="80" y="880" width="440" height="170" rx="6" fill="#d6e9f8" stroke="#4a86b3" stroke-width="1.3"/>
+  <text x="300" y="915" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#0f172a">3. CICLOS (RUTAS)</text>
+  <text x="300" y="938" text-anchor="middle" font-size="12.5" fill="#0f172a">Sin periodo fijo.</text>
+  <text x="300" y="956" text-anchor="middle" font-size="12.5" fill="#0f172a">→ Variables. Se asocia a la</text>
+  <text x="300" y="974" text-anchor="middle" font-size="12.5" fill="#0f172a">economía.</text>
+
+  <!-- TIPOS: hijo 4. CLÚSTER -->
+  <rect x="580" y="880" width="440" height="170" rx="6" fill="#d6e9f8" stroke="#4a86b3" stroke-width="1.3"/>
+  <text x="800" y="915" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#0f172a">4. CLÚSTER</text>
+  <text x="800" y="935" text-anchor="middle" font-size="12.5" fill="#0f172a">(Agrupamiento)</text>
+  <text x="800" y="958" text-anchor="middle" font-size="12.5" fill="#0f172a">Agrupamiento por acción.</text>
+
+  <!-- TIPOS: hijo 5. VARIABLES -->
+  <rect x="270" y="1100" width="560" height="170" rx="6" fill="#d6e9f8" stroke="#4a86b3" stroke-width="1.3"/>
+  <text x="550" y="1135" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#0f172a">5. VARIABLES</text>
+  <text x="550" y="1158" text-anchor="middle" font-size="12.5" fill="#0f172a">Relaciones y coincidencias;</text>
+  <text x="550" y="1176" text-anchor="middle" font-size="12.5" fill="#0f172a">se sigue agrupando.</text>
+  <text x="550" y="1198" text-anchor="middle" font-size="12.5" fill="#0f172a">Comparación (Top / Bottom):</text>
+  <text x="550" y="1216" text-anchor="middle" font-size="12.5" fill="#0f172a">aumento o bajas, competencia.</text>
+
+  <!-- HERRAMIENTAS: hijo Gráfico de barras -->
+  <rect x="1600" y="660" width="440" height="170" rx="6" fill="#fbe4e0" stroke="#b3543f" stroke-width="1.3"/>
+  <text x="1820" y="720" text-anchor="middle" font-size="13" fill="#0f172a">Gráfico de barras</text>
+  <text x="1820" y="742" text-anchor="middle" font-size="12.5" fill="#0f172a">→ Variables (categorías, repeticiones)</text>
+  <text x="1820" y="760" text-anchor="middle" font-size="12.5" fill="#0f172a">→ Clúster, Ciclos</text>
+
+  <!-- HERRAMIENTAS: hijo Gráfica de líneas -->
+  <rect x="2100" y="660" width="440" height="170" rx="6" fill="#fbe4e0" stroke="#b3543f" stroke-width="1.3"/>
+  <text x="2320" y="720" text-anchor="middle" font-size="13" fill="#0f172a">Gráfica de líneas</text>
+  <text x="2320" y="742" text-anchor="middle" font-size="12.5" fill="#0f172a">→ Tendencias</text>
+  <text x="2320" y="760" text-anchor="middle" font-size="12.5" fill="#0f172a">→ Estacionalidad</text>
+
+  <!-- HERRAMIENTAS: hijo Medidas móviles simples -->
+  <rect x="1600" y="880" width="440" height="170" rx="6" fill="#fbe4e0" stroke="#b3543f" stroke-width="1.3"/>
+  <text x="1820" y="935" text-anchor="middle" font-size="13" fill="#0f172a">Medidas móviles simples</text>
+  <text x="1820" y="957" text-anchor="middle" font-size="12.5" fill="#0f172a">Suaviza variables, elimina ruido,</text>
+  <text x="1820" y="975" text-anchor="middle" font-size="12.5" fill="#0f172a">ver tendencia de fondo.</text>
+
+  <!-- HERRAMIENTAS: hijo Gráfico de dispersión -->
+  <rect x="2100" y="880" width="440" height="170" rx="6" fill="#fbe4e0" stroke="#b3543f" stroke-width="1.3"/>
+  <text x="2320" y="925" text-anchor="middle" font-size="13" fill="#0f172a">Gráfico de dispersión</text>
+  <text x="2320" y="947" text-anchor="middle" font-size="12.5" fill="#0f172a">(variables numéricas)</text>
+  <text x="2320" y="965" text-anchor="middle" font-size="12.5" fill="#0f172a">→ Variables, Ciclos, Clúster</text>
+  <text x="2320" y="983" text-anchor="middle" font-size="12.5" fill="#0f172a">(se mueven juntas: correlación)</text>
+
+  <!-- TASA DE CAMBIO -->
+  <rect x="750" y="1200" width="540" height="100" rx="6" fill="#7b2d8e" stroke="#0f172a" stroke-width="1.3"/>
+  <text x="1020" y="1257" text-anchor="middle" font-size="17" font-weight="bold" fill="#ffffff">TASA DE CAMBIO</text>
+
+  <!-- EJEMPLOS APLICADOS -->
+  <rect x="1730" y="1200" width="400" height="100" rx="6" fill="#0f7a68" stroke="#0f172a" stroke-width="1.3"/>
+  <text x="1930" y="1245" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">EJEMPLOS</text>
+  <text x="1930" y="1267" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">APLICADOS</text>
+
+  <!-- TASA: hijo Menos -->
+  <rect x="430" y="1350" width="560" height="180" rx="6" fill="#f2e9f7" stroke="#7b2d8e" stroke-width="1.3"/>
+  <text x="710" y="1390" text-anchor="middle" font-size="13" fill="#0f172a">Menos</text>
+  <text x="710" y="1412" text-anchor="middle" font-size="13" fill="#0f172a">÷ (Más + Menos)</text>
+  <text x="710" y="1434" text-anchor="middle" font-size="13" fill="#0f172a">× 100 =</text>
+  <text x="710" y="1456" text-anchor="middle" font-size="13" fill="#0f172a">Ve qué tan rápido</text>
+  <text x="710" y="1478" text-anchor="middle" font-size="13" fill="#0f172a">cambia la variable.</text>
+
+  <!-- TASA: hijo Ejemplo -->
+  <rect x="1050" y="1350" width="560" height="180" rx="6" fill="#f2e9f7" stroke="#7b2d8e" stroke-width="1.3"/>
+  <text x="1330" y="1400" text-anchor="middle" font-size="13" fill="#0f172a">Ejemplo: Tienda en línea</text>
+  <text x="1330" y="1422" text-anchor="middle" font-size="13" fill="#0f172a">÷ (Tienda física +</text>
+  <text x="1330" y="1444" text-anchor="middle" font-size="13" fill="#0f172a">Tienda en línea) × 100</text>
+
+  <!-- EJEMPLOS: hijo Clientes -->
+  <rect x="1670" y="1350" width="520" height="180" rx="6" fill="#d7f5ec" stroke="#0f7a68" stroke-width="1.3"/>
+  <text x="1930" y="1400" text-anchor="middle" font-size="13" fill="#0f172a">Clientes (se quedan/se van)</text>
+  <text x="1930" y="1422" text-anchor="middle" font-size="13" fill="#0f172a">Inventario (lo que hay/</text>
+  <text x="1930" y="1444" text-anchor="middle" font-size="13" fill="#0f172a">debe conseguirse)</text>
+  <text x="1930" y="1466" text-anchor="middle" font-size="13" fill="#0f172a">Ventas (física/en línea)</text>
+
+</svg>
+</div>
+
+<script>
+  var scale = 0.85;
+  var svg = document.getElementById('diagram');
+  function applyZoom(){
+    svg.setAttribute('width', 2600 * scale);
+    svg.setAttribute('height', 1600 * scale);
+  }
+  function zoom(factor){
+    scale = Math.min(4, Math.max(0.4, scale * factor));
+    applyZoom();
+  }
+  function resetZoom(){
+    scale = 0.85;
+    applyZoom();
+  }
+  applyZoom();
+</script>
+
+</body>
+</html>
