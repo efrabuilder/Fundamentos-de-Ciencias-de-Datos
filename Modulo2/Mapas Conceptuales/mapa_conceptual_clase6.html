@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa Conceptual — Clase 6: Funciones de Agregación, GROUP BY y HAVING</title>
+<style>
+  body{
+    margin:0; padding:0; background:#ffffff;
+    font-family:Arial, Helvetica, sans-serif;
+  }
+  .toolbar{
+    position:sticky; top:0; z-index:10; background:#ffffff; border-bottom:1px solid #e2e8f0;
+    display:flex; justify-content:center; gap:10px; padding:10px;
+  }
+  .toolbar button{
+    font-family:inherit; font-size:14px; padding:6px 16px; border-radius:6px; border:1px solid #cbd5e1;
+    background:#fff; cursor:pointer;
+  }
+  .toolbar button:hover{ background:#f1f5f9; }
+  .scroll-area{
+    overflow:auto; width:100%; padding:20px; box-sizing:border-box;
+  }
+  #diagram{
+    display:block; transform-origin:top left; transition:width .15s ease;
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button onclick="zoom(0.8)">− Alejar</button>
+  <button onclick="zoom(1.25)">+ Acercar</button>
+  <button onclick="resetZoom()">Restablecer</button>
+</div>
+
+<div class="scroll-area">
+<svg id="diagram" viewBox="-20 0 7020 900" width="7020" height="900" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif">
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#94a3b8"/>
+    </marker>
+  </defs>
+
+  <!-- ===================== CONECTORES: ROOT -> NIVEL 1 ===================== -->
+  <line x1="3780" y1="60" x2="1692" y2="150" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="2500" y="100" font-size="13" fill="#475569">usa</text>
+
+  <line x1="3830" y1="75" x2="3875" y2="150" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="3820" y="110" font-size="13" fill="#475569">aplica</text>
+
+  <line x1="3900" y1="75" x2="4908" y2="150" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="4300" y="105" font-size="13" fill="#475569">parte de</text>
+
+  <line x1="3960" y1="60" x2="6052" y2="150" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="4900" y="95" font-size="13" fill="#475569">aclara con</text>
+
+  <!-- ===================== CONECTORES: NIVEL 1 -> NIVEL 2 (funciones) ===================== -->
+  <line x1="1600" y1="205" x2="325" y2="270" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="850" y="235" font-size="11.5" fill="#475569">función</text>
+
+  <line x1="1640" y1="205" x2="975" y2="270" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1150" y="235" font-size="11.5" fill="#475569">función</text>
+
+  <line x1="1692" y1="205" x2="1650" y2="270" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1620" y="240" font-size="11.5" fill="#475569">función</text>
+
+  <line x1="1744" y1="205" x2="2345" y2="270" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="2100" y="235" font-size="11.5" fill="#475569">función</text>
+
+  <line x1="1784" y1="205" x2="3060" y2="270" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="2500" y="235" font-size="11.5" fill="#475569">función</text>
+
+  <!-- ===================== CONECTORES: NIVEL 1 -> NIVEL 2 (formas de ver datos) ===================== -->
+  <line x1="3830" y1="205" x2="3625" y2="270" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="3660" y="238" font-size="11.5" fill="#475569">incluye</text>
+
+  <line x1="3875" y1="205" x2="3860" y2="270" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="3830" y="238" font-size="11.5" fill="#475569">incluye</text>
+
+  <line x1="3920" y1="205" x2="4125" y2="260" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="3990" y="235" font-size="11.5" fill="#475569">propósito</text>
+
+  <!-- ===================== CONECTORES: NIVEL 1 -> NIVEL 2 (agrupación) ===================== -->
+  <line x1="4870" y1="205" x2="4612" y2="270" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="4680" y="238" font-size="11.5" fill="#475569">comando</text>
+
+  <line x1="4940" y1="205" x2="5205" y2="270" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="5060" y="238" font-size="11.5" fill="#475569">comando</text>
+
+  <!-- ===================== CONECTORES: NIVEL 1 -> NIVEL 2 (diferencia clave) ===================== -->
+  <line x1="6000" y1="205" x2="5837" y2="270" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="5850" y="238" font-size="11.5" fill="#475569">compara</text>
+
+  <line x1="6070" y1="205" x2="6267" y2="270" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="6160" y="238" font-size="11.5" fill="#475569">compara</text>
+
+  <line x1="6120" y1="205" x2="6700" y2="245" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="6350" y="228" font-size="11.5" fill="#475569">se explica con</text>
+
+  <!-- ===================== CONECTORES: NIVEL 2 -> NIVEL 3 (COUNT) ===================== -->
+  <line x1="290" y1="325" x2="100" y2="405" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="130" y="365" font-size="11" fill="#475569">qué hace:</text>
+  <line x1="320" y1="325" x2="290" y2="395" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="290" y="365" font-size="11" fill="#475569">ejemplo:</text>
+  <line x1="360" y1="325" x2="515" y2="400" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="430" y="365" font-size="11" fill="#475569">resultado:</text>
+
+  <!-- ===================== CONECTORES: NIVEL 2 -> NIVEL 3 (SUM) ===================== -->
+  <line x1="940" y1="325" x2="740" y2="405" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="765" y="365" font-size="11" fill="#475569">qué hace:</text>
+  <line x1="975" y1="325" x2="960" y2="390" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="945" y="365" font-size="11" fill="#475569">ejemplo:</text>
+  <line x1="1010" y1="325" x2="1195" y2="400" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1075" y="365" font-size="11" fill="#475569">resultado:</text>
+
+  <!-- ===================== CONECTORES: NIVEL 2 -> NIVEL 3 (AVG) ===================== -->
+  <line x1="1615" y1="325" x2="1415" y2="405" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1440" y="365" font-size="11" fill="#475569">qué hace:</text>
+  <line x1="1650" y1="325" x2="1620" y2="390" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1615" y="365" font-size="11" fill="#475569">ejemplo:</text>
+  <line x1="1685" y1="325" x2="1855" y2="400" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="1755" y="365" font-size="11" fill="#475569">resultado:</text>
+
+  <!-- ===================== CONECTORES: NIVEL 2 -> NIVEL 3 (MIN) ===================== -->
+  <line x1="2300" y1="325" x2="2110" y2="405" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="2135" y="365" font-size="11" fill="#475569">qué hace:</text>
+  <line x1="2345" y1="325" x2="2350" y2="390" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="2335" y="365" font-size="11" fill="#475569">ejemplo:</text>
+  <line x1="2390" y1="325" x2="2585" y2="405" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="2455" y="365" font-size="11" fill="#475569">resultado:</text>
+
+  <!-- ===================== CONECTORES: NIVEL 2 -> NIVEL 3 (MAX) ===================== -->
+  <line x1="3015" y1="325" x2="2825" y2="405" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="2850" y="365" font-size="11" fill="#475569">qué hace:</text>
+  <line x1="3060" y1="325" x2="3060" y2="390" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="3050" y="365" font-size="11" fill="#475569">ejemplo:</text>
+  <line x1="3105" y1="325" x2="3295" y2="405" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="3170" y="365" font-size="11" fill="#475569">resultado:</text>
+
+  <!-- ===================== CONECTORES: NIVEL 2 -> NIVEL 3 (GROUP BY) ===================== -->
+  <line x1="4590" y1="325" x2="4480" y2="400" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="4460" y="365" font-size="11" fill="#475569">qué hace:</text>
+  <line x1="4650" y1="325" x2="4745" y2="390" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="4660" y="365" font-size="11" fill="#475569">ejemplo:</text>
+
+  <!-- ===================== CONECTORES: NIVEL 2 -> NIVEL 3 (HAVING agrupación) ===================== -->
+  <line x1="5175" y1="325" x2="5060" y2="400" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="5030" y="365" font-size="11" fill="#475569">qué hace:</text>
+  <line x1="5240" y1="325" x2="5350" y2="385" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <text x="5250" y="362" font-size="11" fill="#475569">ejemplo:</text>
+
+  <!-- ===================== CONECTORES: NIVEL 2 -> NIVEL 3 (WHERE / HAVING zona D) ===================== -->
+  <line x1="5810" y1="325" x2="5735" y2="405" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="5865" y1="325" x2="5940" y2="405" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <line x1="6240" y1="325" x2="6170" y2="405" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="6295" y1="325" x2="6365" y2="405" stroke="#94a3b8" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- ===================== NODOS ===================== -->
+
+  <!-- ROOT -->
+  <rect x="3712" y="5" width="300" height="70" rx="10" fill="#1e293b"/>
+  <text x="3862" y="30" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">Clase 6</text>
+  <text x="3862" y="49" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">Funciones de Agregación,</text>
+  <text x="3862" y="66" text-anchor="middle" font-size="15" font-weight="bold" fill="#ffffff">GROUP BY y HAVING</text>
+
+  <!-- NIVEL 1 -->
+  <rect x="1542" y="150" width="300" height="55" rx="10" fill="#22a58a"/>
+  <text x="1692" y="173" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#ffffff">Funciones de Agregación</text>
+  <text x="1692" y="191" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#ffffff">(COUNT, SUM, AVG, MIN, MAX)</text>
+
+  <rect x="3745" y="150" width="260" height="55" rx="10" fill="#22a58a"/>
+  <text x="3875" y="182" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#ffffff">Formas de ver datos en SQL</text>
+
+  <rect x="4768" y="150" width="280" height="55" rx="10" fill="#22a58a"/>
+  <text x="4908" y="173" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#ffffff">Agrupación (GROUP BY)</text>
+  <text x="4908" y="191" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#ffffff">y filtrado (HAVING)</text>
+
+  <rect x="5922" y="150" width="260" height="55" rx="10" fill="#22a58a"/>
+  <text x="6052" y="173" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#ffffff">Diferencia clave:</text>
+  <text x="6052" y="191" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#ffffff">WHERE vs HAVING</text>
+
+  <!-- NIVEL 2: funciones -->
+  <rect x="250" y="270" width="150" height="55" rx="8" fill="#e8fbf5" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="325" y="293" text-anchor="middle" font-size="13" fill="#0f172a">1. COUNT()</text>
+  <text x="325" y="311" text-anchor="middle" font-size="13" fill="#0f172a">Contar</text>
+
+  <rect x="900" y="270" width="150" height="55" rx="8" fill="#e8fbf5" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="975" y="293" text-anchor="middle" font-size="13" fill="#0f172a">2. SUM()</text>
+  <text x="975" y="311" text-anchor="middle" font-size="13" fill="#0f172a">Sumar</text>
+
+  <rect x="1575" y="270" width="150" height="55" rx="8" fill="#e8fbf5" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="1650" y="293" text-anchor="middle" font-size="13" fill="#0f172a">3. AVG()</text>
+  <text x="1650" y="311" text-anchor="middle" font-size="13" fill="#0f172a">Promedio</text>
+
+  <rect x="2270" y="270" width="150" height="55" rx="8" fill="#e8fbf5" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="2345" y="293" text-anchor="middle" font-size="13" fill="#0f172a">4. MIN()</text>
+  <text x="2345" y="311" text-anchor="middle" font-size="13" fill="#0f172a">Mínimo</text>
+
+  <rect x="2985" y="270" width="150" height="55" rx="8" fill="#e8fbf5" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="3060" y="293" text-anchor="middle" font-size="13" fill="#0f172a">5. MAX()</text>
+  <text x="3060" y="311" text-anchor="middle" font-size="13" fill="#0f172a">Máximo</text>
+
+  <!-- NIVEL 2: formas de ver datos -->
+  <rect x="3540" y="270" width="170" height="55" rx="8" fill="#e8fbf5" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="3625" y="302" text-anchor="middle" font-size="13" fill="#0f172a">Detalle: fila por fila</text>
+
+  <rect x="3750" y="270" width="220" height="55" rx="8" fill="#e8fbf5" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="3860" y="293" text-anchor="middle" font-size="12.5" fill="#0f172a">Resumen: información</text>
+  <text x="3860" y="311" text-anchor="middle" font-size="12.5" fill="#0f172a">agrupada (totales, promedios)</text>
+
+  <rect x="4010" y="260" width="230" height="80" rx="8" fill="#e6f2fb" stroke="#93c5fd" stroke-width="1.5"/>
+  <text x="4125" y="282" text-anchor="middle" font-size="12" fill="#0f172a">Las funciones de agregación</text>
+  <text x="4125" y="299" text-anchor="middle" font-size="12" fill="#0f172a">sirven para pasar de</text>
+  <text x="4125" y="316" text-anchor="middle" font-size="12" fill="#0f172a">detalle → resumen</text>
+
+  <!-- NIVEL 2: agrupación -->
+  <rect x="4542" y="270" width="140" height="55" rx="8" fill="#e8fbf5" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="4612" y="293" text-anchor="middle" font-size="13" fill="#0f172a">GROUP BY</text>
+  <text x="4612" y="311" text-anchor="middle" font-size="13" fill="#0f172a">Agrupar</text>
+
+  <rect x="5125" y="270" width="160" height="55" rx="8" fill="#e8fbf5" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="5205" y="293" text-anchor="middle" font-size="13" fill="#0f172a">HAVING</text>
+  <text x="5205" y="311" text-anchor="middle" font-size="13" fill="#0f172a">Filtrar grupos</text>
+
+  <!-- NIVEL 2: diferencia clave -->
+  <rect x="5782" y="270" width="110" height="55" rx="8" fill="#e8fbf5" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="5837" y="303" text-anchor="middle" font-size="13" fill="#0f172a">WHERE</text>
+
+  <rect x="6212" y="270" width="110" height="55" rx="8" fill="#e8fbf5" stroke="#5eead4" stroke-width="1.5"/>
+  <text x="6267" y="303" text-anchor="middle" font-size="13" fill="#0f172a">HAVING</text>
+
+  <rect x="6550" y="245" width="300" height="110" rx="8" fill="#fdf3d9" stroke="#eab676" stroke-width="1.5"/>
+  <text x="6700" y="267" text-anchor="middle" font-size="12" font-style="italic" fill="#0f172a">Analogía de la tienda:</text>
+  <text x="6700" y="285" text-anchor="middle" font-size="12" fill="#0f172a">WHERE = filtra productos (antes de analizar)</text>
+  <text x="6700" y="302" text-anchor="middle" font-size="12" fill="#0f172a">GROUP BY = hace grupos (por producto)</text>
+  <text x="6700" y="319" text-anchor="middle" font-size="12" fill="#0f172a">HAVING = decide qué grupos interesan</text>
+
+  <!-- NIVEL 3: COUNT -->
+  <rect x="40" y="405" width="120" height="50" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="100" y="435" text-anchor="middle" font-size="11.8" fill="#0f172a">Cuenta filas</text>
+
+  <rect x="190" y="395" width="200" height="70" rx="8" fill="#fdf3d9" stroke="#eab676" stroke-width="1.3"/>
+  <text x="290" y="422" text-anchor="middle" font-size="11.3" fill="#0f172a">SELECT COUNT(*) AS TotalVentas</text>
+  <text x="290" y="440" text-anchor="middle" font-size="11.3" fill="#0f172a">FROM Ventas;</text>
+
+  <rect x="420" y="400" width="190" height="60" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="515" y="424" text-anchor="middle" font-size="11.5" fill="#0f172a">Resultado: cuántas</text>
+  <text x="515" y="441" text-anchor="middle" font-size="11.5" fill="#0f172a">ventas se han hecho</text>
+
+  <!-- NIVEL 3: SUM -->
+  <rect x="660" y="405" width="160" height="50" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="740" y="435" text-anchor="middle" font-size="11.8" fill="#0f172a">Suma valores numéricos</text>
+
+  <rect x="850" y="390" width="220" height="85" rx="8" fill="#fdf3d9" stroke="#eab676" stroke-width="1.3"/>
+  <text x="960" y="414" text-anchor="middle" font-size="11.3" fill="#0f172a">SELECT SUM(Precio * Cantidad)</text>
+  <text x="960" y="431" text-anchor="middle" font-size="11.3" fill="#0f172a">AS TotalDinero</text>
+  <text x="960" y="448" text-anchor="middle" font-size="11.3" fill="#0f172a">FROM Ventas;</text>
+
+  <rect x="1100" y="400" width="190" height="60" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="1195" y="424" text-anchor="middle" font-size="11.5" fill="#0f172a">Resultado: total de</text>
+  <text x="1195" y="441" text-anchor="middle" font-size="11.5" fill="#0f172a">dinero generado</text>
+
+  <!-- NIVEL 3: AVG -->
+  <rect x="1340" y="405" width="150" height="50" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="1415" y="435" text-anchor="middle" font-size="11.8" fill="#0f172a">Calcula el promedio</text>
+
+  <rect x="1520" y="390" width="200" height="85" rx="8" fill="#fdf3d9" stroke="#eab676" stroke-width="1.3"/>
+  <text x="1620" y="414" text-anchor="middle" font-size="11.3" fill="#0f172a">SELECT AVG(Precio)</text>
+  <text x="1620" y="431" text-anchor="middle" font-size="11.3" fill="#0f172a">AS PrecioPromedio</text>
+  <text x="1620" y="448" text-anchor="middle" font-size="11.3" fill="#0f172a">FROM Ventas;</text>
+
+  <rect x="1750" y="400" width="210" height="60" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="1855" y="424" text-anchor="middle" font-size="11.5" fill="#0f172a">Resultado: precio promedio</text>
+  <text x="1855" y="441" text-anchor="middle" font-size="11.5" fill="#0f172a">de los productos</text>
+
+  <!-- NIVEL 3: MIN -->
+  <rect x="2010" y="405" width="200" height="50" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="2110" y="435" text-anchor="middle" font-size="11.8" fill="#0f172a">Devuelve el valor más pequeño</text>
+
+  <rect x="2240" y="390" width="220" height="85" rx="8" fill="#fdf3d9" stroke="#eab676" stroke-width="1.3"/>
+  <text x="2350" y="414" text-anchor="middle" font-size="11.3" fill="#0f172a">SELECT MIN(Precio)</text>
+  <text x="2350" y="431" text-anchor="middle" font-size="11.3" fill="#0f172a">AS PrecioMasBarato</text>
+  <text x="2350" y="448" text-anchor="middle" font-size="11.3" fill="#0f172a">FROM Ventas;</text>
+
+  <rect x="2490" y="405" width="190" height="50" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="2585" y="435" text-anchor="middle" font-size="11.5" fill="#0f172a">Resultado: producto más barato</text>
+
+  <!-- NIVEL 3: MAX -->
+  <rect x="2730" y="405" width="190" height="50" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="2825" y="435" text-anchor="middle" font-size="11.8" fill="#0f172a">Devuelve el valor más alto</text>
+
+  <rect x="2950" y="390" width="220" height="85" rx="8" fill="#fdf3d9" stroke="#eab676" stroke-width="1.3"/>
+  <text x="3060" y="414" text-anchor="middle" font-size="11.3" fill="#0f172a">SELECT MAX(Precio)</text>
+  <text x="3060" y="431" text-anchor="middle" font-size="11.3" fill="#0f172a">AS PrecioMasCaro</text>
+  <text x="3060" y="448" text-anchor="middle" font-size="11.3" fill="#0f172a">FROM Ventas;</text>
+
+  <rect x="3200" y="405" width="190" height="50" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="3295" y="435" text-anchor="middle" font-size="11.5" fill="#0f172a">Resultado: producto más caro</text>
+
+  <!-- NIVEL 3: GROUP BY -->
+  <rect x="4390" y="400" width="180" height="55" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="4480" y="423" text-anchor="middle" font-size="11.5" fill="#0f172a">Agrupa filas con el</text>
+  <text x="4480" y="440" text-anchor="middle" font-size="11.5" fill="#0f172a">mismo valor</text>
+
+  <rect x="4610" y="390" width="270" height="95" rx="8" fill="#fdf3d9" stroke="#eab676" stroke-width="1.3"/>
+  <text x="4745" y="412" text-anchor="middle" font-size="11.2" fill="#0f172a">SELECT Producto,</text>
+  <text x="4745" y="428" text-anchor="middle" font-size="11.2" fill="#0f172a">SUM(Cantidad) AS TotalVendido</text>
+  <text x="4745" y="444" text-anchor="middle" font-size="11.2" fill="#0f172a">FROM Ventas</text>
+  <text x="4745" y="460" text-anchor="middle" font-size="11.2" fill="#0f172a">GROUP BY Producto;</text>
+
+  <!-- NIVEL 3: HAVING (agrupación) -->
+  <rect x="4960" y="400" width="200" height="55" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="5060" y="423" text-anchor="middle" font-size="11.5" fill="#0f172a">Filtra resultados</text>
+  <text x="5060" y="440" text-anchor="middle" font-size="11.5" fill="#0f172a">después de agrupar</text>
+
+  <rect x="5200" y="385" width="300" height="115" rx="8" fill="#fdf3d9" stroke="#eab676" stroke-width="1.3"/>
+  <text x="5350" y="405" text-anchor="middle" font-size="10.8" fill="#0f172a">SELECT Producto,</text>
+  <text x="5350" y="420" text-anchor="middle" font-size="10.8" fill="#0f172a">SUM(Cantidad) AS TotalVendido</text>
+  <text x="5350" y="435" text-anchor="middle" font-size="10.8" fill="#0f172a">FROM Ventas</text>
+  <text x="5350" y="450" text-anchor="middle" font-size="10.8" fill="#0f172a">GROUP BY Producto</text>
+  <text x="5350" y="465" text-anchor="middle" font-size="10.8" fill="#0f172a">HAVING SUM(Cantidad) &gt; 2;</text>
+
+  <!-- NIVEL 3: WHERE (diferencia clave) -->
+  <rect x="5650" y="405" width="170" height="50" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="5735" y="435" text-anchor="middle" font-size="11.5" fill="#0f172a">Filtra filas antes de agrupar</text>
+
+  <rect x="5850" y="405" width="180" height="50" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="5940" y="435" text-anchor="middle" font-size="11.5" fill="#0f172a">NO usa funciones agregadas</text>
+
+  <!-- NIVEL 3: HAVING (diferencia clave) -->
+  <rect x="6090" y="405" width="160" height="50" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="6170" y="435" text-anchor="middle" font-size="11.5" fill="#0f172a">Filtra después de agrupar</text>
+
+  <rect x="6280" y="405" width="170" height="50" rx="8" fill="#ffffff" stroke="#334155" stroke-width="1.3"/>
+  <text x="6365" y="435" text-anchor="middle" font-size="11.5" fill="#0f172a">Sí usa funciones agregadas</text>
+
+  <!-- FUENTE -->
+  <text x="3500" y="850" text-anchor="middle" font-size="14" fill="#475569">Fuente: "Clase 6 - Funciones de Agregación, GROUP BY y HAVING" (Clase_6.docx)</text>
+
+</svg>
+</div>
+
+<script>
+  var scale = 0.7;
+  var svg = document.getElementById('diagram');
+  function applyZoom(){
+    svg.setAttribute('width', 7020 * scale);
+    svg.setAttribute('height', 900 * scale);
+  }
+  function zoom(factor){
+    scale = Math.min(4, Math.max(0.3, scale * factor));
+    applyZoom();
+  }
+  function resetZoom(){
+    scale = 0.7;
+    applyZoom();
+  }
+  applyZoom();
+</script>
+
+</body>
+</html>
