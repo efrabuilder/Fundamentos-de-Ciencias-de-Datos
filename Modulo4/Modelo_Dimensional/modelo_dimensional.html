@@ -42,12 +42,16 @@
   .unit-divider h2.unit-title{font-size:24px;font-weight:600;color:var(--navy);margin:0;}
   .unit-divider .sub{font-size:14px;color:var(--text-muted);margin-left:auto;text-align:right;}
 
+  .sub-block{margin:44px 0 0;}
+  .sub-block .sub-label{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--navy-soft);letter-spacing:0.02em;margin-bottom:6px;}
+
   section{margin-bottom:52px;}
   h2{font-size:20px;font-weight:600;color:var(--navy);margin:0 0 6px;}
   .section-note{font-size:14px;color:var(--text-muted);margin:0 0 22px;max-width:680px;}
 
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
   .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;}
+  .grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;}
   .card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:22px 24px;}
   .card h3{font-size:15.5px;margin:0 0 10px;}
   .card.oltp h3{color:var(--navy-soft);}
@@ -104,6 +108,49 @@
   .agenda-list .t strong{display:block;font-size:14.5px;color:var(--navy);}
   .agenda-list .t span{font-size:13px;color:var(--text-muted);}
 
+  .step-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;}
+  .step-card{background:var(--navy);border-radius:6px;padding:20px 18px;color:#fff;}
+  .step-card .dot{width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,0.14);color:#fff;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+  .step-card h3{font-size:14.5px;margin:0 0 10px;color:#fff;}
+  .step-card p{font-size:13px;color:#c3cbdb;margin:0;}
+  .note-box{margin-top:16px;font-size:13px;color:var(--text-muted);font-style:italic;}
+
+  .flow-wrap{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:28px;}
+  .flow-wrap svg{display:block;width:100%;height:auto;}
+  .flow-caption{font-size:13px;color:var(--text-muted);margin-top:14px;padding-top:14px;border-top:1px dashed var(--border);}
+
+  .role-grid{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;}
+  .role-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:20px;}
+  .role-card .bar{height:3px;width:44px;background:var(--teal);border-radius:2px;margin-bottom:16px;}
+  .role-card h3{font-size:14.5px;margin:0 0 10px;color:var(--navy);}
+  .role-card p{font-size:13.5px;color:var(--text-muted);margin:0;}
+
+  .share-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;}
+  .share-card{background:var(--navy);border-radius:6px;padding:20px;color:#fff;}
+  .share-card h3{font-size:14.5px;margin:0 0 10px;color:#fff;}
+  .share-card p{font-size:13.5px;color:#bcc6da;margin:0;}
+
+  .rule-box{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:16px 20px;font-size:13.5px;color:var(--text-muted);margin-top:16px;}
+
+  .culture-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;}
+  .culture-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:20px 22px;}
+  .culture-card h3{font-size:15px;margin:0 0 10px;color:var(--teal);}
+  .culture-card p{font-size:14px;color:var(--text-muted);margin:0;}
+  .culture-quote{margin-top:16px;font-size:14px;color:var(--navy-soft);font-style:italic;max-width:680px;}
+
+  .before-after{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .ba-card{border-radius:6px;padding:22px 24px;}
+  .ba-card.before{background:var(--card);border:1px solid var(--border);}
+  .ba-card.after{background:var(--navy);}
+  .ba-card h3{font-size:15px;margin:0 0 14px;}
+  .ba-card.before h3{color:var(--navy);}
+  .ba-card.after h3{color:#fff;}
+  .ba-card ul{margin:0;padding:0;list-style:none;}
+  .ba-card.before li{font-size:14px;color:var(--text-muted);padding:9px 0;border-top:1px solid var(--border);}
+  .ba-card.before li:first-child{border-top:none;}
+  .ba-card.after li{font-size:14px;color:#dfe6f0;padding:9px 0;border-top:1px solid rgba(255,255,255,0.12);}
+  .ba-card.after li:first-child{border-top:none;}
+
   footer{font-size:12.5px;color:var(--text-muted);text-align:center;padding-top:24px;border-top:1px solid var(--border);}
 </style>
 </head>
@@ -113,13 +160,15 @@
   <div class="masthead">
     <div class="kicker">Modelado de datos para BI · Ing. Berman Moya Umaña</div>
     <h1>Del modelo dimensional al reporte que se actualiza solo</h1>
-    <p>Mapa resumen del curso: cómo se diseña un modelo para BI, cómo se integran varias fuentes en él, y cómo se mantiene actualizado sin intervención manual.</p>
+    <p>Mapa resumen del curso: cómo se diseña un modelo para BI, cómo se integran varias fuentes en él, y cómo se mantiene actualizado y se comparte sin intervención manual.</p>
   </div>
 
   <nav class="toc">
     <a href="#dimensional">Modelado dimensional</a>
     <a href="#integracion">Integración de fuentes</a>
     <a href="#automatizacion">Automatización de reportes</a>
+    <a href="#publicacion">Publicación de dashboards</a>
+    <a href="#organizacional">BI organizacional</a>
   </nav>
 
   <!-- ===================== MODELADO DIMENSIONAL ===================== -->
@@ -407,7 +456,7 @@
     <p class="section-note" style="margin-top:16px;">Actualización completa vs. incremental: la completa vuelve a cargar todos los datos desde cero; la incremental solo trae lo nuevo o lo modificado desde la última carga, y es preferible cuando el volumen de datos es grande.</p>
   </section>
 
-  <section style="margin-bottom:0;">
+  <section>
     <h2>¿Qué tan fácil es automatizar según la fuente?</h2>
     <div class="grid3">
       <div class="card">
@@ -422,6 +471,243 @@
         <h3>Archivos sueltos</h3>
         <p>Un Excel en la computadora de alguien. Es la fuente más difícil de automatizar: primero hay que moverla a una ubicación compartida.</p>
       </div>
+    </div>
+  </section>
+
+  <div class="sub-block">
+    <div class="sub-label">04·2 — PROGRAMACIÓN DE REFRESH</div>
+  </div>
+
+  <section>
+    <h2>Programar el refresh en Power BI Service</h2>
+    <p class="section-note">Cuatro pasos para dejar un modelo actualizándose solo, sin intervención manual.</p>
+    <div class="step-grid">
+      <div class="step-card">
+        <div class="dot">1</div>
+        <h3>Publicar el modelo</h3>
+        <p>Desde Power BI Desktop, publicar el archivo al espacio de trabajo en el Service.</p>
+      </div>
+      <div class="step-card">
+        <div class="dot">2</div>
+        <h3>Configurar credenciales</h3>
+        <p>Indicar cómo debe autenticarse el Service con cada fuente de datos.</p>
+      </div>
+      <div class="step-card">
+        <div class="dot">3</div>
+        <h3>Definir la frecuencia</h3>
+        <p>Elegir cada cuánto se actualiza: diario, varias veces al día, semanal.</p>
+      </div>
+      <div class="step-card">
+        <div class="dot">4</div>
+        <h3>Elegir el horario</h3>
+        <p>Programar la actualización en horas de bajo uso de la fuente (ej. de madrugada).</p>
+      </div>
+    </div>
+    <div class="note-box">Nota: en Power BI Pro el límite habitual es 8 actualizaciones programadas por día; con Premium/Fabric puede ser más frecuente.</div>
+  </section>
+
+  <section>
+    <h2>El gateway de datos (on-premises data gateway)</h2>
+    <p class="section-note">Un puente seguro entre la nube (Power BI Service) y los datos que viven dentro de la empresa.</p>
+    <div class="flow-wrap">
+      <svg viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="50" width="180" height="60" rx="6" fill="#f4f5f7" stroke="#0f6e56" stroke-width="1"/>
+        <text x="100" y="75" text-anchor="middle" font-family="IBM Plex Sans" font-size="13" font-weight="500" fill="#0f6e56">Fuente local</text>
+        <text x="100" y="93" text-anchor="middle" font-family="IBM Plex Mono" font-size="11.5" fill="#5c6472">(SQL Server interno)</text>
+        <path d="M195 80 L245 80" stroke="#0f6e56" stroke-width="2" fill="none" marker-end="url(#arrow1)"/>
+        <rect x="250" y="45" width="180" height="70" rx="6" fill="#0f6e56"/>
+        <text x="340" y="85" text-anchor="middle" font-family="IBM Plex Sans" font-size="13.5" font-weight="600" fill="#fff">Gateway de datos</text>
+        <path d="M435 80 L485 80" stroke="#0f6e56" stroke-width="2" fill="none" marker-end="url(#arrow1)"/>
+        <rect x="490" y="45" width="180" height="70" rx="6" fill="#16233d"/>
+        <text x="580" y="78" text-anchor="middle" font-family="IBM Plex Sans" font-size="13" font-weight="600" fill="#fff">Power BI Service</text>
+        <text x="580" y="96" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#aebbd0">(en la nube)</text>
+        <defs>
+          <marker id="arrow1" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#0f6e56"/>
+          </marker>
+        </defs>
+      </svg>
+      <div class="flow-caption">El gateway se instala en un equipo dentro de la red de la empresa (no en la nube) y mantiene la conexión activa, sin exponer las credenciales ni abrir la base de datos directamente a internet.</div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Monitorear las actualizaciones</h2>
+    <p class="section-note">Programar el refresh no es el último paso: hay que confirmar que efectivamente se está ejecutando.</p>
+    <div class="checklist">
+      <div class="item"><div class="dot">✓</div><p><strong>Historial de actualizaciones:</strong> el Service guarda la fecha, hora y duración de cada intento de refresh, exitoso o fallido.</p></div>
+      <div class="item"><div class="dot">✓</div><p><strong>Notificaciones por correo:</strong> se puede configurar para avisar automáticamente cuando una actualización falla.</p></div>
+      <div class="item"><div class="dot">✓</div><p><strong>Mensajes de error:</strong> indican la causa más probable — credenciales vencidas, cambios en la fuente, tiempo de espera agotado.</p></div>
+      <div class="item"><div class="dot">✓</div><p><strong>Revisión periódica:</strong> aunque todo funcione, conviene revisar el historial cada cierto tiempo, no solo cuando algo se ve mal.</p></div>
+    </div>
+  </section>
+
+  <!-- ===================== PUBLICACIÓN DE DASHBOARDS ===================== -->
+  <div class="unit-divider" id="publicacion">
+    <span class="num">04·3</span>
+    <h2 class="unit-title">Publicación de dashboards</h2>
+    <span class="sub">De Power BI Desktop al Service: publicar, organizar y compartir</span>
+  </div>
+
+  <section>
+    <h2>De Power BI Desktop al Service</h2>
+    <p class="section-note">Publicar sube el modelo y los reportes al Service. A partir de ahí, el reporte deja de ser un archivo que se envía por correo y pasa a ser un enlace vivo, siempre con la versión y los datos más recientes.</p>
+    <div class="flow-wrap">
+      <svg viewBox="0 0 680 150" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="45" width="190" height="60" rx="6" fill="#f4f5f7" stroke="#0f6e56" stroke-width="1"/>
+        <text x="105" y="70" text-anchor="middle" font-family="IBM Plex Sans" font-size="13" font-weight="500" fill="#0f6e56">Power BI Desktop</text>
+        <text x="105" y="88" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#5c6472">(archivo .pbix local)</text>
+        <path d="M205 75 L255 75" stroke="#0f6e56" stroke-width="2" fill="none" marker-end="url(#arrow2)"/>
+        <rect x="260" y="40" width="180" height="70" rx="6" fill="#0f6e56"/>
+        <text x="350" y="70" text-anchor="middle" font-family="IBM Plex Sans" font-size="13" font-weight="600" fill="#fff">Espacio de trabajo</text>
+        <text x="350" y="88" text-anchor="middle" font-family="IBM Plex Mono" font-size="11" fill="#dfece6">(workspace)</text>
+        <path d="M445 75 L495 75" stroke="#0f6e56" stroke-width="2" fill="none" marker-end="url(#arrow2)"/>
+        <rect x="500" y="40" width="170" height="70" rx="6" fill="#16233d"/>
+        <text x="585" y="80" text-anchor="middle" font-family="IBM Plex Sans" font-size="13.5" font-weight="600" fill="#fff">Usuarios finales</text>
+        <defs>
+          <marker id="arrow2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#0f6e56"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+  </section>
+
+  <section>
+    <h2>Espacios de trabajo (workspaces)</h2>
+    <p class="section-note">El lugar donde vive el reporte antes de compartirse ampliamente, y donde se define quién puede editarlo.</p>
+    <div class="role-grid">
+      <div class="role-card">
+        <div class="bar"></div>
+        <h3>Administrador</h3>
+        <p>Controla el espacio de trabajo completo: agrega o quita miembros, publica apps.</p>
+      </div>
+      <div class="role-card">
+        <div class="bar"></div>
+        <h3>Miembro</h3>
+        <p>Puede editar y publicar contenido dentro del espacio de trabajo.</p>
+      </div>
+      <div class="role-card">
+        <div class="bar"></div>
+        <h3>Colaborador</h3>
+        <p>Puede editar el contenido, pero no gestionar quién más tiene acceso.</p>
+      </div>
+      <div class="role-card">
+        <div class="bar"></div>
+        <h3>Visualizador</h3>
+        <p>Solo puede ver los reportes y dashboards, sin poder modificarlos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Compartir: apps, enlaces y permisos</h2>
+    <div class="share-grid">
+      <div class="share-card">
+        <h3>Compartir directo</h3>
+        <p>Se da acceso a personas específicas a un reporte puntual dentro del espacio de trabajo.</p>
+      </div>
+      <div class="share-card">
+        <h3>App organizacional</h3>
+        <p>Se empaqueta un conjunto de reportes en una "app" que los usuarios instalan; ideal para distribución amplia.</p>
+      </div>
+      <div class="share-card">
+        <h3>Enlace de solo lectura</h3>
+        <p>Se comparte un enlace que abre el reporte sin permitir edición, útil para gerencia o clientes.</p>
+      </div>
+    </div>
+    <div class="rule-box">Regla práctica: comparte el mínimo de permisos necesario. No todos necesitan poder editar; la mayoría de usuarios de negocio solo necesita ver.</div>
+  </section>
+
+  <!-- ===================== BI ORGANIZACIONAL ===================== -->
+  <div class="unit-divider" id="organizacional">
+    <span class="num">04·4</span>
+    <h2 class="unit-title">Uso de BI en entornos organizacionales</h2>
+    <span class="sub">Gobernanza, roles y adopción dentro de la empresa</span>
+  </div>
+
+  <section>
+    <h2>BI dentro de la cultura organizacional</h2>
+    <p class="section-note">Un dashboard solo genera valor si las personas correctas lo usan para decidir.</p>
+    <div class="culture-grid">
+      <div class="culture-card">
+        <h3>Alta gerencia</h3>
+        <p>Necesita indicadores resumidos, de alto nivel, con foco en tendencias.</p>
+      </div>
+      <div class="culture-card">
+        <h3>Mandos medios</h3>
+        <p>Usa reportes operativos para ajustar el trabajo del día a día.</p>
+      </div>
+      <div class="culture-card">
+        <h3>Equipos operativos</h3>
+        <p>Consultan datos puntuales y detallados para tareas específicas.</p>
+      </div>
+    </div>
+    <p class="culture-quote">Si un reporte no está diseñado para su audiencia, aunque esté bien automatizado, nadie lo va a usar.</p>
+  </section>
+
+  <section>
+    <h2>Gobernanza de datos y control de versiones</h2>
+    <div class="checklist">
+      <div class="item"><div class="dot">✓</div><p>Definir un dueño (owner) para cada reporte: quién responde si algo falla o si hay dudas sobre un dato.</p></div>
+      <div class="item"><div class="dot">✓</div><p>Evitar reportes "fantasma": versiones antiguas del mismo dashboard circulando sin control.</p></div>
+      <div class="item"><div class="dot">✓</div><p>Establecer una única fuente de verdad para cada métrica clave, en vez de que cada área calcule sus propios números.</p></div>
+      <div class="item"><div class="dot">✓</div><p>Documentar de dónde viene cada dato y con qué frecuencia se actualiza, para que cualquiera pueda confiar en él.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Roles típicos en un equipo de BI</h2>
+    <div class="grid4">
+      <div class="card" style="background:var(--navy);">
+        <h3 style="color:#fff;">Analista / desarrollador de BI</h3>
+        <p style="color:#c3cbdb;">Diseña el modelo de datos, construye reportes y configura la automatización.</p>
+      </div>
+      <div class="card" style="background:var(--navy);">
+        <h3 style="color:#fff;">Dueño del dato / del reporte</h3>
+        <p style="color:#c3cbdb;">Responde por la calidad y el significado de la información que muestra el reporte.</p>
+      </div>
+      <div class="card" style="background:var(--navy);">
+        <h3 style="color:#fff;">Administrador de la plataforma</h3>
+        <p style="color:#c3cbdb;">Gestiona el gateway, las licencias, los espacios de trabajo y los permisos generales.</p>
+      </div>
+      <div class="card" style="background:var(--navy);">
+        <h3 style="color:#fff;">Usuario de negocio</h3>
+        <p style="color:#c3cbdb;">Consume el reporte para tomar decisiones; no lo edita, pero sí retroalimenta si algo no sirve.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Caso aplicado: Cafetería Central se automatiza</h2>
+    <p class="section-note">De un Excel que alguien actualizaba cada lunes, a un dashboard que se refresca solo y llega a quien lo necesita.</p>
+    <div class="before-after">
+      <div class="ba-card before">
+        <h3>Antes</h3>
+        <ul>
+          <li>Un encargado exporta ventas cada lunes en la mañana</li>
+          <li>El archivo se envía por correo a la gerencia</li>
+          <li>Si alguien olvida enviarlo, esa semana no hay reporte</li>
+        </ul>
+      </div>
+      <div class="ba-card after">
+        <h3>Después</h3>
+        <ul>
+          <li>El modelo se conecta directo al sistema de ventas</li>
+          <li>El refresh está programado todas las noches</li>
+          <li>La gerencia abre la app y siempre ve datos del día anterior</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-bottom:0;">
+    <h2>Resumen de la unidad</h2>
+    <div class="summary-list">
+      <div class="row"><div class="n">01</div><p>Automatizar el refresh reduce el riesgo de error humano y mantiene los reportes al día sin esfuerzo manual.</p></div>
+      <div class="row"><div class="n">02</div><p>El gateway de datos es el puente que permite automatizar fuentes locales sin exponerlas a internet.</p></div>
+      <div class="row"><div class="n">03</div><p>Publicar en el Service convierte el reporte en un enlace vivo; los espacios de trabajo y los roles controlan quién edita y quién solo ve.</p></div>
+      <div class="row"><div class="n">04</div><p>La adopción de BI en la empresa depende tanto de la gobernanza (dueños, fuente única de verdad) como de diseñar cada reporte para su audiencia.</p></div>
     </div>
   </section>
 
