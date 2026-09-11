@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Línea del tiempo · Normativa de datos e interoperabilidad en Costa Rica</title>
+<style>
+  :root{
+    --paper:#EFE8D8;
+    --paper-dim:#E4DCC6;
+    --ink:#17223B;
+    --ink-soft:#2B3552;
+    --text:#241F14;
+    --text-dim:#5B5541;
+    --rule:#C7BB98;
+    --brass:#93672B;
+    --brass-soft:#B0864C;
+    --void:#0F1830;
+    --void-text:#E7E0CC;
+    --gap-bg:#E3D9C2;
+  }
+
+  *{box-sizing:border-box;}
+
+  html,body{
+    margin:0;
+    padding:0;
+    background:var(--paper);
+    color:var(--text);
+    font-family:Georgia,'Iowan Old Style','Palatino Linotype',Palatino,serif;
+    line-height:1.7;
+  }
+
+  .mono{
+    font-family:'Courier New',Courier,monospace;
+    letter-spacing:.02em;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      radial-gradient(1200px 500px at 15% -10%, rgba(176,134,76,.18), transparent 60%),
+      var(--void);
+    color:var(--void-text);
+    padding:88px 24px 96px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height:1px;
+    background:linear-gradient(90deg, transparent, var(--brass-soft), transparent);
+  }
+  .hero-inner{
+    max-width:760px;
+    margin:0 auto;
+  }
+  .hero-kicker{
+    font-family:'Courier New',Courier,monospace;
+    font-size:17.6px;
+    color:var(--brass-soft);
+    letter-spacing:.14em;
+    margin-bottom:22px;
+  }
+  .hero h1{
+    font-size:clamp(40.5px,6.8vw,62.1px);
+    line-height:1.12;
+    margin:0 0 22px;
+    font-weight:400;
+    max-width:15ch;
+  }
+  .hero p{
+    font-size:23px;
+    color:#C9C2AC;
+    max-width:56ch;
+    margin:0 0 8px;
+  }
+  .hero-range{
+    display:flex;
+    gap:36px;
+    margin-top:44px;
+    flex-wrap:wrap;
+  }
+  .hero-range div{
+    border-left:1px solid rgba(231,224,204,.25);
+    padding-left:14px;
+  }
+  .hero-range .yr{
+    font-family:'Courier New',Courier,monospace;
+    font-size:35.1px;
+    color:var(--void-text);
+  }
+  .hero-range .lb{
+    font-size:16.2px;
+    color:#8C8568;
+    margin-top:2px;
+  }
+
+  section{
+    max-width:900px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ---------- SECTION HEADINGS ---------- */
+  .section-head{
+    padding-top:72px;
+    padding-bottom:28px;
+  }
+  .section-head .idx{
+    font-family:'Courier New',Courier,monospace;
+    font-size:16.2px;
+    color:var(--brass);
+    margin-bottom:10px;
+  }
+  .section-head h2{
+    font-size:clamp(29.7px,4.6vw,40.5px);
+    font-weight:400;
+    margin:0 0 10px;
+    color:var(--ink);
+  }
+  .section-head p{
+    color:var(--text-dim);
+    max-width:62ch;
+    font-size:21.6px;
+    margin:0;
+  }
+
+  /* ---------- ANTES ---------- */
+  .before{
+    background:var(--void);
+    color:var(--void-text);
+    padding:56px 0 72px;
+  }
+  .before-inner{
+    max-width:900px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+  .before h2{
+    font-weight:400;
+    font-size:32.4px;
+    margin:0 0 26px;
+    color:var(--void-text);
+  }
+  .before-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:1px;
+    background:rgba(231,224,204,.16);
+    border:1px solid rgba(231,224,204,.16);
+  }
+  .before-cell{
+    background:var(--void);
+    padding:24px 22px;
+  }
+  .before-cell h3{
+    font-size:18.9px;
+    font-weight:400;
+    color:var(--brass-soft);
+    margin:0 0 10px;
+    font-family:'Courier New',Courier,monospace;
+    letter-spacing:.04em;
+  }
+  .before-cell p{
+    margin:0;
+    font-size:20.2px;
+    color:#C9C2AC;
+  }
+  @media(max-width:640px){
+    .before-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- TIMELINE ---------- */
+  .timeline{
+    position:relative;
+    padding:8px 0 40px;
+  }
+  .spine{
+    position:absolute;
+    left:130px;
+    top:0;
+    bottom:0;
+    width:1px;
+    background:linear-gradient(180deg, transparent, var(--rule) 4%, var(--rule) 96%, transparent);
+  }
+  @media(max-width:680px){
+    .spine{left:64px;}
+  }
+
+  .event{
+    position:relative;
+    display:grid;
+    grid-template-columns:130px 1fr;
+    gap:0 28px;
+    padding:26px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .event:last-child{border-bottom:none;}
+  @media(max-width:680px){
+    .event{grid-template-columns:64px 1fr;}
+  }
+
+  .event-year{
+    font-family:'Courier New',Courier,monospace;
+    font-size:27px;
+    color:var(--ink);
+    padding-top:2px;
+    text-align:right;
+    position:relative;
+  }
+  @media(max-width:680px){
+    .event-year{font-size:20.2px;}
+  }
+  .event-year .dot{
+    position:absolute;
+    right:-28.5px;
+    top:8px;
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:var(--brass);
+    border:2px solid var(--paper);
+    box-shadow:0 0 0 1px var(--rule);
+  }
+  @media(max-width:680px){
+    .event-year .dot{right:-32.5px;}
+  }
+  .event.milestone .dot{
+    width:13px;height:13px;
+    background:var(--ink);
+    right:-30.5px;top:6px;
+  }
+  @media(max-width:680px){
+    .event.milestone .dot{right:-34.5px;}
+  }
+
+  .event-body .tag{
+    display:inline-block;
+    font-family:'Courier New',Courier,monospace;
+    font-size:14.9px;
+    letter-spacing:.06em;
+    color:var(--brass);
+    border:1px solid var(--brass);
+    padding:2px 8px;
+    border-radius:2px;
+    margin-bottom:10px;
+  }
+  .event-body .tag.proj{
+    color:var(--text-dim);
+    border-color:var(--rule);
+  }
+  .event-body h3{
+    margin:0 0 8px;
+    font-size:25.7px;
+    font-weight:400;
+    color:var(--ink);
+  }
+  .event-body .num{
+    font-family:'Courier New',Courier,monospace;
+    font-size:18.9px;
+    color:var(--brass);
+  }
+  .event-body p{
+    margin:0;
+    font-size:20.9px;
+    color:var(--text-dim);
+    max-width:56ch;
+  }
+  .event-body .status{
+    margin-top:10px;
+    font-size:17.6px;
+    font-family:'Courier New',Courier,monospace;
+    color:var(--ink-soft);
+  }
+  .event.pending .event-body h3{color:var(--brass);}
+  .event.pending{opacity:.92;}
+
+  /* ---------- CYCLE BOX ---------- */
+  .cycle-box{
+    margin-top:48px;
+    background:var(--void);
+    color:var(--void-text);
+    padding:30px 28px;
+    border-radius:2px;
+  }
+  .cycle-kicker{
+    font-family:'Courier New',Courier,monospace;
+    font-size:14.9px;
+    letter-spacing:.12em;
+    color:var(--brass-soft);
+    margin-bottom:12px;
+  }
+  .cycle-box h3{
+    font-weight:400;
+    font-size:25.7px;
+    margin:0 0 10px;
+    color:var(--void-text);
+    max-width:44ch;
+  }
+  .cycle-box > p{
+    margin:0 0 20px;
+    font-size:19.6px;
+    color:#C9C2AC;
+    max-width:60ch;
+  }
+  .cycle-steps{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:1px;
+    background:rgba(231,224,204,.16);
+    border:1px solid rgba(231,224,204,.16);
+  }
+  .cycle-step{
+    background:var(--void);
+    padding:16px 14px;
+    font-size:18.9px;
+    color:var(--void-text);
+    display:flex;
+    flex-direction:column;
+  }
+  .cycle-step span{
+    font-family:'Courier New',Courier,monospace;
+    color:var(--brass-soft);
+    font-size:16.2px;
+    margin-bottom:6px;
+  }
+  .cycle-step small{
+    display:block;
+    margin-top:6px;
+    font-size:16.9px;
+    color:#9C9578;
+    font-family:Georgia,serif;
+    line-height:1.4;
+  }
+  @media(max-width:760px){
+    .cycle-steps{grid-template-columns:1fr 1fr;}
+  }
+  @media(max-width:460px){
+    .cycle-steps{grid-template-columns:1fr;}
+  }
+
+  /* ---------- GAPS ---------- */
+  .gaps{
+    background:var(--gap-bg);
+    padding:56px 0 72px;
+    border-top:1px dashed var(--rule);
+    border-bottom:1px dashed var(--rule);
+  }
+  .gap-list{
+    display:flex;
+    flex-direction:column;
+    gap:1px;
+    background:var(--rule);
+    border:1px solid var(--rule);
+  }
+  .gap-item{
+    background:var(--gap-bg);
+    padding:20px 22px;
+    display:grid;
+    grid-template-columns:34px 1fr;
+    gap:16px;
+  }
+  .gap-item .mark{
+    font-family:'Courier New',Courier,monospace;
+    color:var(--brass);
+    font-size:24.3px;
+  }
+  .gap-item h3{
+    margin:0 0 6px;
+    font-size:21.6px;
+    font-weight:400;
+    color:var(--ink);
+  }
+  .gap-item p{
+    margin:0;
+    font-size:19.6px;
+    color:var(--text-dim);
+  }
+
+  /* ---------- REFERENCES ---------- */
+  .refs{
+    padding:56px 0 90px;
+  }
+  .ref-list{
+    list-style:none;
+    margin:0;
+    padding:0;
+    counter-reset:refcount;
+  }
+  .ref-list li{
+    counter-increment:refcount;
+    position:relative;
+    padding:16px 0 16px 40px;
+    border-bottom:1px solid var(--rule);
+    font-size:19.6px;
+    color:var(--text-dim);
+  }
+  .ref-list li:first-child{border-top:1px solid var(--rule);}
+  .ref-list li::before{
+    content:counter(refcount);
+    position:absolute;
+    left:0;
+    top:16px;
+    font-family:'Courier New',Courier,monospace;
+    color:var(--brass);
+    font-size:17.6px;
+  }
+  .ref-list li em{
+    font-style:italic;
+    color:var(--text);
+  }
+  .ref-list li a{
+    color:var(--ink-soft);
+    word-break:break-all;
+  }
+  .ref-list .note{
+    display:inline-block;
+    margin-top:6px;
+    font-family:'Courier New',Courier,monospace;
+    font-size:15.5px;
+    color:var(--brass);
+    background:rgba(147,103,43,.09);
+    padding:2px 7px;
+    border-radius:2px;
+  }
+
+  footer{
+    text-align:center;
+    padding:36px 24px 56px;
+    color:var(--text-dim);
+    font-size:17.6px;
+    font-family:'Courier New',Courier,monospace;
+  }
+</style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-kicker">MARCO NORMATIVO · COSTA RICA</div>
+      <h1>Datos personales e interoperabilidad: la ruta legal</h1>
+      <p>De un vacío regulatorio casi total a un ecosistema de leyes, reglamentos y proyectos aún en construcción — pensado para un servicio de interoperabilidad entre el mercado público y el mercado privado.</p>
+      <div class="hero-range">
+        <div>
+          <div class="yr">1949</div>
+          <div class="lb">primer antecedente</div>
+        </div>
+        <div>
+          <div class="yr">2026</div>
+          <div class="lb">estado actual</div>
+        </div>
+        <div>
+          <div class="yr">18</div>
+          <div class="lb">hitos registrados</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="before">
+    <div class="before-inner">
+      <h2>Antes de que existiera esta normativa</h2>
+      <div class="before-grid">
+        <div class="before-cell">
+          <h3>SIN LEY MARCO</h3>
+          <p>Hasta 2011, Costa Rica no tenía ninguna ley específica sobre protección de datos personales. Desde 1949 existía el derecho a la intimidad en la Constitución, pero sin una ley que dijera cómo aplicarlo a bases de datos.</p>
+        </div>
+        <div class="before-cell">
+          <h3>SIN AUTORIDAD DE CONTROL</h3>
+          <p>No existía ningún ente encargado de vigilar el uso de bases de datos personales. No había registro de bases de datos, ni sanciones, ni mecanismo para que una persona reclamara por el mal uso de su información.</p>
+        </div>
+        <div class="before-cell">
+          <h3>TRÁMITES EN PAPEL</h3>
+          <p>Sin una ley de firma digital, los documentos electrónicos no tenían validez jurídica equivalente al papel. Esto retrasó por años cualquier intento serio de intercambiar información entre entidades por medios digitales.</p>
+        </div>
+        <div class="before-cell">
+          <h3>SIN RECTOR DE INTEROPERABILIDAD</h3>
+          <p>Cada institución pública operaba sus sistemas de forma aislada, sin un ente que coordinara el intercambio de datos entre entidades del Estado — y mucho menos entre el Estado y el sector privado.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-head">
+      <div class="idx">01 — CRONOLOGÍA</div>
+      <h2>De 1949 al presente</h2>
+      <p>Cada hito marca una ley, un reglamento o un proyecto que fue construyendo — pieza por pieza — el marco actual. Los puntos grandes son leyes vigentes; los puntos pequeños son reglamentos, decretos o hitos institucionales.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="spine"></div>
+
+      <div class="event milestone">
+        <div class="event-year">1949<span class="dot"></span></div>
+        <div class="event-body">
+          <span class="tag">CONSTITUCIÓN</span>
+          <h3>Artículo 24, Constitución Política</h3>
+          <p>Garantiza el derecho a la intimidad, la libertad y el secreto de las comunicaciones, y la inviolabilidad de los documentos privados. Es la raíz constitucional de la que, décadas después, la Sala Constitucional derivaría el derecho a la autodeterminación informativa.</p>
+        </div>
+      </div>
+
+      <div class="event milestone">
+        <div class="event-year">1978<span class="dot"></span></div>
+        <div class="event-body">
+          <span class="tag">LEY</span>
+          <h3>Ley General de la Administración Pública</h3>
+          <div class="num">Ley N.º 6227</div>
+          <p>Sin ser una ley de datos, es la base de todo el derecho administrativo costarricense: define qué es la Administración Pública y cómo se relacionan sus entes entre sí — el fundamento jurídico que décadas después sostendría los reglamentos de gobierno digital.</p>
+        </div>
+      </div>
+
+      <div class="event milestone">
+        <div class="event-year">2005<span class="dot"></span></div>
+        <div class="event-body">
+          <span class="tag">LEY</span>
+          <h3>Certificados, Firmas Digitales y Documentos Electrónicos</h3>
+          <div class="num">Ley N.º 8454</div>
+          <p>Da validez jurídica a la firma digital y los documentos electrónicos. Es la primera pieza que hace técnicamente posible pensar en trámites digitales entre instituciones y con el sector privado.</p>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-year">2009<span class="dot"></span></div>
+        <div class="event-body">
+          <span class="tag proj">JURISPRUDENCIA</span>
+          <h3>La Sala Constitucional desarrolla la autodeterminación informativa</h3>
+          <p>A través de su jurisprudencia (entre otros antecedentes, la sentencia N.º 910-2009), la Sala Constitucional amplía la protección del artículo 24 frente al auge de las tecnologías de información: las personas deben poder decidir quién usa sus datos, con qué propósito y bajo qué circunstancias. Este concepto, dos años después, sería la base de la Ley 8968.</p>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-year">2010<span class="dot"></span></div>
+        <div class="event-body">
+          <span class="tag proj">DECRETO</span>
+          <h3>Plan de Gobierno Digital</h3>
+          <div class="num">Decreto Ejecutivo N.º 35776-PLAN-JP</div>
+          <p>Costa Rica se compromete con la Meta 38 del plan eLAC 2010: promover la interoperabilidad de sistemas de gobierno electrónico en América Latina y el Caribe. Es la primera mención oficial de "interoperabilidad" como objetivo de Estado.</p>
+        </div>
+      </div>
+
+      <div class="event milestone">
+        <div class="event-year">2011<span class="dot"></span></div>
+        <div class="event-body">
+          <span class="tag">LEY</span>
+          <h3>Protección de la Persona frente al Tratamiento de sus Datos Personales</h3>
+          <div class="num">Ley N.º 8968</div>
+          <p>La ley marco. Crea la Agencia de Protección de Datos de los Habitantes (PRODHAB), obliga a registrar bases de datos y establece los principios de consentimiento informado, calidad de la información, finalidad legítima, seguridad de los datos y confidencialidad. Aplica tanto a entidades públicas como privadas.</p>
+          <p style="margin-top:10px;">Reconoce, además, los derechos de la persona titular sobre su propia información — a menudo resumidos como derechos <strong>ARCO</strong>: acceso, rectificación, actualización y supresión, junto con el control sobre la cesión de sus datos a terceros.</p>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-year">2013<span class="dot"></span></div>
+        <div class="event-body">
+          <span class="tag proj">REGLAMENTO</span>
+          <h3>Reglamento a la Ley 8968</h3>
+          <div class="num">Decreto Ejecutivo N.º 37554-JP</div>
+          <p>Pone en operación la Ley 8968: define el procedimiento de registro de bases de datos ante PRODHAB y el trámite de reclamos de las personas titulares de los datos. También fija reglas de conservación y transferencia: en general, los datos que puedan afectar a su titular no deberían conservarse más de 10 años después de terminado el objeto del tratamiento (salvo excepciones legales, contractuales o de interés público), y su transferencia a terceros requiere autorización expresa y válida del titular, salvo las excepciones establecidas por ley.</p>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-year">2016<span class="dot"></span></div>
+        <div class="event-body">
+          <span class="tag proj">REFORMA</span>
+          <h3>Reforma al Reglamento de la Ley 8968</h3>
+          <div class="num">Decreto Ejecutivo N.º 40008-JP, 19 de julio</div>
+          <p>Tras años de trabajo de PRODHAB, se simplifican requisitos (se elimina la figura del "superusuario" para inscribir bases de datos) y se ajusta el reglamento a la práctica acumulada desde 2013.</p>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-year">2019<span class="dot"></span></div>
+        <div class="event-body">
+          <span class="tag proj">HITO</span>
+          <h3>Taller nacional sobre interoperabilidad</h3>
+          <p>MICITT reúne a instituciones públicas y privadas para sentar las bases técnicas, organizacionales y semánticas de un futuro sistema de interoperabilidad estatal — antecedente directo de la ANGD.</p>
+        </div>
+      </div>
+
+      <div class="event milestone">
+        <div class="event-year">2021<span class="dot"></span></div>
+        <div class="event-body">
+          <span class="tag">LEY</span>
+          <h3>Creación de la Agencia Nacional de Gobierno Digital</h3>
+          <div class="num">Ley N.º 9943</div>
+          <p>Crea la ANGD, adscrita al MICITT, como ente encargado de ejecutar los proyectos transversales de gobierno digital — incluyendo, explícitamente, mecanismos de interoperabilidad e identidad digital entre instituciones.</p>
+          <div class="status">→ El mismo año se presenta el expediente 22.388 (reforma a la Ley 8968) — hoy archivado.</div>
+        </div>
+      </div>
+
+      <div class="event pending">
+        <div class="event-year">2022<span class="dot"></span></div>
+        <div class="event-body">
+          <span class="tag proj">PROYECTO</span>
+          <h3>Ley de Protección de Datos Personales</h3>
+          <div class="num">Expediente N.º 23.097</div>
+          <p>Se presenta el proyecto que derogaría por completo la Ley 8968 y la sustituiría por un marco alineado al RGPD europeo, con una nueva Agencia de Protección de Datos Personales.</p>
+          <div class="status">Estado: aprobado en primer debate (14 oct. 2024) · seguía sin segundo debate en abril de 2026, al cierre del período legislativo 2022-2026 · será heredado por la próxima Asamblea Legislativa</div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-year">2024<span class="dot"></span></div>
+        <div class="event-body">
+          <span class="tag proj">REGLAMENTO</span>
+          <h3>Reglamento de la ANGD</h3>
+          <p>Tres años después de creada la Agencia —y tras un recurso de amparo declarado con lugar por la Sala Constitucional por el atraso— se publica el decreto que finalmente pone en marcha a la ANGD.</p>
+          <div class="status">Publicado el 11 de septiembre de 2024</div>
+        </div>
+      </div>
+
+      <div class="event milestone">
+        <div class="event-year">2024<span class="dot"></span></div>
+        <div class="event-body">
+          <span class="tag">LEY</span>
+          <h3>Ley Marco de Acceso a la Información Pública</h3>
+          <div class="num">Ley N.º 10554</div>
+          <p>Establece la obligación estatal de garantizar el acceso proactivo, oportuno y completo a la información pública — clave para definir qué datos del Estado pueden compartirse hacia el sector privado.</p>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-year">2025<span class="dot"></span></div>
+        <div class="event-body">
+          <span class="tag proj">HITO</span>
+          <h3>La ANGD inicia funcionamiento formal</h3>
+          <p>Un año después de publicado su reglamento, la Agencia Nacional de Gobierno Digital asume operativamente su rol como ente ejecutor de la política de gobierno digital, incluyendo los mecanismos de interoperabilidad previstos desde la Ley 9943.</p>
+          <div class="status">Septiembre de 2025</div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-year">2026<span class="dot"></span></div>
+        <div class="event-body">
+          <span class="tag proj">PROYECTO</span>
+          <h3>Proyecto "CRI/003 – Conecta"</h3>
+          <p>MICITT y la ANGD lanzan, con financiamiento del Gran Ducado de Luxemburgo, el primer proyecto concreto para adoptar el modelo país de interoperabilidad basado en X-Road. En el Taller ConectaCR, representantes de 30 instituciones públicas —con apoyo técnico de una delegación de República Dominicana— hacen un diagnóstico de brechas organizacionales, legales, semánticas y técnicas, paso previo a cualquier hoja de ruta normativa.</p>
+          <div class="status">Lanzado el 11 de marzo de 2026</div>
+        </div>
+      </div>
+
+      <div class="event">
+        <div class="event-year">2026<span class="dot"></span></div>
+        <div class="event-body">
+          <span class="tag proj">HITO</span>
+          <h3>Primera demostración funcional de interoperabilidad en salud</h3>
+          <p>El Global Life-Centered Hub (GLCH), junto con MICITT, la ANGD, instituciones públicas y empresas privadas (Esicom, Meddyg, Siftia), demuestra el intercambio seguro de información médica entre sistemas distintos usando X-Road y el estándar abierto OpenHIE — un paso hacia un futuro sistema nacional de intercambio de información de salud (HIE). Es una prueba piloto, no un sistema en producción.</p>
+          <div class="status">18 de junio de 2026</div>
+        </div>
+      </div>
+
+      <div class="event milestone pending">
+        <div class="event-year">2026<span class="dot"></span></div>
+        <div class="event-body">
+          <span class="tag">LEY</span>
+          <h3>Gobernanza de los Servicios Digitales y el Comercio Electrónico</h3>
+          <div class="num">Ley N.º 10946</div>
+          <p>Regula por primera vez de forma integral las plataformas digitales, la intermediación en línea y el comercio electrónico entre actores públicos y privados.</p>
+          <div class="status">Publicada el 24 de junio de 2026 · entra en vigencia en junio de 2027 · reglamento aún pendiente</div>
+        </div>
+      </div>
+
+      <div class="event pending">
+        <div class="event-year">HOY<span class="dot"></span></div>
+        <div class="event-body">
+          <span class="tag proj">PRESENTE</span>
+          <h3>Costa Rica, septiembre de 2026</h3>
+          <p>Conviven una ley de datos de 2011 que ya se considera insuficiente, un proyecto de sustitución total que la próxima Asamblea Legislativa heredará sin segundo debate, una agencia de interoperabilidad que apenas empieza a ejecutar su primer proyecto técnico (Conecta) y una ley de comercio digital que todavía no tiene reglas de aplicación.</p>
+          <p style="margin-top:10px;">La pieza que falta es la articulación entre ambos mundos: el marco de <strong>protección de datos</strong> (Ley 8968, consentimiento, transferencia con autorización expresa) y el marco de <strong>interoperabilidad técnica</strong> (ANGD, X-Road, Conecta). El diagnóstico de brechas de ConectaCR incluye explícitamente una brecha "legal" por resolver, y la propia prueba piloto de salud se apoya en que los pacientes "autoricen" el intercambio "en el futuro" — es decir, todavía no hay un protocolo de consentimiento propio de la interoperabilidad, distinto del que ya exige la Ley 8968 para cualquier transferencia de datos.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="cycle-box">
+      <div class="cycle-kicker">MARCO PRÁCTICO</div>
+      <h3>Qué regula todo esto en la práctica: el ciclo de vida del dato</h3>
+      <p>Más allá de las fechas, la Ley 8968 y su reglamento se pueden resumir en cinco etapas por las que pasa cualquier dato personal:</p>
+      <div class="cycle-steps">
+        <div class="cycle-step"><span>1</span>Recopilación<small>se informa qué se pide, quién lo pide y para qué; por regla general, con consentimiento informado.</small></div>
+        <div class="cycle-step"><span>2</span>Almacenamiento<small>la base de datos debe mantener condiciones que protejan su seguridad e integridad.</small></div>
+        <div class="cycle-step"><span>3</span>Uso<small>solo para fines determinados, explícitos y legítimos; los datos deben ser actuales, veraces y exactos.</small></div>
+        <div class="cycle-step"><span>4</span>Transferencia<small>requiere autorización expresa del titular, salvo excepciones legales.</small></div>
+        <div class="cycle-step"><span>5</span>Eliminación<small>no debería conservarse una vez que ya cumplió su finalidad (límite general de 10 años).</small></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="gaps">
+    <section style="padding:0;">
+      <div class="section-head" style="padding-top:0;">
+        <div class="idx">02 — HUECOS FALTANTES</div>
+        <h2>Lo que esta investigación no logró confirmar</h2>
+        <p>Antes de usar esta línea de tiempo como base de un trabajo formal, estos puntos deberían verificarse directamente con fuentes primarias.</p>
+      </div>
+
+      <div class="gap-list">
+        <div class="gap-item">
+          <div class="mark">?</div>
+          <div>
+            <h3>Fecha exacta del Decreto 37554-JP</h3>
+            <p>El Tribunal Supremo de Elecciones registra su publicación el 5 de marzo de 2013 (Alcance Digital N.° 42 a La Gaceta N.° 45), pero otras fuentes lo asocian al año 2012, probablemente por confundir la fecha de redacción o consulta pública con la de publicación final. Se usó la fecha del TSE por ser la más específica, pero conviene confirmarla contra la Gaceta original.</p>
+          </div>
+        </div>
+        <div class="gap-item">
+          <div class="mark">?</div>
+          <div>
+            <h3>Existencia del Decreto Ejecutivo N.º 41582-JP (2019)</h3>
+            <p>Una fuente secundaria menciona una segunda reforma al reglamento de la Ley 8968 en 2019, además de la de 2016. No se logró verificar este decreto en una fuente primaria (SINALEVI o La Gaceta), por lo que no se incluyó en la línea de tiempo hasta confirmarlo.</p>
+          </div>
+        </div>
+        <div class="gap-item">
+          <div class="mark">?</div>
+          <div>
+            <h3>Número exacto del decreto de la ANGD</h3>
+            <p>Se confirmó que el reglamento de la Agencia Nacional de Gobierno Digital se publicó el 11 de septiembre de 2024, pero no se localizó el número oficial del decreto ejecutivo ni su texto íntegro en una fuente primaria (SINALEVI o La Gaceta).</p>
+          </div>
+        </div>
+        <div class="gap-item">
+          <div class="mark">?</div>
+          <div>
+            <h3>Trámite del expediente 23.097 después de octubre de 2024</h3>
+            <p>Se confirmó su aprobación en primer debate, pero no se verificó si ya tuvo segundo debate, si fue consultado ante la Sala Constitucional, o si sigue exactamente en el mismo punto del proceso legislativo a la fecha de hoy.</p>
+          </div>
+        </div>
+        <div class="gap-item">
+          <div class="mark">?</div>
+          <div>
+            <h3>Reglamento de la Ley 10554 (Acceso a la Información Pública)</h3>
+            <p>Hay reportes de un recurso de amparo por la falta de reglamento de esta ley (marzo de 2026). No se confirmó si a la fecha actual el Poder Ejecutivo ya lo emitió.</p>
+          </div>
+        </div>
+        <div class="gap-item">
+          <div class="mark">?</div>
+          <div>
+            <h3>Reglamento técnico específico de interoperabilidad</h3>
+            <p>No se confirmó si existe ya un protocolo técnico oficial (formatos, estándares de intercambio, uso de X-Road) derivado del reglamento de la ANGD, más allá de la fase piloto mencionada en 2021-2022.</p>
+          </div>
+        </div>
+        <div class="gap-item">
+          <div class="mark">?</div>
+          <div>
+            <h3>Normativa sectorial no explorada</h3>
+            <p>Quedan fuera de esta línea de tiempo normas específicas que podrían aplicar según el sector del servicio de interoperabilidad: regulación de SUGEF para datos financieros, y la gobernanza de datos de salud del Ministerio de Salud.</p>
+          </div>
+        </div>
+        <div class="gap-item">
+          <div class="mark">?</div>
+          <div>
+            <h3>Reglamento de la Ley 10946 (Comercio electrónico)</h3>
+            <p>La ley entra en vigencia doce meses después de su publicación (junio de 2027) y obliga al Poder Ejecutivo a emitir su reglamento en ese plazo. A la fecha de esta investigación, ese reglamento todavía no existe.</p>
+          </div>
+        </div>
+        <div class="gap-item">
+          <div class="mark">?</div>
+          <div>
+            <h3>Cómo se articula la Ley 8968 con el modelo técnico de interoperabilidad (Conecta / X-Road)</h3>
+            <p>No se localizó una fuente primaria que aclare si el intercambio automatizado de datos personales entre instituciones a través de X-Road se considera una "transferencia" sujeta a la autorización expresa del titular que exige la Ley 8968, o si opera bajo alguna excepción legal distinta. El propio diagnóstico del Taller ConectaCR (marzo de 2026) identifica una brecha "legal" pendiente de resolver, sin que se conozca públicamente en qué consiste. Se revisó también el texto base del expediente 23.097: tampoco emplea el término "interoperabilidad" en ningún momento, ni en su exposición de motivos ni en el articulado revisado (arts. 1-51); regula la transferencia de datos entre instituciones públicas con otra terminología ("transferencias interinstitucionales", "convenios interinstitucionales"), sin conectarla explícitamente con el modelo técnico de interoperabilidad de la ANGD/Conecta.</p>
+          </div>
+        </div>
+        <div class="gap-item">
+          <div class="mark">?</div>
+          <div>
+            <h3>Consentimiento del titular en la interoperabilidad de datos de salud</h3>
+            <p>En la demostración piloto de junio de 2026, un directivo del Global Life-Centered Hub habla de que los pacientes podrán "autorizar" el intercambio de su información médica "en el futuro" — lo que sugiere que el protocolo de consentimiento específico para esta interoperabilidad todavía no está en operación. No se confirmó si, mientras tanto, el intercambio de datos de salud en las pruebas se ampara únicamente en el consentimiento general que ya exige la Ley 8968.</p>
+          </div>
+        </div>
+        <div class="gap-item">
+          <div class="mark">?</div>
+          <div>
+            <h3>Resultado detallado del diagnóstico de brechas de ConectaCR</h3>
+            <p>Se confirmó que en marzo de 2026 se realizó un diagnóstico de brechas organizacionales, legales, semánticas y técnicas con 30 instituciones públicas, pero no se localizó un informe oficial publicado que detalle esas brechas ni una hoja de ruta normativa derivada de ese ejercicio. Búsqueda adicional (septiembre 2026) confirma que este informe sigue sin publicarse: las únicas fuentes disponibles son las notas de prensa del lanzamiento del taller, sin resultados ni documento de diagnóstico.</p>
+          </div>
+        </div>
+        <div class="gap-item">
+          <div class="mark">?</div>
+          <div>
+            <h3>Destino del expediente 23.097 en la nueva Asamblea Legislativa (2026-2030)</h3>
+            <p>Se confirmó que el proyecto seguía sin segundo debate al cierre del período legislativo 2022-2026 (abril de 2026) y que sería heredado por el Congreso entrante. No se identificó si fue reintroducido, modificado o si conserva el mismo número de expediente en el nuevo período.</p>
+          </div>
+        </div>
+        <div class="gap-item">
+          <div class="mark">?</div>
+          <div>
+            <h3>Reglamento de la Ley 10554, más de un año después de su vigencia</h3>
+            <p>Se confirmó que la ley entró en vigencia el 1 de noviembre de 2024, pero no se localizó un decreto ejecutivo específico que reglamente su aplicación, a pesar de que ya transcurrió más de un año desde esa fecha.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="refs">
+    <div class="section-head" style="padding-top:56px;">
+      <div class="idx">03 — REFERENCIAS</div>
+      <h2>Bibliografía (APA 7.ª edición)</h2>
+      <p>Fuentes oficiales y de análisis jurídico usadas para construir esta línea de tiempo, en orden alfabético.</p>
+    </div>
+
+    <ol class="ref-list">
+      <li>Asamblea Nacional Constituyente. (1949, 7 de noviembre). <em>Constitución Política de la República de Costa Rica</em>, art. 24. Political Database of the Americas (PDBA), Universidad de Georgetown. <a href="https://pdba.georgetown.edu/Parties/CostaRica/Leyes/constitucion.pdf" target="_blank" rel="noopener">pdba.georgetown.edu</a>
+            <div class="note">verificado: el texto del art. 24 coincide; para una fuente oficial, sustituir por el enlace directo de SINALEVI antes de un trabajo formal</div>
+      </li>
+
+      <li>Sala Constitucional de la Corte Suprema de Justicia. (2009, 23 de enero). <em>Sentencia N.º 910-2009</em>, de las 13:36 horas [Desarrollo jurisprudencial de la autodeterminación informativa]. Citada en: Procuraduría General de la República, dictamen PGR-OJ-051-2022. <a href="https://www.pgrweb.go.cr/DOCS/DICTAMENES/1/P/J/2020-2029/2020-2024/2022/14D694.HTML" target="_blank" rel="noopener">pgrweb.go.cr</a>
+            <div class="note">fecha y hora exactas verificadas por cita textual en el dictamen enlazado — se recomienda ubicar el texto íntegro en el Sistema Costarricense de Información Jurídica (SCIJ) antes de citarla directamente</div>
+      </li>
+
+      <li>Asamblea Legislativa de la República de Costa Rica. (1978, 2 de mayo). <em>Ley N.º 6227: Ley General de la Administración Pública</em>. Ministerio de Ciencia, Innovación, Tecnología y Telecomunicaciones. <a href="https://www.micitt.go.cr/sites/default/files/marco_juridico_legal/06.%20Ley%20n.%C2%B0%206227%20Ley%20General%20de%20la%20Administraci%C3%B3n%20P%C3%BAblica.pdf" target="_blank" rel="noopener">micitt.go.cr</a></li>
+
+      <li>Asamblea Legislativa de la República de Costa Rica. (2005, 13 de octubre). <em>Ley N.º 8454: Ley de Certificados, Firmas Digitales y Documentos Electrónicos</em>. Ministerio de Ciencia, Innovación, Tecnología y Telecomunicaciones. <a href="https://www.micitt.go.cr/sites/default/files/marco_juridico_legal/05.%20Ley%20n.%C2%B0%208454%20Ley%20de%20Certificados%2C%20Firmas%20Digitales%20y%20Documentos%20Electr%C3%B3nicos..pdf" target="_blank" rel="noopener">micitt.go.cr</a></li>
+
+      <li>Asamblea Legislativa de la República de Costa Rica. (2011, 5 de septiembre). <em>Ley N.º 8968: Protección de la persona frente al tratamiento de sus datos personales</em>. Sistema Nacional de Legislación Vigente (SINALEVI), Procuraduría General de la República. <a href="https://sinalevi.go.cr/ResultadosNormativa/Informacion?param1=70975&param2=85989&param3=1&param4=" target="_blank" rel="noopener">sinalevi.go.cr</a></li>
+
+      <li>Asamblea Legislativa de la República de Costa Rica. (2013, 5 de marzo). <em>Decreto Ejecutivo N.º 37554-JP: Reglamento a la Ley de Protección de la Persona frente al Tratamiento de sus Datos Personales</em>. Tribunal Supremo de Elecciones. <a href="https://www.tse.go.cr/pdf/normativa/reglamentoleyproteccionpersona.pdf" target="_blank" rel="noopener">tse.go.cr</a></li>
+
+      <li>Asamblea Legislativa de la República de Costa Rica. (2016, 19 de julio). <em>Decreto Ejecutivo N.º 40008-JP: Reforma al Reglamento a la Ley de Protección de la Persona frente al Tratamiento de sus Datos Personales</em>. Informática Jurídica. <a href="https://www.informatica-juridica.com/decreto-ejecutivo/decreto-ejecutivo-n-40008-jp-19-julio-2016/" target="_blank" rel="noopener">informatica-juridica.com</a>
+            <div class="note">publicado en La Gaceta N.º 287 del 6 de diciembre de 2016 — se recomienda verificar el texto íntegro en La Gaceta o SINALEVI antes de un trabajo formal</div>
+      </li>
+
+      <li>Asamblea Legislativa de la República de Costa Rica. (2021, 21 de enero). <em>Ley N.º 9943: Creación de la Agencia Nacional de Gobierno Digital</em>. Bufete de Costa Rica. <a href="https://bufetedecostarica.com/wp-content/uploads/2026/05/ley-de-creacion-de-la-agencia-nacional-de-gobierno-digital_9943.pdf" target="_blank" rel="noopener">bufetedecostarica.com</a>
+            <div class="note">fecha de aprobación en segundo debate verificada en Delfino.cr; verificar fecha exacta de publicación en La Gaceta antes de citar formalmente</div>
+      </li>
+
+      <li>Asamblea Legislativa de la República de Costa Rica. (2021, 28 de enero). <em>Expediente N.º 22.388: Reforma integral a la Ley de Protección de la Persona Frente al Tratamiento de sus Datos Personales</em> [Proyecto de ley archivado]. Delfino.cr. <a href="https://delfino.cr/asamblea/proyecto/22388" target="_blank" rel="noopener">delfino.cr</a></li>
+
+      <li>Asamblea Legislativa de la República de Costa Rica. (2022, 9 de mayo). <em>Expediente N.º 23.097: Ley de Protección de Datos Personales</em> [Proyecto de ley, aprobado en primer debate]. Delfino.cr. <a href="https://delfino.cr/asamblea/proyecto/23097" target="_blank" rel="noopener">delfino.cr</a></li>
+
+      <li>Asamblea Legislativa de la República de Costa Rica. (2024). <em>Ley N.º 10554: Ley Marco de Acceso a la Información Pública</em>. Archivo Nacional de Costa Rica. <a href="https://www.archivonacional.go.cr/web/normativa/ley_10554.pdf" target="_blank" rel="noopener">archivonacional.go.cr</a></li>
+
+      <li>Asamblea Legislativa de la República de Costa Rica. (2026, 24 de junio). <em>Ley N.º 10946: Gobernanza de los Servicios Digitales y el Comercio Electrónico</em>. La Gaceta, Alcance N.° 80. <a href="https://bufetedecostarica.com/gobernanza-de-los-servicios-digitales-y-el-comercio-electronico-en-costa-rica-10946/" target="_blank" rel="noopener">bufetedecostarica.com</a></li>
+
+      <li>Bufete de Costa Rica. (2024, 22 de julio). <em>Ley de Protección de la Persona frente al tratamiento de sus datos personales en Costa Rica (Ley N.º 8968)</em>. <a href="https://bufetedecostarica.com/ley-de-proteccion-de-la-persona-frente-al-tratamiento-de-sus-datos-personales-de-costa-rica/" target="_blank" rel="noopener">bufetedecostarica.com</a></li>
+
+      <li>Delfino.cr. (2024). <em>La protección de datos en Costa Rica: una reforma necesaria</em>. <a href="https://delfino.cr/2023/09/la-proteccion-de-datos-en-costa-rica-una-reforma-necesaria" target="_blank" rel="noopener">delfino.cr</a></li>
+
+      <li>Delfino.cr. (2026, 18 de junio). <em>Costa Rica alcanza un hito de interoperabilidad hacia una atención de salud más rápida, segura y centrada en las personas</em>. <a href="https://delfino.cr/2026/06/costa-rica-alcanza-un-hito-de-interoperabilidad-hacia-una-atencion-de-salud-mas-rapida-segura-y-centrada-en-las-personas" target="_blank" rel="noopener">delfino.cr</a></li>
+
+      <li>DPL News. (2024, 11 de septiembre). <em>Costa Rica publica reglamento de la Agencia Nacional de Gobierno Digital</em>. <a href="https://dplnews.com/costa-rica-publica-reglamento-agencia-gobierno-digital/" target="_blank" rel="noopener">dplnews.com</a>
+            <div class="note">fuente secundaria — no se localizó el decreto primario</div>
+      </li>
+
+      <li>El Financiero CR. (2021). <em>La interoperabilidad que facilitaría trámites</em>. <a href="https://www.elfinancierocr.com/tecnologia/la-interoperabilidad-que-facilitaria-tramites/F4Z5M6I4PVH4PK2TAIPDVJG7MA/story/" target="_blank" rel="noopener">elfinancierocr.com</a></li>
+
+      <li>Facio &amp; Cañas. (2026, 6 de marzo). <em>Aspectos elementales para considerar a la hora de ejercer el derecho constitucional de acceso a la información pública</em>. <a href="https://fayca.com/acceso-informacion-publica-ley-10554-costa-rica/" target="_blank" rel="noopener">fayca.com</a></li>
+
+      <li>Ministerio de Ciencia, Innovación, Tecnología y Telecomunicaciones (MICITT). (2026, 11 de marzo). <em>Costa Rica acelera su transformación digital con el lanzamiento del proyecto "CRI/003 – Conecta"</em>. <a href="https://www.micitt.go.cr/el-sector-informa/costa-rica-acelera-su-transformacion-digital-con-el-lanzamiento-del-proyecto" target="_blank" rel="noopener">micitt.go.cr</a></li>
+
+      <li>Poder Ejecutivo de Costa Rica. (2010). <em>Decreto Ejecutivo N.º 35776-PLAN-JP: Plan de Gobierno Digital</em>. Instituto Nacional de las Mujeres. <a href="https://formatos.inamu.go.cr/SIDOC/DOCS/ARTICULOS%20DE%20PERIODICOS%20OFICIALES/2010/Marzo/decreto%2035776-PLAN_G_J.pdf" target="_blank" rel="noopener">inamu.go.cr</a></li>
+
+      <li>Procuraduría General de la República de Costa Rica. (2022, 18 de marzo). <em>PGR-OJ-051-2022</em> [Criterio jurídico no vinculante sobre el expediente N.º 22.388, Reforma Integral a la Ley N.º 8968]. <a href="https://www.pgrweb.go.cr/DOCS/DICTAMENES/1/P/J/2020-2029/2020-2024/2022/14D694.HTML" target="_blank" rel="noopener">pgrweb.go.cr</a></li>
+
+      <li>Soto Morales, T. (2026, 27 de abril). <em>Las 10 leyes que marcaron a Costa Rica y salieron de la Asamblea legislativa 2022-2026 (y los grandes pendientes que quedan)</em>. El Financiero. <a href="https://www.elfinancierocr.com/economia-y-politica/las-10-leyes-que-marcaron-a-costa-rica-y-salieron/V7L7WEOU3FBL7A5C4UY2ZPWZXI/story/" target="_blank" rel="noopener">elfinancierocr.com</a></li>
+
+      <li>Telesemana. (2024, 2 de agosto). <em>Costa Rica puso en consulta pública la reglamentación de la Agencia de Gobierno Digital</em>. <a href="https://www.telesemana.com/blog/2024/08/02/costa-rica-puso-en-consulta-publica-la-reglamentacion-de-la-agencia-de-gobierno-digital/" target="_blank" rel="noopener">telesemana.com</a></li>
+    </ol>
+  </section>
+
+  <footer>Línea del tiempo elaborada para investigación sobre interoperabilidad entre mercado público y privado en Costa Rica · consulta cada fuente antes de citarla en un trabajo formal</footer>
+
+</body>
+</html>
