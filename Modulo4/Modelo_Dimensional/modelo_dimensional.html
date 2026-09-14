@@ -13,6 +13,12 @@
     --teal-bg:#e7f4ef;
     --coral:#b8481f;
     --coral-bg:#faece5;
+    --red:#a3312a;
+    --red-bg:#fbeae8;
+    --blue:#1f5aa3;
+    --blue-bg:#eaf1fb;
+    --green:#227a4a;
+    --green-bg:#e9f6ee;
     --bg:#f4f5f7;
     --card:#ffffff;
     --border:#dde1e7;
@@ -151,6 +157,51 @@
   .ba-card.after li{font-size:14px;color:#dfe6f0;padding:9px 0;border-top:1px solid rgba(255,255,255,0.12);}
   .ba-card.after li:first-child{border-top:none;}
 
+  /* --- Unidad 5 --- */
+  .obj-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .obj-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:20px 22px;display:flex;gap:16px;align-items:flex-start;}
+  .obj-card .badge{flex:0 0 34px;width:34px;height:34px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;}
+  .obj-card h3{font-size:15px;margin:0 0 6px;color:var(--navy);}
+  .obj-card p{font-size:13.5px;color:var(--text-muted);margin:0;}
+
+  .look-list{background:var(--card);border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+  .look-list .row{display:flex;align-items:center;gap:18px;padding:16px 20px;border-top:1px solid var(--border);}
+  .look-list .row:first-child{border-top:none;}
+  .look-list .n{font-size:20px;font-weight:700;color:var(--teal);flex:0 0 32px;}
+  .look-list .t{flex:1;}
+  .look-list .t strong{display:block;font-size:14.5px;color:var(--navy);margin-bottom:2px;}
+  .look-list .t span{font-size:13px;color:var(--text-muted);}
+
+  .scenario-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;}
+  .scenario-card{border-radius:6px;padding:20px 22px;border:1.5px solid var(--border);background:var(--card);}
+  .scenario-card.pesimista{border-color:var(--red);}
+  .scenario-card.pesimista h3{color:var(--red);}
+  .scenario-card.base{border-color:var(--blue);}
+  .scenario-card.base h3{color:var(--blue);}
+  .scenario-card.optimista{border-color:var(--green);}
+  .scenario-card.optimista h3{color:var(--green);}
+  .scenario-card h3{font-size:15px;margin:0 0 10px;text-align:center;}
+  .scenario-card p{font-size:13.5px;color:var(--text-muted);margin:0;text-align:center;}
+
+  .dii-grid{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:stretch;gap:14px;}
+  .dii-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:20px;}
+  .dii-card.insight{background:var(--coral-bg);border-color:var(--coral);}
+  .dii-card h3{font-size:14.5px;margin:0 0 14px;color:var(--navy);}
+  .dii-card.insight h3{color:var(--coral);}
+  .dii-card blockquote{margin:0;font-size:13.5px;color:var(--navy-soft);font-style:italic;line-height:1.5;}
+  .dii-arrow{display:flex;align-items:center;justify-content:center;color:var(--navy-soft);font-size:20px;}
+  .dii-note{margin-top:16px;font-size:13.5px;color:var(--text-muted);font-style:italic;}
+
+  .trap-box{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:20px 22px;margin-bottom:20px;}
+  .trap-box .trap-example{font-size:14px;color:var(--navy-soft);font-style:italic;margin:0 0 10px;}
+  .trap-box .trap-explain{font-size:14px;color:var(--text-muted);margin:0;}
+
+  .audience-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  .audience-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:22px 24px;}
+  .audience-card h3{font-size:15.5px;margin:0 0 10px;color:var(--navy);}
+  .audience-card p{font-size:14px;color:var(--text-muted);margin:0 0 16px;}
+  .audience-card blockquote{margin:0;background:var(--teal-bg);border-left:3px solid var(--teal);border-radius:4px;padding:12px 16px;font-size:13.5px;color:var(--navy-soft);font-style:italic;}
+
   footer{font-size:12.5px;color:var(--text-muted);text-align:center;padding-top:24px;border-top:1px solid var(--border);}
 </style>
 </head>
@@ -160,7 +211,7 @@
   <div class="masthead">
     <div class="kicker">Modelado de datos para BI · Ing. Berman Moya Umaña</div>
     <h1>Del modelo dimensional al reporte que se actualiza solo</h1>
-    <p>Mapa resumen del curso: cómo se diseña un modelo para BI, cómo se integran varias fuentes en él, y cómo se mantiene actualizado y se comparte sin intervención manual.</p>
+    <p>Mapa resumen del curso: cómo se diseña un modelo para BI, cómo se integran varias fuentes en él, cómo se mantiene actualizado y se comparte sin intervención manual, y cómo se usa para decidir.</p>
   </div>
 
   <nav class="toc">
@@ -169,6 +220,7 @@
     <a href="#automatizacion">Automatización de reportes</a>
     <a href="#publicacion">Publicación de dashboards</a>
     <a href="#organizacional">BI organizacional</a>
+    <a href="#decisiones">Toma de decisiones</a>
   </nav>
 
   <!-- ===================== MODELADO DIMENSIONAL ===================== -->
@@ -703,13 +755,164 @@
     </div>
   </section>
 
-  <section style="margin-bottom:0;">
+  <section>
     <h2>Resumen de la unidad</h2>
     <div class="summary-list">
       <div class="row"><div class="n">01</div><p>Automatizar el refresh reduce el riesgo de error humano y mantiene los reportes al día sin esfuerzo manual.</p></div>
       <div class="row"><div class="n">02</div><p>El gateway de datos es el puente que permite automatizar fuentes locales sin exponerlas a internet.</p></div>
       <div class="row"><div class="n">03</div><p>Publicar en el Service convierte el reporte en un enlace vivo; los espacios de trabajo y los roles controlan quién edita y quién solo ve.</p></div>
       <div class="row"><div class="n">04</div><p>La adopción de BI en la empresa depende tanto de la gobernanza (dueños, fuente única de verdad) como de diseñar cada reporte para su audiencia.</p></div>
+    </div>
+  </section>
+
+  <!-- ===================== TOMA DE DECISIONES BASADA EN DATOS ===================== -->
+  <div class="unit-divider" id="decisiones">
+    <span class="num">5</span>
+    <h2 class="unit-title">Toma de decisiones basada en datos</h2>
+    <span class="sub">De los dashboards a la acción: interpretar, simular, descubrir y comunicar</span>
+  </div>
+
+  <section>
+    <h2>Objetivos de la unidad</h2>
+    <p class="section-note">Al terminar, el estudiante podrá...</p>
+    <div class="obj-grid">
+      <div class="obj-card">
+        <div class="badge">01</div>
+        <div>
+          <h3>Interpretar dashboards</h3>
+          <p>Leer KPIs, tendencias y alertas visuales para entender qué está pasando en el negocio.</p>
+        </div>
+      </div>
+      <div class="obj-card">
+        <div class="badge">02</div>
+        <div>
+          <h3>Analizar escenarios</h3>
+          <p>Proyectar resultados bajo distintos supuestos (optimista, base, pesimista).</p>
+        </div>
+      </div>
+      <div class="obj-card">
+        <div class="badge">03</div>
+        <div>
+          <h3>Identificar insights</h3>
+          <p>Distinguir un dato de un hallazgo realmente accionable.</p>
+        </div>
+      </div>
+      <div class="obj-card">
+        <div class="badge">04</div>
+        <div>
+          <h3>Comunicar resultados</h3>
+          <p>Traducir el análisis en una recomendación clara para quien decide.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="sub-block">
+    <div class="sub-label">BLOQUE 1 · INTERPRETACIÓN DE DASHBOARDS</div>
+  </div>
+
+  <section>
+    <h2>¿Qué hay que mirar en un dashboard?</h2>
+    <p class="section-note">Cuatro lentes para leer cualquier dashboard, más allá del número aislado.</p>
+    <div class="look-list">
+      <div class="row"><div class="n">1</div><div class="t"><strong>KPI vs. meta</strong><span>¿El indicador está arriba, en línea o abajo del objetivo?</span></div></div>
+      <div class="row"><div class="n">2</div><div class="t"><strong>Tendencia</strong><span>¿Sube, baja o se mantiene en las últimas semanas o meses?</span></div></div>
+      <div class="row"><div class="n">3</div><div class="t"><strong>Semáforo / alerta</strong><span>¿Qué color o ícono señala algo fuera de rango?</span></div></div>
+      <div class="row"><div class="n">4</div><div class="t"><strong>Comparación</strong><span>¿Cómo se ve este período contra el anterior o contra otra sucursal?</span></div></div>
+    </div>
+  </section>
+
+  <div class="sub-block">
+    <div class="sub-label">BLOQUE 2 · ANÁLISIS DE ESCENARIOS</div>
+  </div>
+
+  <section>
+    <h2>¿Qué es un análisis de escenarios?</h2>
+    <p class="section-note">Proyectar cómo cambiaría un resultado si cambian los supuestos detrás de él.</p>
+    <div class="scenario-grid">
+      <div class="scenario-card pesimista">
+        <h3>Pesimista</h3>
+        <p>Los supuestos más adversos razonables</p>
+      </div>
+      <div class="scenario-card base">
+        <h3>Base</h3>
+        <p>Lo más probable si nada cambia</p>
+      </div>
+      <div class="scenario-card optimista">
+        <h3>Optimista</h3>
+        <p>Los supuestos más favorables razonables</p>
+      </div>
+    </div>
+    <div class="rule-box" style="text-align:center;font-style:italic;">Variables típicas que se mueven entre escenarios: precio, volumen de ventas, costo de insumos, estacionalidad, competencia.</div>
+  </section>
+
+  <div class="sub-block">
+    <div class="sub-label">BLOQUE 3 · DE LOS DATOS AL INSIGHT</div>
+  </div>
+
+  <section>
+    <h2>Dato, información e insight no son lo mismo</h2>
+    <p class="section-note">Un mismo hecho gana valor a medida que se conecta con contexto y con una acción posible.</p>
+    <div class="dii-grid">
+      <div class="dii-card">
+        <h3>Dato</h3>
+        <blockquote>"El martes se vendieron 42 cafés helados"</blockquote>
+      </div>
+      <div class="dii-arrow">→</div>
+      <div class="dii-card">
+        <h3>Información</h3>
+        <blockquote>"Los cafés helados suben los martes y miércoles"</blockquote>
+      </div>
+      <div class="dii-arrow">→</div>
+      <div class="dii-card insight">
+        <h3>Insight</h3>
+        <blockquote>"Sube porque coincide con el día de pago de la empresa vecina: se puede lanzar una promo esos días"</blockquote>
+      </div>
+    </div>
+    <div class="dii-note">Un insight siempre implica una acción posible. Si no cambia nada de lo que harías, todavía no es un insight.</div>
+  </section>
+
+  <section>
+    <h2>Cuidado: correlación no es causalidad</h2>
+    <div class="trap-box">
+      <p class="trap-example">Ejemplo trampa: "Los días con más ventas de café son los días con más ventas de paraguas cerca de la cafetería".</p>
+      <p class="trap-explain">¿El café causa que la gente compre paraguas? No — ambos suben cuando llueve. Una tercera variable explica los dos.</p>
+    </div>
+    <div class="checklist">
+      <div class="item"><div class="dot">1</div><p>Antes de actuar sobre un patrón, pregúntate qué otra variable podría explicarlo.</p></div>
+      <div class="item"><div class="dot">2</div><p>Busca el mismo patrón en otro período o sucursal antes de confiar en él.</p></div>
+      <div class="item"><div class="dot">3</div><p>Si puedes, prueba la hipótesis a pequeña escala antes de decidir en grande.</p></div>
+    </div>
+  </section>
+
+  <div class="sub-block">
+    <div class="sub-label">BLOQUE 4 · COMUNICAR RESULTADOS</div>
+  </div>
+
+  <section>
+    <h2>El mismo hallazgo, dos audiencias distintas</h2>
+    <p class="section-note">La conclusión es la misma; lo que cambia es cuánto detalle necesita cada audiencia para actuar.</p>
+    <div class="audience-grid">
+      <div class="audience-card">
+        <h3>Gerencia</h3>
+        <p>Va directo a la recomendación y el número. Sin detalle metodológico.</p>
+        <blockquote>"Cerrar la promo de tardes ahorraría ₡800 mil al mes sin afectar ventas."</blockquote>
+      </div>
+      <div class="audience-card">
+        <h3>Equipo operativo</h3>
+        <p>Explica el paso a paso y qué deben cambiar en su día a día.</p>
+        <blockquote>"A partir del lunes, dejamos de ofrecer el descuento después de las 3pm porque casi nadie lo usa."</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-bottom:0;">
+    <h2>Resumen de la unidad</h2>
+    <div class="summary-list">
+      <div class="row"><div class="n">01</div><p>Leer un dashboard es comparar el KPI contra su meta, su tendencia y otros períodos o sucursales, no solo ver el número.</p></div>
+      <div class="row"><div class="n">02</div><p>El análisis de escenarios (pesimista, base, optimista) muestra un rango de resultados posibles, no una sola cifra exacta.</p></div>
+      <div class="row"><div class="n">03</div><p>Un insight va más allá del dato y la información: implica una acción concreta, y siempre debe revisarse que no sea solo correlación.</p></div>
+      <div class="row"><div class="n">04</div><p>Comunicar bien significa adaptar el mismo hallazgo al nivel de detalle que cada audiencia necesita para decidir o actuar.</p></div>
     </div>
   </section>
 
