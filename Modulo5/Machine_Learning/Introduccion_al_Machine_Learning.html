@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Introducción al Machine Learning Aplicado</title>
+<style>
+  :root{
+    --bg:#0a0a0a;
+    --bg-alt:#141414;
+    --card:#161616;
+    --card-border:#2a2a2a;
+    --red:#e5173c;
+    --red-dark:#3a0a13;
+    --text:#f2f2f2;
+    --text-dim:#a8a8a8;
+    --text-faint:#6f6f6f;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    line-height:1.6;
+  }
+  .wrap{
+    max-width:900px;
+    margin:0 auto;
+    padding:60px 24px 100px;
+  }
+  .accent-bar{
+    width:56px;
+    height:5px;
+    background:var(--red);
+    margin-bottom:24px;
+    border-radius:2px;
+  }
+  h1{
+    font-size:44px;
+    font-weight:800;
+    margin:0 0 10px;
+    line-height:1.15;
+  }
+  h1 .hl{
+    background:#4a4a4a;
+    padding:0 6px;
+    border-radius:2px;
+  }
+  .subtitle{
+    color:var(--text-dim);
+    font-size:18px;
+    margin-bottom:60px;
+  }
+  h2{
+    font-size:28px;
+    font-weight:700;
+    margin:0 0 20px;
+    border-left:4px solid var(--red);
+    padding-left:14px;
+  }
+  .section{
+    margin-bottom:64px;
+    padding-top:8px;
+  }
+  .section-tag{
+    color:var(--red);
+    font-family:'Courier New',monospace;
+    font-size:12px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    margin-bottom:8px;
+  }
+  p{
+    color:#d8d8d8;
+    font-size:16px;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    margin:24px 0;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:8px;
+    padding:20px 22px;
+  }
+  .card .num{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:32px;height:32px;
+    background:var(--red);
+    color:#fff;
+    font-weight:700;
+    border-radius:6px;
+    margin-bottom:12px;
+    font-size:14px;
+  }
+  .card h3{
+    margin:0 0 8px;
+    font-size:17px;
+  }
+  .card p{
+    margin:0;
+    font-size:14px;
+    color:var(--text-dim);
+  }
+  .compare{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    margin:20px 0;
+  }
+  .compare .box{
+    border:1px solid var(--card-border);
+    border-radius:8px;
+    padding:20px;
+    background:var(--bg-alt);
+  }
+  .compare .box.negative{
+    border-color:#333;
+  }
+  .compare .box.positive{
+    background:var(--red-dark);
+    border-color:#5c1120;
+  }
+  .compare .label{
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:0.5px;
+    margin-bottom:14px;
+  }
+  .compare .positive .label{color:#ff6b85;}
+  .compare .flow{
+    font-family:'Courier New',monospace;
+    font-size:15px;
+    margin-bottom:12px;
+  }
+  .compare .note{
+    font-size:13px;
+    color:var(--text-faint);
+    font-style:italic;
+  }
+  .three-col{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:16px;
+    margin:24px 0;
+  }
+  .three-col .card .bar{
+    width:28px;height:3px;
+    background:var(--red);
+    margin-bottom:14px;
+  }
+  ul.apps{
+    list-style:none;
+    padding:0;
+    margin:20px 0;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px 24px;
+  }
+  ul.apps li{
+    color:#d8d8d8;
+    font-size:15px;
+    padding-left:16px;
+    position:relative;
+  }
+  ul.apps li::before{
+    content:"";
+    position:absolute;
+    left:0;top:8px;
+    width:7px;height:7px;
+    background:var(--red);
+  }
+  .learn-cards{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:16px;
+    margin:24px 0;
+  }
+  .learn-card{
+    border-radius:8px;
+    padding:22px 20px;
+    border:1px solid var(--card-border);
+  }
+  .learn-card.active{
+    background:var(--red-dark);
+    border-color:#6b1524;
+  }
+  .learn-card.inactive{
+    background:var(--bg-alt);
+  }
+  .learn-card .bar{
+    width:32px;height:3px;
+    background:var(--red);
+    margin-bottom:16px;
+  }
+  .learn-card.inactive .bar{background:#555;}
+  .learn-card h3{
+    font-size:18px;
+    margin:0 0 10px;
+  }
+  .learn-card p{
+    font-size:14px;
+    color:var(--text-dim);
+    margin:0 0 14px;
+  }
+  .learn-card .tags{
+    font-size:12px;
+    font-style:italic;
+    color:var(--text-faint);
+  }
+  .foco{
+    font-size:13px;
+    color:var(--text-faint);
+    font-style:italic;
+    margin-top:10px;
+  }
+  .example-box{
+    background:var(--bg-alt);
+    border:1px solid var(--card-border);
+    border-left:4px solid var(--red);
+    border-radius:6px;
+    padding:16px 20px;
+    margin:16px 0;
+    font-size:14.5px;
+    color:var(--text-dim);
+  }
+  .example-box strong{color:var(--text);}
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:20px 0;
+    font-size:14px;
+  }
+  table th, table td{
+    border:1px solid var(--card-border);
+    padding:10px 14px;
+    text-align:left;
+  }
+  table th{
+    background:var(--bg-alt);
+    color:var(--red);
+    font-size:12px;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+  }
+  table td{color:#d8d8d8;}
+  .flow-steps{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:24px 0;
+    align-items:center;
+  }
+  .flow-step{
+    background:var(--card);
+    border:1px solid var(--card-border);
+    border-radius:6px;
+    padding:12px 16px;
+    font-size:14px;
+    flex:1 1 140px;
+    text-align:center;
+  }
+  .flow-arrow{
+    color:var(--red);
+    font-size:18px;
+  }
+  .divider{
+    height:1px;
+    background:var(--card-border);
+    margin:50px 0;
+  }
+  @media (max-width:640px){
+    .grid, .compare, .three-col, .learn-cards, ul.apps{
+      grid-template-columns:1fr;
+    }
+    h1{font-size:32px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="accent-bar"></div>
+  <h1>Introducción al<br><span class="hl">Machine Learning</span> Aplicado</h1>
+  <p class="subtitle">Conceptos de analítica predictiva.</p>
+
+  <!-- AGENDA -->
+  <div class="section">
+    <div class="section-tag">■ Agenda de la unidad</div>
+    <h2>Contenidos que veremos hoy</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="num">01</div>
+        <h3>Introducción al Machine Learning</h3>
+        <p>Qué es, por qué importa y en qué se diferencia de la programación tradicional.</p>
+      </div>
+      <div class="card">
+        <div class="num">02</div>
+        <h3>Tipos de aprendizaje</h3>
+        <p>Aprendizaje supervisado vs. no supervisado: definiciones, ejemplos y diferencias clave.</p>
+      </div>
+      <div class="card">
+        <div class="num">03</div>
+        <h3>Flujo de un proyecto de ML</h3>
+        <p>Las etapas que sigue todo proyecto, desde el problema hasta el despliegue.</p>
+      </div>
+      <div class="card">
+        <div class="num">04</div>
+        <h3>Variables, features y target</h3>
+        <p>Cómo identificar qué predice el modelo y con qué información lo hace.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- QUE ES ML -->
+  <div class="section">
+    <div class="section-tag">■ 1. Introducción al Machine Learning</div>
+    <h2>¿Qué es el Machine Learning?</h2>
+    <p>Es la rama de la Inteligencia Artificial que permite a un sistema <strong>aprender patrones a partir de datos</strong>, en lugar de seguir reglas escritas explícitamente por una persona.</p>
+    <p><em>En otras palabras: en lugar de programar la lógica paso a paso, le mostramos ejemplos al modelo y él encuentra la relación entre ellos.</em></p>
+
+    <div class="compare">
+      <div class="box negative">
+        <div class="label" style="color:var(--text-dim)">Programación tradicional</div>
+        <div class="flow">Datos + Reglas → Resultados</div>
+        <div class="note">La persona programadora define cada regla de forma manual.</div>
+      </div>
+      <div class="box positive">
+        <div class="label">Machine Learning</div>
+        <div class="flow">Datos + Resultados → Reglas (modelo)</div>
+        <div class="note">El algoritmo descubre el patrón a partir de ejemplos.</div>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <strong>Ejemplo para fijar la idea:</strong> para detectar correo spam de forma tradicional habría que escribir reglas como "si contiene la palabra 'gratis' y tiene un enlace, marcar como spam". En ML, se le muestran miles de correos ya etiquetados como spam o no spam, y el algoritmo aprende por sí mismo qué combinaciones de palabras, remitentes y estructura son indicio de spam — incluso patrones que una persona no habría anticipado.
+    </div>
+
+    <h2 style="margin-top:48px;">¿Por qué Machine Learning hoy?</h2>
+    <p>El ML no es una idea nueva —sus bases matemáticas datan de décadas atrás— pero solo se volvió práctico y masivo en los últimos años gracias a tres factores que convergieron:</p>
+
+    <div class="three-col">
+      <div class="card">
+        <div class="bar"></div>
+        <h3>Más datos</h3>
+        <p>Empresas y dispositivos generan volúmenes de datos sin precedentes.</p>
+      </div>
+      <div class="card">
+        <div class="bar"></div>
+        <h3>Más cómputo</h3>
+        <p>GPUs y la nube permiten entrenar modelos complejos rápidamente.</p>
+      </div>
+      <div class="card">
+        <div class="bar"></div>
+        <h3>Mejores algoritmos</h3>
+        <p>Avances en técnicas estadísticas y de aprendizaje profundo.</p>
+      </div>
+    </div>
+
+    <p><strong>Aplicaciones cotidianas</strong></p>
+    <ul class="apps">
+      <li>Recomendaciones (Netflix, Spotify, e-commerce)</li>
+      <li>Detección de fraude en tarjetas y transacciones</li>
+      <li>Filtros de spam en el correo electrónico</li>
+      <li>Diagnóstico asistido en imágenes médicas</li>
+      <li>Mantenimiento predictivo en maquinaria industrial</li>
+      <li>Predicción de demanda y precios</li>
+    </ul>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- TIPOS DE APRENDIZAJE -->
+  <div class="section">
+    <div class="section-tag">■ 2. Tipos de aprendizaje</div>
+    <h2>¿Cómo aprenden los modelos?</h2>
+
+    <div class="learn-cards">
+      <div class="learn-card active">
+        <div class="bar"></div>
+        <h3>Supervisado</h3>
+        <p>Aprende con datos etiquetados (ya conocemos la respuesta correcta).</p>
+        <div class="tags">Clasificación · Regresión</div>
+      </div>
+      <div class="learn-card active">
+        <div class="bar"></div>
+        <h3>No supervisado</h3>
+        <p>Aprende con datos sin etiquetas, buscando estructura oculta.</p>
+        <div class="tags">Clustering · Reducción de dimensión</div>
+      </div>
+      <div class="learn-card inactive">
+        <div class="bar"></div>
+        <h3>Por refuerzo</h3>
+        <p>Aprende por prueba y error, recibiendo recompensas o castigos.</p>
+        <div class="tags">Robótica · Juegos · Control</div>
+      </div>
+    </div>
+    <p class="foco">Foco de esta unidad: supervisado y no supervisado</p>
+
+    <table>
+      <tr>
+        <th>Aspecto</th>
+        <th>Aprendizaje supervisado</th>
+        <th>Aprendizaje no supervisado</th>
+      </tr>
+      <tr>
+        <td>Datos de entrada</td>
+        <td>Etiquetados (con la respuesta correcta ya conocida)</td>
+        <td>Sin etiquetas</td>
+      </tr>
+      <tr>
+        <td>Objetivo</td>
+        <td>Predecir un valor o categoría específica</td>
+        <td>Descubrir patrones o agrupaciones ocultas</td>
+      </tr>
+      <tr>
+        <td>Tareas típicas</td>
+        <td>Clasificación (spam/no spam) · Regresión (precio de una casa)</td>
+        <td>Clustering (segmentar clientes) · Reducción de dimensión</td>
+      </tr>
+      <tr>
+        <td>Ejemplo</td>
+        <td>Predecir si un cliente pagará o no un préstamo, usando historial de clientes ya clasificados como "pagó" / "no pagó"</td>
+        <td>Agrupar clientes de una tienda en segmentos de comportamiento de compra, sin saber de antemano cuántos grupos existen</td>
+      </tr>
+    </table>
+
+    <div class="example-box">
+      <strong>Clasificación vs. regresión (dentro de supervisado):</strong> la clasificación predice una categoría discreta (¿es spam o no?, ¿el cliente se va o se queda?), mientras que la regresión predice un valor numérico continuo (¿cuánto costará la casa?, ¿cuántas unidades se venderán el próximo mes?).
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- FLUJO (contenido ampliado, no estaba en las diapositivas capturadas) -->
+  <div class="section">
+    <div class="section-tag">■ 3. Flujo de un proyecto de ML</div>
+    <h2>Las etapas de un proyecto de Machine Learning</h2>
+    <p>Todo proyecto de ML —independientemente de su complejidad— sigue un ciclo similar. Entender estas etapas ayuda a planificar el trabajo y a saber en qué punto puede fallar un proyecto.</p>
+
+    <div class="flow-steps">
+      <div class="flow-step">1. Definir el problema</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">2. Recolectar datos</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">3. Preparar y limpiar</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">4. Entrenar el modelo</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">5. Evaluar resultados</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">6. Desplegar y monitorear</div>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>1. Definir el problema</h3>
+        <p>¿Qué se quiere predecir o descubrir? ¿Es un problema de clasificación, regresión o clustering? Sin esta claridad, ninguna técnica funciona bien.</p>
+      </div>
+      <div class="card">
+        <h3>2. Recolectar datos</h3>
+        <p>Reunir la información histórica relevante: transacciones, encuestas, sensores, bases de datos internas, etc.</p>
+      </div>
+      <div class="card">
+        <h3>3. Preparar y limpiar</h3>
+        <p>Eliminar duplicados, tratar valores faltantes, corregir errores y transformar los datos a un formato utilizable por el algoritmo.</p>
+      </div>
+      <div class="card">
+        <h3>4. Entrenar el modelo</h3>
+        <p>Elegir un algoritmo (regresión, árboles de decisión, redes neuronales, etc.) y ajustarlo usando los datos de entrenamiento.</p>
+      </div>
+      <div class="card">
+        <h3>5. Evaluar resultados</h3>
+        <p>Medir qué tan bien predice el modelo con datos que no vio durante el entrenamiento (datos de prueba), usando métricas como precisión o error.</p>
+      </div>
+      <div class="card">
+        <h3>6. Desplegar y monitorear</h3>
+        <p>Poner el modelo en producción y vigilar su desempeño en el tiempo, ya que los patrones de los datos pueden cambiar.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- VARIABLES FEATURES TARGET -->
+  <div class="section">
+    <div class="section-tag">■ 4. Variables, features y target</div>
+    <h2>Qué predice el modelo y con qué información</h2>
+    <p>Antes de entrenar cualquier modelo supervisado, hay que distinguir claramente dos tipos de variables dentro del conjunto de datos:</p>
+
+    <div class="compare">
+      <div class="box">
+        <div class="label" style="color:#fff">Features (variables predictoras)</div>
+        <div class="note" style="margin-bottom:8px;">Son las variables de entrada: la información que el modelo usa para hacer su predicción.</div>
+        <div class="note">Ejemplo: edad, ingreso mensual, historial de pagos, número de créditos activos.</div>
+      </div>
+      <div class="box positive">
+        <div class="label">Target (variable objetivo)</div>
+        <div class="note" style="color:#d8d8d8;margin-bottom:8px;">Es lo que el modelo intenta predecir: el resultado o respuesta.</div>
+        <div class="note" style="color:#d8d8d8;">Ejemplo: "pagó el préstamo" / "no lo pagó".</div>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <strong>En una tabla de datos:</strong> cada fila suele representar una observación (una persona, una transacción, un producto) y cada columna una variable. Todas las columnas excepto una son features; la columna restante —la que se quiere predecir— es el target. Elegir bien qué features incluir (y descartar las irrelevantes o redundantes) es una de las tareas más determinantes en la calidad final del modelo.
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
