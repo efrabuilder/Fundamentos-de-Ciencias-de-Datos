@@ -137,6 +137,25 @@
         </div>
       </div>
     </div>
+
+    <div class="card">
+      <div class="card-label">Ejemplo práctico (Notebook)</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-ml-ejemplo"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <label class="btn" for="file-ml-ejemplo">Cargar manualmente</label>
+          <input type="file" id="file-ml-ejemplo">
+          <a class="btn" id="download-ml-ejemplo" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer" id="viewer-ml-ejemplo">
+        <div class="empty-state">
+          <div class="icon">⏳</div>
+          <strong>Cargando recurso…</strong>
+          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+        </div>
+      </div>
+    </div>
   </section>
 
   <!-- ===================== PANEL 2: IA y el Freno Regulatorio ===================== -->
@@ -429,6 +448,7 @@
   }
   // ---------- Recursos del Módulo 5 ----------
   setupResource('ml-intro', 'Machine_Learning/Introduccion_al_Machine_Learning.html');
+  setupResource('ml-ejemplo', 'Machine_Learning/ejemploML.ipynb');
   setupResource('ia-freno', 'Machine_Learning/ia-freno-trump.html');
 </script>
 </body>
