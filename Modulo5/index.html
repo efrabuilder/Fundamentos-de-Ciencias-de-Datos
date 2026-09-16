@@ -13,6 +13,7 @@
     --border:#e2e8f0;
     --brand:#0d9488;
     --r1:#0d9488; --r1-soft:#f0fdfa;
+    --r2:#7c3aed; --r2-soft:#f5f3ff;
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
@@ -33,6 +34,7 @@
   .tab.active{background:var(--accent);border-color:var(--accent);color:#ffffff;}
   .tab.active .dot{background:#ffffff;opacity:1;}
   #tab-r1{--accent:var(--r1);}
+  #tab-r2{--accent:var(--r2);}
   main{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
   .panel{display:none;}
   .panel.active{display:block;animation:fade .25s ease;}
@@ -45,6 +47,7 @@
   .card-label{padding:12px 16px 0;font-size:13px;font-weight:700;color:var(--ink);}
   .card-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--accent-soft);}
   #panel-r1 .card-toolbar{--accent-soft:var(--r1-soft);}
+  #panel-r2 .card-toolbar{--accent-soft:var(--r2-soft);}
   .status{font-size:12.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
   .status .led{width:7px;height:7px;border-radius:50%;background:#cbd5e1;}
   .status.ok .led{background:#16a34a;}
@@ -102,6 +105,9 @@
   <button class="tab active" id="tab-r1" data-target="panel-r1">
     <span class="dot"></span> Introducción al ML
   </button>
+  <button class="tab" id="tab-r2" data-target="panel-r2">
+    <span class="dot"></span> IA y el Freno Regulatorio
+  </button>
 </nav>
 <main>
   <!-- ===================== PANEL 1: Introducción al ML ===================== -->
@@ -124,6 +130,35 @@
         </div>
       </div>
       <div class="viewer" id="viewer-ml-intro">
+        <div class="empty-state">
+          <div class="icon">⏳</div>
+          <strong>Cargando recurso…</strong>
+          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PANEL 2: IA y el Freno Regulatorio ===================== -->
+  <section class="panel" id="panel-r2">
+    <div class="panel-head">
+      <div>
+        <h2>IA y el Freno Regulatorio</h2>
+        <div class="sub">Caso de estudio sobre el debate en torno a la regulación de la Inteligencia Artificial</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">IA y el Freno Regulatorio</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-ia-freno"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <label class="btn" for="file-ia-freno">Cargar manualmente</label>
+          <input type="file" id="file-ia-freno">
+          <a class="btn" id="download-ia-freno" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer" id="viewer-ia-freno">
         <div class="empty-state">
           <div class="icon">⏳</div>
           <strong>Cargando recurso…</strong>
@@ -394,6 +429,7 @@
   }
   // ---------- Recursos del Módulo 5 ----------
   setupResource('ml-intro', 'Machine_Learning/Introduccion_al_Machine_Learning.html');
+  setupResource('ia-freno', 'Machine_Learning/ia-freno-trump.html');
 </script>
 </body>
 </html>
