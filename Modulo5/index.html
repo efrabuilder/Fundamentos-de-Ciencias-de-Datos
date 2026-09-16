@@ -96,29 +96,38 @@
 </div>
 <header>
   <div class="eyebrow">Módulo 5</div>
-  <h1>Introducción al Machine Learning Aplicado</h1>
+  <h1>Analítica Predictiva — Machine Learning Aplicado</h1>
 </header>
 <nav>
   <button class="tab active" id="tab-r1" data-target="panel-r1">
-    <span class="dot"></span> Recursos
+    <span class="dot"></span> Introducción al ML
   </button>
 </nav>
 <main>
-  <!-- ===================== PANEL 1: Recursos ===================== -->
+  <!-- ===================== PANEL 1: Introducción al ML ===================== -->
   <section class="panel active" id="panel-r1">
     <div class="panel-head">
       <div>
-        <h2>Recursos</h2>
-        <div class="sub">Materiales del módulo — se irán agregando a medida que avance el curso</div>
+        <h2>Introducción al Machine Learning</h2>
+        <div class="sub">Qué es el Machine Learning, por qué importa hoy y en qué se diferencia de la programación tradicional</div>
       </div>
     </div>
 
     <div class="card">
-      <div class="viewer">
+      <div class="card-label">Introducción al Machine Learning</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-ml-intro"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <label class="btn" for="file-ml-intro">Cargar manualmente</label>
+          <input type="file" id="file-ml-intro">
+          <a class="btn" id="download-ml-intro" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer" id="viewer-ml-intro">
         <div class="empty-state">
-          <div class="icon">＋</div>
-          <strong>Aún no hay recursos publicados</strong>
-          <span>Este módulo está en progreso. Los mapas conceptuales, ejercicios y tableros se agregarán aquí conforme se vayan completando.</span>
+          <div class="icon">⏳</div>
+          <strong>Cargando recurso…</strong>
+          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
         </div>
       </div>
     </div>
@@ -384,10 +393,7 @@
     });
   }
   // ---------- Recursos del Módulo 5 ----------
-  // Aún no hay recursos publicados. Cuando se agreguen, seguir el mismo
-  // patrón usado en Módulo 4: crear la tarjeta (card) correspondiente en el
-  // panel, y llamar a setupResource(id, "ruta/al/archivo") o
-  // setupResourceHtml(id, "ruta/preview.html", "ruta/descarga.ext").
+  setupResource('ml-intro', 'Machine_Learning/Introduccion_al_Machine_Learning.html');
 </script>
 </body>
 </html>
