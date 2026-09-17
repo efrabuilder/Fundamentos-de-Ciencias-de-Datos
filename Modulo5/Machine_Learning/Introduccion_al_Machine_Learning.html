@@ -59,6 +59,12 @@
     border-left:4px solid var(--red);
     padding-left:14px;
   }
+  h3.sub{
+    font-size:19px;
+    font-weight:700;
+    margin:36px 0 14px;
+    color:var(--text);
+  }
   .section{
     margin-bottom:64px;
     padding-top:8px;
@@ -155,6 +161,12 @@
     background:var(--red);
     margin-bottom:14px;
   }
+  .four-col{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr 1fr;
+    gap:16px;
+    margin:24px 0;
+  }
   ul.apps{
     list-style:none;
     padding:0;
@@ -250,6 +262,9 @@
     text-transform:uppercase;
   }
   table td{color:#d8d8d8;}
+  table.mini{
+    font-size:13px;
+  }
   .flow-steps{
     display:flex;
     flex-wrap:wrap;
@@ -262,13 +277,23 @@
     border:1px solid var(--card-border);
     border-radius:6px;
     padding:12px 16px;
-    font-size:14px;
-    flex:1 1 140px;
+    font-size:13.5px;
+    flex:1 1 120px;
     text-align:center;
   }
   .flow-arrow{
     color:var(--red);
     font-size:18px;
+  }
+  .pipeline-result{
+    background:var(--red);
+    color:#fff;
+    text-align:center;
+    font-weight:700;
+    border-radius:6px;
+    padding:14px 18px;
+    margin:16px 0;
+    font-size:15px;
   }
   .divider{
     height:1px;
@@ -276,7 +301,7 @@
     margin:50px 0;
   }
   @media (max-width:640px){
-    .grid, .compare, .three-col, .learn-cards, ul.apps{
+    .grid, .compare, .three-col, .four-col, .learn-cards, ul.apps{
       grid-template-columns:1fr;
     }
     h1{font-size:32px;}
@@ -314,6 +339,16 @@
         <div class="num">04</div>
         <h3>Variables, features y target</h3>
         <p>Cómo identificar qué predice el modelo y con qué información lo hace.</p>
+      </div>
+      <div class="card">
+        <div class="num">05</div>
+        <h3>Herramientas de trabajo</h3>
+        <p>Python, Pandas, Scikit-learn y Google Colab: con qué vamos a trabajar en la práctica.</p>
+      </div>
+      <div class="card">
+        <div class="num">06</div>
+        <h3>Actividad guiada</h3>
+        <p>Construcción paso a paso de un modelo de clasificación supervisada.</p>
       </div>
     </div>
   </div>
@@ -431,16 +466,42 @@
         <td>Predecir si un cliente pagará o no un préstamo, usando historial de clientes ya clasificados como "pagó" / "no pagó"</td>
         <td>Agrupar clientes de una tienda en segmentos de comportamiento de compra, sin saber de antemano cuántos grupos existen</td>
       </tr>
+      <tr>
+        <td>Algoritmos comunes</td>
+        <td>Regresión, árboles de decisión, SVM</td>
+        <td>K-Means, clustering jerárquico, PCA</td>
+      </tr>
+      <tr>
+        <td>¿Cómo se evalúa?</td>
+        <td>Comparando la predicción del modelo contra la respuesta real</td>
+        <td>Revisando la calidad y coherencia de los grupos formados</td>
+      </tr>
     </table>
 
     <div class="example-box">
       <strong>Clasificación vs. regresión (dentro de supervisado):</strong> la clasificación predice una categoría discreta (¿es spam o no?, ¿el cliente se va o se queda?), mientras que la regresión predice un valor numérico continuo (¿cuánto costará la casa?, ¿cuántas unidades se venderán el próximo mes?).
     </div>
+
+    <h3 class="sub">Ejemplo aplicado — Aprendizaje supervisado</h3>
+    <p>El modelo aprende a partir de ejemplos que ya incluyen la <strong>respuesta correcta</strong> (la etiqueta). Con esos casos "resueltos" entrena un modelo, y luego usa ese modelo para predecir la respuesta en datos nuevos que nunca vio.</p>
+    <table class="mini">
+      <tr><th>Edad</th><th>Ingreso</th><th>¿Compra?</th></tr>
+      <tr><td>25</td><td>$800</td><td>No</td></tr>
+      <tr><td>41</td><td>$1,500</td><td>Sí</td></tr>
+      <tr><td>36</td><td>$1,100</td><td>Sí</td></tr>
+    </table>
+    <div class="pipeline-result">Modelo entrenado → Cliente nuevo: 30 años, $1,200 de ingreso → Predicción: ¿Compra? Sí</div>
+
+    <h3 class="sub">Ejemplo aplicado — Aprendizaje no supervisado</h3>
+    <p>Aquí no hay una columna "respuesta correcta": el modelo recibe puntos de datos sin etiqueta y debe encontrar por sí mismo la estructura que los agrupa.</p>
+    <div class="example-box">
+      <strong>Segmentación de clientes de una tienda:</strong> se parte de un conjunto de puntos "sin agrupar" (por ejemplo, frecuencia de compra vs. monto gastado). El algoritmo de clustering descubre, sin que nadie le diga cuántos grupos buscar, dos comportamientos distintos: <strong>Grupo A — clientes frecuentes de bajo gasto</strong> y <strong>Grupo B — clientes ocasionales de alto gasto</strong>. Ese hallazgo es el resultado del modelo, no un dato que ya existiera en la tabla original.
+    </div>
   </div>
 
   <div class="divider"></div>
 
-  <!-- FLUJO (contenido ampliado, no estaba en las diapositivas capturadas) -->
+  <!-- FLUJO -->
   <div class="section">
     <div class="section-tag">■ 3. Flujo de un proyecto de ML</div>
     <h2>Las etapas de un proyecto de Machine Learning</h2>
@@ -453,11 +514,13 @@
       <div class="flow-arrow">→</div>
       <div class="flow-step">3. Preparar y limpiar</div>
       <div class="flow-arrow">→</div>
-      <div class="flow-step">4. Entrenar el modelo</div>
+      <div class="flow-step">4. Dividir los datos</div>
       <div class="flow-arrow">→</div>
-      <div class="flow-step">5. Evaluar resultados</div>
+      <div class="flow-step">5. Entrenar el modelo</div>
       <div class="flow-arrow">→</div>
-      <div class="flow-step">6. Desplegar y monitorear</div>
+      <div class="flow-step">6. Evaluar resultados</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">7. Desplegar y monitorear</div>
     </div>
 
     <div class="grid">
@@ -474,17 +537,25 @@
         <p>Eliminar duplicados, tratar valores faltantes, corregir errores y transformar los datos a un formato utilizable por el algoritmo.</p>
       </div>
       <div class="card">
-        <h3>4. Entrenar el modelo</h3>
-        <p>Elegir un algoritmo (regresión, árboles de decisión, redes neuronales, etc.) y ajustarlo usando los datos de entrenamiento.</p>
+        <h3>4. Dividir los datos</h3>
+        <p>Separar el conjunto en datos de <strong>entrenamiento (train)</strong> y de <strong>prueba (test)</strong> — típicamente 70/30 u 80/20 — para poder evaluar el modelo con casos que nunca vio durante el entrenamiento.</p>
       </div>
       <div class="card">
-        <h3>5. Evaluar resultados</h3>
-        <p>Medir qué tan bien predice el modelo con datos que no vio durante el entrenamiento (datos de prueba), usando métricas como precisión o error.</p>
+        <h3>5. Entrenar el modelo</h3>
+        <p>Elegir un algoritmo (regresión, árboles de decisión, redes neuronales, etc.) y ajustarlo usando únicamente los datos de entrenamiento.</p>
       </div>
       <div class="card">
-        <h3>6. Desplegar y monitorear</h3>
-        <p>Poner el modelo en producción y vigilar su desempeño en el tiempo, ya que los patrones de los datos pueden cambiar.</p>
+        <h3>6. Evaluar resultados</h3>
+        <p>Medir qué tan bien predice el modelo con los datos de prueba, usando métricas como exactitud (accuracy), precisión, recall o error, según el tipo de problema.</p>
       </div>
+      <div class="card">
+        <h3>7. Desplegar y monitorear</h3>
+        <p>Poner el modelo en producción y vigilar su desempeño en el tiempo, ya que los patrones de los datos pueden cambiar (esto se conoce como <em>drift</em>).</p>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <strong>¿Por qué dividir los datos en train/test?</strong> Si evaluamos el modelo con los mismos datos que usamos para entrenarlo, corremos el riesgo de <strong>sobreajuste (overfitting)</strong>: el modelo "memoriza" los ejemplos en vez de aprender el patrón general, y luego falla con datos nuevos. Reservar una porción de prueba —que el modelo nunca vio— simula cómo se comportará en la vida real.
     </div>
   </div>
 
@@ -511,6 +582,88 @@
 
     <div class="example-box">
       <strong>En una tabla de datos:</strong> cada fila suele representar una observación (una persona, una transacción, un producto) y cada columna una variable. Todas las columnas excepto una son features; la columna restante —la que se quiere predecir— es el target. Elegir bien qué features incluir (y descartar las irrelevantes o redundantes) es una de las tareas más determinantes en la calidad final del modelo.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- HERRAMIENTAS DE TRABAJO -->
+  <div class="section">
+    <div class="section-tag">■ Herramientas de trabajo</div>
+    <h2>Con qué vamos a trabajar en la práctica</h2>
+    <p>Para la parte práctica de esta unidad usaremos un conjunto pequeño pero suficiente de herramientas, todas de uso libre y muy extendidas en la industria:</p>
+
+    <div class="four-col">
+      <div class="learn-card active">
+        <div class="bar"></div>
+        <h3>Python</h3>
+        <p>Lenguaje de programación principal para ciencia de datos y ML.</p>
+      </div>
+      <div class="learn-card inactive">
+        <div class="bar" style="background:#555;"></div>
+        <h3>Pandas</h3>
+        <p>Librería para cargar, explorar y limpiar datos en tablas.</p>
+      </div>
+      <div class="learn-card active">
+        <div class="bar"></div>
+        <h3>Scikit-learn</h3>
+        <p>Librería con los algoritmos de clasificación y clustering que usaremos.</p>
+      </div>
+      <div class="learn-card inactive">
+        <div class="bar" style="background:#555;"></div>
+        <h3>Google Colab</h3>
+        <p>Entorno donde escribimos y ejecutamos el código, sin instalar nada.</p>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <strong>Por qué esta combinación:</strong> Pandas se encarga de la parte de <em>datos</em> (leer un CSV, filtrar filas, revisar valores faltantes), Scikit-learn se encarga de la parte de <em>modelo</em> (dividir train/test, entrenar, predecir, evaluar) y Colab elimina la fricción de instalar Python y librerías localmente, ya que corre en la nube desde el navegador.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ACTIVIDAD GUIADA -->
+  <div class="section">
+    <div class="section-tag">■ Práctica guiada</div>
+    <h2>Actividad 1 · Clasificación supervisada</h2>
+    <p>Vamos a construir, paso a paso, un modelo que predice si un cliente comprará o no un producto, aplicando en código el flujo de la sección 3.</p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="num">1</div>
+        <h3>Cargar y explorar los datos</h3>
+        <p>Leer el dataset y revisar sus columnas, tipos de datos y valores faltantes.</p>
+      </div>
+      <div class="card">
+        <div class="num">2</div>
+        <h3>Definir features y target</h3>
+        <p>Elegir qué columnas son predictoras (X) y cuál es la variable a predecir (y).</p>
+      </div>
+      <div class="card">
+        <div class="num">3</div>
+        <h3>Dividir train / test</h3>
+        <p>Separar los datos en un conjunto para entrenar y otro para evaluar (ej. 80/20).</p>
+      </div>
+      <div class="card">
+        <div class="num">4</div>
+        <h3>Entrenar el modelo</h3>
+        <p>Ajustar un modelo de clasificación (ej. Árbol de Decisión) con los datos de entrenamiento.</p>
+      </div>
+      <div class="card">
+        <div class="num">5</div>
+        <h3>Evaluar el modelo</h3>
+        <p>Medir la exactitud (accuracy) y revisar la matriz de confusión con los datos de prueba.</p>
+      </div>
+      <div class="card">
+        <div class="num">6</div>
+        <h3>Predecir casos nuevos</h3>
+        <p>Usar el modelo entrenado para predecir clientes que aún no conocemos.</p>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <strong>Nota sobre el paso 5:</strong> la <em>matriz de confusión</em> muestra, además del porcentaje de aciertos, en qué se está equivocando el modelo — por ejemplo, cuántos clientes que sí iban a comprar fueron clasificados erróneamente como "no compra" (falso negativo) y viceversa (falso positivo). Esa información suele ser tan importante como el accuracy general, sobre todo cuando el costo de cada tipo de error es distinto.
     </div>
   </div>
 
