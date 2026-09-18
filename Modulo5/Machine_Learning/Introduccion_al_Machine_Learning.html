@@ -300,6 +300,26 @@
     background:var(--card-border);
     margin:50px 0;
   }
+  .closing{
+    text-align:center;
+    padding:40px 20px;
+    background:var(--bg-alt);
+    border:1px solid var(--card-border);
+    border-radius:10px;
+  }
+  .closing .accent-bar{
+    margin:0 auto 24px;
+  }
+  .closing h2{
+    border-left:none;
+    padding-left:0;
+    font-size:30px;
+    margin-bottom:14px;
+  }
+  .closing p{
+    max-width:520px;
+    margin:0 auto;
+  }
   @media (max-width:640px){
     .grid, .compare, .three-col, .four-col, .learn-cards, ul.apps{
       grid-template-columns:1fr;
@@ -348,7 +368,7 @@
       <div class="card">
         <div class="num">06</div>
         <h3>Actividad guiada</h3>
-        <p>Construcción paso a paso de un modelo de clasificación supervisada.</p>
+        <p>Construcción paso a paso de un modelo de clasificación supervisada y de un modelo de clustering no supervisado.</p>
       </div>
     </div>
   </div>
@@ -497,6 +517,10 @@
     <div class="example-box">
       <strong>Segmentación de clientes de una tienda:</strong> se parte de un conjunto de puntos "sin agrupar" (por ejemplo, frecuencia de compra vs. monto gastado). El algoritmo de clustering descubre, sin que nadie le diga cuántos grupos buscar, dos comportamientos distintos: <strong>Grupo A — clientes frecuentes de bajo gasto</strong> y <strong>Grupo B — clientes ocasionales de alto gasto</strong>. Ese hallazgo es el resultado del modelo, no un dato que ya existiera en la tabla original.
     </div>
+
+    <div class="example-box">
+      <strong>Dos tareas dentro de lo no supervisado:</strong> el <em>clustering</em> agrupa elementos parecidos entre sí (por ejemplo, segmentar clientes según sus hábitos de compra), mientras que la <em>reducción de dimensión</em> resume muchas variables en pocas, conservando lo esencial — útil para simplificar cientos de variables y poder visualizarlas o acelerar el análisis posterior.
+    </div>
   </div>
 
   <div class="divider"></div>
@@ -526,15 +550,15 @@
     <div class="grid">
       <div class="card">
         <h3>1. Definir el problema</h3>
-        <p>¿Qué se quiere predecir o descubrir? ¿Es un problema de clasificación, regresión o clustering? Sin esta claridad, ninguna técnica funciona bien.</p>
+        <p>¿Qué se quiere predecir o descubrir? ¿Qué decisión de negocio apoya? ¿Es un problema de clasificación, regresión o clustering? Sin esta claridad, ninguna técnica funciona bien.</p>
       </div>
       <div class="card">
         <h3>2. Recolectar datos</h3>
-        <p>Reunir la información histórica relevante: transacciones, encuestas, sensores, bases de datos internas, etc.</p>
+        <p>Reunir la información histórica relevante para el problema: transacciones, encuestas, sensores, bases de datos internas, etc.</p>
       </div>
       <div class="card">
         <h3>3. Preparar y limpiar</h3>
-        <p>Eliminar duplicados, tratar valores faltantes, corregir errores y transformar los datos a un formato utilizable por el algoritmo.</p>
+        <p>Corregir errores, datos faltantes y formatos inconsistentes; eliminar duplicados y transformar los datos a un formato utilizable por el algoritmo.</p>
       </div>
       <div class="card">
         <h3>4. Dividir los datos</h3>
@@ -542,11 +566,11 @@
       </div>
       <div class="card">
         <h3>5. Entrenar el modelo</h3>
-        <p>Elegir un algoritmo (regresión, árboles de decisión, redes neuronales, etc.) y ajustarlo usando únicamente los datos de entrenamiento.</p>
+        <p>Elegir un algoritmo (regresión, árboles de decisión, redes neuronales, etc.) y ajustarlo: el algoritmo aprende el patrón a partir del conjunto de entrenamiento.</p>
       </div>
       <div class="card">
         <h3>6. Evaluar resultados</h3>
-        <p>Medir qué tan bien predice el modelo con los datos de prueba, usando métricas como exactitud (accuracy), precisión, recall o error, según el tipo de problema.</p>
+        <p>Medir el desempeño del modelo con el conjunto de prueba, usando métricas como exactitud (accuracy), precisión, recall o error, según el tipo de problema.</p>
       </div>
       <div class="card">
         <h3>7. Desplegar y monitorear</h3>
@@ -565,23 +589,34 @@
   <div class="section">
     <div class="section-tag">■ 4. Variables, features y target</div>
     <h2>Qué predice el modelo y con qué información</h2>
-    <p>Antes de entrenar cualquier modelo supervisado, hay que distinguir claramente dos tipos de variables dentro del conjunto de datos:</p>
+    <p>Antes de entrenar cualquier modelo supervisado, hay que distinguir claramente los tipos de variables dentro del conjunto de datos. Todo parte de la idea más general de <strong>variable</strong>: cualquier característica medible de un dato (edad, precio, color, ciudad, etc.). A partir de ahí, dentro de un problema supervisado esas variables se dividen en dos roles distintos:</p>
 
     <div class="compare">
       <div class="box">
         <div class="label" style="color:#fff">Features (variables predictoras)</div>
-        <div class="note" style="margin-bottom:8px;">Son las variables de entrada: la información que el modelo usa para hacer su predicción.</div>
-        <div class="note">Ejemplo: edad, ingreso mensual, historial de pagos, número de créditos activos.</div>
+        <div class="note" style="margin-bottom:8px;">Son las variables de entrada: la información que el modelo usa como "pistas" para hacer su predicción.</div>
+        <div class="note">Ejemplo: edad, ingreso mensual, antigüedad, historial de pagos, número de créditos activos.</div>
       </div>
       <div class="box positive">
         <div class="label">Target (variable objetivo)</div>
-        <div class="note" style="color:#d8d8d8;margin-bottom:8px;">Es lo que el modelo intenta predecir: el resultado o respuesta.</div>
+        <div class="note" style="color:#d8d8d8;margin-bottom:8px;">Es lo que el modelo intenta predecir: la "respuesta" del modelo.</div>
         <div class="note" style="color:#d8d8d8;">Ejemplo: "pagó el préstamo" / "no lo pagó".</div>
       </div>
     </div>
 
+    <p><strong>Ejemplo — dataset de clientes</strong></p>
+    <table class="mini">
+      <tr><th>Edad</th><th>Ingreso</th><th>Antigüedad</th><th>¿Compra?</th></tr>
+      <tr><td>25</td><td>$800</td><td>1 año</td><td>No</td></tr>
+      <tr><td>41</td><td>$1,500</td><td>5 años</td><td>Sí</td></tr>
+      <tr><td>36</td><td>$1,100</td><td>3 años</td><td>Sí</td></tr>
+    </table>
     <div class="example-box">
-      <strong>En una tabla de datos:</strong> cada fila suele representar una observación (una persona, una transacción, un producto) y cada columna una variable. Todas las columnas excepto una son features; la columna restante —la que se quiere predecir— es el target. Elegir bien qué features incluir (y descartar las irrelevantes o redundantes) es una de las tareas más determinantes en la calidad final del modelo.
+      En esta tabla, <strong>Edad</strong>, <strong>Ingreso</strong> y <strong>Antigüedad</strong> son las <em>features</em>; <strong>¿Compra?</strong> es el <em>target</em>. Cada fila suele representar una observación (una persona, una transacción, un producto) y cada columna una variable. Todas las columnas excepto una son features; la columna restante —la que se quiere predecir— es el target. Elegir bien qué features incluir (y descartar las irrelevantes o redundantes) es una de las tareas más determinantes en la calidad final del modelo.
+    </div>
+
+    <div class="example-box">
+      <strong>¿Y en un problema no supervisado?</strong> Ahí no existe target: no hay una columna "respuesta correcta" que el modelo deba predecir. Solo se trabaja con features, y el algoritmo las usa para descubrir por sí mismo estructura, agrupaciones o patrones en los datos — como vimos en el ejemplo de segmentación de clientes.
     </div>
   </div>
 
@@ -623,7 +658,7 @@
 
   <div class="divider"></div>
 
-  <!-- ACTIVIDAD GUIADA -->
+  <!-- ACTIVIDAD GUIADA 1 -->
   <div class="section">
     <div class="section-tag">■ Práctica guiada</div>
     <h2>Actividad 1 · Clasificación supervisada</h2>
@@ -664,6 +699,68 @@
 
     <div class="example-box">
       <strong>Nota sobre el paso 5:</strong> la <em>matriz de confusión</em> muestra, además del porcentaje de aciertos, en qué se está equivocando el modelo — por ejemplo, cuántos clientes que sí iban a comprar fueron clasificados erróneamente como "no compra" (falso negativo) y viceversa (falso positivo). Esa información suele ser tan importante como el accuracy general, sobre todo cuando el costo de cada tipo de error es distinto.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ACTIVIDAD GUIADA 2 -->
+  <div class="section">
+    <div class="section-tag">■ Práctica guiada</div>
+    <h2>Actividad 2 · Clustering no supervisado</h2>
+    <p>Vamos a segmentar clientes en grupos según su comportamiento, sin decirle al modelo cuáles son los grupos: aquí no hay target, solo features.</p>
+
+    <div class="grid">
+      <div class="card">
+        <div class="num">1</div>
+        <h3>Cargar los datos</h3>
+        <p>Leer el dataset de clientes (sin ninguna columna de "respuesta").</p>
+      </div>
+      <div class="card">
+        <div class="num">2</div>
+        <h3>Escalar las variables</h3>
+        <p>Normalizar los datos para que ninguna variable domine por su magnitud (ej. que el ingreso en dólares no "aplaste" a la frecuencia de compra).</p>
+      </div>
+      <div class="card">
+        <div class="num">3</div>
+        <h3>Elegir el número de grupos (k)</h3>
+        <p>Usar el método del codo para decidir cuántos clústeres formar antes de entrenar el algoritmo.</p>
+      </div>
+      <div class="card">
+        <div class="num">4</div>
+        <h3>Aplicar K-Means</h3>
+        <p>Entrenar el algoritmo para que agrupe a los clientes similares entre sí, según las features escaladas.</p>
+      </div>
+      <div class="card">
+        <div class="num">5</div>
+        <h3>Visualizar los grupos</h3>
+        <p>Graficar los clústeres para ver cómo se distribuyen los clientes en el espacio de variables.</p>
+      </div>
+      <div class="card">
+        <div class="num">6</div>
+        <h3>Interpretar cada grupo</h3>
+        <p>Describir el perfil de cada clúster (ej. "alto gasto, baja frecuencia") para convertir el resultado técnico en una conclusión de negocio.</p>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <strong>¿Por qué escalar antes de aplicar K-Means (paso 2)?</strong> K-Means agrupa según la <em>distancia</em> entre puntos. Si una variable se mide en dólares (ej. ingreso, de 0 a 5,000) y otra en unidades pequeñas (ej. frecuencia de compra, de 0 a 20), la variable con números más grandes dominará el cálculo de distancia aunque no sea más importante. Escalar (por ejemplo, llevando todas las variables a un rango comparable) evita ese sesgo.
+    </div>
+
+    <div class="example-box">
+      <strong>¿Por qué elegir k antes de entrenar (paso 3)?</strong> A diferencia de un modelo supervisado, K-Means no "sabe" cuántos grupos existen — hay que indicárselo. El <em>método del codo</em> consiste en probar distintos valores de k y graficar qué tan compactos quedan los grupos en cada caso; el punto donde la mejora deja de ser significativa (el "codo" de la curva) suele ser una buena elección de k.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CIERRE -->
+  <div class="section">
+    <div class="closing">
+      <div class="accent-bar"></div>
+      <div class="section-tag" style="text-align:center;">■ Próximos pasos</div>
+      <h2>¿Preguntas antes de pasar a la práctica?</h2>
+      <p>Repasamos qué es el Machine Learning, la diferencia entre aprendizaje supervisado y no supervisado, el flujo completo de un proyecto, y cómo distinguir features de target. Con esa base, en la siguiente sesión bajamos todo esto a código: Actividad 1 (clasificación) y Actividad 2 (clustering).</p>
     </div>
   </div>
 
