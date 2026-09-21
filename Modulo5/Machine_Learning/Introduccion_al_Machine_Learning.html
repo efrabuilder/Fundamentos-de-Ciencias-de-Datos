@@ -320,6 +320,47 @@
     max-width:520px;
     margin:0 auto;
   }
+  .probbar-wrap{
+    background:var(--bg-alt);
+    border:1px solid var(--card-border);
+    border-radius:8px;
+    padding:18px 20px;
+  }
+  .probbar-row{
+    margin-bottom:14px;
+  }
+  .probbar-row:last-child{margin-bottom:0;}
+  .probbar-label{
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+    margin-bottom:6px;
+    color:var(--text-dim);
+  }
+  .probbar-label strong{color:var(--text);}
+  .probbar-track{
+    height:16px;
+    background:#232323;
+    border-radius:4px;
+    overflow:hidden;
+  }
+  .probbar-fill{
+    height:100%;
+    background:var(--red);
+    border-radius:4px;
+  }
+  .probbar-fill.dim{background:#4a4a4a;}
+  .xy-tag{
+    display:inline-block;
+    font-family:'Courier New',monospace;
+    font-weight:700;
+    font-size:13px;
+    padding:2px 8px;
+    border-radius:4px;
+    margin-right:6px;
+  }
+  .xy-tag.x{background:#232323;color:#ff6b85;border:1px solid #3a0a13;}
+  .xy-tag.y{background:var(--red);color:#fff;}
   @media (max-width:640px){
     .grid, .compare, .three-col, .four-col, .learn-cards, ul.apps{
       grid-template-columns:1fr;
@@ -754,13 +795,292 @@
 
   <div class="divider"></div>
 
+  <!-- UNIDAD 2 HERO -->
+  <div class="section" style="margin-bottom:40px;">
+    <div class="accent-bar"></div>
+    <h1 style="font-size:36px;">Modelos Supervisados <span class="hl">Básicos</span></h1>
+    <p class="subtitle" style="margin-bottom:0;">Cómo una máquina aprende a predecir, explicado de forma simple.</p>
+    <p class="section-tag" style="margin-top:10px;">■ Modelos predictivos · Unidad 2</p>
+  </div>
+
+  <!-- AGENDA UNIDAD 2 -->
+  <div class="section">
+    <div class="section-tag">■ Agenda de la unidad 2</div>
+    <h2>Contenidos que veremos hoy</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="num">01</div>
+        <h3>Concepto de modelo predictivo</h3>
+        <p>Qué es un modelo, y por qué se le puede llamar "un adivino entrenado con ejemplos".</p>
+      </div>
+      <div class="card">
+        <div class="num">02</div>
+        <h3>Variables independientes y dependientes</h3>
+        <p>Qué es la pista (X) y qué es la respuesta que queremos adivinar (Y).</p>
+      </div>
+      <div class="card">
+        <div class="num">03</div>
+        <h3>Introducción a algoritmos básicos</h3>
+        <p>Los 3 "cerebros" más simples: regresión lineal, árbol de decisión y KNN.</p>
+      </div>
+      <div class="card">
+        <div class="num">04</div>
+        <h3>Preparación de datos para modelado</h3>
+        <p>Por qué hay que "lavar y picar" los datos antes de cocinar el modelo.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- CONCEPTO MODELO PREDICTIVO -->
+  <div class="section">
+    <div class="section-tag">■ 1. Concepto de modelo predictivo</div>
+    <h2>¿Qué es un modelo predictivo?</h2>
+    <p>Un modelo predictivo es, en el fondo, <strong>un adivino entrenado con ejemplos</strong>: le mostramos casos pasados donde ya sabemos qué pasó, y aprende un patrón para adivinar qué pasará en casos nuevos.</p>
+    <p><em>En simple: imagina un médico con muchos años de experiencia — ha visto tantos casos que, con solo un par de síntomas, ya intuye el diagnóstico. El modelo hace lo mismo, pero con números.</em></p>
+
+    <div class="compare">
+      <div class="box negative">
+        <div class="label" style="color:var(--text-dim)">Sin modelo predictivo</div>
+        <div class="note" style="margin-bottom:8px;">Reglas fijas, escritas a mano.</div>
+        <div class="note">Cada caso se decide con reglas que una persona programó, una por una.</div>
+      </div>
+      <div class="box positive">
+        <div class="label">Con modelo predictivo</div>
+        <div class="flow">Ejemplos → Patrón → Predicción</div>
+        <div class="note" style="color:#d8d8d8;">El modelo descubre el patrón solo, a partir de ejemplos ya resueltos.</div>
+      </div>
+    </div>
+
+    <h3 class="sub">¿Cómo "aprende" un modelo predictivo?</h3>
+    <div class="three-col">
+      <div class="card">
+        <div class="num">1</div>
+        <h3>Observa ejemplos</h3>
+        <p>Revisa muchos casos pasados junto con su resultado real.</p>
+      </div>
+      <div class="card">
+        <div class="num">2</div>
+        <h3>Encuentra el patrón</h3>
+        <p>Detecta qué combinación de datos suele llevar a cada resultado.</p>
+      </div>
+      <div class="card">
+        <div class="num">3</div>
+        <h3>Predice casos nuevos</h3>
+        <p>Aplica el patrón aprendido a datos que nunca había visto.</p>
+      </div>
+    </div>
+
+    <p><strong>Aplicaciones cotidianas</strong></p>
+    <ul class="apps">
+      <li>Recomendaciones de series o música</li>
+      <li>Predicción del clima</li>
+      <li>Aprobación de créditos bancarios</li>
+      <li>Precio estimado de una casa</li>
+      <li>Diagnóstico médico asistido</li>
+      <li>Predicción de ventas del próximo mes</li>
+    </ul>
+
+    <h3 class="sub">Una predicción no es una certeza</h3>
+    <p>Un modelo predictivo no tiene una bola de cristal: entrega <strong>una estimación basada en patrones pasados</strong>, casi siempre expresada como una probabilidad, no como un sí o un no absoluto.</p>
+    <p><em>En simple: cuando el pronóstico dice "80% de probabilidad de lluvia", no significa que vaya a llover el 80% del día — significa que, en situaciones parecidas, llovió 8 de cada 10 veces.</em></p>
+
+    <div class="probbar-wrap">
+      <div class="probbar-row">
+        <div class="probbar-label"><span>Probabilidad de cancelar</span><strong>72%</strong></div>
+        <div class="probbar-track"><div class="probbar-fill" style="width:72%;"></div></div>
+      </div>
+      <div class="probbar-row">
+        <div class="probbar-label"><span>Probabilidad de NO cancelar</span><strong>28%</strong></div>
+        <div class="probbar-track"><div class="probbar-fill dim" style="width:28%;"></div></div>
+      </div>
+    </div>
+    <div class="example-box">
+      El modelo no dice "cancela" o "no cancela": entrega estos dos porcentajes, y nosotros decidimos a partir de qué probabilidad actuamos. Por eso ninguna predicción se toma como verdad absoluta: siempre conviene medir qué tan seguido acierta el modelo — algo que se conoce como <em>evaluar el modelo</em> (accuracy, precisión, recall) y que ya vimos en la Actividad 1.
+    </div>
+
+    <h3 class="sub">Ejemplo trabajado: ¿qué cliente va a cancelar?</h3>
+    <p>Un servicio de streaming quiere anticiparse a las cancelaciones. Junta el historial de miles de clientes: cuántos meses llevan activos, cuántas quejas han hecho, y si finalmente cancelaron o no.</p>
+    <div style="font-family:'Courier New',monospace;color:var(--text-dim);margin:12px 0;font-size:15px;">Meses activo + Quejas → Patrón → ¿Cancela?</div>
+    <table class="mini">
+      <tr><th>Meses</th><th>Quejas</th><th>¿Canceló?</th></tr>
+      <tr><td>24</td><td>0</td><td>No</td></tr>
+      <tr><td>3</td><td>4</td><td style="color:#ff6b85;font-weight:700;">Sí</td></tr>
+      <tr><td>18</td><td>1</td><td>No</td></tr>
+      <tr><td>2</td><td>3</td><td style="color:#ff6b85;font-weight:700;">Sí</td></tr>
+    </table>
+    <p style="font-size:14px;color:var(--text-dim);">Cliente nuevo: 2 meses activo, 3 quejas</p>
+    <div class="pipeline-result">Predicción: Sí, probablemente cancela</div>
+    <div class="example-box">
+      <strong>¿Por qué el modelo predice eso?</strong> En simple: es como notar que los clientes que se quejan seguido y llevan pocos meses son justamente los que más se van — el modelo detecta esa señal sin que se la digamos explícitamente. El cliente nuevo (2 meses, 3 quejas) se parece mucho más a los casos "Sí" de la tabla (pocos meses, muchas quejas) que a los casos "No" (muchos meses, pocas quejas).
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- VARIABLES X Y -->
+  <div class="section">
+    <div class="section-tag">■ 2. Variables independientes y dependientes</div>
+    <h2>La pista (X) y la respuesta (Y)</h2>
+    <p>Ya vimos esta idea como <em>features</em> y <em>target</em> en la sección 4; aquí es la misma distinción vista desde la notación matemática que usan los algoritmos: cada variable predictora se llama <strong>independiente</strong> y se agrupa bajo la letra <span class="xy-tag x">X</span>, y la variable que queremos adivinar se llama <strong>dependiente</strong> y se representa con <span class="xy-tag y">Y</span>.</p>
+
+    <div class="compare">
+      <div class="box">
+        <div class="label" style="color:#fff"><span class="xy-tag x">X</span> Variable(s) independiente(s)</div>
+        <div class="note" style="margin-bottom:8px;">La "pista": información que ya conocemos y que el modelo usa como entrada. Puede haber varias X a la vez (X₁, X₂, X₃…).</div>
+        <div class="note">No depende de ninguna otra variable del problema — la aportamos nosotros.</div>
+      </div>
+      <div class="box positive">
+        <div class="label"><span class="xy-tag y">Y</span> Variable dependiente</div>
+        <div class="note" style="color:#d8d8d8;margin-bottom:8px;">La "respuesta": lo que queremos adivinar. Su valor <em>depende</em> de X — por eso el modelo busca la función Y = f(X).</div>
+        <div class="note" style="color:#d8d8d8;">Solo puede haber una Y por modelo.</div>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <strong>Retomando el ejemplo del streaming:</strong> <span class="xy-tag x">X</span> = meses activo y número de quejas (las pistas que observamos de cada cliente); <span class="xy-tag y">Y</span> = ¿canceló? (la respuesta que el modelo intenta adivinar). El modelo busca la relación Y = f(X) que mejor explica, con los datos históricos, cómo esas dos pistas se conectan con el resultado.
+    </div>
+
+    <h3 class="sub">Un matiz importante: correlación no es causa</h3>
+    <p>Que X y Y estén relacionadas estadísticamente no significa que X <em>provoque</em> Y. En el ejemplo, las quejas no "causan" la cancelación por sí solas — probablemente ambas son síntoma de una insatisfacción de fondo. El modelo detecta el patrón útil para predecir, no necesariamente la razón profunda detrás de él; esa interpretación de negocio sigue siendo tarea de la persona analista.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ALGORITMOS BASICOS -->
+  <div class="section">
+    <div class="section-tag">■ 3. Introducción a algoritmos básicos</div>
+    <h2>Los 3 "cerebros" más simples</h2>
+    <p>Existen decenas de algoritmos de aprendizaje supervisado, pero casi todos los cursos introductorios arrancan con estos tres porque son fáciles de visualizar y ya resuelven una buena parte de los problemas reales.</p>
+
+    <div class="learn-cards">
+      <div class="learn-card active">
+        <div class="bar"></div>
+        <h3>Regresión lineal</h3>
+        <p>Traza la línea (o el plano) que mejor se ajusta a los datos, y la usa para predecir un valor numérico continuo.</p>
+        <div class="tags">Y = m·X + b</div>
+      </div>
+      <div class="learn-card active">
+        <div class="bar"></div>
+        <h3>Árbol de decisión</h3>
+        <p>Hace una serie de preguntas de sí/no en cadena hasta llegar a una predicción, como un diagrama de flujo.</p>
+        <div class="tags">¿Ingreso &gt; $1,000? → …</div>
+      </div>
+      <div class="learn-card active">
+        <div class="bar"></div>
+        <h3>KNN (k vecinos más cercanos)</h3>
+        <p>Busca los "k" casos históricos más parecidos al caso nuevo y predice por mayoría (o promedio) entre ellos.</p>
+        <div class="tags">"Dime con quién andas…"</div>
+      </div>
+    </div>
+
+    <table>
+      <tr>
+        <th>Aspecto</th>
+        <th>Regresión lineal</th>
+        <th>Árbol de decisión</th>
+        <th>KNN</th>
+      </tr>
+      <tr>
+        <td>Cómo funciona</td>
+        <td>Ajusta una línea/plano que minimiza el error entre lo predicho y lo real</td>
+        <td>Divide los datos con preguntas sucesivas sobre las features</td>
+        <td>Mide la distancia del caso nuevo a todos los casos conocidos</td>
+      </tr>
+      <tr>
+        <td>Tipo de salida típica</td>
+        <td>Valor numérico (regresión)</td>
+        <td>Categoría o valor numérico (ambos)</td>
+        <td>Categoría o valor numérico (ambos)</td>
+      </tr>
+      <tr>
+        <td>Fácil de interpretar</td>
+        <td>Sí — un coeficiente por variable</td>
+        <td>Sí — se puede dibujar como diagrama</td>
+        <td>Medio — no hay "fórmula", solo vecinos</td>
+      </tr>
+      <tr>
+        <td>Sensible a la escala de los datos</td>
+        <td>Poco</td>
+        <td>No</td>
+        <td>Mucho — por eso casi siempre se escala antes</td>
+      </tr>
+      <tr>
+        <td>Cuándo usarlo</td>
+        <td>Relación aproximadamente lineal entre X e Y</td>
+        <td>Reglas de negocio claras o datos mixtos (números y categorías)</td>
+        <td>Pocos datos, fronteras entre grupos irregulares</td>
+      </tr>
+      <tr>
+        <td>Ejemplo típico</td>
+        <td>Precio de una casa según sus m²</td>
+        <td>Aprobación de un crédito según ingreso y antigüedad</td>
+        <td>Recomendar un producto según clientes parecidos</td>
+      </tr>
+    </table>
+
+    <h3 class="sub">Regresión lineal, en simple</h3>
+    <div class="example-box">
+      Busca la recta Y = m·X + b que mejor "atraviesa" la nube de puntos. Por ejemplo, con el tamaño de una casa (X) y su precio de venta (Y) en decenas de casas vendidas, la regresión encuentra la pendiente <strong>m</strong> (cuánto sube el precio por cada m² extra) y el punto de partida <strong>b</strong>. Con esa recta, una casa nueva de 90 m² se ubica en la recta y se lee su precio estimado — sin necesidad de haberla visto antes.
+    </div>
+
+    <h3 class="sub">Árbol de decisión, en simple</h3>
+    <div class="example-box">
+      Funciona como un diagrama de flujo de preguntas: "¿el ingreso mensual es mayor a $1,000?" → si <em>no</em>, rechazar el crédito; si <em>sí</em>, siguiente pregunta: "¿la antigüedad laboral es mayor a 2 años?" → según la respuesta, aprobar o seguir preguntando. Cada pregunta divide el grupo de datos en dos ramas más "puras" (más parecidas entre sí), hasta llegar a una hoja final con la predicción.
+    </div>
+
+    <h3 class="sub">KNN, en simple</h3>
+    <div class="example-box">
+      Para un cliente nuevo, el algoritmo busca en los datos históricos a sus <strong>k</strong> clientes más parecidos (por ejemplo, k = 3) según las features (edad, ingreso, etc.) y mira qué hicieron ellos. Si 2 de esos 3 "vecinos" compraron y 1 no, KNN predice que el cliente nuevo <strong>también comprará</strong> — es literalmente la idea de "dime con quién andas y te diré quién eres", convertida en algoritmo.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PREPARACION DE DATOS -->
+  <div class="section">
+    <div class="section-tag">■ 4. Preparación de datos para modelado</div>
+    <h2>Por qué hay que "lavar y picar" los datos antes de cocinar el modelo</h2>
+    <p>Ningún algoritmo —por bueno que sea— produce buenas predicciones si se le alimenta con datos sucios o mal preparados. En la práctica, esta etapa suele tomar más tiempo que el entrenamiento del modelo en sí.</p>
+
+    <div class="four-col">
+      <div class="card">
+        <h3>Valores faltantes</h3>
+        <p>Completar (con promedio, mediana, etc.) o eliminar filas/columnas con datos vacíos.</p>
+      </div>
+      <div class="card">
+        <h3>Duplicados y errores</h3>
+        <p>Eliminar filas repetidas y corregir valores imposibles (ej. edad = -5 o 300).</p>
+      </div>
+      <div class="card">
+        <h3>Codificar categorías</h3>
+        <p>Convertir texto (ej. "Sí"/"No", ciudades) en números que el algoritmo pueda procesar.</p>
+      </div>
+      <div class="card">
+        <h3>Escalar variables</h3>
+        <p>Llevar las variables numéricas a rangos comparables, clave para KNN y K-Means.</p>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <strong>La metáfora de la cocina:</strong> "lavar" los datos es limpiar lo que está sucio o incompleto (valores faltantes, duplicados, errores de captura); "picar" es darles el formato exacto que el algoritmo necesita para "cocinarlos" (convertir texto a números, escalar, dividir en train/test). Saltarse este paso es como intentar cocinar con verduras sin lavar y sin cortar: el resultado —el modelo— sale de mala calidad, sin importar qué tan bueno sea el algoritmo elegido.
+    </div>
+
+    <div class="example-box">
+      <strong>Conexión con lo ya visto:</strong> esta etapa corresponde al paso 3 ("Preparar y limpiar") del flujo de un proyecto de ML visto antes, y es la razón por la que, en la Actividad 2, escalamos las variables antes de aplicar K-Means — un dato mal preparado puede arruinar incluso al mejor algoritmo.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
   <!-- CIERRE -->
   <div class="section">
     <div class="closing">
       <div class="accent-bar"></div>
       <div class="section-tag" style="text-align:center;">■ Próximos pasos</div>
       <h2>¿Preguntas antes de pasar a la práctica?</h2>
-      <p>Repasamos qué es el Machine Learning, la diferencia entre aprendizaje supervisado y no supervisado, el flujo completo de un proyecto, y cómo distinguir features de target. Con esa base, en la siguiente sesión bajamos todo esto a código: Actividad 1 (clasificación) y Actividad 2 (clustering).</p>
+      <p>Repasamos qué es el Machine Learning, la diferencia entre aprendizaje supervisado y no supervisado, el flujo de un proyecto y cómo distinguir features (X) de target (Y); luego bajamos un nivel más: qué es un modelo predictivo, los tres algoritmos básicos (regresión lineal, árbol de decisión y KNN) y por qué hay que preparar bien los datos antes de entrenar. Con esa base, en la siguiente sesión bajamos todo esto a código: Actividad 1 (clasificación) y Actividad 2 (clustering).</p>
     </div>
   </div>
 
