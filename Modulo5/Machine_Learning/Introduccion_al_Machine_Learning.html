@@ -915,6 +915,22 @@
     <div class="example-box">
       <strong>¿Por qué el modelo predice eso?</strong> En simple: es como notar que los clientes que se quejan seguido y llevan pocos meses son justamente los que más se van — el modelo detecta esa señal sin que se la digamos explícitamente. El cliente nuevo (2 meses, 3 quejas) se parece mucho más a los casos "Sí" de la tabla (pocos meses, muchas quejas) que a los casos "No" (muchos meses, pocas quejas).
     </div>
+
+    <h3 class="sub">Ejemplo trabajado: ¿va a llover mañana?</h3>
+    <p>Un servicio del clima registra, día a día, <strong>la humedad y la presión atmosférica</strong>, junto con si llovió o no. Con esos ejemplos, el modelo aprende a reconocer el patrón que antecedió a la lluvia.</p>
+    <div style="font-family:'Courier New',monospace;color:var(--text-dim);margin:12px 0;font-size:15px;">Humedad + Presión → Patrón → ¿Llueve?</div>
+    <table class="mini">
+      <tr><th>Humedad</th><th>Presión</th><th>¿Llovió?</th></tr>
+      <tr><td>85%</td><td>1005 hPa</td><td style="color:#ff6b85;font-weight:700;">Sí</td></tr>
+      <tr><td>40%</td><td>1020 hPa</td><td>No</td></tr>
+      <tr><td>90%</td><td>1002 hPa</td><td style="color:#ff6b85;font-weight:700;">Sí</td></tr>
+      <tr><td>55%</td><td>1015 hPa</td><td>No</td></tr>
+    </table>
+    <p style="font-size:14px;color:var(--text-dim);">Mañana: 88% de humedad, 1003 hPa</p>
+    <div class="pipeline-result">Predicción: Sí, probablemente llueva</div>
+    <div class="example-box">
+      <em>En simple: es la misma lógica que usa alguien que, sin saber meteorología, aprende con los años que "cuando el aire se siente pesado y húmedo, casi siempre llueve".</em>
+    </div>
   </div>
 
   <div class="divider"></div>
@@ -940,6 +956,81 @@
 
     <div class="example-box">
       <strong>Retomando el ejemplo del streaming:</strong> <span class="xy-tag x">X</span> = meses activo y número de quejas (las pistas que observamos de cada cliente); <span class="xy-tag y">Y</span> = ¿canceló? (la respuesta que el modelo intenta adivinar). El modelo busca la relación Y = f(X) que mejor explica, con los datos históricos, cómo esas dos pistas se conectan con el resultado.
+    </div>
+
+    <p><strong>Ejemplo — dataset de casas</strong></p>
+    <table class="mini">
+      <tr><th>m²</th><th>Habs.</th><th style="color:var(--red);">Precio</th></tr>
+      <tr><td>70</td><td>2</td><td>$62 M</td></tr>
+      <tr><td>95</td><td>3</td><td>$85 M</td></tr>
+      <tr><td>130</td><td>4</td><td>$118 M</td></tr>
+    </table>
+    <div class="example-box">
+      <strong>Variables independientes (X):</strong> metros cuadrados, habitaciones. <strong>Variable dependiente (Y):</strong> precio. <em>En simple: si quieres adivinar el precio de una casa (Y), sus metros cuadrados y su ubicación son las pistas (X).</em>
+    </div>
+
+    <h3 class="sub">Cuidado con lo que pones en X</h3>
+    <p><strong>Un mismo dato puede ser X en un problema y Y en otro.</strong> El precio de la casa es Y cuando queremos calcularlo, pero puede ser X cuando queremos predecir si un comprador la va a visitar. <em>En simple: X e Y no son etiquetas fijas de una columna — dependen de la pregunta que estés haciendo en ese momento.</em></p>
+    <p>Hay otro cuidado todavía más importante: no incluir en X información que, en la práctica, no existiría todavía al momento de predecir.</p>
+    <div class="compare">
+      <div class="box negative">
+        <div class="label" style="color:var(--text-dim)">Error común</div>
+        <div class="note">Usar información "del futuro". Predecir cancelación usando como X "recibió correo de despedida" — ese dato solo existe después de que el cliente ya canceló.</div>
+      </div>
+      <div class="box positive">
+        <div class="label">Buena práctica</div>
+        <div class="note" style="color:#d8d8d8;">Usar solo lo que ya se sabe. Usar meses activo y número de quejas — datos que sí existen antes de que el cliente decida cancelar o no.</div>
+      </div>
+    </div>
+
+    <h3 class="sub">Identificando X e Y en la vida real</h3>
+    <table>
+      <tr>
+        <th>Caso</th>
+        <th>Variables independientes (X)</th>
+        <th>Variable dependiente (Y)</th>
+      </tr>
+      <tr>
+        <td>Precio de un carro usado</td>
+        <td>Año, kilometraje, marca</td>
+        <td>Precio</td>
+      </tr>
+      <tr>
+        <td>Un correo es spam o no</td>
+        <td>Palabras del mensaje, remitente</td>
+        <td>¿Es spam?</td>
+      </tr>
+      <tr>
+        <td>Ventas del próximo mes</td>
+        <td>Inversión en publicidad, temporada</td>
+        <td>Ventas</td>
+      </tr>
+      <tr>
+        <td>Aprobar un préstamo</td>
+        <td>Ingreso, historial de pago</td>
+        <td>¿Se aprueba?</td>
+      </tr>
+      <tr>
+        <td>Diagnóstico de una enfermedad</td>
+        <td>Síntomas, resultados de exámenes</td>
+        <td>¿Tiene la enfermedad?</td>
+      </tr>
+    </table>
+
+    <h3 class="sub">Ejemplo trabajado: precio de un teléfono usado</h3>
+    <p>Para vender un teléfono usado, <strong>los meses de uso y el estado de la batería</strong> son las pistas (X); el precio de reventa es lo que queremos calcular (Y).</p>
+    <div style="font-family:'Courier New',monospace;color:var(--text-dim);margin:12px 0;font-size:15px;">Meses de uso + Batería → Patrón → Precio</div>
+    <table class="mini">
+      <tr><th>Meses uso</th><th>Batería</th><th>Precio</th></tr>
+      <tr><td>3</td><td>95%</td><td>$420</td></tr>
+      <tr><td>18</td><td>82%</td><td>$260</td></tr>
+      <tr><td>30</td><td>70%</td><td>$150</td></tr>
+      <tr><td>8</td><td>90%</td><td>$380</td></tr>
+    </table>
+    <p style="font-size:14px;color:var(--text-dim);">Teléfono nuevo: 12 meses de uso, 85% de batería</p>
+    <div class="pipeline-result">Predicción: $340 aproximadamente</div>
+    <div class="example-box">
+      <em>En simple: todos sabemos, sin hacer cálculos, que un teléfono con batería gastada y muchos meses de uso vale menos — el modelo solo pone un número exacto a esa intuición.</em>
     </div>
 
     <h3 class="sub">Un matiz importante: correlación no es causa</h3>
