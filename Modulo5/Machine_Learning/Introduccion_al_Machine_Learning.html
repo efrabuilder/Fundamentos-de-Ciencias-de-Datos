@@ -1125,6 +1125,102 @@
     <div class="example-box">
       Para un cliente nuevo, el algoritmo busca en los datos históricos a sus <strong>k</strong> clientes más parecidos (por ejemplo, k = 3) según las features (edad, ingreso, etc.) y mira qué hicieron ellos. Si 2 de esos 3 "vecinos" compraron y 1 no, KNN predice que el cliente nuevo <strong>también comprará</strong> — es literalmente la idea de "dime con quién andas y te diré quién eres", convertida en algoritmo.
     </div>
+
+    <h3 class="sub">Ejemplo: regresión lineal paso a paso</h3>
+    <div class="compare">
+      <div class="box negative">
+        <div class="label" style="color:var(--text-dim)">Datos: horas de estudio y nota</div>
+        <table class="mini" style="margin:0;">
+          <tr><th>Horas de estudio</th><th>Nota obtenida</th></tr>
+          <tr><td>1</td><td>46</td></tr>
+          <tr><td>3</td><td>58</td></tr>
+          <tr><td>5</td><td>70</td></tr>
+          <tr><td>7</td><td>82</td></tr>
+          <tr><td>9</td><td>94</td></tr>
+        </table>
+      </div>
+      <div class="box positive">
+        <div class="label">Modelo aprendido</div>
+        <div class="flow">nota ≈ 6 × horas_estudio + 40</div>
+        <div class="note" style="color:#d8d8d8;">Cada hora adicional de estudio suma unos 6 puntos a la nota esperada; sin estudiar, el modelo espera un 40 como base.</div>
+      </div>
+    </div>
+    <div class="pipeline-result">7 horas de estudio → 82 puntos estimados</div>
+    <div class="example-box">
+      <em>En simple: los puntos casi forman una línea recta — el modelo solo tiene que encontrar esa línea.</em> La predicción coincide con el dato real de la tabla — señal de que el modelo aprendió bien el patrón.
+    </div>
+
+    <h3 class="sub">Ejemplo: árbol de decisión paso a paso</h3>
+    <p>Un banco decide si aprobar un préstamo haciendo preguntas en cadena:</p>
+    <div class="card" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px;">
+      <div style="display:flex;align-items:center;gap:14px;"><div class="num">P1</div><strong>¿Entregó un pago inicial?</strong></div>
+      <div style="font-size:13px;text-align:right;">No → <span style="color:#ff6b85;font-weight:700;">Rechazado</span> &nbsp;·&nbsp; Sí → <span style="color:#5fd38d;font-weight:700;">Sigue con la pregunta 2</span></div>
+    </div>
+    <div class="card" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px;">
+      <div style="display:flex;align-items:center;gap:14px;"><div class="num">P2</div><strong>¿Ingreso mensual mayor a $1,000?</strong></div>
+      <div style="font-size:13px;text-align:right;">No → <span style="color:#ff6b85;font-weight:700;">Rechazado</span> &nbsp;·&nbsp; Sí → <span style="color:#5fd38d;font-weight:700;">Sigue con la pregunta 3</span></div>
+    </div>
+    <div class="card" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;">
+      <div style="display:flex;align-items:center;gap:14px;"><div class="num">P3</div><strong>¿Tiene historial de mora?</strong></div>
+      <div style="font-size:13px;text-align:right;">Sí → <span style="color:#ff6b85;font-weight:700;">Rechazado</span> &nbsp;·&nbsp; No → <span style="color:#5fd38d;font-weight:700;">Aprobado</span></div>
+    </div>
+    <div class="example-box">
+      <em>En simple: el árbol va descartando casos con preguntas simples, hasta quedarse con una decisión final.</em>
+    </div>
+
+    <h3 class="sub">Los 3 algoritmos, aplicados al mismo caso</h3>
+    <p>Mismo cliente nuevo (29 años, $1,300 de ingreso) evaluado con cada "cerebro":</p>
+    <div class="three-col">
+      <div class="card">
+        <div class="bar"></div>
+        <h3>Regresión lineal</h3>
+        <p>Calcula una probabilidad de compra a partir de edad e ingreso.</p>
+        <div class="pipeline-result" style="margin:14px 0 0;font-size:14px;">72% → Compra</div>
+      </div>
+      <div class="card">
+        <div class="bar"></div>
+        <h3>Árbol de decisión</h3>
+        <p>¿Ingreso &gt; $1,200? Sí → ¿Edad &gt; 25? Sí →</p>
+        <div class="pipeline-result" style="margin:14px 0 0;font-size:14px;">Compra</div>
+      </div>
+      <div class="card">
+        <div class="bar"></div>
+        <h3>KNN (K vecinos)</h3>
+        <p>Busca sus 5 clientes más parecidos ya conocidos.</p>
+        <div class="pipeline-result" style="margin:14px 0 0;font-size:14px;">4 de 5 → Compra</div>
+      </div>
+    </div>
+    <div class="example-box">
+      <em>En simple: las tres formas de pensar llegan a la misma conclusión con este cliente — eso no siempre ocurre, y comparar resultados ayuda a confiar más en la predicción.</em>
+    </div>
+
+    <h3 class="sub">¿Cuál algoritmo uso primero?</h3>
+    <table>
+      <tr>
+        <th></th>
+        <th>Regresión lineal</th>
+        <th>Árbol de decisión</th>
+        <th>KNN</th>
+      </tr>
+      <tr>
+        <td>Qué predice</td>
+        <td>Números</td>
+        <td>Categorías</td>
+        <td>Categorías o números</td>
+      </tr>
+      <tr>
+        <td>Fácil de interpretar</td>
+        <td>Sí, es casi una fórmula</td>
+        <td>Muy fácil: se lee como un diagrama</td>
+        <td>Simple, pero lento con muchos datos</td>
+      </tr>
+      <tr>
+        <td>Ejemplo típico</td>
+        <td>Precio de una casa</td>
+        <td>¿Se aprueba el préstamo?</td>
+        <td>¿A qué grupo se parece este cliente?</td>
+      </tr>
+    </table>
   </div>
 
   <div class="divider"></div>
@@ -1160,6 +1256,77 @@
 
     <div class="example-box">
       <strong>Conexión con lo ya visto:</strong> esta etapa corresponde al paso 3 ("Preparar y limpiar") del flujo de un proyecto de ML visto antes, y es la razón por la que, en la Actividad 2, escalamos las variables antes de aplicar K-Means — un dato mal preparado puede arruinar incluso al mejor algoritmo.
+    </div>
+
+    <h3 class="sub">¿Por qué separar entrenamiento y prueba?</h3>
+    <p><strong>Evaluar un modelo con los mismos datos que usó para aprender</strong> es como calificar un examen con las mismas preguntas que el estudiante ya había practicado con las respuestas incluidas: parecería perfecto, pero no sabemos si realmente entendió.</p>
+    <div style="display:flex;border-radius:8px;overflow:hidden;margin:20px 0;font-size:13px;font-weight:700;letter-spacing:0.5px;">
+      <div style="flex:8;background:var(--card);padding:16px;text-align:center;border:1px solid var(--card-border);border-right:none;">80% · ENTRENAMIENTO</div>
+      <div style="flex:2;background:var(--red);padding:16px;text-align:center;color:#fff;border:1px solid var(--red);">20% · PRUEBA</div>
+    </div>
+    <div class="grid" style="grid-template-columns:1fr 1fr;">
+      <p style="font-size:14px;margin:0;">El modelo aprende de estos datos: puede verlos las veces que sea necesario para encontrar el patrón.</p>
+      <p style="font-size:14px;margin:0;">Se usa solo para medir qué tan bien predice — nunca para entrenar.</p>
+    </div>
+    <div class="example-box">
+      <em>En simple: nunca le hagas la prueba final a alguien con las mismas preguntas que ya practicó — necesitas preguntas nuevas para saber si realmente aprendió.</em>
+    </div>
+
+    <h3 class="sub">Ejemplo: antes y después de preparar los datos</h3>
+    <div class="compare">
+      <div class="box negative">
+        <div class="label" style="color:var(--text-dim)">Antes: datos sucios</div>
+        <table class="mini" style="margin:0 0 12px;">
+          <tr><th>ID</th><th>Edad</th><th>Ingreso</th></tr>
+          <tr><td>1</td><td>25</td><td>$450k</td></tr>
+          <tr><td>2</td><td>34</td><td>$520k</td></tr>
+          <tr><td>3</td><td style="color:#ff6b85;">—</td><td>$610k</td></tr>
+          <tr><td>4</td><td style="color:#ff6b85;">25</td><td style="color:#ff6b85;">$450k</td></tr>
+          <tr><td>5</td><td style="color:#ff6b85;">300</td><td>$700k</td></tr>
+        </table>
+        <div class="note" style="color:var(--text-dim);">Fila 3: edad faltante · Fila 4: duplicada · Fila 5: edad imposible (300)</div>
+      </div>
+      <div class="box positive">
+        <div class="label">Después: datos preparados</div>
+        <table class="mini" style="margin:0 0 12px;">
+          <tr><th>ID</th><th>Edad</th><th>Ingreso</th></tr>
+          <tr><td>1</td><td>25</td><td>$450k</td></tr>
+          <tr><td>2</td><td>34</td><td>$520k</td></tr>
+          <tr><td>3</td><td>30</td><td>$610k</td></tr>
+          <tr><td>5</td><td>45</td><td>$700k</td></tr>
+        </table>
+        <div class="note" style="color:#d8d8d8;">Edad faltante → rellenada con la mediana (30)<br>Duplicada → eliminada<br>Edad imposible → corregida a 45</div>
+      </div>
+    </div>
+    <div class="example-box">
+      <em>En simple: menos filas, pero datos en los que sí se puede confiar — eso es preferible a tener más datos poco fiables.</em>
+    </div>
+
+    <h3 class="sub">Ejemplo: escalar variables antes de modelar</h3>
+    <div class="compare">
+      <div class="box negative">
+        <div class="label" style="color:var(--text-dim)">Antes: escalas muy distintas</div>
+        <table class="mini" style="margin:0 0 12px;">
+          <tr><th>Cliente</th><th>Edad</th><th>Ingreso</th></tr>
+          <tr><td>A</td><td>25</td><td>$450,000</td></tr>
+          <tr><td>B</td><td>52</td><td>$1,800,000</td></tr>
+          <tr><td>C</td><td>31</td><td>$620,000</td></tr>
+        </table>
+        <div class="note" style="color:var(--text-dim);">El ingreso (cientos de miles) opacaría por completo a la edad (decenas) solo por ser un número mucho más grande — aunque la edad importe igual o más.</div>
+      </div>
+      <div class="box positive">
+        <div class="label">Después: escala 0 a 1</div>
+        <table class="mini" style="margin:0 0 12px;">
+          <tr><th>Cliente</th><th>Edad</th><th>Ingreso</th></tr>
+          <tr><td>A</td><td>0.00</td><td>0.00</td></tr>
+          <tr><td>B</td><td>1.00</td><td>1.00</td></tr>
+          <tr><td>C</td><td>0.22</td><td>0.13</td></tr>
+        </table>
+        <div class="note" style="color:#d8d8d8;">Ahora ambas columnas van de 0 a 1: ninguna variable domina al modelo solo por tener números más grandes.</div>
+      </div>
+    </div>
+    <div class="example-box">
+      <em>En simple: escalar es como convertir todo a la misma unidad antes de comparar — así todas las variables compiten en igualdad de condiciones.</em>
     </div>
   </div>
 
