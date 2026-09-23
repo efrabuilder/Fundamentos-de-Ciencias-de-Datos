@@ -1168,6 +1168,31 @@
       <em>En simple: el árbol va descartando casos con preguntas simples, hasta quedarse con una decisión final.</em>
     </div>
 
+    <h3 class="sub">Ejemplo: KNN paso a paso</h3>
+    <p>Cliente nuevo: 29 años, $1,300 de ingreso mensual. Buscamos sus 5 vecinos más parecidos entre los clientes que ya conocemos:</p>
+    <table class="mini">
+      <tr><th>Vecino</th><th>Edad</th><th>Ingreso</th><th>¿Compró?</th></tr>
+      <tr><td>A</td><td>27</td><td>$1,250</td><td style="color:#5fd38d;font-weight:700;">Sí</td></tr>
+      <tr><td>B</td><td>31</td><td>$1,400</td><td style="color:#5fd38d;font-weight:700;">Sí</td></tr>
+      <tr><td>C</td><td>29</td><td>$1,100</td><td style="color:#ff6b85;font-weight:700;">No</td></tr>
+      <tr><td>D</td><td>33</td><td>$1,350</td><td style="color:#5fd38d;font-weight:700;">Sí</td></tr>
+      <tr><td>E</td><td>26</td><td>$1,200</td><td style="color:#ff6b85;font-weight:700;">No</td></tr>
+    </table>
+    <div class="compare">
+      <div class="box positive">
+        <div class="label">Sí compró</div>
+        <div class="flow">3 votos</div>
+      </div>
+      <div class="box negative">
+        <div class="label" style="color:var(--text-dim)">No compró</div>
+        <div class="flow" style="color:var(--text-dim);">2 votos</div>
+      </div>
+    </div>
+    <div class="pipeline-result">Predicción: Sí, probablemente compre</div>
+    <div class="example-box">
+      <em>3 de sus 5 vecinos más parecidos sí compraron: la mayoría gana.</em>
+    </div>
+
     <h3 class="sub">Los 3 algoritmos, aplicados al mismo caso</h3>
     <p>Mismo cliente nuevo (29 años, $1,300 de ingreso) evaluado con cada "cerebro":</p>
     <div class="three-col">
@@ -1221,6 +1246,24 @@
         <td>¿A qué grupo se parece este cliente?</td>
       </tr>
     </table>
+
+    <h3 class="sub">Cuidado con el sobreajuste (overfitting)</h3>
+    <p>Un modelo puede aprender demasiado bien los ejemplos con los que se entrenó, al punto de memorizarlos en vez de entender el patrón general.</p>
+    <div class="compare">
+      <div class="box negative">
+        <div class="label" style="color:var(--text-dim)">Sobreajustado (memoriza)</div>
+        <div class="flow" style="color:var(--text-dim);">Casi 100% de aciertos… solo en lo ya conocido</div>
+        <div class="note">Aprende hasta los detalles y errores de los datos de entrenamiento, y falla con datos nuevos.</div>
+      </div>
+      <div class="box positive">
+        <div class="label">Bien ajustado</div>
+        <div class="flow" style="color:#d8d8d8;">Un poco menos perfecto… pero mucho más confiable</div>
+        <div class="note" style="color:#d8d8d8;">Capta la tendencia general sin memorizar cada detalle, y predice bien incluso con datos nuevos.</div>
+      </div>
+    </div>
+    <div class="example-box">
+      <em>En simple: es como un estudiante que memorizó las respuestas exactas de los ejercicios de práctica — en el examen real, con preguntas distintas, no sabe qué hacer.</em> Por eso más adelante siempre se evalúa un modelo con datos que no vio durante el entrenamiento.
+    </div>
   </div>
 
   <div class="divider"></div>
