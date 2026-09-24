@@ -361,8 +361,43 @@
   }
   .xy-tag.x{background:#232323;color:#ff6b85;border:1px solid #3a0a13;}
   .xy-tag.y{background:var(--red);color:#fff;}
+  .conf-matrix{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin:20px 0;
+  }
+  .conf-cell{
+    border-radius:8px;
+    padding:18px 20px;
+    border:1px solid var(--card-border);
+  }
+  .conf-cell.hit{
+    background:var(--red-dark);
+    border-color:#6b1524;
+  }
+  .conf-cell.miss{
+    background:var(--bg-alt);
+  }
+  .conf-cell .tag{
+    font-size:12px;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    color:var(--text-faint);
+    margin-bottom:6px;
+  }
+  .conf-cell.hit .tag{color:#ff6b85;}
+  .conf-cell h3{
+    font-size:16px;
+    margin:0 0 6px;
+  }
+  .conf-cell p{
+    font-size:13px;
+    margin:0;
+    color:var(--text-dim);
+  }
   @media (max-width:640px){
-    .grid, .compare, .three-col, .four-col, .learn-cards, ul.apps{
+    .grid, .compare, .three-col, .four-col, .learn-cards, ul.apps, .conf-matrix{
       grid-template-columns:1fr;
     }
     h1{font-size:32px;}
@@ -1375,13 +1410,456 @@
 
   <div class="divider"></div>
 
+  <!-- UNIDAD 3 HERO -->
+  <div class="section" style="margin-bottom:40px;">
+    <div class="accent-bar"></div>
+    <h1 style="font-size:36px;">Regresión y <span class="hl">Clasificación</span></h1>
+    <p class="subtitle" style="margin-bottom:0;">Predecir números y predecir categorías: los dos grandes trabajos del aprendizaje supervisado.</p>
+    <p class="section-tag" style="margin-top:10px;">■ Regresión y clasificación · Unidad 3</p>
+  </div>
+
+  <!-- AGENDA UNIDAD 3 -->
+  <div class="section">
+    <div class="section-tag">■ Agenda de la unidad 3</div>
+    <h2>Cuatro temas</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="num">01</div>
+        <h3>Regresión lineal</h3>
+        <p>Predecir valores continuos: precios, ventas, temperaturas.</p>
+      </div>
+      <div class="card">
+        <div class="num">02</div>
+        <h3>Clasificación</h3>
+        <p>Predecir categorías: sí o no, tipo de cliente, nivel de riesgo.</p>
+      </div>
+      <div class="card">
+        <div class="num">03</div>
+        <h3>Algoritmos básicos</h3>
+        <p>Regresión logística y árboles de decisión simples.</p>
+      </div>
+      <div class="card">
+        <div class="num">04</div>
+        <h3>Interpretación</h3>
+        <p>Métricas, coeficientes y errores para decidir si confiamos en el modelo.</p>
+      </div>
+    </div>
+    <div class="example-box">
+      <strong>En palabras simples:</strong> las cuatro partes forman un solo camino: primero reconocemos qué tipo de pregunta tenemos, luego elegimos un algoritmo para responderla y al final medimos cuánto se equivoca antes de usarlo.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- NUMERO O CATEGORIA -->
+  <div class="section">
+    <div class="section-tag">■ Antes de elegir un modelo</div>
+    <h2>¿Número o categoría?</h2>
+    <p>Ya sabemos, desde la Unidad 2, distinguir features (X) de target (Y). Ahora damos el siguiente paso: mirar qué <em>tipo</em> de valor es esa Y, porque de esa respuesta depende toda la familia de algoritmos que se puede usar.</p>
+
+    <div class="compare">
+      <div class="box">
+        <div class="label" style="color:#fff">¿Cuánto? → Regresión</div>
+        <div class="note" style="margin-bottom:8px;">La respuesta es un número que puede tomar cualquier valor dentro de un rango.</div>
+        <div class="note">Precio de una casa · Temperatura de mañana · Ventas del próximo mes</div>
+      </div>
+      <div class="box positive">
+        <div class="label">¿Cuál? → Clasificación</div>
+        <div class="note" style="color:#d8d8d8;margin-bottom:8px;">La respuesta es una etiqueta tomada de una lista cerrada de opciones.</div>
+        <div class="note" style="color:#d8d8d8;">¿Spam o no spam? · ¿Aprueba o reprueba? · ¿Cliente nuevo, frecuente o en riesgo?</div>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <strong>En palabras simples:</strong> esta es la primera decisión de cualquier proyecto. Si la respuesta puede ser 12.5 o 3 800, es regresión. Si sale de una lista cerrada de opciones, es clasificación.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECCION 1: REGRESION LINEAL -->
+  <div class="section">
+    <div class="section-tag">■ 1. Regresión lineal</div>
+    <h2>Una línea que resume la tendencia</h2>
+    <p>Piensa en un taxi: pagas un monto fijo al subir (el banderazo) y luego un precio por cada kilómetro. Si sabes cuántos kilómetros vas a recorrer, puedes estimar cuánto pagarás.</p>
+    <div class="pipeline-result">tarifa = banderazo + precio por kilómetro × kilómetros</div>
+    <p>Eso ya es un modelo de regresión lineal: una variable de entrada, una salida numérica y una relación en línea recta.</p>
+
+    <h3 class="sub">La fórmula, parte por parte</h3>
+    <div class="pipeline-result">valor estimado = punto de partida + pendiente × dato conocido</div>
+    <div class="four-col">
+      <div class="card">
+        <h3>Valor estimado</h3>
+        <p>Lo que queremos predecir. En el taxi: la tarifa.</p>
+      </div>
+      <div class="card">
+        <h3>Punto de partida</h3>
+        <p>El resultado cuando el dato conocido vale cero. En el taxi: el banderazo.</p>
+      </div>
+      <div class="card">
+        <h3>Pendiente</h3>
+        <p>Cuánto cambia el resultado por cada unidad extra. En el taxi: el precio por kilómetro.</p>
+      </div>
+      <div class="card">
+        <h3>Dato conocido</h3>
+        <p>La información que sí tenemos. En el taxi: los kilómetros.</p>
+      </div>
+    </div>
+    <div class="example-box">
+      <strong>En palabras simples:</strong> toda regresión lineal tiene esta forma. La computadora no inventa la fórmula: solo busca los dos números, el punto de partida y la pendiente, que mejor se ajustan a los datos. Es la misma idea que Y = m·X + b vista en la Unidad 2 — aquí le damos nombre a cada parte.
+    </div>
+
+    <h3 class="sub">¿Cómo encuentra la mejor línea?</h3>
+    <div class="flow-steps">
+      <div class="flow-step">1. Traza una línea candidata</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">2. Mide el residuo de cada punto</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">3. Eleva cada residuo al cuadrado y suma</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">4. Elige la línea con la suma más pequeña</div>
+    </div>
+    <div class="example-box">
+      <strong>Mínimos cuadrados:</strong> el <em>residuo</em> es la distancia vertical de cada punto real a la línea — el error de esa predicción. Ninguna línea pasa por todos los puntos, así que siempre hay errores. Se elevan al cuadrado para que los errores positivos y negativos no se cancelen entre sí y para que los errores grandes pesen más; la mejor línea es la que, al sumar todos esos cuadrados, se equivoca menos en conjunto.
+    </div>
+
+    <h3 class="sub">Regresión múltiple: más de una pista</h3>
+    <p>La misma idea, pero con varias X a la vez: cada feature aporta su propio coeficiente.</p>
+    <div class="pipeline-result" style="font-size:14px;">precio = punto de partida + efecto por m² × m² + efecto por habitación × habitaciones + efecto por año × antigüedad</div>
+    <table>
+      <tr><th>Variable</th><th>Coeficiente</th><th>Cómo se lee</th></tr>
+      <tr><td>Metros cuadrados</td><td>+1,200</td><td>Cada m² extra suma unos $1,200 al precio</td></tr>
+      <tr><td>Habitaciones</td><td>+8,000</td><td>Cada habitación extra suma unos $8,000</td></tr>
+      <tr><td>Antigüedad (años)</td><td>−1,500</td><td>Cada año de antigüedad resta unos $1,500</td></tr>
+    </table>
+    <div class="example-box">
+      Cada coeficiente dice cuánto cambia el precio si esa característica aumenta en 1 <strong>y las demás se quedan igual</strong>. El signo indica si sube o baja. Valores ilustrativos.
+    </div>
+
+    <h3 class="sub">Manos a la obra: en Colab, siempre los mismos 5 pasos</h3>
+    <div class="flow-steps">
+      <div class="flow-step">1 · Cargar datos</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">2 · Separar X y target</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">3 · Apartar datos de prueba</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">4 · Entrenar el modelo</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">5 · Predecir y evaluar</div>
+    </div>
+    <div class="card" style="font-family:'Courier New',monospace;font-size:13px;color:#d8d8d8;line-height:1.8;overflow-x:auto;">
+      from sklearn.linear_model import LinearRegression<br>
+      modelo = LinearRegression() &nbsp;# crear el modelo<br>
+      modelo.fit(km_entrenamiento, tarifas_entrenamiento) &nbsp;# aprender de viajes pasados<br>
+      tarifas_estimadas = modelo.predict(km_nuevos) &nbsp;# predecir viajes nuevos<br>
+      print(modelo.intercept_, modelo.coef_) &nbsp;# banderazo y precio por km
+    </div>
+    <div class="example-box">
+      <strong>En palabras simples:</strong> este patrón —crear, <code>fit</code>, <code>predict</code>— se repite con todos los modelos de scikit-learn que veremos en esta unidad. Lo único que cambia es el tipo de modelo que se importa.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECCION 2: CLASIFICACION -->
+  <div class="section">
+    <div class="section-tag">■ 2. Clasificación</div>
+    <h2>Clasificar es asignar una etiqueta</h2>
+    <p>Predecir a qué grupo o categoría pertenece cada caso. Por ejemplo, decidir si un correo es spam o si un cliente volverá.</p>
+
+    <div class="three-col">
+      <div class="card">
+        <div class="bar"></div>
+        <h3>Un correo</h3>
+        <p>Entrada. Etiqueta: Spam · No spam</p>
+      </div>
+      <div class="card">
+        <div class="bar"></div>
+        <h3>Un estudiante</h3>
+        <p>Entrada. Etiqueta: Aprueba · Reprueba</p>
+      </div>
+      <div class="card">
+        <div class="bar"></div>
+        <h3>Una transacción</h3>
+        <p>Entrada. Etiqueta: Normal · Fraude</p>
+      </div>
+    </div>
+    <div class="example-box">
+      <strong>En palabras simples:</strong> el modelo aprende de ejemplos que ya tienen su etiqueta, como correos que alguien marcó como spam. Así descubre las señales que distinguen a cada grupo y luego etiqueta casos nuevos.
+    </div>
+
+    <h3 class="sub">Binaria o multiclase</h3>
+    <div class="compare">
+      <div class="box">
+        <div class="label" style="color:#fff">Binaria</div>
+        <div class="note" style="margin-bottom:8px;">Dos opciones posibles, normalmente codificadas como 1 y 0.</div>
+        <div class="note">sí / no · 1 / 0 — spam, fraude, aprobación de crédito</div>
+      </div>
+      <div class="box positive">
+        <div class="label">Multiclase</div>
+        <div class="note" style="color:#d8d8d8;margin-bottom:8px;">Tres o más opciones; el modelo elige una de ellas.</div>
+        <div class="note" style="color:#d8d8d8;">bajo / medio / alto — especie de flor, nivel de riesgo, tipo de cliente</div>
+      </div>
+    </div>
+    <div class="example-box">
+      <strong>En palabras simples:</strong> muchos clasificadores primero calculan una probabilidad para cada opción, por ejemplo 87% spam, y después eligen la opción más probable. Binaria o multiclase, la idea es la misma.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECCION 3: ALGORITMOS BASICOS CLASIFICACION -->
+  <div class="section">
+    <div class="section-tag">■ 3. Algoritmos básicos de clasificación</div>
+    <h2>Regresión logística y árboles de decisión</h2>
+    <p>Dos formas de llegar a una categoría: con porcentajes o con preguntas en cadena.</p>
+
+    <h3 class="sub">Algoritmo 1 · Regresión logística</h3>
+    <p>A pesar de su nombre, se usa para <strong>clasificar</strong>, no para predecir números. Combina las variables como una regresión lineal y pasa el resultado por la <em>función sigmoide</em>, que lo comprime entre 0 y 1.</p>
+    <div class="pipeline-result">probabilidad = curva S ( punto de partida + pendiente × horas de estudio )</div>
+    <div class="example-box">
+      La curva tiene forma de S porque una probabilidad nunca baja de 0% ni pasa de 100%. Una recta no serviría aquí — daría probabilidades negativas o mayores a 1.
+    </div>
+
+    <h3 class="sub">Del porcentaje a la decisión: el umbral</h3>
+    <table class="mini">
+      <tr><th>Horas de estudio</th><th>Probabilidad de aprobar</th><th>Decisión (umbral 0.5)</th></tr>
+      <tr><td>2</td><td>0.05</td><td>Reprueba</td></tr>
+      <tr><td>4</td><td>0.27</td><td>Reprueba</td></tr>
+      <tr><td>6</td><td>0.73</td><td>Aprueba</td></tr>
+      <tr><td>8</td><td>0.95</td><td>Aprueba</td></tr>
+    </table>
+    <div class="example-box">
+      <strong>El modelo da un porcentaje, pero al final necesitamos un sí o un no.</strong> El umbral es la línea de corte: por encima del 50% decimos "aprueba", por debajo, "reprueba". Si bajamos el umbral, el modelo marca más casos como positivos — detecta más, pero también se equivoca más. En fraude o salud suele convenir un umbral más bajo para no dejar pasar casos.
+    </div>
+
+    <h3 class="sub">Algoritmo 2 · Árbol de decisión</h3>
+    <p>Se sigue el camino desde arriba: cada respuesta lleva a otra pregunta, hasta llegar a una hoja con la decisión.</p>
+    <div class="card" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px;">
+      <div style="display:flex;align-items:center;gap:14px;"><div class="num">P1</div><strong>¿Ingreso mensual mayor a $1,000?</strong></div>
+      <div style="font-size:13px;text-align:right;">No → <span style="color:#ff6b85;font-weight:700;">Rechazar crédito</span> &nbsp;·&nbsp; Sí → siguiente pregunta</div>
+    </div>
+    <div class="card" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;">
+      <div style="display:flex;align-items:center;gap:14px;"><div class="num">P2</div><strong>¿Tiene deudas atrasadas?</strong></div>
+      <div style="font-size:13px;text-align:right;">Sí → <span style="color:#ff6b85;font-weight:700;">Rechazar crédito</span> &nbsp;·&nbsp; No → <span style="color:#5fd38d;font-weight:700;">Aprobar crédito</span></div>
+    </div>
+    <div class="example-box">
+      Cada pregunta divide los datos en grupos más parecidos entre sí. Las hojas —las cajas finales— contienen la predicción. Es como el juego de las 20 preguntas: el algoritmo elige, en cada paso, la pregunta que mejor separa los datos.
+    </div>
+
+    <h3 class="sub">Hiperparámetros: controlar el tamaño del árbol</h3>
+    <div class="three-col">
+      <div class="card">
+        <div class="bar"></div>
+        <h3>Profundidad máxima</h3>
+        <p>Cuántas preguntas seguidas puede hacer. Poca profundidad da un modelo simple; mucha lo hace memorizar.</p>
+      </div>
+      <div class="card">
+        <div class="bar"></div>
+        <h3>Mínimo de casos por hoja</h3>
+        <p>Cuántos ejemplos debe tener como mínimo cada respuesta final. Evita reglas basadas en uno o dos casos raros.</p>
+      </div>
+      <div class="card">
+        <div class="bar"></div>
+        <h3>Forma de medir cada pregunta</h3>
+        <p>El cálculo que usa el algoritmo para elegir la pregunta que mejor separa los grupos.</p>
+      </div>
+    </div>
+    <div class="example-box">
+      <strong>En palabras simples:</strong> estos límites los decide la persona antes de entrenar, no el modelo. Un buen punto de partida es una profundidad de 3 preguntas; luego se revisa con los datos de prueba si conviene más o menos. Un árbol sin límite puede crecer hasta tener una hoja por cada ejemplo: acierta el 100% en entrenamiento y falla con datos nuevos — el mismo sobreajuste que vimos en la Unidad 2.
+    </div>
+
+    <h3 class="sub">Tres algoritmos, lado a lado</h3>
+    <table>
+      <tr><th>Algoritmo</th><th>Qué predice</th><th>Ventaja</th><th>Cuidado</th></tr>
+      <tr><td>Regresión lineal</td><td>Un número continuo</td><td>Fácil de interpretar con sus coeficientes</td><td>Supone una relación en línea recta; sensible a valores atípicos</td></tr>
+      <tr><td>Regresión logística</td><td>Una probabilidad y una categoría</td><td>Rápida y entrega probabilidades</td><td>Separa las clases con fronteras lineales</td></tr>
+      <tr><td>Árbol de decisión</td><td>Una categoría o un número</td><td>Reglas visibles; no requiere escalar datos</td><td>Se sobreajusta si crece demasiado</td></tr>
+    </table>
+    <div class="example-box">
+      <strong>En palabras simples:</strong> no hay un algoritmo ganador. Se elige según la pregunta: para un número, regresión lineal; para una categoría con su probabilidad, logística; para reglas fáciles de explicar, un árbol. (Los árboles también pueden hacer regresión, con <code>DecisionTreeRegressor</code>.)
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- SECCION 4: INTERPRETACION -->
+  <div class="section">
+    <div class="section-tag">■ 4. Interpretación de resultados</div>
+    <h2>Un modelo solo es útil si sabemos cuánto se equivoca</h2>
+    <p>Predecir es fácil; saber si podemos confiar en la predicción es el trabajo real. Por eso se dedica tanto tiempo a leer métricas, coeficientes y errores antes de tomar una decisión con un modelo.</p>
+
+    <h3 class="sub">Regresión: ¿qué tan lejos quedamos?</h3>
+    <div class="three-col">
+      <div class="card">
+        <div class="bar"></div>
+        <h3>Error promedio (MAE)</h3>
+        <p>En promedio, cuánto nos equivocamos, en las mismas unidades de lo que predecimos. Ej.: error de 12 → fallamos por 12 unidades.</p>
+      </div>
+      <div class="card">
+        <div class="bar"></div>
+        <h3>Error con castigo (RMSE)</h3>
+        <p>Parecido al error promedio, pero pesa más los errores grandes. Si es mucho mayor que el MAE, hay errores grandes sueltos.</p>
+      </div>
+      <div class="card">
+        <div class="bar"></div>
+        <h3>Porcentaje explicado (R²)</h3>
+        <p>Qué parte de los cambios en el resultado logra explicar el modelo. 1 = perfecto · 0 = igual que adivinar el promedio.</p>
+      </div>
+    </div>
+    <div class="example-box">
+      <strong>En palabras simples:</strong> las tres se calculan con datos de prueba y se leen juntas — ninguna basta por sí sola. MAE y RMSE se interpretan en las unidades del problema (colones, grados, kWh); R² se interpreta como qué tan cerca está de 1.
+    </div>
+
+    <h3 class="sub">Cómo leer los coeficientes</h3>
+    <div class="compare">
+      <div class="box">
+        <div class="label" style="color:#fff">Signo</div>
+        <div class="note" style="margin-bottom:8px;">Positivo: cuando el dato de entrada sube, la predicción sube. Negativo: baja.</div>
+        <div class="note">tarifa = 2.5 + 0.8 × km → cada km extra suma 0.8 a la tarifa. Ejemplo: 10 km cuesta 2.5 + 0.8×10 = 10.5</div>
+      </div>
+      <div class="box positive">
+        <div class="label">Tamaño</div>
+        <div class="note" style="color:#d8d8d8;margin-bottom:8px;">Depende de las unidades; compara coeficientes solo si los datos están en la misma escala.</div>
+        <div class="note" style="color:#d8d8d8;">En logística, un coeficiente positivo aumenta la probabilidad de la respuesta "sí".</div>
+      </div>
+    </div>
+    <div class="example-box">
+      <strong>Asociación, no causa:</strong> un coeficiente describe una relación en los datos; por sí solo no prueba que una cosa cause la otra — el mismo matiz que vimos con "correlación no es causa" en la Unidad 2.
+    </div>
+
+    <h3 class="sub">Clasificación: la matriz de confusión</h3>
+    <p>Ejemplo: filtro de spam.</p>
+    <div class="conf-matrix">
+      <div class="conf-cell hit">
+        <div class="tag">Real: spam · Predicho: spam</div>
+        <h3>Verdadero positivo</h3>
+        <p>Era spam y el modelo lo detectó.</p>
+      </div>
+      <div class="conf-cell miss">
+        <div class="tag">Real: spam · Predicho: no spam</div>
+        <h3>Falso negativo</h3>
+        <p>Era spam y se le escapó.</p>
+      </div>
+      <div class="conf-cell miss">
+        <div class="tag">Real: no spam · Predicho: spam</div>
+        <h3>Falso positivo</h3>
+        <p>Correo legítimo enviado a spam.</p>
+      </div>
+      <div class="conf-cell hit">
+        <div class="tag">Real: no spam · Predicho: no spam</div>
+        <h3>Verdadero negativo</h3>
+        <p>Correo legítimo que llegó bien.</p>
+      </div>
+    </div>
+    <div class="example-box">
+      <strong>En palabras simples:</strong> los aciertos son verdadero positivo y verdadero negativo. Los dos errores no pesan igual: perder un correo importante en spam (falso positivo) suele molestar más que recibir un spam de vez en cuando (falso negativo) — o al revés, según el problema.
+    </div>
+
+    <h3 class="sub">Cuatro métricas de clasificación</h3>
+    <table>
+      <tr><th>Métrica</th><th>Cómo se calcula</th><th>Pregunta que responde</th><th>Úsala cuando…</th></tr>
+      <tr><td>Exactitud</td><td>Aciertos ÷ total de casos</td><td>¿Qué porcentaje acertó en total?</td><td>Las clases están balanceadas</td></tr>
+      <tr><td>Precisión</td><td>Detectados bien ÷ todo lo marcado como positivo</td><td>De lo que marcó como positivo, ¿cuánto lo era?</td><td>Un falso positivo es costoso</td></tr>
+      <tr><td>Recall</td><td>Detectados bien ÷ todos los positivos reales</td><td>De los positivos reales, ¿cuántos encontró?</td><td>Un falso negativo es costoso</td></tr>
+      <tr><td>F1</td><td>Media armónica de precisión y recall</td><td>¿Hay equilibrio entre ambas?</td><td>Las clases están desbalanceadas</td></tr>
+    </table>
+    <div class="example-box">
+      <strong>En palabras simples:</strong> todas salen de la matriz de confusión. Elige la métrica según qué error sea más costoso en tu problema. En scikit-learn, <code>classification_report()</code> las muestra juntas para cada clase.
+    </div>
+
+    <h3 class="sub">Atención: la trampa de la exactitud</h3>
+    <div class="probbar-wrap">
+      <div class="probbar-row">
+        <div class="probbar-label"><span>Exactitud del modelo "siempre normal"</span><strong>99%</strong></div>
+        <div class="probbar-track"><div class="probbar-fill" style="width:99%;"></div></div>
+      </div>
+      <div class="probbar-row">
+        <div class="probbar-label"><span>Fraudes detectados</span><strong>0%</strong></div>
+        <div class="probbar-track"><div class="probbar-fill dim" style="width:0%;"></div></div>
+      </div>
+    </div>
+    <div class="example-box">
+      Si solo 1 de cada 100 transacciones es fraude, un modelo que siempre responde "normal" acierta el 99% de las veces — y detecta cero fraudes. <strong>Con clases desbalanceadas, revisa siempre la matriz de confusión y el recall de la clase minoritaria.</strong> Un modelo puede tener un número alto y aun así no servir: siempre pregunta si acierta en los casos que de verdad importan.
+    </div>
+
+    <h3 class="sub">Generalización: subajuste, buen ajuste, sobreajuste</h3>
+    <div class="three-col">
+      <div class="card">
+        <div class="bar"></div>
+        <h3>Subajuste</h3>
+        <p>Modelo demasiado simple: no captura el patrón.</p>
+        <div class="pipeline-result" style="margin:14px 0 0;font-size:13px;">entrenamiento 0.62 · prueba 0.60</div>
+      </div>
+      <div class="card">
+        <div class="bar"></div>
+        <h3>Buen ajuste</h3>
+        <p>Aprende el patrón y generaliza a datos nuevos.</p>
+        <div class="pipeline-result" style="margin:14px 0 0;font-size:13px;">entrenamiento 0.88 · prueba 0.85</div>
+      </div>
+      <div class="card">
+        <div class="bar"></div>
+        <h3>Sobreajuste</h3>
+        <p>Memorizó los datos, incluido el ruido.</p>
+        <div class="pipeline-result" style="margin:14px 0 0;font-size:13px;">entrenamiento 1.00 · prueba 0.71</div>
+      </div>
+    </div>
+    <div class="example-box">
+      <strong>En palabras simples:</strong> un buen modelo saca notas parecidas en la práctica (entrenamiento) y en el examen (prueba). Si le va perfecto en la práctica y mal en el examen, memorizó. La señal de alarma es una gran diferencia entre ambos números; con árboles, esa diferencia crece si se aumenta demasiado la profundidad. Valores ilustrativos.
+    </div>
+
+    <h3 class="sub">El flujo completo de un proyecto</h3>
+    <div class="flow-steps">
+      <div class="flow-step">1 · Pregunta<br><span style="color:var(--text-faint);font-size:12px;">¿Número o categoría?</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">2 · Datos<br><span style="color:var(--text-faint);font-size:12px;">Reunir y revisar</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">3 · Preparar<br><span style="color:var(--text-faint);font-size:12px;">Limpiar, separar X/Y</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">4 · Entrenar<br><span style="color:var(--text-faint);font-size:12px;">Apartar prueba y ajustar</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">5 · Evaluar<br><span style="color:var(--text-faint);font-size:12px;">Métricas con datos de prueba</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">6 · Decidir<br><span style="color:var(--text-faint);font-size:12px;">Explicar y actuar</span></div>
+    </div>
+    <div class="example-box">
+      <strong>En palabras simples:</strong> la interpretación cierra el ciclo. Si el resultado no sirve para tomar una decisión, se vuelve a la pregunta o a los datos — los proyectos reales dan varias vueltas antes de funcionar bien. Este flujo retoma y completa el de la Unidad 1, ahora con la etapa de interpretación explícita.
+    </div>
+
+    <h3 class="sub">Reto de la unidad: tu propio modelo, explicado en 5 minutos</h3>
+    <div class="four-col">
+      <div class="card">
+        <h3>Pregunta clara</h3>
+        <p>¿Regresión o clasificación? Justifícalo.</p>
+      </div>
+      <div class="card">
+        <h3>Dos modelos</h3>
+        <p>Entrénalos en Colab con datos de prueba separados.</p>
+      </div>
+      <div class="card">
+        <h3>Métrica elegida</h3>
+        <p>Explica por qué es la adecuada para tu problema.</p>
+      </div>
+      <div class="card">
+        <h3>Interpretación</h3>
+        <p>Cuenta en lenguaje simple qué significan los resultados.</p>
+      </div>
+    </div>
+    <div class="example-box">
+      <strong>En palabras simples:</strong> lo que más cuenta no es que el modelo acierte mucho, sino que puedas explicar con palabras sencillas por qué confiar o no confiar en él.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
   <!-- CIERRE -->
   <div class="section">
     <div class="closing">
       <div class="accent-bar"></div>
       <div class="section-tag" style="text-align:center;">■ Próximos pasos</div>
       <h2>¿Preguntas antes de pasar a la práctica?</h2>
-      <p>Repasamos qué es el Machine Learning, la diferencia entre aprendizaje supervisado y no supervisado, el flujo de un proyecto y cómo distinguir features (X) de target (Y); luego bajamos un nivel más: qué es un modelo predictivo, los tres algoritmos básicos (regresión lineal, árbol de decisión y KNN) y por qué hay que preparar bien los datos antes de entrenar. Con esa base, en la siguiente sesión bajamos todo esto a código: Actividad 1 (clasificación) y Actividad 2 (clustering).</p>
+      <p>Repasamos qué es el Machine Learning, la diferencia entre aprendizaje supervisado y no supervisado, el flujo de un proyecto y cómo distinguir features (X) de target (Y); luego bajamos un nivel más con el concepto de modelo predictivo, los tres algoritmos básicos (regresión lineal, árbol de decisión y KNN) y la preparación de datos. Con la Unidad 3 profundizamos en los dos grandes trabajos del aprendizaje supervisado —regresión y clasificación—, sumando regresión logística, hiperparámetros de árboles y las métricas (MAE, RMSE, R², matriz de confusión, precisión, recall, F1) que permiten decidir si un modelo es confiable. Con esa base, en la siguiente sesión seguimos bajando todo esto a código, evaluando y ajustando modelos propios en Colab.</p>
     </div>
   </div>
 
