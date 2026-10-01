@@ -162,6 +162,24 @@
         </div>
       </div>
     </div>
+    <div class="card">
+  <div class="card-label">Examen del módulo (Notebook)</div>
+  <div class="card-toolbar">
+    <div class="status" id="status-examen-nb"><span class="led"></span> Cargando…</div>
+    <div class="toolbar-actions">
+      <label class="btn" for="file-examen-nb">Cargar manualmente</label>
+      <input type="file" id="file-examen-nb">
+      <a class="btn" id="download-examen-nb" style="display:none;">Descargar</a>
+    </div>
+  </div>
+  <div class="viewer" id="viewer-examen-nb">
+    <div class="empty-state">
+      <div class="icon">⏳</div>
+      <strong>Cargando recurso…</strong>
+      <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+    </div>
+  </div>
+</div>
   </section>
 
   <!-- ===================== PANEL 2: IA y el Freno Regulatorio ===================== -->
@@ -475,6 +493,7 @@
   setupResource('ml-intro', 'Machine_Learning/Introduccion_al_Machine_Learning.html');
   setupResource('ml-ejemplo', 'Machine_Learning/ejemploML.ipynb');
   setupResource('ia-freno', 'Machine_Learning/ia-freno-trump.html');
+  setupResource('examen-nb', 'Machine_Learning/EfrainRojas_ExamenML.ipynb');
   /** @returns {void} */
 function onEmbedLoad() {
   setStatus('status-examen', 'ok', 'Examen cargado');
