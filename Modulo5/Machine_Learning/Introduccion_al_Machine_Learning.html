@@ -90,6 +90,10 @@ table.mini{font-size:13px;}
 .slide-badge{position:absolute;top:8px;right:0;font-family:'Courier New',monospace;font-size:12px;color:var(--text-faint);border:1px solid var(--card-border);border-radius:4px;padding:3px 8px;}
 .deck-hero{margin-bottom:44px;}
 .deck-hero .subtitle{margin-bottom:0;}
+.intro-source{background:var(--bg-alt);border:1px solid var(--card-border);border-left:4px solid var(--red);border-radius:8px;padding:22px 24px;margin:18px 0 34px;}
+.intro-source h2{margin-bottom:12px;}
+.intro-source p{margin:8px 0;}
+
 @media (max-width:640px){
   .grid, .compare, .three-col, .four-col, .learn-cards, ul.apps, .conf-matrix{grid-template-columns:1fr;}
   h1{font-size:32px;}
@@ -160,6 +164,10 @@ body{padding-top:76px;}
 <div class="sidebar-sub">Unidades 1 · 2 · 3 · 4 · 5<br/>Analítica predictiva aplicada</div>
 </div>
 <nav class="sidebar-nav">
+<div class="side-unit">
+<a class="side-link" data-target="presentacion-inicial" href="#presentacion-inicial">Presentación inicial</a>
+<a class="side-link" data-target="indice-general" href="#indice-general">Índice general</a>
+</div>
 <div class="side-unit"><div class="side-unit-title">■ UNIDAD 1 · INTRODUCCIÓN</div>
 <a class="side-link" data-target="unidad-1" href="#unidad-1">Portada</a>
 <a class="side-link" data-target="u1-section-2" href="#u1-section-2">Agenda</a>
@@ -303,6 +311,12 @@ body{padding-top:76px;}
 </nav>
 </aside>
 <div class="wrap">
+<div class="section intro-source" id="presentacion-inicial">
+<div class="section-tag">■ PRESENTACIÓN INICIAL</div>
+<h2>Material de referencia</h2>
+<p>Este material en formato HTML fue elaborado tomando como base las presentaciones del <strong>Ing. Berman Alonso Moya Umaña</strong>, correspondientes al <strong>Módulo 5: Introducción al ML</strong>, del programa <strong>Fundamentos de Ciencias de Datos</strong>.</p>
+<p>El contenido fue organizado en un formato web para facilitar la lectura, navegación y consulta de las cinco unidades, manteniendo como referencia la estructura y los temas desarrollados en las presentaciones.</p>
+</div>
 <div class="section" id="indice-general">
 <div class="section-tag">■ ÍNDICE GENERAL</div>
 <h2>Machine Learning Aplicado · Unidades 1–5</h2>
@@ -1322,7 +1336,7 @@ print(modelo.intercept_, modelo.coef_)  # banderazo y precio por kilómetro
 <h1>Casos prácticos<br/><span class="hl">empresariales</span></h1>
 <p class="subtitle">Del modelo a la decisión: cómo las empresas ganan (o ahorran) dinero con ML.</p>
 <p class="section-tag" style="margin-top:6px;">■ Machine Learning · Unidad 5 · 32 contenidos</p>
-<p class="hero-meta">Ing. Berman Moya Umaña</p></div>
+</div>
 <div class="section" id="u5-section-1">
 <div class="section-tag">■ Unidad 5 · Casos prácticos empresariales</div>
 <h2>Casos prácticos empresariales</h2>
