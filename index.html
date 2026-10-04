@@ -30,54 +30,54 @@
     min-height:100vh;
   }
   .top-bar{
-  padding:18px 24px 0;
-}
-.top-link{
-  display:inline-flex;
-  align-items:center;
-  gap:10px;
-  padding:8px 16px 8px 8px;
-  background:var(--panel);
-  color:var(--ink);
-  border:1px solid var(--border);
-  border-radius:999px;
-  font-size:13px;
-  font-weight:600;
-  text-decoration:none;
-  box-shadow:0 1px 2px rgba(15,23,42,.06);
-  transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-}
-.top-link .icon{
-  width:28px;
-  height:28px;
-  border-radius:50%;
-  background:var(--ink);
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-shrink:0;
-  transition:background .15s ease;
-}
-.top-link .icon svg{width:16px;height:16px;fill:currentColor;}
-.top-link .arrow{
-  color:var(--ink-soft);
-  transition:transform .15s ease, color .15s ease;
-}
-.top-link:hover{
-  transform:translateY(-1px);
-  border-color:var(--m6);
-  box-shadow:0 6px 16px -8px rgba(79,70,229,.45);
-}
-.top-link:hover .icon{background:var(--m6);}
-.top-link:hover .arrow{transform:translateX(3px);color:var(--m6);}
-.top-link:focus-visible{outline:2px solid var(--m6);outline-offset:3px;}
+    padding:18px 24px 0;
+  }
+  .top-link{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:8px 16px 8px 8px;
+    background:var(--panel);
+    color:var(--ink);
+    border:1px solid var(--border);
+    border-radius:999px;
+    font-size:13px;
+    font-weight:600;
+    text-decoration:none;
+    box-shadow:0 1px 2px rgba(15,23,42,.06);
+    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+  }
+  .top-link .icon{
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    background:var(--ink);
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-shrink:0;
+    transition:background .15s ease;
+  }
+  .top-link .icon svg{width:16px;height:16px;fill:currentColor;}
+  .top-link .arrow{
+    color:var(--ink-soft);
+    transition:transform .15s ease, color .15s ease;
+  }
+  .top-link:hover{
+    transform:translateY(-1px);
+    border-color:var(--m6);
+    box-shadow:0 6px 16px -8px rgba(79,70,229,.45);
+  }
+  .top-link:hover .icon{background:var(--m6);}
+  .top-link:hover .arrow{transform:translateX(3px);color:var(--m6);}
+  .top-link:focus-visible{outline:2px solid var(--m6);outline-offset:3px;}
   header{
-  padding:36px 24px 30px;
-  text-align:center;
-  border-bottom:1px solid var(--border);
-  background:var(--panel);
-}
+    padding:36px 24px 30px;
+    text-align:center;
+    border-bottom:1px solid var(--border);
+    background:var(--panel);
+  }
   header h1{
     margin:0 0 8px;
     font-size:clamp(24px,3.4vw,32px);
@@ -100,6 +100,16 @@
     grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
     gap:18px;
   }
+
+  /* Color de cada módulo definido en la propia tarjeta */
+  #m1{--accent:var(--m1);--accent-soft:var(--m1-soft);}
+  #m2{--accent:var(--m2);--accent-soft:var(--m2-soft);}
+  #m3{--accent:var(--m3);--accent-soft:var(--m3-soft);}
+  #m4{--accent:var(--m4);--accent-soft:var(--m4-soft);}
+  #m5{--accent:var(--m5);--accent-soft:var(--m5-soft);}
+  #m6{--accent:var(--m6);--accent-soft:var(--m6-soft);}
+  #m7{--accent:var(--m7);--accent-soft:var(--m7-soft);}
+
   .card{
     position:relative;
     display:flex;
@@ -111,13 +121,18 @@
     padding:22px;
     text-decoration:none;
     color:var(--ink);
-    transition:transform .15s ease, border-color .15s ease, box-shadow .15s ease;
+    transition:transform .15s ease, border-color .15s ease, box-shadow .15s ease, background .15s ease;
   }
   .card.active{cursor:pointer;}
   .card.active:hover{
     transform:translateY(-2px);
-    border-color:var(--accent);
-    box-shadow:0 8px 20px -12px rgba(15,23,42,.25);
+    border-color:var(--accent);       /* borde con el color del módulo */
+    background:var(--accent-soft);    /* fondo suave del módulo */
+    box-shadow:0 10px 24px -12px var(--accent); /* sombra con el color del módulo */
+  }
+  .card.active:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
   }
   .card.locked{
     cursor:default;
@@ -138,6 +153,11 @@
     background:var(--accent-soft);
     color:var(--accent);
     flex-shrink:0;
+    transition:background .15s ease, color .15s ease;
+  }
+  .card.active:hover .num{
+    background:var(--accent);         /* número se rellena con el color */
+    color:#fff;
   }
   .card.locked .num{background:#f1f5f9;color:var(--ink-soft);}
   .badge{
@@ -202,67 +222,67 @@
 
     <a class="card active" id="m1" href="Modulo1/index.html">
       <div class="card-top">
-        <span class="num" style="--accent:var(--m1);--accent-soft:var(--m1-soft);">01</span>
+        <span class="num">01</span>
         <span class="badge completado">Completado</span>
       </div>
       <h2>Fundamentos de Ciencias de Datos</h2>
       <div class="hours">40 horas</div>
-      <span class="go" style="--accent:var(--m1);">Ver recursos →</span>
+      <span class="go">Ver recursos →</span>
     </a>
 
     <a class="card active" id="m2" href="Modulo2/index.html">
       <div class="card-top">
-        <span class="num" style="--accent:var(--m2);--accent-soft:var(--m2-soft);">02</span>
+        <span class="num">02</span>
         <span class="badge completado">Completado</span>
       </div>
       <h2>Manejo y Preparación de Datos</h2>
       <div class="hours">60 horas</div>
-      <span class="go" style="--accent:var(--m2);">Ver recursos →</span>
+      <span class="go">Ver recursos →</span>
     </a>
 
     <a class="card active" id="m3" href="Modulo3/index.html">
       <div class="card-top">
-        <span class="num" style="--accent:var(--m3);--accent-soft:var(--m3-soft);">03</span>
+        <span class="num">03</span>
         <span class="badge completado">Completado</span>
       </div>
       <h2>Análisis Exploratorio de Datos (EDA)</h2>
       <div class="hours">60 horas</div>
-      <span class="go" style="--accent:var(--m3);">Ver recursos →</span>
+      <span class="go">Ver recursos →</span>
     </a>
 
     <a class="card active" id="m4" href="Modulo4/index.html">
       <div class="card-top">
-        <span class="num" style="--accent:var(--m4);--accent-soft:var(--m4-soft);">04</span>
+        <span class="num">04</span>
         <span class="badge completado">Completado</span>
       </div>
       <h2>Visualización y Business Intelligence</h2>
       <div class="hours">60 horas</div>
-      <span class="go" style="--accent:var(--m4);">Ver recursos →</span>
+      <span class="go">Ver recursos →</span>
     </a>
 
     <a class="card active" id="m5" href="Modulo5/index.html">
       <div class="card-top">
-        <span class="num" style="--accent:var(--m5);--accent-soft:var(--m5-soft);">05</span>
+        <span class="num">05</span>
         <span class="badge completado">Completado</span>
       </div>
       <h2>Introducción al Machine Learning Aplicado</h2>
       <div class="hours">50 horas</div>
-      <span class="go" style="--accent:var(--m5);">Ver recursos →</span>
+      <span class="go">Ver recursos →</span>
     </a>
 
     <a class="card active" id="m6" href="Modulo6/index.html">
       <div class="card-top">
-        <span class="num" style="--accent:var(--m6);--accent-soft:var(--m6-soft);">06</span>
+        <span class="num">06</span>
         <span class="badge progreso">En progreso</span>
       </div>
       <h2>Proyecto Integrador de Análisis de Datos</h2>
       <div class="hours">50 horas</div>
-      <span class="go" style="--accent:var(--m6);">Ver recursos →</span>
+      <span class="go">Ver recursos →</span>
     </a>
 
     <div class="card locked" id="m7">
       <div class="card-top">
-        <span class="num" style="--accent:var(--m7);--accent-soft:var(--m7-soft);">07</span>
+        <span class="num">07</span>
         <span class="badge proximo">Próximamente</span>
       </div>
       <h2>Habilidades Socioemocionales para el Análisis de Datos</h2>
