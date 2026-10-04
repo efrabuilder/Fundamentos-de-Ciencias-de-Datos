@@ -11,19 +11,21 @@
     --ink:#1e293b;
     --ink-soft:#64748b;
     --border:#e2e8f0;
-    --r0:#65a30d; --r0-soft:#f7fee7;
-    --r1:#0284c7; --r1-soft:#f0f9ff;
+
+    --mod-accent:#0284c7; /* color del módulo (cambia por módulo) */
+
+    /* Colores de cada recurso, en el orden de las pestañas */
+    --r0:var(--mod-accent); --r0-soft:#f0f9ff; /* 1º: mismo color del título del módulo */
+    --r1:#65a30d; --r1-soft:#f7fee7;
     --r2:#7c3aed; --r2-soft:#f5f3ff;
     --r3:#db2777; --r3-soft:#fdf2f8;
     --r4:#0d9488; --r4-soft:#f0fdfa;
     --r5:#ea580c; --r5-soft:#fff7ed;
     --r6:#4338ca; --r6-soft:#eef2ff;
     --r7:#b91c1c; --r7-soft:#fef2f2;
-    --r8:#0f766e; --r8-soft:#f0fdfa;
+    --r8:#ca8a04; --r8-soft:#fefce8;
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-
-    --mod-accent:#0284c7; /* cambia por módulo */
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -82,7 +84,7 @@
   .top-link:focus-visible{outline:2px solid var(--mod-accent);outline-offset:3px;}
 
   header{padding:20px 24px 22px;text-align:center;border-bottom:1px solid var(--border);background:var(--panel);}
-  header .eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--r1);margin-bottom:6px;}
+  header .eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--mod-accent);margin-bottom:6px;}
   header h1{margin:0 0 6px;font-size:clamp(20px,3vw,28px);letter-spacing:-0.01em;}
   header p{margin:0;color:var(--ink-soft);font-size:14px;}
   nav{display:flex;justify-content:center;gap:6px;padding:16px;flex-wrap:wrap;background:var(--panel);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;}
@@ -208,9 +210,9 @@
   </button>
   <!--
     Para agregar un nuevo recurso: copia un botón como el de arriba,
-    dale un id y data-target únicos (ej. tab-r8 / panel-r8), y crea abajo su
+    dale un id y data-target únicos (ej. tab-r9 / panel-r9), y crea abajo su
     <section class="panel"> correspondiente. También agrega su color de
-    acento en :root arriba (ej. --r8, --r8-soft) siguiendo el mismo patrón.
+    acento en :root arriba (ej. --r9, --r9-soft) siguiendo el mismo patrón.
   -->
 </nav>
 <main>
