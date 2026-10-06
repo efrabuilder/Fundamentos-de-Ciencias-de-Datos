@@ -89,7 +89,7 @@
   main{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
   .panel{display:none;}
   .panel.active{display:block;animation:fade .25s ease;}
-  /* el panel de recursos usa el color del módulo */
+  /* el panel 1 usa el color del módulo */
   #panel-r1{--accent:var(--r1);--accent-soft:var(--r1-soft);}
   @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
   .panel-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:16px;}
@@ -106,7 +106,7 @@
   .status.err .led{background:#dc2626;}
   .toolbar-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
   .btn{font-family:var(--sans);font-size:12.5px;font-weight:600;padding:7px 12px;border-radius:8px;border:1px solid var(--border);background:#ffffff;color:var(--ink);cursor:pointer;text-decoration:none;}
-  .btn:hover{border-color:var(--r1);color:var(--r1);}
+  .btn:hover{border-color:var(--ink-soft);}
   input[type=file]{display:none;}
   .viewer{min-height:420px;display:flex;align-items:center;justify-content:center;padding:0;background:#ffffff;}
   .viewer.empty{flex-direction:column;gap:10px;padding:60px 20px;color:var(--ink-soft);font-size:13.5px;text-align:center;}
@@ -137,7 +137,6 @@
   .nb-out img{max-width:100%;border-radius:8px;}
 
   .subgroup-title{margin:22px 0 10px;font-size:13.5px;font-weight:700;color:var(--r1);padding-bottom:6px;border-bottom:1px dashed var(--border);}
-  .subgroup-title:first-of-type{margin-top:0;}
 
   .empty-state{display:flex;flex-direction:column;align-items:center;gap:10px;padding:70px 20px;text-align:center;color:var(--ink-soft);}
   .empty-state .icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;background:var(--r1-soft);color:var(--r1);}
@@ -167,39 +166,37 @@
 </header>
 <nav>
   <button class="tab active" id="tab-r1" data-target="panel-r1">
-    <span class="dot"></span> Recursos
+    <span class="dot"></span> Del Dataset al KPI
   </button>
 </nav>
 <main>
-  <!-- ===================== PANEL 1: Recursos ===================== -->
+  <!-- ===================== PANEL 1: Del Dataset al KPI ===================== -->
   <section class="panel active" id="panel-r1">
     <div class="panel-head">
       <div>
-        <h2>Recursos</h2>
-        <div class="sub">Materiales del módulo — se irán agregando a medida que avance el curso</div>
+        <h2>Del Dataset al KPI</h2>
+        <div class="sub">Fases del proyecto, dataset y Kaggle, roles, KPIs y el Documento de Alcance del Proyecto</div>
       </div>
     </div>
 
-    <!-- ===== Unidad 1 ===== -->
-    <div class="subgroup-title">Unidad 1</div>
-
-    <!-- Recurso 1: Del Dataset al KPI -->
     <div class="card">
       <div class="card-label">Del Dataset al KPI</div>
       <div class="card-toolbar">
-        <div class="status" id="status-d1"><span class="led"></span> Buscando archivo…</div>
+        <div class="status" id="status-dataset-kpi"><span class="led"></span> Cargando…</div>
         <div class="toolbar-actions">
-          <label class="btn" for="file-d1">Cargar manualmente</label>
-          <input type="file" id="file-d1" accept=".html,.htm">
-          <a class="btn" id="download-d1" href="#" style="display:none;">Descargar</a>
+          <label class="btn" for="file-dataset-kpi">Cargar manualmente</label>
+          <input type="file" id="file-dataset-kpi">
+          <a class="btn" id="download-dataset-kpi" style="display:none;">Descargar</a>
         </div>
       </div>
-      <div class="viewer empty" id="viewer-d1">
-        <strong>Del Dataset al KPI</strong>
-        <span>Cargando el recurso de la Unidad 1…</span>
+      <div class="viewer" id="viewer-dataset-kpi">
+        <div class="empty-state">
+          <div class="icon">⏳</div>
+          <strong>Cargando recurso…</strong>
+          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+        </div>
       </div>
     </div>
-
   </section>
 
 </main>
@@ -462,10 +459,10 @@
     });
   }
   // ---------- Recursos del Módulo 6 ----------
-  // Unidad 1: Del Dataset al KPI
-  setupResource('d1', 'Unidad1/DelDatasetalKPI.html');
-  // Para agregar más recursos: crear otra tarjeta (card) en el panel con ids
-  // viewer-/status-/download-/file- y llamar a setupResource(id, "ruta/archivo").
+  setupResource('dataset-kpi', 'Unidad1/DelDatasetalKPI.html');
+  // Para agregar otro recurso: nueva pestaña (tab-r2) + panel (panel-r2) con sus
+  // colores --r2 y --r2-soft, y su setupResource al final, como en el Módulo 5.
 </script>
 </body>
+</html>
 </html>
