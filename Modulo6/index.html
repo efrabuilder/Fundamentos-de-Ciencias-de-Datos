@@ -249,10 +249,11 @@
     <div class="panel-head">
       <div>
         <h2>Pandas Cheat Sheet</h2>
-        <div class="sub">Hoja de referencia rápida de Pandas para cargar, limpiar, transformar y analizar datos</div>
+        <div class="sub">Hoja de referencia rápida de Pandas y notebook de Python con la práctica de limpieza de datos</div>
       </div>
     </div>
 
+    <!-- Tarjeta 1: hoja de referencia en HTML -->
     <div class="card">
       <div class="card-label">Pandas Cheat Sheet</div>
       <div class="card-toolbar">
@@ -264,6 +265,26 @@
         </div>
       </div>
       <div class="viewer" id="viewer-pandas">
+        <div class="empty-state">
+          <div class="icon">⏳</div>
+          <strong>Cargando recurso…</strong>
+          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tarjeta 2: libro de Python (notebook) debajo del HTML -->
+    <div class="card">
+      <div class="card-label">Limpieza de Datos (Notebook de Python)</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-limpieza"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <label class="btn" for="file-limpieza">Cargar manualmente</label>
+          <input type="file" id="file-limpieza">
+          <a class="btn" id="download-limpieza" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer" id="viewer-limpieza">
         <div class="empty-state">
           <div class="icon">⏳</div>
           <strong>Cargando recurso…</strong>
@@ -548,6 +569,7 @@
   setupResource('dataset-kpi', 'Unidad1/DelDatasetalKPI.html');
   setupResource('alcance', 'Unidad1/AlcancedeProyecto.html');
   setupResource('pandas', 'Unidad1/PandasCheatSheet.html');
+  setupResource('limpieza', 'Unidad1/LimpiezadeDatos.ipynb'); // notebook en el recurso de Pandas
   // Para agregar otro recurso: nueva pestaña (tab-r4) + panel (panel-r4) con sus
   // colores --r4 y --r4-soft, y su setupResource al final, como en el Módulo 5.
 </script>
