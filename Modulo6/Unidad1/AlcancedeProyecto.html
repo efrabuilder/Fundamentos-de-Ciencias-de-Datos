@@ -98,6 +98,8 @@
   .goal svg { width: 36px; height: 36px; color: var(--teal); }
   .goal h3 { font-family: var(--display); font-size: 1.2rem; color: var(--ink); margin-bottom: 4px; }
   .goal p { color: var(--muted); max-width: 36em; }
+  .goal .tag { display: inline-block; margin-bottom: 6px; font-size: 13px; font-weight: 600; padding: 1px 10px; border-radius: 3px; background: var(--ink); color: var(--white); }
+  .goal .tag.sec { background: #E6EBF2; color: #2B4262; }
 
   /* Datos */
   .datasets { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
@@ -132,6 +134,9 @@
   .kpi svg { width: 34px; height: 34px; color: var(--amber); }
   .kpi h3 { font-family: var(--display); font-size: 1.4rem; line-height: 1.15; margin-top: auto; padding-top: 28px; }
   .kpi p { margin-top: 8px; font-size: 15px; color: #B7C7DA; line-height: 1.5; }
+  .kpi .formula { margin-top: 14px; font-family: var(--mono); font-size: 13px; line-height: 1.45; background: rgba(255,255,255,.1); padding: 6px 10px; border-radius: 3px; }
+  .kpi .q { margin-top: 14px; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.18); font-size: 14.5px; line-height: 1.5; color: var(--white); }
+  .kpi .q span { display: block; font-size: 13px; color: #9DB1C8; margin-bottom: 2px; }
 
   /* Equipo */
   .team-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; }
@@ -227,7 +232,8 @@
       <h2>Planteamiento del problema<small>El dolor principal del negocio</small></h2>
       <div>
         <div class="prose">
-          <p>La aseguradora ha visto una baja en la venta de pólizas y acudió a nuestro equipo para identificar qué factor puede estar causando esa disminución en el sector.</p>
+          <p>La aseguradora ha visto disminuir la venta de pólizas de vida y no sabe qué factor lo explica. Nos pidió identificar la causa.</p>
+          <p>Nuestra hipótesis de trabajo es que el costo de los siniestros no se reparte por igual en el territorio. Mientras no se sepa dónde se concentra, la empresa no puede decidir en qué regiones captar primas ni a qué precio.</p>
         </div>
         <p class="problem-goal">Medir la siniestralidad por ubicación geográfica, identificar clusters de costo y definir una estrategia regional de adquisición de primas en Alemania.</p>
       </div>
@@ -239,24 +245,35 @@
       <h2>Objetivos del proyecto<small>Lo que esperamos lograr al finalizar</small></h2>
       <div class="goals">
         <article class="goal">
-          <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 33s11-9.2 11-17.5a11 11 0 0 0-22 0C7 23.8 18 33 18 33z"/><circle cx="18" cy="15.5" r="4"/></svg>
+          <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="13"/><path d="M23 13l-3.5 7.5L12 24l3.5-7.5z"/></svg>
           <div>
-            <h3>Calcular la siniestralidad promedio por región</h3>
-            <p>Encontrar las regiones del país que pueden representar un riesgo para la aseguradora.</p>
+            <span class="tag">Objetivo principal</span>
+            <h3>Proponer una estrategia regional de adquisición de primas</h3>
+            <p>Indicar a la gerencia en qué regiones de Alemania conviene captar más pólizas de vida y en cuáles conviene frenar, con base en la siniestralidad medida.</p>
           </div>
         </article>
         <article class="goal">
-          <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="13"/><path d="M18 10v8l5 3"/></svg>
+          <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 33s11-9.2 11-17.5a11 11 0 0 0-22 0C7 23.8 18 33 18 33z"/><circle cx="18" cy="15.5" r="4"/></svg>
           <div>
-            <h3>Entregar cada avance a tiempo</h3>
-            <p>Administrar el progreso del proyecto con buenas prácticas de trabajo en equipo y resolución de cada etapa.</p>
+            <span class="tag sec">Objetivo secundario</span>
+            <h3>Calcular la siniestralidad promedio por región e identificar clusters de costo</h3>
+            <p>Detectar las regiones que representan un mayor riesgo para la aseguradora y agruparlas según su costo.</p>
           </div>
         </article>
         <article class="goal">
           <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="6" width="12" height="10" rx="1.5"/><rect x="20" y="20" width="12" height="10" rx="1.5"/><path d="M16 11h6a4 4 0 0 1 4 4v5"/></svg>
           <div>
-            <h3>Elegir las variables correctas para unir las tablas</h3>
-            <p>Evaluar las variables adecuadas para un análisis correcto y una unión de tablas que permita avanzar sin reconsideraciones.</p>
+            <span class="tag sec">Objetivo secundario</span>
+            <h3>Definir las variables correctas para unir las tablas</h3>
+            <p>Elegir las llaves que conectan las pólizas con los municipios y comprobar que la unión no pierda registros, para avanzar sin tener que rehacer el trabajo.</p>
+          </div>
+        </article>
+        <article class="goal">
+          <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="13"/><path d="M18 10v8l5 3"/></svg>
+          <div>
+            <span class="tag sec">Objetivo secundario</span>
+            <h3>Entregar cada avance a tiempo</h3>
+            <p>Cumplir las fechas de cada etapa del proyecto, con trabajo en equipo según los roles asignados.</p>
           </div>
         </article>
       </div>
@@ -321,16 +338,22 @@
           <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="13"/><path d="M22 13.5c-.8-1.2-2.3-1.8-4-1.8-2.3 0-4 1.1-4 2.8 0 4 8.5 1.8 8.5 6 0 1.8-1.8 3-4.5 3-1.9 0-3.5-.7-4.3-2M18 9v3M18 24v3"/></svg>
           <h3>Impacto financiero</h3>
           <p>Costo de los siniestros para la aseguradora.</p>
+          <div class="formula">Σ monto de siniestros de vida, por región</div>
+          <div class="q"><span>Pregunta de negocio</span>¿Cuánto cuestan los siniestros de vida en cada región?</div>
         </article>
         <article class="kpi">
           <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 30V19M13 30V11M21 30V16M29 30V6"/></svg>
           <h3>Frecuencia de siniestros</h3>
           <p>Con qué frecuencia se usan las pólizas para reclamar.</p>
+          <div class="formula">N.º de siniestros / N.º de pólizas de vida</div>
+          <div class="q"><span>Pregunta de negocio</span>¿Qué proporción de las pólizas de vida termina en reclamación?</div>
         </article>
         <article class="kpi">
           <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 4l14 25H4L18 4z"/><path d="M18 14v7M18 25v.5"/></svg>
           <h3>Riesgo por región</h3>
           <p>Regiones donde la siniestralidad supone mayor riesgo.</p>
+          <div class="formula">Monto de siniestros / primas, por región</div>
+          <div class="q"><span>Pregunta de negocio</span>¿En qué regiones conviene frenar o reforzar la adquisición de primas?</div>
         </article>
       </div>
     </div>
