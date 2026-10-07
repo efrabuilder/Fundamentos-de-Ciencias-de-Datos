@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -44,12 +43,13 @@
   }
 
   /* =========================================================
-     HEADER — NUEVO DISEÑO
+     HEADER
      ========================================================= */
 
   header {
     position: relative;
     overflow: hidden;
+
     background:
       radial-gradient(
         circle at 50% -80%,
@@ -59,10 +59,13 @@
       linear-gradient(180deg, #111827 0%, #0f172a 100%);
 
     color: white;
+
     padding: 2.7rem 2rem 2.5rem;
+
     text-align: center;
 
     border-top: 3px solid #2563eb;
+
     border-bottom: 1px solid rgba(37, 99, 235, 0.35);
 
     box-shadow:
@@ -70,14 +73,17 @@
       inset 0 1px 0 rgba(255,255,255,0.04);
   }
 
-  /* Línea luminosa */
   header::before {
     content: "";
+
     position: absolute;
+
     top: 0;
     left: 50%;
+
     width: 520px;
     height: 3px;
+
     transform: translateX(-50%);
 
     background: linear-gradient(
@@ -90,6 +96,7 @@
     );
 
     filter: blur(0.2px);
+
     box-shadow:
       0 0 12px rgba(37, 99, 235, 0.9),
       0 0 35px rgba(37, 99, 235, 0.45);
@@ -97,14 +104,17 @@
     z-index: 1;
   }
 
-  /* Resplandor */
   header::after {
     content: "";
+
     position: absolute;
+
     width: 650px;
     height: 220px;
+
     top: -130px;
     left: 50%;
+
     transform: translateX(-50%);
 
     background: radial-gradient(
@@ -121,7 +131,9 @@
     z-index: 2;
 
     font-size: 2.35rem;
+
     font-weight: 800;
+
     letter-spacing: -0.8px;
 
     margin-bottom: 0.55rem;
@@ -132,6 +144,7 @@
 
   header h1::after {
     content: "";
+
     display: block;
 
     width: 55px;
@@ -142,7 +155,9 @@
     border-radius: 999px;
 
     background: #3b82f6;
-    box-shadow: 0 0 12px rgba(59,130,246,0.7);
+
+    box-shadow:
+      0 0 12px rgba(59,130,246,0.7);
   }
 
   header p {
@@ -150,9 +165,11 @@
     z-index: 2;
 
     font-size: 1rem;
+
     color: #cbd5e1;
 
     max-width: 720px;
+
     margin: 0 auto;
 
     line-height: 1.6;
@@ -163,8 +180,11 @@
     z-index: 2;
 
     display: flex;
+
     gap: 0.55rem;
+
     justify-content: center;
+
     flex-wrap: wrap;
 
     margin-top: 1.35rem;
@@ -182,6 +202,7 @@
     border-radius: 999px;
 
     font-size: 0.78rem;
+
     font-weight: 600;
 
     backdrop-filter: blur(8px);
@@ -200,23 +221,33 @@
     border-color: rgba(96,165,250,0.5);
   }
 
-  /* ===== LAYOUT ===== */
+  /* =========================================================
+     LAYOUT
+     ========================================================= */
 
   .container {
     max-width: 1200px;
+
     margin: 0 auto;
+
     padding: 2rem;
 
     display: grid;
+
     grid-template-columns: 240px 1fr;
+
     gap: 2rem;
   }
 
-  /* ===== SIDEBAR ===== */
+  /* =========================================================
+     SIDEBAR
+     ========================================================= */
 
   aside {
     position: sticky;
+
     top: 1.5rem;
+
     align-self: start;
 
     background: var(--card);
@@ -233,6 +264,7 @@
 
   aside h3 {
     font-size: 0.75rem;
+
     text-transform: uppercase;
 
     letter-spacing: 1px;
@@ -262,6 +294,7 @@
     text-decoration: none;
 
     font-size: 0.88rem;
+
     font-weight: 500;
 
     transition: all 0.15s;
@@ -269,14 +302,19 @@
 
   aside a:hover {
     background: var(--accent-soft);
+
     color: var(--accent);
   }
 
-  /* ===== MAIN ===== */
+  /* =========================================================
+     MAIN
+     ========================================================= */
 
   main {
     display: flex;
+
     flex-direction: column;
+
     gap: 1.5rem;
   }
 
@@ -297,11 +335,13 @@
 
   section h2 {
     font-size: 1.4rem;
+
     font-weight: 700;
 
     margin-bottom: 0.3rem;
 
     display: flex;
+
     align-items: center;
 
     gap: 0.6rem;
@@ -321,7 +361,9 @@
     padding-bottom: 1rem;
   }
 
-  /* ===== SNIPPET CARD ===== */
+  /* =========================================================
+     SNIPPETS
+     ========================================================= */
 
   .snippet {
     background: var(--card-soft);
@@ -359,6 +401,7 @@
 
   .snippet h4 {
     font-size: 0.95rem;
+
     font-weight: 700;
 
     margin-bottom: 0.5rem;
@@ -374,7 +417,9 @@
     margin-bottom: 0.7rem;
   }
 
-  /* ===== CODE ===== */
+  /* =========================================================
+     CODE
+     ========================================================= */
 
   .code-wrap {
     position: relative;
@@ -415,6 +460,7 @@
 
   pre .com {
     color: #64748b;
+
     font-style: italic;
   }
 
@@ -455,15 +501,19 @@
 
   .copy-btn:hover {
     background: var(--accent);
+
     border-color: var(--accent);
   }
 
   .copy-btn.copied {
     background: var(--green);
+
     border-color: var(--green);
   }
 
-  /* ===== CHECKLIST ===== */
+  /* =========================================================
+     CHECKLIST
+     ========================================================= */
 
   .checklist {
     list-style: none;
@@ -476,7 +526,7 @@
 
     gap: 0.7rem;
 
-    padding: 0.7rem 0;
+    padding: 0.7rem;
 
     border-bottom: 1px solid var(--border);
 
@@ -487,9 +537,6 @@
     transition: background 0.15s;
 
     border-radius: 6px;
-
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
   }
 
   .checklist li:hover {
@@ -523,6 +570,7 @@
 
   .checklist input[type="checkbox"]:checked {
     background: var(--green);
+
     border-color: var(--green);
   }
 
@@ -545,11 +593,13 @@
 
   .checklist li.checked label {
     text-decoration: line-through;
+
     color: var(--text-soft);
   }
 
   .checklist label {
     cursor: pointer;
+
     flex: 1;
   }
 
@@ -569,7 +619,9 @@
     font-weight: 600;
   }
 
-  /* ===== CALLOUT ===== */
+  /* =========================================================
+     CALLOUT
+     ========================================================= */
 
   .callout {
     border-radius: 10px;
@@ -589,35 +641,43 @@
 
   .callout .icon {
     font-size: 1.2rem;
+
     line-height: 1.2;
   }
 
   .callout.warn {
     background: var(--yellow-soft);
+
     border-left: 4px solid var(--yellow);
   }
 
   .callout.danger {
     background: var(--red-soft);
+
     border-left: 4px solid var(--red);
   }
 
   .callout.info {
     background: var(--accent-soft);
+
     border-left: 4px solid var(--accent);
   }
 
   .callout.success {
     background: var(--green-soft);
+
     border-left: 4px solid var(--green);
   }
 
   .callout strong {
     display: block;
+
     margin-bottom: 0.2rem;
   }
 
-  /* ===== TABLE ===== */
+  /* =========================================================
+     TABLE
+     ========================================================= */
 
   table {
     width: 100%;
@@ -635,6 +695,7 @@
 
   thead {
     background: var(--bg-soft);
+
     color: white;
   }
 
@@ -645,6 +706,8 @@
     text-align: left;
 
     border-bottom: 1px solid var(--border);
+
+    vertical-align: top;
   }
 
   tbody tr:hover {
@@ -665,7 +728,9 @@
     font-size: 0.82rem;
   }
 
-  /* ===== FOOTER ===== */
+  /* =========================================================
+     FOOTER
+     ========================================================= */
 
   footer {
     text-align: center;
@@ -681,12 +746,15 @@
     color: var(--accent);
   }
 
-  /* ===== RESPONSIVE ===== */
+  /* =========================================================
+     RESPONSIVE
+     ========================================================= */
 
   @media (max-width: 900px) {
 
     .container {
       grid-template-columns: 1fr;
+
       padding: 1rem;
     }
 
@@ -696,7 +764,9 @@
 
     aside ul {
       display: flex;
+
       flex-wrap: wrap;
+
       gap: 0.3rem;
     }
 
@@ -719,6 +789,14 @@
     header::before {
       width: 70%;
     }
+
+    table {
+      display: block;
+
+      overflow-x: auto;
+
+      white-space: normal;
+    }
   }
 
   @media (max-width: 600px) {
@@ -733,6 +811,7 @@
 
     .badge {
       font-size: 0.72rem;
+
       padding: 0.32rem 0.7rem;
     }
 
@@ -760,10 +839,17 @@
   </p>
 
   <div class="badges">
+
     <span class="badge">🧹 Limpieza</span>
+
+    <span class="badge">🧠 Decisión de Negocio</span>
+
     <span class="badge">🔄 Transformación</span>
+
     <span class="badge">🔗 Merges</span>
+
     <span class="badge">✅ Auditoría</span>
+
   </div>
 
 </header>
@@ -771,7 +857,9 @@
 
 <div class="container">
 
-  <!-- ===== SIDEBAR ===== -->
+  <!-- =======================================================
+       SIDEBAR
+       ======================================================= -->
 
   <aside>
 
@@ -782,6 +870,12 @@
       <li>
         <a href="#limpieza">
           🧹 Limpieza y Transformación
+        </a>
+      </li>
+
+      <li>
+        <a href="#decision-negocio">
+          🧠 Decisión de Negocio
         </a>
       </li>
 
@@ -808,11 +902,16 @@
   </aside>
 
 
-  <!-- ===== MAIN ===== -->
+  <!-- =======================================================
+       MAIN
+       ======================================================= -->
 
   <main>
 
-    <!-- SECCIÓN 1 -->
+
+    <!-- =====================================================
+         SECCIÓN 1
+         ===================================================== -->
 
     <section id="limpieza">
 
@@ -821,7 +920,8 @@
       </h2>
 
       <p class="section-sub">
-        Snippets esenciales para preparar tus datos antes de cualquier análisis o cruce.
+        Snippets esenciales para preparar tus datos antes de
+        cualquier análisis o cruce.
       </p>
 
 
@@ -831,6 +931,7 @@
 
         <h4>
           1. Estandarizar texto
+
           <span style="color:var(--text-soft);font-weight:400;font-size:0.8rem;">
             (ideal antes de cruzar tablas)
           </span>
@@ -962,22 +1063,466 @@ df[<span class="str">'Ventas'</span>] = df[<span class="str">'Ventas'</span>].<s
     </section>
 
 
-    <!-- SECCIÓN 2 -->
+    <!-- =====================================================
+         SECCIÓN 2
+         DECISIÓN DE NEGOCIO
+         ===================================================== -->
+
+    <section id="decision-negocio">
+
+      <h2>
+        🧠 Decisión de Negocio
+      </h2>
+
+      <p class="section-sub">
+        La limpieza de datos no es solamente una decisión técnica.
+        Cada valor nulo debe analizarse según el contexto del negocio
+        antes de decidir si se elimina, se reemplaza o se conserva.
+      </p>
+
+
+      <!-- PRINCIPIO -->
+
+      <div class="callout info">
+
+        <span class="icon">💡</span>
+
+        <div>
+
+          <strong>Regla principal:</strong>
+
+          No todos los valores nulos significan un error.
+          Antes de utilizar <code>dropna()</code> o
+          <code>fillna()</code>, pregunta qué significa realmente
+          la ausencia del dato para el negocio.
+
+        </div>
+
+      </div>
+
+
+      <!-- TABLA -->
+
+      <h4 style="margin-top:1.5rem;font-size:1rem;">
+        📊 ¿Eliminar o conservar el dato?
+      </h4>
+
+      <table>
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Columna
+            </th>
+
+            <th>
+              Tipo
+            </th>
+
+            <th>
+              Acción en Python
+            </th>
+
+            <th>
+              Justificación de Negocio
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+
+          <tr>
+
+            <td>
+              <strong>Return_Reason</strong>
+            </td>
+
+            <td>
+              Lógico / Válido
+            </td>
+
+            <td>
+              <code>fillna('Sin Devolución')</code>
+            </td>
+
+            <td>
+              La celda está vacía porque el cliente no devolvió
+              el producto. Borrar la fila eliminaría del sistema
+              una venta exitosa.
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              <strong>Promotion_Code</strong>
+            </td>
+
+            <td>
+              Lógico / Válido
+            </td>
+
+            <td>
+              <code>fillna('Sin Cupón')</code>
+            </td>
+
+            <td>
+              El cliente compró a precio regular.
+              Borrar la fila eliminaría ingresos financieros reales.
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              <strong>Customer_Rating</strong>
+            </td>
+
+            <td>
+              Lógico / Válido
+            </td>
+
+            <td>
+              <code>fillna(0)</code>
+            </td>
+
+            <td>
+              Solo una fracción de los usuarios deja reseñas
+              de 1 a 5. Cero representa ausencia de calificación,
+              no necesariamente un mal servicio.
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              <strong>Customer_Age</strong>
+            </td>
+
+            <td>
+              Omisión / Válido
+            </td>
+
+            <td>
+              <code>fillna(df['Customer_Age'].mean())</code>
+            </td>
+
+            <td>
+              El cajero no solicitó la edad, pero la venta sí ocurrió.
+              Se utiliza el promedio para evitar perder la transacción
+              y mantener los reportes demográficos completos.
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              <strong>Product_Name</strong>
+            </td>
+
+            <td>
+              Bug Crítico / Inválido
+            </td>
+
+            <td>
+              <code>dropna()</code>
+            </td>
+
+            <td>
+              Una factura donde no sabemos qué producto se vendió
+              representa información corrupta. Se elimina para evitar
+              crear inventario o ingresos fantasma.
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              <strong>Payment_Method</strong>
+            </td>
+
+            <td>
+              Bug Crítico / Inválido
+            </td>
+
+            <td>
+              <code>dropna()</code>
+            </td>
+
+            <td>
+              Es una transacción huérfana. Contabilidad no puede
+              auditar correctamente un ingreso sin conocer si fue
+              realizado mediante tarjeta, efectivo u otro método.
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+
+      <!-- EJEMPLO 1 -->
+
+      <div class="snippet green" style="margin-top:1.5rem;">
+
+        <h4>
+          1. Conservar una venta válida
+        </h4>
+
+        <p class="desc">
+          Si el valor nulo tiene un significado válido dentro
+          del negocio, reemplázalo por una categoría explícita.
+        </p>
+
+        <div class="code-wrap">
+
+          <button class="copy-btn" onclick="copyCode(this)">
+            Copiar
+          </button>
+
+          <pre>df[<span class="str">'Return_Reason'</span>] =
+    df[<span class="str">'Return_Reason'</span>].<span class="fn">fillna</span>(<span class="str">'Sin Devolución'</span>)
+
+df[<span class="str">'Promotion_Code'</span>] =
+    df[<span class="str">'Promotion_Code'</span>].<span class="fn">fillna</span>(<span class="str">'Sin Cupón'</span>)</pre>
+
+        </div>
+
+      </div>
+
+
+      <!-- EJEMPLO 2 -->
+
+      <div class="snippet yellow">
+
+        <h4>
+          2. Completar un dato numérico
+        </h4>
+
+        <p class="desc">
+          Cuando el dato es una omisión pero la transacción sigue siendo
+          válida, puede utilizarse una medida estadística como el promedio.
+        </p>
+
+        <div class="code-wrap">
+
+          <button class="copy-btn" onclick="copyCode(this)">
+            Copiar
+          </button>
+
+          <pre>df[<span class="str">'Customer_Age'</span>] =
+    df[<span class="str">'Customer_Age'</span>].<span class="fn">fillna</span>(
+        df[<span class="str">'Customer_Age'</span>].<span class="fn">mean</span>()
+    )</pre>
+
+        </div>
+
+      </div>
+
+
+      <!-- EJEMPLO 3 -->
+
+      <div class="snippet red">
+
+        <h4>
+          3. Eliminar datos corruptos
+        </h4>
+
+        <p class="desc">
+          Si la ausencia del dato impide identificar o auditar
+          correctamente la transacción, eliminar la fila puede
+          ser la decisión más segura.
+        </p>
+
+        <div class="code-wrap">
+
+          <button class="copy-btn" onclick="copyCode(this)">
+            Copiar
+          </button>
+
+          <pre><span class="com"># Producto desconocido</span>
+df = df.<span class="fn">dropna</span>(subset=[<span class="str">'Product_Name'</span>])
+
+<span class="com"># Método de pago desconocido</span>
+df = df.<span class="fn">dropna</span>(subset=[<span class="str">'Payment_Method'</span>])</pre>
+
+        </div>
+
+      </div>
+
+
+      <!-- ADVERTENCIA -->
+
+      <div class="callout warn">
+
+        <span class="icon">⚠️</span>
+
+        <div>
+
+          <strong>Antes de eliminar un nulo, pregunta:</strong>
+
+          ¿El dato representa un error o simplemente significa
+          que esa información no aplica?
+
+          Si eliminarlo puede hacer desaparecer una venta,
+          un ingreso o una transacción válida, no uses
+          <code>dropna()</code> automáticamente.
+
+        </div>
+
+      </div>
+
+
+      <!-- FLUJO -->
+
+      <h4 style="margin-top:1.5rem;font-size:1rem;">
+        🎯 Flujo de decisión
+      </h4>
+
+      <ul class="checklist" style="margin-top:0.5rem;">
+
+
+        <li onclick="toggleCheck(this)">
+
+          <input type="checkbox">
+
+          <label>
+
+            <strong>1. Identificar:</strong>
+
+            ¿Qué representa el valor nulo dentro del negocio?
+
+          </label>
+
+        </li>
+
+
+        <li onclick="toggleCheck(this)">
+
+          <input type="checkbox">
+
+          <label>
+
+            <strong>2. Clasificar:</strong>
+
+            ¿Es una omisión válida o un error crítico?
+
+          </label>
+
+        </li>
+
+
+        <li onclick="toggleCheck(this)">
+
+          <input type="checkbox">
+
+          <label>
+
+            <strong>3. Decidir:</strong>
+
+            ¿Conviene conservar, imputar o eliminar el registro?
+
+          </label>
+
+        </li>
+
+
+        <li onclick="toggleCheck(this)">
+
+          <input type="checkbox">
+
+          <label>
+
+            <strong>4. Justificar:</strong>
+
+            Documentar por qué se tomó esa decisión.
+
+          </label>
+
+        </li>
+
+
+        <li onclick="toggleCheck(this)">
+
+          <input type="checkbox">
+
+          <label>
+
+            <strong>5. Auditar:</strong>
+
+            Comparar la cantidad de registros antes y después
+            de la limpieza.
+
+          </label>
+
+        </li>
+
+      </ul>
+
+
+      <div class="callout success">
+
+        <span class="icon">✅</span>
+
+        <div>
+
+          <strong>Idea clave:</strong>
+
+          La mejor limpieza de datos no es la que elimina más
+          valores nulos, sino la que conserva la información válida
+          y elimina únicamente los datos que pueden comprometer
+          la calidad del análisis o las decisiones empresariales.
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SECCIÓN 3
+         ===================================================== -->
 
     <section id="cruces">
 
       <h2>
+
         🔗 Cruces Relacionales con
+
         <code style="font-size:1rem;background:var(--accent-soft);color:var(--accent);padding:2px 8px;border-radius:6px;">
+
           pd.merge()
+
         </code>
+
       </h2>
 
       <p class="section-sub">
+
         En Pandas usamos <strong>pd.merge()</strong>
         para replicar los JOINs de SQL.
+
         Siempre pregúntate:
+
         <em>¿Qué tabla manda?</em>
+
       </p>
 
 
@@ -986,18 +1531,26 @@ df[<span class="str">'Ventas'</span>] = df[<span class="str">'Ventas'</span>].<s
       <div class="snippet green">
 
         <h4>
+
           ✅ Left Join
+
           <span style="color:var(--green);font-weight:600;font-size:0.8rem;">
+
             (el más recomendado para agregar dimensiones)
+
           </span>
+
         </h4>
 
         <p class="desc">
-          Mantiene <strong>TODAS</strong> las filas de la tabla de la izquierda
-          (ej. Ventas) y solo trae los datos de la derecha
-          (ej. Tiendas) que coincidan.
-          Si una venta se hizo en una tienda que no existe en el catálogo,
-          quedará con valores nulos (NaN).
+
+          Mantiene <strong>TODAS</strong> las filas de la tabla
+          de la izquierda (ej. Ventas) y solo trae los datos de
+          la derecha (ej. Tiendas) que coincidan.
+
+          Si una venta se hizo en una tienda que no existe en el
+          catálogo, quedará con valores nulos (NaN).
+
         </p>
 
         <div class="code-wrap">
@@ -1023,11 +1576,13 @@ df[<span class="str">'Ventas'</span>] = df[<span class="str">'Ventas'</span>].<s
         <span class="icon">💡</span>
 
         <div>
+
           <strong>¿Cuándo usarlo?</strong>
 
           Cuando quieres conservar todas las transacciones
           y solo enriquecerlas con la información de la tabla
           de dimensión (catálogos, tiendas, productos, etc.).
+
         </div>
 
       </div>
@@ -1038,18 +1593,26 @@ df[<span class="str">'Ventas'</span>] = df[<span class="str">'Ventas'</span>].<s
       <div class="snippet red">
 
         <h4>
+
           ⚠️ Inner Join
+
           <span style="color:var(--red);font-weight:600;font-size:0.8rem;">
+
             (el restrictivo)
+
           </span>
+
         </h4>
 
         <p class="desc">
+
           Solo mantiene las filas donde el
           <code>ID_Tienda</code>
           exista en <strong>AMBAS</strong> tablas.
+
           Cuidado: si lo usas, podrías perder registros
           de ventas sin darte cuenta.
+
         </p>
 
         <div class="code-wrap">
@@ -1075,13 +1638,19 @@ df[<span class="str">'Ventas'</span>] = df[<span class="str">'Ventas'</span>].<s
         <span class="icon">🚨</span>
 
         <div>
+
           <strong>Peligro:</strong>
 
           El inner join puede eliminar filas silenciosamente.
+
           Siempre compara
+
           <code>len(df_antes)</code>
+
           vs
+
           <code>len(df_después)</code>.
+
         </div>
 
       </div>
@@ -1090,31 +1659,40 @@ df[<span class="str">'Ventas'</span>] = df[<span class="str">'Ventas'</span>].<s
       <!-- CHECKLIST -->
 
       <h4 style="margin-top:1.5rem;font-size:1rem;">
+
         📋 Checklist antes de un merge
+
       </h4>
 
       <ul class="checklist" style="margin-top:0.5rem;">
 
+
         <li onclick="toggleCheck(this)">
 
           <input type="checkbox">
 
           <label>
+
             ¿Las columnas llave (<code>on=</code>)
             se llaman <strong>EXACTAMENTE</strong> igual?
             (cuidado con mayúsculas)
+
           </label>
 
         </li>
 
+
         <li onclick="toggleCheck(this)">
 
           <input type="checkbox">
 
           <label>
+
             ¿Las columnas llave tienen el
             <strong>mismo tipo de dato</strong>?
+
             (un ID en número no cruzará con un ID en texto)
+
           </label>
 
         </li>
@@ -1124,7 +1702,9 @@ df[<span class="str">'Ventas'</span>] = df[<span class="str">'Ventas'</span>].<s
     </section>
 
 
-    <!-- SECCIÓN 3 -->
+    <!-- =====================================================
+         SECCIÓN 4
+         ===================================================== -->
 
     <section id="auditoria">
 
@@ -1133,21 +1713,30 @@ df[<span class="str">'Ventas'</span>] = df[<span class="str">'Ventas'</span>].<s
       </h2>
 
       <p class="section-sub">
-        Ejecuta estos pasos <strong>antes</strong> de limpiar o transformar.
+
+        Ejecuta estos pasos <strong>antes</strong> de limpiar
+        o transformar.
+
         Marca cada casilla a medida que avanzas.
+
       </p>
 
 
       <ul class="checklist">
 
+
         <li onclick="toggleCheck(this)">
 
           <input type="checkbox">
 
           <label>
+
             <strong>1. Inspección de Tamaño:</strong>
+
             ¿Cuántas filas y columnas reales tenemos?
+
             → <code>df.shape</code>
+
           </label>
 
         </li>
@@ -1158,10 +1747,14 @@ df[<span class="str">'Ventas'</span>] = df[<span class="str">'Ventas'</span>].<s
           <input type="checkbox">
 
           <label>
+
             <strong>2. Mapeo de Tipos de Datos:</strong>
+
             ¿Están los números como int/float y las fechas
             como datetime, o Python leyó todo como texto (object)?
+
             → <code>df.info()</code>
+
           </label>
 
         </li>
@@ -1172,9 +1765,13 @@ df[<span class="str">'Ventas'</span>] = df[<span class="str">'Ventas'</span>].<s
           <input type="checkbox">
 
           <label>
+
             <strong>3. Detección de Nulos:</strong>
+
             ¿Cuántos valores faltantes hay por columna?
+
             → <code>df.isnull().sum()</code>
+
           </label>
 
         </li>
@@ -1185,9 +1782,13 @@ df[<span class="str">'Ventas'</span>] = df[<span class="str">'Ventas'</span>].<s
           <input type="checkbox">
 
           <label>
+
             <strong>4. Detección de Duplicados:</strong>
+
             ¿Tenemos transacciones clonadas por error del sistema?
+
             → <code>df.duplicated().sum()</code>
+
           </label>
 
         </li>
@@ -1198,10 +1799,15 @@ df[<span class="str">'Ventas'</span>] = df[<span class="str">'Ventas'</span>].<s
           <input type="checkbox">
 
           <label>
+
             <strong>5. Análisis de Lógica de Negocio:</strong>
+
             ¿Existen valores físicamente imposibles?
+
             (ej. precios negativos, edades de 150 años)
+
             → <code>df.describe()</code>
+
           </label>
 
         </li>
@@ -1227,7 +1833,9 @@ df.<span class="fn">describe</span>(include=<span class="str">'all'</span>)</pre
     </section>
 
 
-    <!-- SECCIÓN 4 -->
+    <!-- =====================================================
+         SECCIÓN 5
+         ===================================================== -->
 
     <section id="reglas">
 
@@ -1236,7 +1844,10 @@ df.<span class="fn">describe</span>(include=<span class="str">'all'</span>)</pre
       </h2>
 
       <p class="section-sub">
-        Resumen ejecutivo de buenas prácticas para tener siempre a mano.
+
+        Resumen ejecutivo de buenas prácticas para tener siempre
+        a mano.
+
       </p>
 
 
@@ -1245,39 +1856,67 @@ df.<span class="fn">describe</span>(include=<span class="str">'all'</span>)</pre
         <thead>
 
           <tr>
-            <th>Etapa</th>
-            <th>Regla clave</th>
+
+            <th>
+              Etapa
+            </th>
+
+            <th>
+              Regla clave
+            </th>
+
           </tr>
 
         </thead>
 
         <tbody>
 
+
           <tr>
-            <td><strong>Auditoría</strong></td>
 
             <td>
+              <strong>Auditoría</strong>
+            </td>
+
+            <td>
+
               Siempre ejecuta
+
               <code>df.shape</code>,
+
               <code>df.info()</code>,
+
               <code>df.isnull().sum()</code>,
+
               <code>df.duplicated().sum()</code>
+
               y
+
               <code>df.describe()</code>
+
               <strong>antes</strong>
+
               de tocar nada.
+
             </td>
+
           </tr>
 
 
           <tr>
 
-            <td><strong>Texto</strong></td>
+            <td>
+              <strong>Texto</strong>
+            </td>
 
             <td>
+
               Aplica
+
               <code>.str.lower().str.strip()</code>
+
               antes de cualquier cruce.
+
             </td>
 
           </tr>
@@ -1285,15 +1924,24 @@ df.<span class="fn">describe</span>(include=<span class="str">'all'</span>)</pre
 
           <tr>
 
-            <td><strong>Fechas</strong></td>
+            <td>
+              <strong>Fechas</strong>
+            </td>
 
             <td>
+
               Usa
+
               <code>pd.to_datetime()</code>
+
               siempre.
+
               Considera
+
               <code>errors='coerce'</code>
+
               para no romper el flujo.
+
             </td>
 
           </tr>
@@ -1301,13 +1949,19 @@ df.<span class="fn">describe</span>(include=<span class="str">'all'</span>)</pre
 
           <tr>
 
-            <td><strong>Nulos</strong></td>
+            <td>
+              <strong>Nulos</strong>
+            </td>
 
             <td>
+
               Decide:
+
               ¿elimino (<code>dropna</code>)
               o relleno (<code>fillna</code>)?
+
               Depende del negocio.
+
             </td>
 
           </tr>
@@ -1315,13 +1969,39 @@ df.<span class="fn">describe</span>(include=<span class="str">'all'</span>)</pre
 
           <tr>
 
-            <td><strong>Merge</strong></td>
+            <td>
+              <strong>Decisión de Negocio</strong>
+            </td>
 
             <td>
+
+              No elimines un registro únicamente porque contiene
+              un valor nulo.
+
+              Determina primero si el dato representa una omisión
+              válida o un error crítico.
+
+            </td>
+
+          </tr>
+
+
+          <tr>
+
+            <td>
+              <strong>Merge</strong>
+            </td>
+
+            <td>
+
               <strong>Pregúntate: ¿qué tabla manda?</strong>
+
               Si es Ventas,
+
               usa
+
               <code>how='left'</code>.
+
             </td>
 
           </tr>
@@ -1329,15 +2009,24 @@ df.<span class="fn">describe</span>(include=<span class="str">'all'</span>)</pre
 
           <tr>
 
-            <td><strong>Llaves</strong></td>
+            <td>
+              <strong>Llaves</strong>
+            </td>
 
             <td>
+
               Mismo nombre
+
               <strong>exacto</strong>
+
               +
+
               mismo
+
               <strong>tipo de dato</strong>
+
               (ID numérico ≠ ID texto).
+
             </td>
 
           </tr>
@@ -1345,11 +2034,16 @@ df.<span class="fn">describe</span>(include=<span class="str">'all'</span>)</pre
 
           <tr>
 
-            <td><strong>Inner Join</strong></td>
+            <td>
+              <strong>Inner Join</strong>
+            </td>
 
             <td>
+
               ⚠️ Puede borrar ventas sin que te des cuenta.
+
               Úsalo con cuidado y verifica el conteo de filas.
+
             </td>
 
           </tr>
@@ -1368,10 +2062,17 @@ df.<span class="fn">describe</span>(include=<span class="str">'all'</span>)</pre
           <strong>Flujo recomendado:</strong>
 
           Auditoría →
+
           Limpieza →
+
+          Decisión de Negocio →
+
           Estandarización →
+
           Transformación →
+
           Cruces →
+
           Auditoría final.
 
         </div>
@@ -1388,8 +2089,11 @@ df.<span class="fn">describe</span>(include=<span class="str">'all'</span>)</pre
 <footer>
 
   Hecho con
+
   <strong>🐼 Pandas</strong>
+
   · Cheat Sheet para tu repositorio
+
   · Copia, pega y comparte
 
 </footer>
@@ -1397,9 +2101,9 @@ df.<span class="fn">describe</span>(include=<span class="str">'all'</span>)</pre
 
 <script>
 
-  // =========================================================
-  // COPIAR CÓDIGO
-  // =========================================================
+  /* =========================================================
+     COPIAR CÓDIGO
+     ========================================================= */
 
   function copyCode(btn) {
 
@@ -1408,6 +2112,7 @@ df.<span class="fn">describe</span>(include=<span class="str">'all'</span>)</pre
 
     const text =
       pre.innerText;
+
 
     navigator.clipboard
       .writeText(text)
@@ -1418,6 +2123,7 @@ df.<span class="fn">describe</span>(include=<span class="str">'all'</span>)</pre
 
         btn.classList.add('copied');
 
+
         setTimeout(() => {
 
           btn.textContent = 'Copiar';
@@ -1427,6 +2133,7 @@ df.<span class="fn">describe</span>(include=<span class="str">'all'</span>)</pre
         }, 1500);
 
       })
+
 
       .catch(() => {
 
@@ -1443,9 +2150,11 @@ df.<span class="fn">describe</span>(include=<span class="str">'all'</span>)</pre
 
         document.body.removeChild(ta);
 
+
         btn.textContent = '✓ Copiado';
 
         btn.classList.add('copied');
+
 
         setTimeout(() => {
 
@@ -1456,12 +2165,13 @@ df.<span class="fn">describe</span>(include=<span class="str">'all'</span>)</pre
         }, 1500);
 
       });
+
   }
 
 
-  // =========================================================
-  // CHECKLIST
-  // =========================================================
+  /* =========================================================
+     CHECKLIST
+     ========================================================= */
 
   function toggleCheck(li) {
 
@@ -1470,18 +2180,38 @@ df.<span class="fn">describe</span>(include=<span class="str">'all'</span>)</pre
         'input[type="checkbox"]'
       );
 
+
+    /*
+     * Evita que hacer clic directamente sobre el checkbox
+     * produzca un doble cambio de estado.
+     */
+
+    if (event && event.target === cb) {
+
+      li.classList.toggle(
+        'checked',
+        cb.checked
+      );
+
+      return;
+
+    }
+
+
     cb.checked = !cb.checked;
+
 
     li.classList.toggle(
       'checked',
       cb.checked
     );
+
   }
 
 
-  // =========================================================
-  // SCROLL SUAVE
-  // =========================================================
+  /* =========================================================
+     SCROLL SUAVE
+     ========================================================= */
 
   document
     .querySelectorAll('aside a')
@@ -1493,16 +2223,21 @@ df.<span class="fn">describe</span>(include=<span class="str">'all'</span>)</pre
 
           e.preventDefault();
 
+
           const target =
             document.querySelector(
               a.getAttribute('href')
             );
 
+
           if (target) {
 
             target.scrollIntoView({
+
               behavior: 'smooth',
+
               block: 'start'
+
             });
 
           }
@@ -1516,4 +2251,3 @@ df.<span class="fn">describe</span>(include=<span class="str">'all'</span>)</pre
 
 </body>
 </html>
-```
