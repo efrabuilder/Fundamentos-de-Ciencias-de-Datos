@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,8 +7,7 @@
 <title>Módulo 6 · Ciencias de Datos: del dataset al KPI</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
-:root{--bg:#eef2f6;--card:#fff;--ink:#14213d;--mut:#4b5a74;--line:#d3dce8;--acc:#0b8f8a;--acc2:#f2a900;--soft:#dff3f1;--warn:#fff4d6;
-box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root{--bg:#eef2f6;--card:#fff;--ink:#14213d;--mut:#4b5a74;--line:#d3dce8;--acc:#0b8f8a;--acc2:#f2a900;--soft:#dff3f1;--warn:#fff4d6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1626;--card:#16223a;--ink:#e8eef8;--mut:#a6b4cc;--line:#2a3a58;--acc:#3cc9c2;--acc2:#f6bf3b;--soft:#143a46;--warn:#3a3217}}
 :root[data-theme="dark"]{--bg:#0e1626;--card:#16223a;--ink:#e8eef8;--mut:#a6b4cc;--line:#2a3a58;--acc:#3cc9c2;--acc2:#f6bf3b;--soft:#143a46;--warn:#3a3217}
 html{scroll-behavior:smooth;scroll-padding-top:calc(64px + env(safe-area-inset-top,0px))}
@@ -32,14 +32,16 @@ section{max-width:1100px;margin:0 auto;padding:2.5rem 1.25rem;border-top:1px sol
 .box{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1.1rem 1.25rem}
 .box h3{margin-bottom:.35em}
 .box p:last-child,.box ul:last-child{margin-bottom:0}
-ul{margin:.3em 0 .8em;padding-left:1.2em}li{margin:.2em 0}
+ul{margin:.3em 0 .8em;padding-left:1.2em}
+li{margin:.2em 0}
 .tl{list-style:none;padding:0;margin:1rem 0 0;display:grid;gap:0;border-left:3px solid var(--acc);margin-left:.6rem}
 .tl li{position:relative;padding:0 0 1.5rem 1.6rem;margin:0}
 .tl li::before{content:"";position:absolute;left:-10px;top:.35rem;width:17px;height:17px;border-radius:50%;background:var(--bg);border:4px solid var(--acc2)}
 .tl .when{display:inline-block;background:var(--soft);border-radius:6px;padding:.05rem .55rem;font-size:.85rem;font-weight:600;margin-bottom:.3rem}
 .tl .tool{color:var(--mut);font-size:.9rem}
 .vs{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
-.vs .a{border-top:6px solid var(--acc2)}.vs .b{border-top:6px solid var(--acc)}
+.vs .a{border-top:6px solid var(--acc2)}
+.vs .b{border-top:6px solid var(--acc)}
 .ex{background:var(--soft);border-radius:8px;padding:.6rem .8rem;font-size:.95rem;margin-top:.5rem}
 .bad{background:var(--warn)}
 .big{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:2.6rem;line-height:1;color:var(--acc)}
@@ -67,44 +69,76 @@ footer{max-width:1100px;margin:0 auto;padding:2rem 1.25rem 3rem;color:var(--mut)
 </style>
 </head>
 <body>
+
 <nav aria-label="Secciones">
-<a href="#fases">Fases</a><a href="#dataset">Dataset y Kaggle</a><a href="#roles">Roles</a><a href="#negocio">Problema de negocio</a><a href="#kpi">Métrica vs KPI</a><a href="#smart">SMART</a><a href="#lead">Lagging y Leading</a><a href="#catalogo">Catálogo</a><a href="#entregable">Entregable</a>
+<a href="#fases">Fases</a>
+<a href="#dataset">Dataset y Kaggle</a>
+<a href="#roles">Roles</a>
+<a href="#negocio">Problema de negocio</a>
+<a href="#kpi">Métrica vs KPI</a>
+<a href="#smart">SMART</a>
+<a href="#lead">Lagging y Leading</a>
+<a href="#catalogo">Catálogo</a>
+<a href="#entregable">Entregable</a>
 </nav>
 
 <header>
 <h1>Del dataset al KPI</h1>
 <p>Guía del módulo 6 de Ciencias de Datos: cómo resolver un problema de negocio con datos, desde elegir el dataset en Kaggle hasta presentar un dashboard en Power BI.</p>
-<div class="chips"><span class="chip">Python y Pandas</span><span class="chip">Power Query</span><span class="chip">Power BI</span><span class="chip">Kaggle</span><span class="chip">Simulación de roles</span></div>
+<div class="chips">
+<span class="chip">Python y Pandas</span>
+<span class="chip">Power Query</span>
+<span class="chip">Power BI</span>
+<span class="chip">Kaggle</span>
+<span class="chip">Simulación de roles</span>
+</div>
 </header>
 
 <section id="fases">
 <h2>Las 5 fases del proyecto</h2>
 <p>El proyecto avanza por fases, desde definir el negocio hasta defender los resultados ante el cliente.</p>
 <ol class="tl">
-<li><span class="when">Fase 1 · Hoy y mañana</span><h3>Definición del negocio</h3>
+<li>
+<span class="when">Fase 1</span>
+<h3>Definición del negocio</h3>
 <p>Resolver un problema de negocio (ficticio o real) mediante datos: optimizar rutas de logística, entender la caída de ventas o predecir la fuga de clientes.</p>
 <p><b>Rol de Kaggle:</b> solo proveedor de materia prima. No hay que programar ni usar los notebooks de la plataforma: la tarea es buscar un dataset robusto (idealmente con varias tablas para cruzarlas) y descargar los .csv.</p>
-<p><b>Entregable:</b> el «Alcance del Proyecto», un brief donde el equipo define qué problema atacará y qué KPIs medirá.</p></li>
-<li><span class="when">Fase 2 · Sesiones 3 a 5</span><h3>Limpieza y preparación (Data Wrangling)</h3>
-<p>Aquí se trabaja con Python (librería Pandas) y Power Query. La misión: tomar los .csv crudos, tratar los valores nulos, estandarizar tipos de datos y hacer los cruces (joins/merges) para consolidar un dataset maestro limpio y validado.</p></li>
-<li><span class="when">Fase 3 · Sesiones 6 a 8</span><h3>Análisis exploratorio (EDA)</h3>
-<p>Antes del dashboard hay que interrogar los datos limpios. Con Python (Matplotlib, Seaborn) o con Power BI se hace análisis descriptivo, se buscan correlaciones, se detectan anomalías y se extraen insights reales.</p></li>
-<li><span class="when">Fase 4 · Sesiones 9 a 11</span><h3>Visualización</h3>
-<p>Se conecta el dataset maestro a Power BI. El objetivo es un dashboard gerencial interactivo, con segmentación y métricas claras, pensado para que el usuario final tome decisiones de negocio.</p></li>
-<li><span class="when">Fase 5 · Sesiones 12 y 13</span><h3>Presentación ejecutiva</h3>
-<p>Simulación de entorno laboral: se presenta el storytelling con datos y se defienden los resultados ante un cliente.</p></li>
+<p><b>Entregable:</b> el «Alcance del Proyecto», un brief donde el equipo define qué problema atacará y qué KPIs medirá.</p>
+</li>
+<li>
+<span class="when">Fase 2</span>
+<h3>Limpieza y preparación (Data Wrangling)</h3>
+<p>Aquí se trabaja con Python (librería Pandas) y Power Query. La misión: tomar los .csv crudos, tratar los valores nulos, estandarizar tipos de datos y hacer los cruces (joins/merges) para consolidar un dataset maestro limpio y validado.</p>
+</li>
+<li>
+<span class="when">Fase 3</span>
+<h3>Análisis exploratorio (EDA)</h3>
+<p>Antes del dashboard hay que interrogar los datos limpios. Con Python (Matplotlib, Seaborn) o con Power BI se hace análisis descriptivo, se buscan correlaciones, se detectan anomalías y se extraen insights reales.</p>
+</li>
+<li>
+<span class="when">Fase 4</span>
+<h3>Visualización</h3>
+<p>Se conecta el dataset maestro a Power BI. El objetivo es un dashboard gerencial interactivo, con segmentación y métricas claras, pensado para que el usuario final tome decisiones de negocio.</p>
+</li>
+<li>
+<span class="when">Fase 5</span>
+<h3>Presentación ejecutiva</h3>
+<p>Simulación de entorno laboral: se presenta el storytelling con datos y se defienden los resultados ante un cliente.</p>
+</li>
 </ol>
 </section>
 
 <section id="dataset">
 <h2>El dataset y Kaggle</h2>
 <p>Un dataset no es solo una tabla de Excel: es una representación de la realidad operativa de una empresa en un momento dado. En este proyecto se trabaja con datos estructurados: las filas son registros individuales y las columnas son variables o características. El formato buscado es .csv (valores separados por comas), el universal y más ligero para procesar en Python.</p>
+
 <h3>Estructura obligatoria: 3 dimensiones</h3>
 <div class="grid">
 <div class="box"><h3>Tiempo</h3><p>Fechas, para analizar tendencias históricas.</p></div>
 <div class="box"><h3>Categórica</h3><p>Tipos de producto, sucursales, países, para agrupar.</p></div>
 <div class="box"><h3>Cuantitativa</h3><p>Precios, cantidades, costos, para sumar y promediar.</p></div>
 </div>
+
 <h3 style="margin-top:1.5rem">Kaggle, el ecosistema</h3>
 <p>Es la comunidad de Data Science más grande del mundo, adquirida por Google, y el catálogo principal para encontrar problemas reales.</p>
 <div class="grid">
@@ -129,26 +163,43 @@ footer{max-width:1100px;margin:0 auto;padding:2rem 1.25rem 3rem;color:var(--mut)
 <h2>Consulta simple vs. problema de negocio</h2>
 <p>Cualquier persona sabe hacer una suma en Excel. Al analista se le contrata para tomar decisiones.</p>
 <div class="vs">
-<div class="box a"><h3>Consulta simple (descriptiva)</h3>
+<div class="box a">
+<h3>Consulta simple (descriptiva)</h3>
 <div class="ex">«¿Cuál fue el mes con más ventas?»<br>«¿Cuántos empleados renunciaron en 2023?»</div>
-<p style="margin-top:.7rem"><b>El problema:</b> te da un número, pero no te dice qué hacer con él.</p></div>
-<div class="box b"><h3>Problema de negocio (accionable)</h3>
-<p>Responde: ¿por qué pasó y qué podemos hacer al respecto?</p>
-<div class="ex">«¿Por qué la sucursal Norte tiene un 30% más de rotación de personal que la sucursal Sur, y qué políticas de recursos humanos podemos cambiar para retener el talento?»</div></div>
+<p style="margin-top:.7rem"><b>El problema:</b> te da un número, pero no te dice qué hacer con él.</p>
 </div>
-<div class="box" style="margin-top:1rem;border-left:6px solid var(--acc2)"><h3>Regla de oro</h3><p>Si la respuesta no permite lanzar una promoción, cambiar una política o ahorrar dinero, es una mala pregunta.</p></div>
+<div class="box b">
+<h3>Problema de negocio (accionable)</h3>
+<p>Responde: ¿por qué pasó y qué podemos hacer al respecto?</p>
+<div class="ex">«¿Por qué la sucursal Norte tiene un 30% más de rotación de personal que la sucursal Sur, y qué políticas de recursos humanos podemos cambiar para retener el talento?»</div>
+</div>
+</div>
+<div class="box" style="margin-top:1rem;border-left:6px solid var(--acc2)">
+<h3>Regla de oro</h3>
+<p>Si la respuesta no permite lanzar una promoción, cambiar una política o ahorrar dinero, es una mala pregunta.</p>
+</div>
 </section>
 
 <section id="kpi">
 <h2>Métrica vs. KPI</h2>
 <p>Todas las empresas tienen miles de métricas, pero muy pocos KPIs.</p>
 <div class="vs">
-<div class="box a"><div class="big">80 km/h</div><h3>Métrica: el velocímetro</h3>
-<p>Es un dato bruto. Cualquier número.</p><div class="ex">«Tenemos 5,000 seguidores», «Vendimos 100 zapatos», «Tuvimos 1,000 visitas en la tienda».</div></div>
-<div class="box b"><div class="big">GPS</div><h3>KPI: Key Performance Indicator</h3>
-<p>Dice si esa velocidad alcanza para llegar a tiempo o si vas en la dirección equivocada. Es una métrica ligada estrictamente a un objetivo de negocio: te dice si vas ganando o perdiendo el partido.</p><div class="ex">«Alcanzamos un 15% de margen de ganancia este mes, superando la meta del 10%».</div></div>
+<div class="box a">
+<div class="big">80 km/h</div>
+<h3>Métrica: el velocímetro</h3>
+<p>Es un dato bruto. Cualquier número.</p>
+<div class="ex">«Tenemos 5,000 seguidores», «Vendimos 100 zapatos», «Tuvimos 1,000 visitas en la tienda».</div>
 </div>
-<div class="box" style="margin-top:1rem;border-left:6px solid var(--acc2)"><p>Si el número sube o baja y a nadie en la gerencia le importa, o no provoca una reunión de emergencia, es una métrica y no un KPI.</p></div>
+<div class="box b">
+<div class="big">GPS</div>
+<h3>KPI: Key Performance Indicator</h3>
+<p>Dice si esa velocidad alcanza para llegar a tiempo o si vas en la dirección equivocada. Es una métrica ligada estrictamente a un objetivo de negocio: te dice si vas ganando o perdiendo el partido.</p>
+<div class="ex">«Alcanzamos un 15% de margen de ganancia este mes, superando la meta del 10%».</div>
+</div>
+</div>
+<div class="box" style="margin-top:1rem;border-left:6px solid var(--acc2)">
+<p>Si el número sube o baja y a nadie en la gerencia le importa, o no provoca una reunión de emergencia, es una métrica y no un KPI.</p>
+</div>
 <h3 style="margin-top:1.5rem">KPIs reales que se pueden proponer</h3>
 <div class="grid">
 <div class="box"><h3>Ticket Promedio</h3><p>¿Cuánto gasta en promedio cada cliente por factura?</p></div>
@@ -174,12 +225,18 @@ footer{max-width:1100px;margin:0 auto;padding:2rem 1.25rem 3rem;color:var(--mut)
 <h2>Lagging vs. Leading KPIs</h2>
 <p>El secreto de los analistas senior: los KPIs se dividen en dos familias, y un buen dashboard en Power BI debe tener ambas.</p>
 <div class="vs">
-<div class="box a"><h3>Lagging · Resultado (espejo retrovisor)</h3><p>Miden algo que ya pasó.</p>
+<div class="box a">
+<h3>Lagging · Resultado (espejo retrovisor)</h3>
+<p>Miden algo que ya pasó.</p>
 <div class="ex">Ventas totales del mes pasado. Tasa de renuncia anual.</div>
-<p style="margin-top:.7rem"><b>Característica:</b> son fáciles de medir, pero imposibles de cambiar porque el daño o el éxito ya ocurrió.</p></div>
-<div class="box b"><h3>Leading · Predictivo (volante)</h3><p>Miden comportamientos actuales que predicen el futuro.</p>
+<p style="margin-top:.7rem"><b>Característica:</b> son fáciles de medir, pero imposibles de cambiar porque el daño o el éxito ya ocurrió.</p>
+</div>
+<div class="box b">
+<h3>Leading · Predictivo (volante)</h3>
+<p>Miden comportamientos actuales que predicen el futuro.</p>
 <div class="ex">Número de quejas de clientes esta semana: si sube, el lagging «Ventas» caerá el próximo mes.</div>
-<p style="margin-top:.7rem"><b>Característica:</b> son difíciles de medir, pero son los únicos que la gerencia puede influenciar hoy.</p></div>
+<p style="margin-top:.7rem"><b>Característica:</b> son difíciles de medir, pero son los únicos que la gerencia puede influenciar hoy.</p>
+</div>
 </div>
 </section>
 
@@ -191,15 +248,18 @@ footer{max-width:1100px;margin:0 auto;padding:2rem 1.25rem 3rem;color:var(--mut)
 <button role="tab" aria-selected="false" aria-controls="p2" id="t2" tabindex="-1">Recursos Humanos</button>
 <button role="tab" aria-selected="false" aria-controls="p3" id="t3" tabindex="-1">Logística / Cadena de suministro</button>
 </div>
+
 <div role="tabpanel" id="p1" aria-labelledby="t1">
 <div class="kpi"><h3>Ticket Promedio (AOV)</h3><p><span class="formula">Ingresos totales / Número de pedidos</span></p><p>Sirve para saber si las estrategias de ventas cruzadas funcionan. (AOV = Average Order Value.)</p></div>
 <div class="kpi"><h3>Costo de Adquisición del Cliente (CAC)</h3><p>Cuánto dinero cuesta en marketing y ventas conseguir un solo cliente nuevo.</p></div>
 <div class="kpi"><h3>Customer Lifetime Value (CLV)</h3><p>Cuánto dinero dejará un cliente en toda su vida comprando.</p><p><b>Regla:</b> el CLV siempre debe ser al menos 3 veces mayor que el CAC.</p></div>
 </div>
+
 <div role="tabpanel" id="p2" aria-labelledby="t2" hidden>
 <div class="kpi"><h3>Tasa de Rotación Voluntaria (Turnover Rate)</h3><p><span class="formula">(Empleados que renunciaron / Promedio total de empleados) x 100</span></p><p>Mide si el ambiente laboral o los salarios están fallando.</p></div>
 <div class="kpi"><h3>Tiempo de Contratación (Time to Fill)</h3><p>Días promedio desde que se publica una vacante hasta que se firma el contrato. Mide la eficiencia de RRHH.</p></div>
 </div>
+
 <div role="tabpanel" id="p3" aria-labelledby="t3" hidden>
 <div class="kpi"><h3>OTIF (On-Time In-Full)</h3><p>Porcentaje de pedidos entregados a tiempo <b>y</b> completos, sin errores. Es el rey de los KPIs logísticos.</p></div>
 <div class="kpi"><h3>Tiempo de Ciclo de Pedido</h3><p>Horas o días desde que el cliente hace clic en «Comprar» hasta que el paquete llega a sus manos.</p></div>
@@ -217,28 +277,49 @@ footer{max-width:1100px;margin:0 auto;padding:2rem 1.25rem 3rem;color:var(--mut)
 
 <h2 style="margin-top:2.5rem">Documento de Alcance del Proyecto (Project Brief)</h2>
 <p>Simula el primer acercamiento formal con el cliente. Su objetivo es definir con absoluta claridad qué problema de negocio se va a resolver antes de escribir una sola línea de código. Debe completarse y entregarse antes de finalizar la sesión de mañana.</p>
-<details open><summary>1. Información del equipo</summary>
-<ul><li>Nombre del equipo consultor (ficticio).</li><li>Integrantes y roles propuestos (Ej. Data Engineer, Data Analyst, Business Translator).</li></ul></details>
-<details><summary>2. Contexto del negocio</summary>
-<ul><li>¿Cuál es la industria o el sector del proyecto? (Ej. Retail, Logística, Recursos Humanos, Salud).</li><li>Descripción breve de la empresa (real o ficticia) que requiere el análisis.</li></ul></details>
-<details><summary>3. Planteamiento del problema</summary>
+
+<details open>
+<summary>1. Información del equipo</summary>
+<ul><li>Nombre del equipo consultor (ficticio).</li><li>Integrantes y roles propuestos (Ej. Data Engineer, Data Analyst, Business Translator).</li></ul>
+</details>
+
+<details>
+<summary>2. Contexto del negocio</summary>
+<ul><li>¿Cuál es la industria o el sector del proyecto? (Ej. Retail, Logística, Recursos Humanos, Salud).</li><li>Descripción breve de la empresa (real o ficticia) que requiere el análisis.</li></ul>
+</details>
+
+<details>
+<summary>3. Planteamiento del problema</summary>
 <ul><li>¿Cuál es el dolor principal o la oportunidad de mejora que enfrenta el negocio hoy?</li></ul>
-<div class="ex">Ej.: «La empresa ha experimentado un aumento del 15% en la fuga de clientes durante el último trimestre y desconoce las causas».</div><p></p></details>
-<details><summary>4. Objetivos del proyecto</summary>
-<ul><li>¿Qué se espera lograr al finalizar el análisis? Debe ser medible y aportar valor a la toma de decisiones.</li></ul></details>
-<details><summary>5. Fuentes de datos (Data Sourcing)</summary>
-<ul><li>Enlace al dataset seleccionado (Kaggle, repositorios públicos o datos propios anonimizados).</li><li>Descripción breve: cuántas tablas o archivos son y qué volumen aproximado de filas tienen.</li><li>Al menos 3 variables principales del dataset (Ej. fecha de compra, ID de cliente, monto facturado).</li></ul></details>
-<details><summary>6. Identificación de KPIs</summary>
-<ul><li>De 3 a 5 métricas clave que el gerente necesitará ver en el dashboard final de Power BI para considerar el proyecto un éxito (Ej. CAC, tiempo promedio de entrega, tasa de rotación de personal).</li><li>Cada KPI con nombre, fórmula y pregunta de negocio.</li></ul></details>
+<div class="ex">Ej.: «La empresa ha experimentado un aumento del 15% en la fuga de clientes durante el último trimestre y desconoce las causas».</div>
+<p></p>
+</details>
+
+<details>
+<summary>4. Objetivos del proyecto</summary>
+<ul><li>¿Qué se espera lograr al finalizar el análisis? Debe ser medible y aportar valor a la toma de decisiones.</li></ul>
+</details>
+
+<details>
+<summary>5. Fuentes de datos (Data Sourcing)</summary>
+<ul><li>Enlace al dataset seleccionado (Kaggle, repositorios públicos o datos propios anonimizados).</li><li>Descripción breve: cuántas tablas o archivos son y qué volumen aproximado de filas tienen.</li><li>Al menos 3 variables principales del dataset (Ej. fecha de compra, ID de cliente, monto facturado).</li></ul>
+</details>
+
+<details>
+<summary>6. Identificación de KPIs</summary>
+<ul><li>De 3 a 5 métricas clave que el gerente necesitará ver en el dashboard final de Power BI para considerar el proyecto un éxito (Ej. CAC, tiempo promedio de entrega, tasa de rotación de personal).</li><li>Cada KPI con nombre, fórmula y pregunta de negocio.</li></ul>
+</details>
 
 <h3 style="margin-top:1.5rem">Checklist rápido antes de entregar</h3>
-<div class="tbl"><table>
+<div class="tbl">
+<table>
 <tr><th>Elemento</th><th>Debe cumplir</th></tr>
 <tr><td>Dataset</td><td>.csv, usability score de 8.0 o más, con dimensión de tiempo, categórica y cuantitativa</td></tr>
 <tr><td>Pregunta</td><td>Accionable: permite lanzar una promoción, cambiar una política o ahorrar dinero</td></tr>
 <tr><td>KPIs</td><td>De 3 a 5, SMART, con fórmula y pregunta de negocio, mezclando lagging y leading</td></tr>
 <tr><td>Equipo</td><td>Data Engineer, Data Analyst y Business / Data Translator definidos</td></tr>
-</table></div>
+</table>
+</div>
 </section>
 
 <footer>Resumen del módulo 6 de Ciencias de Datos, basado en los documentos «Fases del Proyecto», «Conceptos básicos clase 1», «Concepto KPI» y «Documento de Alcance del Proyecto (Project Brief)».</footer>
@@ -246,8 +327,22 @@ footer{max-width:1100px;margin:0 auto;padding:2rem 1.25rem 3rem;color:var(--mut)
 <script>
 (function(){
 var tabs=[].slice.call(document.querySelectorAll('[role=tab]'));
-function sel(t){tabs.forEach(function(b){var on=b===t;b.setAttribute('aria-selected',on);b.tabIndex=on?0:-1;document.getElementById(b.getAttribute('aria-controls')).hidden=!on;});t.focus();}
-tabs.forEach(function(t,i){t.addEventListener('click',function(){sel(t)});t.addEventListener('keydown',function(e){if(e.key==='ArrowRight')sel(tabs[(i+1)%tabs.length]);if(e.key==='ArrowLeft')sel(tabs[(i+tabs.length-1)%tabs.length]);});});
+function sel(t){
+tabs.forEach(function(b){
+var on=b===t;
+b.setAttribute('aria-selected',on);
+b.tabIndex=on?0:-1;
+document.getElementById(b.getAttribute('aria-controls')).hidden=!on;
+});
+t.focus();
+}
+tabs.forEach(function(t,i){
+t.addEventListener('click',function(){sel(t)});
+t.addEventListener('keydown',function(e){
+if(e.key==='ArrowRight')sel(tabs[(i+1)%tabs.length]);
+if(e.key==='ArrowLeft')sel(tabs[(i+tabs.length-1)%tabs.length]);
+});
+});
 })();
 </script>
 </body>
