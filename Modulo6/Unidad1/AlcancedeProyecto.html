@@ -147,14 +147,27 @@
   .member b { display: block; font-family: var(--display); font-size: 1.1rem; color: var(--ink); line-height: 1.2; }
   .member span { font-size: 14.5px; color: var(--muted); }
 
-  /* Limpieza */
-  .cleaning-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 8px; }
-  .clean-card { background: var(--white); border: 1px solid var(--line); border-radius: 4px; padding: 24px; }
-  .clean-card h3 { font-family: var(--display); font-size: 1.05rem; color: var(--ink); margin-bottom: 12px; }
-  .clean-card ul { list-style: none; }
-  .clean-card li { font-size: 15px; color: var(--muted); padding: 6px 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px; }
-  .clean-card li:last-child { border-bottom: 0; }
-  .clean-card li b { color: var(--ink); font-family: var(--mono); font-size: 13.5px; font-weight: 500; }
+  /* Fase 2 - Limpieza */
+  .phase-header { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 8px; }
+  .phase-header h3 { font-family: var(--display); font-size: 1.5rem; color: var(--ink); }
+  .phase-header .badge { font-family: var(--mono); font-size: 13px; padding: 2px 10px; border-radius: 3px; background: var(--teal); color: var(--white); }
+  .kpi-mini { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 20px 0 28px; }
+  .kpi-mini div { background: var(--white); border: 1px solid var(--line); border-radius: 4px; padding: 16px; }
+  .kpi-mini b { display: block; font-family: var(--display); font-size: 1.5rem; color: var(--ink); line-height: 1; }
+  .kpi-mini span { font-size: 13px; color: var(--muted); }
+
+  .data-table { width: 100%; border-collapse: collapse; background: var(--white); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; font-size: 15px; }
+  .data-table th { background: var(--ink); color: var(--white); font-family: var(--display); font-weight: 600; font-size: 14px; text-align: left; padding: 12px 16px; }
+  .data-table td { padding: 11px 16px; border-bottom: 1px solid var(--line); color: var(--muted); vertical-align: top; }
+  .data-table tr:last-child td { border-bottom: 0; }
+  .data-table td code { font-family: var(--mono); font-size: 13.5px; color: var(--ink-soft); background: var(--paper); padding: 1px 6px; border-radius: 3px; }
+  .data-table .key { font-weight: 600; color: var(--ink); white-space: nowrap; }
+
+  .callout { margin-top: 24px; padding: 20px 22px; background: #FFF8E8; border: 1px solid #EAD9A8; border-left: 6px solid var(--amber); border-radius: 4px; }
+  .callout h4 { font-family: var(--display); font-size: 1.05rem; color: var(--ink); margin-bottom: 6px; }
+  .callout p { font-size: 15px; color: var(--muted); }
+
+  .callout.teal { background: #EAF4F2; border-color: #B9D6D1; border-left-color: var(--teal); }
 
   footer { background: var(--ink); color: #A9BBD0; padding: 36px 0; font-size: 14.5px; }
   footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
@@ -168,15 +181,18 @@
     .flow { grid-template-columns: repeat(2, 1fr); }
     .kpis { grid-template-columns: 1fr; }
     .kpi { min-height: 0; }
+    .kpi-mini { grid-template-columns: 1fr; }
   }
   @media (max-width: 640px) {
     body { font-size: 16px; }
     .wrap { width: calc(100% - 32px); }
     .hero { padding: 48px 0 56px; }
     section { padding: 52px 0; }
-    .datasets, .team-grid, .cleaning-grid { grid-template-columns: 1fr; }
+    .datasets, .team-grid { grid-template-columns: 1fr; }
     .flow { grid-template-columns: 1fr; }
     .facts { grid-template-columns: 1fr; }
+    .data-table { font-size: 14px; }
+    .data-table th, .data-table td { padding: 9px 12px; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -349,37 +365,154 @@
     </div>
   </section>
 
-  <section id="limpieza">
+  <!-- ================= FASE 2: LIMPIEZA Y PREPARACIÓN ================= -->
+  <section id="fase2">
     <div class="wrap row">
-      <h2>Preparación de datos<small>Resultados de la fase 2: limpieza y data wrangling</small></h2>
+      <h2>Fase 2: Limpieza y preparación<small>Data Wrangling — tabla maestra <code>insurance_life_enriched_limpio</code></small></h2>
       <div>
+
+        <div class="phase-header">
+          <h3>Propósito</h3>
+          <span class="badge">Google Colab + Python</span>
+        </div>
         <div class="prose">
-          <p>La tabla maestra <code>insurance_life_enriched_limpio</code> reúne <strong>6.512 filas y 79 campos</strong>, con una completitud global del <strong>99,9%</strong> y <strong>0 filas duplicadas</strong>. Estos controles describen la estructura y la cobertura de los datos; por sí solos no certifican la exactitud de los valores.</p>
+          <p>En lenguaje de negocio, la tabla maestra <code>insurance_life_enriched_limpio</code> muestra de qué está compuesta, qué tan completa es y cuáles son las variables que sostienen las decisiones. No reproduce el listado completo de campos; ese detalle está en el diccionario técnico (<code>diccionario_datos.xlsx</code>).</p>
         </div>
-        <div class="cleaning-grid" style="margin-top: 28px;">
-          <div class="clean-card">
-            <h3>Llaves e identificadores</h3>
-            <ul>
-              <li><span>policy_id</span><b>Única por registro</b></li>
-              <li><span>customer_id</span><b>6.490 valores distintos</b></li>
-              <li><span>postal_code</span><b>14 valores distintos</b></li>
-              <li><span>claim_id</span><b>3.188 valores distintos</b></li>
-              <li><span>adjuster_id</span><b>2.344 valores distintos</b></li>
-              <li><span>agent_id</span><b>4.640 valores distintos</b></li>
-              <li><span>broker_id</span><b>2.212 valores distintos</b></li>
-            </ul>
-          </div>
-          <div class="clean-card">
-            <h3>Tratamiento de valores nulos</h3>
-            <ul>
-              <li><span>claim_description</span><b>98 tratados</b></li>
-              <li><span>adjuster_id</span><b>89 tratados</b></li>
-              <li><span>broker_id</span><b>139 tratados</b></li>
-              <li><span>notes</span><b>125 tratados</b></li>
-            </ul>
-            <p style="font-size: 14px; color: var(--muted); margin-top: 14px;">La base conserva estos nulos; no debe describirse como completamente libre de valores faltantes.</p>
-          </div>
+
+        <div class="kpi-mini">
+          <div><b>6.512</b><span>filas</span></div>
+          <div><b>79</b><span>columnas</span></div>
+          <div><b>99,9 %</b><span>completitud global</span></div>
+          <div><b>0</b><span>filas duplicadas</span></div>
         </div>
+
+        <p style="font-size: 15px; color: var(--muted); margin-bottom: 28px;">Estos controles describen la estructura y la cobertura de los datos; por sí solos no certifican la exactitud de los valores.</p>
+
+        <h3 class="vars-title" style="margin-top: 0;">Arquitectura final y variables críticas del negocio</h3>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Variable o llave</th>
+              <th>Significado y función ejecutiva</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="key"><code>policy_id</code></td>
+              <td>Llave. Identifica una póliza y permite consolidar sus registros. Evita contar repetidamente la misma póliza. 100 % con dato; única por registro.</td>
+            </tr>
+            <tr>
+              <td class="key"><code>customer_id</code></td>
+              <td>Llave. Identifica a un cliente y permite consolidar sus registros sin contarlo más de una vez. 100 % con dato; se repite (6.490 valores distintos en 6.512 filas).</td>
+            </tr>
+            <tr>
+              <td class="key"><code>postal_code</code></td>
+              <td>Llave. Código postal. Llave territorial para enlazar con catálogos geográficos; se conserva como texto para no perder los ceros a la izquierda. El primero enlaza con el catálogo territorial y se normaliza a cinco dígitos. La segunda conserva el valor previo a la reasignación para mantener trazabilidad. 100 % con dato; se repite (14 valores distintos en 6.512 filas). Dado que la tabla de seguros contenía datos ficticios con formato incorrecto, se utilizó la ubicación del Estado por cliente para obtener el código postal verdadero.</td>
+            </tr>
+            <tr>
+              <td class="key"><code>claim_id</code></td>
+              <td>Llave. Identificador de reclamo. Sirve para enlazar registros entre tablas y para detectar duplicados. 100 % con dato; se repite (3.188 valores distintos en 6.512 filas).</td>
+            </tr>
+            <tr>
+              <td class="key"><code>adjuster_id</code></td>
+              <td>Llave. Identificador de adjuster. 98,6 % con dato; se repite (2.344 valores distintos en 6.423 filas).</td>
+            </tr>
+            <tr>
+              <td class="key"><code>agent_id</code></td>
+              <td>Llave. Identificador de agent. 100 % con dato; se repite (4.640 valores distintos en 6.512 filas).</td>
+            </tr>
+            <tr>
+              <td class="key"><code>broker_id</code></td>
+              <td>Llave. Identificador de broker. 97,9 % con dato; se repite (2.212 valores distintos en 6.373 filas).</td>
+            </tr>
+            <tr>
+              <td class="key"><code>claim_description</code></td>
+              <td>Variable transformada. Identificador de descripción de reclamos. Celdas vacías convertidas a nulo real (98 tratados).</td>
+            </tr>
+            <tr>
+              <td class="key"><code>notes</code></td>
+              <td>Variable transformada. Identificador de notas. Celdas vacías convertidas a nulo real (125 tratados).</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout teal" style="margin-top: 24px;">
+          <h4>Referencia técnica</h4>
+          <p>El detalle técnico exhaustivo de los 79 campos estructurales se encuentra en el archivo adjunto <code>diccionario_datos.xlsx</code>.</p>
+        </div>
+
+        <h3 class="vars-title">Preparación de datos y resultados del proceso</h3>
+        <div class="prose">
+          <p>Para el tratamiento de vacíos se aplicó una regla a 4 columnas: <code>claim_description</code> (98 tratados), <code>adjuster_id</code> (89 tratados), <code>broker_id</code> (139 tratados) y <code>notes</code> (125 tratados). La tabla conserva estos valores nulos; por ello, la base no debe describirse como completamente libre de nulos.</p>
+        </div>
+
+        <table class="data-table" style="margin-top: 20px;">
+          <thead>
+            <tr>
+              <th>Control registrado</th>
+              <th>Resultado</th>
+              <th>Lectura ejecutiva</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Tamaño de la base final</td>
+              <td><b>6.512 filas y 79 columnas</b></td>
+              <td>Estructura de la tabla maestra entregada.</td>
+            </tr>
+            <tr>
+              <td>Llave <code>policy_id</code></td>
+              <td>100 % con dato; única por registro</td>
+              <td>Identifica cada registro sin repetirse.</td>
+            </tr>
+            <tr>
+              <td>Llave <code>customer_id</code></td>
+              <td>100 % con dato; se repite (6.490 valores distintos en 6.512 filas)</td>
+              <td>Se repite: relación de uno a muchos; no sirve como identificador único.</td>
+            </tr>
+            <tr>
+              <td>Llave <code>postal_code</code></td>
+              <td>100 % con dato; se repite (14 valores distintos en 6.512 filas)</td>
+              <td>Se repite: relación de uno a muchos; no sirve como identificador único.</td>
+            </tr>
+            <tr>
+              <td>Llave <code>claim_id</code></td>
+              <td>100 % con dato; se repite (3.188 valores distintos en 6.512 filas)</td>
+              <td>Se repite: relación de uno a muchos; no sirve como identificador único.</td>
+            </tr>
+            <tr>
+              <td>Llave <code>adjuster_id</code></td>
+              <td>98,6 % con dato; se repite (2.344 valores distintos en 6.423 filas)</td>
+              <td>Las filas sin valor no cruzan con otras tablas.</td>
+            </tr>
+            <tr>
+              <td>Llave <code>agent_id</code></td>
+              <td>100 % con dato; se repite (4.640 valores distintos en 6.512 filas)</td>
+              <td>Se repite: relación de uno a muchos; no sirve como identificador único.</td>
+            </tr>
+            <tr>
+              <td>Filas duplicadas</td>
+              <td>0</td>
+              <td>Sin duplicados completos.</td>
+            </tr>
+            <tr>
+              <td>Completitud global</td>
+              <td>99,9 %</td>
+              <td>Proporción de celdas con dato en toda la tabla.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="callout" style="margin-top: 24px;">
+          <h4>Valores nulos conservados</h4>
+          <p>La tabla conserva los siguientes valores nulos: <b>139</b> de <code>broker_id</code>, <b>125</b> de <code>notes</code>, <b>98</b> de <code>claim_description</code> y <b>89</b> de <code>adjuster_id</code>. Por ello, la base no debe describirse como completamente libre de nulos.</p>
+        </div>
+
+        <div class="callout" style="margin-top: 20px;">
+          <h4>Limitaciones y advertencias</h4>
+          <p>La completitud del 99,9 % y la ausencia de duplicados completos son controles parciales. No garantizan la exactitud de cada campo ni la validez de las asociaciones geográficas. Los códigos postales se reasignaron a partir del estado del cliente; un estado no identifica un domicilio ni un municipio específico. Estas asignaciones deben conservarse como decisiones metodológicas, junto con el valor original y la regla aplicada.</p>
+        </div>
+
       </div>
     </div>
   </section>
@@ -430,7 +563,7 @@
 <footer>
   <div class="wrap">
     <span>VMHS Data Analisis S.A</span>
-    <span>Documento de alcance del proyecto (Project Brief) — Fase 1: Comprensión del negocio</span>
+    <span>Documento de alcance del proyecto (Project Brief) — Fase 1: Comprensión del negocio · Fase 2: Limpieza y preparación</span>
   </div>
 </footer>
 
@@ -440,7 +573,6 @@
     var svg = document.getElementById('cluster-map');
     if (!svg) return;
     var ns = 'http://www.w3.org/2000/svg';
-    // Contorno simplificado (lon, lat)
     var poly = [[6.0,51.9],[6.8,53.3],[8.0,53.7],[8.6,54.9],[9.4,54.8],[10.0,54.5],[11.0,54.0],[12.5,54.4],[13.8,54.0],[14.3,53.9],[14.6,52.8],[14.7,51.5],[15.0,51.0],[14.3,50.9],[12.2,50.3],[12.5,49.5],[13.8,48.8],[13.0,47.8],[12.2,47.6],[10.5,47.5],[9.6,47.5],[7.6,47.6],[7.6,48.9],[8.2,49.0],[6.4,49.5],[6.2,50.4],[6.0,51.0]];
     var lonMin = 5.8, latMax = 55.1, kx = 0.63 * 42, ky = 42;
     function toXY(p) { return [(p[0] - lonMin) * kx, (latMax - p[1]) * ky]; }
@@ -453,7 +585,6 @@
       }
       return c;
     }
-    // Zonas resaltadas (decorativas)
     var clusters = [[7.0,51.4,1.0],[11.6,48.2,0.9],[13.4,52.5,0.8],[9.9,53.6,0.6]].map(function (c) {
       var xy = toXY([c[0], c[1]]); return { x: xy[0], y: xy[1], r: c[2] * 38 };
     });
