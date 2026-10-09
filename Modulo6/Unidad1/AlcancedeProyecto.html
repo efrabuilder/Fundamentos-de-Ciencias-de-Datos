@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Alcance del proyecto | Siniestralidad de seguros de vida en Alemania</title>
-<meta name="description" content="Documento de alcance del proyecto de VHMS Data Analisis S.A: siniestralidad de seguros de vida por región en Alemania.">
+<meta name="description" content="Documento de alcance del proyecto de VMHS Data Analisis S.A: siniestralidad de seguros de vida por región en Alemania.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -147,6 +147,15 @@
   .member b { display: block; font-family: var(--display); font-size: 1.1rem; color: var(--ink); line-height: 1.2; }
   .member span { font-size: 14.5px; color: var(--muted); }
 
+  /* Limpieza */
+  .cleaning-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 8px; }
+  .clean-card { background: var(--white); border: 1px solid var(--line); border-radius: 4px; padding: 24px; }
+  .clean-card h3 { font-family: var(--display); font-size: 1.05rem; color: var(--ink); margin-bottom: 12px; }
+  .clean-card ul { list-style: none; }
+  .clean-card li { font-size: 15px; color: var(--muted); padding: 6px 0; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px; }
+  .clean-card li:last-child { border-bottom: 0; }
+  .clean-card li b { color: var(--ink); font-family: var(--mono); font-size: 13.5px; font-weight: 500; }
+
   footer { background: var(--ink); color: #A9BBD0; padding: 36px 0; font-size: 14.5px; }
   footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
 
@@ -165,7 +174,7 @@
     .wrap { width: calc(100% - 32px); }
     .hero { padding: 48px 0 56px; }
     section { padding: 52px 0; }
-    .datasets, .team-grid { grid-template-columns: 1fr; }
+    .datasets, .team-grid, .cleaning-grid { grid-template-columns: 1fr; }
     .flow { grid-template-columns: 1fr; }
     .facts { grid-template-columns: 1fr; }
   }
@@ -180,7 +189,7 @@
 <header class="hero">
   <div class="wrap">
     <div>
-      <p class="team">VHMS Data Analisis S.A</p>
+      <p class="team">VMHS Data Analisis S.A</p>
       <h1>Siniestralidad del seguro de vida por región en Alemania</h1>
       <p class="lede">Documento de alcance: qué problema de negocio resolvemos, con qué datos y qué indicadores verá el gerente en el dashboard final.</p>
       <dl class="facts">
@@ -232,10 +241,10 @@
       <h2>Planteamiento del problema<small>El dolor principal del negocio</small></h2>
       <div>
         <div class="prose">
-          <p>La aseguradora ha visto disminuir la venta de pólizas de vida y no sabe qué factor lo explica. Nos pidió identificar la causa.</p>
+          <p>La empresa aseguradora ha visualizado bajas del 20% en su servicio de pólizas, por lo que acudió a nuestra labor para identificar el factor que puede estar causando dicha disminución de las ventas en el sector.</p>
           <p>Nuestra hipótesis de trabajo es que el costo de los siniestros no se reparte por igual en el territorio. Mientras no se sepa dónde se concentra, la empresa no puede decidir en qué regiones captar primas ni a qué precio.</p>
         </div>
-        <p class="problem-goal">Medir la siniestralidad por ubicación geográfica, identificar clusters de costo y definir una estrategia regional de adquisición de primas en Alemania.</p>
+        <p class="problem-goal">Medir la siniestralidad localizada geográficamente: identificar clústeres de costo y diseño de adquisición de primas regionales en Alemania.</p>
       </div>
     </div>
   </section>
@@ -247,33 +256,41 @@
         <article class="goal">
           <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="13"/><path d="M23 13l-3.5 7.5L12 24l3.5-7.5z"/></svg>
           <div>
-            <span class="tag">Objetivo principal</span>
-            <h3>Proponer una estrategia regional de adquisición de primas</h3>
-            <p>Indicar a la gerencia en qué regiones de Alemania conviene captar más pólizas de vida y en cuáles conviene frenar, con base en la siniestralidad medida.</p>
+            <span class="tag">Objetivo general</span>
+            <h3>Calcular el índice de siniestralidad de cada región del país</h3>
+            <p>Mediante la relación entre el monto de los siniestros y las primas correspondientes al período analizado, para encontrar aquellas regiones que pueden ser un riesgo para la aseguradora.</p>
           </div>
         </article>
         <article class="goal">
           <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 33s11-9.2 11-17.5a11 11 0 0 0-22 0C7 23.8 18 33 18 33z"/><circle cx="18" cy="15.5" r="4"/></svg>
           <div>
-            <span class="tag sec">Objetivo secundario</span>
-            <h3>Calcular la siniestralidad promedio por región e identificar clusters de costo</h3>
-            <p>Detectar las regiones que representan un mayor riesgo para la aseguradora y agruparlas según su costo.</p>
+            <span class="tag sec">Objetivo específico 1</span>
+            <h3>Organizar y depurar los datos de primas y siniestros por región</h3>
+            <p>Asegurar la calidad de la información utilizada en el análisis por medio de Python.</p>
           </div>
         </article>
         <article class="goal">
           <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="6" width="12" height="10" rx="1.5"/><rect x="20" y="20" width="12" height="10" rx="1.5"/><path d="M16 11h6a4 4 0 0 1 4 4v5"/></svg>
           <div>
-            <span class="tag sec">Objetivo secundario</span>
-            <h3>Definir las variables correctas para unir las tablas</h3>
-            <p>Elegir las llaves que conectan las pólizas con los municipios y comprobar que la unión no pierda registros, para avanzar sin tener que rehacer el trabajo.</p>
+            <span class="tag sec">Objetivo específico 2</span>
+            <h3>Evaluar las variables adecuadas para un correcto análisis y unión de las tablas</h3>
+            <p>Permitir un avance progresivo sin necesidad de reconsideraciones.</p>
           </div>
         </article>
         <article class="goal">
           <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="13"/><path d="M18 10v8l5 3"/></svg>
           <div>
-            <span class="tag sec">Objetivo secundario</span>
-            <h3>Entregar cada avance a tiempo</h3>
-            <p>Cumplir las fechas de cada etapa del proyecto, con trabajo en equipo según los roles asignados.</p>
+            <span class="tag sec">Objetivo específico 3</span>
+            <h3>Comparar la siniestralidad entre las regiones</h3>
+            <p>Identificar aquellas con los valores más elevados y que podrían representar un mayor riesgo financiero para la aseguradora.</p>
+          </div>
+        </article>
+        <article class="goal">
+          <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="13"/><path d="M18 10v8l5 3"/></svg>
+          <div>
+            <span class="tag sec">Objetivo específico 4</span>
+            <h3>Administrar el progreso del proyecto</h3>
+            <p>Cada avance debe ser entregado en buen tiempo, contemplando buenas prácticas de trabajo en equipo y resolución de las diferentes etapas.</p>
           </div>
         </article>
       </div>
@@ -310,11 +327,13 @@
 
         <h3 class="vars-title">Variables principales</h3>
         <div class="vars">
-          <code>Costumer_ID</code>
+          <code>policy_id</code>
+          <code>customer_id</code>
+          <code>postal_code</code>
+          <code>claim_id</code>
           <code>insurance_type</code>
           <code>gender</code>
           <code>age</code>
-          <code>policy_number</code>
           <code>regional_designation</code>
           <code>municipality_name</code>
         </div>
@@ -323,8 +342,43 @@
         <div class="flow">
           <div class="step"><h3>Dos datasets</h3><p>Pólizas y siniestros, más municipios de Alemania.</p></div>
           <div class="step"><h3>Unión de tablas</h3><p>Variables evaluadas para evitar reconsideraciones.</p></div>
-          <div class="step"><h3>Siniestralidad por región</h3><p>Promedio por región y clusters de costo.</p></div>
+          <div class="step"><h3>Siniestralidad por región</h3><p>Índice de siniestralidad y clusters de costo.</p></div>
           <div class="step"><h3>Dashboard en Power BI</h3><p>Los KPIs que necesita el gerente.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="limpieza">
+    <div class="wrap row">
+      <h2>Preparación de datos<small>Resultados de la fase 2: limpieza y data wrangling</small></h2>
+      <div>
+        <div class="prose">
+          <p>La tabla maestra <code>insurance_life_enriched_limpio</code> reúne <strong>6.512 filas y 79 campos</strong>, con una completitud global del <strong>99,9%</strong> y <strong>0 filas duplicadas</strong>. Estos controles describen la estructura y la cobertura de los datos; por sí solos no certifican la exactitud de los valores.</p>
+        </div>
+        <div class="cleaning-grid" style="margin-top: 28px;">
+          <div class="clean-card">
+            <h3>Llaves e identificadores</h3>
+            <ul>
+              <li><span>policy_id</span><b>Única por registro</b></li>
+              <li><span>customer_id</span><b>6.490 valores distintos</b></li>
+              <li><span>postal_code</span><b>14 valores distintos</b></li>
+              <li><span>claim_id</span><b>3.188 valores distintos</b></li>
+              <li><span>adjuster_id</span><b>2.344 valores distintos</b></li>
+              <li><span>agent_id</span><b>4.640 valores distintos</b></li>
+              <li><span>broker_id</span><b>2.212 valores distintos</b></li>
+            </ul>
+          </div>
+          <div class="clean-card">
+            <h3>Tratamiento de valores nulos</h3>
+            <ul>
+              <li><span>claim_description</span><b>98 tratados</b></li>
+              <li><span>adjuster_id</span><b>89 tratados</b></li>
+              <li><span>broker_id</span><b>139 tratados</b></li>
+              <li><span>notes</span><b>125 tratados</b></li>
+            </ul>
+            <p style="font-size: 14px; color: var(--muted); margin-top: 14px;">La base conserva estos nulos; no debe describirse como completamente libre de valores faltantes.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -345,14 +399,14 @@
           <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 30V19M13 30V11M21 30V16M29 30V6"/></svg>
           <h3>Frecuencia de siniestros</h3>
           <p>Con qué frecuencia se usan las pólizas para reclamar.</p>
-          <div class="formula">N.º de siniestros / N.º de pólizas de vida</div>
+          <div class="formula">N.º de siniestros únicos / N.º de pólizas de vida</div>
           <div class="q"><span>Pregunta de negocio</span>¿Qué proporción de las pólizas de vida termina en reclamación?</div>
         </article>
         <article class="kpi">
           <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 4l14 25H4L18 4z"/><path d="M18 14v7M18 25v.5"/></svg>
           <h3>Riesgo por región</h3>
           <p>Regiones donde la siniestralidad supone mayor riesgo.</p>
-          <div class="formula">Monto de siniestros / primas, por región</div>
+          <div class="formula">(Σ siniestros / Σ primas) × 100</div>
           <div class="q"><span>Pregunta de negocio</span>¿En qué regiones conviene frenar o reforzar la adquisición de primas?</div>
         </article>
       </div>
@@ -361,12 +415,12 @@
 
   <section id="equipo">
     <div class="wrap row">
-      <h2>Equipo consultor<small>VHMS Data Analisis S.A</small></h2>
+      <h2>Equipo consultor<small>VMHS Data Analisis S.A</small></h2>
       <div class="team-grid">
-        <div class="member"><div class="avatar" aria-hidden="true">SR</div><div><b>Sebastian Rojas</b><span>Data Engineer</span></div></div>
-        <div class="member"><div class="avatar" aria-hidden="true">VH</div><div><b>Veronica Hernandez</b><span>Data Analyst</span></div></div>
-        <div class="member"><div class="avatar" aria-hidden="true">HS</div><div><b>Hazel Salazar</b><span>Data Analyst</span></div></div>
-        <div class="member"><div class="avatar" aria-hidden="true">MV</div><div><b>Mercedes Vásquez</b><span>Business Translator</span></div></div>
+        <div class="member"><div class="avatar" aria-hidden="true">SR</div><div><b>Sebastián Rojas Artavia</b><span>Data Engineer</span></div></div>
+        <div class="member"><div class="avatar" aria-hidden="true">VH</div><div><b>Verónica Hernández Solís</b><span>Data Analyst</span></div></div>
+        <div class="member"><div class="avatar" aria-hidden="true">HS</div><div><b>Hazel Salazar Barboza</b><span>Data Analyst</span></div></div>
+        <div class="member"><div class="avatar" aria-hidden="true">MV</div><div><b>Mercedes Vásquez Espinoza</b><span>Business Translator</span></div></div>
       </div>
     </div>
   </section>
@@ -375,8 +429,8 @@
 
 <footer>
   <div class="wrap">
-    <span>VHMS Data Analisis S.A</span>
-    <span>Documento de alcance del proyecto (Project Brief)</span>
+    <span>VMHS Data Analisis S.A</span>
+    <span>Documento de alcance del proyecto (Project Brief) — Fase 1: Comprensión del negocio</span>
   </div>
 </footer>
 
