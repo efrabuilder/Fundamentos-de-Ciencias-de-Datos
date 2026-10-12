@@ -391,7 +391,7 @@ def abrir_dialogo_grafico():
     # histograma sobre una columna de texto, etc.).
     ventana_grafico = tk.Toplevel(ventana)
     ventana_grafico.title("Generar grafico")
-    ventana_grafico.geometry("380x320")
+    ventana_grafico.geometry("380x400")
     ventana_grafico.grab_set()
 
     tipos = list(analisis.TIPOS_GRAFICO.keys())
@@ -416,10 +416,17 @@ def abrir_dialogo_grafico():
         info = analisis.TIPOS_GRAFICO[tipo]
         label_descripcion.config(text=info["descripcion"])
 
-        combo_x["values"] = analisis.columnas_validas_para(estado, tipo, "x")
-        combo_x.set("")
-        if combo_x["values"]:
-            combo_x.current(0)
+        if info["x"] == "ninguna":
+            # La matriz de correlacion no usa columna X: se deshabilita el combo.
+            combo_x["values"] = []
+            combo_x.set("(no aplica: usa todas las numericas)")
+            combo_x.config(state="disabled")
+        else:
+            combo_x.config(state="readonly")
+            combo_x["values"] = analisis.columnas_validas_para(estado, tipo, "x")
+            combo_x.set("")
+            if combo_x["values"]:
+                combo_x.current(0)
 
         if info["y"] == "ninguna":
             label_y.pack_forget()
@@ -440,18 +447,27 @@ def abrir_dialogo_grafico():
         tipo = combo_tipo.get()
         columna_x = combo_x.get()
         columna_y = combo_y.get() or None
-        if not columna_x:
+        if analisis.TIPOS_GRAFICO[tipo]["x"] == "ninguna":
+            columna_x = None
+        elif not columna_x:
             messagebox.showwarning("Aviso", "Debe seleccionar una columna X.")
             return
         try:
-            fig = analisis.generar_grafico(estado, tipo, columna_x, columna_y)
+            filtro = entrada_filtro.get().strip() or None  # condicion opcional (ej. age > 40)
+            fig = analisis.generar_grafico(estado, tipo, columna_x, columna_y, filtro=filtro)
             ventana_grafico.destroy()
             mostrar_grafico(fig)
         except Exception as e:
             manejar_error(e)
 
+    # Boton, entrada y etiqueta se empaquetan desde ABAJO (side="bottom") para que
+    # siempre queden al final aunque los campos de arriba cambien de tamano.
     tk.Button(ventana_grafico, text="Generar", command=generar, bg="#2980b9", fg="white"
-              ).pack(pady=15)
+              ).pack(side="bottom", pady=15)
+    entrada_filtro = tk.Entry(ventana_grafico)  # filtro opcional del grafico
+    entrada_filtro.pack(side="bottom", fill="x", padx=10)
+    tk.Label(ventana_grafico, text="Filtro opcional (ej: age > 40 and gender == 'M'):"
+             ).pack(side="bottom", anchor="w", padx=10)
 
 
 def accion_inconsistencias():
