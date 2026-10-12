@@ -3,211 +3,655 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>De limpiadores a traductores de negocio · Unidad 3 · Ciencias de Datos</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=DM+Mono:wght@400;500&display=swap">
+<title>Unidad 3 · De Limpiadores a Traductores de Negocio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
 :root {
-  --bg: #efeee8;
-  --white: #fff;
-  --ink: #121212;
-  --mut: #5b5b57;
-  --lime: #d6f36b;
-  --lilac: #d9cdff;
-  --coral: #ffc7b3;
-  --sky: #bfe2ff;
-  --r: 28px;
-  color-scheme: light;
-  box-sizing: border-box;
-  padding-top: env(safe-area-inset-top, 0px);
-  padding-bottom: env(safe-area-inset-bottom, 0px);
+  --bg: #0b0f14;
+  --surface: #12181f;
+  --surface-2: #1a222d;
+  --border: #2a3441;
+  --ink: #e6edf3;
+  --mut: #8b9bb4;
+  --cyan: #22d3ee;
+  --teal: #14b8a6;
+  --green: #34d399;
+  --amber: #fbbf24;
+  --rose: #fb7185;
+  --violet: #a78bfa;
+  --r: 12px;
+  color-scheme: dark;
 }
-html { scroll-behavior: smooth; scroll-padding-top: calc(5rem + env(safe-area-inset-top, 0px)); }
-*, *::before, *::after { box-sizing: inherit; }
-body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1.02rem/1.6 "Bricolage Grotesque", system-ui, sans-serif; }
-h1, h2, h3 { margin: 0 0 .4em; line-height: 1.02; letter-spacing: -.025em; font-weight: 800; }
-h1 { font-size: clamp(2.6rem, 7.5vw, 5.6rem); }
-h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
-h3 { font-size: 1.45rem; }
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font: 400 1rem/1.6 "IBM Plex Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { margin: 0 0 .5em; line-height: 1.15; font-weight: 700; letter-spacing: -.02em; }
+h1 { font-size: clamp(1.9rem, 5vw, 3.2rem); }
+h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); }
+h3 { font-size: 1.15rem; }
 p { margin: 0 0 .7em; }
-code, .mono { font-family: "DM Mono", ui-monospace, Menlo, Consolas, monospace; }
-code { font-size: .86em; background: rgba(0,0,0,.08); padding: .05rem .4rem; border-radius: 8px; }
-:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
-
-.wrap { max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
-
-.pillnav { position: sticky; top: calc(.7rem + env(safe-area-inset-top, 0px)); z-index: 5; display: flex; justify-content: center; padding: 0 1rem; }
-.pillnav div { display: flex; gap: .2rem; overflow-x: auto; max-width: 100%; background: var(--ink); border-radius: 99px; padding: .3rem; }
-.pillnav a { color: #fff; text-decoration: none; white-space: nowrap; padding: .4rem 1rem; border-radius: 99px; font-size: .92rem; font-weight: 600; }
-.pillnav a:hover { background: var(--lime); color: var(--ink); }
-
-.bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-bottom: 14px; }
-.tile { background: var(--white); border-radius: var(--r); padding: 1.6rem; grid-column: span 3; min-width: 0; }
-.tile > :last-child { margin-bottom: 0; }
-.w2 { grid-column: span 2; } .w4 { grid-column: span 4; } .w6 { grid-column: span 6; }
-.lime { background: var(--lime); } .lilac { background: var(--lilac); } .coral { background: var(--coral); } .sky { background: var(--sky); }
-.dark { background: var(--ink); color: #fff; }
-.label { display: inline-block; font: 500 .78rem "DM Mono", monospace; text-transform: uppercase; letter-spacing: .08em; background: rgba(0,0,0,.09); border-radius: 99px; padding: .15rem .8rem; margin-bottom: .9rem; }
-.dark .label { background: rgba(255,255,255,.16); }
-.big { font-size: 5.5rem; font-weight: 800; line-height: .9; letter-spacing: -.05em; margin-bottom: .1em; }
-.lead { font-size: 1.3rem; max-width: 34ch; }
-
-.hero { padding: 3rem 0 1rem; }
-.hero .tile { padding: 2rem; }
-.hero h1 em { font-style: normal; color: var(--lime); }
-.dark .lead { color: #cfcfca; }
-
-.ring { display: block; margin: 0 auto .6rem; width: 140px; height: 140px; transform: rotate(-90deg); }
-.ring circle { fill: none; stroke-width: 14; }
-.ring .t { stroke: rgba(0,0,0,.12); }
-.ring .v { stroke: var(--ink); stroke-linecap: round; stroke-dasharray: 339.3; stroke-dashoffset: 339.3; transition: stroke-dashoffset .35s; }
-.prog { text-align: center; display: flex; flex-direction: column; justify-content: center; }
-.prog .count { font: 500 1.4rem "DM Mono", monospace; }
-
-.mission { font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
-.mission u { text-decoration: none; background: var(--ink); color: var(--coral); padding: 0 .3em; border-radius: 12px; }
-
-.section-title { margin: 3.5rem 0 1rem; display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem 1.2rem; }
-.section-title p { color: var(--mut); max-width: 56ch; margin: 0; }
-
-.phase-top { display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem; }
-.phase-top .n { width: 3rem; height: 3rem; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 800; font-size: 1.4rem; }
-.phase-top h3 { margin: 0; }
-.goal b { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 3px; }
-.focus { color: rgba(0,0,0,.65); font-size: .95rem; }
-
-.checks { list-style: none; margin: 1.2rem 0 0; padding: 0; display: grid; gap: .5rem; }
-.checks label { display: grid; grid-template-columns: 1.7rem 1fr; gap: .8rem; background: rgba(255,255,255,.7); border-radius: 18px; padding: .9rem 1rem; cursor: pointer; transition: background .15s; }
-.checks label:hover { background: #fff; }
-.checks input { appearance: none; width: 1.6rem; height: 1.6rem; margin: 0; border-radius: 50%; border: 2.5px solid var(--ink); display: grid; place-content: center; cursor: pointer; background: #fff; }
-.checks input::after { content: ""; width: .8rem; height: .8rem; border-radius: 50%; background: #fff; transform: scale(0); transition: transform .15s; }
-.checks input:checked { background: var(--ink); }
-.checks input:checked::after { transform: scale(1); }
-.checks input:checked ~ span { opacity: .5; }
-.ask { display: block; margin-top: .3rem; font-weight: 600; }
-.eg { display: block; margin-top: .3rem; font-size: .93rem; color: rgba(0,0,0,.65); }
-
-.stat { display: flex; align-items: baseline; gap: .8rem; flex-wrap: wrap; }
-.stat .big { font-size: 4.2rem; }
-
-footer { text-align: center; color: var(--mut); font-size: .9rem; padding: 2.5rem 1rem 3rem; }
-
-@media (max-width: 800px) {
-  .bento { grid-template-columns: 1fr; }
-  .tile, .w2, .w4, .w6 { grid-column: auto; }
-  .big { font-size: 4.2rem; }
+code, .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; }
+code {
+  font-size: .84em;
+  background: rgba(34,211,238,.12);
+  color: var(--cyan);
+  padding: .15rem .4rem;
+  border-radius: 5px;
+  border: 1px solid rgba(34,211,238,.2);
 }
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .ring .v, .checks input::after, .checks label { transition: none; }
+a { color: var(--cyan); }
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; }
+
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 1.2rem 3rem; }
+
+/* TOP BAR */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(11,15,20,.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: .7rem 0;
+}
+.topbar-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: .85rem;
+  font-weight: 500;
+  color: var(--mut);
+}
+.brand .dot {
+  width: 8px; height: 8px;
+  background: var(--green);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--green);
+}
+.nav {
+  display: flex;
+  gap: .25rem;
+  overflow-x: auto;
+}
+.nav a {
+  color: var(--mut);
+  text-decoration: none;
+  font-size: .82rem;
+  font-weight: 500;
+  padding: .35rem .75rem;
+  border-radius: 6px;
+  white-space: nowrap;
+  transition: all .15s;
+}
+.nav a:hover { color: var(--ink); background: var(--surface-2); }
+
+/* HERO */
+.hero {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 1.2rem;
+  margin: 2rem 0 1.5rem;
+}
+@media (max-width: 800px) { .hero { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 1.5rem;
+}
+.card.accent {
+  border-color: rgba(34,211,238,.35);
+  background: linear-gradient(145deg, #12181f 0%, #0f1a22 100%);
+}
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: .72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--cyan);
+  background: rgba(34,211,238,.1);
+  border: 1px solid rgba(34,211,238,.25);
+  padding: .2rem .65rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+.hero h1 span { color: var(--cyan); }
+.lead { color: var(--mut); font-size: 1.05rem; max-width: 42ch; }
+
+/* PROGRESS */
+.progress-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: .6rem;
+}
+.ring-wrap { position: relative; width: 120px; height: 120px; }
+.ring-wrap svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.ring-wrap circle { fill: none; stroke-width: 8; }
+.ring-bg { stroke: var(--border); }
+.ring-val {
+  stroke: var(--cyan);
+  stroke-linecap: round;
+  stroke-dasharray: 339.3;
+  stroke-dashoffset: 339.3;
+  transition: stroke-dashoffset .4s ease;
+  filter: drop-shadow(0 0 6px rgba(34,211,238,.5));
+}
+.ring-center {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+.progress-label {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: .75rem;
+  color: var(--mut);
+  letter-spacing: .04em;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+@media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+.grid.full { grid-template-columns: 1fr; }
+
+.compare .vs {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: .7rem;
+  color: var(--mut);
+  margin-bottom: .5rem;
+}
+.compare h3 { font-size: 1.05rem; margin-bottom: 0; }
+.stat-num {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 3.2rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--cyan);
+  margin: .3rem 0 .2rem;
+}
+.mission-bar {
+  background: linear-gradient(90deg, rgba(34,211,238,.15), rgba(20,184,166,.1));
+  border: 1px solid rgba(34,211,238,.3);
+  border-radius: var(--r);
+  padding: 1.3rem 1.6rem;
+  margin: 1.2rem 0 2rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: center;
+}
+.mission-bar mark {
+  background: none;
+  color: var(--amber);
+  font-weight: 700;
+}
+
+/* SECTION */
+.section-head {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 2.8rem 0 1.1rem;
+  padding-bottom: .7rem;
+  border-bottom: 1px solid var(--border);
+}
+.section-head h2 { margin: 0; }
+.section-head p { margin: 0; color: var(--mut); font-size: .95rem; max-width: 50ch; }
+
+/* PHASE CARDS */
+.phases {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 800px) { .phases { grid-template-columns: 1fr; } }
+
+.phase {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+}
+.phase-header {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: 1rem;
+}
+.phase-num {
+  width: 2.4rem;
+  height: 2.4rem;
+  display: grid;
+  place-items: center;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--cyan);
+}
+.phase h3 { margin: 0; font-size: 1.15rem; }
+.phase .goal {
+  font-size: .92rem;
+  color: var(--mut);
+  margin-bottom: .6rem;
+}
+.phase .goal strong { color: var(--ink); }
+.phase .focus {
+  font-size: .85rem;
+  color: var(--mut);
+  border-left: 2px solid var(--border);
+  padding-left: .8rem;
+  margin-bottom: 1rem;
+}
+
+/* CHECKS */
+.checks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  flex: 1;
+}
+.checks label {
+  display: grid;
+  grid-template-columns: 1.3rem 1fr;
+  gap: .7rem;
+  background: var(--surface-2);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: .75rem .9rem;
+  cursor: pointer;
+  transition: border-color .15s, background .15s;
+  font-size: .9rem;
+}
+.checks label:hover {
+  border-color: var(--border);
+  background: #1e2733;
+}
+.checks input {
+  appearance: none;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: .15rem;
+  border-radius: 4px;
+  border: 2px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: all .15s;
+}
+.checks input:checked {
+  background: var(--cyan);
+  border-color: var(--cyan);
+}
+.checks input:checked::after {
+  content: "✓";
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: .7rem;
+  font-weight: 700;
+  color: #0b0f14;
+}
+.checks input:checked ~ span { opacity: .55; }
+.ask {
+  display: block;
+  margin-top: .3rem;
+  font-weight: 600;
+  color: var(--amber);
+  font-size: .88rem;
+}
+.eg {
+  display: block;
+  margin-top: .25rem;
+  font-size: .82rem;
+  color: var(--mut);
+}
+
+/* STAT ROW */
+.stat-row {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin: .8rem 0 1rem;
+}
+.stat-item .num {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: var(--teal);
+}
+.stat-item .desc { font-size: .85rem; color: var(--mut); }
+
+/* SCHEDULE */
+.schedule {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1rem;
+  margin-top: .5rem;
+}
+@media (max-width: 700px) { .schedule { grid-template-columns: 1fr; } }
+.time-tag {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: .75rem;
+  color: var(--teal);
+  margin-bottom: .5rem;
+}
+
+footer {
+  text-align: center;
+  color: var(--mut);
+  font-size: .8rem;
+  font-family: "IBM Plex Mono", monospace;
+  padding: 2.5rem 1rem 1rem;
+  border-top: 1px solid var(--border);
+  margin-top: 3rem;
 }
 </style>
 </head>
 <body>
 
-<div class="pillnav"><div>
-  <a href="#enfoque">Enfoque</a>
-  <a href="#checklist">Checklist</a>
-  <a href="#f1">1</a><a href="#f2">2</a><a href="#f3">3</a><a href="#f4">4</a>
-  <a href="#clase">La clase</a>
-</div></div>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <span class="dot"></span>
+      <span>EDA · Unidad 3</span>
+    </div>
+    <nav class="nav">
+      <a href="#enfoque">Enfoque</a>
+      <a href="#checklist">Checklist</a>
+      <a href="#f1">Fase 1</a>
+      <a href="#f2">Fase 2</a>
+      <a href="#f3">Fase 3</a>
+      <a href="#f4">Fase 4</a>
+      <a href="#clase">Clase</a>
+    </nav>
+  </div>
+</header>
 
 <div class="wrap">
 
-<div class="hero bento">
-  <div class="tile dark w4">
-    <span class="label">Unidad 3 · Ciencias de Datos</span>
-    <h1>De limpiadores a <em>traductores</em> de negocio</h1>
-    <p class="lead">Hoy torturamos a los datos limpios hasta que confiesen la verdad operativa de sus empresas.</p>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="card accent">
+      <div class="tag">Ciencias de Datos · Unidad 3</div>
+      <h1>De limpiadores a <span>traductores</span> de negocio</h1>
+      <p class="lead">Hoy torturamos a los datos limpios hasta que confiesen la verdad operativa de sus empresas.</p>
+    </div>
+    <div class="card progress-card" aria-live="polite">
+      <div class="ring-wrap">
+        <svg viewBox="0 0 120 120">
+          <circle class="ring-bg" cx="60" cy="60" r="54"/>
+          <circle class="ring-val" id="ringv" cx="60" cy="60" r="54"/>
+        </svg>
+        <div class="ring-center" id="count">0/0</div>
+      </div>
+      <div class="progress-label">CHECKLIST COMPLETADO</div>
+    </div>
   </div>
-  <div class="tile lime w2 prog" aria-live="polite">
-    <svg class="ring" viewBox="0 0 120 120" aria-hidden="true"><circle class="t" cx="60" cy="60" r="54"/><circle class="v" id="ringv" cx="60" cy="60" r="54"/></svg>
-    <div class="count" id="count">0 / 0</div>
-    <p class="mono" style="font-size:.8rem;margin:.2rem 0 0">puntos del checklist</p>
+
+  <!-- ENFOQUE -->
+  <section id="enfoque">
+    <div class="grid">
+      <div class="card compare">
+        <div class="vs">// UNIVERSIDAD</div>
+        <h3>El EDA sirve para ver si los datos tienen una «distribución normal».</h3>
+      </div>
+      <div class="card compare" style="border-color: rgba(52,211,153,.3);">
+        <div class="vs" style="color: var(--green);">// MUNDO REAL</div>
+        <h3>El EDA sirve para auditar dinero, detectar estafadores y encontrar por qué los clientes nos abandonan.</h3>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="vs">Analista Junior</div>
+        <div class="stat-num">50</div>
+        <p style="color:var(--mut);margin:0">gráficos circulares, porque no sabe qué buscar.</p>
+      </div>
+      <div class="card" style="border-color: rgba(34,211,238,.3);">
+        <div class="vs" style="color:var(--cyan);">Business Translator</div>
+        <div class="stat-num">4</div>
+        <p style="color:var(--mut);margin:0">gráficos estratégicos que responden al dolor del negocio.</p>
+      </div>
+    </div>
+    <div class="mission-bar">
+      Su misión hoy no es programar; es <mark>diagnosticar</mark>.
+    </div>
+  </section>
+
+  <!-- CHECKLIST -->
+  <div class="section-head" id="checklist">
+    <h2>Checklist Universal de EDA</h2>
+    <p>Flujo estándar que toda célula debe seguir en Notebook / Power BI antes de revisión.</p>
   </div>
+
+  <div class="phases">
+    <!-- FASE 1 -->
+    <article class="phase" id="f1">
+      <div class="phase-header">
+        <div class="phase-num">01</div>
+        <h3>El Pulso del Negocio</h3>
+      </div>
+      <p class="goal"><strong>Análisis Univariado.</strong> Entender la normalidad y cazar atípicos.</p>
+      <p class="focus">Foco: anomalías · Histogramas · Boxplots · Perfil de clientes/productos</p>
+      <ul class="checks">
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>
+              <b>Histogramas de variables críticas</b><br>
+              Columna principal de dinero (Sales, Income, Profit) y de tiempo (Días de envío, Antigüedad).
+              <span class="ask">¿Dónde está el grueso del negocio?</span>
+            </span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>
+              <b>Boxplots (Diagramas de Caja)</b><br>
+              Busquen outliers. Decidan en equipo:
+              <span class="ask">¿Error de digitación o cliente VIP que salva el mes?</span>
+            </span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>
+              <b>Frecuencias categóricas (Barras)</b>
+              <span class="ask">¿Qué segmento / región / departamento genera más volumen?</span>
+            </span>
+          </label>
+        </li>
+      </ul>
+    </article>
+
+    <!-- FASE 2 -->
+    <article class="phase" id="f2">
+      <div class="phase-header">
+        <div class="phase-num">02</div>
+        <h3>Buscando Culpables</h3>
+      </div>
+      <p class="goal"><strong>Análisis Bivariado.</strong> Cruzar variables para encontrar la causa del problema.</p>
+      <p class="focus">Foco: Scatter · Correlaciones · Líneas de tiempo</p>
+      <ul class="checks">
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>
+              <b>Cruzar contra el Target</b><br>
+              Variable que más duele (Fuga, Devoluciones, Renuncias, Cancelaciones) vs todo lo demás.
+            </span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>
+              <b>Gráficos de dispersión (Scatter)</b>
+              <span class="ask">¿Si aumenta X, aumenta Y?</span>
+              <span class="eg">Ej: ¿Más descuento → menos rentabilidad? ¿Más horas extra → más renuncia?</span>
+            </span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>
+              <b>Matrices de correlación</b><br>
+              Ejecuten <code>df.corr()</code>. Anoten los 3 hallazgos que nadie sospechaba.
+            </span>
+          </label>
+        </li>
+      </ul>
+    </article>
+
+    <!-- FASE 3 -->
+    <article class="phase" id="f3">
+      <div class="phase-header">
+        <div class="phase-num">03</div>
+        <h3>La Trampa del Tiempo</h3>
+      </div>
+      <p class="goal"><strong>Análisis Temporal.</strong> Detectar estacionalidad y auditar calidad de cortes.</p>
+      <p class="focus">Foco: series temporales · integridad de datos recientes</p>
+      <ul class="checks">
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>
+              <b>Gráfico de líneas histórico</b><br>
+              Ventas, cancelaciones o ingresos mes a mes / año a año.
+            </span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>
+              <b>Auditoría visual</b>
+              <span class="ask">¿Hay una caída libre al final del gráfico?</span>
+              Revisen si la base está incompleta en el último trimestre antes de declarar la quiebra.
+            </span>
+          </label>
+        </li>
+      </ul>
+    </article>
+
+    <!-- FASE 4 -->
+    <article class="phase" id="f4">
+      <div class="phase-header">
+        <div class="phase-num">04</div>
+        <h3>Destilación Estratégica</h3>
+      </div>
+      <p class="goal"><strong>Regla de 3 a 5.</strong> Preparar el terreno para el Dashboard.</p>
+      <p class="focus">Foco: consolidación · North Star · KPIs de soporte</p>
+      <div class="stat-row">
+        <div class="stat-item">
+          <div class="num">1</div>
+          <div class="desc">North Star<br>vida o muerte</div>
+        </div>
+        <div class="stat-item">
+          <div class="num">2–4</div>
+          <div class="desc">KPIs de soporte<br>explican el porqué</div>
+        </div>
+      </div>
+      <ul class="checks">
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>
+              <b>Identificar la North Star Metric</b><br>
+              Un solo indicador de vida o muerte para el negocio.
+            </span>
+          </label>
+        </li>
+        <li>
+          <label>
+            <input type="checkbox">
+            <span>
+              <b>Seleccionar KPIs de soporte</b><br>
+              Máximo 2–4 métricas que expliquen la principal. Todo lo demás se descarta.
+            </span>
+          </label>
+        </li>
+      </ul>
+    </article>
+  </div>
+
+  <!-- CLASE -->
+  <div class="section-head" id="clase">
+    <h2>Integración con la clase</h2>
+  </div>
+  <div class="schedule">
+    <div class="card">
+      <div class="time-tag">HORA 1</div>
+      <h3>Explicación del Checklist</h3>
+      <p style="color:var(--mut);margin:0;font-size:.92rem">Todos los equipos aplican los 4 pasos a sus datos.</p>
+    </div>
+    <div class="card">
+      <div class="time-tag">HORAS 2 · 3 · 4</div>
+      <h3>Reuniones 1 a 1</h3>
+      <p style="color:var(--mut);margin:0;font-size:.92rem">Mientras siguen el checklist, paso por cada sala con el «Enfoque de EDA específico» de cada equipo.</p>
+    </div>
+  </div>
+
 </div>
 
-<section id="enfoque" class="bento">
-  <div class="tile"><span class="label">En la universidad</span><h3>El EDA sirve para ver si los datos tienen una «distribución normal».</h3></div>
-  <div class="tile lime"><span class="label">En el mundo real</span><h3>El EDA sirve para auditar dinero, detectar estafadores y encontrar por qué los clientes nos abandonan.</h3></div>
-  <div class="tile"><span class="label">Analista Junior</span><p class="big">50</p><p>gráficos circulares, porque no sabe qué buscar.</p></div>
-  <div class="tile lilac"><span class="label">Business Translator</span><p class="big">4</p><p>gráficos estratégicos que responden al dolor del negocio.</p></div>
-  <div class="tile coral w6"><p class="mission">Su misión hoy no es programar; es <u>diagnosticar</u>.</p></div>
-</section>
-
-<div class="section-title" id="checklist">
-  <h2>El Checklist Universal de EDA</h2>
-  <p>Es el flujo de trabajo estándar que toda célula debe seguir hoy en su Notebook/Power BI antes de llamarme para revisión. Marca cada punto al cumplirlo.</p>
-</div>
-
-<div class="bento">
-  <article class="tile sky" id="f1">
-    <div class="phase-top"><span class="n">1</span><h3>El Pulso del Negocio</h3></div>
-    <p class="goal"><b>Análisis Univariado.</b> Objetivo: entender la normalidad y cazar a los atípicos.</p>
-    <p class="focus">Foco: anomalías; entender la normalidad del negocio (Histogramas, Boxplots) y perfilar a los clientes/productos.</p>
-    <ul class="checks">
-      <li><label><input type="checkbox"><span><b>Histogramas de las variables críticas.</b> Grafiquen su columna principal de dinero (Sales, Income, Profit) y de tiempo (Días de envío, Antigüedad).<span class="ask">¿Dónde está el grueso del negocio?</span></span></label></li>
-      <li><label><input type="checkbox"><span><b>Boxplots (Diagramas de Caja).</b> Busquen los Outliers. Si hay datos extremos, reúnanse como equipo y decidan:<span class="ask">¿Es un error de digitación que hay que aislar, o es un cliente VIP/Venta corporativa que nos está salvando el mes?</span></span></label></li>
-      <li><label><input type="checkbox"><span><b>Frecuencias Categóricas (Barras).</b><span class="ask">¿Cuál es el segmento, región o departamento que más volumen nos genera?</span></span></label></li>
-    </ul>
-  </article>
-
-  <article class="tile lilac" id="f2">
-    <div class="phase-top"><span class="n">2</span><h3>Buscando Culpables</h3></div>
-    <p class="goal"><b>Análisis Bivariado.</b> Objetivo: cruzar variables para encontrar qué causa el problema principal.</p>
-    <p class="focus">Foco: responder qué causa el problema (Scatter plots, Correlaciones, Líneas de tiempo).</p>
-    <ul class="checks">
-      <li><label><input type="checkbox"><span><b>Cruzar contra el «Target».</b> Tomen la variable que más le duele a su empresa (Fuga de clientes, Devoluciones, Renuncias, Cancelaciones) y crúcenla contra todo lo demás.</span></label></li>
-      <li><label><input type="checkbox"><span><b>Gráficos de Dispersión (Scatter).</b><span class="ask">¿Si aumenta X, aumenta Y?</span><span class="eg">Ej: ¿A mayor descuento, menor rentabilidad? ¿A más horas extra, mayor probabilidad de renuncia?</span></span></label></li>
-      <li><label><input type="checkbox"><span><b>Matrices de Correlación.</b> Corran un <code>df.corr()</code>. Busquen los colores más oscuros (correlaciones fuertes). Anoten los 3 hallazgos principales que nadie en la empresa sospechaba.</span></label></li>
-    </ul>
-  </article>
-
-  <article class="tile coral" id="f3">
-    <div class="phase-top"><span class="n">3</span><h3>La Trampa del Tiempo</h3></div>
-    <p class="goal"><b>Análisis Temporal.</b> Objetivo: detectar estacionalidad y auditar la calidad de los cortes.</p>
-    <ul class="checks">
-      <li><label><input type="checkbox"><span><b>Gráfico de Líneas Histórico.</b> Grafiquen sus ventas, cancelaciones o ingresos mes a mes / año a año.</span></label></li>
-      <li><label><input type="checkbox"><span><b>Auditoría visual.</b><span class="ask">¿Hay una caída libre al final del gráfico?</span> Revisen si la base de datos está incompleta en ese último trimestre antes de decirle a la gerencia que la empresa se fue a la quiebra.</span></label></li>
-    </ul>
-  </article>
-
-  <article class="tile lime" id="f4">
-    <div class="phase-top"><span class="n">4</span><h3>Destilación Estratégica</h3></div>
-    <p class="goal"><b>Regla de 3 a 5.</b> Objetivo: preparar el terreno para el Dashboard.</p>
-    <p class="focus">Foco: consolidación de hallazgos definitivos y aplicación estricta de la Regla de 3 a 5 KPIs.</p>
-    <div class="stat"><span class="big">1</span><span><b>North Star:</b> indicador de vida o muerte.</span></div>
-    <div class="stat"><span class="big">2–4</span><span><b>KPIs de soporte:</b> explican el porqué de la principal.</span></div>
-    <ul class="checks">
-      <li><label><input type="checkbox"><span><b>Identificar la «North Star Metric».</b> De todo lo que graficaron, elijan UN indicador que es de vida o muerte para el negocio.</span></label></li>
-      <li><label><input type="checkbox"><span><b>Seleccionar los KPIs de soporte.</b> Elijan un máximo de 2 a 4 métricas adicionales que expliquen el porqué de la métrica principal. Todo lo demás, se descarta para el reporte final.</span></label></li>
-    </ul>
-  </article>
-</div>
-
-<div class="section-title" id="clase"><h2>¿Cómo integrar esto con lo que ya preparamos?</h2></div>
-<div class="bento">
-  <div class="tile dark w2"><span class="label">Hora 1</span><h3>Explicación del Checklist</h3><p>Explicación del Checklist Universal. Todos los equipos empiezan a trabajar aplicando estos 4 pasos a sus datos.</p></div>
-  <div class="tile w4"><span class="label">Horas 2, 3 y 4</span><h3>Reuniones 1 a 1</h3><p>Mientras siguen el checklist, yo pasaré por cada sala y les daré el «Enfoque de EDA específico» que creé para cada uno.</p></div>
-</div>
-
-</div>
-<footer>Resumen basado en la «Guía de Clase: Unidad 3 – De Limpiadores a Traductores de Negocio».</footer>
+<footer>
+  Guía de Clase · Unidad 3 — De Limpiadores a Traductores de Negocio
+</footer>
 
 <script>
-var CIRCUMFERENCE = 339.3;
-
-function updateProgress() {
-  var total = document.querySelectorAll('.checks input').length;
-  var done = document.querySelectorAll('.checks input:checked').length;
-  document.getElementById('count').textContent = done + ' / ' + total;
-  document.getElementById('ringv').style.strokeDashoffset = CIRCUMFERENCE * (1 - done / total);
+const CIRC = 339.3;
+function update() {
+  const total = document.querySelectorAll('.checks input').length;
+  const done  = document.querySelectorAll('.checks input:checked').length;
+  document.getElementById('count').textContent = done + '/' + total;
+  document.getElementById('ringv').style.strokeDashoffset = CIRC * (1 - (total ? done/total : 0));
 }
-
-document.querySelectorAll('.checks input').forEach(function (box) {
-  box.addEventListener('change', updateProgress);
-});
-
-updateProgress();
+document.querySelectorAll('.checks input').forEach(el => el.addEventListener('change', update));
+update();
 </script>
 </body>
 </html>
