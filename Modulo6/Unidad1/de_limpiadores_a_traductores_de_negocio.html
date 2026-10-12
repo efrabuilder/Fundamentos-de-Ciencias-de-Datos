@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>De limpiadores a traductores de negocio · Unidad 3 · Ciencias de Datos</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=DM+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --bg: #efeee8;
+  --white: #fff;
+  --ink: #121212;
+  --mut: #5b5b57;
+  --lime: #d6f36b;
+  --lilac: #d9cdff;
+  --coral: #ffc7b3;
+  --sky: #bfe2ff;
+  --r: 28px;
+  color-scheme: light;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+html { scroll-behavior: smooth; scroll-padding-top: calc(5rem + env(safe-area-inset-top, 0px)); }
+*, *::before, *::after { box-sizing: inherit; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1.02rem/1.6 "Bricolage Grotesque", system-ui, sans-serif; }
+h1, h2, h3 { margin: 0 0 .4em; line-height: 1.02; letter-spacing: -.025em; font-weight: 800; }
+h1 { font-size: clamp(2.6rem, 7.5vw, 5.6rem); }
+h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); }
+h3 { font-size: 1.45rem; }
+p { margin: 0 0 .7em; }
+code, .mono { font-family: "DM Mono", ui-monospace, Menlo, Consolas, monospace; }
+code { font-size: .86em; background: rgba(0,0,0,.08); padding: .05rem .4rem; border-radius: 8px; }
+:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 1rem; }
+
+.pillnav { position: sticky; top: calc(.7rem + env(safe-area-inset-top, 0px)); z-index: 5; display: flex; justify-content: center; padding: 0 1rem; }
+.pillnav div { display: flex; gap: .2rem; overflow-x: auto; max-width: 100%; background: var(--ink); border-radius: 99px; padding: .3rem; }
+.pillnav a { color: #fff; text-decoration: none; white-space: nowrap; padding: .4rem 1rem; border-radius: 99px; font-size: .92rem; font-weight: 600; }
+.pillnav a:hover { background: var(--lime); color: var(--ink); }
+
+.bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; margin-bottom: 14px; }
+.tile { background: var(--white); border-radius: var(--r); padding: 1.6rem; grid-column: span 3; min-width: 0; }
+.tile > :last-child { margin-bottom: 0; }
+.w2 { grid-column: span 2; } .w4 { grid-column: span 4; } .w6 { grid-column: span 6; }
+.lime { background: var(--lime); } .lilac { background: var(--lilac); } .coral { background: var(--coral); } .sky { background: var(--sky); }
+.dark { background: var(--ink); color: #fff; }
+.label { display: inline-block; font: 500 .78rem "DM Mono", monospace; text-transform: uppercase; letter-spacing: .08em; background: rgba(0,0,0,.09); border-radius: 99px; padding: .15rem .8rem; margin-bottom: .9rem; }
+.dark .label { background: rgba(255,255,255,.16); }
+.big { font-size: 5.5rem; font-weight: 800; line-height: .9; letter-spacing: -.05em; margin-bottom: .1em; }
+.lead { font-size: 1.3rem; max-width: 34ch; }
+
+.hero { padding: 3rem 0 1rem; }
+.hero .tile { padding: 2rem; }
+.hero h1 em { font-style: normal; color: var(--lime); }
+.dark .lead { color: #cfcfca; }
+
+.ring { display: block; margin: 0 auto .6rem; width: 140px; height: 140px; transform: rotate(-90deg); }
+.ring circle { fill: none; stroke-width: 14; }
+.ring .t { stroke: rgba(0,0,0,.12); }
+.ring .v { stroke: var(--ink); stroke-linecap: round; stroke-dasharray: 339.3; stroke-dashoffset: 339.3; transition: stroke-dashoffset .35s; }
+.prog { text-align: center; display: flex; flex-direction: column; justify-content: center; }
+.prog .count { font: 500 1.4rem "DM Mono", monospace; }
+
+.mission { font-size: clamp(1.6rem, 4vw, 2.6rem); font-weight: 800; letter-spacing: -.02em; line-height: 1.1; }
+.mission u { text-decoration: none; background: var(--ink); color: var(--coral); padding: 0 .3em; border-radius: 12px; }
+
+.section-title { margin: 3.5rem 0 1rem; display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem 1.2rem; }
+.section-title p { color: var(--mut); max-width: 56ch; margin: 0; }
+
+.phase-top { display: flex; align-items: center; gap: .8rem; margin-bottom: 1rem; }
+.phase-top .n { width: 3rem; height: 3rem; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 800; font-size: 1.4rem; }
+.phase-top h3 { margin: 0; }
+.goal b { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 3px; }
+.focus { color: rgba(0,0,0,.65); font-size: .95rem; }
+
+.checks { list-style: none; margin: 1.2rem 0 0; padding: 0; display: grid; gap: .5rem; }
+.checks label { display: grid; grid-template-columns: 1.7rem 1fr; gap: .8rem; background: rgba(255,255,255,.7); border-radius: 18px; padding: .9rem 1rem; cursor: pointer; transition: background .15s; }
+.checks label:hover { background: #fff; }
+.checks input { appearance: none; width: 1.6rem; height: 1.6rem; margin: 0; border-radius: 50%; border: 2.5px solid var(--ink); display: grid; place-content: center; cursor: pointer; background: #fff; }
+.checks input::after { content: ""; width: .8rem; height: .8rem; border-radius: 50%; background: #fff; transform: scale(0); transition: transform .15s; }
+.checks input:checked { background: var(--ink); }
+.checks input:checked::after { transform: scale(1); }
+.checks input:checked ~ span { opacity: .5; }
+.ask { display: block; margin-top: .3rem; font-weight: 600; }
+.eg { display: block; margin-top: .3rem; font-size: .93rem; color: rgba(0,0,0,.65); }
+
+.stat { display: flex; align-items: baseline; gap: .8rem; flex-wrap: wrap; }
+.stat .big { font-size: 4.2rem; }
+
+footer { text-align: center; color: var(--mut); font-size: .9rem; padding: 2.5rem 1rem 3rem; }
+
+@media (max-width: 800px) {
+  .bento { grid-template-columns: 1fr; }
+  .tile, .w2, .w4, .w6 { grid-column: auto; }
+  .big { font-size: 4.2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .ring .v, .checks input::after, .checks label { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="pillnav"><div>
+  <a href="#enfoque">Enfoque</a>
+  <a href="#checklist">Checklist</a>
+  <a href="#f1">1</a><a href="#f2">2</a><a href="#f3">3</a><a href="#f4">4</a>
+  <a href="#clase">La clase</a>
+</div></div>
+
+<div class="wrap">
+
+<div class="hero bento">
+  <div class="tile dark w4">
+    <span class="label">Unidad 3 · Ciencias de Datos</span>
+    <h1>De limpiadores a <em>traductores</em> de negocio</h1>
+    <p class="lead">Hoy torturamos a los datos limpios hasta que confiesen la verdad operativa de sus empresas.</p>
+  </div>
+  <div class="tile lime w2 prog" aria-live="polite">
+    <svg class="ring" viewBox="0 0 120 120" aria-hidden="true"><circle class="t" cx="60" cy="60" r="54"/><circle class="v" id="ringv" cx="60" cy="60" r="54"/></svg>
+    <div class="count" id="count">0 / 0</div>
+    <p class="mono" style="font-size:.8rem;margin:.2rem 0 0">puntos del checklist</p>
+  </div>
+</div>
+
+<section id="enfoque" class="bento">
+  <div class="tile"><span class="label">En la universidad</span><h3>El EDA sirve para ver si los datos tienen una «distribución normal».</h3></div>
+  <div class="tile lime"><span class="label">En el mundo real</span><h3>El EDA sirve para auditar dinero, detectar estafadores y encontrar por qué los clientes nos abandonan.</h3></div>
+  <div class="tile"><span class="label">Analista Junior</span><p class="big">50</p><p>gráficos circulares, porque no sabe qué buscar.</p></div>
+  <div class="tile lilac"><span class="label">Business Translator</span><p class="big">4</p><p>gráficos estratégicos que responden al dolor del negocio.</p></div>
+  <div class="tile coral w6"><p class="mission">Su misión hoy no es programar; es <u>diagnosticar</u>.</p></div>
+</section>
+
+<div class="section-title" id="checklist">
+  <h2>El Checklist Universal de EDA</h2>
+  <p>Es el flujo de trabajo estándar que toda célula debe seguir hoy en su Notebook/Power BI antes de llamarme para revisión. Marca cada punto al cumplirlo.</p>
+</div>
+
+<div class="bento">
+  <article class="tile sky" id="f1">
+    <div class="phase-top"><span class="n">1</span><h3>El Pulso del Negocio</h3></div>
+    <p class="goal"><b>Análisis Univariado.</b> Objetivo: entender la normalidad y cazar a los atípicos.</p>
+    <p class="focus">Foco: anomalías; entender la normalidad del negocio (Histogramas, Boxplots) y perfilar a los clientes/productos.</p>
+    <ul class="checks">
+      <li><label><input type="checkbox"><span><b>Histogramas de las variables críticas.</b> Grafiquen su columna principal de dinero (Sales, Income, Profit) y de tiempo (Días de envío, Antigüedad).<span class="ask">¿Dónde está el grueso del negocio?</span></span></label></li>
+      <li><label><input type="checkbox"><span><b>Boxplots (Diagramas de Caja).</b> Busquen los Outliers. Si hay datos extremos, reúnanse como equipo y decidan:<span class="ask">¿Es un error de digitación que hay que aislar, o es un cliente VIP/Venta corporativa que nos está salvando el mes?</span></span></label></li>
+      <li><label><input type="checkbox"><span><b>Frecuencias Categóricas (Barras).</b><span class="ask">¿Cuál es el segmento, región o departamento que más volumen nos genera?</span></span></label></li>
+    </ul>
+  </article>
+
+  <article class="tile lilac" id="f2">
+    <div class="phase-top"><span class="n">2</span><h3>Buscando Culpables</h3></div>
+    <p class="goal"><b>Análisis Bivariado.</b> Objetivo: cruzar variables para encontrar qué causa el problema principal.</p>
+    <p class="focus">Foco: responder qué causa el problema (Scatter plots, Correlaciones, Líneas de tiempo).</p>
+    <ul class="checks">
+      <li><label><input type="checkbox"><span><b>Cruzar contra el «Target».</b> Tomen la variable que más le duele a su empresa (Fuga de clientes, Devoluciones, Renuncias, Cancelaciones) y crúcenla contra todo lo demás.</span></label></li>
+      <li><label><input type="checkbox"><span><b>Gráficos de Dispersión (Scatter).</b><span class="ask">¿Si aumenta X, aumenta Y?</span><span class="eg">Ej: ¿A mayor descuento, menor rentabilidad? ¿A más horas extra, mayor probabilidad de renuncia?</span></span></label></li>
+      <li><label><input type="checkbox"><span><b>Matrices de Correlación.</b> Corran un <code>df.corr()</code>. Busquen los colores más oscuros (correlaciones fuertes). Anoten los 3 hallazgos principales que nadie en la empresa sospechaba.</span></label></li>
+    </ul>
+  </article>
+
+  <article class="tile coral" id="f3">
+    <div class="phase-top"><span class="n">3</span><h3>La Trampa del Tiempo</h3></div>
+    <p class="goal"><b>Análisis Temporal.</b> Objetivo: detectar estacionalidad y auditar la calidad de los cortes.</p>
+    <ul class="checks">
+      <li><label><input type="checkbox"><span><b>Gráfico de Líneas Histórico.</b> Grafiquen sus ventas, cancelaciones o ingresos mes a mes / año a año.</span></label></li>
+      <li><label><input type="checkbox"><span><b>Auditoría visual.</b><span class="ask">¿Hay una caída libre al final del gráfico?</span> Revisen si la base de datos está incompleta en ese último trimestre antes de decirle a la gerencia que la empresa se fue a la quiebra.</span></label></li>
+    </ul>
+  </article>
+
+  <article class="tile lime" id="f4">
+    <div class="phase-top"><span class="n">4</span><h3>Destilación Estratégica</h3></div>
+    <p class="goal"><b>Regla de 3 a 5.</b> Objetivo: preparar el terreno para el Dashboard.</p>
+    <p class="focus">Foco: consolidación de hallazgos definitivos y aplicación estricta de la Regla de 3 a 5 KPIs.</p>
+    <div class="stat"><span class="big">1</span><span><b>North Star:</b> indicador de vida o muerte.</span></div>
+    <div class="stat"><span class="big">2–4</span><span><b>KPIs de soporte:</b> explican el porqué de la principal.</span></div>
+    <ul class="checks">
+      <li><label><input type="checkbox"><span><b>Identificar la «North Star Metric».</b> De todo lo que graficaron, elijan UN indicador que es de vida o muerte para el negocio.</span></label></li>
+      <li><label><input type="checkbox"><span><b>Seleccionar los KPIs de soporte.</b> Elijan un máximo de 2 a 4 métricas adicionales que expliquen el porqué de la métrica principal. Todo lo demás, se descarta para el reporte final.</span></label></li>
+    </ul>
+  </article>
+</div>
+
+<div class="section-title" id="clase"><h2>¿Cómo integrar esto con lo que ya preparamos?</h2></div>
+<div class="bento">
+  <div class="tile dark w2"><span class="label">Hora 1</span><h3>Explicación del Checklist</h3><p>Explicación del Checklist Universal. Todos los equipos empiezan a trabajar aplicando estos 4 pasos a sus datos.</p></div>
+  <div class="tile w4"><span class="label">Horas 2, 3 y 4</span><h3>Reuniones 1 a 1</h3><p>Mientras siguen el checklist, yo pasaré por cada sala y les daré el «Enfoque de EDA específico» que creé para cada uno.</p></div>
+</div>
+
+</div>
+<footer>Resumen basado en la «Guía de Clase: Unidad 3 – De Limpiadores a Traductores de Negocio».</footer>
+
+<script>
+var CIRCUMFERENCE = 339.3;
+
+function updateProgress() {
+  var total = document.querySelectorAll('.checks input').length;
+  var done = document.querySelectorAll('.checks input:checked').length;
+  document.getElementById('count').textContent = done + ' / ' + total;
+  document.getElementById('ringv').style.strokeDashoffset = CIRCUMFERENCE * (1 - done / total);
+}
+
+document.querySelectorAll('.checks input').forEach(function (box) {
+  box.addEventListener('change', updateProgress);
+});
+
+updateProgress();
+</script>
+</body>
+</html>
