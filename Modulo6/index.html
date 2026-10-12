@@ -19,6 +19,7 @@
     --r2:#0d9488; --r2-soft:#f0fdfa;           /* 2º: Alcance del Proyecto */
     --r3:#d97706; --r3-soft:#fffbeb;           /* 3º: Pandas Cheat Sheet */
     --r4:#e11d48; --r4-soft:#fff1f2;           /* 4º: Del Dato Limpio al Reporte Final */
+    --r5:#0284c7; --r5-soft:#f0f9ff;           /* 5º: De Limpiadores a Traductores de Negocio */
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
@@ -92,6 +93,7 @@
   #tab-r2{--accent:var(--r2);}
   #tab-r3{--accent:var(--r3);}
   #tab-r4{--accent:var(--r4);}
+  #tab-r5{--accent:var(--r5);}
   main{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
   .panel{display:none;}
   .panel.active{display:block;animation:fade .25s ease;}
@@ -100,6 +102,7 @@
   #panel-r2{--accent:var(--r2);--accent-soft:var(--r2-soft);}
   #panel-r3{--accent:var(--r3);--accent-soft:var(--r3-soft);}
   #panel-r4{--accent:var(--r4);--accent-soft:var(--r4-soft);}
+  #panel-r5{--accent:var(--r5);--accent-soft:var(--r5-soft);}
   @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
   .panel-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:16px;}
   .panel-head h2{margin:0;font-size:19px;}
@@ -112,6 +115,7 @@
   #panel-r2 .card-toolbar{--accent-soft:var(--r2-soft);}
   #panel-r3 .card-toolbar{--accent-soft:var(--r3-soft);}
   #panel-r4 .card-toolbar{--accent-soft:var(--r4-soft);}
+  #panel-r5 .card-toolbar{--accent-soft:var(--r5-soft);}
   .status{font-size:12.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
   .status .led{width:7px;height:7px;border-radius:50%;background:#cbd5e1;}
   .status.ok .led{background:#16a34a;}
@@ -155,6 +159,7 @@
   #panel-r2 .empty-state .icon{background:var(--r2-soft);color:var(--r2);}
   #panel-r3 .empty-state .icon{background:var(--r3-soft);color:var(--r3);}
   #panel-r4 .empty-state .icon{background:var(--r4-soft);color:var(--r4);}
+  #panel-r5 .empty-state .icon{background:var(--r5-soft);color:var(--r5);}
   .empty-state strong{color:var(--ink);font-size:15px;}
   .empty-state span{font-size:13px;max-width:420px;}
 </style>
@@ -192,6 +197,9 @@
   <button class="tab" id="tab-r4" data-target="panel-r4">
   <span class="dot"></span> Del Dato Limpio al Reporte Final
 </button>
+  <button class="tab" id="tab-r5" data-target="panel-r5">
+    <span class="dot"></span> De Limpiadores a Traductores de Negocio
+  </button>
 </nav>
 <main>
   <!-- ===================== PANEL 1: Del Dataset al KPI ===================== -->
@@ -327,6 +335,34 @@
       </div>
     </div>
   </div>
+  </section>
+
+  <!-- ===================== PANEL 5: De Limpiadores a Traductores de Negocio ===================== -->
+  <section class="panel" id="panel-r5">
+    <div class="panel-head">
+      <div>
+        <h2>De Limpiadores a Traductores de Negocio</h2>
+        <div class="sub">Checklist universal de EDA en 4 fases: pulso del negocio, culpables, tiempo y destilación estratégica</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">De Limpiadores a Traductores de Negocio</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-traductores"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <label class="btn" for="file-traductores">Cargar manualmente</label>
+          <input type="file" id="file-traductores">
+          <a class="btn" id="download-traductores" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer" id="viewer-traductores">
+        <div class="empty-state">
+          <div class="icon">⏳</div>
+          <strong>Cargando recurso…</strong>
+          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+        </div>
+      </div>
+    </div>
   </section>
 
 </main>
@@ -606,8 +642,9 @@
   setupResource('pandas', 'Unidad1/PandasCheatSheet.html');
   setupResource('limpieza', 'Unidad1/LimpiezadeDatos.ipynb'); // notebook en el recurso de Pandas
   setupResource('reportefinal', 'Unidad1/deldatolimpioalreportefinal.html');
-  // Para agregar otro recurso: nueva pestaña (tab-r5) + panel (panel-r5) con sus
-  // colores --r5 y --r5-soft, y su setupResource al final, como en el Módulo 5.
+  setupResource('traductores', 'Unidad1/de_limpiadores_a_traductores_de_negocio.html');
+  // Para agregar otro recurso: nueva pestaña (tab-r6) + panel (panel-r6) con sus
+  // colores --r6 y --r6-soft, y su setupResource al final, como en el Módulo 5.
 </script>
 </body>
 </html>
