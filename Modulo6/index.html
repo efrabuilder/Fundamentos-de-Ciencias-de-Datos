@@ -14,13 +14,13 @@
 
     --mod-accent:#4f46e5; /* color del módulo (cambia por módulo) */
 
-    /* Colores de cada recurso */
-    --r1:var(--mod-accent); --r1-soft:#eef2ff; /* 1º: mismo color del título del módulo */
-    --r2:#0d9488; --r2-soft:#f0fdfa;           /* 2º: Alcance del Proyecto */
-    --r3:#d97706; --r3-soft:#fffbeb;           /* 3º: Pandas Cheat Sheet */
-    --r4:#e11d48; --r4-soft:#fff1f2;           /* 4º: Del Dato Limpio al Reporte Final */
-    --r5:#0284c7; --r5-soft:#f0f9ff;           /* 5º: De Limpiadores a Traductores de Negocio */
-    --r6:#7c3aed; --r6-soft:#f5f3ff;           /* 6º: Quiz Teórico-Práctico */
+    /* Colores de cada recurso (el color va con el recurso, no con su posición) */
+    --r1:var(--mod-accent); --r1-soft:#eef2ff; /* Del Dataset al KPI: mismo color del título del módulo */
+    --r2:#0d9488; --r2-soft:#f0fdfa;           /* Alcance del Proyecto */
+    --r3:#d97706; --r3-soft:#fffbeb;           /* Pandas Cheat Sheet */
+    --r4:#e11d48; --r4-soft:#fff1f2;           /* Del Dato Limpio al Reporte Final */
+    --r5:#0284c7; --r5-soft:#f0f9ff;           /* De Limpiadores a Traductores de Negocio */
+    --r6:#7c3aed; --r6-soft:#f5f3ff;           /* Quiz Teórico-Práctico */
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
@@ -190,27 +190,28 @@
   <h1>Proyecto Integrador de Análisis de Datos</h1>
 </header>
 <nav>
+  <!-- Orden: Dataset al KPI, Traductores, Reporte Final, Pandas, Quiz, Alcance -->
   <button class="tab active" id="tab-r1" data-target="panel-r1">
     <span class="dot"></span> Del Dataset al KPI
   </button>
-  <button class="tab" id="tab-r2" data-target="panel-r2">
-    <span class="dot"></span> Alcance del Proyecto
+  <button class="tab" id="tab-r5" data-target="panel-r5">
+    <span class="dot"></span> De Limpiadores a Traductores de Negocio
+  </button>
+  <button class="tab" id="tab-r4" data-target="panel-r4">
+    <span class="dot"></span> Del Dato Limpio al Reporte Final
   </button>
   <button class="tab" id="tab-r3" data-target="panel-r3">
     <span class="dot"></span> Pandas Cheat Sheet
   </button>
-  <button class="tab" id="tab-r4" data-target="panel-r4">
-  <span class="dot"></span> Del Dato Limpio al Reporte Final
-</button>
-  <button class="tab" id="tab-r5" data-target="panel-r5">
-    <span class="dot"></span> De Limpiadores a Traductores de Negocio
-  </button>
   <button class="tab" id="tab-r6" data-target="panel-r6">
     <span class="dot"></span> Quiz Teórico-Práctico
   </button>
+  <button class="tab" id="tab-r2" data-target="panel-r2">
+    <span class="dot"></span> Alcance del Proyecto
+  </button>
 </nav>
 <main>
-  <!-- ===================== PANEL 1: Del Dataset al KPI ===================== -->
+  <!-- ===================== PANEL: Del Dataset al KPI ===================== -->
   <section class="panel active" id="panel-r1">
     <div class="panel-head">
       <div>
@@ -239,26 +240,25 @@
     </div>
   </section>
 
-  <!-- ===================== PANEL 2: Alcance del Proyecto ===================== -->
-  <section class="panel" id="panel-r2">
+  <!-- ===================== PANEL: De Limpiadores a Traductores de Negocio ===================== -->
+  <section class="panel" id="panel-r5">
     <div class="panel-head">
       <div>
-        <h2>Alcance del Proyecto</h2>
-        <div class="sub">Siniestralidad del seguro de vida por región en Alemania: contexto, problema, objetivos, datos, KPIs y equipo</div>
+        <h2>De Limpiadores a Traductores de Negocio</h2>
+        <div class="sub">Checklist universal de EDA en 4 fases: pulso del negocio, culpables, tiempo y destilación estratégica</div>
       </div>
     </div>
-
     <div class="card">
-      <div class="card-label">Alcance del Proyecto</div>
+      <div class="card-label">De Limpiadores a Traductores de Negocio</div>
       <div class="card-toolbar">
-        <div class="status" id="status-alcance"><span class="led"></span> Cargando…</div>
+        <div class="status" id="status-traductores"><span class="led"></span> Cargando…</div>
         <div class="toolbar-actions">
-          <label class="btn" for="file-alcance">Cargar manualmente</label>
-          <input type="file" id="file-alcance">
-          <a class="btn" id="download-alcance" style="display:none;">Descargar</a>
+          <label class="btn" for="file-traductores">Cargar manualmente</label>
+          <input type="file" id="file-traductores">
+          <a class="btn" id="download-traductores" style="display:none;">Descargar</a>
         </div>
       </div>
-      <div class="viewer" id="viewer-alcance">
+      <div class="viewer" id="viewer-traductores">
         <div class="empty-state">
           <div class="icon">⏳</div>
           <strong>Cargando recurso…</strong>
@@ -268,7 +268,35 @@
     </div>
   </section>
 
-  <!-- ===================== PANEL 3: Pandas Cheat Sheet ===================== -->
+  <!-- ===================== PANEL: Del Dato Limpio al Reporte Final ===================== -->
+  <section class="panel" id="panel-r4">
+  <div class="panel-head">
+    <div>
+      <h2>Del Dato Limpio al Reporte Final</h2>
+      <div class="sub">Estructura del reporte, EDA en Python y Power BI, y diccionarios técnico y ejecutivo</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-label">Del Dato Limpio al Reporte Final</div>
+    <div class="card-toolbar">
+      <div class="status" id="status-reportefinal"><span class="led"></span> Cargando…</div>
+      <div class="toolbar-actions">
+        <label class="btn" for="file-reportefinal">Cargar manualmente</label>
+        <input type="file" id="file-reportefinal">
+        <a class="btn" id="download-reportefinal" style="display:none;">Descargar</a>
+      </div>
+    </div>
+    <div class="viewer" id="viewer-reportefinal">
+      <div class="empty-state">
+        <div class="icon">⏳</div>
+        <strong>Cargando recurso…</strong>
+        <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+      </div>
+    </div>
+  </div>
+  </section>
+
+  <!-- ===================== PANEL: Pandas Cheat Sheet ===================== -->
   <section class="panel" id="panel-r3">
     <div class="panel-head">
       <div>
@@ -317,63 +345,8 @@
       </div>
     </div>
 </section>
-     <!-- ===================== PANEL 4: Del Dato Limpio al Reporte Final ===================== -->
-<section class="panel" id="panel-r4">
-  <div class="panel-head">
-    <div>
-      <h2>Del Dato Limpio al Reporte Final</h2>
-      <div class="sub">Estructura del reporte, EDA en Python y Power BI, y diccionarios técnico y ejecutivo</div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-label">Del Dato Limpio al Reporte Final</div>
-    <div class="card-toolbar">
-      <div class="status" id="status-reportefinal"><span class="led"></span> Cargando…</div>
-      <div class="toolbar-actions">
-        <label class="btn" for="file-reportefinal">Cargar manualmente</label>
-        <input type="file" id="file-reportefinal">
-        <a class="btn" id="download-reportefinal" style="display:none;">Descargar</a>
-      </div>
-    </div>
-    <div class="viewer" id="viewer-reportefinal">
-      <div class="empty-state">
-        <div class="icon">⏳</div>
-        <strong>Cargando recurso…</strong>
-        <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
-      </div>
-    </div>
-  </div>
-  </section>
 
-  <!-- ===================== PANEL 5: De Limpiadores a Traductores de Negocio ===================== -->
-  <section class="panel" id="panel-r5">
-    <div class="panel-head">
-      <div>
-        <h2>De Limpiadores a Traductores de Negocio</h2>
-        <div class="sub">Checklist universal de EDA en 4 fases: pulso del negocio, culpables, tiempo y destilación estratégica</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-label">De Limpiadores a Traductores de Negocio</div>
-      <div class="card-toolbar">
-        <div class="status" id="status-traductores"><span class="led"></span> Cargando…</div>
-        <div class="toolbar-actions">
-          <label class="btn" for="file-traductores">Cargar manualmente</label>
-          <input type="file" id="file-traductores">
-          <a class="btn" id="download-traductores" style="display:none;">Descargar</a>
-        </div>
-      </div>
-      <div class="viewer" id="viewer-traductores">
-        <div class="empty-state">
-          <div class="icon">⏳</div>
-          <strong>Cargando recurso…</strong>
-          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== PANEL 6: Quiz Teórico-Práctico ===================== -->
+  <!-- ===================== PANEL: Quiz Teórico-Práctico ===================== -->
   <section class="panel" id="panel-r6">
     <div class="panel-head">
       <div>
@@ -392,6 +365,35 @@
         </div>
       </div>
       <div class="viewer" id="viewer-quiz">
+        <div class="empty-state">
+          <div class="icon">⏳</div>
+          <strong>Cargando recurso…</strong>
+          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PANEL: Alcance del Proyecto ===================== -->
+  <section class="panel" id="panel-r2">
+    <div class="panel-head">
+      <div>
+        <h2>Alcance del Proyecto</h2>
+        <div class="sub">Siniestralidad del seguro de vida por región en Alemania: contexto, problema, objetivos, datos, KPIs y equipo</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Alcance del Proyecto</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-alcance"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <label class="btn" for="file-alcance">Cargar manualmente</label>
+          <input type="file" id="file-alcance">
+          <a class="btn" id="download-alcance" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer" id="viewer-alcance">
         <div class="empty-state">
           <div class="icon">⏳</div>
           <strong>Cargando recurso…</strong>
@@ -674,12 +676,12 @@
   }
   // ---------- Recursos del Módulo 6 ----------
   setupResource('dataset-kpi', 'Unidad1/DelDatasetalKPI.html');
-  setupResource('alcance', 'Unidad1/AlcancedeProyecto.html');
+  setupResource('traductores', 'Unidad1/de_limpiadores_a_traductores_de_negocio.html');
+  setupResource('reportefinal', 'Unidad1/deldatolimpioalreportefinal.html');
   setupResource('pandas', 'Unidad1/PandasCheatSheet.html');
   setupResource('limpieza', 'Unidad1/LimpiezadeDatos.ipynb'); // notebook en el recurso de Pandas
-  setupResource('reportefinal', 'Unidad1/deldatolimpioalreportefinal.html');
-  setupResource('traductores', 'Unidad1/de_limpiadores_a_traductores_de_negocio.html');
   setupResource('quiz', 'Unidad1/quiz_teorico_practico_analisis_datos.html');
+  setupResource('alcance', 'Unidad1/AlcancedeProyecto.html');
   // Para agregar otro recurso: nueva pestaña (tab-r7) + panel (panel-r7) con sus
   // colores --r7 y --r7-soft, y su setupResource al final, como en el Módulo 5.
 </script>
