@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiz teórico-práctico · Análisis de datos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #eef2f6;
+    --card: #ffffff;
+    --ink: #14202b;
+    --muted: #55677a;
+    --line: #cfd9e3;
+    --cobalt: #2740d6;
+    --cobalt-soft: #e3e8fc;
+    --risk: #c0392f;
+    --risk-soft: #fbe6e3;
+    --ok: #1c7a58;
+    --ok-soft: #dff3ea;
+    --head: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0f1720;
+      --card: #17212c;
+      --ink: #e6edf4;
+      --muted: #9fb0c2;
+      --line: #2a3a4a;
+      --cobalt: #8ea0ff;
+      --cobalt-soft: #1f2a52;
+      --risk: #ff8a7e;
+      --risk-soft: #3a1f1c;
+      --ok: #5fd1a3;
+      --ok-soft: #14352a;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 1.5rem; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--cobalt); outline-offset: 2px; border-radius: 4px; }
+
+  .shell {
+    display: grid;
+    grid-template-columns: 17rem minmax(0, 1fr);
+    gap: 3rem;
+    max-width: 74rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 5rem;
+  }
+
+  /* ---------- barra lateral ---------- */
+  .side { position: sticky; top: 1.5rem; align-self: start; font-family: var(--head); }
+  .side h2 { font-size: 0.95rem; font-weight: 700; margin: 0 0 0.75rem; color: var(--muted); }
+  .side nav { display: grid; gap: 0.25rem; }
+  .side nav a {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
+    padding: 0.6rem 0.75rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    border-left: 3px solid transparent;
+  }
+  .side nav a:hover { background: var(--card); }
+  .side nav a[aria-current="true"] { background: var(--card); border-left-color: var(--cobalt); font-weight: 700; }
+  .side nav .count { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .meter { margin-top: 1.5rem; padding: 1rem; background: var(--card); border: 1px solid var(--line); border-radius: 10px; }
+  .meter p { margin: 0 0 0.6rem; font-size: 0.9rem; font-weight: 500; }
+  .bar { height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; }
+  .bar > span { display: block; height: 100%; width: 0; background: var(--ok); transition: width 0.35s ease; }
+  .meter .split { display: flex; justify-content: space-between; margin-top: 0.6rem; font-size: 0.85rem; color: var(--muted); }
+  .reset { margin-top: 0.9rem; width: 100%; }
+
+  /* ---------- encabezado ---------- */
+  .intro h1 {
+    font-family: var(--head);
+    font-weight: 800;
+    font-size: clamp(2rem, 4.6vw, 3.4rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin: 0 0 1rem;
+    max-width: 16ch;
+  }
+  .intro p { max-width: 58ch; margin: 0 0 1.25rem; color: var(--muted); }
+  .join {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    padding: 1.1rem 1.25rem;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    margin-bottom: 3rem;
+  }
+  .join svg { flex: none; width: 150px; height: auto; }
+  .join p { margin: 0; flex: 1 1 18rem; font-size: 0.98rem; color: var(--ink); }
+  .join strong { font-family: var(--head); }
+
+  /* ---------- categorías ---------- */
+  .cat { margin-bottom: 3.5rem; }
+  .cat > header { display: flex; align-items: baseline; gap: 0.75rem; margin-bottom: 1.25rem; padding-bottom: 0.6rem; border-bottom: 2px solid var(--ink); }
+  .cat h2 { font-family: var(--head); font-weight: 700; font-size: 1.5rem; line-height: 1.2; margin: 0; letter-spacing: -0.01em; }
+  .cat header span { font-family: var(--head); color: var(--muted); font-size: 0.9rem; white-space: nowrap; }
+
+  .q {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 1.4rem 1.5rem;
+    margin-bottom: 1.25rem;
+    transition: border-color 0.2s ease;
+  }
+  .q[data-state="known"] { border-color: var(--ok); }
+  .q[data-state="review"] { border-color: var(--risk); }
+  .q h3 { font-family: var(--head); font-weight: 700; font-size: 1.2rem; line-height: 1.3; margin: 0 0 0.9rem; }
+  .tag {
+    display: inline-block;
+    font-family: var(--head);
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.15rem 0.6rem;
+    border-radius: 99px;
+    background: var(--risk-soft);
+    color: var(--risk);
+    margin-bottom: 0.7rem;
+  }
+  .case { margin: 0 0 1.1rem; padding-left: 1rem; border-left: 3px solid var(--cobalt); font-style: italic; max-width: 68ch; }
+  .case b { font-style: normal; font-family: var(--head); font-weight: 700; }
+
+  button {
+    font: inherit;
+    font-family: var(--head);
+    font-weight: 600;
+    font-size: 0.92rem;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 1.5px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    padding: 0.5rem 0.95rem;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  button:hover { background: var(--ink); color: var(--paper); }
+  button[aria-expanded="true"] { background: var(--cobalt); border-color: var(--cobalt); color: #fff; }
+
+  .answer { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.3s ease; }
+  .answer[data-open="true"] { grid-template-rows: 1fr; }
+  .answer > div { overflow: hidden; }
+  .answer .body { margin-top: 1.1rem; padding: 1.1rem 1.2rem; background: var(--cobalt-soft); border-radius: 10px; max-width: 68ch; }
+  .answer .body p { margin: 0 0 0.8rem; }
+  .answer .body p:last-child { margin-bottom: 0; }
+  .answer .body strong { font-family: var(--head); }
+  .grade { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); align-items: center; }
+  .grade span { font-family: var(--head); font-size: 0.9rem; color: var(--muted); margin-right: 0.3rem; }
+  .grade button[aria-pressed="true"] { color: #fff; }
+  .grade .known[aria-pressed="true"] { background: var(--ok); border-color: var(--ok); }
+  .grade .review[aria-pressed="true"] { background: var(--risk); border-color: var(--risk); }
+
+  .foot { color: var(--muted); font-size: 0.9rem; margin-top: 2rem; }
+
+  @media (max-width: 52rem) {
+    .shell { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.5rem; }
+    .side { position: static; }
+    .side nav { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .answer, .bar > span, .q { transition: none; }
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+  <aside class="side" aria-label="Navegación del quiz">
+    <h2>Categorías</h2>
+    <nav id="nav"></nav>
+    <div class="meter">
+      <p id="meterText">0 de 0 respondidas</p>
+      <div class="bar" role="progressbar" aria-label="Progreso del repaso" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar"><span id="barFill"></span></div>
+      <div class="split"><span id="knownCount">0 dominadas</span><span id="reviewCount">0 por repasar</span></div>
+      <button class="reset" id="reset" type="button">Reiniciar repaso</button>
+    </div>
+  </aside>
+
+  <main>
+    <section class="intro">
+      <h1>Quiz teórico-práctico de análisis de datos</h1>
+      <p>Once casos reales de limpieza, cruce y lectura de datos. Piensa tu respuesta, revela la solución y marca si la dominas o si necesitas repasarla.</p>
+      <div class="join">
+        <svg viewBox="0 0 150 80" role="img" aria-label="Diagrama de un Inner Join: solo se conserva la intersección">
+          <circle cx="55" cy="40" r="32" fill="none" stroke="currentColor" stroke-width="2" opacity="0.5"/>
+          <circle cx="95" cy="40" r="32" fill="none" stroke="currentColor" stroke-width="2" opacity="0.5"/>
+          <path d="M75 12.6a32 32 0 0 1 0 54.8a32 32 0 0 1 0-54.8z" fill="var(--cobalt)"/>
+        </svg>
+        <p><strong>Antes de empezar:</strong> casi todos los errores del quiz comparten una raíz. Se limpia o se une un dato sin preguntar primero qué significa para el negocio.</p>
+      </div>
+    </section>
+
+    <div id="content"></div>
+    <p class="foot">Material de estudio basado en las preguntas generales del quiz.</p>
+  </main>
+</div>
+
+<script type="module">
+  // Datos del quiz / quiz data
+  const categories = [
+    {
+      id: "joins",
+      title: "Cruce e integración de datos (Joins)",
+      questions: [
+        {
+          title: "El riesgo del Inner Join en análisis de comportamiento",
+          tag: "Sesgo de supervivencia",
+          case: "Para predecir el abandono de clientes (o predecir devoluciones), un analista une la tabla 'Clientes Activos/Ventas' con la tabla 'Uso de Plataforma/Devoluciones' aplicando un Inner Join. ¿Qué segmento crítico de información se pierde irrevocablemente?",
+          answer: [
+            "Se pierde de forma irrevocable la información de todos aquellos clientes que no registren ninguna actividad en la tabla de destino. Por ejemplo, en un modelo de predicción de abandono, un Inner Join eliminaría por completo a los clientes inactivos o sin interacciones recientes. Esto sesga el análisis, ya que introduce un sesgo de supervivencia al estudiar únicamente a los usuarios que siguen utilizando la plataforma."
+          ]
+        },
+        {
+          title: "El producto cartesiano y los duplicados",
+          tag: "Llave incorrecta",
+          case: "Al cruzar una tabla de Ventas con una de Clientes usando la llave ID_Region, el dataset pasa de 10,000 a 45,000 filas. El analista propone usar df.drop_duplicates() para volver a las 10,000 filas originales. ¿Por qué en este contexto esta práctica es un riesgo financiero y cuál es la causa real?",
+          answer: [
+            "Esta práctica es un riesgo financiero porque df.drop_duplicates() elimina filas basándose en la coincidencia de registros, lo que en este escenario borrará transacciones legítimas de forma aleatoria y corromperá los estados financieros.",
+            "La causa real del problema es una relación de muchos a muchos (Many-to-Many) generada por usar una llave incorrecta (ID_Region), que provoca un producto cartesiano. La solución correcta no es limpiar el resultado corrupto, sino corregir el cruce desde la tabla primaria utilizando una combinación de llaves únicas (como ID_Cliente e ID_Region) y validar la integridad con copias de seguridad antes de avanzar."
+          ]
+        }
+      ]
+    },
+    {
+      id: "nulos",
+      title: "Imputación y manejo de nulos",
+      questions: [
+        {
+          title: "Nulos como indicadores de éxito",
+          tag: "Nulo con significado",
+          case: "En una columna llamada Motivo_Devolucion (o ID_Agente_Intermediario), encontramos un 80% de valores nulos. El equipo propone rellenarlos con la moda o eliminarlos. ¿Por qué esto puede ser un error grave de negocio?",
+          answer: [
+            "Es un error grave porque un porcentaje tan alto de nulos no representa una ausencia de datos, sino un hecho de negocio con un significado específico. En Motivo_Devolucion, un nulo indica el éxito de una venta perfecta (el producto no fue devuelto); en ID_Agente_Intermediario, significa una venta directa sin comisiones.",
+            "Eliminar estas filas o imputarlas con la moda distorsionaría las métricas operativas y destruiría las variables clave para la toma de decisiones estratégicas. Lo correcto es transformar el nulo en una nueva categoría explícita (ej. \"Sin Devolución\" o \"Venta Directa\")."
+          ]
+        },
+        {
+          title: "La trampa de imputar la variable objetivo",
+          tag: "Data leakage",
+          case: "Al limpiar una base de datos, una analista nota que el 5% de los registros no tiene dato en la columna Renunció (Variable Objetivo). Para no perder filas, rellena esos nulos con la moda ('No'). ¿Por qué esto destruye el modelo predictivo?",
+          answer: [
+            "Imputar la variable objetivo con la moda destruye el modelo predictivo porque introduce fuga de datos inversa (data leakage) e infla artificialmente las métricas de evaluación como el accuracy, la precisión y el recall.",
+            "Al rellenar los nulos con \"No\", se enmascaran los casos reales de abandono laboral y se reduce la variabilidad del dataset. Esto genera un modelo sobreajustado (overfitting) que será incapaz de detectar los patrones reales de renuncia en producción."
+          ]
+        },
+        {
+          title: "El sesgo de la mediana global",
+          tag: "Imputación sin segmentar",
+          case: "Para imputar valores nulos en la columna Salario (o detectar subpagos), se utiliza la mediana de toda la empresa. ¿Por qué este enfoque oculta problemas estructurales?",
+          answer: [
+            "Este enfoque oculta problemas estructurales porque la mediana global neutraliza la variabilidad legítima entre diferentes puestos, niveles de responsabilidad, jornadas y antigüedades. Al imputar un salario único general, se reducen artificialmente las brechas salariales, ocultando situaciones de subpago o inequidad de género y departamento.",
+            "La buena práctica exige segmentar e imputar mediante medianas agrupadas por perfiles equivalentes, manteniendo un registro o bandera (flag) que identifique cuáles datos fueron observados y cuáles fueron imputados para no sesgar las auditorías posteriores."
+          ]
+        }
+      ]
+    },
+    {
+      id: "outliers",
+      title: "Valores atípicos (outliers) y promedios",
+      questions: [
+        {
+          title: "La defensa de los outliers rentables",
+          tag: "Outlier de negocio",
+          case: "En el análisis exploratorio (EDA) de la columna Ganancia, se detectan valores atípicos que superan el límite superior del Boxplot. Al revisarlos, tienen precios unitarios altísimos. El analista sugiere eliminarlos para normalizar la curva. ¿Qué impacto tiene esto?",
+          answer: [
+            "Eliminar los valores atípicos que superan el límite superior del Boxplot en la columna Ganancia es un grave error porque no representan errores de captura, sino transacciones con precios unitarios altísimos. Borrarlos únicamente para \"normalizar la curva\" destruye la información financiera más valiosa de la empresa y ciega a la gerencia ante los productos o clientes que generan el mayor margen de rentabilidad.",
+            "Los outliers de negocio deben analizarse como un segmento independiente de alto valor."
+          ]
+        },
+        {
+          title: "El falso positivo del promedio",
+          tag: "Métrica engañosa",
+          case: "Para evaluar si una categoría de productos es rentable, se calcula el promedio de su Profit y da positivo. ¿Por qué el gerente exige ver el porcentaje de transacciones con pérdida en lugar del promedio?",
+          answer: [
+            "El promedio es una métrica altamente sensible a los valores extremos y puede ser distorsionado por unas pocas transacciones de gran volumen, ocultando que la mayoría de las operaciones individuales se ejecutan bajo pérdidas.",
+            "El gerente exige el porcentaje de transacciones con pérdida para evaluar la salud y consistencia operativa del negocio en el día a día. Esta métrica revela la consistencia real del negocio y evita tomar decisiones estratégicas basadas en espejismos estadísticos."
+          ]
+        }
+      ]
+    },
+    {
+      id: "negocio",
+      title: "Lógica de negocio y fechas",
+      questions: [
+        {
+          title: "El falso desplome temporal",
+          tag: "Período incompleto",
+          case: "Un gráfico de líneas muestra una caída del 40% en las ventas en el último trimestre registrado en la base de datos. Antes de presentar esta alarma a la gerencia, ¿qué validación técnica de fechas se debe realizar?",
+          answer: [
+            "Antes de emitir una falsa alarma, se debe realizar una validación técnica de la completitud del período y consistencia en los tiempos de carga (ETL).",
+            "Con frecuencia, este aparente desplome ocurre porque el último trimestre aún se encuentra en curso (período abierto), porque existen retrasos en la consolidación de los datos de los sistemas de origen, o porque se están comparando lapsos temporales de duración desigual."
+          ]
+        },
+        {
+          title: "La lógica de signos financieros",
+          tag: "Signo con significado",
+          case: "En un dataset, una columna transaccional tiene valores negativos y positivos. Un analista aplica la función de valor absoluto abs() para estandarizar. ¿Por qué esto invalida el modelo?",
+          answer: [
+            "Aplicar la función de valor absoluto (abs()) a una columna transaccional destruye la lógica del negocio porque mezcla conceptos opuestos, convirtiendo devoluciones, notas de crédito o costos (números negativos) en ingresos o ganancias positivas.",
+            "Esto distorsiona por completo cualquier métrica agregada, inflando falsamente el flujo de caja y arruinando el rendimiento de cualquier modelo predictivo o análisis financiero."
+          ]
+        },
+        {
+          title: "Peligros de la interpolación lineal en negocios",
+          tag: "Datos inventados",
+          case: "Faltan los datos macroeconómicos de un año específico y se rellenan mediante interpolación lineal usando el año anterior y el posterior. ¿Qué riesgo analítico conlleva esto al cruzarlo con ventas?",
+          answer: [
+            "Rellenar datos macroeconómicos faltantes mediante interpolación lineal entre el año anterior y el posterior asume una progresión matemática constante que ignora la volatilidad real del mercado.",
+            "Al cruzar estos valores ficticios con las ventas reales, se introducen artefactos artificiales que corrompen las correlaciones estadísticas, enmascarando crisis o auges reales y llevando a la gerencia a tomar decisiones estratégicas basadas en datos inventados."
+          ]
+        }
+      ]
+    }
+  ];
+
+  // Estado: id de pregunta -> "known" | "review" / state map
+  const grades = new Map();
+  const totalQuestions = categories.reduce(function (sum, cat) {
+    return sum + cat.questions.length;
+  }, 0);
+
+  function questionId(catIndex, qIndex) {
+    return "q-" + catIndex + "-" + qIndex;
+  }
+
+  function createEl(tag, className, text) {
+    const el = document.createElement(tag);
+    if (className) el.className = className;
+    if (text) el.textContent = text;
+    return el;
+  }
+
+  function buildQuestion(catIndex, qIndex, q) {
+    const id = questionId(catIndex, qIndex);
+    const article = createEl("article", "q");
+    article.id = id;
+    article.dataset.state = "none";
+
+    article.appendChild(createEl("span", "tag", q.tag));
+    article.appendChild(createEl("h3", "", q.title));
+
+    const caseEl = createEl("p", "case");
+    const label = createEl("b", "", "Caso: ");
+    caseEl.appendChild(label);
+    caseEl.appendChild(document.createTextNode(q.case));
+    article.appendChild(caseEl);
+
+    const toggle = createEl("button", "", "Ver respuesta");
+    toggle.type = "button";
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-controls", id + "-a");
+    article.appendChild(toggle);
+
+    const answer = createEl("div", "answer");
+    answer.id = id + "-a";
+    answer.dataset.open = "false";
+    const inner = createEl("div");
+    const body = createEl("div", "body");
+    q.answer.forEach(function (paragraph, i) {
+      const p = createEl("p");
+      if (i === 0) p.appendChild(createEl("strong", "", "Respuesta: "));
+      p.appendChild(document.createTextNode(paragraph));
+      body.appendChild(p);
+    });
+    inner.appendChild(body);
+
+    const grade = createEl("div", "grade");
+    grade.appendChild(createEl("span", "", "¿Cómo te fue?"));
+    const known = createEl("button", "known", "Lo dominaba");
+    known.type = "button";
+    known.setAttribute("aria-pressed", "false");
+    const review = createEl("button", "review", "Debo repasarlo");
+    review.type = "button";
+    review.setAttribute("aria-pressed", "false");
+    grade.appendChild(known);
+    grade.appendChild(review);
+    inner.appendChild(grade);
+    answer.appendChild(inner);
+    article.appendChild(answer);
+
+    toggle.addEventListener("click", function () {
+      const open = answer.dataset.open === "true";
+      answer.dataset.open = String(!open);
+      toggle.setAttribute("aria-expanded", String(!open));
+      toggle.textContent = open ? "Ver respuesta" : "Ocultar respuesta";
+    });
+
+    known.addEventListener("click", function () {
+      setGrade(id, "known");
+    });
+    review.addEventListener("click", function () {
+      setGrade(id, "review");
+    });
+
+    return article;
+  }
+
+  function buildContent() {
+    const root = document.getElementById("content");
+    const nav = document.getElementById("nav");
+
+    categories.forEach(function (cat, catIndex) {
+      const section = createEl("section", "cat");
+      section.id = cat.id;
+
+      const header = createEl("header");
+      header.appendChild(createEl("h2", "", cat.title));
+      header.appendChild(createEl("span", "", cat.questions.length + " casos"));
+      section.appendChild(header);
+
+      cat.questions.forEach(function (q, qIndex) {
+        section.appendChild(buildQuestion(catIndex, qIndex, q));
+      });
+      root.appendChild(section);
+
+      const link = createEl("a");
+      link.href = "#" + cat.id;
+      link.dataset.target = cat.id;
+      link.appendChild(createEl("span", "", cat.title));
+      link.appendChild(createEl("span", "count", String(cat.questions.length)));
+      nav.appendChild(link);
+    });
+  }
+
+  function setGrade(id, value) {
+    // Pulsar de nuevo la misma opción la quita / pressing again clears it
+    if (grades.get(id) === value) {
+      grades.delete(id);
+    } else {
+      grades.set(id, value);
+    }
+    paintQuestion(id);
+    updateMeter();
+  }
+
+  function paintQuestion(id) {
+    const article = document.getElementById(id);
+    const value = grades.get(id) || "none";
+    article.dataset.state = value;
+    article.querySelector(".known").setAttribute("aria-pressed", String(value === "known"));
+    article.querySelector(".review").setAttribute("aria-pressed", String(value === "review"));
+  }
+
+  function countBy(value) {
+    let n = 0;
+    grades.forEach(function (v) {
+      if (v === value) n += 1;
+    });
+    return n;
+  }
+
+  function updateMeter() {
+    const answered = grades.size;
+    const percent = Math.round((answered / totalQuestions) * 100);
+    document.getElementById("meterText").textContent = answered + " de " + totalQuestions + " respondidas";
+    document.getElementById("barFill").style.width = percent + "%";
+    document.getElementById("bar").setAttribute("aria-valuenow", String(percent));
+    document.getElementById("knownCount").textContent = countBy("known") + " dominadas";
+    document.getElementById("reviewCount").textContent = countBy("review") + " por repasar";
+  }
+
+  function resetAll() {
+    grades.clear();
+    document.querySelectorAll(".q").forEach(function (el) {
+      paintQuestion(el.id);
+      const answer = el.querySelector(".answer");
+      const toggle = el.querySelector("button[aria-controls]");
+      answer.dataset.open = "false";
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.textContent = "Ver respuesta";
+    });
+    updateMeter();
+  }
+
+  // Resalta la categoría visible en la barra lateral / highlight visible category
+  function watchSections() {
+    const links = document.querySelectorAll("#nav a");
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        links.forEach(function (link) {
+          link.setAttribute("aria-current", String(link.dataset.target === entry.target.id));
+        });
+      });
+    }, { rootMargin: "-20% 0px -65% 0px" });
+    document.querySelectorAll(".cat").forEach(function (section) {
+      observer.observe(section);
+    });
+  }
+
+  buildContent();
+  updateMeter();
+  watchSections();
+  document.getElementById("reset").addEventListener("click", resetAll);
+</script>
+</body>
+</html>
