@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guía de construcción de proyecto de datos</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #edf2f0;
+    --card: #ffffff;
+    --ink: #14211f;
+    --muted: #55706a;
+    --line: #cfdbd7;
+    --rail: #9db8b0;
+    --p1: #0f6b5c;
+    --p2: #2a5d9f;
+    --p3: #7a4fa0;
+    --p4: #a85a1f;
+    --p5: #a33a52;
+    --font-head: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+    --font-body: "Public Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0f1816;
+      --card: #172421;
+      --ink: #e6efec;
+      --muted: #96b0a9;
+      --line: #284039;
+      --rail: #3d5f56;
+      --p1: #4fc2aa;
+      --p2: #7fb0ee;
+      --p3: #b996de;
+      --p4: #e5995b;
+      --p5: #ec8aa0;
+    }
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--font-body); font-size: 1.0625rem; line-height: 1.6;
+  }
+  :focus-visible { outline: 3px solid var(--p2); outline-offset: 3px; border-radius: 4px; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 0 1.25rem; }
+
+  /* Navegación por fases */
+  .phasenav {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--card); border-bottom: 1px solid var(--line);
+  }
+  .phasenav ul {
+    list-style: none; margin: 0 auto; padding: .6rem 1.25rem; max-width: 980px;
+    display: flex; gap: .5rem; overflow-x: auto;
+  }
+  .phasenav a {
+    display: block; white-space: nowrap; text-decoration: none; font-size: .9rem; font-weight: 600;
+    padding: .35rem .85rem; border-radius: 999px; border: 2px solid var(--c);
+    color: var(--c);
+  }
+  .phasenav a:hover { background: var(--c); color: var(--card); }
+  .phasenav li:nth-child(1) { --c: var(--p1); }
+  .phasenav li:nth-child(2) { --c: var(--p2); }
+  .phasenav li:nth-child(3) { --c: var(--p3); }
+  .phasenav li:nth-child(4) { --c: var(--p4); }
+  .phasenav li:nth-child(5) { --c: var(--p5); }
+
+  /* Encabezado */
+  header.hero { padding: 3.5rem 0 2rem; }
+  h1 {
+    font-family: var(--font-head); font-weight: 800;
+    font-size: clamp(2.2rem, 6vw, 4rem); line-height: 1.02; letter-spacing: -.02em;
+    margin: 0 0 1rem; max-width: 16ch;
+  }
+  .lede { margin: 0; color: var(--muted); max-width: 60ch; }
+
+  /* Ruta de las 5 fases */
+  .route {
+    list-style: none; margin: 2rem 0 0; padding: 0;
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: .4rem;
+  }
+  .route li {
+    border-top: 6px solid var(--c); padding-top: .5rem;
+    font-size: .88rem; font-weight: 600; line-height: 1.3;
+  }
+  .route li span { display: block; color: var(--muted); font-weight: 500; }
+  .route li:nth-child(1) { --c: var(--p1); }
+  .route li:nth-child(2) { --c: var(--p2); }
+  .route li:nth-child(3) { --c: var(--p3); }
+  .route li:nth-child(4) { --c: var(--p4); }
+  .route li:nth-child(5) { --c: var(--p5); }
+  @media (max-width: 700px) { .route { grid-template-columns: 1fr; } }
+
+  /* Línea de tiempo */
+  .timeline { position: relative; padding: 1.5rem 0 3rem; }
+  .phase {
+    position: relative;
+    margin: 0 0 2.5rem 0;
+    padding-left: 4.25rem;
+  }
+  .phase::before {
+    content: ""; position: absolute; left: 1.55rem; top: 3.4rem; bottom: -2.5rem;
+    width: 3px; background: var(--rail);
+  }
+  .phase:last-child::before { display: none; }
+  .phase-mark {
+    position: absolute; left: 0; top: 0;
+    width: 3.3rem; height: 3.3rem; border-radius: 50%;
+    background: var(--c); color: var(--card);
+    display: grid; place-items: center;
+    font-family: var(--font-head); font-weight: 800; font-size: 1.6rem;
+  }
+  .phase:nth-child(1) { --c: var(--p1); }
+  .phase:nth-child(2) { --c: var(--p2); }
+  .phase:nth-child(3) { --c: var(--p3); }
+  .phase:nth-child(4) { --c: var(--p4); }
+  .phase:nth-child(5) { --c: var(--p5); }
+
+  .phase-head { margin-bottom: 1rem; }
+  .phase-head .tag { margin: 0; font-weight: 600; color: var(--c); font-size: .95rem; }
+  h2 {
+    font-family: var(--font-head); font-weight: 700;
+    font-size: clamp(1.5rem, 3.4vw, 2.1rem); line-height: 1.15; margin: .1rem 0 0;
+  }
+
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: .75rem; counter-reset: step; }
+  .steps li {
+    counter-increment: step;
+    background: var(--card); border: 1px solid var(--line); border-left: 5px solid var(--c);
+    border-radius: 8px; padding: 1rem 1.2rem 1.1rem 3.4rem; position: relative;
+  }
+  .steps li::before {
+    content: counter(step); position: absolute; left: 1.05rem; top: 1rem;
+    font-family: var(--font-head); font-weight: 800; font-size: 1.3rem; color: var(--c); line-height: 1.2;
+  }
+  .steps h3 { margin: 0 0 .25rem; font-size: 1.05rem; font-weight: 700; line-height: 1.35; }
+  .steps p { margin: 0; max-width: 66ch; }
+  code {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .92em;
+    background: var(--bg); border: 1px solid var(--line); padding: .05rem .35rem; border-radius: 4px;
+  }
+
+  @media (max-width: 560px) {
+    .phase { padding-left: 0; }
+    .phase::before { display: none; }
+    .phase-mark { position: static; margin-bottom: .6rem; }
+  }
+
+  footer { border-top: 1px solid var(--line); padding: 1.5rem 0 3rem; color: var(--muted); font-size: .9rem; }
+</style>
+</head>
+<body>
+
+<nav class="phasenav" aria-label="Fases del proyecto">
+  <ul>
+    <li><a href="#fase1">Fase 1</a></li>
+    <li><a href="#fase2">Fase 2</a></li>
+    <li><a href="#fase3">Fase 3</a></li>
+    <li><a href="#fase4">Fase 4</a></li>
+    <li><a href="#fase5">Fase 5</a></li>
+  </ul>
+</nav>
+
+<main class="wrap">
+  <header class="hero">
+    <h1>Guía de construcción de proyecto</h1>
+    <p class="lede">Un proyecto de datos recorre cinco fases, desde entender el problema del negocio hasta presentar recomendaciones que se puedan ejecutar.</p>
+    <ol class="route" aria-label="Resumen de las fases">
+      <li>Fase 1<span>Entendimiento del negocio y alcance</span></li>
+      <li>Fase 2<span>Ingeniería y limpieza de datos</span></li>
+      <li>Fase 3<span>Análisis exploratorio de datos</span></li>
+      <li>Fase 4<span>Arquitectura visual y dashboarding</span></li>
+      <li>Fase 5<span>Storytelling y presentación</span></li>
+    </ol>
+  </header>
+
+  <div class="timeline">
+
+    <section class="phase" id="fase1" aria-labelledby="t1">
+      <div class="phase-mark" aria-hidden="true">1</div>
+      <div class="phase-head">
+        <p class="tag">El «Por Qué»</p>
+        <h2 id="t1">Fase 1: Entendimiento del Negocio y Alcance</h2>
+      </div>
+      <ol class="steps">
+        <li>
+          <h3>Identificación del Problema</h3>
+          <p>Definir claramente cuál es el dolor del cliente o la oportunidad de negocio a resolver antes de examinar la base de datos.</p>
+        </li>
+        <li>
+          <h3>Definición de KPIs</h3>
+          <p>Establecer de 3 a 5 indicadores clave de rendimiento (fórmulas matemáticas exactas) que medirán el impacto y el estado de la situación actual.</p>
+        </li>
+        <li>
+          <h3>Mapeo de Datos</h3>
+          <p>Crear un diccionario inicial identificando qué columnas existen en las fuentes crudas (Data Sourcing) y confirmar si son suficientes para calcular los KPIs propuestos.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="phase" id="fase2" aria-labelledby="t2">
+      <div class="phase-mark" aria-hidden="true">2</div>
+      <div class="phase-head">
+        <p class="tag">La Base Estructural</p>
+        <h2 id="t2">Fase 2: Ingeniería y Limpieza de Datos</h2>
+      </div>
+      <ol class="steps">
+        <li>
+          <h3>Ingesta y Auditoría Inicial</h3>
+          <p>Cargar los datos crudos en Python (Pandas) o Power Query para evaluar el volumen, tipos de datos y calidad general del archivo.</p>
+        </li>
+        <li>
+          <h3>Tratamiento de Duplicados</h3>
+          <p>Evaluar si los duplicados son errores del sistema o comportamientos naturales (ej. un mismo cliente comprando varios productos en un carrito). Eliminar exclusivamente con justificación de negocio.</p>
+        </li>
+        <li>
+          <h3>Gestión de Nulos y Valores Atípicos</h3>
+          <p>Decidir si se imputan, se segmentan mediante bifurcación o se eliminan los valores faltantes basándose en reglas de la industria, documentando cada paso en el linaje de datos.</p>
+        </li>
+        <li>
+          <h3>Transformación y Estandarización</h3>
+          <p>Convertir fechas al formato correcto, limpiar caracteres especiales de los textos y asegurar que las variables numéricas operen matemáticamente.</p>
+        </li>
+        <li>
+          <h3>Exportación Consolidada</h3>
+          <p>Generar el archivo entregable (la «Única Fuente de la Verdad») en formato <code>.csv</code> estandarizado (aplicando parámetros como <code>index=False</code> y <code>encoding='utf-8'</code>) listo para importarse a herramientas de visualización.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="phase" id="fase3" aria-labelledby="t3">
+      <div class="phase-mark" aria-hidden="true">3</div>
+      <div class="phase-head">
+        <p class="tag">EDA y Generación de Insights</p>
+        <h2 id="t3">Fase 3: Análisis Exploratorio de Datos</h2>
+      </div>
+      <ol class="steps">
+        <li>
+          <h3>Estadística Descriptiva</h3>
+          <p>Ejecutar comandos estructurales para entender la media, la mediana, la varianza, los mínimos y máximos de las variables clave.</p>
+        </li>
+        <li>
+          <h3>Análisis Univariado y Bivariado</h3>
+          <p>Utilizar librerías gráficas rápidas para visualizar distribuciones individuales y cruzar variables (ej. Tiempo de procesamiento vs. Región) para detectar correlaciones.</p>
+        </li>
+        <li>
+          <h3>Identificación de Anomalías</h3>
+          <p>Traducir los hallazgos estadísticos iniciales en «pistas» de negocio. Detectar cuellos de botella geográficos, temporadas atípicas o comportamientos inusuales de clientes.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="phase" id="fase4" aria-labelledby="t4">
+      <div class="phase-mark" aria-hidden="true">4</div>
+      <div class="phase-head">
+        <p class="tag">Dashboarding</p>
+        <h2 id="t4">Fase 4: Arquitectura Visual y Dashboarding</h2>
+      </div>
+      <ol class="steps">
+        <li>
+          <h3>Modelado de Datos</h3>
+          <p>Ingestar el archivo consolidado en la herramienta de Business Intelligence (ej. Power BI). Definir la arquitectura estableciendo un Modelo Estrella o operando sobre la tabla plana consolidada.</p>
+        </li>
+        <li>
+          <h3>Desarrollo de Medidas Analíticas</h3>
+          <p>Traducir los KPIs definidos en la Fase 1 a un lenguaje de fórmulas (como DAX) para garantizar cálculos dinámicos que respondan a las segmentaciones.</p>
+        </li>
+        <li>
+          <h3>Diseño por Capas (Stakeholders)</h3>
+          <p>Estructurar el reporte orientando cada pestaña a una audiencia específica (Capas Estratégica, Táctica y Operativa).</p>
+        </li>
+        <li>
+          <h3>Implementación de UX/UI</h3>
+          <p>Aplicar principios de diseño limpio. Limitar el dashboard a un máximo de 3 o 4 métricas principales por página, evitando el exceso de colores y garantizando que las respuestas sean accesibles en pocos clics.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="phase" id="fase5" aria-labelledby="t5">
+      <div class="phase-mark" aria-hidden="true">5</div>
+      <div class="phase-head">
+        <p class="tag">Traducción de Negocio</p>
+        <h2 id="t5">Fase 5: Storytelling y Presentación</h2>
+      </div>
+      <ol class="steps">
+        <li>
+          <h3>Síntesis Ejecutiva</h3>
+          <p>Condensar el contexto, la metodología y los descubrimientos en un formato digerible y directo para una audiencia gerencial no técnica.</p>
+        </li>
+        <li>
+          <h3>Traducción a Impacto Económico</h3>
+          <p>Cuantificar los hallazgos operativos en dinero o tiempo perdido, dando peso real al problema detectado.</p>
+        </li>
+        <li>
+          <h3>Recomendaciones Accionables</h3>
+          <p>Proponer pasos precisos y estrategias respaldadas por los datos. El ciclo concluye con la toma de decisiones, no con la simple entrega de gráficos.</p>
+        </li>
+      </ol>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">Fuente: «Guía de Construcción de Proyecto».</div>
+</footer>
+
+</body>
+</html>
