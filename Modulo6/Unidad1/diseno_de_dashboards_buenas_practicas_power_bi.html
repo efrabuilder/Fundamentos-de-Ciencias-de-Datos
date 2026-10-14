@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diseño de dashboards y buenas prácticas en Power BI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f4f6f8;
+    --surface: #ffffff;
+    --ink: #17222d;
+    --muted: #5b6b7a;
+    --line: #d5dce3;
+    --base: #3f5f7f;
+    --base-soft: #e3eaf1;
+    --ok: #2e7d57;
+    --warn: #b7791f;
+    --alert: #b3382c;
+    --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-display: "Newsreader", Georgia, "Times New Roman", serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #121a22;
+      --surface: #1a2530;
+      --ink: #e8eef3;
+      --muted: #9fb0bf;
+      --line: #2f3e4c;
+      --base: #8fb0d1;
+      --base-soft: #223446;
+      --ok: #5fbf90;
+      --warn: #e0b055;
+      --alert: #e27b70;
+    }
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--base); outline-offset: 3px; border-radius: 4px; }
+
+  /* Barra de navegación */
+  .topbar {
+    position: sticky; top: 0; z-index: 10;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar-inner {
+    max-width: 1080px; margin: 0 auto; padding: .65rem 1.25rem;
+    display: flex; gap: .5rem; align-items: center; flex-wrap: wrap;
+  }
+  .topbar strong { font-weight: 600; margin-right: auto; font-size: .95rem; color: var(--muted); }
+  .topbar a {
+    text-decoration: none; font-size: .92rem; font-weight: 500;
+    padding: .35rem .8rem; border-radius: 999px; border: 1px solid var(--line);
+  }
+  .topbar a:hover { background: var(--base-soft); }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.25rem; }
+
+  /* Encabezado */
+  header.intro { padding: 3.5rem 0 2.5rem; }
+  .badge {
+    display: inline-block; font-size: .9rem; font-weight: 600;
+    color: var(--base); background: var(--base-soft);
+    padding: .25rem .75rem; border-radius: 6px; margin-bottom: 1rem;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 600; font-size: clamp(2.1rem, 5.2vw, 3.4rem);
+    line-height: 1.1; margin: 0 0 1rem; max-width: 20ch; letter-spacing: -.01em;
+  }
+  .lede { color: var(--muted); max-width: 62ch; margin: 0; }
+
+  /* Wireframe de jerarquía */
+  .frame {
+    margin-top: 2.25rem;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+    padding: 1rem; display: grid; gap: .6rem; max-width: 640px;
+  }
+  .frame p { margin: 0 0 .15rem; font-size: .85rem; color: var(--muted); }
+  .frame .row { display: grid; gap: .6rem; }
+  .frame .row.top { grid-template-columns: 1.2fr 1fr 1fr 1fr; }
+  .frame .box {
+    border-radius: 6px; padding: .55rem .7rem; font-size: .85rem; font-weight: 500;
+    background: var(--base-soft); border: 1px solid var(--line);
+  }
+  .frame .kpi { background: var(--base); color: var(--paper); border-color: var(--base); }
+  .frame .mid { min-height: 4.2rem; display: flex; align-items: center; justify-content: center; text-align: center; }
+  .frame .bottom {
+    min-height: 3.2rem; display: flex; align-items: center; justify-content: center;
+    background: transparent; border-style: dashed; color: var(--muted);
+  }
+  @media (max-width: 560px) {
+    .frame .row.top { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* Secciones */
+  section.part { padding: 2.5rem 0; border-top: 1px solid var(--line); }
+  .part-head { display: grid; gap: .35rem; margin-bottom: 1.75rem; }
+  h2 {
+    font-family: var(--font-display); font-weight: 600;
+    font-size: clamp(1.6rem, 3.4vw, 2.2rem); line-height: 1.2; margin: 0;
+  }
+  .part-head p { margin: 0; color: var(--muted); max-width: 60ch; }
+
+  /* Fichas de contenido */
+  .grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .item {
+    background: var(--surface); border: 1px solid var(--line);
+    border-left: 4px solid var(--base); border-radius: 8px;
+    padding: 1.15rem 1.3rem 1.25rem;
+  }
+  .item h3 { margin: 0 0 .5rem; font-size: 1.1rem; line-height: 1.3; font-weight: 700; }
+  .item p { margin: 0; max-width: 60ch; }
+  .item.wide { grid-column: 1 / -1; }
+  .item.wide p { max-width: 80ch; }
+
+  /* Ejemplo de KPI con contexto */
+  .compare {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: .75rem; margin-top: 1rem;
+  }
+  .compare > div {
+    border: 1px solid var(--line); border-radius: 8px; padding: .65rem .85rem; background: var(--paper);
+  }
+  .compare small { display: block; color: var(--muted); font-size: .8rem; }
+  .compare b { font-size: 1.25rem; }
+  .compare .up { color: var(--ok); }
+  .compare .down { color: var(--alert); }
+  .compare .mid { color: var(--warn); }
+
+  /* Pares antes / después (título narrativo) */
+  .pair { display: grid; gap: .5rem; margin-top: 1rem; }
+  .pair div { padding: .55rem .85rem; border-radius: 6px; font-size: .95rem; border: 1px solid var(--line); }
+  .pair .before { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--alert); }
+  .pair .after { background: var(--base-soft); font-weight: 600; }
+
+  /* Paleta semántica */
+  .swatches { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+  .swatches span {
+    font-size: .85rem; padding: .25rem .7rem; border-radius: 999px; font-weight: 500;
+    border: 1px solid var(--line);
+  }
+  .swatches .n1 { background: #8a97a3; color: #fff; }
+  .swatches .n2 { background: #7f9bb8; color: #fff; }
+  .swatches .s1 { background: var(--alert); color: #fff; }
+  .swatches .s2 { background: var(--ok); color: #fff; }
+  .swatches .s3 { background: var(--warn); color: #fff; }
+
+  .term {
+    font-weight: 600; background: var(--base-soft); padding: .05rem .35rem; border-radius: 4px;
+  }
+
+  /* Tips generales */
+  .tips { display: grid; gap: 1rem; counter-reset: tip; }
+  .tip {
+    display: grid; grid-template-columns: auto 1fr; gap: 1.1rem;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 8px;
+    padding: 1.2rem 1.35rem;
+  }
+  .tip::before {
+    counter-increment: tip; content: counter(tip);
+    font-family: var(--font-display); font-weight: 600; font-size: 2rem; line-height: 1;
+    color: var(--base); width: 2.2rem;
+  }
+  .tip h3 { margin: 0 0 .4rem; font-size: 1.1rem; line-height: 1.3; }
+  .tip p { margin: 0; max-width: 68ch; }
+  .tip .q { margin-top: .6rem; padding: .6rem .85rem; background: var(--base-soft); border-radius: 6px; font-weight: 500; }
+
+  footer { padding: 2rem 0 3rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .9rem; }
+</style>
+</head>
+<body>
+
+<nav class="topbar" aria-label="Secciones">
+  <div class="topbar-inner">
+    <strong>Módulo 6 · Dashboards</strong>
+    <a href="#disenio">Diseño visual</a>
+    <a href="#desarrollo">Power BI</a>
+    <a href="#tips">Tips generales</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <header class="intro">
+    <span class="badge">Módulo 6</span>
+    <h1>Diseño de dashboards y buenas prácticas en Power BI</h1>
+    <p class="lede">Guía estratégica y tips generales para crear dashboards que ayuden a tomar decisiones: principios de diseño visual, buenas prácticas de desarrollo en Power BI y recomendaciones para empezar bien cada proyecto.</p>
+
+    <div class="frame" role="img" aria-label="Esquema de jerarquía visual: KPIs y filtros globales arriba a la izquierda, tendencias principales en el centro, tablas granulares abajo">
+      <p>Jerarquía visual: el ojo occidental lee en patrón de «F» o «Z»</p>
+      <div class="row top">
+        <div class="box">Filtros globales</div>
+        <div class="box kpi">KPI</div>
+        <div class="box kpi">KPI</div>
+        <div class="box kpi">KPI</div>
+      </div>
+      <div class="box mid">Tendencias principales (centro)</div>
+      <div class="box bottom">Tablas de datos granulares (parte inferior)</div>
+    </div>
+  </header>
+
+  <!-- PARTE 1 -->
+  <section class="part" id="disenio">
+    <div class="part-head">
+      <h2>1. Principios de diseño visual y estratégico</h2>
+      <p>Cómo ordenar, colorear y titular un dashboard para que guíe la atención del usuario.</p>
+    </div>
+
+    <div class="grid">
+      <article class="item">
+        <h3>Jerarquía visual estratégica</h3>
+        <p>El ojo occidental lee en patrón de «F» o «Z». Coloca los KPIs más críticos y los filtros globales en la esquina superior izquierda. Usa el centro para las tendencias principales y deja la parte inferior exclusivamente para las tablas de datos granulares.</p>
+      </article>
+
+      <article class="item">
+        <h3>Métricas con contexto inmediato</h3>
+        <p>Un KPI aislado como «150 ventas» no aporta valor operativo. Cada métrica principal debe incluir una comparativa clara: porcentaje de crecimiento frente al mes anterior, año contra año o desviación respecto a la meta del negocio.</p>
+        <div class="compare" aria-hidden="true">
+          <div><small>Frente al mes anterior</small><b class="up">+8 %</b></div>
+          <div><small>Año contra año</small><b class="mid">+2 %</b></div>
+          <div><small>Desviación frente a la meta</small><b class="down">−5 %</b></div>
+        </div>
+      </article>
+
+      <article class="item">
+        <h3>Uso intencional del color</h3>
+        <p>El color debe guiar la atención, no decorar. Utiliza paletas neutras (grises, azules apagados) para la estructura base y reserva los colores semánticos (rojo, verde, amarillo) únicamente para resaltar alertas, anomalías o el cumplimiento de objetivos.</p>
+        <div class="swatches" aria-hidden="true">
+          <span class="n1">Gris</span><span class="n2">Azul apagado</span>
+          <span class="s1">Rojo: alerta</span><span class="s2">Verde: objetivo cumplido</span><span class="s3">Amarillo: anomalía</span>
+        </div>
+      </article>
+
+      <article class="item">
+        <h3>Títulos narrativos</h3>
+        <p>Reemplaza las descripciones estáticas como «Ventas por Región» por conclusiones directas como «Norteamérica concentró el 45% de las ventas en Q3». El título debe entregar la respuesta de negocio antes de que el usuario analice los ejes del gráfico.</p>
+        <div class="pair" aria-hidden="true">
+          <div class="before">Ventas por Región</div>
+          <div class="after">Norteamérica concentró el 45% de las ventas en Q3</div>
+        </div>
+      </article>
+
+      <article class="item wide">
+        <h3>Aprovechamiento de tooltips y desaturación</h3>
+        <p>Evita saturar el lienzo con múltiples etiquetas de datos superpuestas. Oculta la información secundaria y los desgloses granulares dentro de ventanas flotantes (tooltips) que solo aparezcan cuando el usuario interactúa con un punto de interés.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- PARTE 2 -->
+  <section class="part" id="desarrollo">
+    <div class="part-head">
+      <h2>2. Buenas prácticas de desarrollo en Power BI</h2>
+      <p>Decisiones técnicas que mantienen el reporte rápido, liviano y fácil de usar.</p>
+    </div>
+
+    <div class="grid">
+      <article class="item wide">
+        <h3>Modelado en estrella (Star Schema) innegociable</h3>
+        <p>Power BI está diseñado específicamente para trabajar con tablas de hechos (datos cuantitativos) y dimensiones (catálogos). El modelo de datos debe estructurarse correctamente antes de crear el primer gráfico; mantener todo en una sola tabla plana (tipo Excel) destruye el rendimiento del motor <span class="term">VertiPaq</span> y complica innecesariamente los cálculos en <span class="term">DAX</span>.</p>
+      </article>
+
+      <article class="item">
+        <h3>Medidas (Measures) por encima de columnas calculadas</h3>
+        <p>Evita crear columnas nuevas en el modelo para cada cálculo. Las columnas calculadas consumen memoria RAM estática del archivo, mientras que las medidas en DAX se calculan al vuelo según los filtros activos, manteniendo el dashboard rápido, liviano y escalable.</p>
+      </article>
+
+      <article class="item">
+        <h3>Páginas de tooltips (información sobre herramientas)</h3>
+        <p>Para maximizar el espacio del lienzo, configura páginas ocultas como tooltips. De esta forma, al pasar el cursor sobre una barra de «Ventas de Octubre», el usuario no solo verá un número estático, sino una mini-gráfica interactiva con el desglose por producto para ese mes específico.</p>
+      </article>
+
+      <article class="item">
+        <h3>Sincronización de segmentadores (Sync Slicers)</h3>
+        <p>Si el reporte contiene varias pestañas, el usuario no debería tener que filtrar por «Región Norte» repetidas veces en cada página. Activar la sincronización de filtros garantiza una navegación fluida e ininterrumpida.</p>
+      </article>
+
+      <article class="item">
+        <h3>Marcadores (Bookmarks) para interfaces limpias</h3>
+        <p>Evita sobrecargar una sola pantalla con docenas de gráficos. El uso de marcadores combinados con botones permite alternar vistas en el mismo espacio (por ejemplo, un botón para «Tendencia Mensual» y otro para «Distribución Geográfica»), transformando un reporte estático en una experiencia interactiva tipo aplicación web.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- PARTE 3 -->
+  <section class="part" id="tips">
+    <div class="part-head">
+      <h2>Tips generales para creación de dashboards</h2>
+      <p>Cinco ideas para guiar el trabajo desde la primera pregunta hasta la entrega al usuario final.</p>
+    </div>
+
+    <div class="tips">
+      <article class="tip">
+        <div>
+          <h3>Define el objetivo de negocio antes de conectar los datos</h3>
+          <p>Un dashboard no es una galería de gráficos, es una herramienta para tomar decisiones. Los estudiantes deben preguntar siempre al inicio:</p>
+          <p class="q">¿Qué problema resuelve esto y qué métrica define el éxito?</p>
+        </div>
+      </article>
+
+      <article class="tip">
+        <div>
+          <h3>El trabajo duro ocurre en la preparación</h3>
+          <p>La limpieza y el análisis exploratorio previo son innegociables. Si el linaje de datos es confuso, hay valores atípicos no tratados o errores de formato, el dashboard final mostrará información engañosa por muy bien diseñado que esté. La calidad visual nunca compensa una mala base de datos.</p>
+        </div>
+      </article>
+
+      <article class="tip">
+        <div>
+          <h3>Aplica la regla de los 5 segundos</h3>
+          <p>El flujo visual debe ser tan intuitivo que el usuario entienda el estado general del negocio en cinco segundos. Enseña a colocar los KPIs más críticos y resumidos en la parte superior, dejando los desgloses y tablas de detalle para la parte inferior.</p>
+        </div>
+      </article>
+
+      <article class="tip">
+        <div>
+          <h3>Selecciona el gráfico correcto, no el más llamativo</h3>
+          <p>Menos es más. Es preferible usar histogramas claros para mostrar distribuciones o diagramas de caja (boxplots) para evidenciar anomalías de forma limpia, en lugar de gráficos 3D o gráficos de pastel saturados que dificultan la comparación visual.</p>
+        </div>
+      </article>
+
+      <article class="tip">
+        <div>
+          <h3>Diseña para generar confianza, no para mostrar código</h3>
+          <p>El usuario final (o el cliente local) busca claridad técnica y valor de negocio. El dashboard debe hablar el idioma del cliente y responder a sus dudas operativas, en lugar de ser una vitrina de la complejidad técnica que el desarrollador utilizó para crearlo.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Fuentes: «Guía Estratégica: Diseño de Dashboards y Buenas Prácticas en Power BI» y «Tips Generales para Creación de Dashboards».</div>
+</footer>
+
+</body>
+</html>
