@@ -220,11 +220,31 @@
     html { scroll-behavior: auto; }
     .dot { animation: none; opacity: var(--o, 1); }
   }
+
+  /* Fases 3–5 añadidas desde el documento del proyecto */
+  .result-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
+  .result-card { background:var(--white); border:1px solid var(--line); border-radius:4px; padding:24px; }
+  .result-card h3 { font-family:var(--display); color:var(--ink); font-size:1.15rem; line-height:1.3; }
+  .result-card p, .result-card li { color:var(--muted); font-size:15px; }
+  .result-card p { margin-top:10px; }
+  .result-card ul { margin:12px 0 0 20px; }
+  .result-card li + li { margin-top:8px; }
+  .metric-strip { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin:22px 0; }
+  .metric { background:var(--ink); color:var(--white); padding:20px; border-radius:4px; }
+  .metric b { display:block; font-family:var(--display); font-size:1.65rem; line-height:1.15; }
+  .metric span { display:block; color:#B7C7DA; font-size:13px; margin-top:7px; }
+  .viz-placeholder { min-height:180px; padding:24px; border:1px dashed var(--steel); background:var(--white); border-radius:4px; display:flex; flex-direction:column; justify-content:center; }
+  .viz-placeholder strong { font-family:var(--display); color:var(--ink); font-size:1.1rem; }
+  .viz-placeholder p { margin-top:8px; color:var(--muted); font-size:14px; }
+  .bibliography { overflow-wrap:anywhere; }
+  .bibliography li { margin:12px 0; color:var(--muted); }
+  .note-small { margin-top:18px; font-size:14px; color:var(--muted); }
+  @media (max-width:920px) { .result-grid,.metric-strip { grid-template-columns:1fr; } }
+
 </style>
 </head>
 <body>
-
-<header class="hero">
+  <header class="hero">
   <div class="wrap">
     <div>
       <!-- Nombre del equipo + grupo (dato nuevo del Word) -->
@@ -394,8 +414,7 @@
       </div>
     </div>
   </section>
-
-  <!-- ================= MARCO TEÓRICO (NUEVO) ================= -->
+    <!-- ================= MARCO TEÓRICO (NUEVO) ================= -->
   <section id="marco">
     <div class="wrap row">
       <h2>Marco teórico<small>Fundamentos de las fases 1 y 2</small></h2>
@@ -497,29 +516,19 @@
           <thead>
             <tr>
               <th>Variable o llave</th>
-              <th>Significado y función ejecutiva</th>
-              <th>Control registrado y lectura</th>
+              <th>Rol en el análisis</th>
+              <th>Control o tratamiento registrado</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td class="key"><code>policy_id</code></td>
-              <td>Llave. Identifica una póliza y permite consolidar sus registros. Evita contar repetidamente la misma póliza.</td>
-              <td>100 % con dato; única por registro. Identifica cada registro sin repetirse.</td>
+              <td>Llave de póliza. Permite identificar registros de pólizas y relacionar información.</td>
+              <td>Se debe comprobar la unicidad en la granularidad correspondiente antes de usarla como clave primaria.</td>
             </tr>
             <tr>
               <td class="key"><code>customer_id</code></td>
-              <td>Llave. Identifica a un cliente y permite consolidar sus registros sin contarlo más de una vez.</td>
-              <td>100 % con dato; se repite (6.490 valores distintos en 6.512 filas). Relación de uno a muchos; no sirve como identificador único.</td>
-            </tr>
-            <tr>
-              <td class="key"><code>postal_code</code></td>
-              <td>Llave. Código postal. Llave territorial para enlazar con catálogos geográficos; se conserva como texto para no perder los ceros a la izquierda. El primero enlaza con el catálogo territorial y se normaliza a cinco dígitos. La segunda conserva el valor previo a la reasignación para mantener trazabilidad. Dado que la tabla de seguros contenía datos ficticios con formato incorrecto, se utilizó la ubicación del Estado por cliente para obtener el código postal verdadero.</td>
-              <td>100 % con dato; se repite (14 valores distintos en 6.512 filas). Relación de uno a muchos; no sirve como identificador único.</td>
-            </tr>
-            <tr>
-              <td class="key"><code>claim_id</code></td>
-              <td>Llave. Identificador de reclamo. Sirve para enlazar registros entre tablas y para detectar duplicados.</td>
+              <td>Llave de cliente. Permite enlazar registros entre tablas y detectar duplicados.</td>
               <td>100 % con dato; se repite (3.188 valores distintos en 6.512 filas). Relación de uno a muchos; no sirve como identificador único.</td>
             </tr>
             <tr>
@@ -611,6 +620,143 @@
     </div>
   </section>
 
+  <section id="fase3">
+    <div class="wrap row">
+      <h2>Fase 3: Análisis exploratorio<small>EDA — patrones, relaciones y evolución temporal</small></h2>
+      <div>
+        <div class="phase-header">
+          <h3>Hallazgos exploratorios registrados</h3>
+          <span class="badge">EDA</span>
+                  </div>
+        <p class="prose">El documento analiza las distribuciones de primas y siniestros, la concentración geográfica, las relaciones entre variables y la evolución anual de 2018 a 2025. Los siguientes resultados describen la muestra sintética utilizada.</p>
+        <div class="result-grid" style="margin-top:24px;">
+          <article class="result-card">
+            <h3>1. Distribución de primas y siniestros</h3>
+            <p>Las primas se distribuyen aproximadamente de forma uniforme, con importes cercanos a €0–€5.000 y una mediana aproximada de €2.500. No se observan valores atípicos evidentes en el diagrama de caja descrito.</p>
+            <p>Los siniestros muestran una fuerte asimetría positiva: predominan importes cercanos a cero, pero hay casos que se aproximan a €500.000. Los posibles valores atípicos deben investigarse y no eliminarse automáticamente.</p>
+          </article>
+          <article class="result-card">
+            <h3>2. Concentración geográfica</h3>
+            <p>Los códigos postales 20038 y 10178 concentran gran parte de los registros, mientras que otras ubicaciones tienen una representación reducida. En regiones con pocas pólizas, un solo siniestro elevado puede alterar notablemente el índice.</p>
+            <p>El documento también reporta índices aproximados de 6.800 % para el código 9366 y 5.300 % para el 42551. Deben interpretarse con cautela por el bajo volumen de registros y por las limitaciones de las ubicaciones reasignadas.</p>
+          </article>
+          <article class="result-card">
+            <h3>3. Prima frente a costo del siniestro</h3>
+            <p>La dispersión descrita no muestra una tendencia lineal clara: aparecen siniestros altos tanto en pólizas con primas bajas como altas. El gráfico incluye únicamente registros con siniestros positivos, por lo que no permite estimar la probabilidad de sufrir un siniestro ni concluir que las tarifas estén mal calculadas.</p>
+          </article>
+          <article class="result-card">
+            <h3>4. Satisfacción y riesgo de fuga</h3>
+            <p>El documento observa una tendencia descendente entre satisfacción y puntaje de riesgo de abandono. La intensidad de la relación debe cuantificarse; una gráfica por sí sola no demuestra causalidad ni que el abandono explique la siniestralidad.</p>
+          </article>
+        </div>
+
+        <h3 class="vars-title">Evolución temporal: 2018–2025</h3>
+        <div class="metric-strip">
+          <div class="metric"><b>€69,24 M</b><span>Siniestros aproximados en 2023, el máximo anual descrito</span></div>
+          <div class="metric"><b>2.772,64 %</b><span>Índice de siniestralidad reportado para 2023</span></div>
+          <div class="metric"><b>−20,91 %</b><span>Reducción de siniestros entre 2023 y 2025 según el documento</span></div>
+        </div>
+        <div class="prose">
+          <p>En 2025, los siniestros bajan a aproximadamente €54,76 millones. Las primas se mantienen relativamente estables, entre €2,46 y €2,60 millones anuales. La agrupación anual no permite identificar estacionalidad; para evaluarla se necesitarían datos mensuales o trimestrales de varios años.</p>
+        </div>
+        <div class="callout teal">
+          <h4>Precaución de interpretación</h4>
+          <p>Los resultados se refieren a una base sintética y a códigos postales usados como aproximación territorial. El documento señala que las ubicaciones fueron reasignadas a partir del estado del cliente; por ello, no deben presentarse como municipios o domicilios verificados. Los índices extremos también requieren revisar la consistencia entre primas y siniestros antes de convertirlos en decisiones comerciales.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="fase4">
+    <div class="wrap row">
+      <h2>Fase 4: Visualización<small>Diseño propuesto para comunicar los resultados</small></h2>
+      <div>
+        <div class="prose">
+          <p>La visualización debe permitir que el equipo directivo lea primero el resultado global, después compare ubicaciones y finalmente investigue los segmentos que explican los valores observados. El documento identifica una métrica principal y KPIs de apoyo para el análisis.</p>
+        </div>
+        <div class="result-grid" style="margin-top:24px;">
+          <div class="viz-placeholder">
+            <strong>Resumen ejecutivo</strong>
+            <p>Tarjetas para el índice global de siniestralidad, el costo total de siniestros y el volumen total de primas. Mostrar período, moneda y filtros aplicados.</p>
+          </div>
+          <div class="viz-placeholder">
+            <strong>Comparación regional</strong>
+            <p>Gráfico de barras ordenado por índice regional, acompañado por número de pólizas, volumen de primas y monto de siniestros. Señalar las ubicaciones con muestras pequeñas.</p>
+          </div>
+          <div class="viz-placeholder">
+            <strong>Distribución y valores atípicos</strong>
+            <p>Histogramas y diagramas de caja para primas y siniestros. Los casos extremos se marcan para revisión, no se eliminan automáticamente.</p>
+          </div>
+          <div class="viz-placeholder">
+            <strong>Evolución 2018–2025</strong>
+            <p>Serie temporal de primas, siniestros e índice anual. La vista anual describe cambios interanuales, pero no sustituye un análisis de estacionalidad mensual o trimestral.</p>
+          </div>
+        </div>
+        <div class="callout">
+          <h4>Nota sobre el entregable</h4>
+          <p>El PDF contiene los encabezados de las fases de visualización y presentación ejecutiva, pero no incluye en el texto extraído una descripción legible de los gráficos de esas páginas. Los bloques anteriores son una organización sugerida a partir de los indicadores y hallazgos descritos, no una transcripción de gráficos ya documentados.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="fase5">
+    <div class="wrap row">
+      <h2>Fase 5: Presentación ejecutiva<small>Lectura para la toma de decisiones</small></h2>
+      <div>
+        <div class="prose">
+          <p>La métrica principal propuesta es el Índice de Siniestralidad Global (%), que compara el monto de los siniestros con las primas del período. Debe presentarse junto con los importes absolutos y el período analizado para evitar interpretar el porcentaje de forma aislada.</p>
+        </div>
+        <div class="result-grid" style="margin-top:24px;">
+          <article class="result-card">
+            <h3>Mensaje principal</h3>
+            <p>La muestra presenta diferencias marcadas entre códigos postales y una concentración importante de pólizas en 20038 y 10178. Los índices muy elevados de 9366 y 42551 merecen una auditoría de los importes y del volumen de primas antes de tomar decisiones.</p>
+          </article>
+          <article class="result-card">
+            <h3>KPIs de apoyo</h3>
+            <ul>
+              <li>Índice de siniestralidad regional (%).</li>
+              <li>Volumen de pólizas por ubicación.</li>
+              <li>Riesgo de fuga por segmento (<code>churn_risk_score</code>).</li>
+              <li>Sensibilidad al servicio mediante <code>customer_satisfaction_score</code>.</li>
+            </ul>
+          </article>
+          <article class="result-card">
+            <h3>Acciones recomendadas para validar</h3>
+            <ul>
+              <li>Revisar los registros que producen índices regionales extremos y confirmar que primas y siniestros usan la misma base temporal y monetaria.</li>
+              <li>Documentar las ubicaciones originales, las reasignadas y la regla aplicada.</li>
+              <li>Mostrar siempre el tamaño de la muestra junto al porcentaje regional.</li>
+              <li>Cuantificar las asociaciones entre satisfacción y riesgo de fuga antes de extraer conclusiones.</li>
+            </ul>
+          </article>
+          <article class="result-card">
+            <h3>Limitaciones para comunicar</h3>
+            <p>La disminución del 20 % en el servicio de pólizas es un antecedente del caso académico, no un resultado probado por este análisis. Los datos son sintéticos; no permiten concluir directamente sobre aseguradoras reales ni sobre el riesgo efectivo de la población alemana. Las asociaciones estadísticas no demuestran causalidad.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="bibliografia">
+    <div class="wrap row">
+      <h2>Bibliografía<small>Fuentes citadas en el documento</small></h2>
+      <div class="prose bibliography">
+        <ul>
+          <li>danielsowah123. (2026). <em>Insurance</em> [Data set]. Kaggle. <a href="https://www.kaggle.com/datasets/danielsowah123/insurance" target="_blank" rel="noopener">https://www.kaggle.com/datasets/danielsowah123/insurance</a></li>
+          <li>ajaypatil047. (2025). <em>German municipalities (with districts &amp; more)</em> [Data set]. Kaggle. <a href="https://www.kaggle.com/datasets/ajaypatil047/germany-municipalities-and-districts" target="_blank" rel="noopener">https://www.kaggle.com/datasets/ajaypatil047/germany-municipalities-and-districts</a></li>
+          <li>Government Data Quality Hub. (2020). <em>The Government Data Quality Framework</em>.</li>
+          <li>IBM. (s. f.-a, s. f.-b). Materiales de referencia sobre la metodología CRISP-DM.</li>
+          <li>pandas development team. (s. f.-a, s. f.-b). Documentación de pandas sobre uniones de tablas y valores faltantes.</li>
+          <li>Statistisches Bundesamt (Destatis). (s. f.). Información territorial y sistema GV-ISys.</li>
+          <li>Werner, G. y Modlin, C. (2016). Referencia sobre fundamentos de medición de primas y siniestros citada en el marco teórico.</li>
+        </ul>
+        <p class="note-small">Nota: el PDF proporcionado muestra únicamente las dos referencias de Kaggle en su bibliografía final. Las demás fuentes aparecen citadas en el marco teórico; sus datos bibliográficos completos no están especificados en la página de bibliografía extraída.</p>
+      </div>
+    </div>
+  </section>
+
   <section id="equipo">
     <div class="wrap row">
       <h2>Equipo consultor<small>VMHS Data Analisis S.A</small></h2>
@@ -628,7 +774,7 @@
 <footer>
   <div class="wrap">
     <span>Instituto Técnico INCOEX · Ciencia de Análisis de Datos · Módulo 6 · Sede San José · Grupo 05 · Prof. Byron Vargas · Octubre 2026</span>
-    <span>Documento de alcance del proyecto (Project Brief) — Fase 1: Comprensión del negocio · Fase 2: Limpieza y preparación</span>
+    <span>Proyecto integrador — Fases 1–5: definición del negocio, preparación, análisis exploratorio, visualización y presentación ejecutiva</span>
   </div>
 </footer>
 
