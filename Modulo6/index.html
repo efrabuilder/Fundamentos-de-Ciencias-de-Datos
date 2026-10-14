@@ -21,6 +21,8 @@
     --r4:#e11d48; --r4-soft:#fff1f2;           /* Del Dato Limpio al Reporte Final */
     --r5:#0284c7; --r5-soft:#f0f9ff;           /* De Limpiadores a Traductores de Negocio */
     --r6:#7c3aed; --r6-soft:#f5f3ff;           /* Quiz Teórico-Práctico */
+    --r7:#059669; --r7-soft:#ecfdf5;           /* Guía de Construcción de Proyecto */
+    --r8:#c026d3; --r8-soft:#fdf4ff;           /* Diseño de Dashboards y Buenas Prácticas en Power BI */
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
@@ -96,6 +98,8 @@
   #tab-r4{--accent:var(--r4);}
   #tab-r5{--accent:var(--r5);}
   #tab-r6{--accent:var(--r6);}
+  #tab-r7{--accent:var(--r7);}
+  #tab-r8{--accent:var(--r8);}
   main{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
   .panel{display:none;}
   .panel.active{display:block;animation:fade .25s ease;}
@@ -106,6 +110,8 @@
   #panel-r4{--accent:var(--r4);--accent-soft:var(--r4-soft);}
   #panel-r5{--accent:var(--r5);--accent-soft:var(--r5-soft);}
   #panel-r6{--accent:var(--r6);--accent-soft:var(--r6-soft);}
+  #panel-r7{--accent:var(--r7);--accent-soft:var(--r7-soft);}
+  #panel-r8{--accent:var(--r8);--accent-soft:var(--r8-soft);}
   @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
   .panel-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:16px;}
   .panel-head h2{margin:0;font-size:19px;}
@@ -120,6 +126,8 @@
   #panel-r4 .card-toolbar{--accent-soft:var(--r4-soft);}
   #panel-r5 .card-toolbar{--accent-soft:var(--r5-soft);}
   #panel-r6 .card-toolbar{--accent-soft:var(--r6-soft);}
+  #panel-r7 .card-toolbar{--accent-soft:var(--r7-soft);}
+  #panel-r8 .card-toolbar{--accent-soft:var(--r8-soft);}
   .status{font-size:12.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
   .status .led{width:7px;height:7px;border-radius:50%;background:#cbd5e1;}
   .status.ok .led{background:#16a34a;}
@@ -165,6 +173,8 @@
   #panel-r4 .empty-state .icon{background:var(--r4-soft);color:var(--r4);}
   #panel-r5 .empty-state .icon{background:var(--r5-soft);color:var(--r5);}
   #panel-r6 .empty-state .icon{background:var(--r6-soft);color:var(--r6);}
+  #panel-r7 .empty-state .icon{background:var(--r7-soft);color:var(--r7);}
+  #panel-r8 .empty-state .icon{background:var(--r8-soft);color:var(--r8);}
   .empty-state strong{color:var(--ink);font-size:15px;}
   .empty-state span{font-size:13px;max-width:420px;}
 </style>
@@ -190,7 +200,10 @@
   <h1>Proyecto Integrador de Análisis de Datos</h1>
 </header>
 <nav>
-  <!-- Orden: Dataset al KPI, Reporte Final, Pandas, Traductores, Quiz, Alcance -->
+  <!-- Orden: Guía de Construcción, Dataset al KPI, Reporte Final, Pandas, Traductores, Quiz, Alcance, Dashboards -->
+  <button class="tab" id="tab-r7" data-target="panel-r7">
+    <span class="dot"></span> Guía de Construcción de Proyecto
+  </button>
   <button class="tab active" id="tab-r1" data-target="panel-r1">
     <span class="dot"></span> Del Dataset al KPI
   </button>
@@ -209,8 +222,40 @@
   <button class="tab" id="tab-r2" data-target="panel-r2">
     <span class="dot"></span> Alcance del Proyecto
   </button>
+  <button class="tab" id="tab-r8" data-target="panel-r8">
+    <span class="dot"></span> Diseño de Dashboards y Power BI
+  </button>
 </nav>
 <main>
+  <!-- ===================== PANEL: Guía de Construcción de Proyecto ===================== -->
+  <section class="panel" id="panel-r7">
+    <div class="panel-head">
+      <div>
+        <h2>Guía de Construcción de Proyecto</h2>
+        <div class="sub">Las cinco fases del proyecto: entendimiento del negocio, limpieza de datos, EDA, dashboarding y storytelling</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Guía de Construcción de Proyecto</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-guia"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <label class="btn" for="file-guia">Cargar manualmente</label>
+          <input type="file" id="file-guia">
+          <a class="btn" id="download-guia" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer" id="viewer-guia">
+        <div class="empty-state">
+          <div class="icon">⏳</div>
+          <strong>Cargando recurso…</strong>
+          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===================== PANEL: Del Dataset al KPI ===================== -->
   <section class="panel active" id="panel-r1">
     <div class="panel-head">
@@ -394,6 +439,35 @@
         </div>
       </div>
       <div class="viewer" id="viewer-alcance">
+        <div class="empty-state">
+          <div class="icon">⏳</div>
+          <strong>Cargando recurso…</strong>
+          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PANEL: Diseño de Dashboards y Buenas Prácticas en Power BI ===================== -->
+  <section class="panel" id="panel-r8">
+    <div class="panel-head">
+      <div>
+        <h2>Diseño de Dashboards y Buenas Prácticas en Power BI</h2>
+        <div class="sub">Principios de diseño visual, buenas prácticas de desarrollo en Power BI y tips generales para crear dashboards</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Diseño de Dashboards y Buenas Prácticas en Power BI</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-dashboards"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <label class="btn" for="file-dashboards">Cargar manualmente</label>
+          <input type="file" id="file-dashboards">
+          <a class="btn" id="download-dashboards" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer" id="viewer-dashboards">
         <div class="empty-state">
           <div class="icon">⏳</div>
           <strong>Cargando recurso…</strong>
@@ -675,6 +749,7 @@
     });
   }
   // ---------- Recursos del Módulo 6 ----------
+  setupResource('guia', 'Unidad1/guia_construccion_de_proyecto.html');
   setupResource('dataset-kpi', 'Unidad1/DelDatasetalKPI.html');
   setupResource('reportefinal', 'Unidad1/deldatolimpioalreportefinal.html');
   setupResource('pandas', 'Unidad1/PandasCheatSheet.html');
@@ -682,8 +757,9 @@
   setupResource('traductores', 'Unidad1/de_limpiadores_a_traductores_de_negocio.html');
   setupResource('quiz', 'Unidad1/quiz_teorico_practico_analisis_datos.html');
   setupResource('alcance', 'Unidad1/AlcancedeProyecto.html');
-  // Para agregar otro recurso: nueva pestaña (tab-r7) + panel (panel-r7) con sus
-  // colores --r7 y --r7-soft, y su setupResource al final, como en el Módulo 5.
+  setupResource('dashboards', 'Unidad1/diseno_de_dashboards_buenas_practicas_power_bi.html');
+  // Para agregar otro recurso: nueva pestaña (tab-r9) + panel (panel-r9) con sus
+  // colores --r9 y --r9-soft, y su setupResource al final, como en el Módulo 5.
 </script>
 </body>
 </html>
