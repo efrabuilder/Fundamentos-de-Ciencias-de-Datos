@@ -5,821 +5,616 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Módulo 6 — Proyecto Integrador de Análisis de Datos — Recursos</title>
 <style>
-  :root{
-    --bg:#f8fafc;
-    --panel:#ffffff;
-    --ink:#1e293b;
-    --ink-soft:#64748b;
-    --border:#e2e8f0;
-
-    --mod-accent:#4f46e5; /* color del módulo (cambia por módulo) */
-
-    /* Colores de cada recurso (el primero de la lista usa el color del título del módulo) */
-    --r7:var(--mod-accent); --r7-soft:#eef2ff; /* Guía de Construcción de Proyecto: mismo color del título del módulo */
-    --r1:#059669; --r1-soft:#ecfdf5;           /* Del Dataset al KPI */
-    --r2:#0d9488; --r2-soft:#f0fdfa;           /* Alcance del Proyecto */
-    --r3:#d97706; --r3-soft:#fffbeb;           /* Pandas Cheat Sheet */
-    --r4:#e11d48; --r4-soft:#fff1f2;           /* Del Dato Limpio al Reporte Final */
-    --r5:#0284c7; --r5-soft:#f0f9ff;           /* De Limpiadores a Traductores de Negocio */
-    --r6:#7c3aed; --r6-soft:#f5f3ff;           /* Quiz Teórico-Práctico */
-    --r8:#c026d3; --r8-soft:#fdf4ff;           /* Diseño de Dashboards y Buenas Prácticas en Power BI */
-    --r9:#65a30d; --r9-soft:#f7fee7;           /* Dashboard del Proyecto (PDF y PBIX) */
-    --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
-    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{background:var(--bg);font-family:var(--sans);color:var(--ink);min-height:100vh;}
-
-  .top-bar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:10px;
-    padding:18px 24px 0;
-  }
-  .top-link{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    padding:8px 16px 8px 8px;
-    background:var(--panel);
-    color:var(--ink);
-    border:1px solid var(--border);
-    border-radius:999px;
-    font-size:13px;
-    font-weight:600;
-    text-decoration:none;
-    box-shadow:0 1px 2px rgba(15,23,42,.06);
-    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-  }
-  .top-link .icon{
-    width:28px;
-    height:28px;
-    border-radius:50%;
-    background:var(--ink);
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-shrink:0;
-    transition:background .15s ease, transform .15s ease;
-  }
-  .top-link .icon svg{width:16px;height:16px;}
-  .top-link .icon .stroke{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-  .top-link .icon .fill{fill:currentColor;}
-  .top-link .arrow{
-    color:var(--ink-soft);
-    transition:transform .15s ease, color .15s ease;
-  }
-  .top-link:hover{
-    transform:translateY(-1px);
-    border-color:var(--mod-accent);
-    box-shadow:0 6px 16px -8px var(--mod-accent);
-  }
-  .top-link:hover .icon{background:var(--mod-accent);}
-  .top-link.back:hover .icon{transform:translateX(-2px);}
-  .top-link:hover .arrow{transform:translateX(3px);color:var(--mod-accent);}
-  .top-link:focus-visible{outline:2px solid var(--mod-accent);outline-offset:3px;}
-
-  header{padding:20px 24px 22px;text-align:center;border-bottom:1px solid var(--border);background:var(--panel);}
-  header .eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--mod-accent);margin-bottom:6px;}
-  header h1{margin:0 0 6px;font-size:clamp(20px,3vw,28px);letter-spacing:-0.01em;}
-  header p{margin:0;color:var(--ink-soft);font-size:14px;}
-  nav{display:flex;justify-content:center;gap:6px;padding:16px;flex-wrap:wrap;background:var(--panel);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;}
-  .tab{appearance:none;border:1.5px solid var(--border);background:var(--bg);color:var(--ink-soft);font-family:var(--sans);font-size:13.5px;font-weight:600;padding:10px 18px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .15s ease;}
-  .tab .dot{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.5;}
-  .tab:hover{border-color:var(--accent);color:var(--ink);}
-  .tab.active{background:var(--accent);border-color:var(--accent);color:#ffffff;}
-  .tab.active .dot{background:#ffffff;opacity:1;}
-  #tab-r1{--accent:var(--r1);}
-  #tab-r2{--accent:var(--r2);}
-  #tab-r3{--accent:var(--r3);}
-  #tab-r4{--accent:var(--r4);}
-  #tab-r5{--accent:var(--r5);}
-  #tab-r6{--accent:var(--r6);}
-  #tab-r7{--accent:var(--r7);}
-  #tab-r8{--accent:var(--r8);}
-  #tab-r9{--accent:var(--r9);}
-  main{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
-  .panel{display:none;}
-  .panel.active{display:block;animation:fade .25s ease;}
-  /* cada panel usa el color de su recurso */
-  #panel-r1{--accent:var(--r1);--accent-soft:var(--r1-soft);}
-  #panel-r2{--accent:var(--r2);--accent-soft:var(--r2-soft);}
-  #panel-r3{--accent:var(--r3);--accent-soft:var(--r3-soft);}
-  #panel-r4{--accent:var(--r4);--accent-soft:var(--r4-soft);}
-  #panel-r5{--accent:var(--r5);--accent-soft:var(--r5-soft);}
-  #panel-r6{--accent:var(--r6);--accent-soft:var(--r6-soft);}
-  #panel-r7{--accent:var(--r7);--accent-soft:var(--r7-soft);}
-  #panel-r8{--accent:var(--r8);--accent-soft:var(--r8-soft);}
-  #panel-r9{--accent:var(--r9);--accent-soft:var(--r9-soft);}
-  @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
-  .panel-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:16px;}
-  .panel-head h2{margin:0;font-size:19px;}
-  .panel-head .sub{color:var(--ink-soft);font-size:13px;margin-top:4px;}
-  .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
-  .card + .card{margin-top:16px;}
-  .card-label{padding:12px 16px 0;font-size:13px;font-weight:700;color:var(--ink);}
-  .card-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--accent-soft);}
-  #panel-r1 .card-toolbar{--accent-soft:var(--r1-soft);}
-  #panel-r2 .card-toolbar{--accent-soft:var(--r2-soft);}
-  #panel-r3 .card-toolbar{--accent-soft:var(--r3-soft);}
-  #panel-r4 .card-toolbar{--accent-soft:var(--r4-soft);}
-  #panel-r5 .card-toolbar{--accent-soft:var(--r5-soft);}
-  #panel-r6 .card-toolbar{--accent-soft:var(--r6-soft);}
-  #panel-r7 .card-toolbar{--accent-soft:var(--r7-soft);}
-  #panel-r8 .card-toolbar{--accent-soft:var(--r8-soft);}
-  #panel-r9 .card-toolbar{--accent-soft:var(--r9-soft);}
-  .status{font-size:12.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
-  .status .led{width:7px;height:7px;border-radius:50%;background:#cbd5e1;}
-  .status.ok .led{background:#16a34a;}
-  .status.err .led{background:#dc2626;}
-  .toolbar-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
-  .btn{font-family:var(--sans);font-size:12.5px;font-weight:600;padding:7px 12px;border-radius:8px;border:1px solid var(--border);background:#ffffff;color:var(--ink);cursor:pointer;text-decoration:none;}
-  .btn:hover{border-color:var(--ink-soft);}
-  input[type=file]{display:none;}
-  .viewer{min-height:420px;display:flex;align-items:center;justify-content:center;padding:0;background:#ffffff;}
-  .viewer.empty{flex-direction:column;gap:10px;padding:60px 20px;color:var(--ink-soft);font-size:13.5px;text-align:center;}
-  .viewer.empty strong{color:var(--ink);font-size:14.5px;}
-  .viewer object, .viewer iframe{width:100%;height:78vh;border:0;display:block;}
-  .viewer img{max-width:100%;max-height:78vh;display:block;margin:0 auto;}
-  pre.text-view{width:100%;margin:0;padding:22px 26px;font-family:var(--mono);font-size:12.8px;line-height:1.6;white-space:pre-wrap;word-break:break-word;max-height:78vh;overflow:auto;}
-  .filecard{display:flex;flex-direction:column;align-items:center;gap:14px;padding:70px 20px;text-align:center;}
-  .filecard .icon{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;color:#ffffff;background:var(--accent);}
-  .filecard .fname{font-size:14.5px;font-weight:600;color:var(--ink);word-break:break-word;max-width:520px;}
-  .filecard .fmeta{font-size:12.5px;color:var(--ink-soft);}
-  .filecard .btn.primary{background:var(--accent);border-color:var(--accent);color:#ffffff;padding:9px 18px;font-size:13px;}
-  .office-embed-wrap{width:100%;}
-  .office-embed-note{text-align:center;padding:8px 12px;font-size:11.5px;color:var(--ink-soft);border-top:1px solid var(--border);}
-  .office-embed-note a{color:var(--ink);}
-  .hint{margin-top:12px;font-size:12px;color:var(--ink-soft);line-height:1.6;}
-  .hint code{background:#f1f5f9;padding:1px 6px;border-radius:5px;font-family:var(--mono);}
-  footer{text-align:center;padding:24px;color:var(--ink-soft);font-size:12px;}
-
-  .viewer.notebook{display:block;text-align:left;padding:20px 24px;overflow-x:auto;max-height:78vh;overflow-y:auto;}
-  .nb-cell{margin-bottom:16px;}
-  .nb-cell-label{font-size:11px;font-weight:700;text-transform:uppercase;color:var(--ink-soft);margin-bottom:4px;}
-  .nb-src{background:#0f172a;color:#e2e8f0;padding:12px 14px;border-radius:8px;font-family:var(--mono);font-size:12.5px;line-height:1.6;white-space:pre-wrap;overflow-x:auto;margin:0;}
-  .nb-md-body{font-size:13.5px;line-height:1.6;}
-  .nb-out{margin-top:8px;}
-  .nb-out-label{font-size:10.5px;color:var(--ink-soft);margin-bottom:4px;}
-  .nb-out pre{background:#f1f5f9;padding:10px 12px;border-radius:8px;font-family:var(--mono);font-size:12px;overflow-x:auto;}
-  .nb-out img{max-width:100%;border-radius:8px;}
-
-  .subgroup-title{margin:22px 0 10px;font-size:13.5px;font-weight:700;color:var(--mod-accent);padding-bottom:6px;border-bottom:1px dashed var(--border);}
-
-  .empty-state{display:flex;flex-direction:column;align-items:center;gap:10px;padding:70px 20px;text-align:center;color:var(--ink-soft);}
-  .empty-state .icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;background:var(--r1-soft);color:var(--r1);}
-  #panel-r2 .empty-state .icon{background:var(--r2-soft);color:var(--r2);}
-  #panel-r3 .empty-state .icon{background:var(--r3-soft);color:var(--r3);}
-  #panel-r4 .empty-state .icon{background:var(--r4-soft);color:var(--r4);}
-  #panel-r5 .empty-state .icon{background:var(--r5-soft);color:var(--r5);}
-  #panel-r6 .empty-state .icon{background:var(--r6-soft);color:var(--r6);}
-  #panel-r7 .empty-state .icon{background:var(--r7-soft);color:var(--r7);}
-  #panel-r8 .empty-state .icon{background:var(--r8-soft);color:var(--r8);}
-  #panel-r9 .empty-state .icon{background:var(--r9-soft);color:var(--r9);}
-  .empty-state strong{color:var(--ink);font-size:15px;}
-  .empty-state span{font-size:13px;max-width:420px;}
+:root{
+--bg:#f8fafc;
+--panel:#ffffff;
+--ink:#1e293b;
+--ink-soft:#64748b;
+--border:#e2e8f0;
+--mod-accent:#4f46e5;
+--r7:var(--mod-accent); --r7-soft:#eef2ff;
+--r1:#059669; --r1-soft:#ecfdf5;
+--r2:#0d9488; --r2-soft:#f0fdfa;
+--r3:#d97706; --r3-soft:#fffbeb;
+--r4:#e11d48; --r4-soft:#fff1f2;
+--r5:#0284c7; --r5-soft:#f0f9ff;
+--r6:#7c3aed; --r6-soft:#f5f3ff;
+--r8:#c026d3; --r8-soft:#fdf4ff;
+--r9:#65a30d; --r9-soft:#f7fee7;
+--mono:ui-monospace,"SF Mono","Cascadia Code",Consolas,monospace;
+--sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);font-family:var(--sans);color:var(--ink);min-height:100vh}
+.top-bar{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;padding:18px 24px 0}
+.top-link{display:inline-flex;align-items:center;gap:10px;padding:8px 16px 8px 8px;background:var(--panel);color:var(--ink);border:1px solid var(--border);border-radius:999px;font-size:13px;font-weight:600;text-decoration:none;box-shadow:0 1px 2px rgba(15,23,42,.06);transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
+.top-link .icon{width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .15s ease,transform .15s ease}
+.top-link .icon svg{width:16px;height:16px}
+.top-link .icon .stroke{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.top-link .icon .fill{fill:currentColor}
+.top-link .arrow{color:var(--ink-soft);transition:transform .15s ease,color .15s ease}
+.top-link:hover{transform:translateY(-1px);border-color:var(--mod-accent);box-shadow:0 6px 16px -8px var(--mod-accent)}
+.top-link:hover .icon{background:var(--mod-accent)}
+.top-link.back:hover .icon{transform:translateX(-2px)}
+.top-link:hover .arrow{transform:translateX(3px);color:var(--mod-accent)}
+.top-link:focus-visible{outline:2px solid var(--mod-accent);outline-offset:3px}
+header{padding:20px 24px 22px;text-align:center;border-bottom:1px solid var(--border);background:var(--panel)}
+header .eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--mod-accent);margin-bottom:6px}
+header h1{margin:0 0 6px;font-size:clamp(20px,3vw,28px);letter-spacing:-.01em}
+header p{margin:0;color:var(--ink-soft);font-size:14px}
+nav{display:flex;justify-content:center;gap:6px;padding:16px;flex-wrap:wrap;background:var(--panel);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10}
+.tab{appearance:none;border:1.5px solid var(--border);background:var(--bg);color:var(--ink-soft);font-family:var(--sans);font-size:13.5px;font-weight:600;padding:10px 18px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .15s ease}
+.tab .dot{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.5}
+.tab:hover{border-color:var(--accent);color:var(--ink)}
+.tab.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.tab.active .dot{background:#fff;opacity:1}
+#tab-r1{--accent:var(--r1)}
+#tab-r2{--accent:var(--r2)}
+#tab-r3{--accent:var(--r3)}
+#tab-r4{--accent:var(--r4)}
+#tab-r5{--accent:var(--r5)}
+#tab-r6{--accent:var(--r6)}
+#tab-r7{--accent:var(--r7)}
+#tab-r8{--accent:var(--r8)}
+#tab-r9{--accent:var(--r9)}
+main{max-width:1100px;margin:0 auto;padding:28px 20px 80px}
+.panel{display:none}
+.panel.active{display:block;animation:fade .25s ease}
+#panel-r1{--accent:var(--r1);--accent-soft:var(--r1-soft)}
+#panel-r2{--accent:var(--r2);--accent-soft:var(--r2-soft)}
+#panel-r3{--accent:var(--r3);--accent-soft:var(--r3-soft)}
+#panel-r4{--accent:var(--r4);--accent-soft:var(--r4-soft)}
+#panel-r5{--accent:var(--r5);--accent-soft:var(--r5-soft)}
+#panel-r6{--accent:var(--r6);--accent-soft:var(--r6-soft)}
+#panel-r7{--accent:var(--r7);--accent-soft:var(--r7-soft)}
+#panel-r8{--accent:var(--r8);--accent-soft:var(--r8-soft)}
+#panel-r9{--accent:var(--r9);--accent-soft:var(--r9-soft)}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.panel-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:16px}
+.panel-head h2{margin:0;font-size:19px}
+.panel-head .sub{color:var(--ink-soft);font-size:13px;margin-top:4px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.card+.card{margin-top:16px}
+.card-label{padding:12px 16px 0;font-size:13px;font-weight:700;color:var(--ink)}
+.card-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--accent-soft)}
+#panel-r1 .card-toolbar{--accent-soft:var(--r1-soft)}
+#panel-r2 .card-toolbar{--accent-soft:var(--r2-soft)}
+#panel-r3 .card-toolbar{--accent-soft:var(--r3-soft)}
+#panel-r4 .card-toolbar{--accent-soft:var(--r4-soft)}
+#panel-r5 .card-toolbar{--accent-soft:var(--r5-soft)}
+#panel-r6 .card-toolbar{--accent-soft:var(--r6-soft)}
+#panel-r7 .card-toolbar{--accent-soft:var(--r7-soft)}
+#panel-r8 .card-toolbar{--accent-soft:var(--r8-soft)}
+#panel-r9 .card-toolbar{--accent-soft:var(--r9-soft)}
+.status{font-size:12.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px}
+.status .led{width:7px;height:7px;border-radius:50%;background:#cbd5e1}
+.status.ok .led{background:#16a34a}
+.status.err .led{background:#dc2626}
+.toolbar-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{font-family:var(--sans);font-size:12.5px;font-weight:600;padding:7px 12px;border-radius:8px;border:1px solid var(--border);background:#fff;color:var(--ink);cursor:pointer;text-decoration:none}
+.btn:hover{border-color:var(--ink-soft)}
+input[type=file]{display:none}
+.viewer{min-height:420px;display:flex;align-items:center;justify-content:center;padding:0;background:#fff}
+.viewer.empty{flex-direction:column;gap:10px;padding:60px 20px;color:var(--ink-soft);font-size:13.5px;text-align:center}
+.viewer.empty strong{color:var(--ink);font-size:14.5px}
+.viewer object,.viewer iframe{width:100%;height:78vh;border:0;display:block}
+.viewer img{max-width:100%;max-height:78vh;display:block;margin:0 auto}
+pre.text-view{width:100%;margin:0;padding:22px 26px;font-family:var(--mono);font-size:12.8px;line-height:1.6;white-space:pre-wrap;word-break:break-word;max-height:78vh;overflow:auto}
+.filecard{display:flex;flex-direction:column;align-items:center;gap:14px;padding:70px 20px;text-align:center}
+.filecard .icon{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;color:#fff;background:var(--accent)}
+.filecard .fname{font-size:14.5px;font-weight:600;color:var(--ink);word-break:break-word;max-width:520px}
+.filecard .fmeta{font-size:12.5px;color:var(--ink-soft)}
+.filecard .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff;padding:9px 18px;font-size:13px}
+.office-embed-wrap{width:100%}
+.office-embed-note{text-align:center;padding:8px 12px;font-size:11.5px;color:var(--ink-soft);border-top:1px solid var(--border)}
+.office-embed-note a{color:var(--ink)}
+.hint{margin-top:12px;font-size:12px;color:var(--ink-soft);line-height:1.6}
+.hint code{background:#f1f5f9;padding:1px 6px;border-radius:5px;font-family:var(--mono)}
+footer{text-align:center;padding:24px;color:var(--ink-soft);font-size:12px}
+.viewer.notebook{display:block;text-align:left;padding:20px 24px;overflow-x:auto;max-height:78vh;overflow-y:auto}
+.nb-cell{margin-bottom:16px}
+.nb-cell-label{font-size:11px;font-weight:700;text-transform:uppercase;color:var(--ink-soft);margin-bottom:4px}
+.nb-src{background:#0f172a;color:#e2e8f0;padding:12px 14px;border-radius:8px;font-family:var(--mono);font-size:12.5px;line-height:1.6;white-space:pre-wrap;overflow-x:auto;margin:0}
+.nb-md-body{font-size:13.5px;line-height:1.6}
+.nb-out{margin-top:8px}
+.nb-out-label{font-size:10.5px;color:var(--ink-soft);margin-bottom:4px}
+.nb-out pre{background:#f1f5f9;padding:10px 12px;border-radius:8px;font-family:var(--mono);font-size:12px;overflow-x:auto}
+.nb-out img{max-width:100%;border-radius:8px}
+.subgroup-title{margin:22px 0 10px;font-size:13.5px;font-weight:700;color:var(--mod-accent);padding-bottom:6px;border-bottom:1px dashed var(--border)}
+.empty-state{display:flex;flex-direction:column;align-items:center;gap:10px;padding:70px 20px;text-align:center;color:var(--ink-soft)}
+.empty-state .icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;background:var(--r1-soft);color:var(--r1)}
+#panel-r2 .empty-state .icon{background:var(--r2-soft);color:var(--r2)}
+#panel-r3 .empty-state .icon{background:var(--r3-soft);color:var(--r3)}
+#panel-r4 .empty-state .icon{background:var(--r4-soft);color:var(--r4)}
+#panel-r5 .empty-state .icon{background:var(--r5-soft);color:var(--r5)}
+#panel-r6 .empty-state .icon{background:var(--r6-soft);color:var(--r6)}
+#panel-r7 .empty-state .icon{background:var(--r7-soft);color:var(--r7)}
+#panel-r8 .empty-state .icon{background:var(--r8-soft);color:var(--r8)}
+#panel-r9 .empty-state .icon{background:var(--r9-soft);color:var(--r9)}
+.empty-state strong{color:var(--ink);font-size:15px}
+.empty-state span{font-size:13px;max-width:420px}
 </style>
 </head>
 <body>
 <div class="top-bar">
-  <a class="top-link back" href="../index.html">
-    <span class="icon">
-      <svg class="stroke" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
-    </span>
-    <span>Volver a Módulos</span>
-  </a>
-  <a class="top-link" href="https://github.com/efrabuilder/Fundamentos-de-Ciencias-de-Datos/tree/main/Modulo6" target="_blank" rel="noopener noreferrer">
-    <span class="icon">
-      <svg class="fill" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-    </span>
-    <span>Ver repositorio en GitHub</span>
-    <span class="arrow">→</span>
-  </a>
+<a class="top-link back" href="../index.html">
+<span class="icon">
+<svg class="stroke" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+</span>
+<span>Volver a Módulos</span>
+</a>
+<a class="top-link" href="https://github.com/efrabuilder/Fundamentos-de-Ciencias-de-Datos/tree/main/Modulo6" target="_blank" rel="noopener noreferrer">
+<span class="icon">
+<svg class="fill" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+</span>
+<span>Ver repositorio en GitHub</span>
+<span class="arrow">→</span>
+</a>
 </div>
 <header>
-  <div class="eyebrow">Módulo 6</div>
-  <h1>Proyecto Integrador de Análisis de Datos</h1>
+<div class="eyebrow">Módulo 6</div>
+<h1>Proyecto Integrador de Análisis de Datos</h1>
 </header>
 <nav>
-  <!-- Orden: Guía de Construcción, Dataset al KPI, Reporte Final, Pandas, Traductores, Quiz, Alcance, Dashboards, Dashboard del Proyecto -->
-  <button class="tab" id="tab-r7" data-target="panel-r7">
-    <span class="dot"></span> Guía de Construcción de Proyecto
-  </button>
-  <button class="tab active" id="tab-r1" data-target="panel-r1">
-    <span class="dot"></span> Del Dataset al KPI
-  </button>
-  <button class="tab" id="tab-r4" data-target="panel-r4">
-    <span class="dot"></span> Del Dato Limpio al Reporte Final
-  </button>
-  <button class="tab" id="tab-r3" data-target="panel-r3">
-    <span class="dot"></span> Pandas Cheat Sheet
-  </button>
-  <button class="tab" id="tab-r5" data-target="panel-r5">
-    <span class="dot"></span> De Limpiadores a Traductores de Negocio
-  </button>
-  <button class="tab" id="tab-r6" data-target="panel-r6">
-    <span class="dot"></span> Quiz Teórico-Práctico
-  </button>
-  <button class="tab" id="tab-r2" data-target="panel-r2">
-    <span class="dot"></span> Alcance del Proyecto
-  </button>
-  <button class="tab" id="tab-r8" data-target="panel-r8">
-    <span class="dot"></span> Diseño de Dashboards y Power BI
-  </button>
-  <button class="tab" id="tab-r9" data-target="panel-r9">
-    <span class="dot"></span> Dashboard del Proyecto
-  </button>
+<button class="tab active" id="tab-r7" data-target="panel-r7"><span class="dot"></span> Guía de Construcción de Proyecto</button>
+<button class="tab" id="tab-r1" data-target="panel-r1"><span class="dot"></span> Del Dataset al KPI</button>
+<button class="tab" id="tab-r4" data-target="panel-r4"><span class="dot"></span> Del Dato Limpio al Reporte Final</button>
+<button class="tab" id="tab-r3" data-target="panel-r3"><span class="dot"></span> Pandas Cheat Sheet</button>
+<button class="tab" id="tab-r5" data-target="panel-r5"><span class="dot"></span> De Limpiadores a Traductores de Negocio</button>
+<button class="tab" id="tab-r6" data-target="panel-r6"><span class="dot"></span> Quiz Teórico-Práctico</button>
+<button class="tab" id="tab-r2" data-target="panel-r2"><span class="dot"></span> Alcance del Proyecto</button>
+<button class="tab" id="tab-r8" data-target="panel-r8"><span class="dot"></span> Diseño de Dashboards y Power BI</button>
+<button class="tab" id="tab-r9" data-target="panel-r9"><span class="dot"></span> Dashboard del Proyecto</button>
 </nav>
 <main>
-  <!-- ===================== PANEL: Guía de Construcción de Proyecto ===================== -->
-  <section class="panel" id="panel-r7">
-    <div class="panel-head">
-      <div>
-        <h2>Guía de Construcción de Proyecto</h2>
-        <div class="sub">Las cinco fases del proyecto: entendimiento del negocio, limpieza de datos, EDA, dashboarding y storytelling</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-label">Guía de Construcción de Proyecto</div>
-      <div class="card-toolbar">
-        <div class="status" id="status-guia"><span class="led"></span> Cargando…</div>
-        <div class="toolbar-actions">
-          <label class="btn" for="file-guia">Cargar manualmente</label>
-          <input type="file" id="file-guia">
-          <a class="btn" id="download-guia" style="display:none;">Descargar</a>
-        </div>
-      </div>
-      <div class="viewer" id="viewer-guia">
-        <div class="empty-state">
-          <div class="icon">⏳</div>
-          <strong>Cargando recurso…</strong>
-          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== PANEL: Del Dataset al KPI ===================== -->
-  <section class="panel active" id="panel-r1">
-    <div class="panel-head">
-      <div>
-        <h2>Del Dataset al KPI</h2>
-        <div class="sub">Fases del proyecto, dataset y Kaggle, roles, KPIs y el Documento de Alcance del Proyecto</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-label">Del Dataset al KPI</div>
-      <div class="card-toolbar">
-        <div class="status" id="status-dataset-kpi"><span class="led"></span> Cargando…</div>
-        <div class="toolbar-actions">
-          <label class="btn" for="file-dataset-kpi">Cargar manualmente</label>
-          <input type="file" id="file-dataset-kpi">
-          <a class="btn" id="download-dataset-kpi" style="display:none;">Descargar</a>
-        </div>
-      </div>
-      <div class="viewer" id="viewer-dataset-kpi">
-        <div class="empty-state">
-          <div class="icon">⏳</div>
-          <strong>Cargando recurso…</strong>
-          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== PANEL: Del Dato Limpio al Reporte Final ===================== -->
-  <section class="panel" id="panel-r4">
-  <div class="panel-head">
-    <div>
-      <h2>Del Dato Limpio al Reporte Final</h2>
-      <div class="sub">Estructura del reporte, EDA en Python y Power BI, y diccionarios técnico y ejecutivo</div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-label">Del Dato Limpio al Reporte Final</div>
-    <div class="card-toolbar">
-      <div class="status" id="status-reportefinal"><span class="led"></span> Cargando…</div>
-      <div class="toolbar-actions">
-        <label class="btn" for="file-reportefinal">Cargar manualmente</label>
-        <input type="file" id="file-reportefinal">
-        <a class="btn" id="download-reportefinal" style="display:none;">Descargar</a>
-      </div>
-    </div>
-    <div class="viewer" id="viewer-reportefinal">
-      <div class="empty-state">
-        <div class="icon">⏳</div>
-        <strong>Cargando recurso…</strong>
-        <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
-      </div>
-    </div>
-  </div>
-  </section>
-
-  <!-- ===================== PANEL: Pandas Cheat Sheet ===================== -->
-  <section class="panel" id="panel-r3">
-    <div class="panel-head">
-      <div>
-        <h2>Pandas Cheat Sheet</h2>
-        <div class="sub">Hoja de referencia rápida de Pandas y notebook de Python con la práctica de limpieza de datos</div>
-      </div>
-    </div>
-
-    <!-- Tarjeta 1: hoja de referencia en HTML -->
-    <div class="card">
-      <div class="card-label">Pandas Cheat Sheet</div>
-      <div class="card-toolbar">
-        <div class="status" id="status-pandas"><span class="led"></span> Cargando…</div>
-        <div class="toolbar-actions">
-          <label class="btn" for="file-pandas">Cargar manualmente</label>
-          <input type="file" id="file-pandas">
-          <a class="btn" id="download-pandas" style="display:none;">Descargar</a>
-        </div>
-      </div>
-      <div class="viewer" id="viewer-pandas">
-        <div class="empty-state">
-          <div class="icon">⏳</div>
-          <strong>Cargando recurso…</strong>
-          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Tarjeta 2: libro de Python (notebook) debajo del HTML -->
-    <div class="card">
-      <div class="card-label">Limpieza de Datos (Notebook de Python)</div>
-      <div class="card-toolbar">
-        <div class="status" id="status-limpieza"><span class="led"></span> Cargando…</div>
-        <div class="toolbar-actions">
-          <label class="btn" for="file-limpieza">Cargar manualmente</label>
-          <input type="file" id="file-limpieza">
-          <a class="btn" id="download-limpieza" style="display:none;">Descargar</a>
-        </div>
-      </div>
-      <div class="viewer" id="viewer-limpieza">
-        <div class="empty-state">
-          <div class="icon">⏳</div>
-          <strong>Cargando recurso…</strong>
-          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
-        </div>
-      </div>
-    </div>
+<section class="panel active" id="panel-r7">
+<div class="panel-head"><div>
+<h2>Guía de Construcción de Proyecto</h2>
+<div class="sub">Las cinco fases del proyecto: entendimiento del negocio, limpieza de datos, EDA, dashboarding y storytelling</div>
+</div></div>
+<div class="card">
+<div class="card-label">Guía de Construcción de Proyecto</div>
+<div class="card-toolbar">
+<div class="status" id="status-guia"><span class="led"></span> Cargando…</div>
+<div class="toolbar-actions">
+<label class="btn" for="file-guia">Cargar manualmente</label>
+<input type="file" id="file-guia">
+<a class="btn" id="download-guia" style="display:none;">Descargar</a>
+</div></div>
+<div class="viewer" id="viewer-guia"><div class="empty-state">
+<div class="icon">⏳</div><strong>Cargando recurso…</strong>
+<span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+</div></div>
+</div>
 </section>
-
-  <!-- ===================== PANEL: De Limpiadores a Traductores de Negocio ===================== -->
-  <section class="panel" id="panel-r5">
-    <div class="panel-head">
-      <div>
-        <h2>De Limpiadores a Traductores de Negocio</h2>
-        <div class="sub">Checklist universal de EDA en 4 fases: pulso del negocio, culpables, tiempo y destilación estratégica</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-label">De Limpiadores a Traductores de Negocio</div>
-      <div class="card-toolbar">
-        <div class="status" id="status-traductores"><span class="led"></span> Cargando…</div>
-        <div class="toolbar-actions">
-          <label class="btn" for="file-traductores">Cargar manualmente</label>
-          <input type="file" id="file-traductores">
-          <a class="btn" id="download-traductores" style="display:none;">Descargar</a>
-        </div>
-      </div>
-      <div class="viewer" id="viewer-traductores">
-        <div class="empty-state">
-          <div class="icon">⏳</div>
-          <strong>Cargando recurso…</strong>
-          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== PANEL: Quiz Teórico-Práctico ===================== -->
-  <section class="panel" id="panel-r6">
-    <div class="panel-head">
-      <div>
-        <h2>Quiz Teórico-Práctico</h2>
-        <div class="sub">Once casos sobre joins, nulos, outliers y lógica de negocio, con respuestas reveladas paso a paso para repasar</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-label">Quiz Teórico-Práctico de Análisis de Datos</div>
-      <div class="card-toolbar">
-        <div class="status" id="status-quiz"><span class="led"></span> Cargando…</div>
-        <div class="toolbar-actions">
-          <label class="btn" for="file-quiz">Cargar manualmente</label>
-          <input type="file" id="file-quiz">
-          <a class="btn" id="download-quiz" style="display:none;">Descargar</a>
-        </div>
-      </div>
-      <div class="viewer" id="viewer-quiz">
-        <div class="empty-state">
-          <div class="icon">⏳</div>
-          <strong>Cargando recurso…</strong>
-          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== PANEL: Alcance del Proyecto ===================== -->
-  <section class="panel" id="panel-r2">
-    <div class="panel-head">
-      <div>
-        <h2>Alcance del Proyecto</h2>
-        <div class="sub">Siniestralidad del seguro de vida por región en Alemania: contexto, problema, objetivos, datos, KPIs y equipo</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-label">Alcance del Proyecto</div>
-      <div class="card-toolbar">
-        <div class="status" id="status-alcance"><span class="led"></span> Cargando…</div>
-        <div class="toolbar-actions">
-          <label class="btn" for="file-alcance">Cargar manualmente</label>
-          <input type="file" id="file-alcance">
-          <a class="btn" id="download-alcance" style="display:none;">Descargar</a>
-        </div>
-      </div>
-      <div class="viewer" id="viewer-alcance">
-        <div class="empty-state">
-          <div class="icon">⏳</div>
-          <strong>Cargando recurso…</strong>
-          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== PANEL: Diseño de Dashboards y Buenas Prácticas en Power BI ===================== -->
-  <section class="panel" id="panel-r8">
-    <div class="panel-head">
-      <div>
-        <h2>Diseño de Dashboards y Buenas Prácticas en Power BI</h2>
-        <div class="sub">Principios de diseño visual, buenas prácticas de desarrollo en Power BI y tips generales para crear dashboards</div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-label">Diseño de Dashboards y Buenas Prácticas en Power BI</div>
-      <div class="card-toolbar">
-        <div class="status" id="status-dashboards"><span class="led"></span> Cargando…</div>
-        <div class="toolbar-actions">
-          <label class="btn" for="file-dashboards">Cargar manualmente</label>
-          <input type="file" id="file-dashboards">
-          <a class="btn" id="download-dashboards" style="display:none;">Descargar</a>
-        </div>
-      </div>
-      <div class="viewer" id="viewer-dashboards">
-        <div class="empty-state">
-          <div class="icon">⏳</div>
-          <strong>Cargando recurso…</strong>
-          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== PANEL: Dashboard del Proyecto (PDF y PBIX) ===================== -->
-  <section class="panel" id="panel-r9">
-    <div class="panel-head">
-      <div>
-        <h2>Dashboard del Proyecto</h2>
-        <div class="sub">Dashboard final del proyecto VMHS Data Análisis SA, en PDF para verlo aquí y en PBIX para abrirlo en Power BI Desktop</div>
-      </div>
-    </div>
-
-    <!-- Tarjeta 1: dashboard en PDF (con vista previa) -->
-    <div class="card">
-      <div class="card-label">Dashboard del Proyecto (PDF)</div>
-      <div class="card-toolbar">
-        <div class="status" id="status-dashboard-pdf"><span class="led"></span> Cargando…</div>
-        <div class="toolbar-actions">
-          <label class="btn" for="file-dashboard-pdf">Cargar manualmente</label>
-          <input type="file" id="file-dashboard-pdf">
-          <a class="btn" id="download-dashboard-pdf" style="display:none;">Descargar</a>
-        </div>
-      </div>
-      <div class="viewer" id="viewer-dashboard-pdf">
-        <div class="empty-state">
-          <div class="icon">⏳</div>
-          <strong>Cargando recurso…</strong>
-          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Tarjeta 2: dashboard en PBIX (solo descarga, el navegador no lo abre) -->
-    <div class="card">
-      <div class="card-label">Dashboard del Proyecto (Power BI, PBIX)</div>
-      <div class="card-toolbar">
-        <div class="status" id="status-dashboard-pbix"><span class="led"></span> Cargando…</div>
-        <div class="toolbar-actions">
-          <label class="btn" for="file-dashboard-pbix">Cargar manualmente</label>
-          <input type="file" id="file-dashboard-pbix">
-          <a class="btn" id="download-dashboard-pbix" style="display:none;">Descargar</a>
-        </div>
-      </div>
-      <div class="viewer" id="viewer-dashboard-pbix">
-        <div class="empty-state">
-          <div class="icon">⏳</div>
-          <strong>Cargando recurso…</strong>
-          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
+<section class="panel" id="panel-r1">
+<div class="panel-head"><div>
+<h2>Del Dataset al KPI</h2>
+<div class="sub">Fases del proyecto, dataset y Kaggle, roles, KPIs y el Documento de Alcance del Proyecto</div>
+</div></div>
+<div class="card">
+<div class="card-label">Del Dataset al KPI</div>
+<div class="card-toolbar">
+<div class="status" id="status-dataset-kpi"><span class="led"></span> Cargando…</div>
+<div class="toolbar-actions">
+<label class="btn" for="file-dataset-kpi">Cargar manualmente</label>
+<input type="file" id="file-dataset-kpi">
+<a class="btn" id="download-dataset-kpi" style="display:none;">Descargar</a>
+</div></div>
+<div class="viewer" id="viewer-dataset-kpi"><div class="empty-state">
+<div class="icon">⏳</div><strong>Cargando recurso…</strong>
+<span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+</div></div>
+</div>
+</section>
+<section class="panel" id="panel-r4">
+<div class="panel-head"><div>
+<h2>Del Dato Limpio al Reporte Final</h2>
+<div class="sub">Estructura del reporte, EDA en Python y Power BI, y diccionarios técnico y ejecutivo</div>
+</div></div>
+<div class="card">
+<div class="card-label">Del Dato Limpio al Reporte Final</div>
+<div class="card-toolbar">
+<div class="status" id="status-reportefinal"><span class="led"></span> Cargando…</div>
+<div class="toolbar-actions">
+<label class="btn" for="file-reportefinal">Cargar manualmente</label>
+<input type="file" id="file-reportefinal">
+<a class="btn" id="download-reportefinal" style="display:none;">Descargar</a>
+</div></div>
+<div class="viewer" id="viewer-reportefinal"><div class="empty-state">
+<div class="icon">⏳</div><strong>Cargando recurso…</strong>
+<span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+</div></div>
+</div>
+</section>
+<section class="panel" id="panel-r3">
+<div class="panel-head"><div>
+<h2>Pandas Cheat Sheet</h2>
+<div class="sub">Hoja de referencia rápida de Pandas y notebook de Python con la práctica de limpieza de datos</div>
+</div></div>
+<div class="card">
+<div class="card-label">Pandas Cheat Sheet</div>
+<div class="card-toolbar">
+<div class="status" id="status-pandas"><span class="led"></span> Cargando…</div>
+<div class="toolbar-actions">
+<label class="btn" for="file-pandas">Cargar manualmente</label>
+<input type="file" id="file-pandas">
+<a class="btn" id="download-pandas" style="display:none;">Descargar</a>
+</div></div>
+<div class="viewer" id="viewer-pandas"><div class="empty-state">
+<div class="icon">⏳</div><strong>Cargando recurso…</strong>
+<span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+</div></div>
+</div>
+<div class="card">
+<div class="card-label">Limpieza de Datos (Notebook de Python)</div>
+<div class="card-toolbar">
+<div class="status" id="status-limpieza"><span class="led"></span> Cargando…</div>
+<div class="toolbar-actions">
+<label class="btn" for="file-limpieza">Cargar manualmente</label>
+<input type="file" id="file-limpieza">
+<a class="btn" id="download-limpieza" style="display:none;">Descargar</a>
+</div></div>
+<div class="viewer" id="viewer-limpieza"><div class="empty-state">
+<div class="icon">⏳</div><strong>Cargando recurso…</strong>
+<span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+</div></div>
+</div>
+</section>
+<section class="panel" id="panel-r5">
+<div class="panel-head"><div>
+<h2>De Limpiadores a Traductores de Negocio</h2>
+<div class="sub">Checklist universal de EDA en 4 fases: pulso del negocio, culpables, tiempo y destilación estratégica</div>
+</div></div>
+<div class="card">
+<div class="card-label">De Limpiadores a Traductores de Negocio</div>
+<div class="card-toolbar">
+<div class="status" id="status-traductores"><span class="led"></span> Cargando…</div>
+<div class="toolbar-actions">
+<label class="btn" for="file-traductores">Cargar manualmente</label>
+<input type="file" id="file-traductores">
+<a class="btn" id="download-traductores" style="display:none;">Descargar</a>
+</div></div>
+<div class="viewer" id="viewer-traductores"><div class="empty-state">
+<div class="icon">⏳</div><strong>Cargando recurso…</strong>
+<span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+</div></div>
+</div>
+</section>
+<section class="panel" id="panel-r6">
+<div class="panel-head"><div>
+<h2>Quiz Teórico-Práctico</h2>
+<div class="sub">Once casos sobre joins, nulos, outliers y lógica de negocio, con respuestas reveladas paso a paso para repasar</div>
+</div></div>
+<div class="card">
+<div class="card-label">Quiz Teórico-Práctico de Análisis de Datos</div>
+<div class="card-toolbar">
+<div class="status" id="status-quiz"><span class="led"></span> Cargando…</div>
+<div class="toolbar-actions">
+<label class="btn" for="file-quiz">Cargar manualmente</label>
+<input type="file" id="file-quiz">
+<a class="btn" id="download-quiz" style="display:none;">Descargar</a>
+</div></div>
+<div class="viewer" id="viewer-quiz"><div class="empty-state">
+<div class="icon">⏳</div><strong>Cargando recurso…</strong>
+<span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+</div></div>
+</div>
+</section>
+<section class="panel" id="panel-r2">
+<div class="panel-head"><div>
+<h2>Alcance del Proyecto</h2>
+<div class="sub">Siniestralidad del seguro de vida por región en Alemania: contexto, problema, objetivos, datos, KPIs y equipo</div>
+</div></div>
+<div class="card">
+<div class="card-label">Alcance del Proyecto</div>
+<div class="card-toolbar">
+<div class="status" id="status-alcance"><span class="led"></span> Cargando…</div>
+<div class="toolbar-actions">
+<label class="btn" for="file-alcance">Cargar manualmente</label>
+<input type="file" id="file-alcance">
+<a class="btn" id="download-alcance" style="display:none;">Descargar</a>
+</div></div>
+<div class="viewer" id="viewer-alcance"><div class="empty-state">
+<div class="icon">⏳</div><strong>Cargando recurso…</strong>
+<span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+</div></div>
+</div>
+</section>
+<section class="panel" id="panel-r8">
+<div class="panel-head"><div>
+<h2>Diseño de Dashboards y Buenas Prácticas en Power BI</h2>
+<div class="sub">Principios de diseño visual, buenas prácticas de desarrollo en Power BI y tips generales para crear dashboards</div>
+</div></div>
+<div class="card">
+<div class="card-label">Diseño de Dashboards y Buenas Prácticas en Power BI</div>
+<div class="card-toolbar">
+<div class="status" id="status-dashboards"><span class="led"></span> Cargando…</div>
+<div class="toolbar-actions">
+<label class="btn" for="file-dashboards">Cargar manualmente</label>
+<input type="file" id="file-dashboards">
+<a class="btn" id="download-dashboards" style="display:none;">Descargar</a>
+</div></div>
+<div class="viewer" id="viewer-dashboards"><div class="empty-state">
+<div class="icon">⏳</div><strong>Cargando recurso…</strong>
+<span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+</div></div>
+</div>
+</section>
+<section class="panel" id="panel-r9">
+<div class="panel-head"><div>
+<h2>Dashboard del Proyecto</h2>
+<div class="sub">Dashboard final del proyecto VMHS Data Análisis SA, en PDF para verlo aquí y en PBIX para abrirlo en Power BI Desktop</div>
+</div></div>
+<div class="card">
+<div class="card-label">Dashboard del Proyecto (PDF)</div>
+<div class="card-toolbar">
+<div class="status" id="status-dashboard-pdf"><span class="led"></span> Cargando…</div>
+<div class="toolbar-actions">
+<label class="btn" for="file-dashboard-pdf">Cargar manualmente</label>
+<input type="file" id="file-dashboard-pdf">
+<a class="btn" id="download-dashboard-pdf" style="display:none;">Descargar</a>
+</div></div>
+<div class="viewer" id="viewer-dashboard-pdf"><div class="empty-state">
+<div class="icon">⏳</div><strong>Cargando recurso…</strong>
+<span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+</div></div>
+</div>
+<div class="card">
+<div class="card-label">Dashboard del Proyecto (Power BI, PBIX)</div>
+<div class="card-toolbar">
+<div class="status" id="status-dashboard-pbix"><span class="led"></span> Cargando…</div>
+<div class="toolbar-actions">
+<label class="btn" for="file-dashboard-pbix">Cargar manualmente</label>
+<input type="file" id="file-dashboard-pbix">
+<a class="btn" id="download-dashboard-pbix" style="display:none;">Descargar</a>
+</div></div>
+<div class="viewer" id="viewer-dashboard-pbix"><div class="empty-state">
+<div class="icon">⏳</div><strong>Cargando recurso…</strong>
+<span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+</div></div>
+</div>
+</section>
 </main>
 <footer>Recursos del Módulo 6 — Proyecto Integrador de Análisis de Datos</footer>
 <footer>© 2026 Todos los derechos reservados · Diseñado y desarrollado por Efraín Sebastián Rojas Artavia</footer>
 <script>
-  // Cambia de pestaña y panel al hacer clic
-  document.querySelectorAll('.tab').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.target).classList.add('active');
-    });
-  });
-  // Actualiza el estado (cargando, ok, error) de un recurso
-  function setStatus(id, mode, text){
-    const el = document.getElementById(id);
-    el.className = 'status ' + mode;
-    el.innerHTML = '<span class="led"></span> ' + text;
-  }
-  // Convierte bytes a un texto legible (KB, MB)
-  function formatBytes(bytes){
-    if(!bytes && bytes !== 0) return '';
-    if(bytes < 1024) return bytes + ' B';
-    if(bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
-    return (bytes/(1024*1024)).toFixed(1) + ' MB';
-  }
-  // Escapa caracteres HTML para mostrar texto de forma segura
-  function escapeHtml(str){
-    return str
-      .replace(/&/g,'&amp;')
-      .replace(/</g,'&lt;')
-      .replace(/>/g,'&gt;');
-  }
-  // Muestra un archivo de texto plano
-  function renderText(viewerId, statusId, downloadId, text, url, filename){
-    const v = document.getElementById(viewerId);
-    v.className = 'viewer';
-    const pre = document.createElement('pre');
-    pre.className = 'text-view';
-    pre.textContent = text;
-    v.innerHTML = '';
-    v.appendChild(pre);
-    if(url){
-      const dl = document.getElementById(downloadId);
-      dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
-    }
-    setStatus(statusId,'ok','Archivo cargado');
-  }
-  // Muestra un PDF dentro de un iframe
-  function renderPdf(viewerId, statusId, downloadId, url, filename){
-    const v = document.getElementById(viewerId);
-    v.className = 'viewer';
-    v.innerHTML = '<iframe src="' + url + '"></iframe>';
-    const dl = document.getElementById(downloadId);
-    dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
-    setStatus(statusId,'ok','Archivo cargado');
-  }
-  // Muestra una página HTML dentro de un iframe
-  function renderHtmlPage(viewerId, statusId, downloadId, url, filename){
-    const v = document.getElementById(viewerId);
-    v.className = 'viewer';
-    v.innerHTML = '<iframe src="' + url + '"></iframe>';
-    const dl = document.getElementById(downloadId);
-    dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
-    setStatus(statusId,'ok','Página cargada');
-  }
-  // Muestra una imagen
-  function renderImage(viewerId, statusId, downloadId, url, filename){
-    const v = document.getElementById(viewerId);
-    v.className = 'viewer';
-    v.innerHTML = '';
-    const img = document.createElement('img');
-    img.src = url;
-    v.appendChild(img);
-    const dl = document.getElementById(downloadId);
-    dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
-    setStatus(statusId,'ok','Imagen cargada');
-  }
-  // Muestra archivos de Office (Excel, PowerPoint, Word) con el visor en línea
-  function renderOfficeFile(viewerId, statusId, downloadId, url, filename, size, label, absoluteUrl){
-    const v = document.getElementById(viewerId);
-    v.className = 'viewer';
-    const dl = document.getElementById(downloadId);
-    dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
-
-    if(absoluteUrl){
-      const viewerUrl = 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(absoluteUrl);
-      v.innerHTML =
-        '<div class="office-embed-wrap">' +
-          '<iframe src="' + viewerUrl + '" style="width:100%;height:78vh;border:0;display:block;"></iframe>' +
-          '<div class="office-embed-note">Si la vista previa no carga (puede tardar unos segundos la primera vez), ' +
-            '<a href="' + url + '" download="' + filename + '">descarga el archivo directamente</a>.</div>' +
-        '</div>';
-    } else {
-      v.innerHTML =
-        '<div class="filecard">' +
-          '<div class="icon">' + label + '</div>' +
-          '<div class="fname">' + filename + '</div>' +
-          '<div class="fmeta">' + (size ? formatBytes(size) + ' · ' : '') + 'Vista previa no disponible para este tipo de archivo' + '</div>' +
-          '<a class="btn primary" href="' + url + '" download="' + filename + '">Descargar / Abrir archivo</a>' +
-        '</div>';
-    }
-    setStatus(statusId,'ok','Archivo cargado');
-  }
-  // Muestra un notebook de Jupyter (.ipynb) celda por celda
-  function renderNotebook(viewerId, statusId, downloadId, text, url, filename){
-    const v = document.getElementById(viewerId);
-    v.className = 'viewer notebook';
-    let nb;
-    try{
-      nb = JSON.parse(text);
-    }catch(e){
-      renderText(viewerId, statusId, downloadId, text, url, filename);
-      return;
-    }
-    const wrap = document.createElement('div');
-    wrap.className = 'nb';
-    const cells = nb.cells || [];
-    cells.forEach(cell => {
-      const src = Array.isArray(cell.source) ? cell.source.join('') : (cell.source || '');
-      const cellEl = document.createElement('div');
-      cellEl.className = 'nb-cell ' + (cell.cell_type === 'markdown' ? 'md' : 'code');
-      const label = document.createElement('div');
-      label.className = 'nb-cell-label';
-      label.textContent = cell.cell_type === 'markdown' ? 'Markdown' : 'Código';
-      cellEl.appendChild(label);
-      if(cell.cell_type === 'markdown'){
-        const body = document.createElement('div');
-        body.className = 'nb-md-body';
-        body.innerHTML = escapeHtml(src).replace(/\n/g,'<br>');
-        cellEl.appendChild(body);
-      } else {
-        const pre = document.createElement('pre');
-        pre.className = 'nb-src';
-        pre.textContent = src;
-        cellEl.appendChild(pre);
-        (cell.outputs || []).forEach(out => {
-          const outWrap = document.createElement('div');
-          outWrap.className = 'nb-out';
-          const outLabel = document.createElement('div');
-          outLabel.className = 'nb-out-label';
-          outLabel.textContent = 'Salida';
-          outWrap.appendChild(outLabel);
-          if(out.data && out.data['image/png']){
-            const img = document.createElement('img');
-            img.src = 'data:image/png;base64,' + out.data['image/png'];
-            outWrap.appendChild(img);
-          } else if(out.data && out.data['text/plain']){
-            const pre2 = document.createElement('pre');
-            const t = Array.isArray(out.data['text/plain']) ? out.data['text/plain'].join('') : out.data['text/plain'];
-            pre2.textContent = t;
-            outWrap.appendChild(pre2);
-          } else if(out.text){
-            const pre2 = document.createElement('pre');
-            const t = Array.isArray(out.text) ? out.text.join('') : out.text;
-            pre2.textContent = t;
-            outWrap.appendChild(pre2);
-          } else if(out.ename){
-            const pre2 = document.createElement('pre');
-            pre2.textContent = out.ename + ': ' + out.evalue;
-            outWrap.appendChild(pre2);
-          }
-          cellEl.appendChild(outWrap);
-        });
-      }
-      wrap.appendChild(cellEl);
-    });
-    v.innerHTML = '';
-    v.appendChild(wrap);
-    const dl = document.getElementById(downloadId);
-    dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
-    setStatus(statusId,'ok','Notebook cargado');
-  }
-  // Elige cómo mostrar el archivo según su extensión
-  function renderByExtension(viewerId, statusId, downloadId, url, filename, blob, absoluteUrl){
-    const ext = filename.toLowerCase().split('.').pop();
-    switch(ext){
-      case 'sql':
-      case 'txt':
-      case 'md':
-        if(blob){
-          blob.text().then(text => renderText(viewerId, statusId, downloadId, text, url, filename));
-        }
-        break;
-      case 'svg':
-      case 'png':
-      case 'jpg':
-      case 'jpeg':
-        renderImage(viewerId, statusId, downloadId, url, filename);
-        break;
-      case 'pdf':
-        renderPdf(viewerId, statusId, downloadId, url, filename);
-        break;
-      case 'html':
-      case 'htm':
-        renderHtmlPage(viewerId, statusId, downloadId, url, filename);
-        break;
-      case 'xlsx':
-      case 'xlsm':
-        renderOfficeFile(viewerId, statusId, downloadId, url, filename, blob ? blob.size : null, 'XLS', absoluteUrl);
-        break;
-      case 'pptx':
-        renderOfficeFile(viewerId, statusId, downloadId, url, filename, blob ? blob.size : null, 'PPT', absoluteUrl);
-        break;
-      case 'docx':
-        renderOfficeFile(viewerId, statusId, downloadId, url, filename, blob ? blob.size : null, 'DOC', absoluteUrl);
-        break;
-      case 'pbix':
-        renderOfficeFile(viewerId, statusId, downloadId, url, filename, blob ? blob.size : null, 'PBI', false);
-        break;
-      case 'ipynb':
-        if(blob){
-          blob.text().then(text => renderNotebook(viewerId, statusId, downloadId, text, url, filename));
-        }
-        break;
-      default:
-        if(blob){
-          blob.text().then(text => renderText(viewerId, statusId, downloadId, text, url, filename));
-        }
-    }
-  }
-  // Carga automática del recurso y opción de cargarlo manualmente
-  function setupResource(id, expectedFilename){
-    const viewerId = 'viewer-' + id;
-    const statusId = 'status-' + id;
-    const downloadId = 'download-' + id;
-    const fileId = 'file-' + id;
-    fetch(expectedFilename).then(r=>{
-      if(!r.ok) throw new Error();
-      return r.blob();
-    }).then(blob=>{
-      const absoluteUrl = new URL(expectedFilename, window.location.href).href;
-      renderByExtension(viewerId, statusId, downloadId, URL.createObjectURL(blob), expectedFilename, blob, absoluteUrl);
-    }).catch(()=>{
-      setStatus(statusId,'err','No se encontró automáticamente — cárgalo manualmente');
-    });
-    document.getElementById(fileId).addEventListener('change', e=>{
-      const f = e.target.files[0];
-      if(!f) return;
-      renderByExtension(viewerId, statusId, downloadId, URL.createObjectURL(f), f.name, f);
-    });
-  }
-  // Igual que setupResource, pero la vista previa se carga desde una página
-  // HTML "espejo" del recurso, mientras que el botón Descargar sigue
-  // apuntando al archivo de imagen original (no al HTML).
-  function setupResourceHtml(id, previewHtmlFilename, downloadImageFilename){
-    const viewerId = 'viewer-' + id;
-    const statusId = 'status-' + id;
-    const downloadId = 'download-' + id;
-    const fileId = 'file-' + id;
-    fetch(previewHtmlFilename).then(r=>{
-      if(!r.ok) throw new Error();
-      return r.blob();
-    }).then(blob=>{
-      const previewUrl = URL.createObjectURL(blob);
-      renderHtmlPage(viewerId, statusId, downloadId, previewUrl, previewHtmlFilename);
-      // Sobrescribimos el enlace de descarga para que apunte a la imagen,
-      // no a la página HTML de vista previa.
-      const dl = document.getElementById(downloadId);
-      dl.href = downloadImageFilename;
-      dl.download = downloadImageFilename.split('/').pop();
-      dl.style.display = 'inline-block';
-    }).catch(()=>{
-      setStatus(statusId,'err','No se encontró automáticamente — cárgalo manualmente');
-    });
-    document.getElementById(fileId).addEventListener('change', e=>{
-      const f = e.target.files[0];
-      if(!f) return;
-      renderByExtension(viewerId, statusId, downloadId, URL.createObjectURL(f), f.name, f);
-    });
-  }
-  // ---------- Recursos del Módulo 6 ----------
-  setupResource('guia', 'Unidad1/guia_construccion_de_proyecto.html');
-  setupResource('dataset-kpi', 'Unidad1/DelDatasetalKPI.html');
-  setupResource('reportefinal', 'Unidad1/deldatolimpioalreportefinal.html');
-  setupResource('pandas', 'Unidad1/PandasCheatSheet.html');
-  setupResource('limpieza', 'Unidad1/LimpiezadeDatos.ipynb'); // notebook en el recurso de Pandas
-  setupResource('traductores', 'Unidad1/de_limpiadores_a_traductores_de_negocio.html');
-  setupResource('quiz', 'Unidad1/quiz_teorico_practico_analisis_datos.html');
-  setupResource('alcance', 'Unidad1/AlcancedeProyecto.html');
-  setupResource('dashboards', 'Unidad1/diseno_de_dashboards_buenas_practicas_power_bi.html');
-  setupResource('dashboard-pdf', 'Unidad1/VMHS Data Analisis SA.pdf');   // dashboard en PDF (vista previa)
-  setupResource('dashboard-pbix', 'Unidad1/VMHS Data Analisis SA.pbix'); // dashboard en PBIX (descarga)
-  // Para agregar otro recurso: nueva pestaña (tab-r10) + panel (panel-r10) con sus
-  // colores --r10 y --r10-soft, y su setupResource al final, como en el Módulo 5.
+document.querySelectorAll('.tab').forEach(btn=>{
+btn.addEventListener('click',()=>{
+document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+btn.classList.add('active');
+document.getElementById(btn.dataset.target).classList.add('active');
+});
+});
+function setStatus(id,mode,text){
+const el=document.getElementById(id);
+el.className='status '+mode;
+el.innerHTML='<span class="led"></span> '+text;
+}
+function formatBytes(bytes){
+if(!bytes&&bytes!==0)return '';
+if(bytes<1024)return bytes+' B';
+if(bytes<1024*1024)return(bytes/1024).toFixed(1)+' KB';
+return(bytes/(1024*1024)).toFixed(1)+' MB';
+}
+function escapeHtml(str){
+return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+function renderText(viewerId,statusId,downloadId,text,url,filename){
+const v=document.getElementById(viewerId);
+v.className='viewer';
+const pre=document.createElement('pre');
+pre.className='text-view';
+pre.textContent=text;
+v.innerHTML='';
+v.appendChild(pre);
+if(url){
+const dl=document.getElementById(downloadId);
+dl.href=url;dl.download=filename;dl.style.display='inline-block';
+}
+setStatus(statusId,'ok','Archivo cargado');
+}
+function renderPdf(viewerId,statusId,downloadId,url,filename){
+const v=document.getElementById(viewerId);
+v.className='viewer';
+v.innerHTML='<iframe src="'+url+'"></iframe>';
+const dl=document.getElementById(downloadId);
+dl.href=url;dl.download=filename;dl.style.display='inline-block';
+setStatus(statusId,'ok','Archivo cargado');
+}
+function renderHtmlPage(viewerId,statusId,downloadId,url,filename){
+const v=document.getElementById(viewerId);
+v.className='viewer';
+v.innerHTML='<iframe src="'+url+'"></iframe>';
+const dl=document.getElementById(downloadId);
+dl.href=url;dl.download=filename;dl.style.display='inline-block';
+setStatus(statusId,'ok','Página cargada');
+}
+function renderImage(viewerId,statusId,downloadId,url,filename){
+const v=document.getElementById(viewerId);
+v.className='viewer';
+v.innerHTML='';
+const img=document.createElement('img');
+img.src=url;
+v.appendChild(img);
+const dl=document.getElementById(downloadId);
+dl.href=url;dl.download=filename;dl.style.display='inline-block';
+setStatus(statusId,'ok','Imagen cargada');
+}
+function renderOfficeFile(viewerId,statusId,downloadId,url,filename,size,label,absoluteUrl){
+const v=document.getElementById(viewerId);
+v.className='viewer';
+const dl=document.getElementById(downloadId);
+dl.href=url;dl.download=filename;dl.style.display='inline-block';
+if(absoluteUrl){
+const viewerUrl='https://view.officeapps.live.com/op/embed.aspx?src='+encodeURIComponent(absoluteUrl);
+v.innerHTML='<div class="office-embed-wrap"><iframe src="'+viewerUrl+'" style="width:100%;height:78vh;border:0;display:block;"></iframe><div class="office-embed-note">Si la vista previa no carga (puede tardar unos segundos la primera vez), <a href="'+url+'" download="'+filename+'">descarga el archivo directamente</a>.</div></div>';
+}else{
+v.innerHTML='<div class="filecard"><div class="icon">'+label+'</div><div class="fname">'+filename+'</div><div class="fmeta">'+(size?formatBytes(size)+' · ':'')+'Vista previa no disponible para este tipo de archivo</div><a class="btn primary" href="'+url+'" download="'+filename+'">Descargar / Abrir archivo</a></div>';
+}
+setStatus(statusId,'ok','Archivo cargado');
+}
+function renderNotebook(viewerId,statusId,downloadId,text,url,filename){
+const v=document.getElementById(viewerId);
+v.className='viewer notebook';
+let nb;
+try{nb=JSON.parse(text)}catch(e){renderText(viewerId,statusId,downloadId,text,url,filename);return}
+const wrap=document.createElement('div');
+wrap.className='nb';
+const cells=nb.cells||[];
+cells.forEach(cell=>{
+const src=Array.isArray(cell.source)?cell.source.join(''):(cell.source||'');
+const cellEl=document.createElement('div');
+cellEl.className='nb-cell '+(cell.cell_type==='markdown'?'md':'code');
+const label=document.createElement('div');
+label.className='nb-cell-label';
+label.textContent=cell.cell_type==='markdown'?'Markdown':'Código';
+cellEl.appendChild(label);
+if(cell.cell_type==='markdown'){
+const body=document.createElement('div');
+body.className='nb-md-body';
+body.innerHTML=escapeHtml(src).replace(/\n/g,'<br>');
+cellEl.appendChild(body);
+}else{
+const pre=document.createElement('pre');
+pre.className='nb-src';
+pre.textContent=src;
+cellEl.appendChild(pre);
+(cell.outputs||[]).forEach(out=>{
+const outWrap=document.createElement('div');
+outWrap.className='nb-out';
+const outLabel=document.createElement('div');
+outLabel.className='nb-out-label';
+outLabel.textContent='Salida';
+outWrap.appendChild(outLabel);
+if(out.data&&out.data['image/png']){
+const img=document.createElement('img');
+img.src='data:image/png;base64,'+out.data['image/png'];
+outWrap.appendChild(img);
+}else if(out.data&&out.data['text/plain']){
+const pre2=document.createElement('pre');
+const t=Array.isArray(out.data['text/plain'])?out.data['text/plain'].join(''):out.data['text/plain'];
+pre2.textContent=t;
+outWrap.appendChild(pre2);
+}else if(out.text){
+const pre2=document.createElement('pre');
+const t=Array.isArray(out.text)?out.text.join(''):out.text;
+pre2.textContent=t;
+outWrap.appendChild(pre2);
+}else if(out.ename){
+const pre2=document.createElement('pre');
+pre2.textContent=out.ename+': '+out.evalue;
+outWrap.appendChild(pre2);
+}
+cellEl.appendChild(outWrap);
+});
+}
+wrap.appendChild(cellEl);
+});
+v.innerHTML='';
+v.appendChild(wrap);
+const dl=document.getElementById(downloadId);
+dl.href=url;dl.download=filename;dl.style.display='inline-block';
+setStatus(statusId,'ok','Notebook cargado');
+}
+function renderByExtension(viewerId,statusId,downloadId,url,filename,blob,absoluteUrl){
+const ext=filename.toLowerCase().split('.').pop();
+switch(ext){
+case 'sql':
+case 'txt':
+case 'md':
+if(blob)blob.text().then(text=>renderText(viewerId,statusId,downloadId,text,url,filename));
+break;
+case 'svg':
+case 'png':
+case 'jpg':
+case 'jpeg':
+renderImage(viewerId,statusId,downloadId,url,filename);
+break;
+case 'pdf':
+renderPdf(viewerId,statusId,downloadId,url,filename);
+break;
+case 'html':
+case 'htm':
+renderHtmlPage(viewerId,statusId,downloadId,url,filename);
+break;
+case 'xlsx':
+case 'xlsm':
+renderOfficeFile(viewerId,statusId,downloadId,url,filename,blob?blob.size:null,'XLS',absoluteUrl);
+break;
+case 'pptx':
+renderOfficeFile(viewerId,statusId,downloadId,url,filename,blob?blob.size:null,'PPT',absoluteUrl);
+break;
+case 'docx':
+renderOfficeFile(viewerId,statusId,downloadId,url,filename,blob?blob.size:null,'DOC',absoluteUrl);
+break;
+case 'pbix':
+renderOfficeFile(viewerId,statusId,downloadId,url,filename,blob?blob.size:null,'PBI',false);
+break;
+case 'ipynb':
+if(blob)blob.text().then(text=>renderNotebook(viewerId,statusId,downloadId,text,url,filename));
+break;
+default:
+if(blob)blob.text().then(text=>renderText(viewerId,statusId,downloadId,text,url,filename));
+}
+}
+function setupResource(id,expectedFilename){
+const viewerId='viewer-'+id;
+const statusId='status-'+id;
+const downloadId='download-'+id;
+const fileId='file-'+id;
+fetch(expectedFilename).then(r=>{
+if(!r.ok)throw new Error();
+return r.blob();
+}).then(blob=>{
+const absoluteUrl=new URL(expectedFilename,window.location.href).href;
+renderByExtension(viewerId,statusId,downloadId,URL.createObjectURL(blob),expectedFilename,blob,absoluteUrl);
+}).catch(()=>{
+setStatus(statusId,'err','No se encontró automáticamente — cárgalo manualmente');
+});
+document.getElementById(fileId).addEventListener('change',e=>{
+const f=e.target.files[0];
+if(!f)return;
+renderByExtension(viewerId,statusId,downloadId,URL.createObjectURL(f),f.name,f);
+});
+}
+function setupResourceHtml(id,previewHtmlFilename,downloadImageFilename){
+const viewerId='viewer-'+id;
+const statusId='status-'+id;
+const downloadId='download-'+id;
+const fileId='file-'+id;
+fetch(previewHtmlFilename).then(r=>{
+if(!r.ok)throw new Error();
+return r.blob();
+}).then(blob=>{
+const previewUrl=URL.createObjectURL(blob);
+renderHtmlPage(viewerId,statusId,downloadId,previewUrl,previewHtmlFilename);
+const dl=document.getElementById(downloadId);
+dl.href=downloadImageFilename;
+dl.download=downloadImageFilename.split('/').pop();
+dl.style.display='inline-block';
+}).catch(()=>{
+setStatus(statusId,'err','No se encontró automáticamente — cárgalo manualmente');
+});
+document.getElementById(fileId).addEventListener('change',e=>{
+const f=e.target.files[0];
+if(!f)return;
+renderByExtension(viewerId,statusId,downloadId,URL.createObjectURL(f),f.name,f);
+});
+}
+setupResource('guia','Unidad1/guia_construccion_de_proyecto.html');
+setupResource('dataset-kpi','Unidad1/DelDatasetalKPI.html');
+setupResource('reportefinal','Unidad1/deldatolimpioalreportefinal.html');
+setupResource('pandas','Unidad1/PandasCheatSheet.html');
+setupResource('limpieza','Unidad1/LimpiezadeDatos.ipynb');
+setupResource('traductores','Unidad1/de_limpiadores_a_traductores_de_negocio.html');
+setupResource('quiz','Unidad1/quiz_teorico_practico_analisis_datos.html');
+setupResource('alcance','Unidad1/AlcancedeProyecto.html');
+setupResource('dashboards','Unidad1/diseno_de_dashboards_buenas_practicas_power_bi.html');
+setupResource('dashboard-pdf','Unidad1/VMHS Data Analisis SA.pdf');
+setupResource('dashboard-pbix','Unidad1/VMHS Data Analisis SA.pbix');
 </script>
 </body>
 </html>
