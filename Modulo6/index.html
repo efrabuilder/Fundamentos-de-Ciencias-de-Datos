@@ -23,6 +23,7 @@
     --r6:#7c3aed; --r6-soft:#f5f3ff;           /* Quiz Teórico-Práctico */
     --r7:#059669; --r7-soft:#ecfdf5;           /* Guía de Construcción de Proyecto */
     --r8:#c026d3; --r8-soft:#fdf4ff;           /* Diseño de Dashboards y Buenas Prácticas en Power BI */
+    --r9:#65a30d; --r9-soft:#f7fee7;           /* Dashboard del Proyecto (PDF y PBIX) */
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
@@ -100,6 +101,7 @@
   #tab-r6{--accent:var(--r6);}
   #tab-r7{--accent:var(--r7);}
   #tab-r8{--accent:var(--r8);}
+  #tab-r9{--accent:var(--r9);}
   main{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
   .panel{display:none;}
   .panel.active{display:block;animation:fade .25s ease;}
@@ -112,6 +114,7 @@
   #panel-r6{--accent:var(--r6);--accent-soft:var(--r6-soft);}
   #panel-r7{--accent:var(--r7);--accent-soft:var(--r7-soft);}
   #panel-r8{--accent:var(--r8);--accent-soft:var(--r8-soft);}
+  #panel-r9{--accent:var(--r9);--accent-soft:var(--r9-soft);}
   @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
   .panel-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:16px;}
   .panel-head h2{margin:0;font-size:19px;}
@@ -128,6 +131,7 @@
   #panel-r6 .card-toolbar{--accent-soft:var(--r6-soft);}
   #panel-r7 .card-toolbar{--accent-soft:var(--r7-soft);}
   #panel-r8 .card-toolbar{--accent-soft:var(--r8-soft);}
+  #panel-r9 .card-toolbar{--accent-soft:var(--r9-soft);}
   .status{font-size:12.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
   .status .led{width:7px;height:7px;border-radius:50%;background:#cbd5e1;}
   .status.ok .led{background:#16a34a;}
@@ -175,6 +179,7 @@
   #panel-r6 .empty-state .icon{background:var(--r6-soft);color:var(--r6);}
   #panel-r7 .empty-state .icon{background:var(--r7-soft);color:var(--r7);}
   #panel-r8 .empty-state .icon{background:var(--r8-soft);color:var(--r8);}
+  #panel-r9 .empty-state .icon{background:var(--r9-soft);color:var(--r9);}
   .empty-state strong{color:var(--ink);font-size:15px;}
   .empty-state span{font-size:13px;max-width:420px;}
 </style>
@@ -200,7 +205,7 @@
   <h1>Proyecto Integrador de Análisis de Datos</h1>
 </header>
 <nav>
-  <!-- Orden: Guía de Construcción, Dataset al KPI, Reporte Final, Pandas, Traductores, Quiz, Alcance, Dashboards -->
+  <!-- Orden: Guía de Construcción, Dataset al KPI, Reporte Final, Pandas, Traductores, Quiz, Alcance, Dashboards, Dashboard del Proyecto -->
   <button class="tab" id="tab-r7" data-target="panel-r7">
     <span class="dot"></span> Guía de Construcción de Proyecto
   </button>
@@ -224,6 +229,9 @@
   </button>
   <button class="tab" id="tab-r8" data-target="panel-r8">
     <span class="dot"></span> Diseño de Dashboards y Power BI
+  </button>
+  <button class="tab" id="tab-r9" data-target="panel-r9">
+    <span class="dot"></span> Dashboard del Proyecto
   </button>
 </nav>
 <main>
@@ -477,6 +485,56 @@
     </div>
   </section>
 
+  <!-- ===================== PANEL: Dashboard del Proyecto (PDF y PBIX) ===================== -->
+  <section class="panel" id="panel-r9">
+    <div class="panel-head">
+      <div>
+        <h2>Dashboard del Proyecto</h2>
+        <div class="sub">Dashboard final del proyecto VMHS Data Análisis SA, en PDF para verlo aquí y en PBIX para abrirlo en Power BI Desktop</div>
+      </div>
+    </div>
+
+    <!-- Tarjeta 1: dashboard en PDF (con vista previa) -->
+    <div class="card">
+      <div class="card-label">Dashboard del Proyecto (PDF)</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-dashboard-pdf"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <label class="btn" for="file-dashboard-pdf">Cargar manualmente</label>
+          <input type="file" id="file-dashboard-pdf">
+          <a class="btn" id="download-dashboard-pdf" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer" id="viewer-dashboard-pdf">
+        <div class="empty-state">
+          <div class="icon">⏳</div>
+          <strong>Cargando recurso…</strong>
+          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tarjeta 2: dashboard en PBIX (solo descarga, el navegador no lo abre) -->
+    <div class="card">
+      <div class="card-label">Dashboard del Proyecto (Power BI, PBIX)</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-dashboard-pbix"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <label class="btn" for="file-dashboard-pbix">Cargar manualmente</label>
+          <input type="file" id="file-dashboard-pbix">
+          <a class="btn" id="download-dashboard-pbix" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer" id="viewer-dashboard-pbix">
+        <div class="empty-state">
+          <div class="icon">⏳</div>
+          <strong>Cargando recurso…</strong>
+          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </main>
 <footer>Recursos del Módulo 6 — Proyecto Integrador de Análisis de Datos</footer>
 <footer>© 2026 Todos los derechos reservados · Diseñado y desarrollado por Efraín Sebastián Rojas Artavia</footer>
@@ -575,7 +633,7 @@
         '<div class="filecard">' +
           '<div class="icon">' + label + '</div>' +
           '<div class="fname">' + filename + '</div>' +
-          '<div class="fmeta">' + (size ? formatBytes(size) + ' · ' : '') + 'Vista previa no disponible para archivos cargados manualmente' + '</div>' +
+          '<div class="fmeta">' + (size ? formatBytes(size) + ' · ' : '') + 'Vista previa no disponible para este tipo de archivo' + '</div>' +
           '<a class="btn primary" href="' + url + '" download="' + filename + '">Descargar / Abrir archivo</a>' +
         '</div>';
     }
@@ -758,8 +816,10 @@
   setupResource('quiz', 'Unidad1/quiz_teorico_practico_analisis_datos.html');
   setupResource('alcance', 'Unidad1/AlcancedeProyecto.html');
   setupResource('dashboards', 'Unidad1/diseno_de_dashboards_buenas_practicas_power_bi.html');
-  // Para agregar otro recurso: nueva pestaña (tab-r9) + panel (panel-r9) con sus
-  // colores --r9 y --r9-soft, y su setupResource al final, como en el Módulo 5.
+  setupResource('dashboard-pdf', 'Unidad1/VMHS Data Analisis SA.pdf');   // dashboard en PDF (vista previa)
+  setupResource('dashboard-pbix', 'Unidad1/VMHS Data Analisis SA.pbix'); // dashboard en PBIX (descarga)
+  // Para agregar otro recurso: nueva pestaña (tab-r10) + panel (panel-r10) con sus
+  // colores --r10 y --r10-soft, y su setupResource al final, como en el Módulo 5.
 </script>
 </body>
 </html>
