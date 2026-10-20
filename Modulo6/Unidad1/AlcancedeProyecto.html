@@ -128,7 +128,7 @@
   .step h3 { font-family: var(--display); font-size: 1.05rem; color: var(--ink); line-height: 1.25; }
   .step p { font-size: 14.5px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
 
-  /* Marco teórico (nuevo) */
+  /* Marco teórico */
   .theory { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-top: 28px; }
   .th { background: var(--white); border: 1px solid var(--line); border-top: 4px solid var(--teal); border-radius: 4px; padding: 24px; }
   .th:nth-child(even) { border-top-color: var(--amber); }
@@ -142,7 +142,7 @@
   .th code { font-family: var(--mono); font-size: 13.5px; color: var(--ink-soft); background: var(--paper); padding: 1px 6px; border-radius: 3px; }
   .th .formula code { background: none; padding: 0; }
 
-  /* KPIs (9 indicadores en 3 secciones) */
+  /* KPIs del dashboard */
   .kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
   .kpi { background: var(--ink); color: var(--white); border-radius: 4px; padding: 28px 24px 30px; display: flex; flex-direction: column; }
   .kpi svg { width: 34px; height: 34px; color: var(--amber); }
@@ -179,11 +179,15 @@
   .data-table tr:last-child td { border-bottom: 0; }
   .data-table td code { font-family: var(--mono); font-size: 13.5px; color: var(--ink-soft); background: var(--paper); padding: 1px 6px; border-radius: 3px; }
   .data-table .key { font-weight: 600; color: var(--ink); white-space: nowrap; }
+  .data-table .num { font-family: var(--mono); font-size: 14px; color: var(--ink); white-space: nowrap; }
 
   .callout { margin-top: 24px; padding: 20px 22px; background: #FFF8E8; border: 1px solid #EAD9A8; border-left: 6px solid var(--amber); border-radius: 4px; }
   .callout h4 { font-family: var(--display); font-size: 1.05rem; color: var(--ink); margin-bottom: 6px; }
   .callout p { font-size: 15px; color: var(--muted); }
   .callout p + p { margin-top: 10px; }
+  .callout ul { margin: 10px 0 0 20px; }
+  .callout li { font-size: 15px; color: var(--muted); }
+  .callout li + li { margin-top: 8px; }
   .callout code { font-family: var(--mono); font-size: 13.5px; color: var(--ink-soft); background: rgba(255,255,255,.7); padding: 1px 6px; border-radius: 3px; }
 
   .callout.teal { background: #EAF4F2; border-color: #B9D6D1; border-left-color: var(--teal); }
@@ -221,7 +225,7 @@
     .dot { animation: none; opacity: var(--o, 1); }
   }
 
-  /* Fases 3–5 añadidas desde el documento del proyecto */
+  /* Fases 3–5 */
   .result-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; }
   .result-card { background:var(--white); border:1px solid var(--line); border-radius:4px; padding:24px; }
   .result-card h3 { font-family:var(--display); color:var(--ink); font-size:1.15rem; line-height:1.3; }
@@ -229,17 +233,28 @@
   .result-card p { margin-top:10px; }
   .result-card ul { margin:12px 0 0 20px; }
   .result-card li + li { margin-top:8px; }
+  .result-card code { font-family: var(--mono); font-size: 13.5px; color: var(--ink-soft); background: var(--paper); padding: 1px 6px; border-radius: 3px; }
+  .result-card.wide { grid-column: 1 / -1; }
   .metric-strip { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin:22px 0; }
   .metric { background:var(--ink); color:var(--white); padding:20px; border-radius:4px; }
   .metric b { display:block; font-family:var(--display); font-size:1.65rem; line-height:1.15; }
   .metric span { display:block; color:#B7C7DA; font-size:13px; margin-top:7px; }
-  .viz-placeholder { min-height:180px; padding:24px; border:1px dashed var(--steel); background:var(--white); border-radius:4px; display:flex; flex-direction:column; justify-content:center; }
-  .viz-placeholder strong { font-family:var(--display); color:var(--ink); font-size:1.1rem; }
-  .viz-placeholder p { margin-top:8px; color:var(--muted); font-size:14px; }
   .bibliography { overflow-wrap:anywhere; }
   .bibliography li { margin:12px 0; color:var(--muted); }
   .note-small { margin-top:18px; font-size:14px; color:var(--muted); }
-  @media (max-width:920px) { .result-grid,.metric-strip { grid-template-columns:1fr; } }
+  .table-scroll { overflow-x:auto; margin-top:16px; }
+  .sub-title { font-family: var(--display); font-size: 1.25rem; color: var(--ink); margin: 44px 0 6px; line-height: 1.25; }
+  .sub-title:first-child { margin-top: 0; }
+  .sub-title + .prose { margin-top: 10px; }
+
+  /* Páginas del dashboard */
+  .dash-tag { display:inline-block; font-family: var(--mono); font-size: 12.5px; padding: 2px 10px; border-radius: 3px; background: #E6EBF2; color: #2B4262; margin-bottom: 8px; }
+  .headline { margin-top: 14px; padding: 12px 16px; border-left: 4px solid var(--teal); background: var(--paper); border-radius: 0 4px 4px 0; }
+  .headline b { display: block; font-family: var(--display); font-size: 1rem; color: var(--ink); line-height: 1.3; }
+  .headline span { display: block; margin-top: 2px; font-size: 14.5px; color: var(--muted); line-height: 1.45; }
+  .reading { margin-top: 12px; font-size: 14.5px; color: var(--muted); padding-top: 12px; border-top: 1px dashed var(--line); }
+  .reading b { color: var(--ink); }
+  @media (max-width:920px) { .result-grid,.metric-strip { grid-template-columns:1fr; } .result-card.wide { grid-column: auto; } }
 
 </style>
 </head>
@@ -247,7 +262,6 @@
   <header class="hero">
   <div class="wrap">
     <div>
-      <!-- Nombre del equipo + grupo (dato nuevo del Word) -->
       <p class="team">VMHS Data Analisis S.A · Grupo 05</p>
       <h1>Siniestralidad del seguro de vida por región en Alemania</h1>
       <p class="lede">Documento de alcance: qué problema de negocio resolvemos, con qué datos y qué indicadores verá el gerente en el dashboard final.</p>
@@ -270,6 +284,20 @@
 </header>
 
 <main>
+
+  <!-- ================= INTRODUCCIÓN ================= -->
+  <section id="introduccion">
+    <div class="wrap row">
+      <h2>Introducción<small>Propósito y alcance del proyecto integrador</small></h2>
+      <div class="prose">
+        <p>En el sector asegurador, estudiar las primas, los siniestros y las características de la cartera ayuda a reconocer desequilibrios financieros y oportunidades de mejora. Para ello se necesita información consistente, indicadores bien definidos y una interpretación que considere las limitaciones de los datos.</p>
+        <p>Este proyecto integrador, desarrollado por el equipo consultor ficticio VMHS Data Analisis S.A., busca calcular y comparar el índice de siniestralidad de los seguros de vida entre regiones de Alemania, a partir de la relación entre los importes de siniestros y las primas registradas. Como complemento se examinan el volumen de pólizas, la satisfacción del cliente y el puntaje de riesgo de fuga, para integrar las perspectivas financiera, territorial y comercial.</p>
+        <p>Se utiliza un conjunto de datos de seguros sintético y educativo, enriquecido con información territorial de municipios alemanes. El trabajo comprende la definición del problema, la limpieza e integración de las fuentes, el análisis exploratorio y un reporte interactivo en Power BI. La calidad de los datos se evalúa según el uso previsto y no solo por la cantidad de campos completos (Government Data Quality Hub, 2020).</p>
+        <p>El análisis exploratorio permite reconocer distribuciones, observaciones atípicas y relaciones entre variables, y las visualizaciones facilitan comunicar los resultados mediante filtros de año y región (National Institute of Standards and Technology [NIST], s. f.; Microsoft, s. f.). El reporte se organiza en tres perspectivas: resumen ejecutivo, análisis regional y experiencia del cliente.</p>
+        <p>El aporte consiste en formular recomendaciones gerenciales sustentadas en evidencia, distinguiendo los resultados observados de las posibles explicaciones. El alcance se limita a la muestra construida: los datos sintéticos, las asignaciones geográficas y la comparabilidad temporal de los importes condicionan las conclusiones, que no representan a aseguradoras reales ni demuestran relaciones causales.</p>
+      </div>
+    </div>
+  </section>
 
   <section id="contexto">
     <div class="wrap row">
@@ -305,7 +333,6 @@
         </div>
         <p class="problem-goal">Medir la siniestralidad localizada geográficamente: identificar clústeres de costo y diseño de adquisición de primas regionales en Alemania.</p>
 
-        <!-- Límites del estudio (nuevo, de la Introducción del Word) -->
         <div class="callout teal">
           <h4>Qué no responde este análisis</h4>
           <p>La baja del 20 % es un antecedente del caso académico, no un resultado demostrado. La siniestralidad permite examinar los costos frente a las primas, pero por sí sola no determina las causas de una caída en las ventas; para eso harían falta datos comerciales adicionales.</p>
@@ -376,7 +403,7 @@
               <div class="stat"><b>76</b><span>columnas</span></div>
               <div class="stat"><b>2018–2025</b><span>período</span></div>
             </div>
-            <p>Registros de pólizas y siniestros de aseguradoras alemanas: auto, hogar, vida, salud, viaje y empresariales. Incluye problemas realistas de calidad de datos, como valores faltantes, entradas inconsistentes y registros atípicos.</p>
+            <p>Registros de pólizas y siniestros de aseguradoras alemanas: auto, hogar, vida, salud, viaje y empresariales. Incluye problemas realistas de calidad de datos, como valores faltantes, entradas inconsistentes y registros atípicos. Puede usarse para análisis de siniestros, detección de fraude, evaluación de riesgo y retención de clientes.</p>
             <p class="src"><a href="https://www.kaggle.com/datasets/danielsowah123/insurance" target="_blank" rel="noopener">danielsowah123 (2026), Kaggle</a></p>
           </article>
           <article class="ds">
@@ -414,7 +441,8 @@
       </div>
     </div>
   </section>
-    <!-- ================= MARCO TEÓRICO (NUEVO) ================= -->
+
+  <!-- ================= MARCO TEÓRICO ================= -->
   <section id="marco">
     <div class="wrap row">
       <h2>Marco teórico<small>Fundamentos de las fases 1 y 2</small></h2>
@@ -480,7 +508,8 @@
             <h3>Integración de tablas, territorio y trazabilidad</h3>
             <span class="cite">pandas development team (s. f.-a) · Statistisches Bundesamt (s. f.) · Government Data Quality Hub (2020)</span>
             <p>Con claves repetidas en ambas tablas, una unión puede multiplicar las filas. El parámetro <code>validate</code> comprueba la cardinalidad esperada y el indicador de unión muestra registros sin correspondencia. Verificaciones recomendadas, aún no resultados comprobados: conservar las pólizas con unión izquierda, comprobar la unicidad de la clave del catálogo y conciliar conteos y totales financieros antes y después del cruce.</p>
-            <p>El código postal que publica Destatis (GV-ISys) es el de la sede administrativa del municipio, no el de todos sus residentes. La trazabilidad exige dejar documentados el diccionario de datos, las reglas de limpieza, los campos originales y los controles de calidad. La tabla maestra es un insumo para el análisis exploratorio, no una conclusión sobre el riesgo.</p>
+            <p>El código postal que publica Destatis (GV-ISys) es el de la sede administrativa del municipio, no el de todos sus residentes. En este proyecto se reasignaron códigos postales a partir del estado del cliente y la tabla final contiene 14 códigos distintos; esos valores se conservan como asignaciones metodológicas, junto con el valor original y la regla aplicada, y las asociaciones municipales inferidas se separan de las verificadas.</p>
+            <p>La trazabilidad exige dejar documentados el diccionario de datos, las reglas de limpieza, los campos originales y los controles de calidad. La tabla maestra es un insumo para el análisis exploratorio, no una conclusión sobre el riesgo: la fase 1 aporta la pregunta y las medidas; la fase 2 determina si los registros pueden sostenerlas.</p>
           </article>
         </div>
       </div>
@@ -510,8 +539,8 @@
 
         <p style="font-size: 15px; color: var(--muted); margin-bottom: 28px;">Estos controles describen la estructura y la cobertura de los datos; por sí solos no certifican la exactitud de los valores.</p>
 
-        <!-- Tabla unificada: antes eran dos tablas con las mismas cifras -->
         <h3 class="vars-title" style="margin-top: 0;">Arquitectura final, variables críticas y controles</h3>
+        <div class="table-scroll">
         <table class="data-table">
           <thead>
             <tr>
@@ -523,12 +552,22 @@
           <tbody>
             <tr>
               <td class="key"><code>policy_id</code></td>
-              <td>Llave de póliza. Permite identificar registros de pólizas y relacionar información.</td>
-              <td>Se debe comprobar la unicidad en la granularidad correspondiente antes de usarla como clave primaria.</td>
+              <td>Llave de póliza. Identifica una póliza y permite consolidar sus registros; evita contar repetidamente la misma póliza.</td>
+              <td>100 % con dato; única por registro.</td>
             </tr>
             <tr>
               <td class="key"><code>customer_id</code></td>
-              <td>Llave de cliente. Permite enlazar registros entre tablas y detectar duplicados.</td>
+              <td>Llave de cliente. Permite consolidar sus registros sin contarlo más de una vez.</td>
+              <td>100 % con dato; se repite (6.490 valores distintos en 6.512 filas). Relación de uno a muchos; no sirve como identificador único.</td>
+            </tr>
+            <tr>
+              <td class="key"><code>postal_code</code></td>
+              <td>Llave territorial para enlazar con catálogos geográficos.</td>
+              <td>100 % con dato; se repite (14 valores distintos en 6.512 filas). Se conserva como texto para no perder ceros a la izquierda y se normaliza a cinco dígitos; se guarda también el valor previo a la reasignación para mantener la trazabilidad. Como los códigos originales de la tabla de seguros eran ficticios y con formato incorrecto, se usó el estado del cliente para asignar el código postal.</td>
+            </tr>
+            <tr>
+              <td class="key"><code>claim_id</code></td>
+              <td>Llave. Identificador de reclamo. Sirve para enlazar registros entre tablas y detectar duplicados.</td>
               <td>100 % con dato; se repite (3.188 valores distintos en 6.512 filas). Relación de uno a muchos; no sirve como identificador único.</td>
             </tr>
             <tr>
@@ -558,6 +597,7 @@
             </tr>
           </tbody>
         </table>
+        </div>
 
         <div class="callout teal" style="margin-top: 24px;">
           <h4>Referencia técnica</h4>
@@ -578,48 +618,52 @@
     </div>
   </section>
 
-  <!-- ================= INDICADORES: 9 KPIs EN 3 SECCIONES ================= -->
+  <!-- ================= INDICADORES DEL DASHBOARD ================= -->
   <section id="kpis">
     <div class="wrap row">
-      <h2>Indicadores clave<small>Nueve KPIs en tres secciones: situación general, diferencias regionales y segmentos a revisar</small></h2>
+      <h2>Indicadores del dashboard<small>Tres páginas de análisis: situación general, diferencias regionales y experiencia del cliente</small></h2>
       <div class="kpis">
         <article class="kpi">
           <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="13"/><path d="M22 13.5c-.8-1.2-2.3-1.8-4-1.8-2.3 0-4 1.1-4 2.8 0 4 8.5 1.8 8.5 6 0 1.8-1.8 3-4.5 3-1.9 0-3.5-.7-4.3-2M18 9v3M18 24v3"/></svg>
-          <h3>Resumen ejecutivo</h3>
+          <h3>Resumen Ejecutivo</h3>
           <p>Presenta la situación general de la cartera.</p>
           <ul class="kpi-list">
-            <li><b>Índice de siniestralidad global (%)</b>Cuánto representan los siniestros respecto de las primas del período.</li>
-            <li><b>Costo total de siniestros (€)</b>Dimensiona el impacto financiero de las reclamaciones.</li>
-            <li><b>Volumen total de primas (€)</b>Muestra el tamaño financiero de la cartera analizada.</li>
+            <li><b>Índice Siniestralidad Global (%)</b>Tarjeta principal: 1239 %.</li>
+            <li><b>Evolución del índice 2018–2025</b>Gráfico de línea que muestra si el desequilibrio se corrige con el tiempo.</li>
+            <li><b>Índice por estado</b>Barras ordenadas de mayor a menor entre los diez estados.</li>
+            <li><b>Total pólizas vida por año</b>Volumen de cartera registrado en cada año.</li>
           </ul>
-          <div class="q"><span>Pregunta de negocio</span>¿Cuánto cuestan los siniestros de vida y cuánto pesan frente a las primas?</div>
+          <div class="q"><span>Pregunta de negocio</span>¿Cuánto pesan los siniestros frente a las primas y se sostiene en el tiempo?</div>
         </article>
         <article class="kpi">
           <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 30V19M13 30V11M21 30V16M29 30V6"/></svg>
-          <h3>Deep-Dive: análisis regional</h3>
-          <p>Explica las diferencias entre regiones.</p>
+          <h3>Deep-Dive Regional</h3>
+          <p>Explica las diferencias entre estados con un filtro por estado.</p>
           <ul class="kpi-list">
-            <li><b>Índice de siniestralidad por región (%)</b>Identifica las regiones con mayor costo de siniestros en relación con sus primas.</li>
-            <li><b>Frecuencia de siniestros por región</b>Explora si el resultado regional se relaciona con más eventos.</li>
-            <li><b>Severidad promedio por región (€ por siniestro)</b>Explora si el resultado se relaciona con siniestros de mayor costo.</li>
+            <li><b>Nivel de Siniestralidad Operativa (%)</b>Se recalcula según los estados seleccionados.</li>
+            <li><b>Exposición Total de la Cartera</b>Conteo de pólizas únicas (6,03 mil sin filtros).</li>
+            <li><b>Índice de siniestralidad regional por año</b>Barras por año para el estado elegido.</li>
+            <li><b>Total pólizas vida por año</b>Captación comercial anual del estado elegido.</li>
           </ul>
-          <div class="q"><span>Pregunta de negocio</span>¿En qué regiones conviene frenar o reforzar la adquisición de primas?</div>
+          <div class="q"><span>Pregunta de negocio</span>¿En qué estados y años el desequilibrio es mayor y cuánto pesa cada uno en la cartera?</div>
         </article>
         <article class="kpi">
           <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 4l14 25H4L18 4z"/><path d="M18 14v7M18 25v.5"/></svg>
-          <h3>Perfilamiento: segmentos prioritarios</h3>
+          <h3>Experiencia del Cliente</h3>
           <p>Reconoce los segmentos que requieren revisión.</p>
           <ul class="kpi-list">
-            <li><b>Índice de siniestralidad por segmento (%)</b>Compara grupos de edad o tipos de cobertura dentro de las regiones priorizadas.</li>
-            <li><b>Participación del segmento en el costo de siniestros (%)</b>Identifica los grupos que concentran el impacto financiero.</li>
-            <li><b>Participación del segmento en las primas (%)</b>Contextualiza ese costo según el peso financiero del grupo.</li>
+            <li><b>Probabilidad Media de Abandono (Churn)</b>Tarjeta principal: 0,47.</li>
+            <li><b>Indicador de Experiencia del Cliente</b>Tarjeta principal: 1,55 (incluye ceros sin respuesta).</li>
+            <li><b>Segmentos de riesgo de fuga</b>Anillo con los segmentos alto, medio, crítico y bajo.</li>
+            <li><b>Satisfacción frente a riesgo de fuga</b>Dispersión por nivel de satisfacción (0 a 5).</li>
           </ul>
-          <div class="q"><span>Pregunta de negocio</span>¿Qué grupos de edad o coberturas concentran el costo en las regiones priorizadas?</div>
+          <div class="q"><span>Pregunta de negocio</span>¿Qué segmentos de clientes conviene retener primero?</div>
         </article>
       </div>
     </div>
   </section>
 
+  <!-- ================= FASE 3: EDA ================= -->
   <section id="fase3">
     <div class="wrap row">
       <h2>Fase 3: Análisis exploratorio<small>EDA — patrones, relaciones y evolución temporal</small></h2>
@@ -627,38 +671,81 @@
         <div class="phase-header">
           <h3>Hallazgos exploratorios registrados</h3>
           <span class="badge">EDA</span>
-                  </div>
+        </div>
         <p class="prose">El documento analiza las distribuciones de primas y siniestros, la concentración geográfica, las relaciones entre variables y la evolución anual de 2018 a 2025. Los siguientes resultados describen la muestra sintética utilizada.</p>
+
+        <h3 class="sub-title" style="margin-top:32px;">El pulso del negocio (análisis univariado)</h3>
+        <p class="prose" style="margin-top:10px;">Se usaron histogramas, diagramas de caja y un gráfico de frecuencias por código postal para examinar la forma de las distribuciones, evaluar visualmente su compatibilidad con una distribución normal e identificar observaciones potencialmente atípicas que podrían influir en el índice regional.</p>
         <div class="result-grid" style="margin-top:24px;">
           <article class="result-card">
             <h3>1. Distribución de primas y siniestros</h3>
-            <p>Las primas se distribuyen aproximadamente de forma uniforme, con importes cercanos a €0–€5.000 y una mediana aproximada de €2.500. No se observan valores atípicos evidentes en el diagrama de caja descrito.</p>
-            <p>Los siniestros muestran una fuerte asimetría positiva: predominan importes cercanos a cero, pero hay casos que se aproximan a €500.000. Los posibles valores atípicos deben investigarse y no eliminarse automáticamente.</p>
+            <p>Las primas se distribuyen de forma aproximadamente uniforme, con importes entre cerca de €0 y €5.000 y una mediana de unos €2.500. El diagrama de caja no muestra valores atípicos visibles y, aunque es aproximadamente simétrica, la distribución no tiene forma de campana.</p>
+            <p>Los siniestros muestran una fuerte asimetría positiva: predominan importes cercanos a cero, hay montos que se aproximan a €500.000 y el diagrama de caja señala numerosas observaciones potencialmente atípicas. El documento indica que más del 95 % de la base se concentra en cero o montos ínfimos. Esos casos deben verificarse y no eliminarse automáticamente, porque pueden ser siniestros legítimos que explican parte importante del costo.</p>
           </article>
           <article class="result-card">
             <h3>2. Concentración geográfica</h3>
-            <p>Los códigos postales 20038 y 10178 concentran gran parte de los registros, mientras que otras ubicaciones tienen una representación reducida. En regiones con pocas pólizas, un solo siniestro elevado puede alterar notablemente el índice.</p>
-            <p>El documento también reporta índices aproximados de 6.800 % para el código 9366 y 5.300 % para el 42551. Deben interpretarse con cautela por el bajo volumen de registros y por las limitaciones de las ubicaciones reasignadas.</p>
-          </article>
-          <article class="result-card">
-            <h3>3. Prima frente a costo del siniestro</h3>
-            <p>La dispersión descrita no muestra una tendencia lineal clara: aparecen siniestros altos tanto en pólizas con primas bajas como altas. El gráfico incluye únicamente registros con siniestros positivos, por lo que no permite estimar la probabilidad de sufrir un siniestro ni concluir que las tarifas estén mal calculadas.</p>
-          </article>
-          <article class="result-card">
-            <h3>4. Satisfacción y riesgo de fuga</h3>
-            <p>El documento observa una tendencia descendente entre satisfacción y puntaje de riesgo de abandono. La intensidad de la relación debe cuantificarse; una gráfica por sí sola no demuestra causalidad ni que el abandono explique la siniestralidad.</p>
+            <p>Los códigos postales 20038 y 10178 concentran casi 500 pólizas cada uno, mientras que las otras 12 ubicaciones (como 42551 o 9648) tienen menos de 10 pólizas. En regiones con tan pocas pólizas, un solo siniestro elevado puede alterar notablemente el índice, por el menor volumen de primas.</p>
           </article>
         </div>
 
-        <h3 class="vars-title">Evolución temporal: 2018–2025</h3>
+        <h3 class="sub-title">Buscando culpables (análisis bivariado)</h3>
+        <p class="prose" style="margin-top:10px;">El cruce de variables permite confrontar las hipótesis del negocio con los datos operativos.</p>
+        <div class="result-grid" style="margin-top:24px;">
+          <article class="result-card">
+            <h3>3. Siniestros, primas y región</h3>
+            <p>Los códigos 9366 y 42551 presentan los índices más altos, de aproximadamente 6.800 % y 5.300 %: sus siniestros equivalen a unas 68 y 53 veces las primas registradas. Dado el bajo número de registros en esas zonas, una explicación posible es que un volumen reducido de primas combinado con siniestros elevados infle el índice. Deben interpretarse con cautela, también por las limitaciones de las ubicaciones reasignadas.</p>
+          </article>
+          <article class="result-card">
+            <h3>4. Prima frente a costo del siniestro</h3>
+            <p>La dispersión no muestra una tendencia lineal clara: aparecen siniestros altos tanto en pólizas con primas bajas como altas, lo que sugiere que la prima por sí sola explica poco la variación del costo. El gráfico incluye únicamente registros con siniestros positivos, por lo que no permite estimar la probabilidad de sufrir un siniestro ni concluir que las tarifas estén mal calculadas.</p>
+          </article>
+          <article class="result-card">
+            <h3>5. Satisfacción y riesgo de fuga</h3>
+            <p>Hay una tendencia descendente: a mayor satisfacción, menor puntaje de riesgo de abandono. La línea de tendencia tiene una pendiente ligera, casi horizontal, y su intensidad debe cuantificarse porque la escala vertical ampliada distorsiona la lectura. Además, los puntajes de satisfacción de la muestra se concentran en el rango bajo (0 a 5). El gráfico de segmentos muestra que predominan las categorías de riesgo medio y alto, pero no demuestra que el abandono explique la siniestralidad.</p>
+          </article>
+          <article class="result-card">
+            <h3>6. Matriz de correlación</h3>
+            <p>El documento describe correlaciones cercanas a cero, esperables en un dataset sintético, en tres relaciones: <code>risk_score</code> con <code>premium_amount_eur</code>, <code>age</code> con <code>claim_amount_eur</code>, y <code>customer_satisfaction_score</code> con <code>churn_risk_score</code>.</p>
+            <p>Estas ausencias de relación reflejan cómo se generaron los datos; no bastan para concluir que la aseguradora cobre sin evaluar el riesgo real de sus clientes.</p>
+          </article>
+        </div>
+
+        <h3 class="sub-title">La trampa del tiempo (evolución temporal 2018–2025)</h3>
         <div class="metric-strip">
           <div class="metric"><b>€69,24 M</b><span>Siniestros aproximados en 2023, el máximo anual descrito</span></div>
           <div class="metric"><b>2.772,64 %</b><span>Índice de siniestralidad reportado para 2023</span></div>
           <div class="metric"><b>−20,91 %</b><span>Reducción de siniestros entre 2023 y 2025 según el documento</span></div>
         </div>
         <div class="prose">
-          <p>En 2025, los siniestros bajan a aproximadamente €54,76 millones. Las primas se mantienen relativamente estables, entre €2,46 y €2,60 millones anuales. La agrupación anual no permite identificar estacionalidad; para evaluarla se necesitarían datos mensuales o trimestrales de varios años.</p>
+          <p>Los siniestros superan ampliamente las primas en todos los años observados. En 2025 bajan a aproximadamente €54,76 millones, mientras las primas se mantienen relativamente estables, entre €2,46 y €2,60 millones anuales; por eso la variación del índice se asocia principalmente con los cambios en los siniestros. La agrupación anual no permite identificar estacionalidad: para evaluarla se necesitarían datos mensuales o trimestrales de varios años.</p>
         </div>
+
+        <h3 class="sub-title">Destilación estratégica</h3>
+        <div class="result-grid" style="margin-top:20px;">
+          <article class="result-card wide">
+            <h3>Métrica estrella (North Star): Índice de Siniestralidad Global (%)</h3>
+            <p>Evalúa la salud financiera general del ramo de Vida: muestra qué porcentaje de los ingresos por primas se consume en pagar reclamos a nivel país. Debe presentarse junto con los importes absolutos y el período analizado para no interpretarlo de forma aislada.</p>
+          </article>
+          <article class="result-card">
+            <h3>KPIs de soporte</h3>
+            <ul>
+              <li><b>Índice de siniestralidad regional (%)</b>: identifica qué ubicaciones superan el umbral crítico de pérdida.</li>
+              <li><b>Volumen físico de pólizas por región</b> (<code>total_polizas</code>): muestra la concentración real del mercado y detecta zonas marginales.</li>
+              <li><b>Riesgo de fuga por segmento</b> (<code>churn_risk_score</code>): monitorea la probabilidad de abandono de los asegurados.</li>
+              <li><b>Sensibilidad al servicio</b> (<code>customer_satisfaction_score</code>): contrasta la satisfacción con el riesgo de abandono.</li>
+            </ul>
+          </article>
+          <article class="result-card">
+            <h3>Diagnóstico estadístico</h3>
+            <ul>
+              <li>La cartera no se reparte de forma equitativa entre las 14 ubicaciones: dos códigos postales reúnen casi todo el volumen.</li>
+              <li>Los siniestros se concentran en cero o montos mínimos, con unos pocos casos extremos.</li>
+              <li>La relación entre prima y siniestro es débil, y la satisfacción registrada se concentra en valores bajos.</li>
+              <li>Las correlaciones cercanas a cero son coherentes con una base sintética.</li>
+            </ul>
+          </article>
+        </div>
+
         <div class="callout teal">
           <h4>Precaución de interpretación</h4>
           <p>Los resultados se refieren a una base sintética y a códigos postales usados como aproximación territorial. El documento señala que las ubicaciones fueron reasignadas a partir del estado del cliente; por ello, no deben presentarse como municipios o domicilios verificados. Los índices extremos también requieren revisar la consistencia entre primas y siniestros antes de convertirlos en decisiones comerciales.</p>
@@ -667,73 +754,246 @@
     </div>
   </section>
 
+  <!-- ================= FASE 4: VISUALIZACIÓN Y HALLAZGOS CLAVE ================= -->
   <section id="fase4">
     <div class="wrap row">
-      <h2>Fase 4: Visualización<small>Diseño propuesto para comunicar los resultados</small></h2>
+      <h2>Fase 4: Visualización y hallazgos clave<small>Dashboard en Power BI — Resumen Ejecutivo, Deep-Dive Regional, Experiencia del Cliente, Conclusiones y Recomendaciones</small></h2>
       <div>
+        <div class="phase-header">
+          <h3>Dashboard de Seguros de Vida</h3>
+          <span class="badge">Power BI</span>
+        </div>
         <div class="prose">
-          <p>La visualización debe permitir que el equipo directivo lea primero el resultado global, después compare ubicaciones y finalmente investigue los segmentos que explican los valores observados. El documento identifica una métrica principal y KPIs de apoyo para el análisis.</p>
+          <p>El dashboard tiene cinco páginas: tres de análisis (financiero general, regional y experiencia del cliente) y dos de cierre (conclusiones y recomendaciones). Busca identificar desequilibrios entre siniestros y primas, reconocer los estados que requieren más atención y explorar señales relacionadas con la permanencia de los asegurados.</p>
         </div>
-        <div class="result-grid" style="margin-top:24px;">
-          <div class="viz-placeholder">
-            <strong>Resumen ejecutivo</strong>
-            <p>Tarjetas para el índice global de siniestralidad, el costo total de siniestros y el volumen total de primas. Mostrar período, moneda y filtros aplicados.</p>
-          </div>
-          <div class="viz-placeholder">
-            <strong>Comparación regional</strong>
-            <p>Gráfico de barras ordenado por índice regional, acompañado por número de pólizas, volumen de primas y monto de siniestros. Señalar las ubicaciones con muestras pequeñas.</p>
-          </div>
-          <div class="viz-placeholder">
-            <strong>Distribución y valores atípicos</strong>
-            <p>Histogramas y diagramas de caja para primas y siniestros. Los casos extremos se marcan para revisión, no se eliminan automáticamente.</p>
-          </div>
-          <div class="viz-placeholder">
-            <strong>Evolución 2018–2025</strong>
-            <p>Serie temporal de primas, siniestros e índice anual. La vista anual describe cambios interanuales, pero no sustituye un análisis de estacionalidad mensual o trimestral.</p>
-          </div>
+        <div class="metric-strip">
+          <div class="metric"><b>6.027</b><span>pólizas únicas, de 6.006 clientes, entre 2018 y 2025 (tarjeta: 6,03 mil)</span></div>
+          <div class="metric"><b>10</b><span>estados alemanes agrupados</span></div>
+          <div class="metric"><b>1239 %</b><span>Índice Siniestralidad Global (1.239,38 %)</span></div>
         </div>
+
+        <!-- ===== Página 1: Resumen Ejecutivo ===== -->
+        <h3 class="sub-title">Página 1. Resumen Ejecutivo</h3>
+        <div class="result-grid" style="margin-top:20px;">
+          <article class="result-card">
+            <span class="dash-tag">Tarjeta · Índice Siniestralidad Global %</span>
+            <h3>Índice global: 1239 %</h3>
+            <p>Resulta de dividir aproximadamente €188,92 millones en importes de liquidación asociados a siniestros pagados o aprobados entre €15,24 millones de primas registradas. Por cada euro de prima se contabilizan unos €12,39 en importes de liquidación incluidos en el cálculo.</p>
+            <p>Es una señal para revisar la suficiencia de las primas, los montos de los siniestros y la composición de la cartera. Como incluye registros aprobados además de pagados, no representa solo desembolsos realizados.</p>
+          </article>
+          <article class="result-card">
+            <span class="dash-tag">Gráfico de línea · Índice por año</span>
+            <h3>Evolución de la siniestralidad 2018–2025</h3>
+            <div class="headline"><b>Insolvencia Técnica Histórica</b><span>La siniestralidad se mantiene permanentemente arriba del 1.100 %, multiplicando las pérdidas sobre los ingresos.</span></div>
+            <div class="table-scroll">
+              <table class="data-table">
+                <thead><tr><th>Año</th><th>Índice (%)</th></tr></thead>
+                <tbody>
+                  <tr><td class="key">2018</td><td class="num">1.372,09</td></tr>
+                  <tr><td class="key">2019</td><td class="num">≈ 1.260 *</td></tr>
+                  <tr><td class="key">2020</td><td class="num">≈ 1.165 *</td></tr>
+                  <tr><td class="key">2021</td><td class="num">1.099,82</td></tr>
+                  <tr><td class="key">2022</td><td class="num">1.372,45</td></tr>
+                  <tr><td class="key">2023</td><td class="num">1.165,66</td></tr>
+                  <tr><td class="key">2024</td><td class="num">1.295,26</td></tr>
+                  <tr><td class="key">2025</td><td class="num">1.181,15</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="note-small">* Lectura aproximada del gráfico.</p>
+            <p>El índice baja hasta 2021, sube en 2022 y luego oscila; no hay una recuperación sostenida. La agrupación usa una fecha asociada a la póliza, por lo que no demuestra que los siniestros hayan ocurrido o se hayan pagado en ese año y no debe leerse como flujo financiero anual.</p>
+          </article>
+          <article class="result-card wide">
+            <span class="dash-tag">Barras horizontales · Índice por estado</span>
+            <h3>Comparación consolidada entre estados</h3>
+            <div class="headline"><b>Pérdidas Generalizadas</b><span>Hamburg y Baden-Württemberg.</span></div>
+            <p>El gráfico ordena los diez estados de mayor a menor índice: Hamburg, Baden-Württemberg, Niedersachsen, Berlin, Nordrhein-Westfalen, Sachsen, Hessen, Rheinland-Pfalz, Bayern y Brandenburg. La diferencia entre los extremos es de unos 269,49 puntos porcentuales y los diez estados presentan siniestros superiores a las primas consideradas.</p>
+            <div class="table-scroll">
+              <table class="data-table">
+                <thead><tr><th>Posición</th><th>Estado</th><th>Índice (%)</th></tr></thead>
+                <tbody>
+                  <tr><td class="num">1</td><td class="key">Hamburg</td><td class="num">1.387,48</td></tr>
+                  <tr><td class="num">2</td><td class="key">Baden-Württemberg</td><td class="num">1.362,33</td></tr>
+                  <tr><td class="num">3</td><td class="key">Niedersachsen</td><td class="num">1.342,60</td></tr>
+                  <tr><td class="num">4–8</td><td class="key">Berlin, Nordrhein-Westfalen, Sachsen, Hessen, Rheinland-Pfalz</td><td class="num">entre ambos extremos</td></tr>
+                  <tr><td class="num">9</td><td class="key">Bayern</td><td class="num">1.133,39</td></tr>
+                  <tr><td class="num">10</td><td class="key">Brandenburg</td><td class="num">1.117,99</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>El índice relativo no equivale al impacto monetario: Nordrhein-Westfalen acumula cerca de €29,82 millones en importes de liquidación incluidos y Sachsen cerca de €29,17 millones, frente a €17,21 millones de Hamburg. Además, Nordrhein-Westfalen, Sachsen y Bayern concentran aproximadamente el 46 % de la cartera, así que un índice alto no implica mayor participación comercial.</p>
+          </article>
+          <article class="result-card wide">
+            <span class="dash-tag">Barras verticales · Total Pólizas Vida por año</span>
+            <h3>Volumen de pólizas por año</h3>
+            <div class="headline"><b>Volumen de Cartera Estable</b><span>La colocación comercial se mantiene constante.</span></div>
+            <p>El número de pólizas oscila entre 706 y 805 registros anuales, con un promedio aproximado de 753: el máximo se presenta en 2022 y el mínimo en 2024. En 2025 se contabilizan 769, un aumento cercano al 8,9 % respecto del año anterior.</p>
+            <p>El conteo incluye pólizas activas, canceladas, vencidas y pendientes; representa el volumen registrado en cada agrupación temporal y no debe equipararse con cartera activa ni con nuevas ventas.</p>
+          </article>
+        </div>
+
+        <!-- ===== Página 2: Deep-Dive Regional ===== -->
+        <h3 class="sub-title">Página 2. Deep-Dive Regional</h3>
+        <div class="metric-strip">
+          <div class="metric"><b>1239 %</b><span>Nivel de Siniestralidad Operativa (sin filtro de estado)</span></div>
+          <div class="metric"><b>6,03 mil</b><span>Exposición Total de la Cartera (pólizas únicas)</span></div>
+          <div class="metric"><b>10</b><span>botones de filtro, uno por estado</span></div>
+        </div>
+        <div class="chips" aria-label="Filtro de estados del dashboard" style="margin-bottom:20px;">
+          <span class="chip">Baden-Württemberg</span>
+          <span class="chip">Bayern</span>
+          <span class="chip">Berlin</span>
+          <span class="chip">Brandenburg</span>
+          <span class="chip">Hamburg</span>
+          <span class="chip">Hessen</span>
+          <span class="chip">Niedersachsen</span>
+          <span class="chip">Nordrhein-Westfalen</span>
+          <span class="chip">Rheinland-Pfalz</span>
+          <span class="chip">Sachsen</span>
+        </div>
+        <div class="result-grid">
+          <article class="result-card">
+            <span class="dash-tag">Barras rojas · Índice Siniestralidad Regional % por año</span>
+            <h3>Siniestralidad regional por año</h3>
+            <div class="headline"><b>Déficit Técnico Estructural</b><span>La siniestralidad regional supera el 1,100 % anual en todo el histórico.</span></div>
+            <p>La medida usa la misma fórmula que la global; solo cambia el contexto de filtrado. Cuando se seleccionan varios estados, el resultado divide sus importes acumulados de siniestros entre sus primas acumuladas, no promedia porcentajes regionales.</p>
+          </article>
+          <article class="result-card">
+            <span class="dash-tag">Barras azules · Total Pólizas Vida por año</span>
+            <h3>Captación comercial por año</h3>
+            <div class="headline"><b>Estabilidad en la Captación Comercial</b><span>Se consolida en un promedio constante de 750 unidades anuales.</span></div>
+            <p>La tarjeta «Exposición Total de la Cartera» muestra un conteo de pólizas únicas: dimensiona el grupo analizado, pero no cuantifica exposición monetaria ni la duración de las coberturas. En agrupaciones pequeñas, uno o pocos siniestros grandes pueden modificar mucho el resultado.</p>
+          </article>
+          <article class="result-card wide">
+            <h3>Variación por estado y año</h3>
+            <p>Con el filtro por estado se ve que el resultado consolidado puede ocultar cambios importantes.</p>
+            <div class="table-scroll">
+              <table class="data-table">
+                <thead><tr><th>Estado</th><th>Cambio del índice (%)</th><th>Pólizas</th></tr></thead>
+                <tbody>
+                  <tr><td class="key">Hamburg</td><td class="num">2.209,8 (2018) → 1.283,0 (2025)</td><td>—</td></tr>
+                  <tr><td class="key">Baden-Württemberg</td><td class="num">1.974,4 (2022) → 634,3 (2025)</td><td class="num">50 → 56</td></tr>
+                  <tr><td class="key">Berlin</td><td class="num">393,3 (2023) → 1.864,2 (2025)</td><td class="num">50 → 58</td></tr>
+                  <tr><td class="key">Sachsen</td><td class="num">2.378,8 (2022) → 637,0 (2025)</td><td>—</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Por eso la identificación de estados prioritarios debe considerar territorio y período a la vez.</p>
+          </article>
+        </div>
+
+        <!-- ===== Página 3: Experiencia del Cliente ===== -->
+        <h3 class="sub-title">Página 3. Experiencia del Cliente</h3>
+        <div class="metric-strip">
+          <div class="metric"><b>0,47</b><span>Probabilidad Media de Abandono (Churn); promedio exacto 0,4732</span></div>
+          <div class="metric"><b>1,55</b><span>Indicador de Experiencia del Cliente (incluye ceros sin respuesta)</span></div>
+          <div class="metric"><b>48,23 %</b><span>registros sin respuesta de satisfacción (2.907 de 6.027)</span></div>
+        </div>
+        <div class="result-grid">
+          <article class="result-card">
+            <span class="dash-tag">Gráfico de anillo · Segmentos de riesgo de fuga</span>
+            <h3>Distribución de los segmentos de fuga</h3>
+            <div class="headline"><b>Cartera Altamente Comprometida</b><span>80 % de las pólizas de Vida se concentran en segmentos de riesgo de fuga Alto y Medio.</span></div>
+            <div class="table-scroll">
+              <table class="data-table">
+                <thead><tr><th>Segmento</th><th>Anillo (%)</th></tr></thead>
+                <tbody>
+                  <tr><td class="key">Alto</td><td class="num">44,71</td></tr>
+                  <tr><td class="key">Medio</td><td class="num">35,47</td></tr>
+                  <tr><td class="key">Crítico</td><td class="num">13</td></tr>
+                  <tr><td class="key">Bajo</td><td class="num">6,82</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="reading"><b>Lectura:</b> el anillo se construye con la suma del puntaje de fuga por segmento, no con el conteo de pólizas. Medido en pólizas, alto y medio reúnen el 76,19 % y alto y crítico el 43,69 %.</p>
+          </article>
+          <article class="result-card">
+            <span class="dash-tag">Dispersión · Satisfacción al servicio frente a riesgo de fuga</span>
+            <h3>Satisfacción y riesgo de fuga</h3>
+            <div class="headline"><b>Independencia del Churn</b><span>El riesgo de abandono del cliente se distribuye de forma homogénea.</span></div>
+            <p>Entre los registros con respuestas válidas, el puntaje medio baja de 0,5113 con satisfacción uno a 0,2583 con satisfacción cinco, y los puntos del segmento crítico aparecen solo en los niveles bajos de satisfacción. Los registros sin respuesta (valor 0) tienen un puntaje medio de 0,5687, superior al promedio general.</p>
+            <p class="reading"><b>Lectura:</b> el gráfico muestra una asociación negativa, no una distribución homogénea. El grupo sin respuesta requiere análisis separado y no debe considerarse automáticamente insatisfecho.</p>
+          </article>
+          <article class="result-card">
+            <h3>Puntaje promedio de riesgo de fuga</h3>
+            <p>El promedio de <code>churn_risk_score</code> resume un puntaje ya incorporado en la base; no es una tasa observada de abandono. Entre años varía poco (aprox. 0,4673 a 0,4783) y por estado va de 0,4599 en Bayern a 0,4896 en Hessen. Un promedio similar puede ocultar composiciones distintas, por lo que se complementa con el análisis de segmentos.</p>
+          </article>
+          <article class="result-card">
+            <h3>Satisfacción y cobertura de las respuestas</h3>
+            <p>La tarjeta muestra 1,55 porque incluye valores cero, que según la definición del proyecto equivalen a ausencia de respuesta. Hay 2.907 registros sin respuesta y 3.120 con calificaciones válidas de uno a cinco; al excluir los ceros, la media es de aproximadamente 3 sobre 5.</p>
+            <p>El 1,55 no permite afirmar que quienes respondieron estén en ese nivel de satisfacción. La falta de respuesta limita la representatividad del promedio y no es, por sí sola, evidencia de insatisfacción.</p>
+          </article>
+        </div>
+
         <div class="callout">
-          <h4>Nota sobre el entregable</h4>
-          <p>El PDF contiene los encabezados de las fases de visualización y presentación ejecutiva, pero no incluye en el texto extraído una descripción legible de los gráficos de esas páginas. Los bloques anteriores son una organización sugerida a partir de los indicadores y hallazgos descritos, no una transcripción de gráficos ya documentados.</p>
+          <h4>Notas para leer los titulares del dashboard</h4>
+          <ul>
+            <li><b>«Arriba del 1.100 %».</b> El valor de 2021 es 1.099,82 %, prácticamente en el umbral y no estrictamente por encima.</li>
+            <li><b>«80 % de las pólizas».</b> El 80 % sale de sumar puntajes por segmento (44,71 % + 35,47 %); por conteo de pólizas, alto y medio reúnen el 76,19 %.</li>
+            <li><b>«Independencia del churn».</b> El gráfico y los promedios por nivel de satisfacción muestran una asociación negativa entre ambas variables.</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ================= FASE 5: CONCLUSIONES Y RECOMENDACIONES ================= -->
   <section id="fase5">
     <div class="wrap row">
-      <h2>Fase 5: Presentación ejecutiva<small>Lectura para la toma de decisiones</small></h2>
+      <h2>Fase 5: Conclusiones y recomendaciones<small>Páginas finales del dashboard y lectura estratégica</small></h2>
       <div>
-        <div class="prose">
-          <p>La métrica principal propuesta es el Índice de Siniestralidad Global (%), que compara el monto de los siniestros con las primas del período. Debe presentarse junto con los importes absolutos y el período analizado para evitar interpretar el porcentaje de forma aislada.</p>
+        <h3 class="sub-title">Página 4. Conclusiones</h3>
+        <div class="result-grid" style="margin-top:20px;">
+          <article class="result-card">
+            <h3>Insolvencia Técnica Estructural</h3>
+            <p>La operación presenta un Índice de Siniestralidad Global consolidado del 1239 %. Históricamente, la curva de siniestros duplica y triplica permanentemente a los ingresos.</p>
+            <p class="reading"><b>Lectura:</b> un índice de 1.239 % equivale a unas 12,4 veces las primas, bastante más que «duplicar y triplicar». Incluye importes aprobados y proviene de datos sintéticos, por lo que es una alerta a validar y no un diagnóstico de insolvencia.</p>
+          </article>
+          <article class="result-card">
+            <h3>Concentración y Vulnerabilidad Geográfica</h3>
+            <p>Existe un duopolio comercial absoluto en la cartera. Los estados de Hamburgo y Berlín concentran la mayor parte de las pólizas activas, dejando a las 8 regiones restantes con una participación marginal que las expone a una volatilidad financiera extrema ante cualquier reclamo de alta severidad.</p>
+            <p class="reading"><b>Lectura:</b> el análisis por código postal muestra dos ubicaciones con casi todo el volumen, pero el dashboard por estado no muestra pólizas por estado, y el análisis por estado ubica a Nordrhein-Westfalen, Sachsen y Bayern con cerca del 46 % de la cartera. Conviene verificar esta afirmación antes de presentarla.</p>
+          </article>
+          <article class="result-card">
+            <h3>Tarifas Desvinculadas del Riesgo</h3>
+            <p>El análisis de dispersión evidencia que los siniestros de severidad extrema (picos de hasta €500,000) ocurren de manera aleatoria, afectando con la misma probabilidad a pólizas de bajo costo que a las de alta facturación. Las primas comerciales actuales no reflejan el riesgo real del asegurado.</p>
+            <p class="reading"><b>Lectura:</b> el gráfico incluye solo siniestros positivos, así que no permite hablar de probabilidad, y las correlaciones cercanas a cero reflejan cómo se generó la base sintética. Es un motivo para revisar tarifas, no una prueba de que estén mal calculadas.</p>
+          </article>
+          <article class="result-card">
+            <h3>Riesgo de Fuga Inminente</h3>
+            <p>El segmento de riesgo «Alto» lidera el volumen de la cartera activa. Además, se comprobó estadísticamente que el riesgo de abandono del cliente (Churn) es independiente de sus niveles de satisfacción actuales, lo que exige una estrategia de retención proactiva e inmediata.</p>
+            <p class="reading"><b>Lectura:</b> el segmento alto es el mayor en el anillo, pero el análisis no muestra una prueba de independencia y los promedios por nivel de satisfacción indican una asociación negativa. La retención sigue siendo razonable, apoyada en que el 43,69 % de las pólizas está en riesgo alto o crítico.</p>
+          </article>
         </div>
-        <div class="result-grid" style="margin-top:24px;">
+
+        <h3 class="sub-title">Página 5. Recomendaciones</h3>
+        <div class="result-grid" style="margin-top:20px;">
           <article class="result-card">
-            <h3>Mensaje principal</h3>
-            <p>La muestra presenta diferencias marcadas entre códigos postales y una concentración importante de pólizas en 20038 y 10178. Los índices muy elevados de 9366 y 42551 merecen una auditoría de los importes y del volumen de primas antes de tomar decisiones.</p>
+            <h3>1. Validar la siniestralidad</h3>
+            <p><b>En el dashboard:</b> verificar períodos de primas y separar siniestros pagados de aprobados.</p>
+            <p>Las áreas financiera y actuarial deben comprobar que primas y siniestros correspondan a períodos comparables antes de modificar tarifas. El índice de 1.239,38 % es una alerta importante, pero requiere esta revisión para sustentar decisiones confiables.</p>
           </article>
           <article class="result-card">
-            <h3>KPIs de apoyo</h3>
-            <ul>
-              <li>Índice de siniestralidad regional (%).</li>
-              <li>Volumen de pólizas por ubicación.</li>
-              <li>Riesgo de fuga por segmento (<code>churn_risk_score</code>).</li>
-              <li>Sensibilidad al servicio mediante <code>customer_satisfaction_score</code>.</li>
-            </ul>
+            <h3>2. Priorizar regiones</h3>
+            <p><b>En el dashboard:</b> intervenir según siniestralidad, impacto monetario y evolución anual.</p>
+            <p>Hamburg, Baden-Württemberg y Niedersachsen destacan por sus índices; Nordrhein-Westfalen y Sachsen, por los montos involucrados. Las prioridades deben actualizarse por año, porque el comportamiento de un estado cambia entre períodos.</p>
           </article>
           <article class="result-card">
-            <h3>Acciones recomendadas para validar</h3>
-            <ul>
-              <li>Revisar los registros que producen índices regionales extremos y confirmar que primas y siniestros usan la misma base temporal y monetaria.</li>
-              <li>Documentar las ubicaciones originales, las reasignadas y la regla aplicada.</li>
-              <li>Mostrar siempre el tamaño de la muestra junto al porcentaje regional.</li>
-              <li>Cuantificar las asociaciones entre satisfacción y riesgo de fuga antes de extraer conclusiones.</li>
-            </ul>
+            <h3>3. Revisar tarifas y suscripción</h3>
+            <p><b>En el dashboard:</b> ajustar condiciones con respaldo actuarial y evaluar la sostenibilidad de la cartera.</p>
+            <p>Una vez validados los indicadores, hay que revisar la suficiencia de las primas y los criterios de suscripción por grupos de pólizas, y complementar las metas comerciales con indicadores de renovación y sostenibilidad. Un número de pólizas estable con siniestralidad elevada muestra que mantener el volumen no garantiza el equilibrio de la cartera.</p>
           </article>
           <article class="result-card">
-            <h3>Limitaciones para comunicar</h3>
-            <p>La disminución del 20 % en el servicio de pólizas es un antecedente del caso académico, no un resultado probado por este análisis. Los datos son sintéticos; no permiten concluir directamente sobre aseguradoras reales ni sobre el riesgo efectivo de la población alemana. Las asociaciones estadísticas no demuestran causalidad.</p>
+            <h3>4. Retener clientes prioritarios</h3>
+            <p><b>En el dashboard:</b> contactar asegurados vigentes con riesgo alto o crítico próximos a renovar.</p>
+            <p>Estos segmentos representan el 43,69 % de las pólizas de la base, por lo que conviene identificar las oportunidades reales de intervención y ofrecer atención según las necesidades de cada cliente. La eficacia debe medirse con renovaciones y cancelaciones observadas.</p>
           </article>
+        </div>
+
+        <div class="callout" style="margin-top:28px;">
+          <h4>Limitaciones para comunicar</h4>
+          <p>La disminución del 20 % en el servicio de pólizas es un antecedente del caso académico, no un resultado probado por este análisis. Los datos son sintéticos; no permiten concluir directamente sobre aseguradoras reales ni sobre el riesgo efectivo de la población alemana. Las asociaciones estadísticas no demuestran causalidad.</p>
+          <p>Las fases 3 y 4 trabajan con bases y cortes distintos (tabla maestra de 6.512 filas frente a 6.027 pólizas únicas del dashboard), por lo que sus cifras absolutas no son directamente comparables.</p>
         </div>
       </div>
     </div>
@@ -744,15 +1004,15 @@
       <h2>Bibliografía<small>Fuentes citadas en el documento</small></h2>
       <div class="prose bibliography">
         <ul>
-          <li>danielsowah123. (2026). <em>Insurance</em> [Data set]. Kaggle. <a href="https://www.kaggle.com/datasets/danielsowah123/insurance" target="_blank" rel="noopener">https://www.kaggle.com/datasets/danielsowah123/insurance</a></li>
           <li>ajaypatil047. (2025). <em>German municipalities (with districts &amp; more)</em> [Data set]. Kaggle. <a href="https://www.kaggle.com/datasets/ajaypatil047/germany-municipalities-and-districts" target="_blank" rel="noopener">https://www.kaggle.com/datasets/ajaypatil047/germany-municipalities-and-districts</a></li>
-          <li>Government Data Quality Hub. (2020). <em>The Government Data Quality Framework</em>.</li>
-          <li>IBM. (s. f.-a, s. f.-b). Materiales de referencia sobre la metodología CRISP-DM.</li>
-          <li>pandas development team. (s. f.-a, s. f.-b). Documentación de pandas sobre uniones de tablas y valores faltantes.</li>
-          <li>Statistisches Bundesamt (Destatis). (s. f.). Información territorial y sistema GV-ISys.</li>
-          <li>Werner, G. y Modlin, C. (2016). Referencia sobre fundamentos de medición de primas y siniestros citada en el marco teórico.</li>
+          <li>danielsowah123. (2026). <em>Insurance</em> [Data set]. Kaggle. <a href="https://www.kaggle.com/datasets/danielsowah123/insurance" target="_blank" rel="noopener">https://www.kaggle.com/datasets/danielsowah123/insurance</a></li>
+          <li>Government Data Quality Hub. (2020, 3 de diciembre). <em>The Government Data Quality Framework</em>. GOV.UK. <a href="https://www.gov.uk/government/publications/the-government-data-quality-framework/the-government-data-quality-framework" target="_blank" rel="noopener">https://www.gov.uk/government/publications/the-government-data-quality-framework/the-government-data-quality-framework</a></li>
+          <li>Microsoft. (s. f.). <em>What is Power BI?</em> Microsoft Learn. <a href="https://learn.microsoft.com/en-us/power-bi/fundamentals/power-bi-overview" target="_blank" rel="noopener">https://learn.microsoft.com/en-us/power-bi/fundamentals/power-bi-overview</a></li>
+          <li>National Institute of Standards and Technology. (s. f.). <em>1.1.1. What is EDA?</em> En <em>NIST/SEMATECH e-Handbook of Statistical Methods</em>. <a href="https://www.itl.nist.gov/div898/handbook/eda/section1/eda11.htm" target="_blank" rel="noopener">https://www.itl.nist.gov/div898/handbook/eda/section1/eda11.htm</a></li>
+          <li>O’Brien, K., &amp; Downie, A. (s. f.). <em>What is customer churn?</em> IBM. <a href="https://www.ibm.com/think/topics/customer-churn" target="_blank" rel="noopener">https://www.ibm.com/think/topics/customer-churn</a></li>
+          <li>Werner, G., &amp; Modlin, C. (2016). <em>Basic ratemaking</em> (5.ª ed.). Casualty Actuarial Society. <a href="https://www.casact.org/sites/default/files/2021-03/5_complete_textref.pdf" target="_blank" rel="noopener">https://www.casact.org/sites/default/files/2021-03/5_complete_textref.pdf</a></li>
         </ul>
-        <p class="note-small">Nota: el PDF proporcionado muestra únicamente las dos referencias de Kaggle en su bibliografía final. Las demás fuentes aparecen citadas en el marco teórico; sus datos bibliográficos completos no están especificados en la página de bibliografía extraída.</p>
+        <p class="note-small">Nota: IBM (s. f.-a, s. f.-b), pandas development team (s. f.-a, s. f.-b) y Statistisches Bundesamt (s. f.) están citados en el marco teórico, pero sus datos completos no aparecen en la bibliografía del Word; conviene agregarlos allí antes de la entrega.</p>
       </div>
     </div>
   </section>
@@ -762,7 +1022,7 @@
       <h2>Equipo consultor<small>VMHS Data Analisis S.A</small></h2>
       <div class="team-grid">
         <div class="member"><div class="avatar" aria-hidden="true">SR</div><div><b>Sebastián Rojas Artavia</b><span>Data Engineer</span></div></div>
-        <div class="member"><div class="avatar" aria-hidden="true">VH</div><div><b>Verónica Hernández Solís</b><span>Data Analyst</span></div></div>
+        <div class="member"><div class="avatar" aria-hidden="true">VH</div><div><b>Verónica María Hernández Solís</b><span>Data Analyst</span></div></div>
         <div class="member"><div class="avatar" aria-hidden="true">HS</div><div><b>Hazel Salazar Barboza</b><span>Data Analyst</span></div></div>
         <div class="member"><div class="avatar" aria-hidden="true">MV</div><div><b>Mercedes Vásquez Espinoza</b><span>Business Translator</span></div></div>
       </div>
@@ -774,7 +1034,7 @@
 <footer>
   <div class="wrap">
     <span>Instituto Técnico INCOEX · Ciencia de Análisis de Datos · Módulo 6 · Sede San José · Grupo 05 · Prof. Byron Vargas · Octubre 2026</span>
-    <span>Proyecto integrador — Fases 1–5: definición del negocio, preparación, análisis exploratorio, visualización y presentación ejecutiva</span>
+    <span>Proyecto integrador — Fases 1–5: definición del negocio, preparación, análisis exploratorio, visualización y hallazgos clave, conclusiones y recomendaciones estratégicas</span>
   </div>
 </footer>
 
