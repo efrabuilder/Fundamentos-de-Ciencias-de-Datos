@@ -14,14 +14,14 @@
 
     --mod-accent:#4f46e5; /* color del módulo (cambia por módulo) */
 
-    /* Colores de cada recurso (el color va con el recurso, no con su posición) */
-    --r1:var(--mod-accent); --r1-soft:#eef2ff; /* Del Dataset al KPI: mismo color del título del módulo */
+    /* Colores de cada recurso (el primero de la lista usa el color del título del módulo) */
+    --r7:var(--mod-accent); --r7-soft:#eef2ff; /* Guía de Construcción de Proyecto: mismo color del título del módulo */
+    --r1:#059669; --r1-soft:#ecfdf5;           /* Del Dataset al KPI */
     --r2:#0d9488; --r2-soft:#f0fdfa;           /* Alcance del Proyecto */
     --r3:#d97706; --r3-soft:#fffbeb;           /* Pandas Cheat Sheet */
     --r4:#e11d48; --r4-soft:#fff1f2;           /* Del Dato Limpio al Reporte Final */
     --r5:#0284c7; --r5-soft:#f0f9ff;           /* De Limpiadores a Traductores de Negocio */
     --r6:#7c3aed; --r6-soft:#f5f3ff;           /* Quiz Teórico-Práctico */
-    --r7:#059669; --r7-soft:#ecfdf5;           /* Guía de Construcción de Proyecto */
     --r8:#c026d3; --r8-soft:#fdf4ff;           /* Diseño de Dashboards y Buenas Prácticas en Power BI */
     --r9:#65a30d; --r9-soft:#f7fee7;           /* Dashboard del Proyecto (PDF y PBIX) */
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
@@ -168,7 +168,7 @@
   .nb-out pre{background:#f1f5f9;padding:10px 12px;border-radius:8px;font-family:var(--mono);font-size:12px;overflow-x:auto;}
   .nb-out img{max-width:100%;border-radius:8px;}
 
-  .subgroup-title{margin:22px 0 10px;font-size:13.5px;font-weight:700;color:var(--r1);padding-bottom:6px;border-bottom:1px dashed var(--border);}
+  .subgroup-title{margin:22px 0 10px;font-size:13.5px;font-weight:700;color:var(--mod-accent);padding-bottom:6px;border-bottom:1px dashed var(--border);}
 
   .empty-state{display:flex;flex-direction:column;align-items:center;gap:10px;padding:70px 20px;text-align:center;color:var(--ink-soft);}
   .empty-state .icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;background:var(--r1-soft);color:var(--r1);}
