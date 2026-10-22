@@ -164,25 +164,34 @@
 </header>
 <nav>
   <button class="tab active" id="tab-r1" data-target="panel-r1">
-    <span class="dot"></span> Recursos
+    <span class="dot"></span> Habilidades Socioemocionales
   </button>
 </nav>
 <main>
-  <!-- ===================== PANEL 1: Recursos ===================== -->
+  <!-- ===================== PANEL 1: Habilidades Socioemocionales ===================== -->
   <section class="panel active" id="panel-r1">
     <div class="panel-head">
       <div>
-        <h2>Recursos</h2>
-        <div class="sub">Materiales del módulo — se irán agregando a medida que avance el curso</div>
+        <h2>Habilidades Socioemocionales y Valores Humanos</h2>
+        <div class="sub">Emociones, inteligencia emocional, habilidades socioemocionales y valores humanos</div>
       </div>
     </div>
 
     <div class="card">
-      <div class="viewer">
+      <div class="card-label">Habilidades Socioemocionales y Valores Humanos</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-habilidades"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <label class="btn" for="file-habilidades">Cargar manualmente</label>
+          <input type="file" id="file-habilidades">
+          <a class="btn" id="download-habilidades" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer" id="viewer-habilidades">
         <div class="empty-state">
-          <div class="icon">＋</div>
-          <strong>Aún no hay recursos publicados</strong>
-          <span>Este módulo todavía no ha iniciado. Los materiales, ejercicios y entregables se agregarán aquí conforme se vayan completando.</span>
+          <div class="icon">⏳</div>
+          <strong>Cargando recurso…</strong>
+          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
         </div>
       </div>
     </div>
@@ -448,9 +457,9 @@
     });
   }
   // ---------- Recursos del Módulo 7 ----------
-  // Aún no hay recursos publicados. Cuando se agreguen, seguir el mismo
-  // patrón usado en Módulo 4/5/6: crear la tarjeta (card) correspondiente en el
-  // panel, y llamar a setupResource(id, "ruta/al/archivo") o
+  setupResource('habilidades', 'HabilidadesSocioemocionales/habilidades_socioemocionales.html');
+  // Para agregar más recursos: crear la tarjeta (card) en el panel y llamar a
+  // setupResource(id, "ruta/al/archivo") o
   // setupResourceHtml(id, "ruta/preview.html", "ruta/descarga.ext").
 </script>
 </body>
