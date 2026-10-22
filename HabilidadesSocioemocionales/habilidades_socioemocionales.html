@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Módulo 7 · Emociones, habilidades socioemocionales y valores humanos</title>
+<style>
+:root{
+  --bg:#f5f7f6; --surface:#ffffff; --ink:#1c2b2a; --muted:#51635f;
+  --line:#d3dcd9; --accent:#1f6f68; --accent-soft:#e1f0ee;
+  --warm:#b4532a; --warm-soft:#f8e9e1;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#121a19; --surface:#1a2524; --ink:#e6eeec; --muted:#9db0ac;
+    --line:#2c3b39; --accent:#6cc4ba; --accent-soft:#1d3532;
+    --warm:#e8946b; --warm-soft:#33241d;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121a19; --surface:#1a2524; --ink:#e6eeec; --muted:#9db0ac;
+  --line:#2c3b39; --accent:#6cc4ba; --accent-soft:#1d3532;
+  --warm:#e8946b; --warm-soft:#33241d;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.65;font-size:17px}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+header{padding:56px 0 32px;border-bottom:1px solid var(--line)}
+header p.kicker{margin:0 0 8px;color:var(--accent);font-weight:600}
+h1{font-family:var(--serif);font-size:clamp(2rem,5vw,3.1rem);line-height:1.15;margin:0 0 16px;font-weight:700}
+header p.lead{max-width:62ch;color:var(--muted);margin:0 0 20px;font-size:1.05rem}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.toc a{padding:6px 14px;border:1px solid var(--line);border-radius:999px;color:var(--ink);text-decoration:none;font-size:.92rem;background:var(--surface)}
+.toc a:hover,.toc a:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
+section{padding:44px 0 8px}
+h2{font-family:var(--serif);font-size:1.7rem;margin:0 0 14px;line-height:1.25}
+h3{font-size:1.1rem;margin:0 0 6px}
+p{margin:0 0 14px;max-width:68ch}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+.box.basic{border-left:5px solid var(--accent)}
+.box.complex{border-left:5px solid var(--warm)}
+.box p{margin:0 0 8px}
+.box p:last-child{margin:0}
+.tag{display:inline-block;font-size:.88rem;padding:2px 10px;border-radius:6px;background:var(--accent-soft);color:var(--accent);margin:0 6px 6px 0}
+.box.complex .tag{background:var(--warm-soft);color:var(--warm)}
+.callout{background:var(--accent-soft);border-radius:10px;padding:16px 20px;margin:18px 0;max-width:68ch}
+.callout p{margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 18px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 16px;border-radius:8px;cursor:pointer;font:inherit;font-size:.95rem}
+.chip:hover{border-color:var(--accent)}
+.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.chip[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .chip[aria-selected="true"]{color:#0d1716}}
+:root[data-theme="dark"] .chip[aria-selected="true"]{color:#0d1716}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 22px;max-width:68ch}
+.panel h3{margin-top:0}
+.panel p:last-child{margin:0}
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:0;margin:0 0 10px;max-width:68ch}
+summary{cursor:pointer;padding:14px 18px;font-weight:600;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";float:right;color:var(--accent);font-size:1.2rem;line-height:1}
+details[open] summary::after{content:"–"}
+summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:10px}
+details .body{padding:0 18px 14px;color:var(--muted)}
+details .body p{margin:0}
+.table-scroll{overflow-x:auto;margin:18px 0}
+table{border-collapse:collapse;width:100%;min-width:560px;background:var(--surface)}
+th,td{border:1px solid var(--line);padding:10px 14px;text-align:left;vertical-align:top;font-size:.95rem}
+th{background:var(--accent-soft);color:var(--ink)}
+.video{background:var(--warm-soft);border-radius:10px;padding:16px 20px;margin:18px 0;max-width:68ch}
+.video p{margin:0}
+footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:.92rem}
+.theme{position:absolute;top:14px;right:16px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer;font:inherit;font-size:.88rem}
+.theme:focus-visible{outline:2px solid var(--accent)}
+@media (max-width:640px){.pair{grid-template-columns:1fr}body{font-size:16px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<button class="theme" id="themeBtn" type="button" aria-label="Cambiar entre tema claro y oscuro">Tema</button>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">Módulo 7</p>
+    <h1>Emociones, habilidades socioemocionales y valores humanos</h1>
+    <p class="lead">Un recorrido breve: qué son las emociones, cómo influyen en la conducta, cómo se desarrolla la inteligencia emocional y de qué manera las habilidades socioemocionales sostienen los valores humanos.</p>
+    <nav class="toc" aria-label="Contenido">
+      <a href="#emociones">Las emociones</a>
+      <a href="#conducta">Emoción y conducta</a>
+      <a href="#ie">Inteligencia emocional</a>
+      <a href="#manejo">Validación y manejo</a>
+      <a href="#habilidades">Habilidades socioemocionales</a>
+      <a href="#valores">Valores humanos</a>
+      <a href="#relacion">Cómo se relacionan</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section id="emociones">
+  <h2>Las emociones y sus tipos</h2>
+  <p>Las emociones son reacciones psicofisiológicas que se activan ante estímulos internos o externos. Modulan cómo interpretamos, percibimos y respondemos al entorno. Tienen una base biológica, pero la cultura y la sociedad también las moldean. Su función principal es ayudarnos a adaptarnos: protegernos, buscar bienestar e interactuar con otros.</p>
+  <div class="pair">
+    <div class="box basic">
+      <h3>Emociones básicas</h3>
+      <p>Universales y compartidas por todas las culturas. Se vinculan con respuestas instintivas y de supervivencia.</p>
+      <span class="tag">Alegría</span><span class="tag">Tristeza</span><span class="tag">Miedo</span><span class="tag">Ira</span><span class="tag">Asco</span><span class="tag">Sorpresa</span>
+    </div>
+    <div class="box complex">
+      <h3>Emociones complejas</h3>
+      <p>Surgen de la combinación de emociones básicas y dependen del contexto social y cultural.</p>
+      <span class="tag">Culpa</span><span class="tag">Vergüenza</span><span class="tag">Orgullo</span><span class="tag">Envidia</span><span class="tag">Amor</span>
+    </div>
+  </div>
+</section>
+
+<section id="conducta">
+  <h2>Las emociones y la conducta</h2>
+  <p>Las emociones son uno de los motores principales de la conducta. Determinan cómo percibimos las situaciones y cómo reaccionamos, e influyen en nuestras decisiones y relaciones. El miedo, por ejemplo, puede provocar huida o enfrentamiento; la alegría promueve el acercamiento y la conexión social.</p>
+  <div class="callout">
+    <p>Si las emociones no se gestionan bien, pueden derivar en conductas impulsivas o disfuncionales. Reconocerlas y manejarlas de forma consciente permite respuestas más adaptativas y constructivas.</p>
+  </div>
+</section>
+
+<section id="ie">
+  <h2>Inteligencia emocional</h2>
+  <p>La inteligencia emocional (IE) es la capacidad de identificar, comprender, regular y expresar las emociones de manera adecuada, en uno mismo y en los demás. El concepto fue popularizado por Daniel Goleman, quien la divide en cinco competencias. Selecciona una para ver su descripción.</p>
+  <div class="chips" role="tablist" aria-label="Competencias de la inteligencia emocional" id="ieTabs">
+    <button class="chip" role="tab" aria-selected="true" data-i="0" type="button">Autoconciencia</button>
+    <button class="chip" role="tab" aria-selected="false" data-i="1" type="button">Autorregulación</button>
+    <button class="chip" role="tab" aria-selected="false" data-i="2" type="button">Automotivación</button>
+    <button class="chip" role="tab" aria-selected="false" data-i="3" type="button">Empatía</button>
+    <button class="chip" role="tab" aria-selected="false" data-i="4" type="button">Habilidades sociales</button>
+  </div>
+  <div class="panel" role="tabpanel" id="iePanel" aria-live="polite">
+    <h3 id="ieTitle"></h3>
+    <p id="ieText"></p>
+  </div>
+  <p style="margin-top:16px">Hoy la IE se considera un factor determinante para el éxito personal y profesional, con una influencia sobre el bienestar y las relaciones que puede superar a la de la inteligencia cognitiva.</p>
+  <div class="video">
+    <p><strong>Video visto en clase:</strong> «Inteligencia emocional – Daniel Goleman – Resumen animado» (YouTube).</p>
+  </div>
+</section>
+
+<section id="manejo">
+  <h2>Validación y manejo de las emociones</h2>
+  <p>La validación emocional consiste en reconocer, aceptar y legitimar las emociones propias y ajenas, sin juzgarlas ni minimizarlas. Validar no significa estar de acuerdo con la emoción, sino aceptar que es una experiencia válida. Esto favorece la autocomprensión y fortalece las relaciones.</p>
+  <p>El manejo de las emociones busca regularlas y canalizarlas de forma constructiva para que no controlen nuestras acciones. Estas son cuatro técnicas comunes:</p>
+  <details>
+    <summary>Identificación de emociones</summary>
+    <div class="body"><p>Reconocerlas y nombrarlas para entender su origen.</p></div>
+  </details>
+  <details>
+    <summary>Técnicas de relajación</summary>
+    <div class="body"><p>La respiración profunda y la meditación ayudan a reducir la intensidad de las emociones negativas.</p></div>
+  </details>
+  <details>
+    <summary>Reestructuración cognitiva</summary>
+    <div class="body"><p>Cambiar los patrones de pensamiento que intensifican emociones disfuncionales.</p></div>
+  </details>
+  <details>
+    <summary>Expresión emocional saludable</summary>
+    <div class="body"><p>Comunicar lo que sentimos de manera clara y asertiva.</p></div>
+  </details>
+</section>
+
+<section id="habilidades">
+  <h2>Habilidades socioemocionales</h2>
+  <p>Son un conjunto de competencias para reconocer, manejar y expresar emociones, y para interactuar eficazmente con los demás. Son esenciales para adaptarse y resolver conflictos en contextos personales, educativos y laborales.</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Componente</th><th>Qué implica</th></tr></thead>
+      <tbody>
+        <tr><td>Autoconocimiento</td><td>Identificar y comprender las propias emociones, fortalezas, debilidades y valores, lo que permite construir una identidad sólida.</td></tr>
+        <tr><td>Autorregulación</td><td>Manejar emociones negativas como el estrés y la frustración para responder adecuadamente a los desafíos.</td></tr>
+        <tr><td>Empatía</td><td>Comprender y compartir las emociones de los demás, lo que genera conexiones más profundas y significativas.</td></tr>
+        <tr><td>Comunicación</td><td>Escucha activa, asertividad y expresión clara y respetuosa de pensamientos y sentimientos.</td></tr>
+        <tr><td>Resolución de conflictos</td><td>Abordar las discrepancias de forma constructiva, buscando soluciones beneficiosas para todas las partes.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>En el trabajo, estas habilidades se valoran tanto como las técnicas: favorecen el trabajo en equipo, el liderazgo y la toma de decisiones en momentos críticos. En lo personal, fortalecen las relaciones y el bienestar psicológico.</p>
+</section>
+
+<section id="valores">
+  <h2>Valores humanos</h2>
+  <p>Son principios éticos y morales que guían el comportamiento y definen lo que las personas consideran importante. Funcionan como brújulas internas que orientan las acciones hacia el bien común y la justicia.</p>
+  <div class="pair">
+    <div class="box basic"><h3>Respeto</h3><p>Reconocer y valorar la dignidad de los demás, sin importar sus diferencias.</p></div>
+    <div class="box basic"><h3>Honestidad</h3><p>Actuar con transparencia y verdad en todas las interacciones.</p></div>
+    <div class="box basic"><h3>Responsabilidad</h3><p>Cumplir los compromisos y asumir las consecuencias de las propias acciones.</p></div>
+    <div class="box basic"><h3>Solidaridad</h3><p>Mostrar empatía y apoyo hacia quienes lo necesitan.</p></div>
+    <div class="box basic"><h3>Justicia</h3><p>Buscar la equidad y el trato igualitario en todas las esferas de la vida.</p></div>
+  </div>
+  <p>Los valores son esenciales para construir comunidades cohesionadas y éticas. Sin ellos, la convivencia pacífica y el progreso sostenible serían inalcanzables.</p>
+</section>
+
+<section id="relacion">
+  <h2>Cómo se relacionan ambas dimensiones</h2>
+  <p>Las habilidades socioemocionales permiten interiorizar y practicar los valores humanos de forma consciente y efectiva. Toca un par para ver el vínculo.</p>
+  <div class="chips" role="tablist" aria-label="Vínculos entre habilidades y valores" id="relTabs">
+    <button class="chip" role="tab" aria-selected="true" data-i="0" type="button">Empatía y solidaridad</button>
+    <button class="chip" role="tab" aria-selected="false" data-i="1" type="button">Autorregulación, respeto y justicia</button>
+  </div>
+  <div class="panel" role="tabpanel" aria-live="polite">
+    <p id="relText"></p>
+  </div>
+  <p style="margin-top:16px">En entornos laborales o educativos, combinar ambos aspectos genera climas positivos, mejora la productividad y reduce los conflictos. En lo personal, promueve la autorrealización y relaciones más sanas.</p>
+  <div class="callout">
+    <p>Desarrollar habilidades socioemocionales y practicar valores humanos mejora el bienestar individual y fortalece una sociedad más empática, justa y equilibrada. Por eso conviene fomentar su aprendizaje desde edades tempranas y en distintos contextos.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">Recurso del Módulo 7 · Habilidades socioemocionales y valores humanos</div>
+</footer>
+
+<script>
+(function(){
+  var ie=[
+    ["Autoconciencia emocional","Reconocer las propias emociones y el impacto que tienen en la conducta."],
+    ["Autorregulación","Gestionar las emociones de forma efectiva para adaptarse a diferentes situaciones."],
+    ["Automotivación","Usar las emociones como motor para alcanzar metas y mantener el enfoque a pesar de las adversidades."],
+    ["Empatía","Reconocer y comprender las emociones de los demás, fomentando relaciones saludables."],
+    ["Habilidades sociales","Aplicar la inteligencia emocional para comunicarse, liderar y colaborar de manera efectiva."]
+  ];
+  var rel=[
+    "La empatía fortalece el valor de la solidaridad: comprender lo que siente otra persona es lo que nos mueve a apoyarla.",
+    "La autorregulación contribuye al respeto y a la justicia: manejar el estrés y la frustración evita reaccionar de forma impulsiva y permite tratar a los demás con dignidad e igualdad."
+  ];
+  function wire(id,render){
+    var box=document.getElementById(id);
+    var btns=box.querySelectorAll("button");
+    function select(i){
+      btns.forEach(function(b,k){b.setAttribute("aria-selected",k===i?"true":"false")});
+      render(i);
+    }
+    btns.forEach(function(b,k){b.addEventListener("click",function(){select(k)})});
+    select(0);
+  }
+  wire("ieTabs",function(i){
+    document.getElementById("ieTitle").textContent=ie[i][0];
+    document.getElementById("ieText").textContent=ie[i][1];
+  });
+  wire("relTabs",function(i){
+    document.getElementById("relText").textContent=rel[i];
+  });
+  var root=document.documentElement;
+  document.getElementById("themeBtn").addEventListener("click",function(){
+    var dark=root.getAttribute("data-theme")==="dark" ||
+      (!root.getAttribute("data-theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    root.setAttribute("data-theme",dark?"light":"dark");
+  });
+})();
+</script>
+</body>
+</html>
