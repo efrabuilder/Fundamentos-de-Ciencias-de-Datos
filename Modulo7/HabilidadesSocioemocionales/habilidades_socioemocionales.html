@@ -6,23 +6,16 @@
 <title>Módulo 7 · Emociones, habilidades socioemocionales y valores humanos</title>
 <style>
 :root{
-  --bg:#f5f7f6; --surface:#ffffff; --ink:#1c2b2a; --muted:#51635f;
-  --line:#d3dcd9; --accent:#1f6f68; --accent-soft:#e1f0ee;
-  --warm:#b4532a; --warm-soft:#f8e9e1;
+  --bg:#f8fafc; --surface:#ffffff; --ink:#1e293b; --muted:#64748b;
+  --line:#e2e8f0; --accent:#db2777; --accent-soft:#fdf2f8;
+  --warm:#7c3aed; --warm-soft:#f5f3ff;
   --serif:Georgia,"Times New Roman",serif;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 }
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --bg:#121a19; --surface:#1a2524; --ink:#e6eeec; --muted:#9db0ac;
-    --line:#2c3b39; --accent:#6cc4ba; --accent-soft:#1d3532;
-    --warm:#e8946b; --warm-soft:#33241d;
-  }
-}
 :root[data-theme="dark"]{
-  --bg:#121a19; --surface:#1a2524; --ink:#e6eeec; --muted:#9db0ac;
-  --line:#2c3b39; --accent:#6cc4ba; --accent-soft:#1d3532;
-  --warm:#e8946b; --warm-soft:#33241d;
+  --bg:#0f172a; --surface:#1e293b; --ink:#e2e8f0; --muted:#94a3b8;
+  --line:#334155; --accent:#f472b6; --accent-soft:#3b1a2e;
+  --warm:#a78bfa; --warm-soft:#2a2245;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -54,8 +47,7 @@ p{margin:0 0 14px;max-width:68ch}
 .chip:hover{border-color:var(--accent)}
 .chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .chip[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .chip[aria-selected="true"]{color:#0d1716}}
-:root[data-theme="dark"] .chip[aria-selected="true"]{color:#0d1716}
+:root[data-theme="dark"] .chip[aria-selected="true"]{color:#1e293b}
 .panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 22px;max-width:68ch}
 .panel h3{margin-top:0}
 .panel p:last-child{margin:0}
@@ -254,8 +246,7 @@ footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);colo
   });
   var root=document.documentElement;
   document.getElementById("themeBtn").addEventListener("click",function(){
-    var dark=root.getAttribute("data-theme")==="dark" ||
-      (!root.getAttribute("data-theme") && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    var dark=root.getAttribute("data-theme")==="dark";
     root.setAttribute("data-theme",dark?"light":"dark");
   });
 })();
