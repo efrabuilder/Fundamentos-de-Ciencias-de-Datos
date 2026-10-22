@@ -45,6 +45,12 @@ p{margin:0 0 14px;max-width:68ch}
 .vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin:18px 0}
 .vgrid .box h3{margin:0 0 6px}
 .vgrid .box p{color:var(--muted);font-size:.95rem}
+.steps{list-style:none;counter-reset:st;margin:18px 0;padding:0;max-width:68ch}
+.steps li{counter-increment:st;position:relative;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 18px 14px 62px;margin-bottom:10px}
+.steps li::before{content:counter(st);position:absolute;left:16px;top:14px;width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+:root[data-theme="dark"] .steps li::before{color:#1e293b}
+.steps h3{margin:0 0 4px;font-size:1.02rem}
+.steps p{margin:0;color:var(--muted);font-size:.95rem}
 .tag{display:inline-block;font-size:.88rem;padding:2px 10px;border-radius:6px;background:var(--accent-soft);color:var(--accent);margin:0 6px 6px 0}
 .box.complex .tag{background:var(--warm-soft);color:var(--warm)}
 .callout{background:var(--accent-soft);border-radius:10px;padding:16px 20px;margin:18px 0;max-width:68ch}
@@ -96,6 +102,7 @@ footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);colo
       <a href="#valores">Valores humanos</a>
       <a href="#valores-clase">Valores de clase</a>
       <a href="#decisiones">Decisiones de valor</a>
+      <a href="#cambiar">Cambiar valores</a>
       <a href="#relacion">Cómo se relacionan</a>
     </nav>
   </div>
@@ -310,6 +317,21 @@ footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);colo
     </table>
   </div>
   <p>Una decisión coherente sería presentar el resultado completo, explicar con claridad lo que muestran los datos y proponer cómo comunicarlo, manteniendo el respeto hacia el equipo.</p>
+</section>
+
+<section id="cambiar">
+  <h2>Cómo cambiar los valores personales</h2>
+  <p>Los valores personales no son inamovibles. Pueden revisarse y modificarse cuando dejan de representarnos, chocan con otros valores que consideramos más importantes o nos generan conflictos con las demás personas. Cambiar un valor no significa renunciar a quien eres, sino decidir de manera consciente en quién quieres convertirte.</p>
+  <ol class="steps">
+    <li><h3>Identifica tus propios valores y fortalezas personales</h3><p>Es el punto de partida: reflexionar sobre qué valores guían hoy tus decisiones y con qué fortalezas cuentas para apoyar el cambio.</p></li>
+    <li><h3>Identifica cuáles son los nuevos valores que te gustaría adoptar</h3><p>Definir con claridad qué valores quieres incorporar o fortalecer y por qué, comparándolos con los que practicas actualmente.</p></li>
+    <li><h3>Comprende y respeta los valores de los demás practicando la empatía</h3><p>Conocer cómo piensan y qué valoran otras personas amplía tu mirada, te ayuda a cuestionar tus propios supuestos y a decidir con más criterio.</p></li>
+    <li><h3>Comprométete a mejorar</h3><p>Convertir la intención en acciones concretas y constantes en la vida diaria, hasta que el nuevo valor se vuelva parte de tu manera de actuar.</p></li>
+    <li><h3>Date tiempo para adaptarte</h3><p>El cambio es gradual: habrá avances y retrocesos. La paciencia y la autorregulación ayudan a no desanimarse en el proceso.</p></li>
+  </ol>
+  <div class="callout">
+    <p>Este proceso es un ciclo: cada vez que cambian las circunstancias o aprendemos algo nuevo, podemos volver a identificar nuestros valores y ajustarlos.</p>
+  </div>
 </section>
 
 <section id="relacion">
