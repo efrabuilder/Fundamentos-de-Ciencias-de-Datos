@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Análisis Exploratorio de Datos (EDA): resumen del mapa de patrones de datos</title>
+<style>
+:root{--bg:#f7f9f8;--ink:#1d2733;--mute:#566371;--acc:#1f7f68;--line:#d5dedb;--code:#eef3f1;--hl:#e3f1ed}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14191d;--ink:#e3e9e7;--mute:#9aa8a4;--acc:#5cc4a6;--line:#2c373a;--code:#1d262a;--hl:#1b2d29}}
+*{box-sizing:border-box}
+html{scroll-padding-top:1rem}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.75 Georgia,"Times New Roman",serif}
+main{max-width:46rem;margin:0 auto;padding:3rem 1.25rem 4rem}
+h1{font:700 2rem/1.2 "Trebuchet MS",Verdana,sans-serif;margin:0 0 .75rem}
+h2{font:700 1.4rem/1.3 "Trebuchet MS",Verdana,sans-serif;margin:3rem 0 .5rem;padding-top:1.25rem;border-top:3px solid var(--acc)}
+h3{font:700 1.05rem/1.4 "Trebuchet MS",Verdana,sans-serif;margin:1.75rem 0 .25rem;color:var(--acc)}
+p{margin:.75rem 0}
+.lead{color:var(--mute);font-size:1.05rem}
+.src{font:.85rem/1.4 "Trebuchet MS",Verdana,sans-serif;color:var(--mute);margin:0 0 1rem}
+nav{margin:1.5rem 0;padding:1rem 1.25rem;background:var(--hl);border-left:4px solid var(--acc);font:.95rem/1.8 "Trebuchet MS",Verdana,sans-serif}
+nav ol{margin:0;padding-left:1.2rem}
+a{color:var(--acc)}
+.note{background:var(--hl);padding:.7rem 1rem;border-left:4px solid var(--acc);margin:1rem 0}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+@media print{body{background:#fff;color:#000}nav{display:none}}
+</style>
+</head>
+<body>
+<main>
+<h1>Análisis Exploratorio de Datos (EDA): resumen del mapa de patrones de datos</h1>
+<p class="lead">Este documento narra, en forma de texto continuo, toda la información del mapa conceptual “Patrón de Datos”: qué es un patrón, los cinco tipos de patrón, las herramientas para detectarlos, la tasa de cambio y los ejemplos aplicados.</p>
+<p class="src">Fuente: mapa conceptual “Patrón de Datos” (mapa_conceptual_patron_de_datos.jpg).</p>
+
+<nav aria-label="Índice">
+<strong>Contenido</strong>
+<ol>
+<li><a href="#concepto">¿Qué es un patrón de datos?</a></li>
+<li><a href="#tipos">Tipos de patrón</a></li>
+<li><a href="#herramientas">Herramientas para detectar patrones</a></li>
+<li><a href="#tasa">Tasa de cambio</a></li>
+<li><a href="#ejemplos">Ejemplos aplicados</a></li>
+</ol>
+</nav>
+
+<h2 id="concepto">1. ¿Qué es un patrón de datos?</h2>
+<p>Un patrón de datos es una regularidad en el comportamiento de un producto que permite anticipar su comportamiento futuro. Es un proceso que se analiza mediante la lectura y la visualización de los datos.</p>
+<p>A partir de esta definición, el mapa se desarrolla en cuatro ramas: los tipos de patrón, las herramientas para detectarlos, la tasa de cambio y los ejemplos aplicados.</p>
+
+<h2 id="tipos">2. Tipos de patrón</h2>
+<p>El mapa identifica cinco tipos de patrón.</p>
+<h3>Tendencia</h3>
+<p>Es un comportamiento humano que se sostiene en un periodo específico y que se visualiza como patrón.</p>
+<h3>Estacionalidad</h3>
+<p>Es un patrón que se repite en intervalos de tiempo determinados. Corresponde al comportamiento por temporadas y responde a la pregunta de qué se hace tradicionalmente en cada una.</p>
+<h3>Ciclos (rutas)</h3>
+<p>Son patrones que no tienen un periodo fijo y que se asocian a la economía.</p>
+<h3>Clúster (agrupamiento)</h3>
+<p>Es el agrupamiento de los datos por acción.</p>
+<h3>Variables</h3>
+<p>Se refiere a las relaciones y coincidencias entre datos, que se siguen agrupando. Incluye la comparación Top / Bottom, es decir, los aumentos o bajas y la competencia.</p>
+
+<h2 id="herramientas">3. Herramientas para detectar patrones</h2>
+<p>Se presentan cuatro herramientas, cada una asociada a los tipos de patrón que ayuda a identificar.</p>
+<h3>Gráfico de barras</h3>
+<p>Sirve para ver variables (categorías y repeticiones) y permite detectar clústeres y ciclos.</p>
+<h3>Gráfica de líneas</h3>
+<p>Muestra las tendencias y permite detectar la estacionalidad.</p>
+<h3>Medidas móviles simples</h3>
+<p>Suavizan las variables, eliminan el ruido y dejan ver la tendencia de fondo.</p>
+<h3>Gráfico de dispersión</h3>
+<p>Se usa con variables numéricas y permite detectar variables, ciclos y clústeres. Muestra qué datos se mueven juntos, es decir, su correlación.</p>
+
+<h2 id="tasa">4. Tasa de cambio</h2>
+<p>La tasa de cambio permite ver qué tan rápido cambia una variable. Se calcula con esta expresión:</p>
+<div class="note">Menos ÷ (Más + Menos) × 100</div>
+<p>Como ejemplo, para comparar una tienda en línea con una física se calcula: tienda en línea ÷ (tienda física + tienda en línea) × 100.</p>
+
+<h2 id="ejemplos">5. Ejemplos aplicados</h2>
+<p>El mapa cierra con tres ejemplos donde se aplican los patrones. En <strong>clientes</strong>, se observa quiénes se quedan y quiénes se van. En <strong>inventario</strong>, se compara lo que hay con lo que debe conseguirse. En <strong>ventas</strong>, se comparan las ventas físicas con las ventas en línea.</p>
+</main>
+</body>
+</html>
