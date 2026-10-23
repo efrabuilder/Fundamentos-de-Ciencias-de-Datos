@@ -66,15 +66,6 @@ p{margin:0 0 14px;max-width:68ch}
 .flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:14px 0 18px}
 .flow-step{padding:8px 18px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-weight:700}
 .flow-arrow{color:var(--muted);font-weight:700}
-.flow{display:flex;align-items:stretch;gap:10px;margin:18px 0;flex-wrap:wrap}
-.fbox{flex:1 1 180px;background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--accent);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:4px}
-.fbox.f1{border-top-color:#14b8a6}
-.fbox.f2{border-top-color:#f59e0b}
-.fbox.f3{border-top-color:var(--accent)}
-.fverb{font-family:var(--serif);font-size:1.5rem;font-weight:700}
-.fbox span:last-child{color:var(--muted);font-size:.93rem}
-.farrow{align-self:center;font-size:1.6rem;color:var(--muted)}
-@media (max-width:640px){.farrow{display:none}.fbox{flex-basis:100%}}
 .tag{display:inline-block;font-size:.88rem;padding:2px 10px;border-radius:6px;background:var(--accent-soft);color:var(--accent);margin:0 6px 6px 0}
 .box.complex .tag{background:var(--warm-soft);color:var(--warm)}
 .callout{background:var(--accent-soft);border-radius:10px;padding:16px 20px;margin:18px 0;max-width:68ch}
@@ -215,44 +206,32 @@ footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);colo
   <h2>Las emociones y la conducta</h2>
   <p>Las emociones son uno de los motores principales de la conducta. Determinan cómo percibimos las situaciones y cómo reaccionamos, e influyen en nuestras decisiones y relaciones. El miedo, por ejemplo, puede provocar huida o enfrentamiento; la alegría promueve el acercamiento y la conexión social.</p>
   <h3 style="margin-top:24px">¿Cómo afectan las emociones en la conducta?</h3>
-  <p>Lo que pensamos, lo que sentimos y lo que hacemos están conectados. Un pensamiento despierta una emoción, y esa emoción nos lleva a actuar de cierta manera.</p>
-  <div class="flow" role="list">
-    <div class="fbox f1" role="listitem"><span class="fverb">Pienso</span><strong>Pensamiento</strong><span>Interpreto lo que ocurre.</span></div>
-    <div class="farrow" aria-hidden="true">→</div>
-    <div class="fbox f2" role="listitem"><span class="fverb">Siento</span><strong>Emoción</strong><span>Reacciono con lo que siento en el cuerpo y en el ánimo.</span></div>
-    <div class="farrow" aria-hidden="true">→</div>
-    <div class="fbox f3" role="listitem"><span class="fverb">Actúo</span><strong>Conducta</strong><span>Respondo con lo que hago o dejo de hacer.</span></div>
-  </div>
-  <div class="table-scroll">
-    <table>
-      <thead><tr><th>Ejemplo</th><th>Pienso</th><th>Siento</th><th>Actúo</th></tr></thead>
-      <tbody>
-        <tr><td>Antes de una presentación</td><td>«Me va a salir mal»</td><td>Miedo y ansiedad</td><td>Postergo la preparación o evito presentar</td></tr>
-        <tr><td>Antes de una presentación</td><td>«Puedo prepararme y mejorar»</td><td>Calma y confianza</td><td>Practico y presento con seguridad</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p>La conducta también influye de vuelta: lo que hacemos genera nuevos pensamientos y emociones, y así el ciclo continúa. Por eso conviene intervenir en cualquiera de los tres puntos, por ejemplo cambiando un pensamiento o regulando una emoción antes de actuar.</p>
-  <div class="callout">
-    <p>Si las emociones no se gestionan bien, pueden derivar en conductas impulsivas o disfuncionales. Reconocerlas y manejarlas de forma consciente permite respuestas más adaptativas y constructivas.</p>
-  </div>
-
-  <h3 style="margin-top:28px">¿Cómo afectan las emociones en la conducta?</h3>
   <p>Pensamiento, emoción y conducta están conectados y se influyen entre sí. Un recorrido típico es el siguiente:</p>
-  <div class="flow" aria-label="Secuencia: siento, pienso, siento, actúo">
-    <span class="flow-step">Siento</span><span class="flow-arrow" aria-hidden="true">→</span>
+  <div class="flow" aria-label="Secuencia: me emociono, pienso, siento, actúo">
+    <span class="flow-step">Me emociono</span><span class="flow-arrow" aria-hidden="true">→</span>
     <span class="flow-step">Pienso</span><span class="flow-arrow" aria-hidden="true">→</span>
     <span class="flow-step">Siento</span><span class="flow-arrow" aria-hidden="true">→</span>
     <span class="flow-step">Actúo</span>
   </div>
-  <p>Primero aparece una emoción ante lo que ocurre. Luego la interpretamos con nuestros pensamientos, y estos pueden reforzarla, calmarla o transformarla. Finalmente, lo que sentimos al terminar ese proceso orienta lo que hacemos.</p>
+  <p>Primero aparece una emoción ante lo que ocurre. Luego la interpretamos con nuestros pensamientos, y estos pueden reforzarla, calmarla o transformarla. Después tomamos conciencia de lo que sentimos y, finalmente, eso orienta lo que hacemos.</p>
   <div class="vgrid">
-    <div class="box basic"><h3>Pensamiento</h3><p>Lo que interpretamos y nos decimos sobre la situación.</p></div>
-    <div class="box complex"><h3>Emoción</h3><p>La reacción que se produce y que cambia según cómo pensamos.</p></div>
-    <div class="box basic"><h3>Conducta</h3><p>Lo que hacemos como resultado: acercarnos, evitar, discutir, pedir ayuda.</p></div>
+    <div class="box basic"><h3>Me emociono</h3><p>Reacción inmediata ante lo que ocurre, con cambios en el cuerpo.</p></div>
+    <div class="box complex"><h3>Pienso</h3><p>Interpreto la situación y me digo cosas sobre ella.</p></div>
+    <div class="box basic"><h3>Siento</h3><p>Vivo de forma consciente lo que resulta, según cómo lo interpreté.</p></div>
+    <div class="box complex"><h3>Actúo</h3><p>Respondo con lo que hago: acercarme, evitar, discutir o pedir ayuda.</p></div>
   </div>
+  <div class="table-scroll">
+    <table style="min-width:640px">
+      <thead><tr><th>Ejemplo</th><th>Me emociono</th><th>Pienso</th><th>Siento</th><th>Actúo</th></tr></thead>
+      <tbody>
+        <tr><td>Recibo una crítica a mi informe</td><td>Sorpresa y enojo</td><td>«Creen que no soy capaz»</td><td>Vergüenza y frustración</td><td>Respondo a la defensiva</td></tr>
+        <tr><td>Recibo una crítica a mi informe</td><td>Sorpresa y enojo</td><td>«Es una oportunidad para mejorar»</td><td>Calma y apertura</td><td>Pido detalles y corrijo</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>La conducta también influye de vuelta: lo que hacemos genera nuevos pensamientos y emociones, y el ciclo continúa. Por eso conviene intervenir en cualquiera de los puntos, por ejemplo cambiando un pensamiento o haciendo una pausa antes de actuar.</p>
   <div class="callout">
-    <p>Como lo que pensamos influye en lo que sentimos y en lo que hacemos, cambiar un pensamiento o hacer una pausa antes de actuar puede cambiar la conducta.</p>
+    <p>Si las emociones no se gestionan bien, pueden derivar en conductas impulsivas o disfuncionales. Reconocerlas y manejarlas de forma consciente permite respuestas más adaptativas y constructivas.</p>
   </div>
 </section>
 
