@@ -296,7 +296,7 @@
     <div class="hint" style="margin-bottom:22px;">
       Nombre esperado en el repositorio: <code>Mapas Conceptuales/mapa_conceptual_clase4.html</code> (vista) · <code>Mapas Conceptuales/mapa_conceptual_clase4.jpg</code> (descarga)
     </div>
-    <div class="card">
+    <div class="card" style="margin-bottom:18px;">
       <div class="card-toolbar">
         <span class="status" id="status-r0e"><span class="led"></span> Buscando archivo…</span>
         <div class="toolbar-actions">
@@ -311,8 +311,26 @@
         o cárgalo manualmente con el botón de arriba.
       </div>
     </div>
-    <div class="hint">
+    <div class="hint" style="margin-bottom:22px;">
       Nombre esperado en el repositorio: <code>Mapas Conceptuales/mapa_conceptual_clase6.html</code> (vista) · <code>Mapas Conceptuales/mapa_conceptual_clase6.jpg</code> (descarga)
+    </div>
+    <div class="card">
+      <div class="card-toolbar">
+        <span class="status" id="status-r0f"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions">
+          <button class="btn" onclick="document.getElementById('file-r0f').click()">Cargar archivo…</button>
+          <input type="file" id="file-r0f" accept=".html,text/html">
+          <a class="btn" id="download-r0f" download="resumen_mapas_conceptuales.html" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer empty" id="viewer-r0f">
+        <strong>Sin archivo cargado todavía</strong>
+        Coloca el archivo <code>Mapas Conceptuales/resumen_mapas_conceptuales.html</code> en la ruta indicada (relativa a este HTML),
+        o cárgalo manualmente con el botón de arriba.
+      </div>
+    </div>
+    <div class="hint">
+      Nombre esperado en el repositorio: <code>Mapas Conceptuales/resumen_mapas_conceptuales.html</code> (resumen narrado de todos los mapas conceptuales · vista y descarga)
     </div>
   </section>
   <!-- ===================== PANEL 1: BASE DE DATOS (SQL) ===================== -->
@@ -986,6 +1004,11 @@
           blob.text().then(text => renderText(viewerId, statusId, downloadId, text, url, filename));
         }
         break;
+      case 'html':
+      case 'htm':
+        // Página HTML (p.ej. resumen narrado): se muestra embebida y el botón descarga el propio .html
+        renderEmbeddedHtml(viewerId, statusId, downloadId, url, url, filename.split('/').pop());
+        break;
       case 'svg':
       case 'png':
       case 'jpg':
@@ -1071,6 +1094,7 @@
   setupMapResource('r0c', 'Mapas Conceptuales/mapa_conceptual_seguridad.html', 'Mapas Conceptuales/mapa_conceptual_seguridad.jpg');
   setupMapResource('r0d', 'Mapas Conceptuales/mapa_conceptual_clase4.html', 'Mapas Conceptuales/mapa_conceptual_clase4.jpg');
   setupMapResource('r0e', 'Mapas Conceptuales/mapa_conceptual_clase6.html', 'Mapas Conceptuales/mapa_conceptual_clase6.jpg');
+  setupResource('r0f', 'Mapas Conceptuales/resumen_mapas_conceptuales.html');
   setupResource('r1', 'Base de Datos (SQL)/DB Modulo 2 (Module 2).sql');
   setupResource('r2', 'Diagrama indentidad relacion (ejemplo)/Diagrama indentidad relacion modulo 2, ejemplo.drawio.png');
   setupResource('r3a', 'Caso Practico/Caso practico.png');
