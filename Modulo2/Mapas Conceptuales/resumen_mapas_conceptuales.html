@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manejo y Preparación de Datos: resumen de los mapas conceptuales</title>
+<style>
+:root{--bg:#f7f9f8;--ink:#1d2733;--mute:#566371;--acc:#1f7f68;--line:#d5dedb;--code:#eef3f1;--hl:#e3f1ed}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14191d;--ink:#e3e9e7;--mute:#9aa8a4;--acc:#5cc4a6;--line:#2c373a;--code:#1d262a;--hl:#1b2d29}}
+*{box-sizing:border-box}
+html{scroll-padding-top:1rem}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.75 Georgia,"Times New Roman",serif}
+main{max-width:46rem;margin:0 auto;padding:3rem 1.25rem 4rem}
+h1{font:700 2rem/1.2 "Trebuchet MS",Verdana,sans-serif;margin:0 0 .75rem}
+h2{font:700 1.4rem/1.3 "Trebuchet MS",Verdana,sans-serif;margin:3rem 0 .5rem;padding-top:1.25rem;border-top:3px solid var(--acc)}
+h3{font:700 1.05rem/1.4 "Trebuchet MS",Verdana,sans-serif;margin:1.75rem 0 .25rem;color:var(--acc)}
+p{margin:.75rem 0}
+.lead{color:var(--mute);font-size:1.05rem}
+.src{font:.85rem/1.4 "Trebuchet MS",Verdana,sans-serif;color:var(--mute);margin:0 0 1rem}
+nav{margin:1.5rem 0;padding:1rem 1.25rem;background:var(--hl);border-left:4px solid var(--acc);font:.95rem/1.8 "Trebuchet MS",Verdana,sans-serif}
+nav ol{margin:0;padding-left:1.2rem}
+a{color:var(--acc)}
+pre{background:var(--code);border:1px solid var(--line);padding:.8rem 1rem;overflow-x:auto;font:.85rem/1.55 Consolas,Menlo,monospace;margin:.9rem 0}
+code{font-family:Consolas,Menlo,monospace;font-size:.9em;background:var(--code);padding:.05em .3em}
+pre code{background:none;padding:0}
+.note{background:var(--hl);padding:.7rem 1rem;border-left:4px solid var(--acc);margin:1rem 0}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+@media print{body{background:#fff;color:#000}nav{display:none}}
+</style>
+</head>
+<body>
+<main>
+<h1>Manejo y Preparación de Datos: resumen de los mapas conceptuales</h1>
+<p class="lead">Este documento narra, en forma de texto continuo, toda la información contenida en cinco mapas conceptuales del módulo Manejo y Preparación de Datos: el marco del módulo, la introducción a las bases de datos, los tipos de datos y las relaciones entre tablas en SQL, el resumen de datos con funciones de agregación, y la concurrencia y seguridad.</p>
+
+<nav aria-label="Índice">
+<strong>Contenido</strong>
+<ol>
+<li><a href="#marco">Presentación del módulo: objetivos, herramientas y conceptos básicos</a></li>
+<li><a href="#leccion1">¿Qué es una base de datos? Historia, modelos y SGBD</a></li>
+<li><a href="#clase4">Cómo se guardan los datos en SQL, tipos de datos y relaciones entre tablas</a></li>
+<li><a href="#clase6">Cómo resumir datos en SQL con COUNT, SUM, AVG, MIN, MAX, GROUP BY y HAVING</a></li>
+<li><a href="#seguridad">Protección de los datos: concurrencia, encriptación y blockchain</a></li>
+</ol>
+</nav>
+
+<!-- ===================== MARCO ===================== -->
+<h2 id="marco">1. Presentación del módulo: objetivos, herramientas y conceptos básicos</h2>
+<p class="src">Fuente: apuntes de cuaderno, 13 y 14 de julio de 2026.</p>
+
+<h3>Instalación inicial</h3>
+<p>El módulo Manejo y Preparación de Datos requiere una instalación inicial de tres pasos: primero se instala SQL Server 2025, luego SQL Server Management Studio y, por último, se reinicia el ordenador para que todo quede funcionando.</p>
+
+<h3>Objetivo general y herramientas</h3>
+<p>El módulo persigue un objetivo general: desarrollar habilidades para gestionar, desarrollar (preparar), mejorar y transformar bases de datos. Para lograrlo se utilizan SQL, MySQL, SQLite, Python, Power BI, Pandas y Google Colab.</p>
+
+<h3>Objetivos específicos</h3>
+<p>El objetivo general se detalla en seis objetivos específicos: comprender las bases de datos, aplicar consultas en SQL, evaluar la calidad de los datos, integrar múltiples fuentes, limpiar y transformar datos, y utilizar Python y Power BI.</p>
+
+<h3>Introducción a SQL</h3>
+<p>El módulo comienza con una introducción que parte de dos conceptos. El dato representa una variable y cada usuario le da su significado; se apoya en la investigación con IoT, minería, BI y bases de datos. La información, por su parte, es un conjunto de datos que explican algo o le dan sentido, y esa información genera conocimiento, que a su vez alimenta los motores de estrategia.</p>
+
+<h3>Cloud y log</h3>
+<p>El módulo conecta con el tema de la nube y el registro (log). El log se registra en SQL, Excel, Oracle, Cloud, Azure, GitHub, AWS e IBM. Este tema se relaciona con la base de datos, entendida como un conjunto de datos informáticos almacenados. Las bases de datos son repositorios; garantizan integridad y validez; requieren ética y gobernanza; necesitan capas de recuperación; y abarcan procesos, métodos, productos y servicios.</p>
+
+<!-- ===================== LECCION 01 ===================== -->
+<h2 id="leccion1">2. ¿Qué es una base de datos? Historia, modelos y SGBD</h2>
+<p class="src">Fuente: “Introducción a Bases de Datos”, Lección 01 (PRIMERA_PRESENTACION.pdf).</p>
+<p>La lección abarca cinco grandes temas: la historia y justificación de las bases de datos, la justificación de un modelo de datos, los sistemas de bases de datos frente a los sistemas de archivos, los tipos de bases de datos y la aplicación del álgebra relacional en modelos relacionales. El mapa desarrolla en detalle los tres primeros.</p>
+
+<h3>Historia y justificación de las bases de datos</h3>
+<p>Este bloque forma parte de los conceptos de dato, información y conocimiento, define el concepto de base de datos como un conjunto de datos almacenados y compartidos, y recorre su evolución histórica.</p>
+<p>La evolución comienza con las tarjetas perforadas de Herman Hollerith, en 1884. En los años 50 siguen las cintas y tarjetas magnéticas, que sirvieron para automatizar y respaldar la información. Entre 1960 y 1970 continúa con el modelo relacional de Codd, que da origen a Oracle e IBM System R. En la década de 1980, SQL se vuelve el estándar de la industria. En los años 90 se llega a las bases de datos orientadas a objetos, como Excel y Access. La evolución incorpora además los triggers, consultas automáticas que funcionan como disparador o detonador.</p>
+
+<h3>Justificación de un modelo de datos</h3>
+<p>Esta justificación se centra en el modelo de datos: el conjunto de conceptos que describen la estructura, las relaciones y las restricciones de los datos. El modelo se compone de tres niveles.</p>
+<p><strong>Modelo conceptual.</strong> Trabaja con entidad, atributo y relación. Su ejemplo es el modelo Entidad-Relación (E-R) y los modelos semánticos. Este modelo usa una notación en la que la tabla es un rectángulo, la relación es un rombo y las variables son óvalos, y define la cardinalidad: (1,1), (1,N) y (N,M). Un ejemplo es que un cantante interpreta muchos temas, es decir, una relación 1:N.</p>
+<p><strong>Modelo lógico.</strong> Se divide en modelos basados en registros (jerárquico, de redes y relacional) y modelos basados en objetos (orientado a objeto).</p>
+<p><strong>Modelo físico.</strong> Corresponde a las tablas, columnas y claves primarias y externas.</p>
+
+<h3>Sistemas de bases de datos frente a sistemas de archivos</h3>
+<p>El mapa compara dos enfoques. Los sistemas de archivos son una colección de archivos de texto plano y presentan problemas: redundancia, difícil acceso, poca seguridad y limitaciones de integridad y concurrencia. Frente a ellos está el Sistema de Gestión de Bases de Datos (SGBD), que soporta DDL, DML, DCL y las propiedades ACID, y que se organiza en los niveles de abstracción ANSI/SPARC: externo, conceptual e interno.</p>
+
+<h3>Tipos de bases de datos y álgebra relacional</h3>
+<p>Los tipos de bases de datos y la aplicación del álgebra relacional en modelos relacionales aparecen como los dos últimos temas de la lección, sin desarrollo adicional en el mapa.</p>
+
+<!-- ===================== CLASE 4 ===================== -->
+<h2 id="clase4">3. Cómo se guardan los datos en SQL, tipos de datos y relaciones entre tablas</h2>
+<p class="src">Fuente: “Clase 4 - Variables SQL y Relaciones entre Tablas” (Clase_4.docx).</p>
+<p>La clase incluye variables SQL, tipos de datos y relaciones entre tablas, y se ejemplifica con comandos SQL.</p>
+
+<h3>Variables SQL</h3>
+<p>Las variables se definen como espacios en memoria donde se guarda un valor temporal. Se explican con una analogía: una cajita donde se guarda un dato momentáneamente.</p>
+
+<h3>Tipos de datos</h3>
+<p>Los tipos de datos se clasifican en cinco grupos.</p>
+<p><strong>A. Texto (strings).</strong> Incluye VARCHAR(n), texto variable; CHAR(n), texto fijo; y TEXT, texto largo (obsoleto).</p>
+<p><strong>B. Números.</strong> Los enteros son INT (números normales), BIGINT (números grandes), SMALLINT (pequeños) y TINYINT (de 0 a 255). Los decimales son DECIMAL(p,s), de precisión exacta; NUMERIC, igual que decimal; y FLOAT, aproximado.</p>
+<p><strong>C. Fechas.</strong> DATE guarda solo la fecha; DATETIME, fecha y hora; TIME, solo la hora; y DATETIME2 es más preciso.</p>
+<p><strong>D. Booleano.</strong> Sus valores son 0 = falso y 1 = verdadero.</p>
+<p><strong>E. Otros importantes.</strong> IDENTITY es el auto incremento; UNIQUEIDENTIFIER es el GUID, un ID único global; y XML guarda datos en formato XML.</p>
+
+<h3>Relaciones entre tablas</h3>
+<p>Las relaciones se basan en claves primarias y foráneas, y se clasifican en 1:1, 1:N y N:M.</p>
+<p>La <strong>clave primaria (PRIMARY KEY)</strong> se explica con la analogía de la cédula de identidad: es única, no se repite e identifica cada registro. Su ejemplo es <code>CREATE TABLE Cursos (ID_Curso INT PRIMARY KEY)</code>.</p>
+<p>La <strong>clave foránea (FOREIGN KEY)</strong> es como una referencia o enlace a otra tabla. Por ejemplo, Estudiantes guarda ID_Curso, que referencia a Cursos(ID_Curso).</p>
+<p>La <strong>relación 1:1 (uno a uno)</strong> se explica con la analogía de que una persona tiene una sola cédula y viceversa. Un caso real de negocio es la relación entre cliente e información financiera: un cliente tiene un solo perfil de crédito. Se implementa con Clientes (PK) y Crédito (FK + UNIQUE sobre ID_Cliente).</p>
+
+<h3>Comandos SQL de ejemplo</h3>
+<p>Tabla con clave primaria:</p>
+<pre><code>CREATE TABLE Cursos (
+  ID_Curso INT PRIMARY KEY,
+  NombreCurso VARCHAR(50)
+);</code></pre>
+<p>Tabla con clave foránea:</p>
+<pre><code>CREATE TABLE Estudiantes (
+  ID INT PRIMARY KEY,
+  Nombre VARCHAR(50),
+  ID_Curso INT,
+  FOREIGN KEY (ID_Curso)
+  REFERENCES Cursos(ID_Curso)
+);</code></pre>
+<p>Otra tabla con clave primaria:</p>
+<pre><code>CREATE TABLE Clientes (
+  ID_Cliente INT PRIMARY KEY,
+  Nombre VARCHAR(50)
+);</code></pre>
+<p>Relación 1:1 (FK + UNIQUE):</p>
+<pre><code>CREATE TABLE Credito (
+  ID_Credito INT PRIMARY KEY,
+  ID_Cliente INT UNIQUE,
+  Limite DECIMAL(10,2),
+  FOREIGN KEY (ID_Cliente)
+  REFERENCES Clientes(ID_Cliente)
+);</code></pre>
+
+<!-- ===================== CLASE 6 ===================== -->
+<h2 id="clase6">4. Cómo resumir datos en SQL con COUNT, SUM, AVG, MIN, MAX, GROUP BY y HAVING</h2>
+<p class="src">Fuente: “Clase 6 - Funciones de Agregación, GROUP BY y HAVING” (Clase_6.docx).</p>
+<p>La clase usa las funciones de agregación (COUNT, SUM, AVG, MIN, MAX), las presenta como parte de las formas de ver datos en SQL, aplica la agrupación (GROUP BY) y el filtrado (HAVING), y aclara la diferencia clave entre WHERE y HAVING.</p>
+
+<h3>Formas de ver datos en SQL</h3>
+<p>Hay dos formas: el detalle, que muestra fila por fila, y el resumen, que presenta información agrupada como totales y promedios. El propósito de las funciones de agregación es pasar de detalle a resumen.</p>
+
+<h3>Funciones de agregación</h3>
+<p><strong>1. COUNT() (contar).</strong> Cuenta filas. El resultado es cuántas ventas se han hecho.</p>
+<pre><code>SELECT COUNT(*) AS TotalVentas
+FROM Ventas;</code></pre>
+<p><strong>2. SUM() (sumar).</strong> Suma valores numéricos. El resultado es el total de dinero generado.</p>
+<pre><code>SELECT SUM(Precio * Cantidad)
+AS TotalDinero
+FROM Ventas;</code></pre>
+<p><strong>3. AVG() (promedio).</strong> Calcula el promedio. El resultado es el precio promedio de los productos.</p>
+<pre><code>SELECT AVG(Precio)
+AS PrecioPromedio
+FROM Ventas;</code></pre>
+<p><strong>4. MIN() (mínimo).</strong> Devuelve el valor más pequeño. El resultado es el producto más barato.</p>
+<pre><code>SELECT MIN(Precio)
+AS PrecioMasBarato
+FROM Ventas;</code></pre>
+<p><strong>5. MAX() (máximo).</strong> Devuelve el valor más alto. El resultado es el producto más caro.</p>
+<pre><code>SELECT MAX(Precio)
+AS PrecioMasCaro
+FROM Ventas;</code></pre>
+
+<h3>Agrupación y filtrado de grupos</h3>
+<p><strong>GROUP BY (agrupar)</strong> agrupa filas con el mismo valor.</p>
+<pre><code>SELECT Producto,
+SUM(Cantidad) AS TotalVendido
+FROM Ventas
+GROUP BY Producto;</code></pre>
+<p><strong>HAVING (filtrar grupos)</strong> filtra los resultados después de agrupar.</p>
+<pre><code>SELECT Producto,
+SUM(Cantidad) AS TotalVendido
+FROM Ventas
+GROUP BY Producto
+HAVING SUM(Cantidad) &gt; 2;</code></pre>
+
+<h3>Diferencia clave: WHERE frente a HAVING</h3>
+<p>WHERE filtra filas antes de agrupar y no usa funciones agregadas. HAVING filtra después de agrupar y sí usa funciones agregadas.</p>
+<div class="note">Analogía de la tienda: WHERE filtra productos antes de analizar; GROUP BY hace grupos (por producto); y HAVING decide qué grupos interesan.</div>
+
+<!-- ===================== SEGURIDAD ===================== -->
+<h2 id="seguridad">5. Protección de los datos: concurrencia, encriptación y blockchain</h2>
+<p class="src">Fuente: apuntes de cuaderno, 15 de julio de 2026.</p>
+<p>El tema incluye dos ejes: la concurrencia y la seguridad.</p>
+
+<h3>Concurrencia</h3>
+<p>La concurrencia busca resolver conflictos entre usuarios.</p>
+
+<h3>Seguridad y encriptación</h3>
+<p>La seguridad requiere la confidencialidad de los datos, que se logra con la encriptación. Esta funciona convirtiendo texto o datos en un código (ciphertext) que no se entiende sin la llave (contraseña) correcta. Tiene dos ventajas: es útil para enviar contenido privado por internet y previene la copia de información. Su riesgo es que puede ser atacada por informáticos habilidosos.</p>
+<p>La encriptación se aplica de dos maneras: mediante algoritmos y en blockchain.</p>
+
+<h3>Algoritmos: AES, RSA y DES</h3>
+<p><strong>AES (Advanced Encryption Standard)</strong> es uno de los más seguros y lo usan gobiernos y organizaciones de seguridad. Usa encriptación simétrica (key encryption) con AES-128, 192 y 256 bits.</p>
+<p><strong>RSA (Rivest Shamir Adleman)</strong> se usa para enviar datos online; es encriptación asimétrica con key privada propia.</p>
+<p><strong>DES</strong> usa 56 bits, no es muy seguro y era el método estándar de 1970. Evoluciona a <strong>3DES</strong>, que usa tres bloques (key) de 56 bits para triple protección y es muy usado actualmente.</p>
+
+<h3>Blockchain</h3>
+<p>En blockchain se aplican cuatro conceptos:</p>
+<p><strong>Encriptación asimétrica:</strong> llave pública para encriptar y llave privada para desencriptar, sin compartir llaves.</p>
+<p><strong>Hashing:</strong> convierte una transacción en algo de longitud fija y verifica que no se haya modificado, como en los libros de cuentas.</p>
+<p><strong>Encriptación simétrica:</strong> se usa dentro de empresas y en data storage para compartir llaves.</p>
+<p><strong>Técnicas avanzadas:</strong> pruebas de cero conocimiento y encriptación homomórfica, que permiten transacciones confidenciales y procesos de seguridad de datos sin relevancia de líneas de información.</p>
+</main>
+</body>
+</html>
