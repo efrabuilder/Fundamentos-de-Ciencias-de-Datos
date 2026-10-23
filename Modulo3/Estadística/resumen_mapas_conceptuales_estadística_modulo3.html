@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Análisis Exploratorio de Datos (EDA): resumen de los mapas de estadística básica</title>
+<style>
+:root{--bg:#f7f9f8;--ink:#1d2733;--mute:#566371;--acc:#1f7f68;--line:#d5dedb;--code:#eef3f1;--hl:#e3f1ed}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14191d;--ink:#e3e9e7;--mute:#9aa8a4;--acc:#5cc4a6;--line:#2c373a;--code:#1d262a;--hl:#1b2d29}}
+*{box-sizing:border-box}
+html{scroll-padding-top:1rem}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.75 Georgia,"Times New Roman",serif}
+main{max-width:46rem;margin:0 auto;padding:3rem 1.25rem 4rem}
+h1{font:700 2rem/1.2 "Trebuchet MS",Verdana,sans-serif;margin:0 0 .75rem}
+h2{font:700 1.4rem/1.3 "Trebuchet MS",Verdana,sans-serif;margin:3rem 0 .5rem;padding-top:1.25rem;border-top:3px solid var(--acc)}
+h3{font:700 1.05rem/1.4 "Trebuchet MS",Verdana,sans-serif;margin:1.75rem 0 .25rem;color:var(--acc)}
+p{margin:.75rem 0}
+.lead{color:var(--mute);font-size:1.05rem}
+.src{font:.85rem/1.4 "Trebuchet MS",Verdana,sans-serif;color:var(--mute);margin:0 0 1rem}
+nav{margin:1.5rem 0;padding:1rem 1.25rem;background:var(--hl);border-left:4px solid var(--acc);font:.95rem/1.8 "Trebuchet MS",Verdana,sans-serif}
+nav ol{margin:0;padding-left:1.2rem}
+a{color:var(--acc)}
+code{font-family:Consolas,Menlo,monospace;font-size:.9em;background:var(--code);padding:.05em .3em}
+.note{background:var(--hl);padding:.7rem 1rem;border-left:4px solid var(--acc);margin:1rem 0}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+@media print{body{background:#fff;color:#000}nav{display:none}}
+</style>
+</head>
+<body>
+<main>
+<h1>Análisis Exploratorio de Datos (EDA): resumen de los mapas de estadística básica</h1>
+<p class="lead">Este documento narra, en forma de texto continuo, toda la información de dos mapas conceptuales de estadística básica del módulo Análisis Exploratorio de Datos (EDA): uno sobre los fundamentos de la estadística, los tipos de variables y un caso empresarial, y otro con la simbología de la estadística inferencial.</p>
+
+<nav aria-label="Índice">
+<strong>Contenido</strong>
+<ol>
+<li><a href="#fundamentos">Fundamentos de la estadística, tipos de variables y el caso de Amazon</a></li>
+<li><a href="#simbologia">Simbología de estadística inferencial</a></li>
+</ol>
+</nav>
+
+<h2 id="fundamentos">1. Fundamentos de la estadística, tipos de variables y el caso de Amazon</h2>
+<p class="src">Fuente: mapa conceptual de estadística (mapa_conceptual_estadistica_vertical.png).</p>
+<p>El mapa se organiza en tres bloques: los fundamentos de la estadística, los tipos de variables con ejemplos y un caso empresarial.</p>
+
+<h3>Fundamentos de la estadística</h3>
+<p>La estadística se define como la disciplina que convierte datos en información útil (Arias Sevilla & Roldán, 2025). Tiene dos ramas, citadas de los mismos autores: la <strong>descriptiva</strong>, que resume datos mediante tablas, gráficos y promedios, y la <strong>inferencial</strong>, que predice y generaliza a partir de una muestra.</p>
+<p>Sus pilares, según Julián (2025), son tres. La <strong>población</strong> es el conjunto total a estudiar, la <strong>muestra</strong> es un subconjunto representativo de esa población y la <strong>variable</strong> es la característica que se mide.</p>
+<p>En la empresa (Tu Dashboard, 2019; Ikusi, 2023), la estadística sirve para dos fines: apoyar las decisiones ante la incertidumbre, por ejemplo en ventas, finanzas y producción, y medir el rendimiento y realizar estudios de mercado.</p>
+
+<h3>Tipos de variables (con ejemplos)</h3>
+<p>Las variables estadísticas (López, 2026) se dividen en cuantitativas y cualitativas.</p>
+<p>Las <strong>cuantitativas</strong> se expresan con números y pueden ser de dos clases. Las <strong>discretas</strong> toman valores enteros y contables, como el número de helados vendidos. Las <strong>continuas</strong> pueden tomar cualquier valor dentro de un rango, como el tiempo en una carrera de 100 metros.</p>
+<p>Las <strong>cualitativas</strong> describen una cualidad y también son de dos clases. Las <strong>nominales</strong> son categorías sin orden, como el color de ojos. Las <strong>ordinales</strong> son categorías con orden, como el nivel de satisfacción.</p>
+
+<h3>Caso empresarial: Amazon</h3>
+<p>El caso parte de un contexto de retail digital con millones de transacciones diarias. Sobre el comportamiento del consumidor (Wickham, 2024) se señalan dos datos: en el uso mensual, el 72,3 % de los usuarios compra por la app frente al 51,4 % por la web, y durante el Prime Day el 56,2 % lo hace por la app frente al 30,5 % por la web.</p>
+<p>Las variables del caso se clasifican así: el <strong>monto de compra</strong> es cuantitativa continua; el <strong>número de artículos por pedido</strong> es cuantitativa discreta; el <strong>método de pago</strong> es cualitativa nominal; y el <strong>nivel de satisfacción</strong> es cualitativa ordinal.</p>
+<p>En cuanto a la aplicación del análisis, en las variables cuantitativas se calculan promedios y en las cualitativas se usan frecuencias.</p>
+
+<h2 id="simbologia">2. Simbología de estadística inferencial</h2>
+<p class="src">Fuente: mapa “Simbología de estadística inferencial”, Fundamentos de Ciencias de Datos, Módulo 3 (mapa_simbologia_modulo3.jpg).</p>
+<p>El mapa reúne la simbología estadística en tres columnas: datos y muestreo, distribuciones, e inferencia y pruebas.</p>
+
+<h3>Datos y muestreo: población y muestra</h3>
+<p>Se distingue entre los símbolos de la población y los de la muestra. <strong>N</strong> es el tamaño de la población y <strong>n</strong> el tamaño de la muestra. <strong>X</strong> es la variable y <strong>xᵢ</strong> una observación. <strong>μ</strong> es la media poblacional y <strong>x̄</strong> la media muestral. <strong>σ</strong> es la desviación estándar poblacional y <strong>s</strong> la muestral. <strong>σ²</strong> es la varianza poblacional y <strong>s²</strong> la muestral. Por último, <strong>p</strong> es la proporción poblacional y <strong>p̂</strong> la muestral.</p>
+
+<h3>Datos y muestreo: sumatorias y operaciones</h3>
+<p><strong>Σ</strong> representa la sumatoria y <strong>Σxᵢ</strong> la suma de los datos, donde <strong>xᵢ</strong> es cada dato individual y <strong>n</strong> el número de datos. Entre los símbolos de operación aparecen <strong>√</strong> (raíz cuadrada), <strong>≈</strong> (aproximadamente), <strong>=</strong> (igual), <strong>&lt;</strong> (menor que), <strong>&gt;</strong> (mayor que), <strong>≤</strong> (menor o igual) y <strong>≥</strong> (mayor o igual).</p>
+
+<h3>Datos y muestreo: muestreo</h3>
+<p>En el muestreo, <strong>N</strong> es la población y <strong>n</strong> la muestra. <strong>f</strong> es la fracción de muestreo, <strong>N/n</strong> expresa la relación población/muestra y <strong>n/N</strong> también es la fracción de muestreo. Por ejemplo, con N = 10 000 y n = 500, n/N es igual a 5 %.</p>
+
+<h3>Distribuciones: distribución normal</h3>
+<p><strong>Z</strong> es el estadístico Z y <strong>z</strong> un valor Z. <strong>μ</strong> es la media poblacional y <strong>σ</strong> la desviación estándar. <strong>N(μ,σ²)</strong> denota la distribución normal y <strong>P</strong> la probabilidad. La fórmula de estandarización es:</p>
+<div class="note">Z = (X − μ) / σ</div>
+
+<h3>Distribuciones: t de Student</h3>
+<p><strong>t</strong> es el estadístico t y <strong>tα/2</strong> el valor crítico t. Los grados de libertad se representan con <strong>gl</strong> o <strong>df</strong> y se calculan como <strong>n − 1</strong>. Por ejemplo, con n = 30 se tiene df = 29.</p>
+
+<h3>Inferencia y pruebas: intervalos de confianza</h3>
+<p><strong>IC</strong> es el intervalo de confianza y <strong>CL</strong> el nivel de confianza. <strong>α</strong> es el nivel de significancia y <strong>1 − α</strong> el nivel de confianza. <strong>zα/2</strong> es el valor crítico Z, <strong>E / ME</strong> el margen de error y <strong>SE</strong> el error estándar. Los valores críticos de z son 1.645 para el 90 %, 1.960 para el 95 % y 2.576 para el 99 %.</p>
+
+<h3>Inferencia y pruebas: error estándar</h3>
+<p><strong>SE</strong> es el error estándar, <strong>σx̄</strong> el error estándar de la media y <strong>sx̄</strong> el error estándar estimado. Se calcula de dos maneras según lo que se conozca:</p>
+<div class="note">SE = σ/√n (cuando σ es conocida)<br>SE = s/√n (cuando se usa s)</div>
+
+<h3>Inferencia y pruebas: pruebas de hipótesis</h3>
+<p><strong>H₀</strong> es la hipótesis nula y <strong>H₁ / Ha</strong> la hipótesis alternativa. <strong>α</strong> es el nivel de significancia y <strong>p-value</strong> el valor p. Los estadísticos de prueba son <strong>Z</strong>, <strong>t</strong>, <strong>F</strong> (estadístico F) y <strong>χ²</strong> (chi-cuadrado). La regla de decisión es que si el p-value es menor que α, se rechaza H₀.</p>
+
+<h3>Inferencia y pruebas: proporciones</h3>
+<p><strong>p</strong> es la proporción poblacional, <strong>p̂</strong> la proporción muestral, <strong>q</strong> el complemento de p y <strong>x</strong> el número de éxitos. La proporción muestral se calcula como p̂ = x/n; por ejemplo, con x = 350 y n = 500, p̂ es 70 %.</p>
+
+<h3>Equivalencias clave</h3>
+<p>El mapa cierra con dos correspondencias entre población y muestra: μ ↔ x̄ (población frente a muestra) y σ ↔ s (desviación poblacional frente a muestral).</p>
+</main>
+</body>
+</html>
