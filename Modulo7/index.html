@@ -1,466 +1,473 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Módulo 7 — Habilidades Socioemocionales para el Análisis de Datos — Recursos</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Módulo 7 · Emociones, habilidades socioemocionales y valores humanos</title>
 <style>
-  :root{
-    --bg:#f8fafc;
-    --panel:#ffffff;
-    --ink:#1e293b;
-    --ink-soft:#64748b;
-    --border:#e2e8f0;
-
-    --mod-accent:#db2777; /* color del módulo (cambia por módulo) */
-
-    /* Colores de cada recurso */
-    --r1:var(--mod-accent); --r1-soft:#fdf2f8; /* 1º: mismo color del título del módulo */
-    --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
-    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
-  body{background:var(--bg);font-family:var(--sans);color:var(--ink);min-height:100vh;}
-
-  .top-bar{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-    gap:10px;
-    padding:18px 24px 0;
-  }
-  .top-link{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    padding:8px 16px 8px 8px;
-    background:var(--panel);
-    color:var(--ink);
-    border:1px solid var(--border);
-    border-radius:999px;
-    font-size:13px;
-    font-weight:600;
-    text-decoration:none;
-    box-shadow:0 1px 2px rgba(15,23,42,.06);
-    transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease;
-  }
-  .top-link .icon{
-    width:28px;
-    height:28px;
-    border-radius:50%;
-    background:var(--ink);
-    color:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-shrink:0;
-    transition:background .15s ease, transform .15s ease;
-  }
-  .top-link .icon svg{width:16px;height:16px;}
-  .top-link .icon .stroke{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
-  .top-link .icon .fill{fill:currentColor;}
-  .top-link .arrow{
-    color:var(--ink-soft);
-    transition:transform .15s ease, color .15s ease;
-  }
-  .top-link:hover{
-    transform:translateY(-1px);
-    border-color:var(--mod-accent);
-    box-shadow:0 6px 16px -8px var(--mod-accent);
-  }
-  .top-link:hover .icon{background:var(--mod-accent);}
-  .top-link.back:hover .icon{transform:translateX(-2px);}
-  .top-link:hover .arrow{transform:translateX(3px);color:var(--mod-accent);}
-  .top-link:focus-visible{outline:2px solid var(--mod-accent);outline-offset:3px;}
-
-  header{padding:20px 24px 22px;text-align:center;border-bottom:1px solid var(--border);background:var(--panel);}
-  header .eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--mod-accent);margin-bottom:6px;}
-  header h1{margin:0 0 6px;font-size:clamp(20px,3vw,28px);letter-spacing:-0.01em;}
-  header p{margin:0;color:var(--ink-soft);font-size:14px;}
-  nav{display:flex;justify-content:center;gap:6px;padding:16px;flex-wrap:wrap;background:var(--panel);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;}
-  .tab{appearance:none;border:1.5px solid var(--border);background:var(--bg);color:var(--ink-soft);font-family:var(--sans);font-size:13.5px;font-weight:600;padding:10px 18px;border-radius:999px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .15s ease;}
-  .tab .dot{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.5;}
-  .tab:hover{border-color:var(--accent);color:var(--ink);}
-  .tab.active{background:var(--accent);border-color:var(--accent);color:#ffffff;}
-  .tab.active .dot{background:#ffffff;opacity:1;}
-  #tab-r1{--accent:var(--r1);}
-  main{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
-  .panel{display:none;}
-  .panel.active{display:block;animation:fade .25s ease;}
-  @keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:none;}}
-  .panel-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:16px;}
-  .panel-head h2{margin:0;font-size:19px;}
-  .panel-head .sub{color:var(--ink-soft);font-size:13px;margin-top:4px;}
-  .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
-  .card + .card{margin-top:16px;}
-  .card-label{padding:12px 16px 0;font-size:13px;font-weight:700;color:var(--ink);}
-  .card-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--accent-soft);}
-  #panel-r1 .card-toolbar{--accent-soft:var(--r1-soft);}
-  .status{font-size:12.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
-  .status .led{width:7px;height:7px;border-radius:50%;background:#cbd5e1;}
-  .status.ok .led{background:#16a34a;}
-  .status.err .led{background:#dc2626;}
-  .toolbar-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
-  .btn{font-family:var(--sans);font-size:12.5px;font-weight:600;padding:7px 12px;border-radius:8px;border:1px solid var(--border);background:#ffffff;color:var(--ink);cursor:pointer;}
-  .btn:hover{border-color:var(--ink-soft);}
-  input[type=file]{display:none;}
-  .viewer{min-height:420px;display:flex;align-items:center;justify-content:center;padding:0;background:#ffffff;}
-  .viewer.empty{flex-direction:column;gap:10px;padding:60px 20px;color:var(--ink-soft);font-size:13.5px;text-align:center;}
-  .viewer.empty strong{color:var(--ink);font-size:14.5px;}
-  .viewer object, .viewer iframe{width:100%;height:78vh;border:0;display:block;}
-  .viewer img{max-width:100%;max-height:78vh;display:block;margin:0 auto;}
-  pre.text-view{width:100%;margin:0;padding:22px 26px;font-family:var(--mono);font-size:12.8px;line-height:1.6;white-space:pre-wrap;word-break:break-word;max-height:78vh;overflow:auto;}
-  .filecard{display:flex;flex-direction:column;align-items:center;gap:14px;padding:70px 20px;text-align:center;}
-  .filecard .icon{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:700;color:#ffffff;background:var(--accent);}
-  .filecard .fname{font-size:14.5px;font-weight:600;color:var(--ink);word-break:break-word;max-width:520px;}
-  .filecard .fmeta{font-size:12.5px;color:var(--ink-soft);}
-  .filecard .btn.primary{background:var(--accent);border-color:var(--accent);color:#ffffff;padding:9px 18px;font-size:13px;}
-  .office-embed-wrap{width:100%;}
-  .office-embed-note{text-align:center;padding:8px 12px;font-size:11.5px;color:var(--ink-soft);border-top:1px solid var(--border);}
-  .office-embed-note a{color:var(--ink);}
-  .hint{margin-top:12px;font-size:12px;color:var(--ink-soft);line-height:1.6;}
-  .hint code{background:#f1f5f9;padding:1px 6px;border-radius:5px;font-family:var(--mono);}
-  footer{text-align:center;padding:24px;color:var(--ink-soft);font-size:12px;}
-
-  .viewer.notebook{display:block;text-align:left;padding:20px 24px;overflow-x:auto;max-height:78vh;overflow-y:auto;}
-  .nb-cell{margin-bottom:16px;}
-  .nb-cell-label{font-size:11px;font-weight:700;text-transform:uppercase;color:var(--ink-soft);margin-bottom:4px;}
-  .nb-src{background:#0f172a;color:#e2e8f0;padding:12px 14px;border-radius:8px;font-family:var(--mono);font-size:12.5px;line-height:1.6;white-space:pre-wrap;overflow-x:auto;margin:0;}
-  .nb-md-body{font-size:13.5px;line-height:1.6;}
-  .nb-out{margin-top:8px;}
-  .nb-out-label{font-size:10.5px;color:var(--ink-soft);margin-bottom:4px;}
-  .nb-out pre{background:#f1f5f9;padding:10px 12px;border-radius:8px;font-family:var(--mono);font-size:12px;overflow-x:auto;}
-  .nb-out img{max-width:100%;border-radius:8px;}
-
-  .subgroup-title{margin:22px 0 10px;font-size:13.5px;font-weight:700;color:var(--r1);padding-bottom:6px;border-bottom:1px dashed var(--border);}
-
-  .empty-state{display:flex;flex-direction:column;align-items:center;gap:10px;padding:70px 20px;text-align:center;color:var(--ink-soft);}
-  .empty-state .icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;background:var(--r1-soft);color:var(--r1);}
-  .empty-state strong{color:var(--ink);font-size:15px;}
-  .empty-state span{font-size:13px;max-width:420px;}
+:root{
+  --bg:#f8fafc; --surface:#ffffff; --ink:#1e293b; --muted:#64748b;
+  --line:#e2e8f0; --accent:#db2777; --accent-soft:#fdf2f8;
+  --warm:#7c3aed; --warm-soft:#f5f3ff;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+:root[data-theme="dark"]{
+  --bg:#0f172a; --surface:#1e293b; --ink:#e2e8f0; --muted:#94a3b8;
+  --line:#334155; --accent:#f472b6; --accent-soft:#3b1a2e;
+  --warm:#a78bfa; --warm-soft:#2a2245;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.65;font-size:17px}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+header{padding:56px 0 32px;border-bottom:1px solid var(--line)}
+header p.kicker{margin:0 0 8px;color:var(--accent);font-weight:600}
+h1{font-family:var(--serif);font-size:clamp(2rem,5vw,3.1rem);line-height:1.15;margin:0 0 16px;font-weight:700}
+header p.lead{max-width:62ch;color:var(--muted);margin:0 0 20px;font-size:1.05rem}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.toc a{padding:6px 14px;border:1px solid var(--line);border-radius:999px;color:var(--ink);text-decoration:none;font-size:.92rem;background:var(--surface)}
+.toc a:hover,.toc a:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
+section{padding:44px 0 8px}
+h2{font-family:var(--serif);font-size:1.7rem;margin:0 0 14px;line-height:1.25}
+h3{font-size:1.1rem;margin:0 0 6px}
+p{margin:0 0 14px;max-width:68ch}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+.box.basic{border-left:5px solid var(--accent)}
+.box.complex{border-left:5px solid var(--warm)}
+.box p{margin:0 0 8px}
+.box p:last-child{margin:0}
+.val{padding:10px 0;border-top:1px solid var(--line)}
+.val h4{margin:0 0 2px;font-size:1rem;color:var(--ink)}
+.val p{margin:0;color:var(--muted);font-size:.95rem}
+.box h3+p{margin-bottom:10px}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin:18px 0}
+.vgrid .box h3{margin:0 0 6px}
+.vgrid .box p{color:var(--muted);font-size:.95rem}
+.steps{list-style:none;counter-reset:st;margin:18px 0;padding:0;max-width:68ch}
+.steps li{counter-increment:st;position:relative;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 18px 14px 62px;margin-bottom:10px}
+.steps li::before{content:counter(st);position:absolute;left:16px;top:14px;width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+:root[data-theme="dark"] .steps li::before{color:#1e293b}
+.steps h3{margin:0 0 4px;font-size:1.02rem}
+.steps p{margin:0;color:var(--muted);font-size:.95rem}
+.checks{list-style:none;margin:0 0 18px;padding:0;max-width:68ch}
+.checks li{position:relative;padding:8px 0 8px 30px;border-bottom:1px solid var(--line)}
+.checks li::before{content:"✓";position:absolute;left:4px;top:8px;color:var(--accent);font-weight:700}
+.quote{margin:20px 0 10px;padding:16px 22px;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px;max-width:68ch}
+.quote blockquote{margin:0;font-family:var(--serif);font-size:1.15rem;line-height:1.5}
+.quote figcaption{margin-top:8px;color:var(--muted);font-size:.92rem}
+.quote figcaption::before{content:"— "}
+.tag{display:inline-block;font-size:.88rem;padding:2px 10px;border-radius:6px;background:var(--accent-soft);color:var(--accent);margin:0 6px 6px 0}
+.box.complex .tag{background:var(--warm-soft);color:var(--warm)}
+.callout{background:var(--accent-soft);border-radius:10px;padding:16px 20px;margin:18px 0;max-width:68ch}
+.callout p{margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 18px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 16px;border-radius:8px;cursor:pointer;font:inherit;font-size:.95rem}
+.chip:hover{border-color:var(--accent)}
+.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.chip[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .chip[aria-selected="true"]{color:#1e293b}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 22px;max-width:68ch}
+.panel h3{margin-top:0}
+.panel p:last-child{margin:0}
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:0;margin:0 0 10px;max-width:68ch}
+summary{cursor:pointer;padding:14px 18px;font-weight:600;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";float:right;color:var(--accent);font-size:1.2rem;line-height:1}
+details[open] summary::after{content:"–"}
+summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:10px}
+details .body{padding:0 18px 14px;color:var(--muted)}
+details .body p{margin:0}
+.table-scroll{overflow-x:auto;margin:18px 0}
+table{border-collapse:collapse;width:100%;min-width:560px;background:var(--surface)}
+th,td{border:1px solid var(--line);padding:10px 14px;text-align:left;vertical-align:top;font-size:.95rem}
+th{background:var(--accent-soft);color:var(--ink)}
+.video{background:var(--warm-soft);border-radius:10px;padding:16px 20px;margin:18px 0;max-width:68ch}
+.video p{margin:0}
+footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:.92rem}
+.theme{position:absolute;top:14px;right:16px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer;font:inherit;font-size:.88rem}
+.theme:focus-visible{outline:2px solid var(--accent)}
+@media (max-width:640px){.pair{grid-template-columns:1fr}body{font-size:16px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<div class="top-bar">
-  <a class="top-link back" href="../index.html">
-    <span class="icon">
-      <svg class="stroke" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
-    </span>
-    <span>Volver a Módulos</span>
-  </a>
-  <a class="top-link" href="https://github.com/efrabuilder/Fundamentos-de-Ciencias-de-Datos/tree/main/Modulo7" target="_blank" rel="noopener noreferrer">
-    <span class="icon">
-      <svg class="fill" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
-    </span>
-    <span>Ver repositorio en GitHub</span>
-    <span class="arrow">→</span>
-  </a>
-</div>
-<header>
-  <div class="eyebrow">Módulo 7</div>
-  <h1>Habilidades Socioemocionales para el Análisis de Datos</h1>
-</header>
-<nav>
-  <button class="tab active" id="tab-r1" data-target="panel-r1">
-    <span class="dot"></span> Habilidades Socioemocionales
-  </button>
-</nav>
-<main>
-  <!-- ===================== PANEL 1: Habilidades Socioemocionales ===================== -->
-  <section class="panel active" id="panel-r1">
-    <div class="panel-head">
-      <div>
-        <h2>Habilidades Socioemocionales y Valores Humanos</h2>
-        <div class="sub">Emociones, inteligencia emocional, habilidades socioemocionales y valores humanos</div>
-      </div>
-    </div>
+<button class="theme" id="themeBtn" type="button" aria-label="Cambiar entre tema claro y oscuro">Tema</button>
 
-    <div class="card">
-      <div class="card-label">Habilidades Socioemocionales y Valores Humanos</div>
-      <div class="card-toolbar">
-        <div class="status" id="status-habilidades"><span class="led"></span> Cargando…</div>
-        <div class="toolbar-actions">
-          <label class="btn" for="file-habilidades">Cargar manualmente</label>
-          <input type="file" id="file-habilidades">
-          <a class="btn" id="download-habilidades" style="display:none;">Descargar</a>
-        </div>
-      </div>
-      <div class="viewer" id="viewer-habilidades">
-        <div class="empty-state">
-          <div class="icon">⏳</div>
-          <strong>Cargando recurso…</strong>
-          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
-        </div>
-      </div>
+<header>
+  <div class="wrap">
+    <p class="kicker">Módulo 7</p>
+    <h1>Emociones, habilidades socioemocionales y valores humanos</h1>
+    <p class="lead">Un recorrido breve: qué son las emociones, cómo influyen en la conducta, cómo se desarrolla la inteligencia emocional y de qué manera las habilidades socioemocionales sostienen los valores humanos.</p>
+    <nav class="toc" aria-label="Contenido">
+      <a href="#emociones">Las emociones</a>
+      <a href="#conducta">Emoción y conducta</a>
+      <a href="#ie">Inteligencia emocional</a>
+      <a href="#manejo">Validación y manejo</a>
+      <a href="#reflexion">Reflexión</a>
+      <a href="#habilidades">Habilidades socioemocionales</a>
+      <a href="#valores">Valores humanos</a>
+      <a href="#valores-clase">Valores de clase</a>
+      <a href="#decisiones">Decisiones de valor</a>
+      <a href="#cambiar">Cambiar valores</a>
+      <a href="#ventajas">Ventajas de ser fiel</a>
+      <a href="#relacion">Cómo se relacionan</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section id="emociones">
+  <h2>Las emociones y sus tipos</h2>
+  <p>Las emociones son reacciones psicofisiológicas que se activan ante estímulos internos o externos. Modulan cómo interpretamos, percibimos y respondemos al entorno. Tienen una base biológica, pero la cultura y la sociedad también las moldean. Su función principal es ayudarnos a adaptarnos: protegernos, buscar bienestar e interactuar con otros.</p>
+  <div class="pair">
+    <div class="box basic">
+      <h3>Emociones básicas</h3>
+      <p>Universales y compartidas por todas las culturas. Se vinculan con respuestas instintivas y de supervivencia.</p>
+      <span class="tag">Alegría</span><span class="tag">Tristeza</span><span class="tag">Miedo</span><span class="tag">Ira</span><span class="tag">Asco</span><span class="tag">Sorpresa</span>
     </div>
-  </section>
+    <div class="box complex">
+      <h3>Emociones complejas</h3>
+      <p>Surgen de la combinación de emociones básicas y dependen del contexto social y cultural.</p>
+      <span class="tag">Culpa</span><span class="tag">Vergüenza</span><span class="tag">Orgullo</span><span class="tag">Envidia</span><span class="tag">Amor</span>
+    </div>
+  </div>
+</section>
+
+<section id="conducta">
+  <h2>Las emociones y la conducta</h2>
+  <p>Las emociones son uno de los motores principales de la conducta. Determinan cómo percibimos las situaciones y cómo reaccionamos, e influyen en nuestras decisiones y relaciones. El miedo, por ejemplo, puede provocar huida o enfrentamiento; la alegría promueve el acercamiento y la conexión social.</p>
+  <div class="callout">
+    <p>Si las emociones no se gestionan bien, pueden derivar en conductas impulsivas o disfuncionales. Reconocerlas y manejarlas de forma consciente permite respuestas más adaptativas y constructivas.</p>
+  </div>
+</section>
+
+<section id="ie">
+  <h2>Inteligencia emocional</h2>
+  <p>La inteligencia emocional (IE) es la capacidad de identificar, comprender, regular y expresar las emociones de manera adecuada, en uno mismo y en los demás. El concepto fue popularizado por Daniel Goleman, quien la divide en cinco competencias. Selecciona una para ver su descripción.</p>
+  <div class="chips" role="tablist" aria-label="Competencias de la inteligencia emocional" id="ieTabs">
+    <button class="chip" role="tab" aria-selected="true" data-i="0" type="button">Autoconciencia</button>
+    <button class="chip" role="tab" aria-selected="false" data-i="1" type="button">Autorregulación</button>
+    <button class="chip" role="tab" aria-selected="false" data-i="2" type="button">Automotivación</button>
+    <button class="chip" role="tab" aria-selected="false" data-i="3" type="button">Empatía</button>
+    <button class="chip" role="tab" aria-selected="false" data-i="4" type="button">Habilidades sociales</button>
+  </div>
+  <div class="panel" role="tabpanel" id="iePanel" aria-live="polite">
+    <h3 id="ieTitle"></h3>
+    <p id="ieText"></p>
+  </div>
+  <p style="margin-top:16px">Hoy la IE se considera un factor determinante para el éxito personal y profesional, con una influencia sobre el bienestar y las relaciones que puede superar a la de la inteligencia cognitiva.</p>
+  <div class="video">
+    <p><strong>Video visto en clase:</strong> «Inteligencia emocional – Daniel Goleman – Resumen animado» (YouTube).</p>
+  </div>
+</section>
+
+<section id="manejo">
+  <h2>Validación y manejo de las emociones</h2>
+  <p>La validación emocional consiste en reconocer, aceptar y legitimar las emociones propias y ajenas, sin juzgarlas ni minimizarlas. Validar no significa estar de acuerdo con la emoción, sino aceptar que es una experiencia válida. Esto favorece la autocomprensión y fortalece las relaciones.</p>
+  <p>El manejo de las emociones busca regularlas y canalizarlas de forma constructiva para que no controlen nuestras acciones. Estas son cuatro técnicas comunes:</p>
+  <details>
+    <summary>Identificación de emociones</summary>
+    <div class="body"><p>Reconocerlas y nombrarlas para entender su origen.</p></div>
+  </details>
+  <details>
+    <summary>Técnicas de relajación</summary>
+    <div class="body"><p>La respiración profunda y la meditación ayudan a reducir la intensidad de las emociones negativas.</p></div>
+  </details>
+  <details>
+    <summary>Reestructuración cognitiva</summary>
+    <div class="body"><p>Cambiar los patrones de pensamiento que intensifican emociones disfuncionales.</p></div>
+  </details>
+  <details>
+    <summary>Expresión emocional saludable</summary>
+    <div class="body"><p>Comunicar lo que sentimos de manera clara y asertiva.</p></div>
+  </details>
+</section>
+
+<section id="reflexion">
+  <h2>Reflexión sobre las emociones</h2>
+  <p>Dos frases ayudan a pensar cómo nos relacionamos con lo que sentimos.</p>
+
+  <figure class="quote">
+    <blockquote>«La ira, el resentimiento y los celos no cambian el corazón de los otros, solo cambia el tuyo…»</blockquote>
+    <figcaption>Shannon L. Alder</figcaption>
+  </figure>
+  <p>Estas emociones suelen dirigirse hacia otra persona con la esperanza, consciente o no, de que cambie. Sin embargo, quien realmente las carga es quien las siente: generan desgaste, tensión y pueden deteriorar sus propias relaciones. La frase invita a recordar que lo único que podemos modificar es nuestra respuesta. Esto no significa negar la ira o los celos, sino reconocerlos y decidir qué hacer con ellos, algo que se trabaja con la autorregulación y la reestructuración cognitiva.</p>
+
+  <figure class="quote">
+    <blockquote>«Una emoción no causa dolor. La resistencia o supresión de una emoción causa dolor…»</blockquote>
+    <figcaption>Frederick Dodson</figcaption>
+  </figure>
+  <p>La emoción en sí es información sobre cómo vivimos una situación. El sufrimiento aumenta cuando intentamos rechazarla, ocultarla o fingir que no existe, porque la emoción no desaparece y suele volver con más fuerza. Aquí cobra sentido la validación emocional: aceptar lo que sentimos sin juzgarlo, ponerle nombre y expresarlo de manera clara y asertiva.</p>
+
+  <div class="callout">
+    <p>Ambas frases coinciden en algo: lo importante no es la emoción en sí misma, sino la forma en que la reconocemos y la manejamos.</p>
+  </div>
+</section>
+
+<section id="habilidades">
+  <h2>Habilidades socioemocionales (habilidades sociales)</h2>
+  <p>Las habilidades socioemocionales, también llamadas habilidades sociales y, en el ámbito laboral, habilidades blandas, son un conjunto de competencias para reconocer, manejar y expresar emociones, y para interactuar eficazmente con los demás. Son esenciales para adaptarse y resolver conflictos en contextos personales, educativos y laborales.</p>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Componente</th><th>Qué implica</th></tr></thead>
+      <tbody>
+        <tr><td>Autoconocimiento</td><td>Identificar y comprender las propias emociones, fortalezas, debilidades y valores, lo que permite construir una identidad sólida.</td></tr>
+        <tr><td>Autorregulación</td><td>Manejar emociones negativas como el estrés y la frustración para responder adecuadamente a los desafíos.</td></tr>
+        <tr><td>Empatía</td><td>Comprender y compartir las emociones de los demás, lo que genera conexiones más profundas y significativas.</td></tr>
+        <tr><td>Comunicación</td><td>Escucha activa, asertividad y expresión clara y respetuosa de pensamientos y sentimientos.</td></tr>
+        <tr><td>Resolución de conflictos</td><td>Abordar las discrepancias de forma constructiva, buscando soluciones beneficiosas para todas las partes.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h3 style="margin-top:28px">Habilidades importantes</h3>
+  <div class="vgrid">
+    <div class="box basic"><h3>Autoconocimiento</h3><p>Identificar y comprender las propias emociones, fortalezas, debilidades y valores.</p></div>
+    <div class="box complex"><h3>Mente abierta</h3><p>Escuchar ideas distintas, aceptar otros puntos de vista y estar dispuesto a cambiar de opinión.</p></div>
+    <div class="box basic"><h3>Autorregulación</h3><p>Manejar emociones como el estrés y la frustración para responder de forma adecuada.</p></div>
+    <div class="box complex"><h3>Colaboración</h3><p>Trabajar junto a otros hacia metas comunes, aportando y valorando los aportes de los demás.</p></div>
+    <div class="box basic"><h3>Empatía</h3><p>Comprender y compartir lo que sienten las demás personas.</p></div>
+    <div class="box complex"><h3>Comunicación asertiva</h3><p>Expresar ideas, opiniones y desacuerdos de forma clara y respetuosa, sin agredir ni callar.</p></div>
+  </div>
+  <h3 style="margin-top:28px">¿Qué nos permiten las habilidades socioemocionales?</h3>
+  <div class="vgrid">
+    <div class="box basic"><h3>Entender y regular nuestras emociones</h3><p>Reconocer lo que sentimos y manejarlo para que no dirija nuestra conducta.</p></div>
+    <div class="box complex"><h3>Sentir empatía</h3><p>Comprender lo que viven y sienten las demás personas y ponerse en su lugar.</p></div>
+    <div class="box basic"><h3>Tener relaciones positivas</h3><p>Construir vínculos sanos, basados en el respeto y la confianza.</p></div>
+    <div class="box complex"><h3>Tomar decisiones responsables</h3><p>Elegir considerando las consecuencias para uno mismo y para los demás.</p></div>
+    <div class="box basic"><h3>Alcanzar metas</h3><p>Mantener la motivación y el enfoque para lograr lo que nos proponemos.</p></div>
+  </div>
+  <p>En el trabajo, estas habilidades se valoran tanto como las técnicas: favorecen el trabajo en equipo, el liderazgo y la toma de decisiones en momentos críticos. En lo personal, fortalecen las relaciones y el bienestar psicológico.</p>
+<h3 style="margin-top:28px">Importancia del manejo de las habilidades sociales</h3>
+  <div class="callout">
+    <p>Las habilidades sociales nos ayudan a relacionarnos con los demás, integrarnos y comunicarnos de manera efectiva. Son muchas las facetas de la vida diaria en las que las habilidades sociales marcan la diferencia.</p>
+  </div>
+  <h3 style="margin-top:28px">¿Por qué es útil aprenderlas?</h3>
+  <p>No son solo un rasgo innato: se pueden practicar y desarrollar de forma intencional. Aprenderlas permite:</p>
+  <ul class="checks">
+    <li>Colaborar mejor en equipos y evitar conflictos innecesarios.</li>
+    <li>Comunicar ideas técnicas de forma que otros las entiendan, algo clave en áreas como TI.</li>
+    <li>Manejar situaciones de presión, críticas o desacuerdos con criterio.</li>
+    <li>Mejorar el ambiente laboral y las oportunidades de crecimiento profesional.</li>
+  </ul>
+  <div class="callout">
+    <p>Quienes tienen menos empatía natural pueden compensarlo en buena medida con tolerancia, discernimiento y buena comunicación. Por eso aprenderlas beneficia a cualquier persona, sin importar su punto de partida.</p>
+  </div>
+</section>
+
+<section id="valores">
+  <h2>Valores humanos</h2>
+  <p>Son principios éticos y morales que guían el comportamiento y definen lo que las personas consideran importante. Funcionan como brújulas internas que orientan las acciones hacia el bien común y la justicia.</p>
+  <p>Según el ámbito en el que se practican, los valores se pueden agrupar en cinco tipos: personales, familiares, sociales, socioculturales y materiales.</p>
+  <div class="pair">
+    <div class="box basic">
+      <h3>Valores personales</h3>
+      <p>Orientan cómo actuamos y nos comprometemos, aun cuando nadie nos observa.</p>
+      <div class="val"><h4>Honestidad</h4><p>Actuar con transparencia y verdad en todas las interacciones.</p></div>
+      <div class="val"><h4>Responsabilidad</h4><p>Cumplir los compromisos y asumir las consecuencias de las propias acciones.</p></div>
+      <div class="val"><h4>Perseverancia</h4><p>Mantener el esfuerzo hacia una meta a pesar de los obstáculos y los errores.</p></div>
+      <div class="val"><h4>Humildad</h4><p>Reconocer las propias limitaciones y estar abierto a aprender de los demás.</p></div>
+      <div class="val"><h4>Autodisciplina</h4><p>Actuar de acuerdo con lo que se ha decidido, aunque cueste o no haya ganas.</p></div>
+      <div class="val"><h4>Gratitud</h4><p>Reconocer y valorar lo que se recibe de otras personas y de la vida.</p></div>
+    </div>
+    <div class="box complex">
+      <h3>Valores familiares</h3>
+      <p>Se aprenden y se viven en el hogar, y sostienen los vínculos entre sus miembros.</p>
+      <div class="val"><h4>Amor</h4><p>Cuidar y querer a los miembros de la familia, mostrándolo con hechos.</p></div>
+      <div class="val"><h4>Unidad</h4><p>Mantenerse unidos y apoyarse, sobre todo en los momentos difíciles.</p></div>
+      <div class="val"><h4>Lealtad</h4><p>Ser fiel y comprometido con la familia y con los lazos que se comparten.</p></div>
+      <div class="val"><h4>Comunicación</h4><p>Dialogar con confianza y escucharse para resolver las diferencias en casa.</p></div>
+    </div>
+    <div class="box basic">
+      <h3>Valores sociales</h3>
+      <p>Regulan cómo nos relacionamos y convivimos en comunidad.</p>
+      <div class="val"><h4>Respeto</h4><p>Reconocer y valorar la dignidad de los demás, sin importar sus diferencias.</p></div>
+      <div class="val"><h4>Solidaridad</h4><p>Mostrar empatía y apoyo hacia quienes lo necesitan.</p></div>
+      <div class="val"><h4>Justicia</h4><p>Buscar la equidad y el trato igualitario en todas las esferas de la vida.</p></div>
+      <div class="val"><h4>Tolerancia</h4><p>Aceptar y convivir con ideas, creencias y formas de vida distintas a las propias.</p></div>
+      <div class="val"><h4>Cooperación</h4><p>Trabajar junto a otros para lograr objetivos comunes, aportando y recibiendo apoyo.</p></div>
+      <div class="val"><h4>Igualdad</h4><p>Reconocer que todas las personas tienen los mismos derechos y oportunidades.</p></div>
+      <div class="val"><h4>Generosidad</h4><p>Compartir tiempo, conocimientos o recursos en beneficio de los demás sin esperar algo a cambio.</p></div>
+    </div>
+    <div class="box complex">
+      <h3>Valores socioculturales</h3>
+      <p>Provienen de la cultura y la historia de una comunidad, y definen su identidad.</p>
+      <div class="val"><h4>Identidad cultural</h4><p>Valorar las costumbres, la lengua y la historia propias como parte de quiénes somos.</p></div>
+      <div class="val"><h4>Tradición</h4><p>Conservar y transmitir las prácticas y celebraciones de una generación a otra.</p></div>
+      <div class="val"><h4>Diversidad</h4><p>Reconocer y apreciar la variedad de culturas que conviven en una misma sociedad.</p></div>
+      <div class="val"><h4>Sentido de pertenencia</h4><p>Sentirse parte de una comunidad y comprometerse con su bienestar.</p></div>
+    </div>
+    <div class="box basic">
+      <h3>Valores materiales</h3>
+      <p>Se relacionan con el uso y el cuidado de los bienes y recursos que permiten vivir bien.</p>
+      <div class="val"><h4>Ahorro</h4><p>Guardar parte de lo que se tiene para necesidades futuras o imprevistos.</p></div>
+      <div class="val"><h4>Austeridad</h4><p>Usar los recursos con moderación y evitar el gasto innecesario.</p></div>
+      <div class="val"><h4>Cuidado de los bienes</h4><p>Mantener y aprovechar al máximo lo que se posee y lo que se comparte.</p></div>
+      <div class="val"><h4>Trabajo</h4><p>Esforzarse de manera productiva para obtener los recursos propios de forma digna.</p></div>
+    </div>
+  </div>
+  <p>Los cinco tipos se complementan: los valores personales se viven en lo individual, pero se forman en la familia, se practican en la sociedad y se expresan a través de la cultura y del uso de los recursos materiales. El respeto, por ejemplo, nace de una convicción personal y se practica en todos esos ámbitos.</p>
+  <p>Los valores son esenciales para construir comunidades cohesionadas y éticas. Sin ellos, la convivencia pacífica y el progreso sostenible serían inalcanzables.</p>
+</section>
+
+<section id="valores-clase">
+  <h2>Valores vistos en clase</h2>
+  <p>Estos son los quince valores trabajados en la presentación del curso, en el mismo orden y agrupación en que aparecen allí. Cada tres valores comparten un color.</p>
+  <div class="vgrid">
+    <div class="box basic"><h3>Amor</h3><p>Es el sentimiento de afecto profundo y de entrega hacia otra persona, que se demuestra con el cuidado, la comprensión y el apoyo constante, buscando su bienestar sin esperar nada a cambio.</p></div>
+    <div class="box basic"><h3>Amistad</h3><p>Es un vínculo de cariño, confianza y reciprocidad entre personas que se acompañan, se escuchan y se apoyan tanto en los buenos como en los malos momentos.</p></div>
+    <div class="box basic"><h3>Bondad</h3><p>Es la inclinación a hacer el bien y a tratar a los demás con amabilidad y compasión, actuando con generosidad aun cuando nadie lo exija.</p></div>
+    <div class="box complex"><h3>Paz</h3><p>Es un estado de armonía, interior y en la convivencia con los demás, que se construye resolviendo los conflictos mediante el diálogo y evitando cualquier forma de violencia.</p></div>
+    <div class="box complex"><h3>Respeto</h3><p>Es reconocer y valorar la dignidad, las ideas y los derechos de cada persona, aun cuando sean distintos a los propios, tratándola siempre con consideración.</p></div>
+    <div class="box complex"><h3>Responsabilidad</h3><p>Es cumplir con los compromisos y asumir las consecuencias de las propias decisiones, respondiendo tanto por lo que se hace como por lo que se deja de hacer.</p></div>
+    <div class="box basic"><h3>Confianza</h3><p>Es la seguridad que se deposita en alguien de que actuará con sinceridad y coherencia. Se construye con hechos constantes a lo largo del tiempo y puede perderse con facilidad.</p></div>
+    <div class="box basic"><h3>Fraternidad</h3><p>Es el vínculo de hermandad entre las personas, que se reconocen como iguales y se tratan con apoyo y unión, más allá de las diferencias de origen, ideas o condición.</p></div>
+    <div class="box basic"><h3>Honor</h3><p>Es actuar con rectitud y coherencia entre lo que se piensa, se dice y se hace, cuidando la propia dignidad y el buen nombre frente a los demás.</p></div>
+    <div class="box complex"><h3>Honradez</h3><p>Es el actuar con sabiduría e integridad, permitiendo ser transparente al actor en el vivir, un vínculo interpersonal limpio y fuera de corrupción.</p></div>
+    <div class="box complex"><h3>Justicia</h3><p>En un contexto de causa y efecto, las acciones son equivalentes al resultado. Como puede suceder, dentro de una coyuntura, la totalidad de sus hechos van a equivaler a su merecimiento final.</p></div>
+    <div class="box complex"><h3>Libertad</h3><p>La libertad propia termina cuando empieza la libertad de otra persona. Es poder elegir hacia dónde voy y con quien, además es poder expresar las opiniones de forma clara y bajo las creencias propias.</p></div>
+    <div class="box basic"><h3>Solidaridad</h3><p>Es la disposición a apoyar a quienes atraviesan una necesidad, compartiendo tiempo, recursos o ayuda, entendiendo que el bienestar de cada persona depende también del bienestar de las demás.</p></div>
+    <div class="box basic"><h3>Tolerancia</h3><p>Es aceptar y respetar ideas, creencias y formas de vida distintas a las propias, sin imponer la visión personal ni discriminar, reconociendo que la diversidad enriquece.</p></div>
+    <div class="box basic"><h3>Valentía</h3><p>Es la capacidad de enfrentar el miedo, el riesgo o la dificultad para actuar conforme a lo que se considera correcto, aun cuando hacerlo resulte complicado.</p></div>
+  </div>
+</section>
+
+<section id="decisiones">
+  <h2>Decisiones de valor</h2>
+  <p>Una decisión de valor es una elección en la que están en juego nuestros valores y no solo el costo, la rapidez o la conveniencia. Suele aparecer cuando dos valores chocan, por ejemplo la honestidad frente a la lealtad, y hay que decidir cuál pesa más en esa situación y asumir las consecuencias.</p>
+  <p>Estas decisiones se apoyan en las habilidades socioemocionales: el autoconocimiento para saber qué valoramos, la autorregulación para no decidir en caliente y la empatía para considerar a las personas afectadas. Estos son seis pasos para tomarlas con criterio. Abre cada uno para ver su descripción.</p>
+  <details>
+    <summary>1. Identificar la situación y los valores en juego</summary>
+    <div class="body"><p>Describir qué ocurre y qué valores se ven comprometidos (honestidad, respeto, responsabilidad, justicia, etc.).</p></div>
+  </details>
+  <details>
+    <summary>2. Reconocer las propias emociones</summary>
+    <div class="body"><p>Nombrar lo que se siente (miedo, presión, enojo) y regularlo antes de decidir, para que la emoción no tome la decisión.</p></div>
+  </details>
+  <details>
+    <summary>3. Considerar a las personas afectadas</summary>
+    <div class="body"><p>Preguntarse quiénes resultan beneficiados o perjudicados y qué sienten, aplicando la empatía.</p></div>
+  </details>
+  <details>
+    <summary>4. Evaluar alternativas y consecuencias</summary>
+    <div class="body"><p>Plantear al menos dos opciones y valorar sus efectos a corto y largo plazo para uno mismo, para otros y para la comunidad.</p></div>
+  </details>
+  <details>
+    <summary>5. Decidir y asumir la responsabilidad</summary>
+    <div class="body"><p>Elegir la opción más coherente con los valores propios, comunicarla de forma asertiva y hacerse cargo de sus resultados.</p></div>
+  </details>
+  <details>
+    <summary>6. Reflexionar sobre lo ocurrido</summary>
+    <div class="body"><p>Revisar qué se aprendió y qué se haría igual o distinto, para fortalecer el criterio en futuras decisiones.</p></div>
+  </details>
+
+  <h3 style="margin-top:28px">Un ejemplo en el análisis de datos</h3>
+  <div class="callout">
+    <p>Una analista termina un informe y descubre que los datos no respaldan la conclusión que su jefatura esperaba. Le sugieren omitir un resultado para que el informe «se vea mejor». Debe decidir qué hacer.</p>
+  </div>
+  <div class="table-scroll">
+    <table>
+      <thead><tr><th>Valor en juego</th><th>Qué pide la situación</th></tr></thead>
+      <tbody>
+        <tr><td>Honestidad</td><td>Presentar los resultados tal como son, sin ocultar información relevante.</td></tr>
+        <tr><td>Responsabilidad</td><td>Asumir que sus conclusiones influirán en decisiones reales de la organización.</td></tr>
+        <tr><td>Respeto</td><td>Plantear su desacuerdo con la jefatura de forma asertiva y sin descalificar.</td></tr>
+        <tr><td>Justicia</td><td>Pensar en quiénes podrían salir perjudicados si se decide con datos incompletos.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Una decisión coherente sería presentar el resultado completo, explicar con claridad lo que muestran los datos y proponer cómo comunicarlo, manteniendo el respeto hacia el equipo.</p>
+</section>
+
+<section id="cambiar">
+  <h2>Cómo cambiar los valores personales</h2>
+  <p>Los valores personales no son inamovibles. Pueden revisarse y modificarse cuando dejan de representarnos, chocan con otros valores que consideramos más importantes o nos generan conflictos con las demás personas. Cambiar un valor no significa renunciar a quien eres, sino decidir de manera consciente en quién quieres convertirte.</p>
+  <ol class="steps">
+    <li><h3>Identifica tus propios valores y fortalezas personales</h3><p>Es el punto de partida: reflexionar sobre qué valores guían hoy tus decisiones y con qué fortalezas cuentas para apoyar el cambio.</p></li>
+    <li><h3>Identifica cuáles son los nuevos valores que te gustaría adoptar</h3><p>Definir con claridad qué valores quieres incorporar o fortalecer y por qué, comparándolos con los que practicas actualmente.</p></li>
+    <li><h3>Comprende y respeta los valores de los demás practicando la empatía</h3><p>Conocer cómo piensan y qué valoran otras personas amplía tu mirada, te ayuda a cuestionar tus propios supuestos y a decidir con más criterio.</p></li>
+    <li><h3>Comprométete a mejorar</h3><p>Convertir la intención en acciones concretas y constantes en la vida diaria, hasta que el nuevo valor se vuelva parte de tu manera de actuar.</p></li>
+    <li><h3>Date tiempo para adaptarte</h3><p>El cambio es gradual: habrá avances y retrocesos. La paciencia y la autorregulación ayudan a no desanimarse en el proceso.</p></li>
+  </ol>
+  <div class="callout">
+    <p>Este proceso es un ciclo: cada vez que cambian las circunstancias o aprendemos algo nuevo, podemos volver a identificar nuestros valores y ajustarlos.</p>
+  </div>
+</section>
+
+<section id="ventajas">
+  <h2>Ventajas de ser fiel a tus valores humanos</h2>
+  <p>Vivir de acuerdo con los propios valores trae beneficios tanto personales como en la relación con los demás. Estas son las principales ventajas.</p>
+  <div class="vgrid">
+    <div class="box basic"><h3>Ayudan a conocerte más a ti mismo/a</h3><p>Al actuar según lo que valoras, descubres qué es importante para ti y cómo eres realmente.</p></div>
+    <div class="box complex"><h3>Aportan una mayor estabilidad emocional</h3><p>Vivir de acuerdo con tus valores reduce la sensación de contradicción interna y da más calma ante los problemas.</p></div>
+    <div class="box basic"><h3>Ayudan a tener una mejor relación con uno/a mismo/a y con los demás</h3><p>La coherencia genera tranquilidad contigo y relaciones más sinceras y respetuosas con otras personas.</p></div>
+    <div class="box complex"><h3>Te convierten en una persona más íntegra</h3><p>Lo que piensas, dices y haces va en la misma dirección, y eso fortalece tu carácter.</p></div>
+    <div class="box basic"><h3>Es más fácil tomar tus propias decisiones sin titubear</h3><p>Tener claro lo que valoras sirve de guía y evita la duda constante al elegir.</p></div>
+    <div class="box complex"><h3>Ayudan a conocer cuáles son tus verdaderas prioridades</h3><p>Frente a varias opciones, tus valores te muestran a qué le das más importancia en tu vida.</p></div>
+    <div class="box basic"><h3>Los demás te perciben como una persona más segura y confiable</h3><p>Al notar que actúas de forma coherente con tus propios valores, las personas confían más en ti.</p></div>
+  </div>
+</section>
+
+<section id="relacion">
+  <h2>Cómo se relacionan ambas dimensiones</h2>
+  <p>Las habilidades socioemocionales permiten interiorizar y practicar los valores humanos de forma consciente y efectiva. Toca un par para ver el vínculo.</p>
+  <div class="chips" role="tablist" aria-label="Vínculos entre habilidades y valores" id="relTabs">
+    <button class="chip" role="tab" aria-selected="true" data-i="0" type="button">Empatía y solidaridad</button>
+    <button class="chip" role="tab" aria-selected="false" data-i="1" type="button">Autorregulación, respeto y justicia</button>
+  </div>
+  <div class="panel" role="tabpanel" aria-live="polite">
+    <p id="relText"></p>
+  </div>
+  <p style="margin-top:16px">En entornos laborales o educativos, combinar ambos aspectos genera climas positivos, mejora la productividad y reduce los conflictos. En lo personal, promueve la autorrealización y relaciones más sanas.</p>
+  <div class="callout">
+    <p>Desarrollar habilidades socioemocionales y practicar valores humanos mejora el bienestar individual y fortalece una sociedad más empática, justa y equilibrada. Por eso conviene fomentar su aprendizaje desde edades tempranas y en distintos contextos.</p>
+  </div>
+</section>
 
 </main>
-<footer>Recursos del Módulo 7 — Habilidades Socioemocionales para el Análisis de Datos</footer>
-<footer>© 2026 Todos los derechos reservados · Diseñado y desarrollado por Efraín Sebastián Rojas Artavia</footer>
-<script>
-  document.querySelectorAll('.tab').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
-      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById(btn.dataset.target).classList.add('active');
-    });
-  });
-  function setStatus(id, mode, text){
-    const el = document.getElementById(id);
-    el.className = 'status ' + mode;
-    el.innerHTML = '<span class="led"></span> ' + text;
-  }
-  function formatBytes(bytes){
-    if(!bytes && bytes !== 0) return '';
-    if(bytes < 1024) return bytes + ' B';
-    if(bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
-    return (bytes/(1024*1024)).toFixed(1) + ' MB';
-  }
-  function escapeHtml(str){
-    return str
-      .replace(/&/g,'&amp;')
-      .replace(/</g,'&lt;')
-      .replace(/>/g,'&gt;');
-  }
-  function renderText(viewerId, statusId, downloadId, text, url, filename){
-    const v = document.getElementById(viewerId);
-    v.className = 'viewer';
-    const pre = document.createElement('pre');
-    pre.className = 'text-view';
-    pre.textContent = text;
-    v.innerHTML = '';
-    v.appendChild(pre);
-    if(url){
-      const dl = document.getElementById(downloadId);
-      dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
-    }
-    setStatus(statusId,'ok','Archivo cargado');
-  }
-  function renderPdf(viewerId, statusId, downloadId, url, filename){
-    const v = document.getElementById(viewerId);
-    v.className = 'viewer';
-    v.innerHTML = '<iframe src="' + url + '"></iframe>';
-    const dl = document.getElementById(downloadId);
-    dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
-    setStatus(statusId,'ok','Archivo cargado');
-  }
-  function renderHtmlPage(viewerId, statusId, downloadId, url, filename){
-    const v = document.getElementById(viewerId);
-    v.className = 'viewer';
-    v.innerHTML = '<iframe src="' + url + '"></iframe>';
-    const dl = document.getElementById(downloadId);
-    dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
-    setStatus(statusId,'ok','Página cargada');
-  }
-  function renderImage(viewerId, statusId, downloadId, url, filename){
-    const v = document.getElementById(viewerId);
-    v.className = 'viewer';
-    v.innerHTML = '';
-    const img = document.createElement('img');
-    img.src = url;
-    v.appendChild(img);
-    const dl = document.getElementById(downloadId);
-    dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
-    setStatus(statusId,'ok','Imagen cargada');
-  }
-  function renderOfficeFile(viewerId, statusId, downloadId, url, filename, size, label, absoluteUrl){
-    const v = document.getElementById(viewerId);
-    v.className = 'viewer';
-    const dl = document.getElementById(downloadId);
-    dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
 
-    if(absoluteUrl){
-      const viewerUrl = 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(absoluteUrl);
-      v.innerHTML =
-        '<div class="office-embed-wrap">' +
-          '<iframe src="' + viewerUrl + '" style="width:100%;height:78vh;border:0;display:block;"></iframe>' +
-          '<div class="office-embed-note">Si la vista previa no carga (puede tardar unos segundos la primera vez), ' +
-            '<a href="' + url + '" download="' + filename + '">descarga el archivo directamente</a>.</div>' +
-        '</div>';
-    } else {
-      v.innerHTML =
-        '<div class="filecard">' +
-          '<div class="icon">' + label + '</div>' +
-          '<div class="fname">' + filename + '</div>' +
-          '<div class="fmeta">' + (size ? formatBytes(size) + ' · ' : '') + 'Vista previa no disponible para archivos cargados manualmente' + '</div>' +
-          '<a class="btn primary" href="' + url + '" download="' + filename + '">Descargar / Abrir archivo</a>' +
-        '</div>';
+<footer>
+  <div class="wrap">Recurso del Módulo 7 · Habilidades socioemocionales y valores humanos</div>
+</footer>
+
+<script>
+(function(){
+  var ie=[
+    ["Autoconciencia emocional","Reconocer las propias emociones y el impacto que tienen en la conducta."],
+    ["Autorregulación","Gestionar las emociones de forma efectiva para adaptarse a diferentes situaciones."],
+    ["Automotivación","Usar las emociones como motor para alcanzar metas y mantener el enfoque a pesar de las adversidades."],
+    ["Empatía","Reconocer y comprender las emociones de los demás, fomentando relaciones saludables."],
+    ["Habilidades sociales","Aplicar la inteligencia emocional para comunicarse, liderar y colaborar de manera efectiva."]
+  ];
+  var rel=[
+    "La empatía fortalece el valor de la solidaridad: comprender lo que siente otra persona es lo que nos mueve a apoyarla.",
+    "La autorregulación contribuye al respeto y a la justicia: manejar el estrés y la frustración evita reaccionar de forma impulsiva y permite tratar a los demás con dignidad e igualdad."
+  ];
+  function wire(id,render){
+    var box=document.getElementById(id);
+    var btns=box.querySelectorAll("button");
+    function select(i){
+      btns.forEach(function(b,k){b.setAttribute("aria-selected",k===i?"true":"false")});
+      render(i);
     }
-    setStatus(statusId,'ok','Archivo cargado');
+    btns.forEach(function(b,k){b.addEventListener("click",function(){select(k)})});
+    select(0);
   }
-  function renderNotebook(viewerId, statusId, downloadId, text, url, filename){
-    const v = document.getElementById(viewerId);
-    v.className = 'viewer notebook';
-    let nb;
-    try{
-      nb = JSON.parse(text);
-    }catch(e){
-      renderText(viewerId, statusId, downloadId, text, url, filename);
-      return;
-    }
-    const wrap = document.createElement('div');
-    wrap.className = 'nb';
-    const cells = nb.cells || [];
-    cells.forEach(cell => {
-      const src = Array.isArray(cell.source) ? cell.source.join('') : (cell.source || '');
-      const cellEl = document.createElement('div');
-      cellEl.className = 'nb-cell ' + (cell.cell_type === 'markdown' ? 'md' : 'code');
-      const label = document.createElement('div');
-      label.className = 'nb-cell-label';
-      label.textContent = cell.cell_type === 'markdown' ? 'Markdown' : 'Código';
-      cellEl.appendChild(label);
-      if(cell.cell_type === 'markdown'){
-        const body = document.createElement('div');
-        body.className = 'nb-md-body';
-        body.innerHTML = escapeHtml(src).replace(/\n/g,'<br>');
-        cellEl.appendChild(body);
-      } else {
-        const pre = document.createElement('pre');
-        pre.className = 'nb-src';
-        pre.textContent = src;
-        cellEl.appendChild(pre);
-        (cell.outputs || []).forEach(out => {
-          const outWrap = document.createElement('div');
-          outWrap.className = 'nb-out';
-          const outLabel = document.createElement('div');
-          outLabel.className = 'nb-out-label';
-          outLabel.textContent = 'Salida';
-          outWrap.appendChild(outLabel);
-          if(out.data && out.data['image/png']){
-            const img = document.createElement('img');
-            img.src = 'data:image/png;base64,' + out.data['image/png'];
-            outWrap.appendChild(img);
-          } else if(out.data && out.data['text/plain']){
-            const pre2 = document.createElement('pre');
-            const t = Array.isArray(out.data['text/plain']) ? out.data['text/plain'].join('') : out.data['text/plain'];
-            pre2.textContent = t;
-            outWrap.appendChild(pre2);
-          } else if(out.text){
-            const pre2 = document.createElement('pre');
-            const t = Array.isArray(out.text) ? out.text.join('') : out.text;
-            pre2.textContent = t;
-            outWrap.appendChild(pre2);
-          } else if(out.ename){
-            const pre2 = document.createElement('pre');
-            pre2.textContent = out.ename + ': ' + out.evalue;
-            outWrap.appendChild(pre2);
-          }
-          cellEl.appendChild(outWrap);
-        });
-      }
-      wrap.appendChild(cellEl);
-    });
-    v.innerHTML = '';
-    v.appendChild(wrap);
-    const dl = document.getElementById(downloadId);
-    dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
-    setStatus(statusId,'ok','Notebook cargado');
-  }
-  function renderByExtension(viewerId, statusId, downloadId, url, filename, blob, absoluteUrl){
-    const ext = filename.toLowerCase().split('.').pop();
-    switch(ext){
-      case 'sql':
-      case 'txt':
-      case 'md':
-        if(blob){
-          blob.text().then(text => renderText(viewerId, statusId, downloadId, text, url, filename));
-        }
-        break;
-      case 'svg':
-      case 'png':
-      case 'jpg':
-      case 'jpeg':
-        renderImage(viewerId, statusId, downloadId, url, filename);
-        break;
-      case 'pdf':
-        renderPdf(viewerId, statusId, downloadId, url, filename);
-        break;
-      case 'html':
-      case 'htm':
-        renderHtmlPage(viewerId, statusId, downloadId, url, filename);
-        break;
-      case 'xlsx':
-      case 'xlsm':
-        renderOfficeFile(viewerId, statusId, downloadId, url, filename, blob ? blob.size : null, 'XLS', absoluteUrl);
-        break;
-      case 'pptx':
-        renderOfficeFile(viewerId, statusId, downloadId, url, filename, blob ? blob.size : null, 'PPT', absoluteUrl);
-        break;
-      case 'docx':
-        renderOfficeFile(viewerId, statusId, downloadId, url, filename, blob ? blob.size : null, 'DOC', absoluteUrl);
-        break;
-      case 'pbix':
-        renderOfficeFile(viewerId, statusId, downloadId, url, filename, blob ? blob.size : null, 'PBI', false);
-        break;
-      case 'ipynb':
-        if(blob){
-          blob.text().then(text => renderNotebook(viewerId, statusId, downloadId, text, url, filename));
-        }
-        break;
-      default:
-        if(blob){
-          blob.text().then(text => renderText(viewerId, statusId, downloadId, text, url, filename));
-        }
-    }
-  }
-  function setupResource(id, expectedFilename){
-    const viewerId = 'viewer-' + id;
-    const statusId = 'status-' + id;
-    const downloadId = 'download-' + id;
-    const fileId = 'file-' + id;
-    fetch(expectedFilename).then(r=>{
-      if(!r.ok) throw new Error();
-      return r.blob();
-    }).then(blob=>{
-      const absoluteUrl = new URL(expectedFilename, window.location.href).href;
-      renderByExtension(viewerId, statusId, downloadId, URL.createObjectURL(blob), expectedFilename, blob, absoluteUrl);
-    }).catch(()=>{
-      setStatus(statusId,'err','No se encontró automáticamente — cárgalo manualmente');
-    });
-    document.getElementById(fileId).addEventListener('change', e=>{
-      const f = e.target.files[0];
-      if(!f) return;
-      renderByExtension(viewerId, statusId, downloadId, URL.createObjectURL(f), f.name, f);
-    });
-  }
-  // Igual que setupResource, pero la vista previa se carga desde una página
-  // HTML "espejo" del recurso, mientras que el botón Descargar sigue
-  // apuntando al archivo de imagen original (no al HTML).
-  function setupResourceHtml(id, previewHtmlFilename, downloadImageFilename){
-    const viewerId = 'viewer-' + id;
-    const statusId = 'status-' + id;
-    const downloadId = 'download-' + id;
-    const fileId = 'file-' + id;
-    fetch(previewHtmlFilename).then(r=>{
-      if(!r.ok) throw new Error();
-      return r.blob();
-    }).then(blob=>{
-      const previewUrl = URL.createObjectURL(blob);
-      renderHtmlPage(viewerId, statusId, downloadId, previewUrl, previewHtmlFilename);
-      // Sobrescribimos el enlace de descarga para que apunte a la imagen,
-      // no a la página HTML de vista previa.
-      const dl = document.getElementById(downloadId);
-      dl.href = downloadImageFilename;
-      dl.download = downloadImageFilename.split('/').pop();
-      dl.style.display = 'inline-block';
-    }).catch(()=>{
-      setStatus(statusId,'err','No se encontró automáticamente — cárgalo manualmente');
-    });
-    document.getElementById(fileId).addEventListener('change', e=>{
-      const f = e.target.files[0];
-      if(!f) return;
-      renderByExtension(viewerId, statusId, downloadId, URL.createObjectURL(f), f.name, f);
-    });
-  }
-  // ---------- Recursos del Módulo 7 ----------
-  setupResource('habilidades', 'HabilidadesSocioemocionales/habilidades_socioemocionales.html');
-  // Para agregar más recursos: crear la tarjeta (card) en el panel y llamar a
-  // setupResource(id, "ruta/al/archivo") o
-  // setupResourceHtml(id, "ruta/preview.html", "ruta/descarga.ext").
+  wire("ieTabs",function(i){
+    document.getElementById("ieTitle").textContent=ie[i][0];
+    document.getElementById("ieText").textContent=ie[i][1];
+  });
+  wire("relTabs",function(i){
+    document.getElementById("relText").textContent=rel[i];
+  });
+  var root=document.documentElement;
+  document.getElementById("themeBtn").addEventListener("click",function(){
+    var dark=root.getAttribute("data-theme")==="dark";
+    root.setAttribute("data-theme",dark?"light":"dark");
+  });
+})();
 </script>
 </body>
 </html>
