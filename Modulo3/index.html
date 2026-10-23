@@ -203,13 +203,20 @@
       <div class="viewer empty" id="viewer-r0b"><strong>Sin archivo cargado todavía</strong> El visor muestra el mapa conceptual en HTML (<code>Estadística/mapa_conceptual_estadistica.html</code>). El botón de descarga obtiene la imagen PNG original.</div>
     </div>
     <div class="hint" style="margin-bottom:22px;">Visor: <code>Estadística/mapa_conceptual_estadistica.html</code> &nbsp;·&nbsp; Descarga: <code>Estadística/mapa_conceptual_estadistica_vertical.png</code></div>
-    <div class="card">
+    <div class="card" style="margin-bottom:18px;">
       <div class="card-toolbar"><span class="status" id="status-r0c"><span class="led"></span> Buscando archivo…</span>
         <div class="toolbar-actions"><button class="btn" onclick="document.getElementById('file-r0c').click()">Cargar archivo…</button><input type="file" id="file-r0c" accept=".html,.jpg,.jpeg,image/jpeg"><a class="btn" id="download-r0c" download="mapa_simbologia_modulo3.jpg" style="display:none;">Descargar imagen</a></div>
       </div>
       <div class="viewer empty" id="viewer-r0c"><strong>Sin archivo cargado todavía</strong> El visor muestra el mapa de simbología en HTML (<code>Estadística/mapa_simbologia_estadistica_inferencial.html</code>). El botón de descarga obtiene la imagen JPG original.</div>
     </div>
-    <div class="hint">Visor: <code>Estadística/mapa_simbologia_estadistica_inferencial.html</code> &nbsp;·&nbsp; Descarga: <code>Estadística/mapa_simbologia_modulo3.jpg</code></div>
+    <div class="hint" style="margin-bottom:22px;">Visor: <code>Estadística/mapa_simbologia_estadistica_inferencial.html</code> &nbsp;·&nbsp; Descarga: <code>Estadística/mapa_simbologia_modulo3.jpg</code></div>
+    <div class="card">
+      <div class="card-toolbar"><span class="status" id="status-r0d"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions"><button class="btn" onclick="document.getElementById('file-r0d').click()">Cargar archivo…</button><input type="file" id="file-r0d" accept=".html,text/html"><a class="btn" id="download-r0d" download="resumen_mapas_conceptuales_estadística_modulo3.html" style="display:none;">Descargar</a></div>
+      </div>
+      <div class="viewer empty" id="viewer-r0d"><strong>Sin archivo cargado todavía</strong> Coloca el archivo <code>Estadística/resumen_mapas_conceptuales_estadística_modulo3.html</code> en la ruta indicada (relativa a este HTML), o cárgalo manualmente con el botón de arriba.</div>
+    </div>
+    <div class="hint">Resumen narrado de los mapas de estadística básica: <code>Estadística/resumen_mapas_conceptuales_estadística_modulo3.html</code> (vista y descarga)</div>
   </section>
 
   <!-- PANEL 1 -->
@@ -272,6 +279,13 @@
       <div class="viewer empty" id="viewer-r4b"><strong>Sin archivo cargado todavía</strong> El visor muestra el mapa conceptual en HTML (<code>Patrones de Datos/mapa_conceptual_patron_de_datos.html</code>). El botón de descarga obtiene la imagen JPG original.</div>
     </div>
     <div class="hint" style="margin-bottom:22px;">Visor: <code>Patrones de Datos/mapa_conceptual_patron_de_datos.html</code> &nbsp;·&nbsp; Descarga: <code>Patrones de Datos/mapa_conceptual_patron_de_datos.jpg</code></div>
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-toolbar"><span class="status" id="status-r4c"><span class="led"></span> Buscando archivo…</span>
+        <div class="toolbar-actions"><button class="btn" onclick="document.getElementById('file-r4c').click()">Cargar archivo…</button><input type="file" id="file-r4c" accept=".html,text/html"><a class="btn" id="download-r4c" download="resumen_mapa_patrones_de_datos.html" style="display:none;">Descargar</a></div>
+      </div>
+      <div class="viewer empty" id="viewer-r4c"><strong>Sin archivo cargado todavía</strong> Coloca el archivo <code>Patrones de Datos/resumen_mapa_patrones_de_datos.html</code> en la ruta indicada (relativa a este HTML), o cárgalo manualmente con el botón de arriba.</div>
+    </div>
+    <div class="hint" style="margin-bottom:22px;">Resumen narrado del mapa de patrones de datos: <code>Patrones de Datos/resumen_mapa_patrones_de_datos.html</code> (vista y descarga)</div>
     <div class="card">
       <div class="card-toolbar"><span class="status" id="status-r4a"><span class="led"></span> Buscando archivo…</span>
         <div class="toolbar-actions"><button class="btn" onclick="document.getElementById('file-r4a').click()">Cargar archivo…</button><input type="file" id="file-r4a" accept=".ipynb"><a class="btn" id="download-r4a" download="Prueba_de_grafico.ipynb" style="display:none;">Descargar</a></div>
@@ -454,6 +468,9 @@
     const v = document.getElementById(viewerId);
     v.className = 'viewer';
     v.innerHTML = '<iframe src="' + url + '" style="width:100%;height:78vh;border:0;display:block;"></iframe>';
+    // El propio .html también se puede descargar (útil para los resúmenes narrados)
+    const dl = document.getElementById(downloadId);
+    dl.href = url; dl.download = filename.split('/').pop(); dl.style.display = 'inline-block';
     setStatus(statusId,'ok','HTML cargado');
   }
   function renderOfficeFile(viewerId, statusId, downloadId, url, filename, size, label, absoluteUrl){
@@ -605,6 +622,9 @@
   setupResource('r5map', 'Estadistica Descriptiva/mapa_conceptual_estadistica_descriptiva.html', 'Estadistica Descriptiva/mapa_conceptual_estadistica_descriptiva.png');
   setupResource('r6a', 'ESTADÍSTICA APLICADA AL NEGOCIO/mapa_conceptual_unidad3_estadistica_aplicada.html', 'ESTADÍSTICA APLICADA AL NEGOCIO/mapa_conceptual_unidad3_vertical.png');
   setupResource('r7b', 'Storytelling/mapa_evitar_hacer_storytelling.html', 'Storytelling/mapa_conceptual_evitar_hacer_completo.png');
+  // Resúmenes narrados (mismo archivo para visor y descarga)
+  setupResource('r0d', 'Estadística/resumen_mapas_conceptuales_estadística_modulo3.html');
+  setupResource('r4c', 'Patrones de Datos/resumen_mapa_patrones_de_datos.html');
   // Recursos estándar (mismo archivo para visor y descarga)
   setupResource('r0a', 'Estadística/Estadística.pptx');
   setupResource('r3a', 'Consultas con Python/Consultas con Python.ipynb');
