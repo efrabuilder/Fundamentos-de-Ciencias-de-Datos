@@ -54,6 +54,12 @@ p{margin:0 0 14px;max-width:68ch}
 .checks{list-style:none;margin:0 0 18px;padding:0;max-width:68ch}
 .checks li{position:relative;padding:8px 0 8px 30px;border-bottom:1px solid var(--line)}
 .checks li::before{content:"✓";position:absolute;left:4px;top:8px;color:var(--accent);font-weight:700}
+.tech{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;margin:18px 0}
+.tech .box h3{margin:0 0 4px}
+.tech .box .sub{color:var(--muted);font-size:.93rem;margin:0 0 8px}
+.tech .checks{margin:0;max-width:none}
+.tech .checks li{padding:7px 0 7px 28px;font-size:.96rem}
+.tech .checks li:last-child{border-bottom:none}
 .quote{margin:20px 0 10px;padding:16px 22px;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px;max-width:68ch}
 .quote blockquote{margin:0;font-family:var(--serif);font-size:1.15rem;line-height:1.5}
 .quote figcaption{margin-top:8px;color:var(--muted);font-size:.92rem}
@@ -96,7 +102,7 @@ th{background:var(--accent-soft);color:var(--ink)}
 footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:.92rem}
 .theme{position:absolute;top:14px;right:16px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer;font:inherit;font-size:.88rem}
 .theme:focus-visible{outline:2px solid var(--accent)}
-@media (max-width:640px){.pair{grid-template-columns:1fr}body{font-size:16px}}
+@media (max-width:640px){.pair{grid-template-columns:1fr}.tech{grid-template-columns:1fr}body{font-size:16px}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
@@ -114,6 +120,7 @@ footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);colo
       <a href="#conducta">Emoción y conducta</a>
       <a href="#ensenan">Qué nos enseñan</a>
       <a href="#ie">Inteligencia emocional</a>
+      <a href="#tecnicas-pilares">Técnicas por pilar</a>
       <a href="#manejo">Validación y manejo</a>
       <a href="#secuestro">Secuestro emocional</a>
       <a href="#ira-ansiedad-depresion">Ira, ansiedad y depresión</a>
@@ -272,6 +279,95 @@ footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);colo
     <div class="box complex"><h3>Empatía</h3><p><strong>Comprender</strong> emociones.</p></div>
     <div class="box basic"><h3>Habilidades sociales</h3><p>Relacionarse y comunicarse con los demás.</p></div>
   </div>
+
+  <h3 id="tecnicas-pilares" style="margin-top:28px">Técnicas para desarrollar cada pilar</h3>
+  <p>Cada componente de la inteligencia emocional se puede entrenar con prácticas concretas. Estas son las técnicas vistas en clase para cada pilar.</p>
+  <div class="tech">
+    <div class="box basic">
+      <h3>Autoconocimiento</h3>
+      <p class="sub">Técnicas para desarrollar el autoconocimiento</p>
+      <ul class="checks">
+        <li>Reconecta con tu cuerpo.</li>
+        <li>Encuentra el vínculo entre emociones y acciones.</li>
+        <li>Lleva un diario de emociones.</li>
+        <li>Escribe la historia de tu vida.</li>
+        <li>Apunta tus virtudes, defectos y aficiones.</li>
+        <li>Pídele a un amigo o familiar que escriba sobre ti.</li>
+        <li>Fórmate en inteligencia emocional.</li>
+      </ul>
+    </div>
+    <div class="box complex">
+      <h3>Autocontrol</h3>
+      <p class="sub">Técnicas para desarrollar el autocontrol</p>
+      <ul class="checks">
+        <li>Técnicas de relajación.</li>
+        <li>Técnica de respiración profunda.</li>
+        <li>Técnica del volumen fijo.</li>
+        <li>Técnica de tiempo fuera.</li>
+        <li>Autoinstrucciones.</li>
+        <li>Parada del pensamiento.</li>
+        <li>Diario de las emociones.</li>
+        <li>Empatía.</li>
+      </ul>
+    </div>
+    <div class="box basic">
+      <h3>Automotivación</h3>
+      <p class="sub">Claves para desarrollar la automotivación</p>
+      <ul class="checks">
+        <li>Aprende algo nuevo todos los días.</li>
+        <li>Sal de tu zona de confort.</li>
+        <li>Establece tus metas y objetivos.</li>
+        <li>Sin miedo a cometer errores.</li>
+        <li>Invierte en cosas y momentos que te hagan feliz.</li>
+        <li>Recompénsate para tener automotivación.</li>
+        <li>Cambia tu enfoque de pensamiento.</li>
+      </ul>
+    </div>
+    <div class="box complex">
+      <h3>Empatía</h3>
+      <p class="sub">Técnicas para desarrollar la empatía</p>
+      <ul class="checks">
+        <li>Practica la escucha activa: atiende sin interrumpir ni preparar tu respuesta.</li>
+        <li>Ponte en el lugar de la otra persona e imagina cómo vive la situación.</li>
+        <li>Observa el lenguaje no verbal: gestos, tono de voz y postura.</li>
+        <li>Pregunta en lugar de suponer lo que siente o necesita.</li>
+        <li>Valida lo que la otra persona siente, aunque no pienses igual.</li>
+        <li>Suspende el juicio y reconoce tus propios prejuicios.</li>
+        <li>Conoce otras historias y puntos de vista distintos al tuyo.</li>
+        <li>Expresa lo que percibes: «Entiendo que te sientas así».</li>
+      </ul>
+    </div>
+    <div class="box basic" style="grid-column:1/-1">
+      <h3>Inteligencia emocional (técnicas generales)</h3>
+      <p class="sub">Técnicas para desarrollar tu inteligencia emocional, incluidas las habilidades sociales</p>
+      <ul class="checks">
+        <li>Desarrolla el autoconocimiento.</li>
+        <li>Practica la atención plena.</li>
+        <li>Mejora tu empatía.</li>
+        <li>Practica la escucha activa.</li>
+        <li>Practica la adaptabilidad.</li>
+        <li>Desarrolla tus habilidades sociales.</li>
+        <li>Agradece los comentarios.</li>
+        <li>Aprende sobre la resolución de conflictos.</li>
+        <li>Cuando estés en duda, reflexiona.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3 id="beneficios-ie" style="margin-top:28px">Beneficios de la inteligencia emocional</h3>
+  <ul class="checks">
+    <li>Mejora el autoconocimiento y la toma de decisiones.</li>
+    <li>Mejora el rendimiento laboral.</li>
+    <li>Protege y evita el estrés.</li>
+    <li>Mejora las relaciones interpersonales.</li>
+    <li>Favorece el desarrollo personal.</li>
+    <li>Otorga capacidad de influencia y liderazgo.</li>
+    <li>Favorece el bienestar psicológico.</li>
+    <li>Reduce la ansiedad y ayuda a superar la depresión.</li>
+    <li>Aumenta la motivación y ayuda a alcanzar las metas.</li>
+    <li>Ayuda a dormir mejor.</li>
+  </ul>
+
   <h3 style="margin-top:28px">Cinco principios básicos</h3>
   <p>Cinco ideas que sirven de base para desarrollar la inteligencia emocional y relacionarnos mejor con lo que sentimos:</p>
   <ol class="steps">
