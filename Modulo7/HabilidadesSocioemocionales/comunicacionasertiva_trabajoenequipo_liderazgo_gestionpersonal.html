@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comunicación Asertiva, Trabajo en Equipo, Liderazgo y Gestión Personal</title>
+<style>
+:root{
+  --bg:#f8fafc; --surface:#ffffff; --ink:#1e293b; --muted:#64748b;
+  --line:#e2e8f0; --accent:#0d9488; --accent-soft:#f0fdfa;
+  --warm:#7c3aed; --warm-soft:#f5f3ff;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+:root[data-theme="dark"]{
+  --bg:#0f172a; --surface:#1e293b; --ink:#e2e8f0; --muted:#94a3b8;
+  --line:#334155; --accent:#2dd4bf; --accent-soft:#134e4a;
+  --warm:#a78bfa; --warm-soft:#2a2245;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.65;font-size:17px}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+header{padding:56px 0 32px;border-bottom:1px solid var(--line)}
+header p.kicker{margin:0 0 8px;color:var(--accent);font-weight:600}
+h1{font-family:var(--serif);font-size:clamp(2rem,5vw,2.9rem);line-height:1.15;margin:0 0 16px;font-weight:700}
+header p.lead{max-width:62ch;color:var(--muted);margin:0 0 20px;font-size:1.05rem}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.toc a{padding:6px 14px;border:1px solid var(--line);border-radius:999px;color:var(--ink);text-decoration:none;font-size:.9rem;background:var(--surface)}
+.toc a:hover,.toc a:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
+section{padding:44px 0 8px}
+h2{font-family:var(--serif);font-size:1.7rem;margin:0 0 14px;line-height:1.25}
+h3{font-size:1.12rem;margin:0 0 8px}
+p{margin:0 0 14px;max-width:68ch}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+.box.basic{border-left:5px solid var(--accent)}
+.box.complex{border-left:5px solid var(--warm)}
+.box p{margin:0 0 8px}
+.box p:last-child{margin:0}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin:18px 0}
+.vgrid .box h3{margin:0 0 6px}
+.vgrid .box p{color:var(--muted);font-size:.95rem}
+.steps{list-style:none;counter-reset:st;margin:18px 0;padding:0;max-width:68ch}
+.steps li{counter-increment:st;position:relative;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 18px 14px 62px;margin-bottom:10px}
+.steps li::before{content:counter(st);position:absolute;left:16px;top:14px;width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+:root[data-theme="dark"] .steps li::before{color:#0f172a}
+.steps h3{margin:0 0 4px;font-size:1.02rem}
+.steps p{margin:0;color:var(--muted);font-size:.95rem}
+.checks{list-style:none;margin:0 0 18px;padding:0;max-width:68ch}
+.checks li{position:relative;padding:8px 0 8px 30px;border-bottom:1px solid var(--line)}
+.checks li::before{content:"✓";position:absolute;left:4px;top:8px;color:var(--accent);font-weight:700}
+.links{list-style:none;margin:0 0 18px;padding:0;max-width:68ch}
+.links li{padding:8px 0;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
+.links a{color:var(--warm)}
+.links a:hover,.links a:focus-visible{color:var(--accent)}
+.quote{margin:20px 0 10px;padding:16px 22px;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px;max-width:68ch}
+.quote blockquote{margin:0;font-family:var(--serif);font-size:1.12rem;line-height:1.5}
+.callout{background:var(--accent-soft);border-radius:10px;padding:16px 20px;margin:18px 0;max-width:68ch}
+.callout p{margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 18px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 16px;border-radius:8px;cursor:pointer;font:inherit;font-size:.93rem}
+.chip:hover{border-color:var(--accent)}
+.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.chip[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .chip[aria-selected="true"]{color:#0f172a}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 22px;max-width:68ch}
+.panel h3{margin-top:0}
+.panel p:last-child{margin:0}
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:0;margin:0 0 10px;max-width:68ch}
+summary{cursor:pointer;padding:14px 18px;font-weight:600;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";float:right;color:var(--accent);font-size:1.2rem;line-height:1}
+details[open] summary::after{content:"–"}
+summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:10px}
+details .body{padding:0 18px 14px;color:var(--muted)}
+details .body p{margin:0}
+.video{background:var(--warm-soft);border-radius:10px;padding:16px 20px;margin:18px 0;max-width:68ch}
+.video p{margin:0}
+footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:.92rem}
+.theme{position:absolute;top:14px;right:16px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer;font:inherit;font-size:.88rem}
+.theme:focus-visible{outline:2px solid var(--accent)}
+@media (max-width:640px){.pair{grid-template-columns:1fr}body{font-size:16px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<button class="theme" id="themeBtn" type="button" aria-label="Cambiar entre tema claro y oscuro">Tema</button>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">Recurso de clase</p>
+    <h1>Comunicación Asertiva, Trabajo en Equipo, Liderazgo y Gestión Personal</h1>
+    <p class="lead">Habilidades clave para relacionarse mejor, colaborar, liderar y manejar el estrés y el tiempo de forma efectiva.</p>
+    <nav class="toc" aria-label="Contenido">
+      <a href="#comunicacion">Comunicación asertiva</a>
+      <a href="#equipo">Trabajo en equipo</a>
+      <a href="#liderazgo">Liderazgo</a>
+      <a href="#estres">Estrés</a>
+      <a href="#tiempo">Organización del tiempo</a>
+      <a href="#pensamiento">Pensamiento analítico y crítico</a>
+      <a href="#decisiones">Toma de decisiones y conflictos</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ===================== COMUNICACIÓN ASERTIVA ===================== -->
+<section id="comunicacion">
+  <h2>Comunicación asertiva</h2>
+  <p>La comunicación asertiva es la capacidad de expresar pensamientos, sentimientos y necesidades de forma clara, directa y respetuosa, sin recurrir a la agresividad ni a la pasividad. Permite equilibrar los derechos propios con los de los demás y genera confianza y cooperación.</p>
+
+  <h3>Estilos de comunicación</h3>
+  <p>Selecciona un estilo para ver su descripción:</p>
+  <div class="chips" role="tablist" id="estiloTabs">
+    <button class="chip" role="tab" aria-selected="true" type="button">Pasivo</button>
+    <button class="chip" role="tab" aria-selected="false" type="button">Agresivo</button>
+    <button class="chip" role="tab" aria-selected="false" type="button">Pasivo-agresivo</button>
+    <button class="chip" role="tab" aria-selected="false" type="button">Asertivo</button>
+  </div>
+  <div class="panel" role="tabpanel">
+    <h3 id="estiloTitle"></h3>
+    <p id="estiloText"></p>
+  </div>
+
+  <h3 style="margin-top:28px">Claves para desarrollar la comunicación asertiva</h3>
+  <div class="vgrid">
+    <div class="box basic"><h3>Autoconocimiento</h3><p>Reconocer las propias emociones, necesidades y límites.</p></div>
+    <div class="box complex"><h3>Empatía</h3><p>Comprender y respetar las perspectivas y sentimientos de los demás.</p></div>
+    <div class="box basic"><h3>Escucha activa</h3><p>Prestar atención plena, incluyendo el lenguaje no verbal.</p></div>
+    <div class="box complex"><h3>Lenguaje claro y directo</h3><p>Evitar ambigüedades y ser específico.</p></div>
+    <div class="box basic"><h3>Control emocional</h3><p>Responder en lugar de reaccionar, especialmente en conflicto.</p></div>
+  </div>
+
+  <h3 style="margin-top:28px">Técnicas de comunicación asertiva</h3>
+  <ol class="steps">
+    <li><h3>Disco rayado</h3><p>Repetir de forma calmada y consistente el mensaje principal, especialmente frente a presiones.</p></li>
+    <li><h3>Banco de niebla</h3><p>Reconocer parcialmente la verdad en un comentario negativo sin entrar en conflicto: “Entiendo tu punto de vista, aunque no lo comparto”.</p></li>
+    <li><h3>Mensajes “Yo”</h3><p>Expresar sentimientos o necesidades empezando con “Yo” para evitar culpabilizar: “Yo siento frustración cuando esto ocurre”.</p></li>
+    <li><h3>Acuerdo asertivo</h3><p>Aceptar errores propios sin exagerarlos ni justificarse innecesariamente.</p></li>
+  </ol>
+
+  <h3 style="margin-top:28px">Tipos de comunicación</h3>
+  <div class="vgrid">
+    <div class="box basic"><h3>Verbal</h3><p>Lenguaje hablado o escrito. Requiere claridad y estructura.</p></div>
+    <div class="box complex"><h3>No verbal</h3><p>Gestos, expresiones, postura y contacto visual. Puede complementar o contradecir el mensaje verbal.</p></div>
+    <div class="box basic"><h3>Paraverbal</h3><p>Tono, volumen y ritmo del habla. Influyen mucho en la interpretación.</p></div>
+    <div class="box complex"><h3>Digital</h3><p>Medios electrónicos. Exige claridad y cortesía por la falta de elementos no verbales.</p></div>
+  </div>
+
+  <div class="callout">
+    <p>La empatía fortalece las relaciones, reduce malentendidos, mejora la resolución de problemas y genera un ambiente más armonioso, además de incrementar la autoestima.</p>
+  </div>
+
+  <h3 style="margin-top:28px">Recursos</h3>
+  <div class="video"><p><strong>Episodios de Spotify</strong></p></div>
+  <ul class="links">
+    <li><a href="https://open.spotify.com/episode/3MkxUxWLxWNzr4MZsJy92D?si=_TLw-dRsTPCguOmsxRO56g" target="_blank" rel="noopener">Episodio 1</a></li>
+    <li><a href="https://open.spotify.com/episode/5hZrYJGTLoWZ1cOA2WcSwY?si=yqlQm9V4Qj2cCxyxQhIaYQ" target="_blank" rel="noopener">Episodio 2</a></li>
+    <li><a href="https://open.spotify.com/episode/7EuIemj4xlrYz4rgnIl5xW?si=SILmWubSTGOlGYr--eIzDQ" target="_blank" rel="noopener">Episodio 3</a></li>
+    <li><a href="https://open.spotify.com/episode/4oOy0ckeyLk88Nk31fxngS?si=0zkm535wSte0ELNfx6zaOg" target="_blank" rel="noopener">Episodio 4</a></li>
+  </ul>
+</section>
+
+<!-- ===================== TRABAJO EN EQUIPO ===================== -->
+<section id="equipo">
+  <h2>Trabajo en equipo</h2>
+  <p>Es el proceso colaborativo en el que varias personas con habilidades y perspectivas diferentes se unen para lograr un objetivo común. Se basa en la cooperación, la coordinación y la integración de fortalezas.</p>
+
+  <h3>Componentes fundamentales</h3>
+  <div class="vgrid">
+    <div class="box basic"><h3>Objetivo común</h3><p>Un propósito claro que guíe y motive las acciones del equipo.</p></div>
+    <div class="box complex"><h3>Roles definidos</h3><p>Responsabilidades específicas que equilibran el trabajo.</p></div>
+    <div class="box basic"><h3>Comunicación efectiva</h3><p>Compartir ideas, resolver problemas y alinear esfuerzos.</p></div>
+    <div class="box complex"><h3>Coordinación y colaboración</h3><p>Alinear esfuerzos y adaptarse mutuamente.</p></div>
+    <div class="box basic"><h3>Confianza y respeto</h3><p>Base de una dinámica sana donde todos se sienten valorados.</p></div>
+  </div>
+
+  <h3 style="margin-top:28px">Características de equipos efectivos</h3>
+  <ul class="checks">
+    <li>Diversidad de habilidades</li>
+    <li>Flexibilidad y adaptabilidad</li>
+    <li>Objetivos y metas compartidos</li>
+    <li>Compromiso y responsabilidad</li>
+    <li>Empatía y apoyo mutuo</li>
+  </ul>
+
+  <h3 style="margin-top:28px">Actitudes esenciales</h3>
+  <div class="vgrid">
+    <div class="box basic"><h3>Apertura y escucha activa</h3><p>Considerar las ideas de los demás sin prejuicios.</p></div>
+    <div class="box complex"><h3>Compromiso</h3><p>Involucrarse activamente en los objetivos del equipo.</p></div>
+    <div class="box basic"><h3>Flexibilidad</h3><p>Adaptarse a cambios y necesidades del grupo.</p></div>
+    <div class="box complex"><h3>Responsabilidad</h3><p>Asumir las consecuencias y cumplir los compromisos.</p></div>
+    <div class="box basic"><h3>Empatía</h3><p>Comprender y respetar emociones y perspectivas ajenas.</p></div>
+  </div>
+
+  <h3 style="margin-top:28px">Recomendaciones prácticas</h3>
+  <ol class="steps">
+    <li><h3>Definir metas y roles claros</h3><p>Cada miembro debe saber qué se espera de él y hacia dónde se dirige el equipo.</p></li>
+    <li><h3>Fomentar comunicación abierta</h3><p>Retroalimentación constructiva y espacios seguros para opinar.</p></li>
+    <li><h3>Actividades de integración</h3><p>Refuerzan la cohesión y el entendimiento mutuo.</p></li>
+    <li><h3>Sistema de apoyo</h3><p>Respetar opiniones y emociones de todos.</p></li>
+    <li><h3>Capacitar en habilidades interpersonales</h3><p>Mejora la interacción y la resolución de conflictos.</p></li>
+  </ol>
+
+  <div class="callout">
+    <p>El trabajo en equipo aprovecha habilidades complementarias, incrementa la productividad, fomenta la creatividad, desarrolla habilidades blandas y mejora el manejo del estrés al compartir responsabilidades.</p>
+  </div>
+</section>
+
+<!-- ===================== LIDERAZGO ===================== -->
+<section id="liderazgo">
+  <h2>Liderazgo</h2>
+  <p>Es la capacidad de influir, motivar y dirigir a un grupo para alcanzar objetivos comunes. Un buen líder orienta, inspira, promueve el desarrollo de su equipo y se adapta a las circunstancias.</p>
+
+  <h3>Tipos de liderazgo</h3>
+  <p>Selecciona un estilo:</p>
+  <div class="chips" role="tablist" id="liderTabs">
+    <button class="chip" role="tab" aria-selected="true" type="button">Autocrático</button>
+    <button class="chip" role="tab" aria-selected="false" type="button">Democrático</button>
+    <button class="chip" role="tab" aria-selected="false" type="button">Transformacional</button>
+    <button class="chip" role="tab" aria-selected="false" type="button">Laissez-faire</button>
+    <button class="chip" role="tab" aria-selected="false" type="button">Situacional</button>
+    <button class="chip" role="tab" aria-selected="false" type="button">Servicial</button>
+  </div>
+  <div class="panel" role="tabpanel">
+    <h3 id="liderTitle"></h3>
+    <p id="liderText"></p>
+  </div>
+
+  <h3 style="margin-top:28px">Habilidades de un buen líder</h3>
+  <div class="vgrid">
+    <div class="box basic"><h3>Comunicación eficaz</h3><p>Transmitir ideas con claridad y escuchar al equipo.</p></div>
+    <div class="box complex"><h3>Empatía</h3><p>Comprender y atender necesidades y preocupaciones.</p></div>
+    <div class="box basic"><h3>Toma de decisiones</h3><p>Evaluar opciones y elegir con firmeza.</p></div>
+    <div class="box complex"><h3>Visión estratégica</h3><p>Claridad de objetivos a largo plazo y planificación.</p></div>
+    <div class="box basic"><h3>Resolución de conflictos</h3><p>Manejar discrepancias de forma constructiva.</p></div>
+    <div class="box complex"><h3>Adaptación y motivación</h3><p>Flexibilidad y capacidad de inspirar al equipo.</p></div>
+  </div>
+
+  <h3 style="margin-top:28px">Técnicas para desarrollar el liderazgo</h3>
+  <ol class="steps">
+    <li><h3>Autoevaluación y retroalimentación</h3><p>Identificar fortalezas y áreas de mejora con feedback del equipo.</p></li>
+    <li><h3>Objetivos personales de liderazgo</h3><p>Definir metas concretas y trabajarlas de forma constante.</p></li>
+    <li><h3>Capacitación continua</h3><p>Cursos, talleres y seminarios sobre habilidades de liderazgo.</p></li>
+    <li><h3>Escucha activa</h3><p>Entender mejor las necesidades y perspectivas del equipo.</p></li>
+    <li><h3>Mentoría y coaching</h3><p>Aprender de alguien con más experiencia.</p></li>
+    <li><h3>Inteligencia emocional</h3><p>Gestionar las propias emociones y comprender las de los demás.</p></li>
+    <li><h3>Toma de riesgos controlados</h3><p>Practicar decisiones en contextos seguros para ganar confianza.</p></li>
+  </ol>
+</section>
+
+<!-- ===================== ESTRÉS ===================== -->
+<section id="estres">
+  <h2>Estrés y su manejo</h2>
+  <p>El estrés es una respuesta natural del organismo ante situaciones percibidas como desafiantes o amenazantes (respuesta de “lucha o huida”). Cuando se vuelve constante o desbordante afecta la salud física, mental y el desempeño.</p>
+
+  <h3>Síntomas más comunes</h3>
+  <div class="pair">
+    <div class="box basic">
+      <h3>Físicos</h3>
+      <p>Dolores de cabeza, tensión muscular, fatiga, insomnio, problemas gastrointestinales y alteraciones inmunológicas.</p>
+    </div>
+    <div class="box complex">
+      <h3>Emocionales y cognitivos</h3>
+      <p>Irritabilidad, ansiedad, tristeza, dificultad de concentración, problemas de memoria y pensamientos catastróficos.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:28px">Tipos de estrés</h3>
+  <div class="vgrid">
+    <div class="box basic"><h3>Agudo</h3><p>Temporal. Desaparece cuando termina la situación. Puede ser motivador en dosis pequeñas.</p></div>
+    <div class="box complex"><h3>Agudo episódico</h3><p>Se repite con frecuencia en personas que asumen demasiadas responsabilidades.</p></div>
+    <div class="box basic"><h3>Crónico</h3><p>Duradero. Surge de problemas prolongados y tiene consecuencias graves para la salud.</p></div>
+  </div>
+
+  <h3 style="margin-top:28px">Estrés laboral</h3>
+  <p>Aparece cuando las demandas del trabajo superan los recursos disponibles. Factores típicos: sobrecarga, falta de control, inseguridad laboral o ambiente hostil.</p>
+
+  <h3 style="margin-top:20px">Cómo manejar el estrés y aumentar la resiliencia</h3>
+  <ol class="steps">
+    <li><h3>Establecer límites y prioridades</h3><p>Aprender a decir “no” y planificar para reducir la sensación de sobrecarga.</p></li>
+    <li><h3>Gestión del tiempo</h3><p>Dividir el trabajo en tareas manejables y organizar el día.</p></li>
+    <li><h3>Autocuidado</h3><p>Ejercicio, alimentación saludable y buen descanso.</p></li>
+    <li><h3>Apoyo social y comunicación asertiva</h3><p>Contar con un equipo de apoyo reduce la carga emocional.</p></li>
+    <li><h3>Técnicas de relajación</h3><p>Respiración, mindfulness, yoga o meditación.</p></li>
+    <li><h3>Desarrollar resiliencia</h3><p>Adaptarse a las adversidades y aprender de ellas mejora la percepción de control.</p></li>
+  </ol>
+</section>
+
+<!-- ===================== ORGANIZACIÓN DEL TIEMPO ===================== -->
+<section id="tiempo">
+  <h2>Organización del tiempo</h2>
+  <p>Consiste en planificar y distribuir las actividades según su importancia, plazos y recursos personales (energía, atención, conocimientos y apoyo). Facilita cumplir responsabilidades y mantener equilibrio entre estudio, trabajo y vida personal.</p>
+
+  <div class="callout">
+    <p>Cuando se acumulan pendientes aparece un ciclo: más tareas → más preocupación → menos concentración → todavía más pendientes. La organización del tiempo interrumpe ese ciclo.</p>
+  </div>
+
+  <h3 style="margin-top:28px">Planificar: de la intención a la acción</h3>
+  <p>Una buena planificación responde a cinco preguntas:</p>
+  <ul class="checks">
+    <li>¿Qué debo realizar?</li>
+    <li>¿Para cuándo debe estar terminado?</li>
+    <li>¿Qué pasos necesito seguir?</li>
+    <li>¿Cuánto tiempo puede requerir cada paso?</li>
+    <li>¿Con qué recursos y apoyo cuento?</li>
+  </ul>
+  <p>Diferencia entre intención (“ponerme al día”) y acción concreta (“leer el capítulo y hacer un resumen esta tarde”).</p>
+
+  <h3 style="margin-top:28px">Prioridades: urgente vs importante</h3>
+  <div class="pair">
+    <div class="box basic">
+      <h3>Urgente</h3>
+      <p>Requiere respuesta cercana en el tiempo.</p>
+    </div>
+    <div class="box complex">
+      <h3>Importante</h3>
+      <p>Contribuye a metas, responsabilidades o necesidades relevantes (aunque no tenga plazo inmediato).</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:28px">Procrastinación</h3>
+  <p>Aplazar una actividad necesaria aunque se sepa que traerá problemas. Puede deberse a instrucciones poco claras, temor a equivocarse, aburrimiento o la sensación de que la tarea es demasiado grande.</p>
+  <div class="callout">
+    <p>Pregunta clave: “¿Cuál es el primer paso concreto que puedo realizar ahora?” (abrir el documento, leer las instrucciones, escribir un esquema…).</p>
+  </div>
+
+  <h3 style="margin-top:28px">Bloques de trabajo y pausas</h3>
+  <p>Reservar períodos concretos para una actividad específica (“Durante los próximos 30 minutos revisaré mis apuntes”) y programar pausas breves. Ninguna técnica sustituye el sueño y el tiempo personal.</p>
+
+  <h3 style="margin-top:28px">Límites y comunicación asertiva</h3>
+  <p>Antes de asumir una nueva tarea, revisar disponibilidad. Ejemplos de frases asertivas:</p>
+  <ul class="checks">
+    <li>“Puedo terminar esta actividad el viernes”.</li>
+    <li>“Para atender esta solicitud hoy necesitamos cambiar la prioridad de las otras tareas”.</li>
+    <li>“Necesito aclarar las instrucciones antes de calcular el tiempo de entrega”.</li>
+  </ul>
+
+  <h3 style="margin-top:28px">Flexibilidad y revisión</h3>
+  <p>Un horario es una guía, no una cárcel. Al final del día o de la semana conviene preguntarse:</p>
+  <ul class="checks">
+    <li>¿Qué logré completar?</li>
+    <li>¿Qué actividad necesitó más tiempo del previsto?</li>
+    <li>¿Qué interrupciones aparecieron?</li>
+    <li>¿Qué puedo modificar?</li>
+    <li>¿Necesito ayuda o un cambio de plazo?</li>
+  </ul>
+</section>
+
+<!-- ===================== PENSAMIENTO ===================== -->
+<section id="pensamiento">
+  <h2>Pensamiento analítico y crítico</h2>
+
+  <h3>Pensamiento analítico</h3>
+  <p>Permite descomponer y analizar información compleja de forma estructurada, organizar datos lógicamente y tomar decisiones basadas en evidencias.</p>
+  <div class="vgrid">
+    <div class="box basic"><h3>Mapas conceptuales</h3><p>Organizar la información visualmente para ver relaciones entre ideas.</p></div>
+    <div class="box complex"><h3>Desglose del problema</h3><p>Dividir un problema grande en partes más pequeñas y manejables.</p></div>
+    <div class="box basic"><h3>Análisis de datos</h3><p>Buscar patrones y practicar la interpretación de información.</p></div>
+  </div>
+
+  <h3 style="margin-top:28px">Pensamiento crítico</h3>
+  <p>Evalúa la información, desafía suposiciones, busca sesgos y errores lógicos. Fomenta una mentalidad abierta y ética.</p>
+  <div class="vgrid">
+    <div class="box basic"><h3>Cuestionamiento socrático</h3><p>Preguntar “¿Por qué?” y “¿Qué evidencia respalda esta afirmación?”.</p></div>
+    <div class="box complex"><h3>Identificación de sesgos</h3><p>Reconocer los propios prejuicios y los de otros.</p></div>
+    <div class="box basic"><h3>Evaluación de fuentes</h3><p>Practicar la valoración de la confiabilidad de la información.</p></div>
+  </div>
+
+  <h3 style="margin-top:28px">Recursos</h3>
+  <div class="video"><p><strong>Videos</strong></p></div>
+  <ul class="links">
+    <li><a href="https://www.youtube.com/watch?v=Arr7_VKvLvg" target="_blank" rel="noopener">Video 1</a></li>
+    <li><a href="https://www.youtube.com/watch?v=6ksKyv5L76I" target="_blank" rel="noopener">Video 2</a></li>
+    <li><a href="https://www.youtube.com/watch?v=xJl0VPrPr38" target="_blank" rel="noopener">Video 3</a></li>
+  </ul>
+</section>
+
+<!-- ===================== TOMA DE DECISIONES Y CONFLICTOS ===================== -->
+<section id="decisiones">
+  <h2>Toma de decisiones y resolución de conflictos</h2>
+
+  <h3>Toma de decisiones</h3>
+  <p>Es el proceso de elegir la mejor opción entre varias alternativas considerando riesgos, beneficios y viabilidad. Las emociones (estrés, ansiedad, enojo o euforia) pueden distorsionar el juicio; identificarlas y gestionarlas permite decidir de forma más equilibrada.</p>
+  <div class="vgrid">
+    <div class="box basic"><h3>Análisis costo-beneficio</h3><p>Evaluar ventajas y desventajas de cada alternativa.</p></div>
+    <div class="box complex"><h3>Matrices de decisión</h3><p>Asignar valores a resultados y alternativas para compararlas visualmente.</p></div>
+    <div class="box basic"><h3>Escenarios simulados</h3><p>Practicar decisiones sin la presión de consecuencias reales.</p></div>
+  </div>
+
+  <h3 style="margin-top:28px">Resolución de conflictos</h3>
+  <p>Gestionar y solucionar disputas de forma constructiva y empática, protegiendo las relaciones. Las emociones intensas pueden agravar el conflicto; la empatía y la paciencia facilitan soluciones.</p>
+  <ol class="steps">
+    <li><h3>Escucha activa</h3><p>Escuchar sin interrupciones ni prejuicios para entender la perspectiva del otro.</p></li>
+    <li><h3>Comunicación asertiva</h3><p>Expresar ideas y necesidades de manera clara y respetuosa.</p></li>
+    <li><h3>Negociación y mediación</h3><p>Buscar acuerdos justos y satisfactorios para todas las partes.</p></li>
+  </ol>
+
+  <div class="callout">
+    <p>Desarrollar pensamiento analítico, crítico, toma de decisiones y resolución de conflictos mejora tanto el rendimiento profesional como las relaciones personales. Controlar las emociones en estos procesos es clave para actuar con madurez y equilibrio.</p>
+  </div>
+
+  <h3 style="margin-top:28px">Recursos</h3>
+  <div class="video"><p><strong>Videos</strong></p></div>
+  <ul class="links">
+    <li><a href="https://www.youtube.com/watch?v=Arr7_VKvLvg" target="_blank" rel="noopener">Video 1</a></li>
+    <li><a href="https://www.youtube.com/watch?v=6ksKyv5L76I" target="_blank" rel="noopener">Video 2</a></li>
+    <li><a href="https://www.youtube.com/watch?v=xJl0VPrPr38" target="_blank" rel="noopener">Video 3</a></li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">Recurso de clase · Comunicación asertiva, trabajo en equipo, liderazgo y gestión personal</div>
+</footer>
+
+<script>
+(function(){
+  /* Estilos de comunicación */
+  var estilos = [
+    ["Pasivo", "Evita el conflicto y no expresa necesidades o emociones. Puede generar frustración y baja autoestima."],
+    ["Agresivo", "Impone opiniones y deseos de forma dominante. Genera conflictos y deteriora las relaciones."],
+    ["Pasivo-agresivo", "No expresa directamente los pensamientos, pero manifiesta malestar de forma indirecta o sarcástica."],
+    ["Asertivo", "Equilibrio ideal: expresa pensamientos y emociones respetando tanto los derechos propios como los de los demás."]
+  ];
+  wireTabs("estiloTabs", estilos, "estiloTitle", "estiloText");
+
+  /* Tipos de liderazgo */
+  var lideres = [
+    ["Autocrático", "El líder toma decisiones de forma centralizada y espera que el equipo las siga. Útil en crisis, pero limita la creatividad y la autonomía."],
+    ["Democrático / Participativo", "Involucra al equipo en las decisiones, fomenta el intercambio de ideas y suele generar mayor compromiso y satisfacción."],
+    ["Transformacional", "Inspira y motiva hacia una visión compartida, centrándose en el desarrollo personal y profesional de cada integrante."],
+    ["Laissez-faire", "Delega el poder de decisión y da libertad al equipo, interviniendo solo cuando es necesario. Requiere un equipo maduro y autónomo."],
+    ["Situacional", "Adapta el estilo según las necesidades y circunstancias del equipo, alternando enfoques según el momento."],
+    ["Servicial", "Prioriza el bienestar de los miembros del equipo, actuando como guía y apoyo para que cada uno alcance su potencial."]
+  ];
+  wireTabs("liderTabs", lideres, "liderTitle", "liderText");
+
+  function wireTabs(id, data, titleId, textId){
+    var box = document.getElementById(id);
+    var btns = box.querySelectorAll("button");
+    function select(i){
+      btns.forEach(function(b,k){ b.setAttribute("aria-selected", k===i ? "true" : "false"); });
+      document.getElementById(titleId).textContent = data[i][0];
+      document.getElementById(textId).textContent = data[i][1];
+    }
+    btns.forEach(function(b,k){ b.addEventListener("click", function(){ select(k); }); });
+    select(0);
+  }
+
+  /* Tema claro/oscuro */
+  var root = document.documentElement;
+  document.getElementById("themeBtn").addEventListener("click", function(){
+    var dark = root.getAttribute("data-theme") === "dark";
+    root.setAttribute("data-theme", dark ? "light" : "dark");
+  });
+})();
+</script>
+</body>
+</html>
