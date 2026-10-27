@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Autoconocimiento, autocontrol, automotivación y resiliencia</title>
+<style>
+:root{
+  --bg:#f8fafc; --surface:#ffffff; --ink:#1e293b; --muted:#64748b;
+  --line:#e2e8f0; --accent:#db2777; --accent-soft:#fdf2f8;
+  --warm:#7c3aed; --warm-soft:#f5f3ff;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+:root[data-theme="dark"]{
+  --bg:#0f172a; --surface:#1e293b; --ink:#e2e8f0; --muted:#94a3b8;
+  --line:#334155; --accent:#f472b6; --accent-soft:#3b1a2e;
+  --warm:#a78bfa; --warm-soft:#2a2245;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.65;font-size:17px}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+header{padding:56px 0 32px;border-bottom:1px solid var(--line)}
+header p.kicker{margin:0 0 8px;color:var(--accent);font-weight:600}
+h1{font-family:var(--serif);font-size:clamp(2rem,5vw,3.1rem);line-height:1.15;margin:0 0 16px;font-weight:700}
+header p.lead{max-width:62ch;color:var(--muted);margin:0 0 20px;font-size:1.05rem}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.toc a{padding:6px 14px;border:1px solid var(--line);border-radius:999px;color:var(--ink);text-decoration:none;font-size:.92rem;background:var(--surface)}
+.toc a:hover,.toc a:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
+section{padding:44px 0 8px}
+h2{font-family:var(--serif);font-size:1.7rem;margin:0 0 14px;line-height:1.25}
+h3{font-size:1.1rem;margin:0 0 6px}
+p{margin:0 0 14px;max-width:68ch}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+.box.basic{border-left:5px solid var(--accent)}
+.box.complex{border-left:5px solid var(--warm)}
+.box p{margin:0 0 8px}
+.box p:last-child{margin:0}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin:18px 0}
+.vgrid .box h3{margin:0 0 6px}
+.vgrid .box p{color:var(--muted);font-size:.95rem}
+.steps{list-style:none;counter-reset:st;margin:18px 0;padding:0;max-width:68ch}
+.steps li{counter-increment:st;position:relative;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 18px 14px 62px;margin-bottom:10px}
+.steps li::before{content:counter(st);position:absolute;left:16px;top:14px;width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+:root[data-theme="dark"] .steps li::before{color:#1e293b}
+.steps h3{margin:0 0 4px;font-size:1.02rem}
+.steps p{margin:0;color:var(--muted);font-size:.95rem}
+.checks{list-style:none;margin:0 0 18px;padding:0;max-width:68ch}
+.checks li{position:relative;padding:8px 0 8px 30px;border-bottom:1px solid var(--line)}
+.checks li::before{content:"✓";position:absolute;left:4px;top:8px;color:var(--accent);font-weight:700}
+.links{list-style:none;margin:0 0 18px;padding:0;max-width:68ch}
+.links li{padding:8px 0;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
+.links a{color:var(--warm)}
+.links a:hover,.links a:focus-visible{color:var(--accent)}
+.quote{margin:20px 0 10px;padding:16px 22px;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px;max-width:68ch}
+.quote blockquote{margin:0;font-family:var(--serif);font-size:1.15rem;line-height:1.5}
+.tag{display:inline-block;font-size:.88rem;padding:2px 10px;border-radius:6px;background:var(--accent-soft);color:var(--accent);margin:0 6px 6px 0}
+.box.complex .tag{background:var(--warm-soft);color:var(--warm)}
+.callout{background:var(--accent-soft);border-radius:10px;padding:16px 20px;margin:18px 0;max-width:68ch}
+.callout p{margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 18px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 16px;border-radius:8px;cursor:pointer;font:inherit;font-size:.95rem}
+.chip:hover{border-color:var(--accent)}
+.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.chip[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .chip[aria-selected="true"]{color:#1e293b}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 22px;max-width:68ch}
+.panel h3{margin-top:0}
+.panel p:last-child{margin:0}
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:0;margin:0 0 10px;max-width:68ch}
+summary{cursor:pointer;padding:14px 18px;font-weight:600;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";float:right;color:var(--accent);font-size:1.2rem;line-height:1}
+details[open] summary::after{content:"–"}
+summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:10px}
+details .body{padding:0 18px 14px;color:var(--muted)}
+details .body p{margin:0}
+.table-scroll{overflow-x:auto;margin:18px 0}
+table{border-collapse:collapse;width:100%;min-width:560px;background:var(--surface)}
+th,td{border:1px solid var(--line);padding:10px 14px;text-align:left;vertical-align:top;font-size:.95rem}
+th{background:var(--accent-soft);color:var(--ink)}
+.video{background:var(--warm-soft);border-radius:10px;padding:16px 20px;margin:18px 0;max-width:68ch}
+.video p{margin:0}
+footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:.92rem}
+.theme{position:absolute;top:14px;right:16px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer;font:inherit;font-size:.88rem}
+.theme:focus-visible{outline:2px solid var(--accent)}
+@media (max-width:640px){.pair{grid-template-columns:1fr}body{font-size:16px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<button class="theme" id="themeBtn" type="button" aria-label="Cambiar entre tema claro y oscuro">Tema</button>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">Recurso de clase</p>
+    <h1>Autoconocimiento, autocontrol, automotivación y resiliencia</h1>
+    <p class="lead">Cuatro habilidades de la inteligencia emocional que se refuerzan entre sí: conocerse, regularse, motivarse y recuperarse ante la adversidad.</p>
+    <nav class="toc" aria-label="Contenido">
+      <a href="#resumen">Resumen</a>
+      <a href="#autoconocimiento">Autoconocimiento</a>
+      <a href="#autocontrol">Autocontrol emocional</a>
+      <a href="#automotivacion">Automotivación</a>
+      <a href="#resiliencia">Resiliencia</a>
+      <a href="#relacion">Cómo se relacionan</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<section id="resumen">
+  <h2>Los cuatro en resumen</h2>
+  <p>Selecciona una habilidad para ver su idea central.</p>
+  <div class="chips" role="tablist" aria-label="Resumen de las cuatro habilidades" id="resTabs">
+    <button class="chip" role="tab" aria-selected="true" type="button">Autoconocimiento</button>
+    <button class="chip" role="tab" aria-selected="false" type="button">Autocontrol</button>
+    <button class="chip" role="tab" aria-selected="false" type="button">Automotivación</button>
+    <button class="chip" role="tab" aria-selected="false" type="button">Resiliencia</button>
+  </div>
+  <div class="panel" role="tabpanel" aria-live="polite">
+    <h3 id="resTitle"></h3>
+    <p id="resText"></p>
+  </div>
+</section>
+
+<section id="autoconocimiento">
+  <h2>Autoconocimiento</h2>
+  <p>El autoconocimiento es clave para el bienestar psicológico. Conocerse uno mismo permite saber lo que queremos en la vida, ya sea en grandes proyectos o en el día a día, y gestionar mejor nuestras emociones incluso en las situaciones más difíciles.</p>
+  <p>Está muy relacionado con la inteligencia emocional, ya que saber interpretar nuestras emociones se vincula con la autorreflexión y la mejora de la salud mental.</p>
+  <div class="callout">
+    <p>Conocerse no es fácil: requiere motivación, voluntad y tiempo. Un primer paso es apuntar tus virtudes, pasiones y defectos, algo que muchas personas nunca han reflexionado.</p>
+  </div>
+
+  <h3 style="margin-top:24px">¿Qué nos aporta?</h3>
+  <div class="vgrid">
+    <div class="box basic"><h3>Reconocer áreas de oportunidad</h3><p>Permite trabajar los aspectos necesarios para mejorar en el desempeño laboral y alcanzar metas personales.</p></div>
+    <div class="box complex"><h3>Formar mejores equipos</h3><p>Al conocer tus áreas de oportunidad, puedes apoyarte en personas con habilidades distintas, de modo que el equipo cubra todos los aspectos importantes.</p></div>
+    <div class="box basic"><h3>Comunicarte con eficiencia</h3><p>Ayuda a elegir mejores momentos y herramientas para expresar opiniones, quejas o felicitaciones a los compañeros.</p></div>
+    <div class="box complex"><h3>Explotar tus habilidades y ganar confianza</h3><p>Ser consciente de tus habilidades, gustos, desagrados y áreas de oportunidad genera un sentido de identidad estable y óptimo.</p></div>
+    <div class="box basic"><h3>Definir metas</h3><p>Guía para identificar deseos y necesidades y establecer metas personales y profesionales que logren la satisfacción individual y grupal.</p></div>
+    <div class="box complex"><h3>Decidir con información</h3><p>Es la base para tomar decisiones más informadas, sobre todo cuando implican riesgos altos para la empresa.</p></div>
+  </div>
+
+  <h3 style="margin-top:24px">Beneficios en el ámbito laboral y social</h3>
+  <ul class="checks">
+    <li>Desarrollo de la personalidad con capacidad de líder.</li>
+    <li>Autoconciencia de las emociones que se transmiten.</li>
+    <li>Autoconfianza para llevar a cabo las funciones del cargo.</li>
+    <li>Disciplina y eficiencia para ejecutar las tareas en el tiempo y orden especificado.</li>
+    <li>Automotivación para siempre seguir adelante.</li>
+  </ul>
+  <p>Estas competencias ayudan a desarrollar el perfil adecuado para un puesto de trabajo y aumentan las posibilidades de ser seleccionado. Al tomar conciencia de nuestras emociones, aprender a regularlas y asumir la responsabilidad de pensamientos, emociones y acciones, cultivamos la autoconfianza, la autoestima, la autodisciplina y la autogestión, fundamentales para el liderazgo y para destacar en el entorno social.</p>
+
+  <h3 style="margin-top:24px">Técnicas para mejorar el autoconocimiento</h3>
+  <ol class="steps">
+    <li><h3>Reconecta con tu cuerpo</h3><p>Mente y cuerpo están tan conectados que podemos relacionar sensaciones físicas con emociones. Pregúntate: ¿dónde siento el miedo?, ¿en qué parte del cuerpo siento la vergüenza?, ¿dónde siento la felicidad? Por ejemplo, guardarse lo que de verdad se quiere decir puede sentirse como un limón atorado en la garganta; la angustia, como un elefante sentado en el pecho.</p></li>
+    <li><h3>Reconoce que muchas emociones son inconscientes</h3><p>Primero las sentimos físicamente y luego atraviesan a la conciencia. Estar en sincronía con el cuerpo ayuda a identificarlas.</p></li>
+    <li><h3>Encuentra el vínculo entre emociones y acciones</h3><p>Las emociones son impulsos a la acción. Conecta lo que piensas, lo que sientes y lo que haces: enojo-grito, aburrimiento-morder las uñas, vulnerable-evadir al mundo. Vincular la emoción con la acción habitual permite cambiar la respuesta la próxima vez que aparezca el estímulo.</p></li>
+    <li><h3>Identifica tus detonadores</h3><p>Reconoce qué personas, situaciones, conversaciones, lugares o fechas te disparan. Si lo sabes, puedes trazar un plan de acción para mantener la calma la siguiente vez.</p></li>
+    <li><h3>Lleva un diario de emociones</h3><p>El mayor obstáculo del autoconocimiento es la objetividad. En un diario registras los eventos que detonan emociones fuertes y tus reacciones, lo que permite identificar patrones y distinguir cómo te sientes físicamente ante cada emoción.</p></li>
+    <li><h3>Identifica el efecto de tus emociones en los demás</h3><p>Como los anillos que se forman al soltar una piedra en el agua, lo que expresamos tiene consecuencias en quienes nos rodean. Las emociones son contagiosas: pon atención a lo que contagias.</p></li>
+  </ol>
+  <div class="callout">
+    <p>Identificar y manejar las emociones es un trabajo de tiempo completo y puede ser agotador. El autoconocimiento es un atajo: permite aprender de los errores más rápido y libera tiempo y energía para aventuras más interesantes.</p>
+  </div>
+</section>
+
+<section id="autocontrol">
+  <h2>Autocontrol emocional</h2>
+  <p>Es la capacidad de gestionar y regular, de manera consciente y efectiva, la reacción o el impulso que provocan nuestras propias emociones, especialmente en situaciones de estrés, presión o conflicto.</p>
+  <p>Implica reconocer y entender lo que se siente para luego tomar decisiones adecuadas que eviten reacciones impulsivas o desproporcionadas. Así, la persona mantiene la calma, actúa de manera equilibrada y responde de forma constructiva, lo que favorece relaciones más saludables y una mejor toma de decisiones.</p>
+
+  <h3 style="margin-top:24px">Técnicas de autocontrol</h3>
+  <ol class="steps">
+    <li><h3>Técnicas de relajación</h3><p>Las emociones activan nuestro organismo, por eso la relajación se usa mucho. La relajación muscular progresiva es muy efectiva si hay entrenamiento previo que permita hacerla en pocos segundos. Está muy indicada cuando la emoción a controlar es muy activadora, como la ansiedad.</p></li>
+    <li><h3>Autoinstrucciones</h3><p>Afirmaciones positivas que nos guían ante una situación difícil. Requieren elaborar una lista propia antes de enfrentar la situación; deben redactarse en positivo, ser realizables y no demasiado largas.</p></li>
+    <li><h3>Empatía</h3><p>Se usa para ver la situación desde la perspectiva de la persona a la que asociamos la emoción.</p></li>
+    <li><h3>Parada del pensamiento</h3><p>Consiste en detener los pensamientos que causan la emoción justo cuando notamos que empieza a aparecer, diciendo «stop», «para», «basta» u otra palabra similar, en voz alta o mentalmente. Con entrenamiento resulta muy efectiva y se usa en psicología para pensamientos recurrentes asociados a algunos trastornos.</p></li>
+  </ol>
+  <h3 style="margin-top:24px">Ejemplos de autoinstrucciones</h3>
+  <div class="vgrid">
+    <div class="box basic"><h3>«Puedo controlar las emociones que estoy sintiendo»</h3></div>
+    <div class="box complex"><h3>«Respondo de una manera racional y no emocional»</h3></div>
+    <div class="box basic"><h3>«Elijo cómo me afecta lo que me sucede»</h3></div>
+  </div>
+</section>
+
+<section id="automotivacion">
+  <h2>Automotivación</h2>
+  <p>La automotivación es la capacidad y práctica de motivarse a sí mismo para conseguir los objetivos propuestos. Su característica principal es que el emisor y el receptor de la motivación son la misma persona, por eso es importante aprender a trabajarla para aprovechar sus beneficios.</p>
+
+  <h3 style="margin-top:24px">¿Para qué sirve?</h3>
+  <p>Es una parte clave de la inteligencia emocional y es vital para quien quiera proponerse nuevos retos y superarse día tras día. Alcanzar un sueño es un trabajo arduo que requiere constancia y planificación; la automotivación evita perder la esperanza y ayuda a seguir buscando el rumbo correcto. Además, estimula el pensamiento creativo y permite observar la vida desde distintos ángulos.</p>
+  <figure class="quote">
+    <blockquote>Toda meta necesita un combustible: la motivación. Pero no siempre la tenemos, ni podemos esperar a que aparezca mágicamente.</blockquote>
+    <figcaption style="margin-top:8px;color:var(--muted);font-size:.92rem">— Clarisa María Ponte Betancourt, curso de Automotivación y motivación al logro</figcaption>
+  </figure>
+
+  <h3 style="margin-top:24px">Componentes de la automotivación</h3>
+  <div class="vgrid">
+    <div class="box basic"><h3>1. Impulso personal</h3><p>Ambición o empoderamiento, pero también mentalidad. Con mentalidad fija se cree que el talento es innato; con mentalidad de crecimiento, que las habilidades mejoran con esfuerzo, y quienes la tienen son más propensos al éxito. Incluye ser organizado, gestionar bien el tiempo y evitar distracciones.</p></div>
+    <div class="box complex"><h3>2. Compromiso con los objetivos</h3><p>Fijar objetivos es importante para el bienestar general. Saber dónde se quiere estar y cómo se planea llegar es vital para mantener la automotivación.</p></div>
+    <div class="box basic"><h3>3. Iniciativa</h3><p>Aprovechar las oportunidades cuando se presentan, combinando coraje para superar el miedo a lo desconocido con buena gestión del riesgo para elegir las oportunidades correctas.</p></div>
+    <div class="box complex"><h3>4. Optimismo y resiliencia</h3><p>El optimismo es mirar el lado positivo; la resiliencia, recuperarse tras un revés. Las personas resilientes usan el pensamiento racional para examinar sus reacciones, y piden y ofrecen ayuda cuando hace falta.</p></div>
+  </div>
+
+  <h3 style="margin-top:24px">Beneficios de la automotivación</h3>
+  <p>Mantenerse motivado favorece el estado de ánimo y también la productividad. Entre otros beneficios, la automotivación:</p>
+  <ul class="checks">
+    <li>Propicia una mayor claridad mental.</li>
+    <li>Desarrolla la creatividad.</li>
+    <li>Facilita la toma de decisiones.</li>
+    <li>Impulsa una actitud proactiva.</li>
+    <li>Ayuda al logro de objetivos.</li>
+    <li>Incrementa la satisfacción laboral.</li>
+    <li>Garantiza un estado de ánimo positivo.</li>
+  </ul>
+
+  <h3 style="margin-top:24px">Claves para desarrollarla</h3>
+  <details>
+    <summary>1. Aprende algo nuevo todos los días</summary>
+    <div class="body"><p>La fuerza de voluntad y la iniciativa son indispensables. Cuanto más te informas, más autoridad y confianza ganas para enfrentar el mundo, y eso te hace creer en tu potencial.</p></div>
+  </details>
+  <details>
+    <summary>2. Sal de tu zona de confort</summary>
+    <div class="body"><p>Es normal tener miedo de hacer cosas distintas. Si tu meta es aprender un idioma y te da pena hablarlo, participa en clases y conversa con compañeros. Al lograr algo que parecía complicado, te sentirás motivado a seguir.</p></div>
+  </details>
+  <details>
+    <summary>3. Establece tus metas y objetivos</summary>
+    <div class="body"><p>Si te sientes desmotivado por no tener claro adónde quieres llegar, pregúntate: ¿por qué quieres alcanzar esas metas?, ¿lo que haces contribuye a tus sueños?, ¿por qué haces lo que haces? Tener metas bien definidas facilita la actitud para alcanzarlas.</p></div>
+  </details>
+  <details>
+    <summary>4. Sin miedo a cometer errores</summary>
+    <div class="body"><p>Los buenos resultados vienen del trabajo constante y la disciplina, no de la suerte. Equivocarse es sano porque así se encuentran mejores formas de hacer las cosas: acepta los errores y úsalos para mejorar, no para desmotivarte.</p></div>
+  </details>
+  <details>
+    <summary>5. Invierte en cosas y momentos que te hagan feliz</summary>
+    <div class="body"><p>Necesitas desconectarte de la rutina; una razón por la que se pierde la automotivación es la falta de tiempo de ocio. Define horarios para descansar, estar con tu familia o hacer lo que te divierte.</p></div>
+  </details>
+  <details>
+    <summary>6. Recompénsate</summary>
+    <div class="body"><p>Premiarte mantiene intactas las ganas de cumplir tus metas. Por ejemplo, si te cuesta madrugar a hacer ejercicio, date un premio al cumplir una semana levantándote temprano.</p></div>
+  </details>
+  <details>
+    <summary>7. Cambia tu enfoque de pensamiento</summary>
+    <div class="body"><p>Hay decisiones que no tomamos no porque no nos gusten, sino por pensar en el «qué dirán». Olvídate de lo que dirán los otros: tus decisiones son la razón para mantener la automotivación cuando te sientas desanimado.</p></div>
+  </details>
+
+  <h3 style="margin-top:24px">Videos y recursos adicionales</h3>
+  <p>Revisa el material de clase sobre autoconocimiento, autocontrol y automotivación, y complementa con estos enlaces.</p>
+  <div class="video"><p><strong>Videos</strong></p></div>
+  <ul class="links">
+    <li><a href="https://www.youtube.com/watch?v=YgXFrUyFZGs" target="_blank" rel="noopener">Video 1</a></li>
+    <li><a href="https://www.youtube.com/watch?v=TlhGY24OSkQ" target="_blank" rel="noopener">Video 2</a></li>
+    <li><a href="https://www.youtube.com/watch?v=LXwuWrOnKJA" target="_blank" rel="noopener">Video 3</a></li>
+    <li><a href="https://www.youtube.com/watch?v=VZrUfADraX8" target="_blank" rel="noopener">Video 4</a></li>
+  </ul>
+  <div class="video"><p><strong>Episodios de Spotify</strong></p></div>
+  <ul class="links">
+    <li><a href="https://open.spotify.com/episode/2WdqKCBUdERzuJI50NA6dF?si=IbS-d69KTMuJPO4EOE8fFg" target="_blank" rel="noopener">Episodio 1</a></li>
+    <li><a href="https://open.spotify.com/episode/7fHUYLxOfvUAaqCvJBvcH5?si=6iaPGFnhTh6Dp2fT3xXIcw" target="_blank" rel="noopener">Episodio 2</a></li>
+    <li><a href="https://open.spotify.com/episode/6MDMYTh10BaeXTosI4Yvii?si=u2cc-bBQQyCdeobPzfoHzw" target="_blank" rel="noopener">Episodio 3</a></li>
+    <li><a href="https://open.spotify.com/episode/2hd0y6Van1HiQtHWZsJcOD?si=rjP9qztVQfe7usnn7XwI_g" target="_blank" rel="noopener">Episodio 4</a></li>
+  </ul>
+</section>
+
+<section id="resiliencia">
+  <h2>Resiliencia</h2>
+  <p>Es la capacidad de una persona para adaptarse y recuperarse frente a situaciones adversas, traumas o momentos de crisis, y utilizar esas experiencias como fuente de aprendizaje y desarrollo personal. Permite enfrentar los desafíos de forma constructiva, con enfoque positivo y encontrando nuevas oportunidades de crecimiento.</p>
+
+  <h3 style="margin-top:24px">Características de las personas resilientes</h3>
+  <div class="vgrid">
+    <div class="box basic"><h3>Autoconfianza</h3><p>Confían en sus capacidades para enfrentar y superar situaciones difíciles.</p></div>
+    <div class="box complex"><h3>Flexibilidad</h3><p>Adaptan enfoques y perspectivas según las circunstancias, sin aferrarse rígidamente a sus planes originales.</p></div>
+    <div class="box basic"><h3>Mentalidad positiva</h3><p>Mantienen una perspectiva optimista en momentos de estrés, enfocándose en soluciones y no en problemas.</p></div>
+    <div class="box complex"><h3>Empatía y conexión</h3><p>Establecen relaciones significativas que les dan una red de apoyo en tiempos de crisis.</p></div>
+    <div class="box basic"><h3>Autocontrol emocional</h3><p>Manejan adecuadamente sus emociones y evitan que tomen el control de sus decisiones.</p></div>
+  </div>
+
+  <h3 style="margin-top:24px">Ventajas de la resiliencia</h3>
+  <ul class="checks">
+    <li><strong>Mejora el manejo del estrés:</strong> reduce los efectos negativos y permite reaccionar de forma equilibrada.</li>
+    <li><strong>Incrementa la productividad:</strong> mantiene un alto rendimiento incluso en situaciones adversas y facilita cumplir metas.</li>
+    <li><strong>Fomenta el crecimiento personal:</strong> permite aprender de los errores y las dificultades.</li>
+    <li><strong>Favorece el bienestar mental:</strong> al enfrentar las dificultades de manera positiva, se reduce la probabilidad de problemas como la ansiedad o la depresión.</li>
+    <li><strong>Fortalece las relaciones:</strong> lidiar con las propias emociones y mantener la calma mejora la comunicación y los vínculos.</li>
+  </ul>
+
+  <h3 style="margin-top:24px">Cualidades de las personas resilientes</h3>
+  <div class="pair">
+    <div class="box basic">
+      <h3>Cómo piensan</h3>
+      <p><strong>Optimismo realista:</strong> no ignoran los problemas, pero confían en su capacidad para superarlos.</p>
+      <p><strong>Capacidad de reflexión:</strong> analizan sus experiencias y reconocen qué pueden aprender.</p>
+      <p><strong>Persistencia:</strong> no se rinden fácilmente y ven el fracaso como una oportunidad para mejorar.</p>
+    </div>
+    <div class="box complex">
+      <h3>Cómo actúan</h3>
+      <p><strong>Autonomía:</strong> son independientes y toman decisiones sin depender por completo de los demás.</p>
+      <p><strong>Sentido de propósito:</strong> tienen metas claras que les dan dirección y motivación en momentos difíciles.</p>
+    </div>
+  </div>
+
+  <h3 style="margin-top:24px">Técnicas para desarrollar la resiliencia</h3>
+  <ol class="steps">
+    <li><h3>Entrenamiento en mindfulness</h3><p>La atención plena ayuda a manejar el estrés y a aceptar la realidad de las situaciones difíciles.</p></li>
+    <li><h3>Desarrollo de la inteligencia emocional</h3><p>Reconocer y controlar las propias emociones permite gestionar mejor las respuestas ante la adversidad.</p></li>
+    <li><h3>Establecimiento de objetivos</h3><p>Plantearse metas claras y alcanzables ayuda a mantener el enfoque y la motivación.</p></li>
+    <li><h3>Red de apoyo social</h3><p>Rodearse de personas que brindan apoyo emocional y consejo constructivo fortalece la capacidad de afrontar dificultades.</p></li>
+    <li><h3>Práctica de la gratitud</h3><p>Identificar y agradecer lo positivo, incluso en tiempos difíciles, mantiene una mentalidad positiva y motivadora.</p></li>
+    <li><h3>Autocuidado</h3><p>Atender las necesidades físicas y emocionales (dormir bien, hacer ejercicio, descansar) da las bases para enfrentar la adversidad.</p></li>
+  </ol>
+  <div class="callout">
+    <p>La resiliencia es una habilidad esencial para enfrentar los desafíos del día a día y transformar las experiencias negativas en oportunidades de crecimiento. Al cultivarla se logra un equilibrio emocional y mental que permite vivir de forma más plena y productiva.</p>
+  </div>
+
+  <h3 style="margin-top:24px">Recursos</h3>
+  <p>Revisa el material de clase sobre resiliencia y complementa con estos enlaces.</p>
+  <div class="video"><p><strong>Episodios de Spotify</strong></p></div>
+  <ul class="links">
+    <li><a href="https://open.spotify.com/episode/4iTgwnUxEYFr7BOFT534VK?si=yqk7LKHCQ3iwz1lL5YQnug&amp;context=spotify%3Ashow%3A2WouaOcup1I7sz8M1QmgFh" target="_blank" rel="noopener">Episodio 1</a></li>
+    <li><a href="https://open.spotify.com/episode/1cnWQe2c7b3iK9h1jterWA?si=ohm0eiw2TniHQriMLsnzyg" target="_blank" rel="noopener">Episodio 2</a></li>
+    <li><a href="https://open.spotify.com/episode/1eHFpvuol8Zg6sMCsEIuBR?si=idS47LDUS1mcuhMIZps_LA" target="_blank" rel="noopener">Episodio 3</a></li>
+  </ul>
+  <div class="video"><p><strong>Videos</strong></p></div>
+  <ul class="links">
+    <li><a href="https://www.youtube.com/watch?v=Fv8FpqvNpl8" target="_blank" rel="noopener">Video principal</a></li>
+    <li>Resiliencia para afrontar la vida cotidiana. Walter Riso, doctor en Psicología y escritor (YouTube)</li>
+    <li>Versión completa. Resiliencia: el dolor es inevitable, el sufrimiento es opcional. Boris Cyrulnik</li>
+    <li>V. completa. Más fuerte que la adversidad. Walter Riso, doctor en Psicología y escritor</li>
+  </ul>
+</section>
+
+<section id="relacion">
+  <h2>Cómo se relacionan</h2>
+  <p>Las cuatro habilidades se apoyan entre sí: conocerse permite regularse, regularse permite sostener la motivación y la motivación alimenta la capacidad de recuperarse. Toca un par para ver el vínculo.</p>
+  <div class="chips" role="tablist" aria-label="Vínculos entre las habilidades" id="relTabs">
+    <button class="chip" role="tab" aria-selected="true" type="button">Autoconocimiento y autocontrol</button>
+    <button class="chip" role="tab" aria-selected="false" type="button">Automotivación y resiliencia</button>
+    <button class="chip" role="tab" aria-selected="false" type="button">Autocontrol y resiliencia</button>
+  </div>
+  <div class="panel" role="tabpanel" aria-live="polite">
+    <p id="relText"></p>
+  </div>
+  <div class="callout">
+    <p>Trabajar estas cuatro habilidades mejora el desempeño laboral, las relaciones y el bienestar psicológico: son parte de la inteligencia emocional y se pueden practicar de forma intencional.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">Recurso de clase · Autoconocimiento, autocontrol, automotivación y resiliencia</div>
+</footer>
+
+<script>
+(function(){
+  var res=[
+    ["Autoconocimiento","Saber qué sentimos, qué queremos y cuáles son nuestras virtudes, defectos y detonadores. Es la base para decidir con información y establecer metas."],
+    ["Autocontrol emocional","Regular de forma consciente el impulso que provocan las emociones, sobre todo bajo estrés, presión o conflicto, para responder de manera equilibrada y constructiva."],
+    ["Automotivación","Motivarse a uno mismo para alcanzar los objetivos propuestos, apoyándose en impulso personal, compromiso, iniciativa, optimismo y resiliencia."],
+    ["Resiliencia","Adaptarse y recuperarse ante la adversidad, usando la experiencia como fuente de aprendizaje y crecimiento personal."]
+  ];
+  var rel=[
+    "El autoconocimiento permite identificar emociones y detonadores; con ese mapa, las técnicas de autocontrol se aplican a tiempo, antes de reaccionar de forma impulsiva.",
+    "La automotivación, con su optimismo y mentalidad de crecimiento, da el impulso para seguir; la resiliencia permite recuperarse de los reveses sin perder el rumbo.",
+    "El autocontrol emocional es una de las características de las personas resilientes: manejar las emociones evita que tomen el control de las decisiones en momentos de crisis."
+  ];
+  function wire(id,render){
+    var box=document.getElementById(id);
+    var btns=box.querySelectorAll("button");
+    function select(i){
+      btns.forEach(function(b,k){b.setAttribute("aria-selected",k===i?"true":"false")});
+      render(i);
+    }
+    btns.forEach(function(b,k){b.addEventListener("click",function(){select(k)})});
+    select(0);
+  }
+  wire("resTabs",function(i){
+    document.getElementById("resTitle").textContent=res[i][0];
+    document.getElementById("resText").textContent=res[i][1];
+  });
+  wire("relTabs",function(i){
+    document.getElementById("relText").textContent=rel[i];
+  });
+  var root=document.documentElement;
+  document.getElementById("themeBtn").addEventListener("click",function(){
+    var dark=root.getAttribute("data-theme")==="dark";
+    root.setAttribute("data-theme",dark?"light":"dark");
+  });
+})();
+</script>
+</body>
+</html>
