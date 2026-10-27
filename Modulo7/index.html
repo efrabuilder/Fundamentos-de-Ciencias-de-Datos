@@ -11,18 +11,16 @@
     --ink:#1e293b;
     --ink-soft:#64748b;
     --border:#e2e8f0;
-
     --mod-accent:#db2777; /* color del módulo (cambia por módulo) */
-
     /* Colores de cada recurso */
     --r1:var(--mod-accent); --r1-soft:#fdf2f8; /* 1º: mismo color del título del módulo */
+    --r2:#0d9488; --r2-soft:#f0fdfa; /* 2º: Esmeralda para automanejo y resiliencia */
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
   body{background:var(--bg);font-family:var(--sans);color:var(--ink);min-height:100vh;}
-
   .top-bar{
     display:flex;
     justify-content:space-between;
@@ -74,7 +72,6 @@
   .top-link.back:hover .icon{transform:translateX(-2px);}
   .top-link:hover .arrow{transform:translateX(3px);color:var(--mod-accent);}
   .top-link:focus-visible{outline:2px solid var(--mod-accent);outline-offset:3px;}
-
   header{padding:20px 24px 22px;text-align:center;border-bottom:1px solid var(--border);background:var(--panel);}
   header .eyebrow{font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--mod-accent);margin-bottom:6px;}
   header h1{margin:0 0 6px;font-size:clamp(20px,3vw,28px);letter-spacing:-0.01em;}
@@ -86,6 +83,7 @@
   .tab.active{background:var(--accent);border-color:var(--accent);color:#ffffff;}
   .tab.active .dot{background:#ffffff;opacity:1;}
   #tab-r1{--accent:var(--r1);}
+  #tab-r2{--accent:var(--r2);} /* Color esmeralda para el nuevo recurso */
   main{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
   .panel{display:none;}
   .panel.active{display:block;animation:fade .25s ease;}
@@ -98,6 +96,7 @@
   .card-label{padding:12px 16px 0;font-size:13px;font-weight:700;color:var(--ink);}
   .card-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--accent-soft);}
   #panel-r1 .card-toolbar{--accent-soft:var(--r1-soft);}
+  #panel-r2 .card-toolbar{--accent-soft:var(--r2-soft);} /* Fondo esmeralda claro para el nuevo panel */
   .status{font-size:12.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
   .status .led{width:7px;height:7px;border-radius:50%;background:#cbd5e1;}
   .status.ok .led{background:#16a34a;}
@@ -123,7 +122,6 @@
   .hint{margin-top:12px;font-size:12px;color:var(--ink-soft);line-height:1.6;}
   .hint code{background:#f1f5f9;padding:1px 6px;border-radius:5px;font-family:var(--mono);}
   footer{text-align:center;padding:24px;color:var(--ink-soft);font-size:12px;}
-
   .viewer.notebook{display:block;text-align:left;padding:20px 24px;overflow-x:auto;max-height:78vh;overflow-y:auto;}
   .nb-cell{margin-bottom:16px;}
   .nb-cell-label{font-size:11px;font-weight:700;text-transform:uppercase;color:var(--ink-soft);margin-bottom:4px;}
@@ -133,9 +131,7 @@
   .nb-out-label{font-size:10.5px;color:var(--ink-soft);margin-bottom:4px;}
   .nb-out pre{background:#f1f5f9;padding:10px 12px;border-radius:8px;font-family:var(--mono);font-size:12px;overflow-x:auto;}
   .nb-out img{max-width:100%;border-radius:8px;}
-
   .subgroup-title{margin:22px 0 10px;font-size:13.5px;font-weight:700;color:var(--r1);padding-bottom:6px;border-bottom:1px dashed var(--border);}
-
   .empty-state{display:flex;flex-direction:column;align-items:center;gap:10px;padding:70px 20px;text-align:center;color:var(--ink-soft);}
   .empty-state .icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;background:var(--r1-soft);color:var(--r1);}
   .empty-state strong{color:var(--ink);font-size:15px;}
@@ -166,6 +162,10 @@
   <button class="tab active" id="tab-r1" data-target="panel-r1">
     <span class="dot"></span> Habilidades Socioemocionales
   </button>
+  <!-- NUEVO RECURSO -->
+  <button class="tab" id="tab-r2" data-target="panel-r2">
+    <span class="dot"></span> Autoconocimiento y Resiliencia
+  </button>
 </nav>
 <main>
   <!-- ===================== PANEL 1: Habilidades Socioemocionales ===================== -->
@@ -176,7 +176,6 @@
         <div class="sub">Emociones, inteligencia emocional, habilidades socioemocionales y valores humanos</div>
       </div>
     </div>
-
     <div class="card">
       <div class="card-label">Habilidades Socioemocionales y Valores Humanos</div>
       <div class="card-toolbar">
@@ -197,6 +196,33 @@
     </div>
   </section>
 
+  <!-- ===================== PANEL 2: Autoconocimiento y Resiliencia ===================== -->
+  <section class="panel" id="panel-r2">
+    <div class="panel-head">
+      <div>
+        <h2>Autoconocimiento, Autocontrol, Automotivación y Resiliencia</h2>
+        <div class="sub">Técnicas de automanejo y desarrollo de la inteligencia emocional</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">Autoconocimiento y Resiliencia</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-r2"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <label class="btn" for="file-r2">Cargar manualmente</label>
+          <input type="file" id="file-r2">
+          <a class="btn" id="download-r2" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer" id="viewer-r2">
+        <div class="empty-state">
+          <div class="icon">⏳</div>
+          <strong>Cargando recurso…</strong>
+          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 <footer>Recursos del Módulo 7 — Habilidades Socioemocionales para el Análisis de Datos</footer>
 <footer>© 2026 Todos los derechos reservados · Diseñado y desarrollado por Efraín Sebastián Rojas Artavia</footer>
@@ -272,7 +298,6 @@
     v.className = 'viewer';
     const dl = document.getElementById(downloadId);
     dl.href = url; dl.download = filename; dl.style.display = 'inline-block';
-
     if(absoluteUrl){
       const viewerUrl = 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(absoluteUrl);
       v.innerHTML =
@@ -458,6 +483,8 @@
   }
   // ---------- Recursos del Módulo 7 ----------
   setupResource('habilidades', 'HabilidadesSocioemocionales/habilidades_socioemocionales.html');
+  setupResource('r2', 'HabilidadesSocioemocionales/autoconocimiento-autocontrol-automotivacion-resiliencia.html');
+  
   // Para agregar más recursos: crear la tarjeta (card) en el panel y llamar a
   // setupResource(id, "ruta/al/archivo") o
   // setupResourceHtml(id, "ruta/preview.html", "ruta/descarga.ext").
