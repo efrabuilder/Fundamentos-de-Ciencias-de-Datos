@@ -21,7 +21,7 @@
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.65;font-size:17px}
 .wrap{max-width:860px;margin:0 auto;padding:0 20px}
-header{padding:56px 0 32px;border-bottom:1px solid var(--line)}
+header{padding:56px 0 32px;border-bottom:1px solid var(--line);position:relative}
 header p.kicker{margin:0 0 8px;color:var(--accent);font-weight:600}
 h1{font-family:var(--serif);font-size:clamp(2rem,5vw,3.1rem);line-height:1.15;margin:0 0 16px;font-weight:700}
 header p.lead{max-width:62ch;color:var(--muted);margin:0 0 20px;font-size:1.05rem}
@@ -86,6 +86,9 @@ th{background:var(--accent-soft);color:var(--ink)}
 footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:.92rem}
 .theme{position:absolute;top:14px;right:16px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer;font:inherit;font-size:.88rem}
 .theme:focus-visible{outline:2px solid var(--accent)}
+.rama{border:1px solid var(--line);border-radius:12px;padding:22px 24px;margin:28px 0;background:var(--surface)}
+.rama h3{font-family:var(--serif);font-size:1.35rem;margin:0 0 12px;color:var(--accent)}
+.rama .def{font-size:1.05rem;margin-bottom:16px}
 @media (max-width:640px){.pair{grid-template-columns:1fr}body{font-size:16px}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
@@ -152,160 +155,165 @@ footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);colo
   <p>Estas competencias ayudan a desarrollar el perfil adecuado para un puesto de trabajo y aumentan las posibilidades de ser seleccionado. Al tomar conciencia de nuestras emociones, aprender a regularlas y asumir la responsabilidad de pensamientos, emociones y acciones, cultivamos la autoconfianza, la autoestima, la autodisciplina y la autogestión, fundamentales para el liderazgo y para destacar en el entorno social.</p>
 
   <!-- ========== RAMAS DEL AUTOCONOCIMIENTO ========== -->
-
   <h3 style="margin-top:36px">Ramas del autoconocimiento</h3>
-  <p>El autoconocimiento se construye a través de varias capacidades relacionadas. Aquí profundizamos en tres de las más importantes: <strong>Autoobservación</strong>, <strong>Autonomía</strong> y la ya conocida <strong>Ley del Espejo</strong>.</p>
+  <p>El autoconocimiento se construye a través de varias capacidades relacionadas. Aquí profundizamos en tres de las más importantes: <strong>Autoobservación</strong>, <strong>Autonomía</strong> y la <strong>Ley del Espejo</strong>.</p>
 
-  <!-- AUTOOBSERVACIÓN -->
-  <h3 style="margin-top:28px">1. Autoobservación</h3>
-  <p>La autoobservación implica el reconocimiento de nosotros mismos, de nuestras conductas, nuestras actitudes y las circunstancias que nos rodean. Es la capacidad de mirarnos con honestidad, sin juicio excesivo ni autoengaño.</p>
+  <!-- ========== 1. AUTOOBSERVACIÓN ========== -->
+  <div class="rama" id="autoobservacion">
+    <h3>1. Autoobservación</h3>
+    <p class="def">La autoobservación implica el reconocimiento de nosotros mismos, de nuestras conductas, nuestras actitudes y las circunstancias que nos rodean. Es la capacidad de mirarnos con honestidad, sin juicio excesivo ni autoengaño.</p>
 
-  <div class="callout">
-    <p>Sin autoobservación no hay autoconocimiento real. Es el primer paso para dejar de vivir en piloto automático.</p>
-  </div>
-
-  <h3 style="margin-top:20px">¿Qué permite la autoobservación?</h3>
-  <div class="vgrid">
-    <div class="box basic"><h3>Detectar patrones</h3><p>Identificar comportamientos repetitivos que nos perjudican o nos benefician.</p></div>
-    <div class="box complex"><h3>Ganar distancia emocional</h3><p>Observar la emoción en lugar de ser arrastrado por ella.</p></div>
-    <div class="box basic"><h3>Mejorar la autorregulación</h3><p>Al ver con claridad lo que ocurre dentro, resulta más fácil intervenir a tiempo.</p></div>
-    <div class="box complex"><h3>Aumentar la responsabilidad personal</h3><p>Dejamos de culpar solo al exterior y reconocemos nuestra parte.</p></div>
-  </div>
-
-  <h3 style="margin-top:24px">Técnicas para fortalecer la autoobservación</h3>
-  <ol class="steps">
-    <li>
-      <h3>Pausa consciente</h3>
-      <p>Varias veces al día detente 10-20 segundos y pregunta: “¿Qué estoy sintiendo ahora? ¿Qué estoy pensando? ¿Qué estoy haciendo?”. Solo observa, sin corregir todavía.</p>
-    </li>
-    <li>
-      <h3>Diario de autoobservación</h3>
-      <p>Al final del día escribe tres momentos en los que te observaste con claridad. Anota la situación, la emoción y la conducta. Con el tiempo aparecen patrones muy reveladores.</p>
-    </li>
-    <li>
-      <h3>Observación corporal</h3>
-      <p>Escanea tu cuerpo: tensión en mandíbula, hombros, estómago, respiración. El cuerpo suele avisar antes de que la mente se dé cuenta.</p>
-    </li>
-    <li>
-      <h3>Feedback externo selectivo</h3>
-      <p>Pide a personas de confianza que te digan qué conductas notan en ti cuando estás bajo presión o contento. Combínalo con tu propia observación.</p>
-    </li>
-    <li>
-      <h3>Grabarte o escribirte</h3>
-      <p>En situaciones importantes, después de una reunión o conversación difícil, escribe o grábate contando cómo crees que actuaste. Luego compáralo con la realidad.</p>
-    </li>
-  </ol>
-
-  <!-- AUTONOMÍA -->
-  <h3 style="margin-top:36px">2. Autonomía</h3>
-  <p>La autonomía es la capacidad para desenvolverse por cuenta propia y en consonancia con nuestro entorno social y cultural. No significa aislamiento, sino la habilidad de dirigirse a uno mismo de forma responsable y coherente.</p>
-
-  <div class="callout">
-    <p>La autonomía real se construye sobre el autoconocimiento: solo puedo ser autónomo si sé quién soy, qué necesito y cuáles son mis límites.</p>
-  </div>
-
-  <h3 style="margin-top:20px">Aspectos de la vida donde debemos fomentarla</h3>
-  <div class="vgrid">
-    <div class="box basic"><h3>Hábitos</h3><p>Alimentación, higiene, salud y aspecto físico. Cuidarnos es el primer acto de autonomía.</p></div>
-    <div class="box complex"><h3>Interacciones sociales</h3><p>Elegir con quién relacionarnos, poner límites y comunicarnos de forma asertiva.</p></div>
-    <div class="box basic"><h3>Desarrollo intelectual</h3><p>Aprender por iniciativa propia, no solo por obligación externa.</p></div>
-    <div class="box complex"><h3>El ocio</h3><p>Decidir cómo usamos nuestro tiempo libre de forma que nos nutra realmente.</p></div>
-    <div class="box basic"><h3>Responsabilidad</h3><p>Asumir las consecuencias de nuestras decisiones y acciones sin echar la culpa a otros.</p></div>
-  </div>
-
-  <h3 style="margin-top:24px">Cómo desarrollar mayor autonomía</h3>
-  <ol class="steps">
-    <li>
-      <h3>Toma pequeñas decisiones diarias</h3>
-      <p>Empieza por elegir conscientemente qué comer, qué ropa ponerte o cómo organizar tu mañana. Cada decisión consciente fortalece el músculo de la autonomía.</p>
-    </li>
-    <li>
-      <h3>Practica el “yo decido”</h3>
-      <p>Cuando notes que estás actuando solo por costumbre o por lo que esperan los demás, detente y pregunta: “¿Esto lo elijo yo realmente?”.</p>
-    </li>
-    <li>
-      <h3>Asume las consecuencias</h3>
-      <p>Cada vez que tomes una decisión, acepta también los resultados (buenos o malos). Esto cierra el círculo de la responsabilidad.</p>
-    </li>
-    <li>
-      <h3>Reduce la dependencia emocional</h3>
-      <p>Practica estar bien contigo mismo. No necesitas la aprobación constante de los demás para validar tus decisiones.</p>
-    </li>
-    <li>
-      <h3>Establece límites claros</h3>
-      <p>Saber decir “no” y proteger tu tiempo y energía es una de las expresiones más claras de autonomía.</p>
-    </li>
-  </ol>
-
-  <!-- LEY DEL ESPEJO (ya existente) -->
-  <h3 style="margin-top:36px">3. La ley del espejo: el mundo exterior como reflejo</h3>
-  <p>Una de las herramientas más potentes del autoconocimiento es la <strong>ley del espejo</strong>: el mundo exterior expresa nuestro mundo interior. Todo lo que nos molesta, atrae o se repite en los demás suele ser un reflejo de algo que aún no hemos visto o sanado en nosotros.</p>
-
-  <div class="callout">
-    <p><strong>Principio central:</strong> no eres víctima de nadie más que de ti mismo. El exterior solo refleja lo que hay dentro.</p>
-  </div>
-
-  <h3 style="margin-top:24px">¿Qué permite la ley del espejo?</h3>
-  <div class="vgrid">
-    <div class="box basic"><h3>Convertir problemas en aprendizaje</h3><p>Lo que se repite deja de ser “mala suerte” y se convierte en información valiosa sobre ti.</p></div>
-    <div class="box complex"><h3>Sanar</h3><p>Al reconocer el reflejo, puedes trabajar la herida o el patrón en lugar de pelear solo con el exterior.</p></div>
-    <div class="box basic"><h3>Profundizar el autoconocimiento</h3><p>Hace consciente lo que estaba en el inconsciente y acelera el crecimiento personal.</p></div>
-  </div>
-
-  <h3 style="margin-top:24px">Cómo usarla a tu favor</h3>
-  <ol class="steps">
-    <li>
-      <h3>Fuente de autoconocimiento</h3>
-      <p>Cada persona o situación que te genera una emoción fuerte es un espejo. Pregúntate: “¿Qué parte de mí está viendo esto?”.</p>
-    </li>
-    <li>
-      <h3>Hacer lo inconsciente consciente</h3>
-      <p>Lo que más te molesta en los demás suele ser una cualidad o herida que no quieres reconocer en ti.</p>
-    </li>
-    <li>
-      <h3>Lo que quieres cambiar de alguien está en tu interior</h3>
-      <p>Si deseas que otra persona cambie un comportamiento, observa primero dónde tú actúas de forma similar (aunque sea en menor grado).</p>
-    </li>
-    <li>
-      <h3>Ejercicio de autopercepción</h3>
-      <p>Cuando alguien te active, escribe: “Esta persona me muestra __________. ¿Dónde está esto en mí?”.</p>
-    </li>
-  </ol>
-
-  <h3 style="margin-top:24px">Tipos de situaciones de espejo</h3>
-  <div class="vgrid">
-    <div class="box basic">
-      <h3>Similitud</h3>
-      <p>Una parte de ti que no quieres ver se refleja en otra persona. Es el espejo más directo y a veces el más incómodo.</p>
+    <div class="callout">
+      <p>Sin autoobservación no hay autoconocimiento real. Es el primer paso para dejar de vivir en piloto automático.</p>
     </div>
-    <div class="box complex">
-      <h3>Oposición</h3>
-      <p>Alguien que representa exactamente lo contrario a ti se sitúa en un extremo. Te muestra el polo que tienes desbalanceado.</p>
+
+    <h3 style="margin-top:20px">¿Qué permite la autoobservación?</h3>
+    <div class="vgrid">
+      <div class="box basic"><h3>Detectar patrones</h3><p>Identificar comportamientos repetitivos que nos perjudican o nos benefician.</p></div>
+      <div class="box complex"><h3>Ganar distancia emocional</h3><p>Observar la emoción en lugar de ser arrastrado por ella.</p></div>
+      <div class="box basic"><h3>Mejorar la autorregulación</h3><p>Al ver con claridad lo que ocurre dentro, resulta más fácil intervenir a tiempo.</p></div>
+      <div class="box complex"><h3>Aumentar la responsabilidad personal</h3><p>Dejamos de culpar solo al exterior y reconocemos nuestra parte.</p></div>
     </div>
-    <div class="box basic">
-      <h3>Proyección</h3>
-      <p>Algo que tú haces a terceros se te devuelve a través de otra persona. La vida te muestra tu propio comportamiento.</p>
-    </div>
-    <div class="box complex">
-      <h3>Expectativas (idealización)</h3>
-      <p>Te muestra la distancia entre tus expectativas y la realidad. Idealizas a alguien y luego te decepcionas: el espejo revela tus propias proyecciones.</p>
-    </div>
+
+    <h3 style="margin-top:24px">Técnicas para fortalecer la autoobservación</h3>
+    <ol class="steps">
+      <li>
+        <h3>Pausa consciente</h3>
+        <p>Varias veces al día detente 10-20 segundos y pregunta: “¿Qué estoy sintiendo ahora? ¿Qué estoy pensando? ¿Qué estoy haciendo?”. Solo observa, sin corregir todavía.</p>
+      </li>
+      <li>
+        <h3>Diario de autoobservación</h3>
+        <p>Al final del día escribe tres momentos en los que te observaste con claridad. Anota la situación, la emoción y la conducta. Con el tiempo aparecen patrones muy reveladores.</p>
+      </li>
+      <li>
+        <h3>Observación corporal</h3>
+        <p>Escanea tu cuerpo: tensión en mandíbula, hombros, estómago, respiración. El cuerpo suele avisar antes de que la mente se dé cuenta.</p>
+      </li>
+      <li>
+        <h3>Feedback externo selectivo</h3>
+        <p>Pide a personas de confianza que te digan qué conductas notan en ti cuando estás bajo presión o contento. Combínalo con tu propia observación.</p>
+      </li>
+      <li>
+        <h3>Grabarte o escribirte</h3>
+        <p>En situaciones importantes, después de una reunión o conversación difícil, escribe o grábate contando cómo crees que actuaste. Luego compáralo con la realidad.</p>
+      </li>
+    </ol>
   </div>
 
-  <h3 style="margin-top:24px">Consecuencias y “maestros”</h3>
-  <div class="pair">
-    <div class="box basic">
-      <h3>Si no sanas…</h3>
-      <p>La vida sigue trayendo las mismas pruebas (personas o situaciones parecidas) hasta que el mensaje se recibe.</p>
+  <!-- ========== 2. AUTONOMÍA ========== -->
+  <div class="rama" id="autonomia">
+    <h3>2. Autonomía</h3>
+    <p class="def">La autonomía es la capacidad para desenvolverse por cuenta propia y en consonancia con nuestro entorno social y cultural. No significa aislamiento, sino la habilidad de dirigirse a uno mismo de forma responsable y coherente.</p>
+
+    <div class="callout">
+      <p>La autonomía real se construye sobre el autoconocimiento: solo puedo ser autónomo si sé quién soy, qué necesito y cuáles son mis límites.</p>
     </div>
-    <div class="box complex">
-      <h3>Los maestros</h3>
-      <p>Existen personas que aparecen en tu camino precisamente para mostrarte los espejos que necesitas ver. No son enemigos: son maestros disfrazados.</p>
+
+    <h3 style="margin-top:20px">Aspectos de la vida donde debemos fomentarla</h3>
+    <div class="vgrid">
+      <div class="box basic"><h3>Hábitos</h3><p>Alimentación, higiene, salud y aspecto físico. Cuidarnos es el primer acto de autonomía.</p></div>
+      <div class="box complex"><h3>Interacciones sociales</h3><p>Elegir con quién relacionarnos, poner límites y comunicarnos de forma asertiva.</p></div>
+      <div class="box basic"><h3>Desarrollo intelectual</h3><p>Aprender por iniciativa propia, no solo por obligación externa.</p></div>
+      <div class="box complex"><h3>El ocio</h3><p>Decidir cómo usamos nuestro tiempo libre de forma que nos nutra realmente.</p></div>
+      <div class="box basic"><h3>Responsabilidad</h3><p>Asumir las consecuencias de nuestras decisiones y acciones sin echar la culpa a otros.</p></div>
     </div>
+
+    <h3 style="margin-top:24px">Cómo desarrollar mayor autonomía</h3>
+    <ol class="steps">
+      <li>
+        <h3>Toma pequeñas decisiones diarias</h3>
+        <p>Empieza por elegir conscientemente qué comer, qué ropa ponerte o cómo organizar tu mañana. Cada decisión consciente fortalece el músculo de la autonomía.</p>
+      </li>
+      <li>
+        <h3>Practica el “yo decido”</h3>
+        <p>Cuando notes que estás actuando solo por costumbre o por lo que esperan los demás, detente y pregunta: “¿Esto lo elijo yo realmente?”.</p>
+      </li>
+      <li>
+        <h3>Asume las consecuencias</h3>
+        <p>Cada vez que tomes una decisión, acepta también los resultados (buenos o malos). Esto cierra el círculo de la responsabilidad.</p>
+      </li>
+      <li>
+        <h3>Reduce la dependencia emocional</h3>
+        <p>Practica estar bien contigo mismo. No necesitas la aprobación constante de los demás para validar tus decisiones.</p>
+      </li>
+      <li>
+        <h3>Establece límites claros</h3>
+        <p>Saber decir “no” y proteger tu tiempo y energía es una de las expresiones más claras de autonomía.</p>
+      </li>
+    </ol>
   </div>
 
-  <div class="callout" style="margin-top:24px">
-    <p><strong>Propósito final:</strong> ser más feliz a través del autoconocimiento + sanar + dedicarte tiempo real a ti mismo. La ley del espejo no busca culparte; busca devolverte el poder de cambiar lo que sí depende de ti.</p>
+  <!-- ========== 3. LEY DEL ESPEJO ========== -->
+  <div class="rama" id="ley-espejo">
+    <h3>3. La ley del espejo: el mundo exterior como reflejo</h3>
+    <p class="def">Una de las herramientas más potentes del autoconocimiento es la <strong>ley del espejo</strong>: el mundo exterior expresa nuestro mundo interior. Todo lo que nos molesta, atrae o se repite en los demás suele ser un reflejo de algo que aún no hemos visto o sanado en nosotros.</p>
+
+    <div class="callout">
+      <p><strong>Principio central:</strong> no eres víctima de nadie más que de ti mismo. El exterior solo refleja lo que hay dentro.</p>
+    </div>
+
+    <h3 style="margin-top:24px">¿Qué permite la ley del espejo?</h3>
+    <div class="vgrid">
+      <div class="box basic"><h3>Convertir problemas en aprendizaje</h3><p>Lo que se repite deja de ser “mala suerte” y se convierte en información valiosa sobre ti.</p></div>
+      <div class="box complex"><h3>Sanar</h3><p>Al reconocer el reflejo, puedes trabajar la herida o el patrón en lugar de pelear solo con el exterior.</p></div>
+      <div class="box basic"><h3>Profundizar el autoconocimiento</h3><p>Hace consciente lo que estaba en el inconsciente y acelera el crecimiento personal.</p></div>
+    </div>
+
+    <h3 style="margin-top:24px">Cómo usarla a tu favor</h3>
+    <ol class="steps">
+      <li>
+        <h3>Fuente de autoconocimiento</h3>
+        <p>Cada persona o situación que te genera una emoción fuerte es un espejo. Pregúntate: “¿Qué parte de mí está viendo esto?”.</p>
+      </li>
+      <li>
+        <h3>Hacer lo inconsciente consciente</h3>
+        <p>Lo que más te molesta en los demás suele ser una cualidad o herida que no quieres reconocer en ti.</p>
+      </li>
+      <li>
+        <h3>Lo que quieres cambiar de alguien está en tu interior</h3>
+        <p>Si deseas que otra persona cambie un comportamiento, observa primero dónde tú actúas de forma similar (aunque sea en menor grado).</p>
+      </li>
+      <li>
+        <h3>Ejercicio de autopercepción</h3>
+        <p>Cuando alguien te active, escribe: “Esta persona me muestra __________. ¿Dónde está esto en mí?”.</p>
+      </li>
+    </ol>
+
+    <h3 style="margin-top:24px">Tipos de situaciones de espejo</h3>
+    <div class="vgrid">
+      <div class="box basic">
+        <h3>Similitud</h3>
+        <p>Una parte de ti que no quieres ver se refleja en otra persona. Es el espejo más directo y a veces el más incómodo.</p>
+      </div>
+      <div class="box complex">
+        <h3>Oposición</h3>
+        <p>Alguien que representa exactamente lo contrario a ti se sitúa en un extremo. Te muestra el polo que tienes desbalanceado.</p>
+      </div>
+      <div class="box basic">
+        <h3>Proyección</h3>
+        <p>Algo que tú haces a terceros se te devuelve a través de otra persona. La vida te muestra tu propio comportamiento.</p>
+      </div>
+      <div class="box complex">
+        <h3>Expectativas (idealización)</h3>
+        <p>Te muestra la distancia entre tus expectativas y la realidad. Idealizas a alguien y luego te decepcionas: el espejo revela tus propias proyecciones.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:24px">Consecuencias y “maestros”</h3>
+    <div class="pair">
+      <div class="box basic">
+        <h3>Si no sanas…</h3>
+        <p>La vida sigue trayendo las mismas pruebas (personas o situaciones parecidas) hasta que el mensaje se recibe.</p>
+      </div>
+      <div class="box complex">
+        <h3>Los maestros</h3>
+        <p>Existen personas que aparecen en tu camino precisamente para mostrarte los espejos que necesitas ver. No son enemigos: son maestros disfrazados.</p>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:24px">
+      <p><strong>Propósito final:</strong> ser más feliz a través del autoconocimiento + sanar + dedicarte tiempo real a ti mismo. La ley del espejo no busca culparte; busca devolverte el poder de cambiar lo que sí depende de ti.</p>
+    </div>
   </div>
 
   <!-- Técnicas generales de autoconocimiento -->
@@ -345,7 +353,7 @@ footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);colo
   </div>
 
   <h3 style="margin-top:28px">Técnicas de respiración (apoyo al autocontrol)</h3>
-  <p>La respiración es una de las herramientas más rápidas y accesibles para recuperar el equilibrio emocional. Aquí tienes tres prácticas recomendadas:</p>
+  <p>La respiración es una de las herramientas más rápidas y accesibles para recuperar el equilibrio emocional. Aquí tienes tres prácticas recomendadas (en clase se trabajan con códigos QR):</p>
   <div class="vgrid">
     <div class="box basic">
       <h3>Meditación guiada</h3>
@@ -532,6 +540,7 @@ footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);colo
   ];
   function wire(id,render){
     var box=document.getElementById(id);
+    if(!box) return;
     var btns=box.querySelectorAll("button");
     function select(i){
       btns.forEach(function(b,k){b.setAttribute("aria-selected",k===i?"true":"false")});
@@ -541,17 +550,23 @@ footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);colo
     select(0);
   }
   wire("resTabs",function(i){
-    document.getElementById("resTitle").textContent=res[i][0];
-    document.getElementById("resText").textContent=res[i][1];
+    var title=document.getElementById("resTitle");
+    var text=document.getElementById("resText");
+    if(title) title.textContent=res[i][0];
+    if(text) text.textContent=res[i][1];
   });
   wire("relTabs",function(i){
-    document.getElementById("relText").textContent=rel[i];
+    var text=document.getElementById("relText");
+    if(text) text.textContent=rel[i];
   });
   var root=document.documentElement;
-  document.getElementById("themeBtn").addEventListener("click",function(){
-    var dark=root.getAttribute("data-theme")==="dark";
-    root.setAttribute("data-theme",dark?"light":"dark");
-  });
+  var themeBtn=document.getElementById("themeBtn");
+  if(themeBtn){
+    themeBtn.addEventListener("click",function(){
+      var dark=root.getAttribute("data-theme")==="dark";
+      root.setAttribute("data-theme",dark?"light":"dark");
+    });
+  }
 })();
 </script>
 </body>
