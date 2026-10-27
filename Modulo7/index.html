@@ -11,10 +11,12 @@
     --ink:#1e293b;
     --ink-soft:#64748b;
     --border:#e2e8f0;
-    --mod-accent:#db2777; /* color del módulo (cambia por módulo) */
+    --mod-accent:#db2777;
     /* Colores de cada recurso */
-    --r1:var(--mod-accent); --r1-soft:#fdf2f8; /* 1º: mismo color del título del módulo */
-    --r2:#0d9488; --r2-soft:#f0fdfa; /* 2º: Esmeralda para automanejo y resiliencia */
+    --r1:var(--mod-accent); --r1-soft:#fdf2f8; /* Rosa */
+    --r2:#0d9488; --r2-soft:#f0fdfa;           /* Esmeralda */
+    --r3:#7c3aed; --r3-soft:#f5f3ff;           /* Violeta */
+    --r4:#2563eb; --r4-soft:#eff6ff;           /* Azul */
     --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
     --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   }
@@ -83,7 +85,9 @@
   .tab.active{background:var(--accent);border-color:var(--accent);color:#ffffff;}
   .tab.active .dot{background:#ffffff;opacity:1;}
   #tab-r1{--accent:var(--r1);}
-  #tab-r2{--accent:var(--r2);} /* Color esmeralda para el nuevo recurso */
+  #tab-r2{--accent:var(--r2);}
+  #tab-r3{--accent:var(--r3);}
+  #tab-r4{--accent:var(--r4);}
   main{max-width:1100px;margin:0 auto;padding:28px 20px 80px;}
   .panel{display:none;}
   .panel.active{display:block;animation:fade .25s ease;}
@@ -96,7 +100,9 @@
   .card-label{padding:12px 16px 0;font-size:13px;font-weight:700;color:var(--ink);}
   .card-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;padding:12px 16px;border-bottom:1px solid var(--border);background:var(--accent-soft);}
   #panel-r1 .card-toolbar{--accent-soft:var(--r1-soft);}
-  #panel-r2 .card-toolbar{--accent-soft:var(--r2-soft);} /* Fondo esmeralda claro para el nuevo panel */
+  #panel-r2 .card-toolbar{--accent-soft:var(--r2-soft);}
+  #panel-r3 .card-toolbar{--accent-soft:var(--r3-soft);}
+  #panel-r4 .card-toolbar{--accent-soft:var(--r4-soft);}
   .status{font-size:12.5px;color:var(--ink-soft);display:flex;align-items:center;gap:6px;}
   .status .led{width:7px;height:7px;border-radius:50%;background:#cbd5e1;}
   .status.ok .led{background:#16a34a;}
@@ -162,13 +168,18 @@
   <button class="tab active" id="tab-r1" data-target="panel-r1">
     <span class="dot"></span> Habilidades Socioemocionales
   </button>
-  <!-- NUEVO RECURSO -->
   <button class="tab" id="tab-r2" data-target="panel-r2">
     <span class="dot"></span> Autoconocimiento y Resiliencia
   </button>
+  <button class="tab" id="tab-r3" data-target="panel-r3">
+    <span class="dot"></span> Comunicación, Equipo y Liderazgo
+  </button>
+  <button class="tab" id="tab-r4" data-target="panel-r4">
+    <span class="dot"></span> Diversidad, Currículo y Entrevista
+  </button>
 </nav>
 <main>
-  <!-- ===================== PANEL 1: Habilidades Socioemocionales ===================== -->
+  <!-- PANEL 1 -->
   <section class="panel active" id="panel-r1">
     <div class="panel-head">
       <div>
@@ -196,7 +207,7 @@
     </div>
   </section>
 
-  <!-- ===================== PANEL 2: Autoconocimiento y Resiliencia ===================== -->
+  <!-- PANEL 2 -->
   <section class="panel" id="panel-r2">
     <div class="panel-head">
       <div>
@@ -215,6 +226,62 @@
         </div>
       </div>
       <div class="viewer" id="viewer-r2">
+        <div class="empty-state">
+          <div class="icon">⏳</div>
+          <strong>Cargando recurso…</strong>
+          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANEL 3 -->
+  <section class="panel" id="panel-r3">
+    <div class="panel-head">
+      <div>
+        <h2>Comunicación Asertiva, Trabajo en Equipo, Liderazgo y Gestión Personal</h2>
+        <div class="sub">Comunicación, colaboración, liderazgo, estrés, tiempo y toma de decisiones</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">Comunicación, Equipo y Liderazgo</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-r3"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <label class="btn" for="file-r3">Cargar manualmente</label>
+          <input type="file" id="file-r3">
+          <a class="btn" id="download-r3" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer" id="viewer-r3">
+        <div class="empty-state">
+          <div class="icon">⏳</div>
+          <strong>Cargando recurso…</strong>
+          <span>Si no aparece automáticamente, cárgalo manualmente con el botón de arriba.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANEL 4 -->
+  <section class="panel" id="panel-r4">
+    <div class="panel-head">
+      <div>
+        <h2>Diversidad e Inclusión, Elaboración del Currículo y Preparación para la Entrevista</h2>
+        <div class="sub">Entornos inclusivos, presentación profesional y procesos de selección</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">Diversidad, Currículo y Entrevista</div>
+      <div class="card-toolbar">
+        <div class="status" id="status-r4"><span class="led"></span> Cargando…</div>
+        <div class="toolbar-actions">
+          <label class="btn" for="file-r4">Cargar manualmente</label>
+          <input type="file" id="file-r4">
+          <a class="btn" id="download-r4" style="display:none;">Descargar</a>
+        </div>
+      </div>
+      <div class="viewer" id="viewer-r4">
         <div class="empty-state">
           <div class="icon">⏳</div>
           <strong>Cargando recurso…</strong>
@@ -452,42 +519,12 @@
       renderByExtension(viewerId, statusId, downloadId, URL.createObjectURL(f), f.name, f);
     });
   }
-  // Igual que setupResource, pero la vista previa se carga desde una página
-  // HTML "espejo" del recurso, mientras que el botón Descargar sigue
-  // apuntando al archivo de imagen original (no al HTML).
-  function setupResourceHtml(id, previewHtmlFilename, downloadImageFilename){
-    const viewerId = 'viewer-' + id;
-    const statusId = 'status-' + id;
-    const downloadId = 'download-' + id;
-    const fileId = 'file-' + id;
-    fetch(previewHtmlFilename).then(r=>{
-      if(!r.ok) throw new Error();
-      return r.blob();
-    }).then(blob=>{
-      const previewUrl = URL.createObjectURL(blob);
-      renderHtmlPage(viewerId, statusId, downloadId, previewUrl, previewHtmlFilename);
-      // Sobrescribimos el enlace de descarga para que apunte a la imagen,
-      // no a la página HTML de vista previa.
-      const dl = document.getElementById(downloadId);
-      dl.href = downloadImageFilename;
-      dl.download = downloadImageFilename.split('/').pop();
-      dl.style.display = 'inline-block';
-    }).catch(()=>{
-      setStatus(statusId,'err','No se encontró automáticamente — cárgalo manualmente');
-    });
-    document.getElementById(fileId).addEventListener('change', e=>{
-      const f = e.target.files[0];
-      if(!f) return;
-      renderByExtension(viewerId, statusId, downloadId, URL.createObjectURL(f), f.name, f);
-    });
-  }
+
   // ---------- Recursos del Módulo 7 ----------
   setupResource('habilidades', 'HabilidadesSocioemocionales/habilidades_socioemocionales.html');
   setupResource('r2', 'HabilidadesSocioemocionales/autoconocimiento-autocontrol-automotivacion-resiliencia.html');
-  
-  // Para agregar más recursos: crear la tarjeta (card) en el panel y llamar a
-  // setupResource(id, "ruta/al/archivo") o
-  // setupResourceHtml(id, "ruta/preview.html", "ruta/descarga.ext").
+  setupResource('r3', 'HabilidadesSocioemocionales/comunicacionasertiva_trabajoenequipo_liderazgo_gestionpersonal.html');
+  setupResource('r4', 'HabilidadesSocioemocionales/diversidad-inclusion-curriculo-entrevista.html');
 </script>
 </body>
 </html>
