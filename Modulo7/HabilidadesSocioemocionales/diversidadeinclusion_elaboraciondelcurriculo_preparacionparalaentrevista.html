@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diversidad e Inclusión, Elaboración del Currículum y Preparación para la Entrevista</title>
+<style>
+:root{
+  --bg:#f8fafc; --surface:#ffffff; --ink:#1e293b; --muted:#64748b;
+  --line:#e2e8f0; --accent:#2563eb; --accent-soft:#eff6ff;
+  --warm:#7c3aed; --warm-soft:#f5f3ff;
+  --serif:Georgia,"Times New Roman",serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+:root[data-theme="dark"]{
+  --bg:#0f172a; --surface:#1e293b; --ink:#e2e8f0; --muted:#94a3b8;
+  --line:#334155; --accent:#60a5fa; --accent-soft:#1e3a5f;
+  --warm:#a78bfa; --warm-soft:#2a2245;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.65;font-size:17px}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+header{padding:56px 0 32px;border-bottom:1px solid var(--line)}
+header p.kicker{margin:0 0 8px;color:var(--accent);font-weight:600}
+h1{font-family:var(--serif);font-size:clamp(2rem,5vw,2.8rem);line-height:1.15;margin:0 0 16px;font-weight:700}
+header p.lead{max-width:62ch;color:var(--muted);margin:0 0 20px;font-size:1.05rem}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.toc a{padding:6px 14px;border:1px solid var(--line);border-radius:999px;color:var(--ink);text-decoration:none;font-size:.9rem;background:var(--surface)}
+.toc a:hover,.toc a:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
+section{padding:44px 0 8px}
+h2{font-family:var(--serif);font-size:1.7rem;margin:0 0 14px;line-height:1.25}
+h3{font-size:1.12rem;margin:0 0 8px}
+p{margin:0 0 14px;max-width:68ch}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px}
+.box.basic{border-left:5px solid var(--accent)}
+.box.complex{border-left:5px solid var(--warm)}
+.box p{margin:0 0 8px}
+.box p:last-child{margin:0}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin:18px 0}
+.vgrid .box h3{margin:0 0 6px}
+.vgrid .box p{color:var(--muted);font-size:.95rem}
+.steps{list-style:none;counter-reset:st;margin:18px 0;padding:0;max-width:68ch}
+.steps li{counter-increment:st;position:relative;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 18px 14px 62px;margin-bottom:10px}
+.steps li::before{content:counter(st);position:absolute;left:16px;top:14px;width:32px;height:32px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+:root[data-theme="dark"] .steps li::before{color:#0f172a}
+.steps h3{margin:0 0 4px;font-size:1.02rem}
+.steps p{margin:0;color:var(--muted);font-size:.95rem}
+.checks{list-style:none;margin:0 0 18px;padding:0;max-width:68ch}
+.checks li{position:relative;padding:8px 0 8px 30px;border-bottom:1px solid var(--line)}
+.checks li::before{content:"✓";position:absolute;left:4px;top:8px;color:var(--accent);font-weight:700}
+.callout{background:var(--accent-soft);border-radius:10px;padding:16px 20px;margin:18px 0;max-width:68ch}
+.callout p{margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 18px}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:8px 16px;border-radius:8px;cursor:pointer;font:inherit;font-size:.93rem}
+.chip:hover{border-color:var(--accent)}
+.chip:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.chip[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+:root[data-theme="dark"] .chip[aria-selected="true"]{color:#0f172a}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 22px;max-width:68ch}
+.panel h3{margin-top:0}
+.panel p:last-child{margin:0}
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:0;margin:0 0 10px;max-width:68ch}
+summary{cursor:pointer;padding:14px 18px;font-weight:600;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";float:right;color:var(--accent);font-size:1.2rem;line-height:1}
+details[open] summary::after{content:"–"}
+summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:10px}
+details .body{padding:0 18px 14px;color:var(--muted)}
+details .body p{margin:0}
+footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:.92rem}
+.theme{position:absolute;top:14px;right:16px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:6px 12px;cursor:pointer;font:inherit;font-size:.88rem}
+.theme:focus-visible{outline:2px solid var(--accent)}
+@media (max-width:640px){.pair{grid-template-columns:1fr}body{font-size:16px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<button class="theme" id="themeBtn" type="button" aria-label="Cambiar entre tema claro y oscuro">Tema</button>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">Recurso de clase</p>
+    <h1>Diversidad e Inclusión, Elaboración del Currículum y Preparación para la Entrevista</h1>
+    <p class="lead">Construir entornos inclusivos, presentar tu perfil de forma efectiva y prepararte con seguridad para los procesos de selección.</p>
+    <nav class="toc" aria-label="Contenido">
+      <a href="#diversidad">Diversidad e inclusión</a>
+      <a href="#curriculum">Elaboración del currículum</a>
+      <a href="#entrevista">Técnicas para la entrevista</a>
+      <a href="#virtual">Entrevista virtual</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ===================== DIVERSIDAD E INCLUSIÓN ===================== -->
+<section id="diversidad">
+  <h2>Diversidad e inclusión</h2>
+  <p>La diversidad reconoce y valora las diferencias entre las personas: origen, género, edad, orientación, capacidades, experiencia, pensamiento y trayectorias de vida. La inclusión son las prácticas concretas que hacen que todas las personas se sientan respetadas, escuchadas y con igualdad real de oportunidades para aportar y crecer.</p>
+
+  <div class="callout">
+    <p>Diversidad es tener un asiento en la mesa. Inclusión es que tu voz sea escuchada, valorada y tenga impacto real.</p>
+  </div>
+
+  <h3>Dimensiones de la diversidad</h3>
+  <div class="vgrid">
+    <div class="box basic"><h3>Diversidad demográfica</h3><p>Género, edad, origen étnico, nacionalidad, orientación sexual, discapacidad y otras características visibles o identificables.</p></div>
+    <div class="box complex"><h3>Diversidad de pensamiento</h3><p>Estilos cognitivos, experiencias formativas, perspectivas culturales y formas distintas de resolver problemas.</p></div>
+    <div class="box basic"><h3>Diversidad de experiencias</h3><p>Trayectorias laborales, educativas y vitales diferentes que enriquecen la toma de decisiones y la innovación.</p></div>
+  </div>
+
+  <h3 style="margin-top:28px">Beneficios de un entorno inclusivo</h3>
+  <ul class="checks">
+    <li>Mayor innovación y creatividad al combinar perspectivas distintas.</li>
+    <li>Mejor toma de decisiones basada en información más completa y menos sesgada.</li>
+    <li>Mayor compromiso, sentido de pertenencia y retención del talento.</li>
+    <li>Mejora del clima laboral y reducción de conflictos.</li>
+    <li>Mayor capacidad de entender y servir a mercados y comunidades diversas.</li>
+  </ul>
+
+  <h3 style="margin-top:28px">Prácticas para fomentar la inclusión</h3>
+  <ol class="steps">
+    <li><h3>Reconocer sesgos inconscientes</h3><p>Todos tenemos sesgos. Identificarlos permite evitar que influyan negativamente en la selección, la evaluación o la asignación de oportunidades.</p></li>
+    <li><h3>Usar lenguaje inclusivo</h3><p>Comunicarse de forma respetuosa y no excluyente en documentos, reuniones y conversaciones cotidianas.</p></li>
+    <li><h3>Garantizar participación equitativa</h3><p>Asegurar que todas las voces tengan espacio real en las discusiones y en los procesos de decisión.</p></li>
+    <li><h3>Diseñar procesos justos</h3><p>Selección, promoción y evaluación transparentes, basados en criterios objetivos y claros.</p></li>
+    <li><h3>Formarse de manera continua</h3><p>Integrar la diversidad, la equidad y la inclusión como parte del desarrollo profesional permanente.</p></li>
+  </ol>
+</section>
+
+<!-- ===================== ELABORACIÓN DEL CURRÍCULUM ===================== -->
+<section id="curriculum">
+  <h2>Elaboración del currículum</h2>
+  <p>Un currículum eficaz es una herramienta clave para abrir puertas en el mercado laboral y destacarse entre otros candidatos. Debe ser claro, ordenado, veraz y adaptado al puesto al que se aspira.</p>
+
+  <h3>Claves para elaborarlo</h3>
+  <ol class="steps">
+    <li><h3>Claridad y concisión</h3><p>Debe ser fácil de leer y no exceder una o dos páginas. Estructúralo de manera ordenada y resalta solo la información esencial.</p></li>
+    <li><h3>Personalización</h3><p>Adapta el contenido al puesto específico. Destaca habilidades, logros y experiencias relevantes para ese rol.</p></li>
+    <li><h3>Formato profesional</h3><p>Diseño limpio, fuentes legibles, títulos claros y espacios entre secciones. Facilita la lectura y proyecta profesionalismo.</p></li>
+    <li><h3>Logros cuantificables</h3><p>En lugar de solo listar responsabilidades, incluye resultados medibles (porcentajes de mejora, metas alcanzadas, impacto concreto).</p></li>
+    <li><h3>Palabras clave</h3><p>Muchos reclutadores usan sistemas automáticos. Incorpora términos del anuncio de empleo para aumentar las posibilidades de ser considerado.</p></li>
+  </ol>
+
+  <h3 style="margin-top:28px">Estructura recomendada</h3>
+  <div class="vgrid">
+    <div class="box basic"><h3>Datos de contacto</h3><p>Nombre, correo electrónico, teléfono y, si es relevante, enlace a LinkedIn o portafolio.</p></div>
+    <div class="box complex"><h3>Resumen profesional</h3><p>Breve introducción con experiencia, habilidades clave y objetivos (3-5 líneas).</p></div>
+    <div class="box basic"><h3>Experiencia laboral</h3><p>Empresa, cargo, fechas y logros relevantes. Orden cronológico inverso.</p></div>
+    <div class="box complex"><h3>Formación académica</h3><p>Nivel más alto alcanzado y estudios relevantes para el puesto.</p></div>
+    <div class="box basic"><h3>Habilidades y competencias</h3><p>Técnicas (software, idiomas) e interpersonales alineadas con la vacante.</p></div>
+    <div class="box complex"><h3>Referencias</h3><p>Opcional. Se pueden indicar solo si el reclutador las solicita.</p></div>
+  </div>
+
+  <div class="callout">
+    <p>Un buen currículum no cuenta toda tu vida: destaca lo más relevante para el puesto y facilita que el reclutador entienda rápidamente tu valor.</p>
+  </div>
+</section>
+
+<!-- ===================== TÉCNICAS PARA LA ENTREVISTA ===================== -->
+<section id="entrevista">
+  <h2>Técnicas para la entrevista</h2>
+  <p>Para destacar en una entrevista es importante estar preparado y proyectar confianza. La preparación reduce la ansiedad y mejora el desempeño.</p>
+
+  <h3>Técnicas efectivas</h3>
+  <ol class="steps">
+    <li><h3>Preparación previa</h3><p>Investiga la empresa y el puesto. Analiza misión, visión y cultura organizacional para alinear tus respuestas y hacer preguntas informadas.</p></li>
+    <li><h3>Narrativa profesional</h3><p>Prepara una “historia profesional” coherente que englobe experiencias relevantes y logros. Facilita transmitir una visión clara y persuasiva de tu trayectoria.</p></li>
+    <li><h3>Método STAR</h3><p>Situación → Tarea → Acción → Resultado. Estructura respuestas claras y relevantes que resalten tu impacto positivo en situaciones anteriores.</p></li>
+    <li><h3>Lenguaje corporal y voz</h3><p>Postura abierta, contacto visual y tono modulado transmiten seguridad. Practica una respiración relajada para controlar el estrés.</p></li>
+    <li><h3>Escucha activa</h3><p>Comprende bien las preguntas antes de responder. Escuchar atentamente también ayuda a conectar mejor con el entrevistador.</p></li>
+    <li><h3>Preguntas al entrevistador</h3><p>Demuestra interés real. Pregunta sobre oportunidades de crecimiento, cultura de equipo o proyectos clave.</p></li>
+  </ol>
+</section>
+
+<!-- ===================== ENTREVISTA VIRTUAL ===================== -->
+<section id="virtual">
+  <h2>Entrevista virtual</h2>
+  <p>Las entrevistas virtuales se han convertido en un estándar. Aunque comparten similitudes con las presenciales, presentan desafíos propios que conviene anticipar.</p>
+
+  <h3>Claves para una entrevista virtual exitosa</h3>
+  <ol class="steps">
+    <li><h3>Entorno adecuado</h3><p>Lugar tranquilo, ordenado y con buena iluminación (preferiblemente natural). Evita ruidos de fondo para proyectar profesionalismo.</p></li>
+    <li><h3>Prueba de tecnología</h3><p>Revisa con anticipación cámara, micrófono y conexión a Internet. Usa audífonos con micrófono para reducir el eco y mejorar el sonido.</p></li>
+    <li><h3>Puntualidad</h3><p>Inicia la sesión 5 a 10 minutos antes. Permite solucionar imprevistos técnicos y muestra respeto por el tiempo del entrevistador.</p></li>
+    <li><h3>Contacto visual a la cámara</h3><p>Mira a la cámara (no a la pantalla) mientras respondes. Da la impresión de contacto visual y proyecta confianza.</p></li>
+    <li><h3>Gestos y expresión facial</h3><p>Aunque la pantalla limita el lenguaje corporal, gestos naturales y una expresión amigable transmiten interés y profesionalismo.</p></li>
+    <li><h3>Documentos de apoyo</h3><p>Ten el currículum y notas a la mano para referencia rápida, sin depender completamente de ellos.</p></li>
+  </ol>
+
+  <h3 style="margin-top:28px">Recomendaciones adicionales</h3>
+  <ul class="checks">
+    <li><strong>Vestimenta formal:</strong> aunque sea virtual, vestirse profesionalmente muestra respeto por el proceso.</li>
+    <li><strong>Práctica con simulaciones:</strong> ensaya en la plataforma que se usará (Zoom, Teams, Google Meet, etc.) para ganar comodidad y reducir ansiedad técnica.</li>
+    <li><strong>Empatía y asertividad:</strong> la falta de contacto presencial hace que sonreír y mostrar una actitud positiva sean aún más importantes.</li>
+  </ul>
+
+  <div class="callout">
+    <p>La preparación no elimina la nerviosidad, pero te permite gestionarla y mostrar lo mejor de ti. Cada entrevista, independientemente del resultado, es práctica y aprendizaje.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">Recurso de clase · Diversidad e inclusión, currículum y preparación para la entrevista</div>
+</footer>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  document.getElementById("themeBtn").addEventListener("click", function(){
+    var dark = root.getAttribute("data-theme") === "dark";
+    root.setAttribute("data-theme", dark ? "light" : "dark");
+  });
+})();
+</script>
+</body>
+</html>
