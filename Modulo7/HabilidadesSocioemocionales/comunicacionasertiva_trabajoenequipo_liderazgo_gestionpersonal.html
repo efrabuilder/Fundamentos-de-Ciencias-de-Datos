@@ -7,15 +7,15 @@
 <style>
 :root{
   --bg:#f8fafc; --surface:#ffffff; --ink:#1e293b; --muted:#64748b;
-  --line:#e2e8f0; --accent:#0d9488; --accent-soft:#f0fdfa;
-  --warm:#7c3aed; --warm-soft:#f5f3ff;
+  --line:#e2e8f0; --accent:#7c3aed; --accent-soft:#f5f3ff;
+  --warm:#0d9488; --warm-soft:#f0fdfa;
   --serif:Georgia,"Times New Roman",serif;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
 }
 :root[data-theme="dark"]{
   --bg:#0f172a; --surface:#1e293b; --ink:#e2e8f0; --muted:#94a3b8;
-  --line:#334155; --accent:#2dd4bf; --accent-soft:#134e4a;
-  --warm:#a78bfa; --warm-soft:#2a2245;
+  --line:#334155; --accent:#a78bfa; --accent-soft:#2a2245;
+  --warm:#2dd4bf; --warm-soft:#134e4a;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -106,7 +106,6 @@ footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);colo
 
 <main class="wrap">
 
-<!-- ===================== COMUNICACIÓN ASERTIVA ===================== -->
 <section id="comunicacion">
   <h2>Comunicación asertiva</h2>
   <p>La comunicación asertiva es la capacidad de expresar pensamientos, sentimientos y necesidades de forma clara, directa y respetuosa, sin recurrir a la agresividad ni a la pasividad. Permite equilibrar los derechos propios con los de los demás y genera confianza y cooperación.</p>
@@ -163,7 +162,6 @@ footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);colo
   </ul>
 </section>
 
-<!-- ===================== TRABAJO EN EQUIPO ===================== -->
 <section id="equipo">
   <h2>Trabajo en equipo</h2>
   <p>Es el proceso colaborativo en el que varias personas con habilidades y perspectivas diferentes se unen para lograr un objetivo común. Se basa en la cooperación, la coordinación y la integración de fortalezas.</p>
@@ -209,7 +207,6 @@ footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);colo
   </div>
 </section>
 
-<!-- ===================== LIDERAZGO ===================== -->
 <section id="liderazgo">
   <h2>Liderazgo</h2>
   <p>Es la capacidad de influir, motivar y dirigir a un grupo para alcanzar objetivos comunes. Un buen líder orienta, inspira, promueve el desarrollo de su equipo y se adapta a las circunstancias.</p>
@@ -251,7 +248,6 @@ footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);colo
   </ol>
 </section>
 
-<!-- ===================== ESTRÉS ===================== -->
 <section id="estres">
   <h2>Estrés y su manejo</h2>
   <p>El estrés es una respuesta natural del organismo ante situaciones percibidas como desafiantes o amenazantes (respuesta de “lucha o huida”). Cuando se vuelve constante o desbordante afecta la salud física, mental y el desempeño.</p>
@@ -289,7 +285,6 @@ footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);colo
   </ol>
 </section>
 
-<!-- ===================== ORGANIZACIÓN DEL TIEMPO ===================== -->
 <section id="tiempo">
   <h2>Organización del tiempo</h2>
   <p>Consiste en planificar y distribuir las actividades según su importancia, plazos y recursos personales (energía, atención, conocimientos y apoyo). Facilita cumplir responsabilidades y mantener equilibrio entre estudio, trabajo y vida personal.</p>
@@ -349,7 +344,6 @@ footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);colo
   </ul>
 </section>
 
-<!-- ===================== PENSAMIENTO ===================== -->
 <section id="pensamiento">
   <h2>Pensamiento analítico y crítico</h2>
 
@@ -378,7 +372,6 @@ footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);colo
   </ul>
 </section>
 
-<!-- ===================== TOMA DE DECISIONES Y CONFLICTOS ===================== -->
 <section id="decisiones">
   <h2>Toma de decisiones y resolución de conflictos</h2>
 
@@ -419,7 +412,6 @@ footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);colo
 
 <script>
 (function(){
-  /* Estilos de comunicación */
   var estilos = [
     ["Pasivo", "Evita el conflicto y no expresa necesidades o emociones. Puede generar frustración y baja autoestima."],
     ["Agresivo", "Impone opiniones y deseos de forma dominante. Genera conflictos y deteriora las relaciones."],
@@ -428,7 +420,6 @@ footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);colo
   ];
   wireTabs("estiloTabs", estilos, "estiloTitle", "estiloText");
 
-  /* Tipos de liderazgo */
   var lideres = [
     ["Autocrático", "El líder toma decisiones de forma centralizada y espera que el equipo las siga. Útil en crisis, pero limita la creatividad y la autonomía."],
     ["Democrático / Participativo", "Involucra al equipo en las decisiones, fomenta el intercambio de ideas y suele generar mayor compromiso y satisfacción."],
@@ -451,7 +442,6 @@ footer{margin:48px 0 0;padding:24px 0 48px;border-top:1px solid var(--line);colo
     select(0);
   }
 
-  /* Tema claro/oscuro */
   var root = document.documentElement;
   document.getElementById("themeBtn").addEventListener("click", function(){
     var dark = root.getAttribute("data-theme") === "dark";
